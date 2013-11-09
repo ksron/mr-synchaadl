@@ -6,21 +6,33 @@
   including MODEL-TRANSITION-SYSTEM .
   including TIMED-MODEL-CHECKER .
 
-  var C : ComponentId .   vars COMPS PORTS REST : Configuration .
-  var PROPS : PropertyAssociation .  var PATH : ComponentRef .  
-  var E : Expression .  var L : Location . 
+  var C : ComponentId .   var P : FeatureId . 
+  vars COMPS PORTS PORTS' REST : Configuration .
+  var FMAP : FeatureMap .  var PROPS : PropertyAssociation .  
+  var PATH : ComponentRef .  var L : Location . 
+  var E : Expression .  var V : Value . var DCL : List{DataContent} .
 
 --- component data expressions
   op _|_ : ComponentRef Expression -> Prop [ctor] .   
+
   eq {< C : Ensemble | subcomponents : COMPS >} |= PATH | E
    = lookupExp(COMPS, PATH, E) .
 
   op lookupExp : Configuration ComponentRef Expression -> Bool .
   eq lookupExp(< C : Ensemble | subcomponents : COMPS > REST, C . PATH, E)
    = lookupExp(COMPS, PATH, E) .
-  eq lookupExp(< C : Thread | subcomponents : COMPS, properties : PROPS > REST, C, E)
-   = eval(E, empty | empty | COMPS | PROPS) == [true] .
+  eq lookupExp(< C : Component | features : PORTS, 
+                                 subcomponents : COMPS, properties : PROPS > REST, C, E)
+   = eval(E, empty | feedbackOutputs(PORTS,empty) | COMPS | PROPS) == [true] .
   eq lookupExp(REST, PATH, E) = false [owise] .
+
+  --- return the last value in a given feedback output port
+  --- TODO: need to have some function??
+  op feedbackOutputs : Configuration FeatureMap -> FeatureMap [format (m! o)] .
+  eq feedbackOutputs(< P : OutPort | content : DCL V > PORTS, FMAP)
+   = feedbackOutputs(PORTS, insert(P, V, FMAP)) .
+  eq feedbackOutputs(PORTS, FMAP) = FMAP [owise] .
+
 
 --- thread states
   op _@_ : ComponentRef Location -> Prop [ctor] . 

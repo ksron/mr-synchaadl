@@ -43,7 +43,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		val initialState = model.compileComponent(model.periodinMS);
 		
 		'''
-		(tomod «model.name.escape.toUpperCase»-MODEL is
+		(tomod «model.name.toUpperCase»-MODEL is
 			including MODEL-TRANSITION-SYSTEM .
 			
 			--- AADL identifiers

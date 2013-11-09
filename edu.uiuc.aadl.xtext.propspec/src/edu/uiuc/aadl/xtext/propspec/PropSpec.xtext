@@ -56,12 +56,12 @@ ConjFormula returns Formula:
 	
 UnaryFormula returns Formula:
 	{UnaryFormula} op=('~'|'O'|'<>'|'[]') child=AtomicFormula
-|	{UnaryFormula} op=('True'|'False')
 |	AtomicFormula;
  
 AtomicFormula returns Formula:
 	Prop 
-|	PropRef 
+|	PropRef
+|	{UnaryFormula} op=('True'|'False')
 |	'(' Formula ')';
  	
 PropRef:

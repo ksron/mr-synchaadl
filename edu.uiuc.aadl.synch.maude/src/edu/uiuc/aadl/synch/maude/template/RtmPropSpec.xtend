@@ -23,18 +23,17 @@ class RtmPropSpec {
 		load Çtop.nameÈ.maude .
 		load ÇRtmAadlSetting.SEMANTICS_PATHÈ/ÇRtmAadlSetting.ANALYSIS_FILEÈ .
 		
-		(tomod Çtop.nameÈ-VERIFICATION-DEF is
-			including Çtop.name.escape.toUpperCaseÈ-MODEL .
+		(tomod Çtop.name.toUpperCaseÈ-VERIFICATION-DEF is
+			including Çtop.name.toUpperCaseÈ-MODEL .
 			including AADL-SIMPLE-COUNTEREXAMPLE .
 			
-			--- formulas and propositions
+			--- requirements
 			ÇFOR r : top.requirementsÈ
 			op Çr.nameÈ : -> Formula .	ÇIF r.bound > 0È--- bound = Çr.boundÈÇENDIFÈ
 			eq Çr.nameÈ
 			 = Çr.value.compileFormulaÈ .
 			
 			ÇENDFORÈ
-			
 			--- formulas and propositions
 			ÇFOR f : top.formulasÈ
 			op Çf.nameÈ : -> Formula .
