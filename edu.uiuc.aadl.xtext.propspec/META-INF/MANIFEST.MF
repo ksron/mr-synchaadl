@@ -1,0 +1,36 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: edu.uiuc.aadl.xtext.propspec
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: edu.uiuc.aadl.xtext.propspec; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.osate.aadl2;bundle-version="1.0.0",
+ org.osate.xtext.aadl2.properties;bundle-version="1.0.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.eclipse.xtext.common.types,
+ org.osate.aadl2.modelsupport;bundle-version="1.0.0",
+ org.antlr.runtime
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.xbase.lib
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: edu.uiuc.aadl.xtext.propspec,
+ edu.uiuc.aadl.xtext.propspec.services,
+ edu.uiuc.aadl.xtext.propspec.propSpec,
+ edu.uiuc.aadl.xtext.propspec.propSpec.impl,
+ edu.uiuc.aadl.xtext.propspec.propSpec.util,
+ edu.uiuc.aadl.xtext.propspec.serializer,
+ edu.uiuc.aadl.xtext.propspec.parser.antlr,
+ edu.uiuc.aadl.xtext.propspec.parser.antlr.internal,
+ edu.uiuc.aadl.xtext.propspec.parser.antlr.lexer,
+ edu.uiuc.aadl.xtext.propspec.validation,
+ edu.uiuc.aadl.xtext.propspec.scoping,
+ edu.uiuc.aadl.xtext.propspec.formatting
+

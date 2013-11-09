@@ -1,0 +1,85 @@
+--- Data values used in components and communications.
+
+(fmod DATA-VALUE is
+  sort Value .
+endfm)
+
+(fmod DATA-CONTENT is
+  including DATA-VALUE .
+  sort DataContent .
+  subsort Value < DataContent .
+  op bot : -> DataContent [ctor] .   --- bottom (no value)
+endfm)
+
+(view Value from TRIV to DATA-VALUE is
+  sort Elt to Value .
+endv)
+
+(view DataContent from TRIV to DATA-CONTENT is
+  sort Elt to DataContent .
+endv)
+
+
+--- In AADL, a data value is typically (a combination of) boolean, integer, 
+--- float, character, and string. They can be also composed by using 
+--- array, struct, and union, as explained in the Data Modeling Annex.
+--- This file specifies such basic data types in Maude. 
+--- Note that some other properties, such as the bit size 
+--- of a data type, can be defined in the annex, but we do not consider those here.
+
+(fmod BASIC-VALUE is
+  including DATA-VALUE .
+  protecting CONVERSION .
+
+  sort BoolValue IntValue FloatValue CharValue StringValue .
+  subsort BoolValue IntValue FloatValue CharValue StringValue < Value . 
+  subsort CharValue < StringValue .
+
+  op `[_`] : Bool -> BoolValue [ctor] .
+  op `[_`] : Int -> IntValue [ctor] .
+  op `[_`] : Float -> FloatValue [ctor] .
+  op `[_`] : Char -> CharValue [ctor] .
+  op `[_`] : String -> StringValue [ctor] .
+
+  var B : Bool . var I : Int . var F : Float . var S : String .
+
+  op bool : BoolValue -> Bool .		eq bool([B]) = B .
+  op int : IntValue -> Int .		eq int([I]) = I .
+  op float : IntValue -> Float .	eq float([I]) = float(I) .  
+  op float : FloatValue -> Float .	eq float([F]) = F .
+  op string : StringValue -> String .	eq string([S]) = S .
+endfm)
+
+*** Since arrays are not defined yet in the semantics, arrays and structs
+*** are not used.
+
+--- An array value is a map from a number to a value. An array value is 
+--- also a value, so that a multi-dimensional array value is also well defined.
+(fmod ARRAY-VALUE is
+  protecting MAP{Nat,Value} .
+
+  sort ArrayValue .
+  subsort ArrayValue < Value .
+  op array : Map{Nat,Value} -> ArrayValue [ctor] .
+
+  var M : Map{Nat,Value} . var I : Nat .
+
+  op _`[_`] : ArrayValue Nat -> Value .
+  eq array(M) [I] = M [I] .
+endfm)
+
+--- Similarly, a struct value is a map from a component id to a value.
+(fmod STRUCT-VALUE is
+  protecting MAP{ComponentId,Value} .
+  
+  sort StructValue .
+  subsort StructValue < Value .
+  op struct : Map{ComponentId,Value} -> StructValue [ctor] .
+
+  var M : Map{ComponentId,Value} . var C : ComponentId .
+
+  op _._ : StructValue ComponentId -> Value .
+  eq struct(M) . C = M [C] .
+endfm)
+
+

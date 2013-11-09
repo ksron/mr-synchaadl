@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="SynchAADL"
+            id="edu.uiuc.aadl.synch">
+      </category>
+      <view
+            name="SynchAADL Verifier"
+            icon="icons/sample.gif"
+            category="edu.uiuc.aadl.synch"
+            class="edu.uiuc.aadl.synch.views.SynchAadlView"
+            id="edu.uiuc.aadl.synch.views.SynchAadlView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.osate.ui.perspective.AadlPerspective">
+         <view
+               relative="org.eclipse.ui.views.ContentOutline"
+               relationship="stack"
+               id="edu.uiuc.aadl.synch.views.SynchAadlView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+   <extension 
+         point="org.eclipse.core.resources.markers"
+         id="edu.uiuc.aadl.synch.SyncAadlObjectMarker"
+         name="Synchrnouls AADL Marker">
+      <super type="org.osate.aadl2.modelsupport.AadlObjectMarker"/>
+      <persistent value="true"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="SynchAADL"
+            id="edu.uiuc.aadl.synch">
+      </category>
+      <wizard
+            name="SynchAADL Property Specification file"
+            icon="icons/sample.gif"
+            category="edu.uiuc.aadl.synch"
+            class="edu.uiuc.aadl.synch.wizard.RtmAadlPropertyWizard"
+            id="edu.uiuc.aadl.synch.wizard.RtmAadlPropertyWizard">
+      </wizard>
+   </extension>
+
+</plugin>

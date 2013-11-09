@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Checker
+Bundle-SymbolicName: edu.uiuc.aadl.synch.checker
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: edu.uiuc.aadl.synch.checker.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.osate.ui;bundle-version="1.0.0",
+ org.osate.aadl2;bundle-version="1.0.0",
+ org.osate.aadl2.modelsupport;bundle-version="1.0.0",
+ org.osate.xtext.aadl2.properties;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: edu.uiuc.aadl.synch.checker.action
+Import-Package: edu.uiuc.aadl.utils
