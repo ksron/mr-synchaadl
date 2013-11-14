@@ -15,7 +15,7 @@
                     subcomponents : Configuration,
 		    connections : Set{Connection},
 		    properties : PropertyAssociation .
-  subsort ComponentId < Oid .
+  subsort ComponentRef < Oid .
 endom)
 
 --- a component with period (or rate).

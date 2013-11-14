@@ -4,6 +4,7 @@
   including THREAD-DYNAMICS .
   including ENSEMBLE-DYNAMICS .
   including BUILTIN-INPUT-ADAPTOR-SEMANTICS .
+  including COLLAPSE-SINGLE-RATE .
 
   var C : ComponentId . var PROPS : PropertyAssociation .
   var T : Time . var OBJ : Object .

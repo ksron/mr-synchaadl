@@ -39,16 +39,16 @@ endfm)
   including COMPONENT-ID .
   sort ComponentRef .
   subsort ComponentId < ComponentRef .
-  op _._ : ComponentId ComponentRef -> ComponentRef [ctor] .  --- for a subcomponent 
+  op _._ : ComponentRef ComponentRef -> ComponentRef [ctor assoc] .  --- for a subcomponent 
 endfm)
 
 (fmod FEATURE-REF is
   including FEATURE-ID .
-  including COMPONENT-ID .
+  including COMPONENT-REF .
 
   sort FeatureRef .
   subsort FeatureId < FeatureRef .
-  op _._ : ComponentId FeatureRef -> FeatureRef [ctor] .  --- for a feature
+  op _.._ : ComponentRef FeatureId -> FeatureRef [ctor] .  --- for a feature
 endfm)
 
 ------------------------

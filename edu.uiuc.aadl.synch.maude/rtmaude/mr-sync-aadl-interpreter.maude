@@ -18,4 +18,5 @@ load transfer-data.maude
 load component-dynamics.maude
 
 load input-adaptor-semantics.maude
+load flatten-singlerate.maude
 load synchronous-rule.maude

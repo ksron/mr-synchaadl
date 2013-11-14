@@ -177,7 +177,7 @@ endom)
   var VAL : VarValuation .  var FMAP : FeatureMap . vars COMPS : Configuration .  
   var PROPS : PropertyAssociation .  vars V : Value .  var B : Bool .
   var LCF : LocalBehaviorConf . var GCF : GlobalBehaviorConf .
-  var CI : ComponentRef .  var PI : FeatureId .  var VI : VarId .  
+  var CR : ComponentRef .  var PI : FeatureId .  var VI : VarId .  
   var PR : PropertyId .  var PV : PropertyValue .  vars E1 E2 : Expression . 
 
   --- eval(exp, local variables | features | data subcompnents | property values)
@@ -191,7 +191,7 @@ endom)
   eq eval([PI], VAL | (PI |-> (V : B), FMAP) | COMPS | PROPS) = V . --- input ports
   eq eval([PI], VAL | (PI |-> V, FMAP)       | COMPS | PROPS) = V . --- input parameters
 
-  eq eval([CI], VAL | FMAP | < CI : Data | value : V > COMPS | PROPS) = V . --- only basic values
+  eq eval([CR], VAL | FMAP | < CR : Data | value : V > COMPS | PROPS) = V . --- only basic values
 
   eq eval([PR], VAL | FMAP | COMPS | (PR => PV) ; PROPS) = value(PV) . --- properties
 
@@ -237,7 +237,7 @@ endom)
 
   var VAL : VarValuation .  var FMAP : FeatureMap . vars COMPS : Configuration .  
   var PROPS : PropertyAssociation .  var LCF : LocalBehaviorConf .
-  var CI : ComponentRef .  var PI : FeatureId .  var VI : VarId .  
+  var CR : ComponentRef .  var PI : FeatureId .  var VI : VarId .  
   var A : Action .  vars AS AS' AS'' : ActionGroup .  
   var ASQ : ActionSequence .  var AST : ActionSet .
   vars F F' : Float .  vars V : Value .  
@@ -254,24 +254,27 @@ endom)
   eq execAction({skip},    LCF) = LCF . --- empty action
 
 --- assignment: local variables, output ports/params, and data (sub)components
- ceq execAction({VI} := E, LCF)
-   = (VI |-> eval(E, LCF)) ; VAL | FMAP | COMPS | PROPS
-  if (VI |-> DC) ; VAL | FMAP | COMPS | PROPS := LCF . 
+  eq execAction({VI} := E, (VI |-> DC) ; VAL | FMAP | COMPS | PROPS)
+   = (VI |-> eval(E, (VI |-> DC) ; VAL | FMAP | COMPS | PROPS)) ; VAL 
+   | FMAP | COMPS | PROPS .
   
- ceq execAction({PI} := E, LCF)
-   = VAL | (PI |-> eval(E, LCF), FMAP) | COMPS |  PROPS   --- output data ports/parameters
-  if VAL | (PI |-> DC, FMAP) | COMPS | PROPS := LCF .
+  eq execAction({PI} := E, VAL | (PI |-> DC, FMAP) | COMPS | PROPS)
+   = VAL 
+   | (PI |-> eval(E, VAL | (PI |-> DC, FMAP) | COMPS | PROPS), FMAP) 
+   | COMPS |  PROPS .   --- output data ports/parameters
 
  --- only basic values. 
  --- NOTE: objects in matching conditions are not automatically translated.
- ceq execAction({CI} := E, LCF)
-   = VAL | FMAP | < CI : CLS:Data | value : eval(E, LCF), ATTS > COMPS | PROPS
-  if VAL | FMAP | < CI : CLS:Data | value : DC, ATTS > COMPS | PROPS := LCF .  
+  eq execAction({CR} := E, VAL | FMAP | < CR : Data | value : DC > COMPS | PROPS)
+   = VAL | FMAP 
+   | < CR : Data | value : eval(E, VAL | FMAP | < CR : Data | value : DC > COMPS | PROPS) > COMPS 
+   | PROPS .
+
 
   op target : VarExpression -> AssignmentTarget [format (m! o)] .
   eq target([VI]) = {VI} .
   eq target([PI]) = {PI} .
-  eq target([CI]) = {CI} .
+  eq target([CR]) = {CR} .
 
 --- communication: only subprogram component/classifier call.
 --- Currently, we only consider predefined functions for subprogram calls.
@@ -345,39 +348,41 @@ endom)
 
 --- execute (nondeterministic) transitions until reaching a complete state.
   op execTransSystem : Location Set{Location} Set{Transition} VarValuation GlobalBehaviorConf 
-	-> Tuple{Location,FeatureMap,Configuration} [format (m! o)] .
+	~> Tuple{Location,FeatureMap,Configuration} [format (m! o)] .
+  op execTransSystem : Location Set{Location} Set{Transition} Set{Transition} VarValuation GlobalBehaviorConf 
+	~> Tuple{Location,FeatureMap,Configuration} [format (m! o)] .
 
- crl [trans]: 
-     execTransSystem(L, LS, TRS, VAL, GCF)
-  => 
-     if L' in LS then 
-	transitionResult(L', GCF')
-     else 
-	execTransSystem(L', LS, TRS, VAL, GCF') 
-     fi
-  if (L -[GUARD]-> L' ACTION) ; TRS' := enabledTransitions(L, TRS, VAL | GCF, empty)
-  /\ VAL' | GCF' := execAction(ACTION, VAL | GCF) .
+  eq execTransSystem(L, LS, TRS, VAL, GCF)
+   = execTransSystem(L, LS, enabledTransitions(L, TRS, VAL | GCF, empty), TRS, VAL, GCF) .
 
+  rl [trans]:
+     execTransSystem(L, LS, (L -[GUARD]-> L' ACTION) ; TRS', TRS, VAL, GCF)
+   => 
+     if L' in LS 
+     then transitionResult(L', execAction(ACTION, VAL | GCF))
+     else execTransSystem(L', LS, TRS, VAL, global(execAction(ACTION, VAL | GCF))) fi .
 
 --- execute deterministic transitions until reaching a complete state.
   op execDetTransSystem : Location Set{Location} Set{Transition} VarValuation GlobalBehaviorConf 
-	-> Tuple{Location,FeatureMap,Configuration} [format(m! o)] .
+	~> Tuple{Location,FeatureMap,Configuration} [format(m! o)] .
+  op execDetTransSystem : Location Set{Location} Set{Transition} Set{Transition} VarValuation GlobalBehaviorConf 
+	~> Tuple{Location,FeatureMap,Configuration} [format(m! o)] .
 
- ceq execDetTransSystem(L, LS, TRS, VAL, GCF)
+  eq execDetTransSystem(L, LS, TRS, VAL, GCF)
+   = execDetTransSystem(L, LS, enabledTransitions(L, TRS, VAL | GCF, empty), TRS, VAL, GCF) .
+
+  eq execDetTransSystem(L, LS, (L -[GUARD]-> L' ACTION) ; TRS', TRS, VAL, GCF)
    = 
-     if L' in LS then 
-	transitionResult(L', GCF')
-     else 
-	execDetTransSystem(L', LS, TRS, VAL, GCF') 
-     fi
-   if (L -[GUARD]-> L' ACTION) ; TRS' := enabledTransitions(L, TRS, VAL | GCF, empty)
-   /\ VAL' | GCF' := execAction(ACTION, VAL | GCF) .
+     if L' in LS 
+     then transitionResult(L', execAction(ACTION, VAL | GCF))
+     else execDetTransSystem(L', LS, TRS, VAL, global(execAction(ACTION, VAL | GCF))) fi .
 
+  --- aux functions
+  op transitionResult : Location LocalBehaviorConf -> Tuple{Location,FeatureMap,Configuration} [format (m! o)] .
+  eq transitionResult(L, VAL | FMAP | COMPS | PROPS) = L | FMAP | COMPS .
 
-  --- aux function
-  op transitionResult : Location GlobalBehaviorConf -> Tuple{Location,FeatureMap,Configuration} [format (m! o)] .
-  eq transitionResult(L, FMAP | COMPS | PROPS) = L | FMAP | COMPS .
-
+  op global : LocalBehaviorConf ~> GlobalBehaviorConf [format (m! o)] .
+  eq global(VAL | GCF) = GCF .
 
 --- enabledTransitions(current state, transitions, behavior configuration): return a set of enabled transitions
   op enabledTransitions : Location Set{Transition} LocalBehaviorConf Set{Transition} -> Set{Transition} [format (m! o)] .

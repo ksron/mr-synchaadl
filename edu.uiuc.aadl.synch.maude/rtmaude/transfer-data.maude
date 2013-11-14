@@ -9,7 +9,7 @@
   op __ : ConxTable ConxTable -> ConxTable [ctor comm assoc id: none] .
   op _|->_ : FeatureRef NeSet{FeatureRef} -> ConxItem [ctor] .
 
-  var C : ComponentId . var P : FeatureId . 
+  var CR : ComponentRef . var P : FeatureId . 
   var CONXS : Set{Connection} . var CTB : ConxTable .
   vars PN : FeatureRef .  var NPS NPS' : NeSet{FeatureRef} .
 
@@ -29,8 +29,8 @@
   eq inner-tb(CONXS) = inner-tb(CONXS, none) .
   
   op inner-tb : Set{Connection} ConxTable ~> ConxTable [format (m! o)] .
-  eq inner-tb((PN --> C . P) ; CONXS, CTB)
-   = inner-tb(CONXS, (PN |-> C . P) CTB) .
+  eq inner-tb((PN --> CR .. P) ; CONXS, CTB)
+   = inner-tb(CONXS, (PN |-> CR .. P) CTB) .
   eq inner-tb(CONXS, CTB) = normalize(CTB) [owise] .
 
 --- 
@@ -49,7 +49,7 @@ endfm)
   protecting CONX-TABLE .
   protecting PORT .
 
-  var C : ComponentId . var P : FeatureId .  var PNS : Set{FeatureRef} . 
+  var CR : ComponentRef . var P : FeatureId .  var PNS : Set{FeatureRef} . 
   var DL : List{DataContent} . var NDL : NeList{DataContent} .
   var PORTS : Configuration .  vars KPS KCS : [Configuration] .
 
@@ -57,21 +57,21 @@ endfm)
   op transIn : NeList{DataContent} Set{FeatureRef} ~> Msg [format (b! o)] .
   eq transIn(NDL, empty) = none .
 
-  eq < C : Ensemble | features : KPS transIn(NDL,PNS), subcomponents : KCS >
-   = < C : Ensemble | features : KPS, subcomponents : transIn(NDL,PNS) KCS > .
+  eq < CR : Ensemble | features : KPS transIn(NDL,PNS), subcomponents : KCS >
+   = < CR : Ensemble | features : KPS, subcomponents : transIn(NDL,PNS) KCS > .
 
-  eq transIn(NDL, (C . P, PNS))
-     < C : Component | features : < P : InPort | content : nil > PORTS >
+  eq transIn(NDL, (CR .. P, PNS))
+     < CR : Component | features : < P : InPort | content : nil > PORTS >
    =
      transIn(NDL, PNS)
-     < C : Component | features : < P : InPort | content : NDL > PORTS > .
+     < CR : Component | features : < P : InPort | content : NDL > PORTS > .
 
   --- transfer to the wrapper
   op transOut : NeList{DataContent} Set{FeatureRef} ~> Msg [format (b! o)] .
   eq transOut(NDL, empty) = none .
 
-  eq < C : Ensemble | features : KPS, subcomponents : transOut(NDL,PNS) KCS >
-   = < C : Ensemble | features : KPS transOut(NDL,PNS), subcomponents : KCS > .
+  eq < CR : Ensemble | features : KPS, subcomponents : transOut(NDL,PNS) KCS >
+   = < CR : Ensemble | features : KPS transOut(NDL,PNS), subcomponents : KCS > .
 
   eq transOut(NDL, (P, PNS)) < P : OutPort | content : DL > 
    = transOut(NDL, PNS) < P : OutPort | content : DL NDL > .
@@ -81,7 +81,7 @@ endom)
 (omod TRANSFER-DATA is
   protecting TRANSFER-FUNCTIONS .
 
-  var C : ComponentId . vars P : FeatureId . 
+  var CR : ComponentRef . vars P : FeatureId . 
   var D : DataContent . var DL : List{DataContent} . var NDL : NeList{DataContent} .
   var PORTS COMPS : Configuration . var CONXS : Set{Connection} .
   var NPS : NeSet{FeatureRef} . var ICTB OCTB : ConxTable .
@@ -92,10 +92,10 @@ endom)
 
   op transferInputs : Object ~> Object [format (m! o)] .
   eq transferInputs(
-      < C : Ensemble | features : PORTS, 
+      < CR : Ensemble | features : PORTS, 
                        subcomponents : COMPS, connections : CONXS >)
    = 
-      < C : Ensemble | features : transEnvIn(PORTS,inner-tb(CONXS)),
+      < CR : Ensemble | features : transEnvIn(PORTS,inner-tb(CONXS)),
                        subcomponents : transFBOut(COMPS,inner-tb(CONXS)) > .
 
   --- 1. transfer first inputs from the ensemble's input ports to subcomponents.
@@ -107,12 +107,12 @@ endom)
   --- 2. transfer feedback outputs between subcomponents.
   op transFBOut : Configuration ConxTable ~> Configuration [format (m! o)] .
   eq transFBOut(
-       < C : Component | features : < P : OutPort | content : NDL > PORTS >
-       COMPS, (C . P |-> NPS) ICTB)
+       < CR : Component | features : < P : OutPort | content : NDL > PORTS >
+       COMPS, (CR .. P |-> NPS) ICTB)
    = 
      transIn(NDL,NPS) 
      transFBOut(
-       < C : Component | features : < P : OutPort | content : nil > PORTS >
+       < CR : Component | features : < P : OutPort | content : nil > PORTS >
        COMPS, ICTB) .
   eq transFBOut(COMPS,ICTB) = COMPS [owise] .
 
@@ -121,19 +121,18 @@ endom)
   ----------------------------------------------------
 
   op transferResults : Object ~> Object [format (m! o)] .
-  eq transferResults(< C : Ensemble | subcomponents : COMPS, connections : CONXS >)
-   = < C : Ensemble | subcomponents : transEnvOut(COMPS,outer-tb(CONXS),inner-tb(CONXS)) > .
+  eq transferResults(< CR : Ensemble | subcomponents : COMPS, connections : CONXS >)
+   = < CR : Ensemble | subcomponents : transEnvOut(COMPS,outer-tb(CONXS),inner-tb(CONXS)) > .
 
   op transEnvOut : Configuration ConxTable ConxTable ~> Configuration [format (m! o)] .
- ceq transEnvOut(
-       < C : Component | features : < P : OutPort | content : NDL > PORTS > COMPS,
-       (C . P |-> NPS) OCTB, ICTB)
+  eq transEnvOut(
+       < CR : Component | features : < P : OutPort | content : NDL > PORTS > COMPS,
+       (CR .. P |-> NPS) OCTB, ICTB)
    = 
      transOut(NDL,NPS)
      transEnvOut(
-       < C : Component | features : < P : OutPort | content : DL > PORTS > COMPS,
-       OCTB, ICTB)
-   if DL :=  if contains?(C . P, ICTB) then NDL else nil fi .
+       < CR : Component | features : < P : OutPort | content : (if contains?(CR .. P, ICTB) then NDL else nil fi) > PORTS > COMPS,
+       OCTB, ICTB) .
   eq transEnvOut(COMPS,OCTB,ICTB) = COMPS [owise] .
 endom)
 

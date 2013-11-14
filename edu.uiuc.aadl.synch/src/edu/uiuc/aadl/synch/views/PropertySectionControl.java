@@ -82,7 +82,7 @@ public class PropertySectionControl {
 		// layout
 		propSec.setClient(propSecCl);
 		propSecCl.setLayout(new GridLayout(2,false));
-		GridData gd = new GridData(SWT.FILL,SWT.FILL,true,true,2,1);  gd.heightHint = propTable.getItemHeight() * 6;
+		GridData gd = new GridData(SWT.FILL,SWT.FILL,true,true,2,1);  gd.heightHint = propTable.getItemHeight() * 3;
 		propTable.setLayoutData(gd);
 		verifyButton.setLayoutData(new GridData(SWT.END,SWT.CENTER,false,false));
 

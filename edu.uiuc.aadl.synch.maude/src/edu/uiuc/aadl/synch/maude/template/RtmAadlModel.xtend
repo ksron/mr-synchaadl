@@ -51,8 +51,8 @@ class RtmAadlModel extends RtmAadlIdentifier {
 					
 			--- the initial state
 			op initial : -> Object .
-			eq initial =
-				ÇinitialStateÈ .
+			eq initial = collapse(
+				ÇinitialStateÈ) .
 		endtom)
 		
 		(set tick det .)
@@ -139,7 +139,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		
 	private def compileConnectionEndName(AbstractConnectionEnd end, ConnectionReference o) {
 		switch end {
-			ConnectedElement:	'''ÇIF end.context != nullÈÇend.context.name.escapeÈ . ÇENDIFÈÇend.connectionEnd.name.escapeÈ'''
+			ConnectedElement:	'''ÇIF end.context != nullÈÇend.context.name.escapeÈ .. ÇENDIFÈÇend.connectionEnd.name.escapeÈ'''
 			default:			null => [ o.check(false, "Unsupported connection end") ]
 		}
 	}

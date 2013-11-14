@@ -6,11 +6,11 @@
   protecting SYNCHAADL-PROPERTIES .
   including TIME-DOMAIN .
 
-  var C : ComponentId . var P : FeatureId . 
+  var CR : ComponentRef . var P : FeatureId . 
   vars PORTS PORTS' REST : Configuration .  var PROPS : PropertyAssociation .
   var NZ : NzNat .  var NDL : NeList{DataContent} .  var IA : BuiltinInputAdaptor .
 
---- A transition relation of each component.
+--- A transition relation of each component, defined by either equations or rules.
   op executeStep : Object ~> Object [format (m! o)] .
 
 --- input adaptors (name, input, output length)
@@ -18,8 +18,8 @@
 
 --- apply adaptors to the input ports of given components
   op applyAdaptors : Configuration -> Configuration [format (m! o)] .
-  eq applyAdaptors(< C : PeriodicComponent | rate : NZ, features : PORTS > REST)
-   = < C : PeriodicComponent | features : applyAdaptors(NZ,PORTS,none) > applyAdaptors(REST) .
+  eq applyAdaptors(< CR : PeriodicComponent | rate : NZ, features : PORTS > REST)
+   = < CR : PeriodicComponent | features : applyAdaptors(NZ,PORTS,none) > applyAdaptors(REST) .
   eq applyAdaptors(none) = none .
 
   op applyAdaptors : NzNat Configuration Configuration -> Object [format (m! o)] .
@@ -37,38 +37,31 @@ endtom)
 
   vars COMPS COMPS' PORTS PORTS' : Configuration .  var PROPS : PropertyAssociation .  
   vars VAL VAL' : VarValuation .  vars FMAP FMAP' : FeatureMap .  
-  var C : ComponentId .  var VIS : Set{VarId} .
+  var CR : ComponentRef .  var VIS : Set{VarId} .
   vars L L' : Location . vars LS : Set{Location} . 
   var GUARD : TransGuard .  var TRS TRS' : Set{Transition} .  var ACTION : ActionBlock .
 
-  --- nondeterministic. May have several enabled transition at a time.
-  crl [execute]:
-       executeStep(
-         < C : Thread | features : PORTS, subcomponents : COMPS,
-			currState : L,    completeStates : LS,   transitions : TRS,
-			variables : VIS,  properties : PROPS >)
-    =>
-         < C : Thread | features : writeFeature(FMAP',PORTS'),
-                        subcomponents : COMPS',
-		        currState : L' >
-   if MRSynchAADL::Nondeterministic => {true} in PROPS
-   /\ PORTS' | FMAP := readFeature(PORTS)
-   /\ execTransSystem(L, LS, TRS, defaultValuation(VIS), FMAP | COMPS | PROPS) => L' | FMAP' | COMPS' .
+--- aux operators
+  op executeStepRead : Pair{Configuration,FeatureMap} Object ~> Object [format (m! o)] . 
+  op executeStepTrans : Configuration Tuple{Location,FeatureMap,Configuration} Object ~> Object [format (m! o)] . 
 
+--- first, read data in its input ports
+  eq executeStep(< CR : Thread | features : PORTS >)
+   = executeStepRead(readFeature(PORTS), < CR : Thread | features : PORTS >) .
 
-  --- deterministic. Assume that only one enabled transition at a time.
-  ceq [execute]:
-       executeStep(
-         < C : Thread | features : PORTS, subcomponents : COMPS,
-			currState : L,    completeStates : LS,   transitions : TRS,
-			variables : VIS,  properties : PROPS >)
-    = 
-         < C : Thread | features : writeFeature(FMAP',PORTS'),
-                        subcomponents : COMPS',
-		        currState : L' >
-   if not (MRSynchAADL::Nondeterministic => {true} in PROPS)
-   /\ PORTS' | FMAP := readFeature(PORTS)
-   /\ L' | FMAP' | COMPS' := execDetTransSystem(L, LS, TRS, defaultValuation(VIS), FMAP | COMPS | PROPS) .
+--- then, execute its transition system; for nondeterministic cases, execTransSystem will be rewritten by rules.
+  eq executeStepRead(PORTS' | FMAP, 
+         < CR : Thread | subcomponents : COMPS, properties : PROPS, 
+			 currState : L, completeStates : LS,  
+			 variables : VIS,   transitions : TRS >)
+   = 
+     if MRSynchAADL::Nondeterministic => {true} in PROPS
+     then executeStepTrans(PORTS',    execTransSystem(L,LS,TRS,defaultValuation(VIS), FMAP | COMPS | PROPS), < CR : Thread | >) 
+     else executeStepTrans(PORTS', execDetTransSystem(L,LS,TRS,defaultValuation(VIS), FMAP | COMPS | PROPS), < CR : Thread | >) fi .
+
+--- its ports, data, and state will be update accordingly
+  eq executeStepTrans(PORTS', L' | FMAP' | COMPS', < CR : Thread | >)
+   = < CR : Thread | features : writeFeature(FMAP',PORTS'), subcomponents : COMPS', currState : L' > .
 endtom)
 
 
@@ -78,53 +71,46 @@ endtom)
   including DEFAULT-PROPERTIES .
   protecting TRANSFER-DATA .
 
-  vars C : ComponentId .  var P : FeatureId .  var N : Nat . var NZ : NzNat . 
-  vars OBJ1 OBJ2 : Object .  vars COMPS : Configuration . var PROPS : PropertyAssociation .
+  vars CR : ComponentRef .  var P : FeatureId .  var N : Nat . var NZ : NzNat . 
+  vars OBJ : Object .  vars COMPS : Configuration . var PROPS : PropertyAssociation .
   var PROPS : PropertyAssociation .  var NDL : NeList{DataContent} . 
-  var QUEUE : [ObjectQueue] .  var KOBJ : [Object] .  var KDCF : [DetConf] . 
+  var QUEUE : [ObjectQueue] .  var KOBJ : [Object] .  
 
-  crl [execute]: 
-        executeStep(< C : Ensemble | >)
-   =>
-        transferResults(OBJ2)
-    if OBJ1 := applyAdaptorsSub( transferInputs(< C : Ensemble | >) )
-    /\ prepareExecSub(OBJ1) => OBJ2 .
+--- the frozen attribute gives a deterministic order in rewriting.
+  sort ObjectQueue .
+  op nil : -> ObjectQueue [ctor] .
+  op _::_ : Object ObjectQueue -> ObjectQueue [ctor frozen(2)] .
+  op _|_ : ObjectQueue Configuration ~> Configuration [ctor] .
 
+--- the result of prepareExecSub will be rewritten to an object .
+  eq executeStep(< CR : Ensemble | >)
+   = transferResults(prepareExecSub(applyAdaptorsSub(transferInputs(< CR : Ensemble | >)))) .
+
+--- apply adaptors to subcomponents
    op applyAdaptorsSub : Object -> Object [format (m! o)] .
-   eq applyAdaptorsSub(< C : Ensemble | subcomponents : COMPS >)
-    = < C : Ensemble | subcomponents : applyAdaptors(COMPS) > .
+   eq applyAdaptorsSub(< CR : Ensemble | subcomponents : COMPS >)
+    = < CR : Ensemble | subcomponents : applyAdaptors(COMPS) > .
 
-  --- prepare to execute. If there are several nondeterministic components,
-  --- we need to adopt the POR technique in the MR-PALS semantics.
+--- prepare to execute. If there are several nondeterministic components,
+--- we need to adopt the POR technique in the MR-PALS semantics.
   op prepareExecSub : Object ~> Object [format (m! o)] .
-  eq prepareExecSub(< C : Ensemble | subcomponents : COMPS >)
-   = < C : Ensemble | subcomponents : prepareExec(COMPS, nil) > .
+  eq prepareExecSub(< CR : Ensemble | subcomponents : COMPS >)
+   = < CR : Ensemble | subcomponents : prepareExec(COMPS, nil) > .
 
   --- generate a "serialized" queue. This is generally needed since a system 
   --- component can contain several system components in AADL.
-  op prepareExec : Configuration ObjectQueue ~> DetConf [format (m! o)] .
-  eq prepareExec(< C : PeriodicComponent | rate : NZ > COMPS, QUEUE)
-   = prepareExec(COMPS, k-executeStep(NZ, < C : PeriodicComponent | >) :: QUEUE) .
-  eq prepareExec(COMPS, QUEUE) = COMPS QUEUE [owise] .
+  op prepareExec : Configuration ObjectQueue ~> Configuration [format (m! o)] .
+  eq prepareExec(< CR : PeriodicComponent | rate : NZ > COMPS, QUEUE)
+   = prepareExec(COMPS, k-executeStep(NZ, < CR : PeriodicComponent | >) :: QUEUE) .
+  eq prepareExec(COMPS, QUEUE) = QUEUE | COMPS [owise] .
 
   --- performs "executeStep" k times, after applying adaptors.
   op k-executeStep : Nat Object ~> Object [format (m! o)] .
   eq k-executeStep(s(N), KOBJ) = executeStep(k-executeStep(N, KOBJ)) .
   eq k-executeStep(0, KOBJ)    = KOBJ .
 
-  --- the frozen attribute gives a deterministic order in rewriting.
-  sort ObjectQueue .
-  op nil : -> ObjectQueue [ctor] .
-  op _::_ : Object ObjectQueue -> ObjectQueue [ctor frozen(2)] .
-
-  sort DetConf .
-  subsort ObjectQueue Configuration < DetConf .
-  op __ : DetConf DetConf -> DetConf [ditto] .
-
-  --- if the first item finishes its execution, then the next item is scheduled
-  eq OBJ1 :: (KOBJ :: KDCF) = (KOBJ :: KDCF) OBJ1 .
-  eq OBJ1 :: nil = OBJ1 .
+--- if the first item finishes its execution, then the next item is scheduled
+  eq OBJ :: QUEUE | COMPS = QUEUE | COMPS OBJ .
+  eq          nil | COMPS =         COMPS .
 endtom)
-
-
 
