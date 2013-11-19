@@ -74,7 +74,7 @@ endtom)
   vars CR : ComponentRef .  var P : FeatureId .  var N : Nat . var NZ : NzNat . 
   vars OBJ : Object .  vars COMPS : Configuration . var PROPS : PropertyAssociation .
   var PROPS : PropertyAssociation .  var NDL : NeList{DataContent} . 
-  var QUEUE : [ObjectQueue] .  var KOBJ : [Object] .  
+  var QUEUE : [ObjectQueue] .  
 
 --- the frozen attribute gives a deterministic order in rewriting.
   sort ObjectQueue .
@@ -106,8 +106,8 @@ endtom)
 
   --- performs "executeStep" k times, after applying adaptors.
   op k-executeStep : Nat Object ~> Object [format (m! o)] .
-  eq k-executeStep(s(N), KOBJ) = executeStep(k-executeStep(N, KOBJ)) .
-  eq k-executeStep(0, KOBJ)    = KOBJ .
+  eq k-executeStep(s(N), OBJ) = executeStep(k-executeStep(N, OBJ)) .
+  eq k-executeStep(0, OBJ)    = OBJ .
 
 --- if the first item finishes its execution, then the next item is scheduled
   eq OBJ :: QUEUE | COMPS = QUEUE | COMPS OBJ .
