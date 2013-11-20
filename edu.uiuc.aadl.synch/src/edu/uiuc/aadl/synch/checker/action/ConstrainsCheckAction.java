@@ -11,7 +11,7 @@ import org.osate.ui.actions.AbstractInstanceOrDeclarativeModelReadOnlyAction;
 import org.osate.ui.dialogs.Dialog;
 import org.osgi.framework.Bundle;
 
-import edu.uiuc.aadl.synch.checker.Activator;
+import edu.uiuc.aadl.synch.Activator;
 import edu.uiuc.aadl.synch.checker.SynchAadlConstChecker;
 
 public class ConstrainsCheckAction extends AbstractInstanceOrDeclarativeModelReadOnlyAction {

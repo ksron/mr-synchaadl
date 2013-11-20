@@ -23,7 +23,7 @@ import org.osgi.framework.Bundle;
 
 import com.google.common.collect.HashMultimap;
 
-import edu.uiuc.aadl.synch.maude.Activator;
+import edu.uiuc.aadl.synch.Activator;
 import edu.uiuc.aadl.synch.maude.template.RtmAadlModel;
 import edu.uiuc.aadl.synch.maude.template.RtmAadlSetting;
 import edu.uiuc.aadl.utils.IOUtils;
