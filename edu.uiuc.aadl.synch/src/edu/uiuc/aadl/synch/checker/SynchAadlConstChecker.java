@@ -15,6 +15,8 @@ import edu.uiuc.aadl.utils.PropertyUtil;
 
 public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 
+	//TODO: check input adators for multirate connections (e.g., existance, fast/slow types, etc.)
+	//TODO: should initial values be a vector for the fast machine?, or given by the related input adaptors??
 	
 	public SynchAadlConstChecker(IProgressMonitor pm, AnalysisErrorReporterManager errMgr) {
 		super(pm, errMgr);

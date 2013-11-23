@@ -26,6 +26,7 @@ class RtmAadlProperty extends RtmAadlIdentifier {
 	}
 	
 	def compileSynchAadlPropertyValue(Property pr, NamedElement ne) {
+		//TODO: check fast/slow adaptor types for multirate connections..
 		switch pr.name {
 			case PropertyUtil.INPUT_ADAPTOR:	(PropertyUtils.getSimplePropertyValue(ne,pr) as StringLiteral).value
 			default:							pr.compileDefaultPropertyValue(ne)

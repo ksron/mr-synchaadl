@@ -2,7 +2,6 @@ package edu.uiuc.aadl.synch.maude.template
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.SetMultimap
-import fr.tpt.aadl.annex.behavior.aadlba.BehaviorAnnex
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
 import org.osate.aadl2.AbstractConnectionEnd
@@ -24,6 +23,7 @@ import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager
 import static extension edu.uiuc.aadl.synch.maude.template.RtmAadlSetting.*
 import static extension edu.uiuc.aadl.utils.PropertyUtil.*
 import static extension org.osate.xtext.aadl2.properties.util.GetProperties.*
+import org.osate.ba.aadlba.BehaviorAnnex
 
 class RtmAadlModel extends RtmAadlIdentifier {		
 	
@@ -67,7 +67,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			val period = o.periodinMS => [ 
 				o.check(! o.periodic || (it > 0.0 && parentPeriod % it == 0), "Invalid period: " + o.category.name + " " + o.name) ]
 			val behAnx = o.componentClassifier.ownedAnnexSubclauses.filter(typeof(BehaviorAnnex)) => [
-				o.check(! o.behavioral || ! it.empty, "Invalid behavior definition: " + o.category.name + " " + o.name) ]
+				o.check(! o.behavioral || ! it.empty, "No behavior annex definition in thread: " + o.category.name + " " + o.name) ]
 				
 			// update the connection table
 			o.connectionInstances.forEach [connectionReferences.forEach[conxTable.put(context, it) ]]
@@ -102,7 +102,8 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	}
 	
 
-	private def compileFeature(FeatureInstance o) {	// TODO: generate an error for a lack of initial value of a feedback ooutput
+	private def compileFeature(FeatureInstance o) {	
+		//TODO: generate an error for a lack of initial value of a feedback ooutput
 	 	val f = o.feature
 	 	switch f {
 	 		Parameter: 
@@ -132,6 +133,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	 
 	
 	private def CharSequence compileConnection(ConnectionReference o) {
+		//TODO: check input adaptors for multirate connections
 		val c = o.connection => [ o.check(it instanceof PortConnection || it instanceof ParameterConnection, "Unsupported connection type") ]
 		'''(Çc.source.compileConnectionEndName(o)È --> Çc.destination.compileConnectionEndName(o)È)'''
 	}
