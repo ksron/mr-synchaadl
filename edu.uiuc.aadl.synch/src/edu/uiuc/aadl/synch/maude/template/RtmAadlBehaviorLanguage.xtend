@@ -187,11 +187,11 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 
 	private def dispatch CharSequence compileExpression(ValueConstant e) {
 		switch e {
-			BehaviorBooleanLiteral:		if (e.value) "[true]" else "[false]"
+			BehaviorBooleanLiteral:		if (e.isValue()) "[true]" else "[false]"
 			BehaviorStringLiteral:		'''["Çe.valueÈ"]'''
 			BehaviorRealLiteral:		'''[Çe.valueÈ]'''
 			BehaviorIntegerLiteral:		'''[Çe.valueÈ]'''
-			BehaviorPropertyValue: 		'''[Çe.property.qualifiedName.escapeÈ]'''
+			BehaviorPropertyValue: 		'''[Çe.property.getQualifiedName().escapeÈ]'''
 			BehaviorPropertyConstant:	e.compilePropertyConstant
 			default:					null => [e.check(false, "Unsupported expression constant: " + e.class.name)]
 		}

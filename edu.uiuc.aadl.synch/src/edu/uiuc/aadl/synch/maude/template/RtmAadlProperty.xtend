@@ -47,7 +47,7 @@ class RtmAadlProperty extends RtmAadlIdentifier {
 	 
 	
 	static def dispatch CharSequence compilePropertyValue(BooleanLiteral be) {
-		if (be.value) "true" else "false"
+		if (be.isValue()) "true" else "false"
 	}
 	
 	

@@ -8,7 +8,7 @@ class DefaultPropSpec {
 		name: «model.name»;
 		
 		-- an AADL implementation
-		model: «model.systemImplementation.qualifiedName»;
+		model: «model.systemImplementation.getQualifiedName()»;
 		
 		-- a path for the corresponding instance model
 		instance: "«modelFile.fullPath»";

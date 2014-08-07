@@ -34,7 +34,7 @@ class RtmAadlIdentifier {
 	}
 	
 	def qualifiedId(NamedElement ne, String sort) {
-		ne.qualifiedName.id(sort)
+		ne.getQualifiedName().id(sort)
 	}
 	
 	/*

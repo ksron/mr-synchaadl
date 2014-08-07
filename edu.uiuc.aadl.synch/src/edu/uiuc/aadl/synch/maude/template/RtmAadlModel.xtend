@@ -65,9 +65,9 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			throw new OperationCanceledException
 		else {
 			val period = o.periodinMS => [ 
-				o.check(! o.periodic || (it > 0.0 && parentPeriod % it == 0), "Invalid period: " + o.category.name + " " + o.name) ]
+				o.check(! o.periodic || (it > 0.0 && parentPeriod % it == 0), "Invalid period: " + o.category.getName() + " " + o.name) ]
 			val behAnx = o.componentClassifier.ownedAnnexSubclauses.filter(typeof(BehaviorAnnex)) => [
-				o.check(! o.behavioral || ! it.empty, "No behavior annex definition in thread: " + o.category.name + " " + o.name) ]
+				o.check(! o.behavioral || ! it.empty, "No behavior annex definition in thread: " + o.category.getName() + " " + o.name) ]
 				
 			// update the connection table
 			o.connectionInstances.forEach [connectionReferences.forEach[conxTable.put(context, it) ]]
@@ -120,7 +120,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		 			ÇENDIFÈ
 		 			properties : Çf.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")È >'''
 	 		default: 
-	 			null => [o.check(false, "Unsupported feature: " + o.category.name + " " + o.name)]
+	 			null => [o.check(false, "Unsupported feature: " + o.category.getName() + " " + o.name)]
 	 	}
 	 	
 	}
