@@ -31,8 +31,9 @@ public class RtmSimulationAction implements IActionDelegate {
 		
 		if (currentSelection instanceof IResource) {
 			Maude maude = MaudesimpleGUIPlugin.getDefault().getMaude();
-			if (!maude.isRunning())
+			if (!maude.isRunning()) {
 				maude.runMaude();
+			}
 			
 			maude.sendToMaude("load " + ((IResource)currentSelection).getLocation().toOSString() + "\n");
 			maude.sendToMaude(RtmPropSpec.compileSimulCommand(bound).toString());
@@ -44,8 +45,9 @@ public class RtmSimulationAction implements IActionDelegate {
 	
 	@Override
 	public synchronized void selectionChanged(IAction action, ISelection selection) {
-		if (selection instanceof IStructuredSelection && !((IStructuredSelection)selection).isEmpty() )
+		if (selection instanceof IStructuredSelection && !((IStructuredSelection)selection).isEmpty() ) {
 			currentSelection = ((IStructuredSelection)selection).getFirstElement();
+		}
 	}
 
 }

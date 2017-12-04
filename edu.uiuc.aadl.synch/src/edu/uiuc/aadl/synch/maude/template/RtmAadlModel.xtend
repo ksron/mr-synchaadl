@@ -4,7 +4,7 @@ import com.google.common.collect.HashMultimap
 import com.google.common.collect.SetMultimap
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
-import org.osate.aadl2.AbstractConnectionEnd
+// import org.osate.aadl2.AbstractConnectionEnd
 import org.osate.aadl2.ConnectedElement
 import org.osate.aadl2.DirectionType
 import org.osate.aadl2.NamedElement
@@ -30,7 +30,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	private val RtmAadlBehaviorLanguage bc;
 	private val RtmAadlProperty pc;
 	private val IProgressMonitor monitor;
-	private val HashMultimap<ComponentInstance,ConnectionReference> conxTable = HashMultimap.create() ;
+	private val HashMultimap<ComponentInstance,ConnectionReference> conxTable = HashMultimap::create() ;
 	
 	new(IProgressMonitor pm, AnalysisErrorReporterManager errMgr, SetMultimap<String,String> opTable) {
 		super(errMgr, opTable)
@@ -43,16 +43,16 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		val initialState = model.compileComponent(model.periodinMS);
 		
 		'''
-		(tomod Çmodel.name.toUpperCaseÈ-MODEL is
+		(tomod Â«model.name.toUpperCaseÂ»-MODEL is
 			including MODEL-TRANSITION-SYSTEM .
 			
 			--- AADL identifiers
-			ÇgenerateIdsÈ
+			Â«generateIdsÂ»
 					
 			--- the initial state
 			op initial : -> Object .
 			eq initial = collapse(
-				ÇinitialStateÈ) .
+				Â«initialStateÂ») .
 		endtom)
 		
 		(set tick det .)
@@ -73,31 +73,31 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			o.connectionInstances.forEach [connectionReferences.forEach[conxTable.put(context, it) ]]
 				
 			'''
-			< Ço.id("ComponentId")È : Ço.compClassÈ |
-				ÇIF o.periodic && period > 0È
-				rate : Ç(parentPeriod / period).intValueÈ,
-				ÇENDIFÈ
-				ÇIF o.isDataÈ
-				value : Ço.compileInitialValue("bot")È,
-				ÇENDIFÈ
+			< Â«o.id("ComponentId")Â» : Â«o.compClassÂ» |
+				Â«IF o.periodic && period > 0Â»
+				rate : Â«(parentPeriod / period).intValueÂ»,
+				Â«ENDIFÂ»
+				Â«IF o.isDataÂ»
+				value : Â«o.compileInitialValue("bot")Â»,
+				Â«ENDIFÂ»
 				features : (
-					Ço.featureInstances.map[compileFeature].filterNull.join('\n',"none")È),
+					Â«o.featureInstances.map[compileFeature].filterNull.join('\n',"none")Â»),
 				subcomponents : (
-					Ço.componentInstances.filter[isSync].map[compileComponent(period)].filterNull.join('\n',"none")È),
+					Â«o.componentInstances.filter[isSync].map[compileComponent(period)].filterNull.join('\n',"none")Â»),
 				properties : (
-					Ço.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")È),
-				ÇIF o.behavioral && ! behAnx.emptyÈ
+					Â«o.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")Â»),
+				Â«IF o.behavioral && ! behAnx.emptyÂ»
 				currState : (
-					ÇbehAnx.get(0).states.filter[isInitial].get(0).id("Location")È),
+					Â«behAnx.get(0).states.filter[isInitial].get(0).id("Location")Â»),
 				completeStates : (
-					ÇbehAnx.get(0).states.filter[isComplete].map[id("Location")].join(' ', "empty")È),
+					Â«behAnx.get(0).states.filter[isComplete].map[id("Location")].join(' ', "empty")Â»),
 				variables : (
-					ÇbehAnx.get(0).variables.map[id("VarId")].join(' ; ', "empty")È),
+					Â«behAnx.get(0).variables.map[id("VarId")].join(' ; ', "empty")Â»),
 				transitions : (
-					ÇbehAnx.get(0).transitions.map[bc.compileTransition(it)].filterNull.join(' ;\n', "empty")È),
-				ÇENDIFÈ
+					Â«behAnx.get(0).transitions.map[bc.compileTransition(it)].filterNull.join(' ;\n', "empty")Â»),
+				Â«ENDIFÂ»
 				connections : (
-					ÇconxTable.get(o).map[compileConnection].filterNull.join(' ;\n', "empty")È) >''' => [ monitor.worked(1) ]
+					Â«conxTable.get(o).map[compileConnection].filterNull.join(' ;\n', "empty")Â») >''' => [ monitor.worked(1) ]
 		}
 	}
 	
@@ -108,17 +108,17 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	 	switch f {
 	 		Parameter: 
 		 		'''
-		 		< Çf.id("FeatureId")È : Çf.direction.compileDirection(o)ÈParam | 
+		 		< Â«f.id("FeatureId")Â» : Â«f.direction.compileDirection(o)Â»Param | 
 		 			content : bot,
-		 			properties : Çf.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")È >'''
+		 			properties : Â«f.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")Â» >'''
 	 		Port: 
 		 		'''
-		 		< Çf.id("FeatureId")È : Çf.direction.compileDirection(o)ÈPort | 
-		 			content : Ço.compileInitialValue("nil")È,
-		 			ÇIF f.direction.incomingÈ
+		 		< Â«f.id("FeatureId")Â» : Â«f.direction.compileDirection(o)Â»Port | 
+		 			content : Â«o.compileInitialValue("nil")Â»,
+		 			Â«IF f.direction.incomingÂ»
 		 			cache : bot,
-		 			ÇENDIFÈ
-		 			properties : Çf.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")È >'''
+		 			Â«ENDIFÂ»
+		 			properties : Â«f.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")Â» >'''
 	 		default: 
 	 			null => [o.check(false, "Unsupported feature: " + o.category.getName() + " " + o.name)]
 	 	}
@@ -128,20 +128,19 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def compileDirection(DirectionType type, FeatureInstance o) {
 		o.check(! (type.incoming && type.outgoing), "'in out' features are not supported")
-		'''ÇIF type.incomingÈInÇENDIFÈÇIF type.outgoingÈOutÇENDIFÈ''' 
+		'''Â«IF type.incomingÂ»InÂ«ENDIFÂ»Â«IF type.outgoingÂ»OutÂ«ENDIFÂ»''' 
 	}
 	 
 	
 	private def CharSequence compileConnection(ConnectionReference o) {
-		//TODO: check input adaptors for multirate connections
+		//TODO: check input adaptors for multirate connecLtions
 		val c = o.connection => [ o.check(it instanceof PortConnection || it instanceof ParameterConnection, "Unsupported connection type") ]
-		'''(Çc.source.compileConnectionEndName(o)È --> Çc.destination.compileConnectionEndName(o)È)'''
+		'''(Â«c.source.compileConnectionEndName(o)Â» --> Â«c.destination.compileConnectionEndName(o)Â»)'''
 	}
 
-		
-	private def compileConnectionEndName(AbstractConnectionEnd end, ConnectionReference o) {
+	private def compileConnectionEndName(ConnectedElement end, ConnectionReference o) {
 		switch end {
-			ConnectedElement:	'''ÇIF end.context != nullÈÇend.context.name.escapeÈ .. ÇENDIFÈÇend.connectionEnd.name.escapeÈ'''
+			ConnectedElement:	'''Â«IF end.context != nullÂ»Â«end.context.name.escapeÂ» .. Â«ENDIFÂ»Â«end.connectionEnd.name.escapeÂ»'''
 			default:			null => [ o.check(false, "Unsupported connection end") ]
 		}
 	}
@@ -149,7 +148,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def compilePropertyAssociation(PropertyAssociation p, NamedElement ne) {
 		val value = pc.compilePropertyValue(p.property,ne)
-		if (value != null)	'''(Çp.property.qualifiedId("PropertyId")È => {ÇvalueÈ})'''
+		if (value != null)	'''(Â«p.property.qualifiedId("PropertyId")Â» => {Â«valueÂ»})'''
 	}
 	
 	

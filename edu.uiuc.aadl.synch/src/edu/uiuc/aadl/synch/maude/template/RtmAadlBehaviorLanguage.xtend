@@ -1,6 +1,5 @@
 package edu.uiuc.aadl.synch.maude.template
 
-import com.google.common.collect.SetMultimap
 import org.osate.aadl2.DataPort
 import org.osate.aadl2.PropertyValue
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager
@@ -34,7 +33,7 @@ import org.osate.ba.aadlba.BehaviorBooleanLiteral
 import org.osate.ba.aadlba.BehaviorStringLiteral
 import org.osate.ba.aadlba.BehaviorRealLiteral
 import org.osate.ba.aadlba.BehaviorIntegerLiteral
-import org.osate.ba.aadlba.BehaviorPropertyValue
+//import org.osate.ba.aadlba.BehaviorPropertyValue
 import org.osate.ba.aadlba.ValueVariable
 import org.osate.ba.aadlba.BehaviorVariableHolder
 import org.osate.ba.aadlba.ParameterLabel
@@ -43,6 +42,7 @@ import org.osate.ba.aadlba.DataSubcomponentHolder
 import org.osate.ba.aadlba.ParameterHolder
 import org.osate.ba.aadlba.PortCountValue
 import org.osate.ba.aadlba.PortFreshValue
+import com.google.common.collect.SetMultimap
 
 class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 
@@ -53,7 +53,7 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	
 	def compileTransition(BehaviorTransition t) {
 		t.check(t.priority < 0, "transition priorities are not supported" )
-		'''(Çt.sourceState.id("Location")È -[ Çt.compileTransitionGuardÈ ]-> Çt.destinationState.id("Location")È Çt.compileTransitionActionÈ)''' 
+		'''(Â«t.sourceState.id("Location")Â» -[ Â«t.compileTransitionGuardÂ» ]-> Â«t.destinationState.id("Location")Â» Â«t.compileTransitionActionÂ»)''' 
 	}
 	
 	
@@ -94,7 +94,7 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 		a.check(a.timeout == null, "timeout action not supported")
 		'''
 		{
-			Ça.content.compileActionÈ
+			Â«a.content.compileActionÂ»
 		}'''
 	}
 		
@@ -108,37 +108,37 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	
 	private def dispatch CharSequence compileAction(IfStatement a) {
 		if (a.elif) '''
-			elsif (Ça.logicalValueExpression.compileExpressionÈ)
-				Ça.behaviorActions.compileActionÈ
-			Ça.elseStatement?.compileActionÈ'''
+			elsif (Â«a.logicalValueExpression.compileExpressionÂ»)
+				Â«a.behaviorActions.compileActionÂ»
+			Â«a.elseStatement?.compileActionÂ»'''
 		else '''
-			if (Ça.logicalValueExpression.compileExpressionÈ)
-				Ça.behaviorActions.compileActionÈ
-			Ça.elseStatement?.compileActionÈ
+			if (Â«a.logicalValueExpression.compileExpressionÂ»)
+				Â«a.behaviorActions.compileActionÂ»
+			Â«a.elseStatement?.compileActionÂ»
 			end if'''
 	}
 	
 	private def dispatch CharSequence compileAction(ElseStatement a) '''
 			else
-				Ça.behaviorActions.compileActionÈ'''
+				Â«a.behaviorActions.compileActionÂ»'''
 				
 	private def dispatch CharSequence compileAction(WhileOrDoUntilStatement a) {
 		if (a.doUntil) '''
 			do
-				Ça.getBehaviorActions.compileActionÈ
-			until (Ça.logicalValueExpression.compileExpressionÈ)'''
+				Â«a.getBehaviorActions.compileActionÂ»
+			until (Â«a.logicalValueExpression.compileExpressionÂ»)'''
 		else '''
-			while (Ça.logicalValueExpression.compileExpressionÈ) {
-				Ça.behaviorActions.compileActionÈ
+			while (Â«a.logicalValueExpression.compileExpressionÂ») {
+				Â«a.behaviorActions.compileActionÂ»
 			}'''
 	}
 	
 	private def dispatch CharSequence compileAction(AssignmentAction a) '''
-		({Ça.target.compileTargetÈ} := Ça.valueExpression.compileExpressionÈ)'''
+		({Â«a.target.compileTargetÂ»} := Â«a.valueExpression.compileExpressionÂ»)'''
 	
 	private def dispatch CharSequence compileAction(SubprogramCallAction a) {
-		a.check(a.dataAccess == null , "data access for subprogram not supported")
-		'''(Ça.subprogram.element.qualifiedId("ClassifierId")È !ÇIF a.setParameterLabelsÈ (Ça.parameterLabels.map[compileParameter].filterNull.join(' , ')È)ÇENDIFÈ)'''
+		// a.check(a.dataAccess == null , "data access for subprogram not supported")
+		'''(Â«a.subprogram.element.qualifiedId("ClassifierId")Â» !Â«IF a.setParameterLabelsÂ» (Â«a.parameterLabels.map[compileParameter].filterNull.join(' , ')Â»)Â«ENDIFÂ»)'''
 	}
 	
 	private def dispatch CharSequence compileAction(BehaviorActions a) {
@@ -162,7 +162,7 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	private def compileParameter(ParameterLabel p) {
 		switch p {
 			ValueExpression: 	compileExpression(p)
-			Target:				'''[ÇcompileTarget(p)È]'''
+			Target:				'''[Â«compileTarget(p)Â»]'''
 		}
 		
 	}
@@ -174,24 +174,22 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	 
 	private def dispatch CharSequence compileExpression(ValueVariable e) {
 		switch e {
-			BehaviorVariableHolder:	'''[Çe.behaviorVariable.name.escapeÈ]'''
-			DataPortHolder:			'''[Çe.dataPort.name.escapeÈ]'''
-			DataSubcomponentHolder:	'''[Çe.dataSubcomponent.name.escapeÈ]'''
-			ParameterHolder:		'''[Çe.parameter.name.escapeÈ]'''
-			PortCountValue:			'''count(Çe.port.name.escapeÈ)'''	=> [e.check(e.port instanceof DataPort, "only data port supported")]
-			PortFreshValue:			'''fresh(Çe.port.name.escapeÈ)'''	=> [e.check(e.port instanceof DataPort, "only data port supported")]
+			BehaviorVariableHolder:	'''[Â«e.behaviorVariable.name.escapeÂ»]'''
+			DataPortHolder:			'''[Â«e.dataPort.name.escapeÂ»]'''
+			DataSubcomponentHolder:	'''[Â«e.dataSubcomponent.name.escapeÂ»]'''
+			ParameterHolder:		'''[Â«e.parameter.name.escapeÂ»]'''
+			PortCountValue:			'''count(Â«e.port.name.escapeÂ»)'''	=> [e.check(e.port instanceof DataPort, "only data port supported")]
+			PortFreshValue:			'''fresh(Â«e.port.name.escapeÂ»)'''	=> [e.check(e.port instanceof DataPort, "only data port supported")]
 			default:				null => [e.check(false, "Unsupported expression reference: " + e.class.name)]
 		}
 	}
-
-
 	private def dispatch CharSequence compileExpression(ValueConstant e) {
 		switch e {
 			BehaviorBooleanLiteral:		if (e.isValue()) "[true]" else "[false]"
-			BehaviorStringLiteral:		'''["Çe.valueÈ"]'''
-			BehaviorRealLiteral:		'''[Çe.valueÈ]'''
-			BehaviorIntegerLiteral:		'''[Çe.valueÈ]'''
-			BehaviorPropertyValue: 		'''[Çe.property.getQualifiedName().escapeÈ]'''
+			BehaviorStringLiteral:		'''["Â«e.valueÂ»"]'''
+			BehaviorRealLiteral:		'''[Â«e.valueÂ»]'''
+			BehaviorIntegerLiteral:		'''[Â«e.valueÂ»]'''
+			//BehaviorPropertyValue: 		'''[Â«e.property.getQualifiedName().escapeÂ»]'''
 			BehaviorPropertyConstant:	e.compilePropertyConstant
 			default:					null => [e.check(false, "Unsupported expression constant: " + e.class.name)]
 		}
@@ -200,11 +198,10 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	private def compilePropertyConstant(BehaviorPropertyConstant c) {
 		val value = c.property.constantValue
 		if (value instanceof PropertyValue)
-			'''[ÇRtmAadlProperty.compilePropertyValue(value as PropertyValue)È]'''
+			'''[Â«RtmAadlProperty::compilePropertyValue(value as PropertyValue)Â»]'''
 		else
 			null => [c.check(false, "Unsupported property constant: " + c.class.name)]
 	}
-
 	
 	private def dispatch CharSequence compileExpression(ValueExpression e) {
 		val itRel = e.relations.iterator
@@ -212,7 +209,7 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 		if (e.setLogicalOperators) {
 			val itOp = e.logicalOperators.iterator
 			while (itRel.hasNext)
-				result = '''(ÇresultÈ ÇitOp.next.literalÈ ÇitRel.next.compileExpressionÈ)'''
+				result = '''(Â«resultÂ» Â«itOp.next.literalÂ» Â«itRel.next.compileExpressionÂ»)'''
 		}
 		return result
 	}
@@ -222,7 +219,7 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 		if (e.secondExpression == null)
 			e.firstExpression.compileExpression
 		else
-			'''(Çe.firstExpression.compileExpressionÈ Çe.relationalOperator.literalÈ Çe.secondExpression.compileExpressionÈ)'''
+			'''(Â«e.firstExpression.compileExpressionÂ» Â«e.relationalOperator.literalÂ» Â«e.secondExpression.compileExpressionÂ»)'''
 	}
 	
 	
@@ -232,39 +229,36 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 		if (e.setBinaryAddingOperators) {
 			val itOp = e.binaryAddingOperators.iterator
 			while (itTerm.hasNext)
-				result = '''(ÇresultÈ ÇitOp.next.literalÈ ÇitTerm.next.compileExpressionÈ)'''
+				result = '''(Â«resultÂ» Â«itOp.next.literalÂ» Â«itTerm.next.compileExpressionÂ»)'''
 		}
-		return if (e.setUnaryAddingOperator) '''Çe.unaryAddingOperator.compileUnaryAddingOperatorÈ(ÇresultÈ)''' else result
+		return if (e.setUnaryAddingOperator) '''Â«e.unaryAddingOperator.compileUnaryAddingOperatorÂ»(Â«resultÂ»)''' else result
 	}
 	
 	private def compileUnaryAddingOperator(UnaryAddingOperator u) {
 		switch u.value {
-			case UnaryAddingOperator.NONE_VALUE:	""
-			case UnaryAddingOperator.PLUS_VALUE:	"plus"
-			case UnaryAddingOperator.MINUS_VALUE:	"minus"
+			case UnaryAddingOperator::NONE_VALUE:	""
+			case UnaryAddingOperator::PLUS_VALUE:	"plus"
+			case UnaryAddingOperator::MINUS_VALUE:	"minus"
 		}
 	}
 	
-
 	private def dispatch CharSequence compileExpression(Term e) {
 		val itFact = e.factors.iterator
 		var result = itFact.next.compileExpression
 		if (e.setMultiplyingOperators) {
 			val itOp = e.multiplyingOperators.iterator
 			while (itFact.hasNext)
-				result = '''(ÇresultÈ ÇitOp.next.literalÈ ÇitFact.next.compileExpressionÈ)'''
+				result = '''(Â«resultÂ» Â«itOp.next.literalÂ» Â«itFact.next.compileExpressionÂ»)'''
 		}
 		return result
 	}
-
-
 	private def dispatch CharSequence compileExpression(Factor e) {
 		if (e.setUnaryNumericOperator) '''
-			Çe.unaryNumericOperator.literalÈ(Çe.firstValue.compileExpressionÈ)'''
+			Â«e.unaryNumericOperator.literalÂ»(Â«e.firstValue.compileExpressionÂ»)'''
 		else if (e.setUnaryBooleanOperator) '''
-			Çe.unaryBooleanOperator.literalÈ(Çe.firstValue.compileExpressionÈ)'''
+			Â«e.unaryBooleanOperator.literalÂ»(Â«e.firstValue.compileExpressionÂ»)'''
 		else if (e.setBinaryNumericOperator) '''
-			(Çe.firstValue.compileExpressionÈ Çe.binaryNumericOperator.literalÈ Çe.secondValue.compileExpressionÈ)'''
+			(Â«e.firstValue.compileExpressionÂ» Â«e.binaryNumericOperator.literalÂ» Â«e.secondValue.compileExpressionÂ»)'''
 		else
 			e.firstValue.compileExpression
 	}

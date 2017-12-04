@@ -5,13 +5,13 @@ import org.eclipse.core.resources.IFile
 
 class DefaultPropSpec {
 	def static deGenerate(SystemInstance model, IFile modelFile) '''
-		name: «model.name»;
+		name: √ámodel.name√à;
 		
 		-- an AADL implementation
-		model: «model.systemImplementation.getQualifiedName()»;
+		model: √ámodel.systemImplementation.getQualifiedName()√à;
 		
 		-- a path for the corresponding instance model
-		instance: "«modelFile.fullPath»";
+		instance: "√ámodelFile.fullPath√à";
 		
 		-- requirements and formulas below
 	'''

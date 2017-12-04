@@ -20,84 +20,81 @@ import edu.uiuc.aadl.xtext.propspec.propSpec.ReqStatement
 class RtmPropSpec {
 	
 	static def compileSpec(Top top) '''
-		load «top.name».maude .
-		load «RtmAadlSetting.SEMANTICS_PATH»/«RtmAadlSetting.ANALYSIS_FILE» .
+		load ¬´top.name¬ª.maude .
+		load ¬´RtmAadlSetting::SEMANTICS_PATH¬ª/¬´RtmAadlSetting::ANALYSIS_FILE¬ª .
 		
-		(tomod «top.name.toUpperCase»-VERIFICATION-DEF is
-			including «top.name.toUpperCase»-MODEL .
+		(tomod ¬´top.name.toUpperCase¬ª-VERIFICATION-DEF is
+			including ¬´top.name.toUpperCase¬ª-MODEL .
 			including AADL-SIMPLE-COUNTEREXAMPLE .
 			
 			--- requirements
-			«FOR r : top.requirements»
-			op «r.name» : -> Formula .	«IF r.bound > 0»--- bound = «r.bound»«ENDIF»
-			eq «r.name»
-			 = «r.value.compileFormula» .
+			¬´FOR r : top.requirements¬ª
+			op ¬´r.name¬ª : -> Formula .	¬´IF r.bound > 0¬ª--- bound = ¬´r.bound¬ª¬´ENDIF¬ª
+			eq ¬´r.name¬ª
+			 = ¬´r.value.compileFormula¬ª .
 			
-			«ENDFOR»
+			¬´ENDFOR¬ª
 			--- formulas and propositions
-			«FOR f : top.formulas»
-			op «f.name» : -> Formula .
-			eq «f.name»
-			 = «f.value.compileFormula» .
+			¬´FOR f : top.formulas¬ª
+			op ¬´f.name¬ª : -> Formula .
+			eq ¬´f.name¬ª
+			 = ¬´f.value.compileFormula¬ª .
 			
-			«ENDFOR»
+			¬´ENDFOR¬ª
 		endtom)
 	'''
 	
 	static def compileReqCommand(ReqStatement req) {
 		if (req.bound > 0)
-			'''(mc {initial} |=t «req.name.escape» in time <= «req.bound» .)'''
+			'''(mc {initial} |=t ¬´req.name.escape¬ª in time <= ¬´req.bound¬ª .)'''
 		else
-			'''(mc {initial} |=u «req.name.escape» .)'''
+			'''(mc {initial} |=u ¬´req.name.escape¬ª .)'''
 	}
 	
 	static def compileSimulCommand(int bound) '''
-		(trew {initial} in time <= «bound»  .)
+		(trew {initial} in time <= ¬´bound¬ª  .)
 	'''
-
 	
 	/**
 	 *  translate LTL formulas
 	 */
 	 
 	private static def dispatch CharSequence compileFormula(BinaryFormula f) 
-	'''(«f.left.compileFormula» «f.op» «f.right.compileFormula»)'''
+	'''(¬´f.left.compileFormula¬ª ¬´f.op¬ª ¬´f.right.compileFormula¬ª)'''
 			
 	
 	private static def dispatch CharSequence compileFormula(UnaryFormula f) {
-		if (f.child == null) f.op else '''(«f.op» «f.child.compileFormula»)'''
+		if (f.child == null) f.op else '''(¬´f.op¬ª ¬´f.child.compileFormula¬ª)'''
 	}
 			
-
 	private static def dispatch CharSequence compileFormula(PropRef pr) 
-	'''«pr.def.name»'''
+	'''¬´pr.def.name¬ª'''
 	
 	
 	private static def dispatch CharSequence compileFormula(StateProp prop) 
-	'''«prop.path.compilePath» @ «prop.state»'''
+	'''¬´prop.path.compilePath¬ª @ ¬´prop.state¬ª'''
 	
 	
 	private static def dispatch CharSequence compileFormula(ValueProp prop) 
-	'''«prop.path.compilePath» | «prop.expression.compileExp»'''
+	'''¬´prop.path.compilePath¬ª | ¬´prop.expression.compileExp¬ª'''
 	 
-	 
+	  
 	/**
 	 *  translate BA expressions
 	 */
-
 	private static def dispatch CharSequence compileExp(BinaryExpression e) '''
-		(«e.left.compileExp» «e.op» «e.right.compileExp»)'''
+		(¬´e.left.compileExp¬ª ¬´e.op¬ª ¬´e.right.compileExp¬ª)'''
 		
 		
 	private static def dispatch CharSequence compileExp(UnaryExpression e) '''
-		«e.op.translateUnaryOp»(«e.child.compileExp»)'''
+		¬´e.op.translateUnaryOp¬ª(¬´e.child.compileExp¬ª)'''
 	
 	
 	private static def dispatch CharSequence compileExp(Value e) {
 		val v = e.value
 		switch v {
-			PropertyValue:			'''[«RtmAadlProperty.compilePropertyValue(v)»]'''
-			ContainmentPathElement:	'''[«v.namedElement.name.escape»]'''
+			PropertyValue:			'''[¬´RtmAadlProperty::compilePropertyValue(v)¬ª]'''
+			ContainmentPathElement:	'''[¬´v.namedElement.name.escape¬ª]'''
 		}
 	}
 	

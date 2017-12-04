@@ -16,9 +16,9 @@ class RtmAadlIdentifier {
 	}
 	
 	def generateIds() '''
-		ÇFOR key: opTable.keySetÈ
-		ops ÇopTable.get(key).join(" ")È : -> ÇkeyÈ [ctor] .
-		ÇENDFORÈ
+		Â«FOR key: opTable.keySetÂ»
+		ops Â«opTable.get(key).join(" ")Â» : -> Â«keyÂ» [ctor] .
+		Â«ENDFORÂ»
 	'''
 	
 	def check(Element obj, boolean cond, String msg) {

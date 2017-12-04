@@ -15,25 +15,25 @@ import edu.uiuc.aadl.synch.Activator;
 import edu.uiuc.aadl.synch.checker.SynchAadlConstChecker;
 
 public class ConstrainsCheckAction extends AbstractInstanceOrDeclarativeModelReadOnlyAction {
-	
+
 	@Override
 	protected Bundle getBundle() {
 		return Activator.getDefault().getBundle();
 	}
-	
+
 	@Override
 	protected String getActionName() {
 		return "Synch AADL Constraints Checker";
 	}
-	
+
 	@Override
 	protected String getMarkerType() {
 		return "edu.uiuc.aadl.synch.SyncAadlObjectMarker";
 	}
-	
+
 	@Override
 	protected void analyzeInstanceModel(IProgressMonitor monitor,
-			AnalysisErrorReporterManager errManager, SystemInstance root, SystemOperationMode som) {		
+			AnalysisErrorReporterManager errManager, SystemInstance root, SystemOperationMode som) {
 		int count = AadlUtil.countElementsBySubclass(root, ComponentInstance.class);
 		try {
 			monitor.beginTask(getActionName(), count);
@@ -42,12 +42,13 @@ public class ConstrainsCheckAction extends AbstractInstanceOrDeclarativeModelRea
 		finally {
 			monitor.done();
 		}
-	    
-	    if (errManager.getNumErrors() > 0)
-	    	Dialog.showError(getActionName(), "This model violates some synchronous AADL constraints! " + 
-	    			"Please see the problems view for more details.");
-	    else
-	    	Dialog.showInfo(getActionName(), "Valid Synchronous AADL model!");
+
+		if (errManager.getNumErrors() > 0) {
+			Dialog.showError(getActionName(), "This model violates some synchronous AADL constraints! " +
+					"Please see the problems view for more details.");
+		} else {
+			Dialog.showInfo(getActionName(), "Valid Synchronous AADL model!");
+		}
 	}
 
 	@Override
@@ -57,4 +58,3 @@ public class ConstrainsCheckAction extends AbstractInstanceOrDeclarativeModelRea
 	}
 }
 
-	

@@ -20,7 +20,7 @@ class RtmAadlProperty extends RtmAadlIdentifier {
 	
 	def compilePropertyValue(Property pr, NamedElement ne) {
 		switch (pr.eContainer as NamedElement).name {
-			case PropertyUtil.SYNCHAADL:	pr.compileSynchAadlPropertyValue(ne)
+			case PropertyUtil::SYNCHAADL:	pr.compileSynchAadlPropertyValue(ne)
 			default:						pr.compileDefaultPropertyValue(ne)
 		}
 	}
@@ -28,14 +28,14 @@ class RtmAadlProperty extends RtmAadlIdentifier {
 	def compileSynchAadlPropertyValue(Property pr, NamedElement ne) {
 		//TODO: check fast/slow adaptor types for multirate connections..
 		switch pr.name {
-			case PropertyUtil.INPUT_ADAPTOR:	(PropertyUtils.getSimplePropertyValue(ne,pr) as StringLiteral).value
+			case PropertyUtil::INPUT_ADAPTOR:	(PropertyUtils::getSimplePropertyValue(ne,pr) as StringLiteral).value
 			default:							pr.compileDefaultPropertyValue(ne)
 		}
 	}
 	
 	
 	def compileDefaultPropertyValue(Property pr, NamedElement ne) {
-		val pe = PropertyUtils.getSimplePropertyValue(ne,pr)
+		val pe = PropertyUtils::getSimplePropertyValue(ne,pr)
 		if (pe instanceof PropertyValue)	
 			compilePropertyValue(pe as PropertyValue)
 	}

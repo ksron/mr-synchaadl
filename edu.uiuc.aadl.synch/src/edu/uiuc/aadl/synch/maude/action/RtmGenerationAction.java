@@ -29,24 +29,24 @@ import edu.uiuc.aadl.synch.maude.template.RtmAadlSetting;
 import edu.uiuc.aadl.utils.IOUtils;
 
 
-/** 
- * 
+/**
+ *
  * @author Kyungmin Bae
  *
  */
 public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeModelReadOnlyAction {
-	
+
 	private IPath targetPath;
-	
+
 	public synchronized void setTargetPath(IPath targetPath) {
 		this.targetPath = targetPath;
 	}
-	
+
 	@Override
 	protected Bundle getBundle() {
 		return Activator.getDefault().getBundle();
 	}
-	
+
 	@Override
 	protected String getActionName() {
 		return "Real-Time Maude Instance Model Generator";
@@ -56,7 +56,7 @@ public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeMode
 	protected String getMarkerType() {
 		return "edu.uiuc.aadl.synch.SyncAadlObjectMarker";
 	}
-	
+
 	@Override
 	protected void analyzeInstanceModel(IProgressMonitor monitor, AnalysisErrorReporterManager errManager, SystemInstance root, SystemOperationMode som) {
 
@@ -65,17 +65,18 @@ public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeMode
 		if (path == null) {
 			context = IOUtils.getFile(root.eResource()).getFullPath().removeLastSegments(1);
 			path = IOUtils.getCodegenPath(context, root);
-		}
-		else
+		} else {
 			context = path.removeLastSegments(1);
-		
+		}
+
 		try {
 			doCodegen(monitor, errManager, root, context, path);
-			
-			if (errManager.getNumErrors() > 0)
-		    	Dialog.showError(getActionName(), "Some error occured during code generation! Please see the problems view for more details.");
-		    else
-		    	Dialog.showInfo(getActionName(), "Code generation succeeded!");
+
+			if (errManager.getNumErrors() > 0) {
+				Dialog.showError(getActionName(), "Some error occured during code generation! Please see the problems view for more details.");
+			} else {
+				Dialog.showInfo(getActionName(), "Code generation succeeded!");
+			}
 		}
 		catch (OperationCanceledException e) {
 			Dialog.showInfo(getActionName(), "Code generation canceled!");
@@ -83,7 +84,7 @@ public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeMode
 		catch (IOException e) {
 			e.printStackTrace();
 			Dialog.showError(getActionName(), e.toString());
-		} 
+		}
 		catch (CoreException e) {
 			e.printStackTrace();
 			Dialog.showError(getActionName(), e.toString());
@@ -91,26 +92,27 @@ public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeMode
 	}
 
 
-	protected void doCodegen(IProgressMonitor monitor, AnalysisErrorReporterManager errManager, final SystemInstance root, IPath context, IPath path) 
+	protected void doCodegen(IProgressMonitor monitor, AnalysisErrorReporterManager errManager, final SystemInstance root, IPath context, IPath path)
 			throws CoreException, IOException {
-		
+
 		int count = AadlUtil.countElementsBySubclass(root, ComponentInstance.class);
 		monitor.beginTask("Generating a Real-Time Maude instance model", count + 2);
 
 		try {
 			HashMultimap<String, String> opTable = HashMultimap.create();
 			RtmAadlModel compiler = new RtmAadlModel(monitor, errManager, opTable);
-			
+
 			final StringBuffer code = new StringBuffer("load " + RtmAadlSetting.SEMANTICS_PATH + "/" + RtmAadlSetting.SEMANTICS_FILE);
 			code.append(AadlConstants.newlineChar);
 			code.append(compiler.doGenerate(root));
-			
+
 			monitor.setTaskName("Saving the Real-Time Maude model file...");
 			IFile modelFile = IOUtils.getFile(path);
-			if (modelFile != null)
+			if (modelFile != null) {
 				IOUtils.setFileContent(new ByteArrayInputStream(code.toString().getBytes()), modelFile);
+			}
 			monitor.worked(1);
-			
+
 			monitor.setTaskName("Copying the Real-Time Maude semantics file...");
 			copyMaudeFiles(context);
 			monitor.worked(1);
@@ -120,14 +122,15 @@ public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeMode
 		}
 	}
 
-	
+
 	private static void copyMaudeFiles(IPath loc) throws IOException, CoreException {
 		Enumeration<URL> urls = Activator.getDefault().getBundle().findEntries(RtmAadlSetting.SEMANTICS_PATH, "*", true);
 		while (urls.hasMoreElements()) {
 			URL su = urls.nextElement();
 			IFile nfile = IOUtils.getFile(loc.append(su.getFile()));
-			if (nfile != null)
+			if (nfile != null) {
 				IOUtils.setFileContent(su.openStream(), nfile);
+			}
 		}
 	}
 

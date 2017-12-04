@@ -11,4 +11,8 @@ public class PropSpecRuntimeModule extends edu.uiuc.aadl.xtext.propspec.Abstract
 	public Class<? extends org.eclipse.xtext.linking.ILinkingService> bindILinkingService() {
 		return edu.uiuc.aadl.xtext.propspec.linking.PropSpecLinkingService.class;
 	}
+
+	public Class<? extends org.eclipse.xtext.naming.IQualifiedNameConverter> bindIQualifiedNameConverter() {
+		return org.osate.xtext.aadl2.naming.Aadl2QualifiedNameConverter.class;
+	}
 }
