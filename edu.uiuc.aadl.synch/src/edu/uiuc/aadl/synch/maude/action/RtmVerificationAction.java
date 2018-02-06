@@ -42,30 +42,43 @@ public class RtmVerificationAction implements IActionDelegate {
 			if (currentSelection instanceof IResource) {
 				IResource res = (IResource)currentSelection;
 				Top spec = getPropSpecTop(res);
-				
+
 				IPath path = res.getFullPath().removeFileExtension().addFileExtension("verification.maude");
 				IFile file = IOUtils.getFile(path);
-				if (file != null)
+				if (file != null) {
 					createSpecCodeAsJob(spec, file);
-				
+				}
+
 				Maude maude = MaudesimpleGUIPlugin.getDefault().getMaude();
-				if (!maude.isRunning())
+				if (!maude.isRunning()) {
 					maude.runMaude();
-				
+				}
+
 				// pick the selected requirements (all by default)
 				List<ReqStatement> targets = targetReqs;
-				if (targets == null || targets.isEmpty())
+				if (targets == null || targets.isEmpty()) {
 					targets = spec.getRequirements();
-				
-				maude.sendToMaude("cd " + file.getLocation().removeLastSegments(1).toOSString() + "\n");
-				maude.sendToMaude("load " + file.getLocation().toOSString() + "\n");
+				}
+
+				String osName = System.getProperty("os.name").toLowerCase();
+
+				if (osName.contains("win")) {
+					// maude runs in cygwin, which has default path /cygdrive/ prior to the original path
+					maude.sendToMaude("cd " + "/cygdrive/"
+							+ file.getLocation().removeLastSegments(1).toString().replace(":", "") + "\n");
+					maude.sendToMaude("load " + "/cygdrive/" + file.getLocation().toString().replace(":", "") + "\n");
+				} else {
+					maude.sendToMaude("cd " + file.getLocation().removeLastSegments(1).toOSString() + "\n");
+					maude.sendToMaude("load " + file.getLocation().toOSString() + "\n");
+				}
+
 				for (ReqStatement rq : targets)
 				{
 					maude.sendToMaude(RtmPropSpec.compileReqCommand(rq).toString());
 				}
-			}
-			else
+			} else {
 				Dialog.showError(action.getText(), "No Property Specification file!");
+			}
 		} catch (CoreException e) {
 			e.printStackTrace();
 			Dialog.showError(action.getText(), e.getMessage());
@@ -75,7 +88,7 @@ public class RtmVerificationAction implements IActionDelegate {
 		}
 	}
 
-	private void createSpecCodeAsJob(final Top spec, final IFile file) 
+	private void createSpecCodeAsJob(final Top spec, final IFile file)
 			throws CoreException, InterruptedException {
 		WorkspaceJob job = new WorkspaceJob("Real-Time Maude Property Spec Generation") {
 			@Override
@@ -84,7 +97,7 @@ public class RtmVerificationAction implements IActionDelegate {
 				try {
 					CharSequence specCode = RtmPropSpec.compileSpec(spec);
 					monitor.worked(1);
-					
+
 					monitor.setTaskName("Saving the Real-Time Maude model file...");
 					IOUtils.setFileContent(new ByteArrayInputStream(specCode.toString().getBytes()), file);
 					monitor.worked(1);
@@ -100,30 +113,33 @@ public class RtmVerificationAction implements IActionDelegate {
 		job.schedule();
 		job.join();
 	}
-	
+
 	private Top getPropSpecTop(IResource res) {
 		ResourceSet rs = new ResourceSetImpl();
 		Resource resource = rs.getResource(URI.createURI(res.getFullPath().toString()), true);
 		EObject eo = resource.getContents().get(0);
-		if (eo instanceof Top)
+		if (eo instanceof Top) {
 			return (Top)eo;
+		}
 		return null;
 	}
-	
+
 
 	public void setReqs(List<?> reqs) {
 		if (reqs != null) {
 			this.targetReqs = new ArrayList<ReqStatement>();
 			for(Object o : reqs) {
-				if (o instanceof ReqStatement)
+				if (o instanceof ReqStatement) {
 					this.targetReqs.add((ReqStatement)o);
+				}
 			}
 		}
 	}
 
 	@Override
 	public synchronized void selectionChanged(IAction action, ISelection selection) {
-		if (selection instanceof IStructuredSelection && !((IStructuredSelection)selection).isEmpty() )
+		if (selection instanceof IStructuredSelection && !((IStructuredSelection)selection).isEmpty() ) {
 			currentSelection = ((IStructuredSelection)selection).getFirstElement();
+		}
 	}
 }

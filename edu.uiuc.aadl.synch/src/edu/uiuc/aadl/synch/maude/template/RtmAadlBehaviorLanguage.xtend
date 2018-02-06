@@ -2,6 +2,7 @@ package edu.uiuc.aadl.synch.maude.template
 
 import org.osate.aadl2.DataPort
 import org.osate.aadl2.PropertyValue
+import org.osate.aadl2.Property
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager
 import org.osate.ba.aadlba.BehaviorTransition
 import org.osate.ba.aadlba.DispatchCondition
@@ -33,7 +34,6 @@ import org.osate.ba.aadlba.BehaviorBooleanLiteral
 import org.osate.ba.aadlba.BehaviorStringLiteral
 import org.osate.ba.aadlba.BehaviorRealLiteral
 import org.osate.ba.aadlba.BehaviorIntegerLiteral
-//import org.osate.ba.aadlba.BehaviorPropertyValue
 import org.osate.ba.aadlba.ValueVariable
 import org.osate.ba.aadlba.BehaviorVariableHolder
 import org.osate.ba.aadlba.ParameterLabel
@@ -42,7 +42,7 @@ import org.osate.ba.aadlba.DataSubcomponentHolder
 import org.osate.ba.aadlba.ParameterHolder
 import org.osate.ba.aadlba.PortCountValue
 import org.osate.ba.aadlba.PortFreshValue
-import com.google.common.collect.SetMultimap
+import com.google.common.collect.SetMultimapimport org.osate.ba.aadlba.PropertySetPropertyReference
 
 class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 
@@ -189,11 +189,20 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 			BehaviorStringLiteral:		'''["«e.value»"]'''
 			BehaviorRealLiteral:		'''[«e.value»]'''
 			BehaviorIntegerLiteral:		'''[«e.value»]'''
-			//BehaviorPropertyValue: 		'''[«e.property.getQualifiedName().escape»]'''
+			PropertySetPropertyReference: e.compilePropertySetPropertyReference
 			BehaviorPropertyConstant:	e.compilePropertyConstant
 			default:					null => [e.check(false, "Unsupported expression constant: " + e.class.name)]
 		}
 	}
+	
+	private def compilePropertySetPropertyReference(PropertySetPropertyReference c){
+		val value = c.properties.get(0).property.element
+		if(value instanceof Property)
+			'''[«value.getQualifiedName.escape»]'''
+		else
+			null => [c.check(false, "Unsupported property reference : " + c.class.name)]
+	}
+	
 	
 	private def compilePropertyConstant(BehaviorPropertyConstant c) {
 		val value = c.property.constantValue

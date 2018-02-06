@@ -24,6 +24,7 @@ import static extension edu.uiuc.aadl.synch.maude.template.RtmAadlSetting.*
 import static extension edu.uiuc.aadl.utils.PropertyUtil.*
 import static extension org.osate.xtext.aadl2.properties.util.GetProperties.*
 import org.osate.ba.aadlba.BehaviorAnnex
+import org.osate.aadl2.DefaultAnnexSubclause
 
 class RtmAadlModel extends RtmAadlIdentifier {		
 	
@@ -66,8 +67,14 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		else {
 			val period = o.periodinMS => [ 
 				o.check(! o.periodic || (it > 0.0 && parentPeriod % it == 0), "Invalid period: " + o.category.getName() + " " + o.name) ]
-			val behAnx = o.componentClassifier.ownedAnnexSubclauses.filter(typeof(BehaviorAnnex)) => [
-				o.check(! o.behavioral || ! it.empty, "No behavior annex definition in thread: " + o.category.getName() + " " + o.name) ]
+				
+			val anxSub = o.componentClassifier.ownedAnnexSubclauses.filter(typeof(DefaultAnnexSubclause)) => [
+				o.check((! o.behavioral) || ! it.empty, "No behavior annex definition in thread: " + o.category.getName() + " " + o.name) ]
+
+			val behAnx = if(o.behavioral && ! (anxSub.empty))anxSub.get(0).parsedAnnexSubclause as BehaviorAnnex
+			
+			//val behAnx = o.componentClassifier.ownedAnnexSubclauses.filter(typeof(BehaviorAnnex)) => [
+			//	o.check(! o.behavioral || ! it.empty, "No behavior annex definition in thread: " + o.category.getName() + " " + o.name) ]
 				
 			// update the connection table
 			o.connectionInstances.forEach [connectionReferences.forEach[conxTable.put(context, it) ]]
@@ -86,15 +93,15 @@ class RtmAadlModel extends RtmAadlIdentifier {
 					«o.componentInstances.filter[isSync].map[compileComponent(period)].filterNull.join('\n',"none")»),
 				properties : (
 					«o.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")»),
-				«IF o.behavioral && ! behAnx.empty»
+				«IF o.behavioral && ! (behAnx == null)»
 				currState : (
-					«behAnx.get(0).states.filter[isInitial].get(0).id("Location")»),
+					«behAnx.states.filter[isInitial].get(0).id("Location")»),
 				completeStates : (
-					«behAnx.get(0).states.filter[isComplete].map[id("Location")].join(' ', "empty")»),
+					«behAnx.states.filter[isComplete].map[id("Location")].join(' ', "empty")»),
 				variables : (
-					«behAnx.get(0).variables.map[id("VarId")].join(' ; ', "empty")»),
+					«behAnx.variables.map[id("VarId")].join(' ; ', "empty")»),
 				transitions : (
-					«behAnx.get(0).transitions.map[bc.compileTransition(it)].filterNull.join(' ;\n', "empty")»),
+					«behAnx.transitions.map[bc.compileTransition(it)].filterNull.join(' ;\n', "empty")»),
 				«ENDIF»
 				connections : (
 					«conxTable.get(o).map[compileConnection].filterNull.join(' ;\n', "empty")») >''' => [ monitor.worked(1) ]
