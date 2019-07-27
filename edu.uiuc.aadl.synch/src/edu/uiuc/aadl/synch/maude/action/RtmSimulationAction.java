@@ -42,12 +42,11 @@ public class RtmSimulationAction implements IActionDelegate {
 				maude.sendToMaude("load " + "/cygdrive/"
 						+ ((IResource) currentSelection).getLocation().toString().replace(":", "") + "\n");
 			} else {
-				maude.sendToMaude("load " + ((IResource) currentSelection).getLocation().toOSString() + "\n");
+				maude.sendToMaude("load " + ((IResource) currentSelection).getLocation().toOSString());
 			}
 
 			maude.sendToMaude(RtmPropSpec.compileSimulCommand(bound).toString());
-		}
-		else {
+		} else {
 			Dialog.showError(action.getText(), "No Real-Time Maude model!");
 		}
 	}

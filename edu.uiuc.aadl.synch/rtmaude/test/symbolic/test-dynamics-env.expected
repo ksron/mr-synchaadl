@@ -1,0 +1,2698 @@
+==========================================
+reduce in TEST-ENV-DYNAMICS : finalConst(env1) .
+rewrites: 27
+result BoolExp: b(1) === b(0) and [0] === r(0)
+==========================================
+reduce in TEST-ENV-DYNAMICS : finalConst(env2) .
+rewrites: 71
+result BoolExp: b(2) and [0] === r(0) and [0] === r(1)
+==========================================
+search in TEST-ENV-DYNAMICS : executeStep([true], env1, false) =>*
+    C:ConstConfig .
+
+Solution 1 (state 5)
+states: 6  rewrites: 565
+C:ConstConfig --> (not [2] < r("e1", 6) and not [5] < r("e1", 6) and not [5] <
+    r("e1", 7) and not r("e1", 6) < [0] and not r("e1", 7) < r("e1", 6) and not
+    b("e1", 5) and b(1) === b(0) and [0] === r(0) and r("b", 0) === [1] + [
+    3602879701896397/18014398509481984] * r("e1", 6) and r("e1", 7) === [5]) ||
+    < e : Env | properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e1", 8) # b("e1", 6),envCache : r("e1", 8) # b("e1", 6),target
+    : cr1 > < on1 : EnvInPort | content : [0] # [false],envCache : r("e1", 5) #
+    b("e1", 5),target : cr1 >),subcomponents : < x : Data | properties : none,
+    features : none,subcomponents : none,connections : empty,value : [1] + - r(
+    "e1", 6) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e1", 6) + [
+    3602879701896397/18014398509481984] * r("e1", 7) # [true] >,connections : x
+    ==> a,varGen : < "e1",9,7 >,currMode : loc([0]),jumps : loc([0]) -[on1]->
+    loc([0]),flows : loc([0]) [x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))],sampling : cr1 :(0,1),response : cr1 :(2,3) >
+
+Solution 2 (state 6)
+states: 7  rewrites: 970
+C:ConstConfig --> (not [2] < r("e1", 6) and not [4] < r("e1", 7) and not [5] <
+    r("e1", 6) and not [5] < r("e1", 7) and not [5] < r("e1", 8) and not r(
+    "e1", 6) < [0] and not r("e1", 7) < [2] and not r("e1", 7) < r("e1", 6) and
+    not r("e1", 8) < r("e1", 7) and b(1) === b(0) and [0] === r(0) and r("b",
+    0) === [1] + [3602879701896397/18014398509481984] * r("e1", 6) and r("e1",
+    8) === [5] and b("e1", 5)) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e1", 9) # b("e1", 6),
+    envCache : r("e1", 9) # b("e1", 6),target : cr1 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e1", 5) # b("e1", 5),target : cr1 >),
+    subcomponents : < x : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : [1] + - r("e1", 6) * [
+    3602879701896397/18014398509481984] + - r("e1", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e1", 6) + [3602879701896397/18014398509481984] * r("e1", 7) + [
+    3602879701896397/18014398509481984] * r("e1", 8) # [true] >,connections : x
+    ==> a,varGen : < "e1",10,7 >,currMode : loc([0]),jumps : loc([0]) -[on1]->
+    loc([0]),flows : loc([0]) [x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))],sampling : cr1 :(0,1),response : cr1 :(2,3) >
+
+No more solutions.
+states: 7  rewrites: 970
+==========================================
+search in TEST-ENV-DYNAMICS : executeStep([true], env1, true) =>* C:ConstConfig
+    .
+
+Solution 1 (state 0)
+states: 1  rewrites: 1032
+C:ConstConfig --> ((not [2] < r("e1", 6) and not [5] < r("e1", 6) and not [5] <
+    r("e1", 7) and not r("e1", 6) < [0] and not r("e1", 7) < r("e1", 6) and not
+    b("e1", 5) and r("e1", 7) === [5] and r("e1", 9) === [1] + - r("e1", 6) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e1", 6) + [3602879701896397/18014398509481984] * r("e1", 7) or not [2]
+    < r("e1", 6) and not [4] < r("e1", 7) and not [5] < r("e1", 6) and not [5]
+    < r("e1", 7) and not [5] < r("e1", 8) and not r("e1", 6) < [0] and not r(
+    "e1", 7) < [2] and not r("e1", 7) < r("e1", 6) and not r("e1", 8) < r("e1",
+    7) and r("e1", 8) === [5] and r("e1", 9) === [1] + - r("e1", 6) * [
+    3602879701896397/18014398509481984] + - r("e1", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e1", 6) + [3602879701896397/18014398509481984] * r("e1", 7) + [
+    3602879701896397/18014398509481984] * r("e1", 8) and b("e1", 5)) and b(1)
+    === b(0) and [0] === r(0) and r("b", 0) === [1] + [
+    3602879701896397/18014398509481984] * r("e1", 6)) || < e : Env | properties
+    : ((TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {
+    {5.0e-1}}),features : (< a : EnvOutPort | content : r("e1", 10) # b("e1",
+    6),envCache : r("e1", 10) # b("e1", 6),target : cr1 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e1", 5) # b("e1", 5),target : cr1 >),
+    subcomponents : < x : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : r("e1", 9) # [true] >,
+    connections : x ==> a,varGen : < "e1",11,7 >,currMode : loc([0]),jumps :
+    loc([0]) -[on1]-> loc([0]),flows : loc([0]) [x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))],sampling : cr1 :(0,1),response : cr1 :(2,3) >
+
+No more solutions.
+states: 1  rewrites: 1032
+==========================================
+search in TEST-ENV-DYNAMICS : executeStep([true], env2, false) =>*
+    C:ConstConfig .
+
+Solution 1 (state 72)
+states: 73  rewrites: 5583
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 8) and not r(
+    "e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < r("e2", 8) and not b("e2", 5) and not b("e2", 6) and
+    b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1) + - r("e2",
+    7) * [3602879701896397/36028797018963968] and r("b", 0) === [1] + - r("e2",
+    8) * [5404319552844595/18014398509481984] and r("e2", 9) === [5] and r(
+    "mode", 0) === [0]) || < e : Env | properties : ((TimingProperties::Period
+    => {{5}}) ; HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a :
+    EnvOutPort | content : r("e2", 10) # b("e2", 10),envCache : r("e2", 10) #
+    b("e2", 10),target : cr1 > < b : EnvOutPort | content : r("e2", 11) # b(
+    "e2", 11),envCache : r("e2", 11) # b("e2", 11),target : cr2 > < on1 :
+    EnvInPort | content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),
+    target : cr1 > < on2 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort | content : [false]
+    # [false],envCache : b("e2", 7) # b("e2", 8),target : cr1 > < off2 :
+    EnvInPort | content : * # [false],envCache : * # b("e2", 9),target : cr2
+    >),subcomponents : (< x : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : r(1) + - r("e2", 9) * [
+    3602879701896397/36028797018963968] # [true] > < y : Data | properties :
+    none,features : none,subcomponents : none,connections : empty,value : [1] +
+    - r("e2", 9) * [5404319552844595/18014398509481984] # [true] >),connections
+    : ((x ==> a) ; y ==> b),varGen : < "e2",12,12 >,currMode : loc([0]),jumps :
+    ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[
+    on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([
+    3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([
+    3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 2 (state 77)
+states: 78  rewrites: 6871
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 7) and not r(
+    "e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not
+    r("e2", 8) < r("e2", 7) and not r("e2", 9) < r("e2", 8) and not b("e2", 5)
+    and not b("e2", 6) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0)
+    === r(1) + - r("e2", 8) * [3602879701896397/36028797018963968] and r("b",
+    0) === [1] + - r("e2", 7) * [5404319552844595/18014398509481984] and r(
+    "e2", 9) === [5] and r("mode", 0) === [0]) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 10) # b("e2",
+    10),envCache : r("e2", 10) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 11) # b("e2", 11),envCache : r("e2", 11) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 9) *
+    [3602879701896397/36028797018963968] # [true] > < y : Data | properties :
+    none,features : none,subcomponents : none,connections : empty,value : [1] +
+    - r("e2", 9) * [5404319552844595/18014398509481984] # [true] >),connections
+    : ((x ==> a) ; y ==> b),varGen : < "e2",12,12 >,currMode : loc([0]),jumps :
+    ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[
+    on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([
+    3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([
+    3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 3 (state 82)
+states: 83  rewrites: 8187
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 8) and not r(
+    "e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < r("e2", 8) and not b("e2", 5) and not b("e2", 9) and
+    b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1) + - r("e2",
+    7) * [3602879701896397/36028797018963968] and r("b", 0) === [1] + - r("e2",
+    7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2", 9) === [5]
+    and r("mode", 0) === [1]) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 10) # b("e2",
+    10),envCache : r("e2", 10) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 11) # b("e2", 11),envCache : r("e2", 11) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 9) *
+    [3602879701896397/36028797018963968] # [true] > < y : Data | properties :
+    none,features : none,subcomponents : none,connections : empty,value : [1] +
+    - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + [1/2] * r("e2", 7) + [1/2] *
+    r("e2", 8) + [1/2] * r("e2", 9) # [true] >),connections : ((x ==> a) ; y
+    ==> b),varGen : < "e2",12,12 >,currMode : loc([1]),jumps : ((loc([0]) -[
+    on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([
+    3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc(
+    [2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[
+    off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 4 (state 87)
+states: 88  rewrites: 9477
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 7) and not r(
+    "e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not
+    r("e2", 8) < r("e2", 7) and not r("e2", 9) < r("e2", 8) and not b("e2", 5)
+    and not b("e2", 9) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0)
+    === r(1) + - r("e2", 8) * [3602879701896397/36028797018963968] and r("b",
+    0) === [1] + [1/2] * r("e2", 7) and r("e2", 9) === [5] and r("mode", 0) ===
+    [1]) || < e : Env | properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 10) # b("e2", 10),envCache : r("e2", 10) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 11) # b("e2", 11),
+    envCache : r("e2", 11) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : r(1) + - r("e2", 9) * [3602879701896397/36028797018963968] #
+    [true] > < y : Data | properties : none,features : none,subcomponents :
+    none,connections : empty,value : [1] + - r("e2", 7) * [1/2] + - r("e2", 8)
+    * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) # [
+    true] >),connections : ((x ==> a) ; y ==> b),varGen : < "e2",12,12 >,
+    currMode : loc([1]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[
+    on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([
+    0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc(
+    [3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [
+    (x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] *
+    [[2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 5 (state 92)
+states: 93  rewrites: 10764
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 8) and not r(
+    "e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < r("e2", 8) and not b("e2", 6) and not b("e2", 8) and
+    b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1) + [
+    3602879701896397/18014398509481984] * r("e2", 7) and r("b", 0) === [1] + -
+    r("e2", 8) * [5404319552844595/18014398509481984] and r("e2", 9) === [5]
+    and r("mode", 0) === [2]) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 10) # b("e2",
+    10),envCache : r("e2", 10) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 11) # b("e2", 11),envCache : r("e2", 11) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 7) *
+    [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 9) * [5404319552844595/18014398509481984] # [true]
+    >),connections : ((x ==> a) ; y ==> b),varGen : < "e2",12,12 >,currMode :
+    loc([2]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([
+    1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc(
+    [2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[
+    on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)=
+    (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 6 (state 97)
+states: 98  rewrites: 12055
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 7) and not r(
+    "e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not
+    r("e2", 8) < r("e2", 7) and not r("e2", 9) < r("e2", 8) and not b("e2", 6)
+    and not b("e2", 8) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0)
+    === r(1) + - r("e2", 7) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 7) + [
+    3602879701896397/18014398509481984] * r("e2", 8) and r("b", 0) === [1] + -
+    r("e2", 7) * [5404319552844595/18014398509481984] and r("e2", 9) === [5]
+    and r("mode", 0) === [2]) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 10) # b("e2",
+    10),envCache : r("e2", 10) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 11) # b("e2", 11),envCache : r("e2", 11) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 7) *
+    [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 9) * [5404319552844595/18014398509481984] # [true]
+    >),connections : ((x ==> a) ; y ==> b),varGen : < "e2",12,12 >,currMode :
+    loc([2]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([
+    1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc(
+    [2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[
+    on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)=
+    (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 7 (state 102)
+states: 103  rewrites: 13351
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 8) and not r(
+    "e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < r("e2", 8) and not b("e2", 6) and not b("e2", 8) and
+    b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1) + [
+    3602879701896397/18014398509481984] * r("e2", 7) and r("b", 0) === [1] + -
+    r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2", 9)
+    === [5] and r("mode", 0) === [3]) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 10) # b("e2",
+    10),envCache : r("e2", 10) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 11) # b("e2", 11),envCache : r("e2", 11) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 7) *
+    [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + [1/2] * r("e2",
+    7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) # [true] >),connections : ((x
+    ==> a) ; y ==> b),varGen : < "e2",12,12 >,currMode : loc([3]),jumps : ((
+    loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[
+    on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([
+    3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([
+    3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 8 (state 107)
+states: 108  rewrites: 14644
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 7) and not r(
+    "e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not
+    r("e2", 8) < r("e2", 7) and not r("e2", 9) < r("e2", 8) and not b("e2", 6)
+    and not b("e2", 8) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0)
+    === r(1) + - r("e2", 7) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 7) + [
+    3602879701896397/18014398509481984] * r("e2", 8) and r("b", 0) === [1] + [
+    1/2] * r("e2", 7) and r("e2", 9) === [5] and r("mode", 0) === [3]) || < e :
+    Env | properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 10) # b("e2", 10),envCache : r("e2", 10) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 11) # b("e2", 11),
+    envCache : r("e2", 11) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : r(1) + - r("e2", 7) * [3602879701896397/18014398509481984] +
+    - r("e2", 8) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 7) + [
+    3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + [1/2] * r("e2",
+    7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) # [true] >),connections : ((x
+    ==> a) ; y ==> b),varGen : < "e2",12,12 >,currMode : loc([3]),jumps : ((
+    loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[
+    on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([
+    3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([
+    3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 9 (state 110)
+states: 111  rewrites: 15661
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
+    "e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) < r("e2",
+    8) and not r("e2", 10) < r("e2", 9) and not b("e2", 6) and b(2) and [0] ===
+    r(0) and [0] === r(1) and r("a", 0) === r(1) + - r("e2", 7) * [
+    3602879701896397/36028797018963968] and r("b", 0) === [1] + - r("e2", 8) *
+    [5404319552844595/18014398509481984] and r("e2", 10) === [5] and r("mode",
+    0) === [0] and b("e2", 5)) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 11) # b("e2",
+    10),envCache : r("e2", 11) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 12) # b("e2", 11),envCache : r("e2", 12) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 9) *
+    [10808639105689191/36028797018963968] + [
+    3602879701896397/18014398509481984] * r("e2", 10) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 10) * [5404319552844595/18014398509481984] # [true]
+    >),connections : ((x ==> a) ; y ==> b),varGen : < "e2",13,12 >,currMode :
+    loc([2]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([
+    1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc(
+    [2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[
+    on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)=
+    (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 10 (state 112)
+states: 113  rewrites: 16208
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 8) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
+    r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [
+    7/2] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and
+    not b("e2", 5) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) ===
+    r(1) + - r("e2", 7) * [3602879701896397/36028797018963968] and r("b", 0)
+    === [1] + - r("e2", 8) * [5404319552844595/18014398509481984] and r("e2",
+    10) === [5] and r("mode", 0) === [0] and b("e2", 6)) || < e : Env |
+    properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 11) # b("e2", 10),envCache : r("e2", 11) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 12) # b("e2", 11),
+    envCache : r("e2", 12) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : r(1) + - r("e2", 10) * [3602879701896397/36028797018963968] #
+    [true] > < y : Data | properties : none,features : none,subcomponents :
+    none,connections : empty,value : [1] + - r("e2", 9) * [
+    14411518807585587/18014398509481984] + [1/2] * r("e2", 10) # [true] >),
+    connections : ((x ==> a) ; y ==> b),varGen : < "e2",13,12 >,currMode : loc(
+    [1]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ;
+    (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[
+    on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([
+    2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 11 (state 114)
+states: 115  rewrites: 18071
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
+    "e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and
+    not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and not b(
+    "e2", 6) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1)
+    + - r("e2", 8) * [3602879701896397/36028797018963968] and r("b", 0) === [1]
+    + - r("e2", 7) * [5404319552844595/18014398509481984] and r("e2", 10) === [
+    5] and r("mode", 0) === [0] and b("e2", 5)) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 11) # b("e2",
+    10),envCache : r("e2", 11) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 12) # b("e2", 11),envCache : r("e2", 12) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 9) *
+    [10808639105689191/36028797018963968] + [
+    3602879701896397/18014398509481984] * r("e2", 10) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 10) * [5404319552844595/18014398509481984] # [true]
+    >),connections : ((x ==> a) ; y ==> b),varGen : < "e2",13,12 >,currMode :
+    loc([2]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([
+    1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc(
+    [2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[
+    on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)=
+    (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 12 (state 116)
+states: 117  rewrites: 18634
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 7) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
+    r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [7/2] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < r("e2", 9) and not b("e2", 5) and b(2) and [0] === r(0) and [0] ===
+    r(1) and r("a", 0) === r(1) + - r("e2", 8) * [
+    3602879701896397/36028797018963968] and r("b", 0) === [1] + - r("e2", 7) *
+    [5404319552844595/18014398509481984] and r("e2", 10) === [5] and r("mode",
+    0) === [0] and b("e2", 6)) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 11) # b("e2",
+    10),envCache : r("e2", 11) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 12) # b("e2", 11),envCache : r("e2", 12) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 10)
+    * [3602879701896397/36028797018963968] # [true] > < y : Data | properties :
+    none,features : none,subcomponents : none,connections : empty,value : [1] +
+    - r("e2", 9) * [14411518807585587/18014398509481984] + [1/2] * r("e2", 10)
+    # [true] >),connections : ((x ==> a) ; y ==> b),varGen : < "e2",13,12 >,
+    currMode : loc([1]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[
+    on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([
+    0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc(
+    [3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [
+    (x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] *
+    [[2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 13 (state 118)
+states: 119  rewrites: 20537
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
+    "e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) < r("e2",
+    8) and not r("e2", 10) < r("e2", 9) and not b("e2", 6) and b(2) and [0] ===
+    r(0) and [0] === r(1) and r("a", 0) === r(1) + - r("e2", 7) * [
+    3602879701896397/36028797018963968] and r("b", 0) === [1] + - r("e2", 7) *
+    [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2", 10) === [5] and
+    r("mode", 0) === [1] and b("e2", 5)) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 11) # b("e2",
+    10),envCache : r("e2", 11) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 12) # b("e2", 11),envCache : r("e2", 12) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 9) *
+    [10808639105689191/36028797018963968] + [
+    3602879701896397/18014398509481984] * r("e2", 10) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) *
+    [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [
+    1/2] * r("e2", 10) # [true] >),connections : ((x ==> a) ; y ==> b),varGen :
+    < "e2",13,12 >,currMode : loc([3]),jumps : ((loc([0]) -[on1]-> loc([2])) ;
+    (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[
+    off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc(
+    [0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows :
+    ((loc([0]) [(x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ;
+    (loc([2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t]
+    * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),
+    sampling : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,
+    9/2)) >
+
+Solution 14 (state 120)
+states: 121  rewrites: 21092
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 8) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
+    r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [
+    7/2] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and
+    not b("e2", 5) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) ===
+    r(1) + - r("e2", 7) * [3602879701896397/36028797018963968] and r("b", 0)
+    === [1] + - r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8)
+    and r("e2", 10) === [5] and r("mode", 0) === [1] and b("e2", 9)) || < e :
+    Env | properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 11) # b("e2", 10),envCache : r("e2", 11) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 12) # b("e2", 11),
+    envCache : r("e2", 12) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : r(1) + - r("e2", 10) * [3602879701896397/36028797018963968] #
+    [true] > < y : Data | properties : none,features : none,subcomponents :
+    none,connections : empty,value : - (- r("e2", 9) * [
+    5404319552844595/18014398509481984]) + [1] + - r("e2", 7) * [1/2] + - r(
+    "e2", 8) * [1/2] + - r("e2", 10) * [5404319552844595/18014398509481984] + [
+    1/2] * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) # [true] >),
+    connections : ((x ==> a) ; y ==> b),varGen : < "e2",13,12 >,currMode : loc(
+    [0]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ;
+    (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[
+    on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([
+    2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 15 (state 121)
+states: 122  rewrites: 22436
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
+    "e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) < r("e2",
+    8) and not r("e2", 10) < r("e2", 9) and not b("e2", 9) and b(2) and [0] ===
+    r(0) and [0] === r(1) and r("a", 0) === r(1) + - r("e2", 7) * [
+    3602879701896397/36028797018963968] and r("b", 0) === [1] + - r("e2", 7) *
+    [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2", 10) === [5] and
+    r("mode", 0) === [1] and b("e2", 5)) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 11) # b("e2",
+    10),envCache : r("e2", 11) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 12) # b("e2", 11),envCache : r("e2", 12) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 9) *
+    [10808639105689191/36028797018963968] + [
+    3602879701896397/18014398509481984] * r("e2", 10) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) *
+    [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [
+    1/2] * r("e2", 10) # [true] >),connections : ((x ==> a) ; y ==> b),varGen :
+    < "e2",13,12 >,currMode : loc([3]),jumps : ((loc([0]) -[on1]-> loc([2])) ;
+    (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[
+    off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc(
+    [0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows :
+    ((loc([0]) [(x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ;
+    (loc([2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t]
+    * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),
+    sampling : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,
+    9/2)) >
+
+Solution 16 (state 123)
+states: 124  rewrites: 22973
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
+    "e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and
+    not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and not b(
+    "e2", 6) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1)
+    + - r("e2", 8) * [3602879701896397/36028797018963968] and r("b", 0) === [1]
+    + [1/2] * r("e2", 7) and r("e2", 10) === [5] and r("mode", 0) === [1] and
+    b("e2", 5)) || < e : Env | properties : ((TimingProperties::Period => {{
+    5}}) ; HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a :
+    EnvOutPort | content : r("e2", 11) # b("e2", 10),envCache : r("e2", 11) #
+    b("e2", 10),target : cr1 > < b : EnvOutPort | content : r("e2", 12) # b(
+    "e2", 11),envCache : r("e2", 12) # b("e2", 11),target : cr2 > < on1 :
+    EnvInPort | content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),
+    target : cr1 > < on2 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort | content : [false]
+    # [false],envCache : b("e2", 7) # b("e2", 8),target : cr1 > < off2 :
+    EnvInPort | content : * # [false],envCache : * # b("e2", 9),target : cr2
+    >),subcomponents : (< x : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : r(1) + - r("e2", 9) * [
+    10808639105689191/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 10) # [true] > < y : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : [1] + - r("e2", 7) * [1/2]
+    + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + [1/2] * r("e2", 7) + [1/2]
+    * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2", 10) # [true] >),
+    connections : ((x ==> a) ; y ==> b),varGen : < "e2",13,12 >,currMode : loc(
+    [3]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ;
+    (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[
+    on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([
+    2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 17 (state 125)
+states: 126  rewrites: 23533
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 7) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
+    r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [7/2] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < r("e2", 9) and not b("e2", 5) and b(2) and [0] === r(0) and [0] ===
+    r(1) and r("a", 0) === r(1) + - r("e2", 8) * [
+    3602879701896397/36028797018963968] and r("b", 0) === [1] + [1/2] * r("e2",
+    7) and r("e2", 10) === [5] and r("mode", 0) === [1] and b("e2", 9)) || < e
+    : Env | properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 11) # b("e2", 10),envCache : r("e2", 11) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 12) # b("e2", 11),
+    envCache : r("e2", 12) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : r(1) + - r("e2", 10) * [3602879701896397/36028797018963968] #
+    [true] > < y : Data | properties : none,features : none,subcomponents :
+    none,connections : empty,value : - (- r("e2", 9) * [
+    5404319552844595/18014398509481984]) + [1] + - r("e2", 7) * [1/2] + - r(
+    "e2", 8) * [1/2] + - r("e2", 10) * [5404319552844595/18014398509481984] + [
+    1/2] * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) # [true] >),
+    connections : ((x ==> a) ; y ==> b),varGen : < "e2",13,12 >,currMode : loc(
+    [0]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ;
+    (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[
+    on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([
+    2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 18 (state 126)
+states: 127  rewrites: 24887
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
+    "e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and
+    not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and not b(
+    "e2", 9) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1)
+    + - r("e2", 8) * [3602879701896397/36028797018963968] and r("b", 0) === [1]
+    + [1/2] * r("e2", 7) and r("e2", 10) === [5] and r("mode", 0) === [1] and
+    b("e2", 5)) || < e : Env | properties : ((TimingProperties::Period => {{
+    5}}) ; HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a :
+    EnvOutPort | content : r("e2", 11) # b("e2", 10),envCache : r("e2", 11) #
+    b("e2", 10),target : cr1 > < b : EnvOutPort | content : r("e2", 12) # b(
+    "e2", 11),envCache : r("e2", 12) # b("e2", 11),target : cr2 > < on1 :
+    EnvInPort | content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),
+    target : cr1 > < on2 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort | content : [false]
+    # [false],envCache : b("e2", 7) # b("e2", 8),target : cr1 > < off2 :
+    EnvInPort | content : * # [false],envCache : * # b("e2", 9),target : cr2
+    >),subcomponents : (< x : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : r(1) + - r("e2", 9) * [
+    10808639105689191/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 10) # [true] > < y : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : [1] + - r("e2", 7) * [1/2]
+    + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + [1/2] * r("e2", 7) + [1/2]
+    * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2", 10) # [true] >),
+    connections : ((x ==> a) ; y ==> b),varGen : < "e2",13,12 >,currMode : loc(
+    [3]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ;
+    (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[
+    on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([
+    2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 19 (state 128)
+states: 129  rewrites: 25400
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
+    "e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) < r("e2",
+    8) and not r("e2", 10) < r("e2", 9) and not b("e2", 6) and b(2) and [0] ===
+    r(0) and [0] === r(1) and r("a", 0) === r(1) + [
+    3602879701896397/18014398509481984] * r("e2", 7) and r("b", 0) === [1] + -
+    r("e2", 8) * [5404319552844595/18014398509481984] and r("e2", 10) === [5]
+    and r("mode", 0) === [2] and b("e2", 8)) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 11) # b("e2",
+    10),envCache : r("e2", 11) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 12) # b("e2", 11),envCache : r("e2", 12) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : - (- r("e2", 9) * [
+    3602879701896397/36028797018963968]) + r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 10) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 10) * [5404319552844595/18014398509481984] # [true]
+    >),connections : ((x ==> a) ; y ==> b),varGen : < "e2",13,12 >,currMode :
+    loc([0]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([
+    1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc(
+    [2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[
+    on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)=
+    (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 20 (state 130)
+states: 131  rewrites: 25936
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 8) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
+    r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [
+    7/2] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and
+    not b("e2", 8) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) ===
+    r(1) + [3602879701896397/18014398509481984] * r("e2", 7) and r("b", 0) ===
+    [1] + - r("e2", 8) * [5404319552844595/18014398509481984] and r("e2", 10)
+    === [5] and r("mode", 0) === [2] and b("e2", 6)) || < e : Env | properties
+    : ((TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {
+    {5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 11) # b("e2",
+    10),envCache : r("e2", 11) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 12) # b("e2", 11),envCache : r("e2", 12) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 7) *
+    [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 9) * [14411518807585587/18014398509481984] + [1/2]
+    * r("e2", 10) # [true] >),connections : ((x ==> a) ; y ==> b),varGen : <
+    "e2",13,12 >,currMode : loc([3]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (
+    loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[
+    off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc(
+    [0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows :
+    ((loc([0]) [(x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ;
+    (loc([2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t]
+    * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),
+    sampling : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,
+    9/2)) >
+
+Solution 21 (state 132)
+states: 133  rewrites: 27799
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
+    "e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and
+    not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and not b(
+    "e2", 6) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1)
+    + - r("e2", 7) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 7) + [
+    3602879701896397/18014398509481984] * r("e2", 8) and r("b", 0) === [1] + -
+    r("e2", 7) * [5404319552844595/18014398509481984] and r("e2", 10) === [5]
+    and r("mode", 0) === [2] and b("e2", 8)) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 11) # b("e2",
+    10),envCache : r("e2", 11) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 12) # b("e2", 11),envCache : r("e2", 12) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : - (- r("e2", 9) * [
+    3602879701896397/36028797018963968]) + r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 10) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 10) * [5404319552844595/18014398509481984] # [true]
+    >),connections : ((x ==> a) ; y ==> b),varGen : < "e2",13,12 >,currMode :
+    loc([0]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([
+    1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc(
+    [2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[
+    on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)=
+    (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 22 (state 134)
+states: 135  rewrites: 28378
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 7) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
+    r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [7/2] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < r("e2", 9) and not b("e2", 8) and b(2) and [0] === r(0) and [0] ===
+    r(1) and r("a", 0) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) and r("b",
+    0) === [1] + - r("e2", 7) * [5404319552844595/18014398509481984] and r(
+    "e2", 10) === [5] and r("mode", 0) === [2] and b("e2", 6)) || < e : Env |
+    properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 11) # b("e2", 10),envCache : r("e2", 11) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 12) # b("e2", 11),
+    envCache : r("e2", 12) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : r(1) + - r("e2", 7) * [3602879701896397/18014398509481984] +
+    - r("e2", 8) * [3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 9) * [14411518807585587/18014398509481984] + [1/2]
+    * r("e2", 10) # [true] >),connections : ((x ==> a) ; y ==> b),varGen : <
+    "e2",13,12 >,currMode : loc([3]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (
+    loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[
+    off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc(
+    [0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows :
+    ((loc([0]) [(x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ;
+    (loc([2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t]
+    * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),
+    sampling : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,
+    9/2)) >
+
+Solution 23 (state 136)
+states: 137  rewrites: 30300
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
+    "e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) < r("e2",
+    8) and not r("e2", 10) < r("e2", 9) and not b("e2", 9) and b(2) and [0] ===
+    r(0) and [0] === r(1) and r("a", 0) === r(1) + [
+    3602879701896397/18014398509481984] * r("e2", 7) and r("b", 0) === [1] + -
+    r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2",
+    10) === [5] and r("mode", 0) === [3] and b("e2", 8)) || < e : Env |
+    properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 11) # b("e2", 10),envCache : r("e2", 11) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 12) # b("e2", 11),
+    envCache : r("e2", 12) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : - (- r("e2", 9) * [3602879701896397/36028797018963968]) + r(
+    1) + - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 10) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) *
+    [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [
+    1/2] * r("e2", 10) # [true] >),connections : ((x ==> a) ; y ==> b),varGen :
+    < "e2",13,12 >,currMode : loc([1]),jumps : ((loc([0]) -[on1]-> loc([2])) ;
+    (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[
+    off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc(
+    [0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows :
+    ((loc([0]) [(x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ;
+    (loc([2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t]
+    * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),
+    sampling : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,
+    9/2)) >
+
+Solution 24 (state 138)
+states: 139  rewrites: 30852
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 8) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
+    r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [
+    7/2] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and
+    not b("e2", 8) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) ===
+    r(1) + [3602879701896397/18014398509481984] * r("e2", 7) and r("b", 0) ===
+    [1] + - r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r(
+    "e2", 10) === [5] and r("mode", 0) === [3] and b("e2", 6)) || < e : Env |
+    properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 11) # b("e2", 10),envCache : r("e2", 11) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 12) # b("e2", 11),
+    envCache : r("e2", 12) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : r(1) + - r("e2", 7) * [3602879701896397/18014398509481984] +
+    - r("e2", 8) * [3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : - (- r("e2", 9) * [5404319552844595/18014398509481984]) + [1] + -
+    r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 10) * [
+    5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [1/2] * r("e2",
+    8) + [1/2] * r("e2", 9) # [true] >),connections : ((x ==> a) ; y ==> b),
+    varGen : < "e2",13,12 >,currMode : loc([2]),jumps : ((loc([0]) -[on1]->
+    loc([2])) ; (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (
+    loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[
+    off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([
+    1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 25 (state 139)
+states: 140  rewrites: 32128
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
+    "e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) < r("e2",
+    8) and not r("e2", 10) < r("e2", 9) and not b("e2", 6) and b(2) and [0] ===
+    r(0) and [0] === r(1) and r("a", 0) === r(1) + [
+    3602879701896397/18014398509481984] * r("e2", 7) and r("b", 0) === [1] + -
+    r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2",
+    10) === [5] and r("mode", 0) === [3] and b("e2", 8)) || < e : Env |
+    properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 11) # b("e2", 10),envCache : r("e2", 11) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 12) # b("e2", 11),
+    envCache : r("e2", 12) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : - (- r("e2", 9) * [3602879701896397/36028797018963968]) + r(
+    1) + - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 10) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) *
+    [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [
+    1/2] * r("e2", 10) # [true] >),connections : ((x ==> a) ; y ==> b),varGen :
+    < "e2",13,12 >,currMode : loc([1]),jumps : ((loc([0]) -[on1]-> loc([2])) ;
+    (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[
+    off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc(
+    [0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows :
+    ((loc([0]) [(x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ;
+    (loc([2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t]
+    * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),
+    sampling : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,
+    9/2)) >
+
+Solution 26 (state 141)
+states: 142  rewrites: 32733
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
+    "e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and
+    not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and not b(
+    "e2", 9) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1)
+    + - r("e2", 7) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 7) + [
+    3602879701896397/18014398509481984] * r("e2", 8) and r("b", 0) === [1] + [
+    1/2] * r("e2", 7) and r("e2", 10) === [5] and r("mode", 0) === [3] and b(
+    "e2", 8)) || < e : Env | properties : ((TimingProperties::Period => {{5}})
+    ; HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort
+    | content : r("e2", 11) # b("e2", 10),envCache : r("e2", 11) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 12) # b("e2", 11),
+    envCache : r("e2", 12) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : - (- r("e2", 9) * [3602879701896397/36028797018963968]) + r(
+    1) + - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 10) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) *
+    [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [
+    1/2] * r("e2", 10) # [true] >),connections : ((x ==> a) ; y ==> b),varGen :
+    < "e2",13,12 >,currMode : loc([1]),jumps : ((loc([0]) -[on1]-> loc([2])) ;
+    (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[
+    off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc(
+    [0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows :
+    ((loc([0]) [(x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ;
+    (loc([2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t]
+    * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),
+    sampling : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,
+    9/2)) >
+
+Solution 27 (state 143)
+states: 144  rewrites: 33309
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 7) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
+    r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [7/2] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < r("e2", 9) and not b("e2", 8) and b(2) and [0] === r(0) and [0] ===
+    r(1) and r("a", 0) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) and r("b",
+    0) === [1] + [1/2] * r("e2", 7) and r("e2", 10) === [5] and r("mode", 0)
+    === [3] and b("e2", 6)) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 11) # b("e2",
+    10),envCache : r("e2", 11) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 12) # b("e2", 11),envCache : r("e2", 12) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 7) *
+    [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : - (- r("e2", 9) * [5404319552844595/18014398509481984]) + [1] + -
+    r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 10) * [
+    5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [1/2] * r("e2",
+    8) + [1/2] * r("e2", 9) # [true] >),connections : ((x ==> a) ; y ==> b),
+    varGen : < "e2",13,12 >,currMode : loc([2]),jumps : ((loc([0]) -[on1]->
+    loc([2])) ; (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (
+    loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[
+    off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([
+    1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 28 (state 144)
+states: 145  rewrites: 34633
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
+    < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
+    "e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and
+    not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and not b(
+    "e2", 6) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1)
+    + - r("e2", 7) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 7) + [
+    3602879701896397/18014398509481984] * r("e2", 8) and r("b", 0) === [1] + [
+    1/2] * r("e2", 7) and r("e2", 10) === [5] and r("mode", 0) === [3] and b(
+    "e2", 8)) || < e : Env | properties : ((TimingProperties::Period => {{5}})
+    ; HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort
+    | content : r("e2", 11) # b("e2", 10),envCache : r("e2", 11) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 12) # b("e2", 11),
+    envCache : r("e2", 12) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : - (- r("e2", 9) * [3602879701896397/36028797018963968]) + r(
+    1) + - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 10) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) *
+    [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [
+    1/2] * r("e2", 10) # [true] >),connections : ((x ==> a) ; y ==> b),varGen :
+    < "e2",13,12 >,currMode : loc([1]),jumps : ((loc([0]) -[on1]-> loc([2])) ;
+    (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[
+    off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc(
+    [0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows :
+    ((loc([0]) [(x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ;
+    (loc([2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t]
+    * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),
+    sampling : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,
+    9/2)) >
+
+Solution 29 (state 145)
+states: 146  rewrites: 35434
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 10) and not
+    r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < [7/2] and not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2",
+    10) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1) + -
+    r("e2", 7) * [3602879701896397/36028797018963968] and r("b", 0) === [1] + -
+    r("e2", 8) * [5404319552844595/18014398509481984] and r("e2", 11) === [5]
+    and r("mode", 0) === [0] and b("e2", 5) and b("e2", 6)) || < e : Env |
+    properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 12) # b("e2", 10),envCache : r("e2", 12) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 13) # b("e2", 11),
+    envCache : r("e2", 13) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : r(1) + - r("e2", 9) * [10808639105689191/36028797018963968] +
+    - r("e2", 10) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 10) + [
+    3602879701896397/18014398509481984] * r("e2", 11) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 10) * [14411518807585587/18014398509481984] + [1/2]
+    * r("e2", 11) # [true] >),connections : ((x ==> a) ; y ==> b),varGen : <
+    "e2",14,12 >,currMode : loc([3]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (
+    loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[
+    off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc(
+    [0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows :
+    ((loc([0]) [(x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ;
+    (loc([2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t]
+    * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),
+    sampling : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,
+    9/2)) >
+
+Solution 30 (state 146)
+states: 147  rewrites: 36168
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 9) and not
+    r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [7/2] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < [3] and not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2",
+    10) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1) + -
+    r("e2", 7) * [3602879701896397/36028797018963968] and r("b", 0) === [1] + -
+    r("e2", 8) * [5404319552844595/18014398509481984] and r("e2", 11) === [5]
+    and r("mode", 0) === [0] and b("e2", 5) and b("e2", 6)) || < e : Env |
+    properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 12) # b("e2", 10),envCache : r("e2", 12) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 13) # b("e2", 11),
+    envCache : r("e2", 13) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : r(1) + - r("e2", 10) * [10808639105689191/36028797018963968]
+    + [3602879701896397/18014398509481984] * r("e2", 11) # [true] > < y : Data
+    | properties : none,features : none,subcomponents : none,connections :
+    empty,value : [1] + - r("e2", 9) * [14411518807585587/18014398509481984] +
+    - r("e2", 10) * [1/2] + [1/2] * r("e2", 10) + [1/2] * r("e2", 11) # [true]
+    >),connections : ((x ==> a) ; y ==> b),varGen : < "e2",14,12 >,currMode :
+    loc([3]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([
+    1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc(
+    [2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[
+    on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)=
+    (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 31 (state 147)
+states: 148  rewrites: 36926
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 10) and not
+    r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and
+    not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) <
+    r("e2", 8) and not r("e2", 10) < [7/2] and not r("e2", 10) < r("e2", 9) and
+    not r("e2", 11) < r("e2", 10) and b(2) and [0] === r(0) and [0] === r(1)
+    and r("a", 0) === r(1) + - r("e2", 8) * [
+    3602879701896397/36028797018963968] and r("b", 0) === [1] + - r("e2", 7) *
+    [5404319552844595/18014398509481984] and r("e2", 11) === [5] and r("mode",
+    0) === [0] and b("e2", 5) and b("e2", 6)) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 12) # b("e2",
+    10),envCache : r("e2", 12) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 13) # b("e2", 11),envCache : r("e2", 13) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 9) *
+    [10808639105689191/36028797018963968] + - r("e2", 10) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 10) + [3602879701896397/18014398509481984] * r("e2", 11) # [true]
+    > < y : Data | properties : none,features : none,subcomponents : none,
+    connections : empty,value : [1] + - r("e2", 10) * [
+    14411518807585587/18014398509481984] + [1/2] * r("e2", 11) # [true] >),
+    connections : ((x ==> a) ; y ==> b),varGen : < "e2",14,12 >,currMode : loc(
+    [3]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ;
+    (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[
+    on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([
+    2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 32 (state 148)
+states: 149  rewrites: 37684
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 9) and not
+    r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and
+    not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [7/2] and not r("e2", 9) <
+    r("e2", 8) and not r("e2", 10) < [3] and not r("e2", 10) < r("e2", 9) and
+    not r("e2", 11) < r("e2", 10) and b(2) and [0] === r(0) and [0] === r(1)
+    and r("a", 0) === r(1) + - r("e2", 8) * [
+    3602879701896397/36028797018963968] and r("b", 0) === [1] + - r("e2", 7) *
+    [5404319552844595/18014398509481984] and r("e2", 11) === [5] and r("mode",
+    0) === [0] and b("e2", 5) and b("e2", 6)) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 12) # b("e2",
+    10),envCache : r("e2", 12) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 13) # b("e2", 11),envCache : r("e2", 13) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + - r("e2", 10)
+    * [10808639105689191/36028797018963968] + [
+    3602879701896397/18014398509481984] * r("e2", 11) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 9) * [14411518807585587/18014398509481984] + - r(
+    "e2", 10) * [1/2] + [1/2] * r("e2", 10) + [1/2] * r("e2", 11) # [true] >),
+    connections : ((x ==> a) ; y ==> b),varGen : < "e2",14,12 >,currMode : loc(
+    [3]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ;
+    (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[
+    on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([
+    2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 33 (state 149)
+states: 150  rewrites: 38403
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 10) and not
+    r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < [7/2] and not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2",
+    10) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1) + -
+    r("e2", 7) * [3602879701896397/36028797018963968] and r("b", 0) === [1] + -
+    r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2",
+    11) === [5] and r("mode", 0) === [1] and b("e2", 5) and b("e2", 6)) || < e
+    : Env | properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 12) # b("e2", 10),envCache : r("e2", 12) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 13) # b("e2", 11),
+    envCache : r("e2", 13) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : r(1) + - r("e2", 9) * [10808639105689191/36028797018963968] +
+    - r("e2", 10) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 10) + [
+    3602879701896397/18014398509481984] * r("e2", 11) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : - (- r("e2", 10) * [5404319552844595/18014398509481984]) + [1] + -
+    r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + - r(
+    "e2", 11) * [5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [
+    1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2", 10) # [true] >),
+    connections : ((x ==> a) ; y ==> b),varGen : < "e2",14,12 >,currMode : loc(
+    [2]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ;
+    (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[
+    on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([
+    2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 34 (state 150)
+states: 151  rewrites: 39159
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 9) and not
+    r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [7/2] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < [3] and not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2",
+    10) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1) + -
+    r("e2", 7) * [3602879701896397/36028797018963968] and r("b", 0) === [1] + -
+    r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2",
+    11) === [5] and r("mode", 0) === [1] and b("e2", 5) and b("e2", 9)) || < e
+    : Env | properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 12) # b("e2", 10),envCache : r("e2", 12) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 13) # b("e2", 11),
+    envCache : r("e2", 13) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : r(1) + - r("e2", 10) * [10808639105689191/36028797018963968]
+    + [3602879701896397/18014398509481984] * r("e2", 11) # [true] > < y : Data
+    | properties : none,features : none,subcomponents : none,connections :
+    empty,value : - (- r("e2", 9) * [5404319552844595/18014398509481984]) + [1]
+    + - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 11) * [
+    5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [1/2] * r("e2",
+    8) + [1/2] * r("e2", 9) # [true] >),connections : ((x ==> a) ; y ==> b),
+    varGen : < "e2",14,12 >,currMode : loc([2]),jumps : ((loc([0]) -[on1]->
+    loc([2])) ; (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (
+    loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[
+    off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([
+    1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 35 (state 151)
+states: 152  rewrites: 39909
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 10) and not
+    r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and
+    not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) <
+    r("e2", 8) and not r("e2", 10) < [7/2] and not r("e2", 10) < r("e2", 9) and
+    not r("e2", 11) < r("e2", 10) and b(2) and [0] === r(0) and [0] === r(1)
+    and r("a", 0) === r(1) + - r("e2", 8) * [
+    3602879701896397/36028797018963968] and r("b", 0) === [1] + [1/2] * r("e2",
+    7) and r("e2", 11) === [5] and r("mode", 0) === [1] and b("e2", 5) and b(
+    "e2", 6)) || < e : Env | properties : ((TimingProperties::Period => {{5}})
+    ; HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort
+    | content : r("e2", 12) # b("e2", 10),envCache : r("e2", 12) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 13) # b("e2", 11),
+    envCache : r("e2", 13) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : r(1) + - r("e2", 9) * [10808639105689191/36028797018963968] +
+    - r("e2", 10) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 10) + [
+    3602879701896397/18014398509481984] * r("e2", 11) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : - (- r("e2", 10) * [5404319552844595/18014398509481984]) + [1] + -
+    r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + - r(
+    "e2", 11) * [5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [
+    1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2", 10) # [true] >),
+    connections : ((x ==> a) ; y ==> b),varGen : < "e2",14,12 >,currMode : loc(
+    [2]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ;
+    (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[
+    on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([
+    2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 36 (state 152)
+states: 153  rewrites: 40670
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 9) and not
+    r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and
+    not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [7/2] and not r("e2", 9) <
+    r("e2", 8) and not r("e2", 10) < [3] and not r("e2", 10) < r("e2", 9) and
+    not r("e2", 11) < r("e2", 10) and b(2) and [0] === r(0) and [0] === r(1)
+    and r("a", 0) === r(1) + - r("e2", 8) * [
+    3602879701896397/36028797018963968] and r("b", 0) === [1] + [1/2] * r("e2",
+    7) and r("e2", 11) === [5] and r("mode", 0) === [1] and b("e2", 5) and b(
+    "e2", 9)) || < e : Env | properties : ((TimingProperties::Period => {{5}})
+    ; HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort
+    | content : r("e2", 12) # b("e2", 10),envCache : r("e2", 12) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 13) # b("e2", 11),
+    envCache : r("e2", 13) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : r(1) + - r("e2", 10) * [10808639105689191/36028797018963968]
+    + [3602879701896397/18014398509481984] * r("e2", 11) # [true] > < y : Data
+    | properties : none,features : none,subcomponents : none,connections :
+    empty,value : - (- r("e2", 9) * [5404319552844595/18014398509481984]) + [1]
+    + - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 11) * [
+    5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [1/2] * r("e2",
+    8) + [1/2] * r("e2", 9) # [true] >),connections : ((x ==> a) ; y ==> b),
+    varGen : < "e2",14,12 >,currMode : loc([2]),jumps : ((loc([0]) -[on1]->
+    loc([2])) ; (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (
+    loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[
+    off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([
+    1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 37 (state 153)
+states: 154  rewrites: 41380
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 10) and not
+    r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < [7/2] and not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2",
+    10) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1) + [
+    3602879701896397/18014398509481984] * r("e2", 7) and r("b", 0) === [1] + -
+    r("e2", 8) * [5404319552844595/18014398509481984] and r("e2", 11) === [5]
+    and r("mode", 0) === [2] and b("e2", 6) and b("e2", 8)) || < e : Env |
+    properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 12) # b("e2", 10),envCache : r("e2", 12) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 13) # b("e2", 11),
+    envCache : r("e2", 13) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : - (- r("e2", 9) * [3602879701896397/36028797018963968]) + r(
+    1) + - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 10) * [14411518807585587/18014398509481984] + [1/2]
+    * r("e2", 11) # [true] >),connections : ((x ==> a) ; y ==> b),varGen : <
+    "e2",14,12 >,currMode : loc([1]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (
+    loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[
+    off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc(
+    [0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows :
+    ((loc([0]) [(x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ;
+    (loc([2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t]
+    * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),
+    sampling : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,
+    9/2)) >
+
+Solution 38 (state 154)
+states: 155  rewrites: 42106
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 9) and not
+    r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [7/2] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < [3] and not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2",
+    10) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1) + [
+    3602879701896397/18014398509481984] * r("e2", 7) and r("b", 0) === [1] + -
+    r("e2", 8) * [5404319552844595/18014398509481984] and r("e2", 11) === [5]
+    and r("mode", 0) === [2] and b("e2", 6) and b("e2", 8)) || < e : Env |
+    properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 12) # b("e2", 10),envCache : r("e2", 12) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 13) # b("e2", 11),
+    envCache : r("e2", 13) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : - (- r("e2", 10) * [3602879701896397/36028797018963968]) + r(
+    1) + - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 9) * [14411518807585587/18014398509481984] + - r(
+    "e2", 10) * [1/2] + [1/2] * r("e2", 10) + [1/2] * r("e2", 11) # [true] >),
+    connections : ((x ==> a) ; y ==> b),varGen : < "e2",14,12 >,currMode : loc(
+    [1]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ;
+    (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[
+    on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([
+    2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 39 (state 155)
+states: 156  rewrites: 42885
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 10) and not
+    r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and
+    not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) <
+    r("e2", 8) and not r("e2", 10) < [7/2] and not r("e2", 10) < r("e2", 9) and
+    not r("e2", 11) < r("e2", 10) and b(2) and [0] === r(0) and [0] === r(1)
+    and r("a", 0) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) and r("b",
+    0) === [1] + - r("e2", 7) * [5404319552844595/18014398509481984] and r(
+    "e2", 11) === [5] and r("mode", 0) === [2] and b("e2", 6) and b("e2", 8))
+    || < e : Env | properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 12) # b("e2", 10),envCache : r("e2", 12) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 13) # b("e2", 11),
+    envCache : r("e2", 13) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : - (- r("e2", 9) * [3602879701896397/36028797018963968]) + r(
+    1) + - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 10) * [14411518807585587/18014398509481984] + [1/2]
+    * r("e2", 11) # [true] >),connections : ((x ==> a) ; y ==> b),varGen : <
+    "e2",14,12 >,currMode : loc([1]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (
+    loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[
+    off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[off1]-> loc(
+    [0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([1])),flows :
+    ((loc([0]) [(x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ;
+    (loc([2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[
+    y] - (v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t]
+    * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),
+    sampling : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,
+    9/2)) >
+
+Solution 40 (state 156)
+states: 157  rewrites: 43654
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 9) and not
+    r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and
+    not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [7/2] and not r("e2", 9) <
+    r("e2", 8) and not r("e2", 10) < [3] and not r("e2", 10) < r("e2", 9) and
+    not r("e2", 11) < r("e2", 10) and b(2) and [0] === r(0) and [0] === r(1)
+    and r("a", 0) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) and r("b",
+    0) === [1] + - r("e2", 7) * [5404319552844595/18014398509481984] and r(
+    "e2", 11) === [5] and r("mode", 0) === [2] and b("e2", 6) and b("e2", 8))
+    || < e : Env | properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 12) # b("e2", 10),envCache : r("e2", 12) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 13) # b("e2", 11),
+    envCache : r("e2", 13) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : - (- r("e2", 10) * [3602879701896397/36028797018963968]) + r(
+    1) + - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : [1] + - r("e2", 9) * [14411518807585587/18014398509481984] + - r(
+    "e2", 10) * [1/2] + [1/2] * r("e2", 10) + [1/2] * r("e2", 11) # [true] >),
+    connections : ((x ==> a) ; y ==> b),varGen : < "e2",14,12 >,currMode : loc(
+    [1]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ;
+    (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[
+    on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([
+    2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 41 (state 157)
+states: 158  rewrites: 44375
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 10) and not
+    r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < [7/2] and not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2",
+    10) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1) + [
+    3602879701896397/18014398509481984] * r("e2", 7) and r("b", 0) === [1] + -
+    r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2",
+    11) === [5] and r("mode", 0) === [3] and b("e2", 8) and b("e2", 9)) || < e
+    : Env | properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 12) # b("e2", 10),envCache : r("e2", 12) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 13) # b("e2", 11),
+    envCache : r("e2", 13) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : - (- r("e2", 9) * [3602879701896397/36028797018963968]) + r(
+    1) + - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : - (- r("e2", 10) * [5404319552844595/18014398509481984]) + [1] + -
+    r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + - r(
+    "e2", 11) * [5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [
+    1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2", 10) # [true] >),
+    connections : ((x ==> a) ; y ==> b),varGen : < "e2",14,12 >,currMode : loc(
+    [0]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ;
+    (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[
+    on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([
+    2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 42 (state 158)
+states: 159  rewrites: 45123
+C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 9) and not
+    r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [7/2] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < [3] and not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2",
+    10) and b(2) and [0] === r(0) and [0] === r(1) and r("a", 0) === r(1) + [
+    3602879701896397/18014398509481984] * r("e2", 7) and r("b", 0) === [1] + -
+    r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2",
+    11) === [5] and r("mode", 0) === [3] and b("e2", 6) and b("e2", 8)) || < e
+    : Env | properties : ((TimingProperties::Period => {{5}}) ;
+    HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a : EnvOutPort |
+    content : r("e2", 12) # b("e2", 10),envCache : r("e2", 12) # b("e2", 10),
+    target : cr1 > < b : EnvOutPort | content : r("e2", 13) # b("e2", 11),
+    envCache : r("e2", 13) # b("e2", 11),target : cr2 > < on1 : EnvInPort |
+    content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),target : cr1 > <
+    on2 : EnvInPort | content : [0] # [false],envCache : r("e2", 6) # b("e2",
+    6),target : cr2 > < off1 : EnvInPort | content : [false] # [false],envCache
+    : b("e2", 7) # b("e2", 8),target : cr1 > < off2 : EnvInPort | content : * #
+    [false],envCache : * # b("e2", 9),target : cr2 >),subcomponents : (< x :
+    Data | properties : none,features : none,subcomponents : none,connections :
+    empty,value : - (- r("e2", 10) * [3602879701896397/36028797018963968]) + r(
+    1) + - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : - (- r("e2", 9) * [5404319552844595/18014398509481984]) + [1] + -
+    r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 11) * [
+    5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [1/2] * r("e2",
+    8) + [1/2] * r("e2", 9) # [true] >),connections : ((x ==> a) ; y ==> b),
+    varGen : < "e2",14,12 >,currMode : loc([0]),jumps : ((loc([0]) -[on1]->
+    loc([2])) ; (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (
+    loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[
+    off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([
+    1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 43 (state 159)
+states: 160  rewrites: 45894
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 10) and not
+    r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and
+    not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) <
+    r("e2", 8) and not r("e2", 10) < [7/2] and not r("e2", 10) < r("e2", 9) and
+    not r("e2", 11) < r("e2", 10) and b(2) and [0] === r(0) and [0] === r(1)
+    and r("a", 0) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) and r("b",
+    0) === [1] + [1/2] * r("e2", 7) and r("e2", 11) === [5] and r("mode", 0)
+    === [3] and b("e2", 8) and b("e2", 9)) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 12) # b("e2",
+    10),envCache : r("e2", 12) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 13) # b("e2", 11),envCache : r("e2", 13) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : - (- r("e2", 9) * [
+    3602879701896397/36028797018963968]) + r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : - (- r("e2", 10) * [5404319552844595/18014398509481984]) + [1] + -
+    r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + - r(
+    "e2", 11) * [5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [
+    1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2", 10) # [true] >),
+    connections : ((x ==> a) ; y ==> b),varGen : < "e2",14,12 >,currMode : loc(
+    [0]),jumps : ((loc([0]) -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ;
+    (loc([1]) -[on1]-> loc([3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[
+    on2]-> loc([3])) ; (loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([
+    2])) ; loc([3]) -[off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[
+    t] * [[1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+Solution 44 (state 160)
+states: 161  rewrites: 46666
+C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 9) and not
+    r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and
+    not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [7/2] and not r("e2", 9) <
+    r("e2", 8) and not r("e2", 10) < [3] and not r("e2", 10) < r("e2", 9) and
+    not r("e2", 11) < r("e2", 10) and b(2) and [0] === r(0) and [0] === r(1)
+    and r("a", 0) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) and r("b",
+    0) === [1] + [1/2] * r("e2", 7) and r("e2", 11) === [5] and r("mode", 0)
+    === [3] and b("e2", 6) and b("e2", 8)) || < e : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridAADL::MaxClockDeviation => {{
+    5.0e-1}}),features : (< a : EnvOutPort | content : r("e2", 12) # b("e2",
+    10),envCache : r("e2", 12) # b("e2", 10),target : cr1 > < b : EnvOutPort |
+    content : r("e2", 13) # b("e2", 11),envCache : r("e2", 13) # b("e2", 11),
+    target : cr2 > < on1 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 5) # b("e2", 5),target : cr1 > < on2 : EnvInPort | content : [0] # [
+    false],envCache : r("e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort
+    | content : [false] # [false],envCache : b("e2", 7) # b("e2", 8),target :
+    cr1 > < off2 : EnvInPort | content : * # [false],envCache : * # b("e2", 9),
+    target : cr2 >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : - (- r("e2", 10) * [
+    3602879701896397/36028797018963968]) + r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) # [true] > < y : Data |
+    properties : none,features : none,subcomponents : none,connections : empty,
+    value : - (- r("e2", 9) * [5404319552844595/18014398509481984]) + [1] + -
+    r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 11) * [
+    5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [1/2] * r("e2",
+    8) + [1/2] * r("e2", 9) # [true] >),connections : ((x ==> a) ; y ==> b),
+    varGen : < "e2",14,12 >,currMode : loc([0]),jumps : ((loc([0]) -[on1]->
+    loc([2])) ; (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc([3])) ; (
+    loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (loc([2]) -[
+    off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[off1]-> loc([
+    1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+No more solutions.
+states: 161  rewrites: 46744
+==========================================
+search in TEST-ENV-DYNAMICS : executeStep([true], env2, true) =>* C:ConstConfig
+    .
+
+Solution 1 (state 0)
+states: 1  rewrites: 48617
+C:ConstConfig --> (b(2) and (((not [2] < r("e2", 7) and not [5] < r("e2", 7)
+    and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2",
+    8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) <
+    r("e2", 7) and not r("e2", 9) < r("e2", 8) and not b("e2", 5) and not b(
+    "e2", 6) and r("e2", 9) === [5] and r("e2", 12) === [1] + - r("e2", 8) * [
+    5404319552844595/18014398509481984] and r("e2", 13) === r(1) + - r("e2", 9)
+    * [3602879701896397/36028797018963968] and r("e2", 14) === [1] + - r("e2",
+    9) * [5404319552844595/18014398509481984] and r("mode", 0) === [0] or not [
+    2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [
+    5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2] < r("e2", 8) and
+    not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2]
+    and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [7/2] and not r("e2",
+    9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and not b("e2", 5) and r(
+    "e2", 10) === [5] and r("e2", 12) === [1] + - r("e2", 7) * [1/2] + [1/2] *
+    r("e2", 7) + [1/2] * r("e2", 8) and r("e2", 13) === r(1) + - r("e2", 10) *
+    [3602879701896397/36028797018963968] and r("e2", 14) === - (- r("e2", 9) *
+    [5404319552844595/18014398509481984]) + [1] + - r("e2", 7) * [1/2] + - r(
+    "e2", 8) * [1/2] + - r("e2", 10) * [5404319552844595/18014398509481984] + [
+    1/2] * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) and r("mode",
+    0) === [1] and b("e2", 9)) and r("e2", 15) === r(1) + - r("e2", 7) * [
+    3602879701896397/36028797018963968] or not [2] < r("e2", 8) and not [5] <
+    r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [7/2]
+    < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
+    "e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < r("e2",
+    8) and not b("e2", 5) and not b("e2", 6) and r("e2", 9) === [5] and r("e2",
+    12) === [1] + - r("e2", 7) * [5404319552844595/18014398509481984] and r(
+    "e2", 13) === r(1) + - r("e2", 9) * [3602879701896397/36028797018963968]
+    and r("e2", 14) === [1] + - r("e2", 9) * [
+    5404319552844595/18014398509481984] and r("e2", 15) === r(1) + - r("e2", 8)
+    * [3602879701896397/36028797018963968] and r("mode", 0) === [0] or not [2]
+    < r("e2", 7) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5]
+    < r("e2", 9) and not [5] < r("e2", 10) and not [7/2] < r("e2", 8) and not
+    r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < r("e2", 9) and not b("e2", 6) and r("e2", 10) === [5] and r("e2", 12)
+    === [1] + - r("e2", 8) * [5404319552844595/18014398509481984] and r("e2",
+    13) === - (- r("e2", 9) * [3602879701896397/36028797018963968]) + r(1) + -
+    r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 10) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === [1] +
+    - r("e2", 10) * [5404319552844595/18014398509481984] and r("e2", 15) === r(
+    1) + [3602879701896397/18014398509481984] * r("e2", 7) and r("mode", 0) ===
+    [2] and b("e2", 8) or not [2] < r("e2", 8) and not [5] < r("e2", 7) and not
+    [5] < r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not
+    [7/2] < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and
+    not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [
+    3] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and not
+    b("e2", 6) and r("e2", 10) === [5] and r("e2", 12) === [1] + - r("e2", 7) *
+    [5404319552844595/18014398509481984] and r("e2", 13) === - (- r("e2", 9) *
+    [3602879701896397/36028797018963968]) + r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 10) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === [1] +
+    - r("e2", 10) * [5404319552844595/18014398509481984] and r("e2", 15) === r(
+    1) + - r("e2", 7) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 7) + [
+    3602879701896397/18014398509481984] * r("e2", 8) and r("mode", 0) === [2]
+    and b("e2", 8) or not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5]
+    < r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [
+    7/2] < r("e2", 7) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and
+    not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r(
+    "e2", 7) and not r("e2", 9) < [7/2] and not r("e2", 9) < r("e2", 8) and not
+    r("e2", 10) < r("e2", 9) and not b("e2", 5) and r("e2", 10) === [5] and r(
+    "e2", 12) === [1] + [1/2] * r("e2", 7) and r("e2", 13) === r(1) + - r("e2",
+    10) * [3602879701896397/36028797018963968] and r("e2", 14) === - (- r("e2",
+    9) * [5404319552844595/18014398509481984]) + [1] + - r("e2", 7) * [1/2] + -
+    r("e2", 8) * [1/2] + - r("e2", 10) * [5404319552844595/18014398509481984] +
+    [1/2] * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) and r("e2",
+    15) === r(1) + - r("e2", 8) * [3602879701896397/36028797018963968] and r(
+    "mode", 0) === [1] and b("e2", 9) or not [2] < r("e2", 7) and not [5] < r(
+    "e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [5] < r(
+    "e2", 10) and not [5] < r("e2", 11) and not [7/2] < r("e2", 8) and not [
+    11/2] < r("e2", 9) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and
+    not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [7/2] and not r("e2", 9) <
+    r("e2", 8) and not r("e2", 10) < [3] and not r("e2", 10) < r("e2", 9) and
+    not r("e2", 11) < r("e2", 10) and r("e2", 11) === [5] and r("e2", 12) === [
+    1] + - r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r(
+    "e2", 13) === - (- r("e2", 10) * [3602879701896397/36028797018963968]) + r(
+    1) + - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) and r("e2", 14) === - (-
+    r("e2", 9) * [5404319552844595/18014398509481984]) + [1] + - r("e2", 7) * [
+    1/2] + - r("e2", 8) * [1/2] + - r("e2", 11) * [
+    5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [1/2] * r("e2",
+    8) + [1/2] * r("e2", 9) and r("e2", 15) === r(1) + [
+    3602879701896397/18014398509481984] * r("e2", 7) and r("mode", 0) === [3]
+    and b("e2", 6) and b("e2", 8) or not [2] < r("e2", 7) and not [5] < r("e2",
+    7) and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2",
+    10) and not [5] < r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] <
+    r("e2", 10) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
+    "e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) < r("e2",
+    8) and not r("e2", 10) < [7/2] and not r("e2", 10) < r("e2", 9) and not r(
+    "e2", 11) < r("e2", 10) and r("e2", 11) === [5] and r("e2", 12) === [1] + -
+    r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2",
+    13) === - (- r("e2", 9) * [3602879701896397/36028797018963968]) + r(1) + -
+    r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === - (-
+    r("e2", 10) * [5404319552844595/18014398509481984]) + [1] + - r("e2", 7) *
+    [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + - r("e2", 11) * [
+    5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [1/2] * r("e2",
+    8) + [1/2] * r("e2", 9) + [1/2] * r("e2", 10) and r("e2", 15) === r(1) + [
+    3602879701896397/18014398509481984] * r("e2", 7) and r("mode", 0) === [3]
+    and b("e2", 8) and b("e2", 9) or not [2] < r("e2", 8) and not [5] < r("e2",
+    7) and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2",
+    10) and not [5] < r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] <
+    r("e2", 9) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
+    "e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [7/2]
+    and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < [3] and not r("e2",
+    10) < r("e2", 9) and not r("e2", 11) < r("e2", 10) and r("e2", 11) === [5]
+    and r("e2", 12) === [1] + [1/2] * r("e2", 7) and r("e2", 13) === - (- r(
+    "e2", 10) * [3602879701896397/36028797018963968]) + r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) and r("e2", 14) === - (-
+    r("e2", 9) * [5404319552844595/18014398509481984]) + [1] + - r("e2", 7) * [
+    1/2] + - r("e2", 8) * [1/2] + - r("e2", 11) * [
+    5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [1/2] * r("e2",
+    8) + [1/2] * r("e2", 9) and r("e2", 15) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) and r(
+    "mode", 0) === [3] and b("e2", 6) and b("e2", 8) or not [2] < r("e2", 8)
+    and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2", 9)
+    and not [5] < r("e2", 10) and not [5] < r("e2", 11) and not [7/2] < r("e2",
+    7) and not [11/2] < r("e2", 10) and not r("e2", 7) < [0] and not r("e2", 7)
+    < [3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r(
+    "e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < [7/2]
+    and not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2", 10) and r(
+    "e2", 11) === [5] and r("e2", 12) === [1] + [1/2] * r("e2", 7) and r("e2",
+    13) === - (- r("e2", 9) * [3602879701896397/36028797018963968]) + r(1) + -
+    r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === - (-
+    r("e2", 10) * [5404319552844595/18014398509481984]) + [1] + - r("e2", 7) *
+    [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + - r("e2", 11) * [
+    5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [1/2] * r("e2",
+    8) + [1/2] * r("e2", 9) + [1/2] * r("e2", 10) and r("e2", 15) === r(1) + -
+    r("e2", 7) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 7) + [
+    3602879701896397/18014398509481984] * r("e2", 8) and r("mode", 0) === [3]
+    and b("e2", 8) and b("e2", 9)) and r("e2", 16) === [0] or not [2] < r("e2",
+    7) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2",
+    9) and not [7/2] < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) <
+    [3/2] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < r("e2", 8) and
+    not b("e2", 5) and not b("e2", 9) and r("e2", 9) === [5] and r("e2", 12)
+    === [1] + - r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8)
+    and r("e2", 13) === r(1) + - r("e2", 9) * [
+    3602879701896397/36028797018963968] and r("e2", 14) === [1] + - r("e2", 7)
+    * [1/2] + - r("e2", 8) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) +
+    [1/2] * r("e2", 9) and r("e2", 15) === r(1) + - r("e2", 7) * [
+    3602879701896397/36028797018963968] and r("e2", 16) === [1] and r("mode",
+    0) === [1] or not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 8) and not r(
+    "e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < r("e2", 8) and not b("e2", 6) and not b("e2", 8) and
+    r("e2", 9) === [5] and r("e2", 12) === [1] + - r("e2", 8) * [
+    5404319552844595/18014398509481984] and r("e2", 13) === r(1) + - r("e2", 7)
+    * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === [1] +
+    - r("e2", 9) * [5404319552844595/18014398509481984] and r("e2", 15) === r(
+    1) + [3602879701896397/18014398509481984] * r("e2", 7) and r("e2", 16) ===
+    [2] and r("mode", 0) === [2] or not [2] < r("e2", 7) and not [5] < r("e2",
+    7) and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r(
+    "e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
+    "e2", 8) < r("e2", 7) and not r("e2", 9) < r("e2", 8) and not b("e2", 6)
+    and not b("e2", 8) and r("e2", 9) === [5] and r("e2", 12) === [1] + - r(
+    "e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2", 13)
+    === r(1) + - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2",
+    8) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 7) + [
+    3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === [1] +
+    - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + [1/2] * r("e2", 7) + [1/2] *
+    r("e2", 8) + [1/2] * r("e2", 9) and r("e2", 15) === r(1) + [
+    3602879701896397/18014398509481984] * r("e2", 7) and r("e2", 16) === [3]
+    and r("mode", 0) === [3] or not [2] < r("e2", 8) and not [5] < r("e2", 7)
+    and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2",
+    7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) <
+    [0] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < r("e2", 8) and not
+    b("e2", 5) and not b("e2", 9) and r("e2", 9) === [5] and r("e2", 12) === [
+    1] + [1/2] * r("e2", 7) and r("e2", 13) === r(1) + - r("e2", 9) * [
+    3602879701896397/36028797018963968] and r("e2", 14) === [1] + - r("e2", 7)
+    * [1/2] + - r("e2", 8) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) +
+    [1/2] * r("e2", 9) and r("e2", 15) === r(1) + - r("e2", 8) * [
+    3602879701896397/36028797018963968] and r("e2", 16) === [1] and r("mode",
+    0) === [1] or not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
+    r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 7) and not r(
+    "e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not
+    r("e2", 8) < r("e2", 7) and not r("e2", 9) < r("e2", 8) and not b("e2", 6)
+    and not b("e2", 8) and r("e2", 9) === [5] and r("e2", 12) === [1] + - r(
+    "e2", 7) * [5404319552844595/18014398509481984] and r("e2", 13) === r(1) +
+    - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === [1] +
+    - r("e2", 9) * [5404319552844595/18014398509481984] and r("e2", 15) === r(
+    1) + - r("e2", 7) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 7) + [
+    3602879701896397/18014398509481984] * r("e2", 8) and r("e2", 16) === [2]
+    and r("mode", 0) === [2] or not [2] < r("e2", 8) and not [5] < r("e2", 7)
+    and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2",
+    7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) <
+    [0] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < r("e2", 8) and not
+    b("e2", 6) and not b("e2", 8) and r("e2", 9) === [5] and r("e2", 12) === [
+    1] + [1/2] * r("e2", 7) and r("e2", 13) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === [1] +
+    - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + [1/2] * r("e2", 7) + [1/2] *
+    r("e2", 8) + [1/2] * r("e2", 9) and r("e2", 15) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) and r(
+    "e2", 16) === [3] and r("mode", 0) === [3] or not [2] < r("e2", 7) and not
+    [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not
+    [5] < r("e2", 10) and not [7/2] < r("e2", 8) and not r("e2", 7) < [0] and
+    not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) <
+    [3] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and
+    not b("e2", 6) and r("e2", 10) === [5] and r("e2", 12) === [1] + - r("e2",
+    8) * [5404319552844595/18014398509481984] and r("e2", 13) === r(1) + - r(
+    "e2", 9) * [10808639105689191/36028797018963968] + [
+    3602879701896397/18014398509481984] * r("e2", 10) and r("e2", 14) === [1] +
+    - r("e2", 10) * [5404319552844595/18014398509481984] and r("e2", 15) === r(
+    1) + - r("e2", 7) * [3602879701896397/36028797018963968] and r("e2", 16)
+    === [2] and r("mode", 0) === [0] and b("e2", 5) or not [2] < r("e2", 7) and
+    not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2", 9) and
+    not [5] < r("e2", 10) and not [7/2] < r("e2", 8) and not r("e2", 7) < [0]
+    and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7) and not r("e2",
+    9) < [3] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9)
+    and not b("e2", 6) and r("e2", 10) === [5] and r("e2", 12) === [1] + - r(
+    "e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2", 13)
+    === r(1) + - r("e2", 9) * [10808639105689191/36028797018963968] + [
+    3602879701896397/18014398509481984] * r("e2", 10) and r("e2", 14) === [1] +
+    - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + [1/2]
+    * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2",
+    10) and r("e2", 15) === r(1) + - r("e2", 7) * [
+    3602879701896397/36028797018963968] and r("e2", 16) === [3] and r("mode",
+    0) === [1] and b("e2", 5) or not [2] < r("e2", 7) and not [5] < r("e2", 7)
+    and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10)
+    and not [7/2] < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [
+    3/2] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r(
+    "e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and not b("e2", 6)
+    and r("e2", 10) === [5] and r("e2", 12) === [1] + - r("e2", 7) * [1/2] + [
+    1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2", 13) === - (- r("e2", 9)
+    * [3602879701896397/36028797018963968]) + r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 10) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === [1] +
+    - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + [1/2]
+    * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2",
+    10) and r("e2", 15) === r(1) + [3602879701896397/18014398509481984] * r(
+    "e2", 7) and r("e2", 16) === [1] and r("mode", 0) === [3] and b("e2", 8) or
+    not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and
+    not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2] < r("e2", 8)
+    and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r(
+    "e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not
+    r("e2", 10) < r("e2", 9) and not b("e2", 9) and r("e2", 10) === [5] and r(
+    "e2", 12) === [1] + - r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r(
+    "e2", 8) and r("e2", 13) === r(1) + - r("e2", 9) * [
+    10808639105689191/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 10) and r("e2", 14) === [1] + - r("e2", 7) * [1/2] + - r("e2", 8)
+    * [1/2] + - r("e2", 9) * [1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) +
+    [1/2] * r("e2", 9) + [1/2] * r("e2", 10) and r("e2", 15) === r(1) + - r(
+    "e2", 7) * [3602879701896397/36028797018963968] and r("e2", 16) === [3] and
+    r("mode", 0) === [1] and b("e2", 5) or not [2] < r("e2", 7) and not [5] <
+    r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [5] <
+    r("e2", 10) and not [7/2] < r("e2", 8) and not r("e2", 7) < [0] and not r(
+    "e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3]
+    and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and not b(
+    "e2", 9) and r("e2", 10) === [5] and r("e2", 12) === [1] + - r("e2", 7) * [
+    1/2] + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2", 13) === - (- r(
+    "e2", 9) * [3602879701896397/36028797018963968]) + r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 10) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === [1] +
+    - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + [1/2]
+    * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2",
+    10) and r("e2", 15) === r(1) + [3602879701896397/18014398509481984] * r(
+    "e2", 7) and r("e2", 16) === [1] and r("mode", 0) === [3] and b("e2", 8) or
+    not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and
+    not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2] < r("e2", 8)
+    and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not r("e2", 8) < [
+    3/2] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [7/2] and not r(
+    "e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and not b("e2", 5)
+    and r("e2", 10) === [5] and r("e2", 12) === [1] + - r("e2", 8) * [
+    5404319552844595/18014398509481984] and r("e2", 13) === r(1) + - r("e2",
+    10) * [3602879701896397/36028797018963968] and r("e2", 14) === [1] + - r(
+    "e2", 9) * [14411518807585587/18014398509481984] + [1/2] * r("e2", 10) and
+    r("e2", 15) === r(1) + - r("e2", 7) * [3602879701896397/36028797018963968]
+    and r("e2", 16) === [1] and r("mode", 0) === [0] and b("e2", 6) or not [2]
+    < r("e2", 7) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5]
+    < r("e2", 9) and not [5] < r("e2", 10) and not [7/2] < r("e2", 8) and not [
+    11/2] < r("e2", 9) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and
+    not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [7/2] and not r("e2", 9) <
+    r("e2", 8) and not r("e2", 10) < r("e2", 9) and not b("e2", 8) and r("e2",
+    10) === [5] and r("e2", 12) === [1] + - r("e2", 8) * [
+    5404319552844595/18014398509481984] and r("e2", 13) === r(1) + - r("e2", 7)
+    * [3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) and r("e2", 14) === [1] +
+    - r("e2", 9) * [14411518807585587/18014398509481984] + [1/2] * r("e2", 10)
+    and r("e2", 15) === r(1) + [3602879701896397/18014398509481984] * r("e2",
+    7) and r("e2", 16) === [3] and r("mode", 0) === [2] and b("e2", 6) or not [
+    2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [
+    5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2] < r("e2", 8) and
+    not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2]
+    and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [7/2] and not r("e2",
+    9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and not b("e2", 8) and r(
+    "e2", 10) === [5] and r("e2", 12) === [1] + - r("e2", 7) * [1/2] + [1/2] *
+    r("e2", 7) + [1/2] * r("e2", 8) and r("e2", 13) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) and r("e2", 14) === - (-
+    r("e2", 9) * [5404319552844595/18014398509481984]) + [1] + - r("e2", 7) * [
+    1/2] + - r("e2", 8) * [1/2] + - r("e2", 10) * [
+    5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [1/2] * r("e2",
+    8) + [1/2] * r("e2", 9) and r("e2", 15) === r(1) + [
+    3602879701896397/18014398509481984] * r("e2", 7) and r("e2", 16) === [2]
+    and r("mode", 0) === [3] and b("e2", 6) or not [2] < r("e2", 8) and not [5]
+    < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [5]
+    < r("e2", 10) and not [7/2] < r("e2", 7) and not r("e2", 7) < [0] and not
+    r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < r("e2", 9) and not b("e2", 6) and r("e2", 10) === [5] and r("e2", 12)
+    === [1] + - r("e2", 7) * [5404319552844595/18014398509481984] and r("e2",
+    13) === r(1) + - r("e2", 9) * [10808639105689191/36028797018963968] + [
+    3602879701896397/18014398509481984] * r("e2", 10) and r("e2", 14) === [1] +
+    - r("e2", 10) * [5404319552844595/18014398509481984] and r("e2", 15) === r(
+    1) + - r("e2", 8) * [3602879701896397/36028797018963968] and r("e2", 16)
+    === [2] and r("mode", 0) === [0] and b("e2", 5) or not [2] < r("e2", 8) and
+    not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2", 9) and
+    not [5] < r("e2", 10) and not [7/2] < r("e2", 7) and not r("e2", 7) < [0]
+    and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r(
+    "e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not
+    r("e2", 10) < r("e2", 9) and not b("e2", 6) and r("e2", 10) === [5] and r(
+    "e2", 12) === [1] + [1/2] * r("e2", 7) and r("e2", 13) === r(1) + - r("e2",
+    9) * [10808639105689191/36028797018963968] + [
+    3602879701896397/18014398509481984] * r("e2", 10) and r("e2", 14) === [1] +
+    - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + [1/2]
+    * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2",
+    10) and r("e2", 15) === r(1) + - r("e2", 8) * [
+    3602879701896397/36028797018963968] and r("e2", 16) === [3] and r("mode",
+    0) === [1] and b("e2", 5) or not [2] < r("e2", 8) and not [5] < r("e2", 7)
+    and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10)
+    and not [7/2] < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [
+    3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r(
+    "e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r(
+    "e2", 9) and not b("e2", 6) and r("e2", 10) === [5] and r("e2", 12) === [1]
+    + [1/2] * r("e2", 7) and r("e2", 13) === - (- r("e2", 9) * [
+    3602879701896397/36028797018963968]) + r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 10) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === [1] +
+    - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + [1/2]
+    * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2",
+    10) and r("e2", 15) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) and r(
+    "e2", 16) === [1] and r("mode", 0) === [3] and b("e2", 8) or not [2] < r(
+    "e2", 8) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r(
+    "e2", 9) and not [5] < r("e2", 10) and not [7/2] < r("e2", 7) and not r(
+    "e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not
+    r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) < r(
+    "e2", 8) and not r("e2", 10) < r("e2", 9) and not b("e2", 9) and r("e2",
+    10) === [5] and r("e2", 12) === [1] + [1/2] * r("e2", 7) and r("e2", 13)
+    === r(1) + - r("e2", 9) * [10808639105689191/36028797018963968] + [
+    3602879701896397/18014398509481984] * r("e2", 10) and r("e2", 14) === [1] +
+    - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + [1/2]
+    * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2",
+    10) and r("e2", 15) === r(1) + - r("e2", 8) * [
+    3602879701896397/36028797018963968] and r("e2", 16) === [3] and r("mode",
+    0) === [1] and b("e2", 5) or not [2] < r("e2", 8) and not [5] < r("e2", 7)
+    and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10)
+    and not [7/2] < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [
+    3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r(
+    "e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r(
+    "e2", 9) and not b("e2", 9) and r("e2", 10) === [5] and r("e2", 12) === [1]
+    + [1/2] * r("e2", 7) and r("e2", 13) === - (- r("e2", 9) * [
+    3602879701896397/36028797018963968]) + r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 10) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === [1] +
+    - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + [1/2]
+    * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2",
+    10) and r("e2", 15) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) and r(
+    "e2", 16) === [1] and r("mode", 0) === [3] and b("e2", 8) or not [2] < r(
+    "e2", 8) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r(
+    "e2", 9) and not [5] < r("e2", 10) and not [7/2] < r("e2", 7) and not [
+    11/2] < r("e2", 9) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and
+    not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [
+    7/2] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and
+    not b("e2", 5) and r("e2", 10) === [5] and r("e2", 12) === [1] + - r("e2",
+    7) * [5404319552844595/18014398509481984] and r("e2", 13) === r(1) + - r(
+    "e2", 10) * [3602879701896397/36028797018963968] and r("e2", 14) === [1] +
+    - r("e2", 9) * [14411518807585587/18014398509481984] + [1/2] * r("e2", 10)
+    and r("e2", 15) === r(1) + - r("e2", 8) * [
+    3602879701896397/36028797018963968] and r("e2", 16) === [1] and r("mode",
+    0) === [0] and b("e2", 6) or not [2] < r("e2", 8) and not [5] < r("e2", 7)
+    and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10)
+    and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 9) and not r("e2", 7) <
+    [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not r("e2", 8)
+    < r("e2", 7) and not r("e2", 9) < [7/2] and not r("e2", 9) < r("e2", 8) and
+    not r("e2", 10) < r("e2", 9) and not b("e2", 8) and r("e2", 10) === [5] and
+    r("e2", 12) === [1] + - r("e2", 7) * [5404319552844595/18014398509481984]
+    and r("e2", 13) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) and r("e2", 14) === [1] +
+    - r("e2", 9) * [14411518807585587/18014398509481984] + [1/2] * r("e2", 10)
+    and r("e2", 15) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) and r(
+    "e2", 16) === [3] and r("mode", 0) === [2] and b("e2", 6) or not [2] < r(
+    "e2", 8) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r(
+    "e2", 9) and not [5] < r("e2", 10) and not [7/2] < r("e2", 7) and not [
+    11/2] < r("e2", 9) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and
+    not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [
+    7/2] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < r("e2", 9) and
+    not b("e2", 8) and r("e2", 10) === [5] and r("e2", 12) === [1] + [1/2] * r(
+    "e2", 7) and r("e2", 13) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) and r("e2", 14) === - (-
+    r("e2", 9) * [5404319552844595/18014398509481984]) + [1] + - r("e2", 7) * [
+    1/2] + - r("e2", 8) * [1/2] + - r("e2", 10) * [
+    5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [1/2] * r("e2",
+    8) + [1/2] * r("e2", 9) and r("e2", 15) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) and r(
+    "e2", 16) === [2] and r("mode", 0) === [3] and b("e2", 6) or not [2] < r(
+    "e2", 7) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r(
+    "e2", 9) and not [5] < r("e2", 10) and not [5] < r("e2", 11) and not [7/2]
+    < r("e2", 8) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
+    r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [
+    7/2] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < [3] and not r(
+    "e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2", 10) and r("e2", 11)
+    === [5] and r("e2", 12) === [1] + - r("e2", 8) * [
+    5404319552844595/18014398509481984] and r("e2", 13) === r(1) + - r("e2",
+    10) * [10808639105689191/36028797018963968] + [
+    3602879701896397/18014398509481984] * r("e2", 11) and r("e2", 14) === [1] +
+    - r("e2", 9) * [14411518807585587/18014398509481984] + - r("e2", 10) * [
+    1/2] + [1/2] * r("e2", 10) + [1/2] * r("e2", 11) and r("e2", 15) === r(1) +
+    - r("e2", 7) * [3602879701896397/36028797018963968] and r("e2", 16) === [3]
+    and r("mode", 0) === [0] and b("e2", 5) and b("e2", 6) or not [2] < r("e2",
+    7) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2",
+    9) and not [5] < r("e2", 10) and not [5] < r("e2", 11) and not [7/2] < r(
+    "e2", 8) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not r(
+    "e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [7/2]
+    and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < [3] and not r("e2",
+    10) < r("e2", 9) and not r("e2", 11) < r("e2", 10) and r("e2", 11) === [5]
+    and r("e2", 12) === [1] + - r("e2", 8) * [
+    5404319552844595/18014398509481984] and r("e2", 13) === - (- r("e2", 10) *
+    [3602879701896397/36028797018963968]) + r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) and r("e2", 14) === [1] +
+    - r("e2", 9) * [14411518807585587/18014398509481984] + - r("e2", 10) * [
+    1/2] + [1/2] * r("e2", 10) + [1/2] * r("e2", 11) and r("e2", 15) === r(1) +
+    [3602879701896397/18014398509481984] * r("e2", 7) and r("e2", 16) === [1]
+    and r("mode", 0) === [2] and b("e2", 6) and b("e2", 8) or not [2] < r("e2",
+    7) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2",
+    9) and not [5] < r("e2", 10) and not [5] < r("e2", 11) and not [7/2] < r(
+    "e2", 8) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not r(
+    "e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [7/2]
+    and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < [3] and not r("e2",
+    10) < r("e2", 9) and not r("e2", 11) < r("e2", 10) and r("e2", 11) === [5]
+    and r("e2", 12) === [1] + - r("e2", 7) * [1/2] + [1/2] * r("e2", 7) + [1/2]
+    * r("e2", 8) and r("e2", 13) === r(1) + - r("e2", 10) * [
+    10808639105689191/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 11) and r("e2", 14) === - (- r("e2", 9) * [
+    5404319552844595/18014398509481984]) + [1] + - r("e2", 7) * [1/2] + - r(
+    "e2", 8) * [1/2] + - r("e2", 11) * [5404319552844595/18014398509481984] + [
+    1/2] * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) and r("e2", 15)
+    === r(1) + - r("e2", 7) * [3602879701896397/36028797018963968] and r("e2",
+    16) === [2] and r("mode", 0) === [1] and b("e2", 5) and b("e2", 9) or not [
+    2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [
+    5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] < r("e2", 11) and not
+    [7/2] < r("e2", 8) and not [11/2] < r("e2", 10) and not r("e2", 7) < [0]
+    and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7) and not r("e2",
+    9) < [3] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < [7/2] and
+    not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2", 10) and r("e2",
+    11) === [5] and r("e2", 12) === [1] + - r("e2", 8) * [
+    5404319552844595/18014398509481984] and r("e2", 13) === r(1) + - r("e2", 9)
+    * [10808639105689191/36028797018963968] + - r("e2", 10) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 10) + [3602879701896397/18014398509481984] * r("e2", 11) and r(
+    "e2", 14) === [1] + - r("e2", 10) * [14411518807585587/18014398509481984] +
+    [1/2] * r("e2", 11) and r("e2", 15) === r(1) + - r("e2", 7) * [
+    3602879701896397/36028797018963968] and r("e2", 16) === [3] and r("mode",
+    0) === [0] and b("e2", 5) and b("e2", 6) or not [2] < r("e2", 7) and not [
+    5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [
+    5] < r("e2", 10) and not [5] < r("e2", 11) and not [7/2] < r("e2", 8) and
+    not [11/2] < r("e2", 10) and not r("e2", 7) < [0] and not r("e2", 8) < [
+    3/2] and not r("e2", 8) < r("e2", 7) and not r("e2", 9) < [3] and not r(
+    "e2", 9) < r("e2", 8) and not r("e2", 10) < [7/2] and not r("e2", 10) < r(
+    "e2", 9) and not r("e2", 11) < r("e2", 10) and r("e2", 11) === [5] and r(
+    "e2", 12) === [1] + - r("e2", 8) * [5404319552844595/18014398509481984] and
+    r("e2", 13) === - (- r("e2", 9) * [3602879701896397/36028797018963968]) +
+    r(1) + - r("e2", 7) * [3602879701896397/18014398509481984] + - r("e2", 8) *
+    [3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === [1] +
+    - r("e2", 10) * [14411518807585587/18014398509481984] + [1/2] * r("e2", 11)
+    and r("e2", 15) === r(1) + [3602879701896397/18014398509481984] * r("e2",
+    7) and r("e2", 16) === [1] and r("mode", 0) === [2] and b("e2", 6) and b(
+    "e2", 8) or not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] < r(
+    "e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
+    r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 10) and not
+    r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < [7/2] and not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2",
+    10) and r("e2", 11) === [5] and r("e2", 12) === [1] + - r("e2", 7) * [1/2]
+    + [1/2] * r("e2", 7) + [1/2] * r("e2", 8) and r("e2", 13) === r(1) + - r(
+    "e2", 9) * [10808639105689191/36028797018963968] + - r("e2", 10) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 10) + [3602879701896397/18014398509481984] * r("e2", 11) and r(
+    "e2", 14) === - (- r("e2", 10) * [5404319552844595/18014398509481984]) + [
+    1] + - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + -
+    r("e2", 11) * [5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [
+    1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2", 10) and r("e2",
+    15) === r(1) + - r("e2", 7) * [3602879701896397/36028797018963968] and r(
+    "e2", 16) === [2] and r("mode", 0) === [1] and b("e2", 5) and b("e2", 6) or
+    not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and
+    not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] < r("e2", 11)
+    and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 9) and not r("e2", 7) <
+    [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not r("e2", 8)
+    < r("e2", 7) and not r("e2", 9) < [7/2] and not r("e2", 9) < r("e2", 8) and
+    not r("e2", 10) < [3] and not r("e2", 10) < r("e2", 9) and not r("e2", 11)
+    < r("e2", 10) and r("e2", 11) === [5] and r("e2", 12) === [1] + - r("e2",
+    7) * [5404319552844595/18014398509481984] and r("e2", 13) === r(1) + - r(
+    "e2", 10) * [10808639105689191/36028797018963968] + [
+    3602879701896397/18014398509481984] * r("e2", 11) and r("e2", 14) === [1] +
+    - r("e2", 9) * [14411518807585587/18014398509481984] + - r("e2", 10) * [
+    1/2] + [1/2] * r("e2", 10) + [1/2] * r("e2", 11) and r("e2", 15) === r(1) +
+    - r("e2", 8) * [3602879701896397/36028797018963968] and r("e2", 16) === [3]
+    and r("mode", 0) === [0] and b("e2", 5) and b("e2", 6) or not [2] < r("e2",
+    8) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2",
+    9) and not [5] < r("e2", 10) and not [5] < r("e2", 11) and not [7/2] < r(
+    "e2", 7) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not r(
+    "e2", 7) < [3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [7/2] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < [3] and not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2",
+    10) and r("e2", 11) === [5] and r("e2", 12) === [1] + - r("e2", 7) * [
+    5404319552844595/18014398509481984] and r("e2", 13) === - (- r("e2", 10) *
+    [3602879701896397/36028797018963968]) + r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 9) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) + [
+    3602879701896397/18014398509481984] * r("e2", 10) and r("e2", 14) === [1] +
+    - r("e2", 9) * [14411518807585587/18014398509481984] + - r("e2", 10) * [
+    1/2] + [1/2] * r("e2", 10) + [1/2] * r("e2", 11) and r("e2", 15) === r(1) +
+    - r("e2", 7) * [3602879701896397/18014398509481984] + [
+    3602879701896397/18014398509481984] * r("e2", 7) + [
+    3602879701896397/18014398509481984] * r("e2", 8) and r("e2", 16) === [1]
+    and r("mode", 0) === [2] and b("e2", 6) and b("e2", 8) or not [2] < r("e2",
+    8) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2",
+    9) and not [5] < r("e2", 10) and not [5] < r("e2", 11) and not [7/2] < r(
+    "e2", 7) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not r(
+    "e2", 7) < [3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7)
+    and not r("e2", 9) < [7/2] and not r("e2", 9) < r("e2", 8) and not r("e2",
+    10) < [3] and not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2",
+    10) and r("e2", 11) === [5] and r("e2", 12) === [1] + [1/2] * r("e2", 7)
+    and r("e2", 13) === r(1) + - r("e2", 10) * [
+    10808639105689191/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 11) and r("e2", 14) === - (- r("e2", 9) * [
+    5404319552844595/18014398509481984]) + [1] + - r("e2", 7) * [1/2] + - r(
+    "e2", 8) * [1/2] + - r("e2", 11) * [5404319552844595/18014398509481984] + [
+    1/2] * r("e2", 7) + [1/2] * r("e2", 8) + [1/2] * r("e2", 9) and r("e2", 15)
+    === r(1) + - r("e2", 8) * [3602879701896397/36028797018963968] and r("e2",
+    16) === [2] and r("mode", 0) === [1] and b("e2", 5) and b("e2", 9) or not [
+    2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and not [
+    5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] < r("e2", 11) and not
+    [7/2] < r("e2", 7) and not [11/2] < r("e2", 10) and not r("e2", 7) < [0]
+    and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r(
+    "e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not
+    r("e2", 10) < [7/2] and not r("e2", 10) < r("e2", 9) and not r("e2", 11) <
+    r("e2", 10) and r("e2", 11) === [5] and r("e2", 12) === [1] + - r("e2", 7)
+    * [5404319552844595/18014398509481984] and r("e2", 13) === r(1) + - r("e2",
+    9) * [10808639105689191/36028797018963968] + - r("e2", 10) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 10) + [3602879701896397/18014398509481984] * r("e2", 11) and r(
+    "e2", 14) === [1] + - r("e2", 10) * [14411518807585587/18014398509481984] +
+    [1/2] * r("e2", 11) and r("e2", 15) === r(1) + - r("e2", 8) * [
+    3602879701896397/36028797018963968] and r("e2", 16) === [3] and r("mode",
+    0) === [0] and b("e2", 5) and b("e2", 6) or not [2] < r("e2", 8) and not [
+    5] < r("e2", 7) and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [
+    5] < r("e2", 10) and not [5] < r("e2", 11) and not [7/2] < r("e2", 7) and
+    not [11/2] < r("e2", 10) and not r("e2", 7) < [0] and not r("e2", 7) < [
+    3/2] and not r("e2", 8) < [0] and not r("e2", 8) < r("e2", 7) and not r(
+    "e2", 9) < [3] and not r("e2", 9) < r("e2", 8) and not r("e2", 10) < [7/2]
+    and not r("e2", 10) < r("e2", 9) and not r("e2", 11) < r("e2", 10) and r(
+    "e2", 11) === [5] and r("e2", 12) === [1] + - r("e2", 7) * [
+    5404319552844595/18014398509481984] and r("e2", 13) === - (- r("e2", 9) * [
+    3602879701896397/36028797018963968]) + r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + - r("e2", 8) * [
+    3602879701896397/18014398509481984] + - r("e2", 11) * [
+    3602879701896397/36028797018963968] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) + [
+    3602879701896397/18014398509481984] * r("e2", 9) and r("e2", 14) === [1] +
+    - r("e2", 10) * [14411518807585587/18014398509481984] + [1/2] * r("e2", 11)
+    and r("e2", 15) === r(1) + - r("e2", 7) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 7) + [3602879701896397/18014398509481984] * r("e2", 8) and r(
+    "e2", 16) === [1] and r("mode", 0) === [2] and b("e2", 6) and b("e2", 8) or
+    not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] < r("e2", 8) and
+    not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] < r("e2", 11)
+    and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 10) and not r("e2", 7)
+    < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not r("e2",
+    8) < r("e2", 7) and not r("e2", 9) < [3] and not r("e2", 9) < r("e2", 8)
+    and not r("e2", 10) < [7/2] and not r("e2", 10) < r("e2", 9) and not r(
+    "e2", 11) < r("e2", 10) and r("e2", 11) === [5] and r("e2", 12) === [1] + [
+    1/2] * r("e2", 7) and r("e2", 13) === r(1) + - r("e2", 9) * [
+    10808639105689191/36028797018963968] + - r("e2", 10) * [
+    3602879701896397/18014398509481984] + [3602879701896397/18014398509481984]
+    * r("e2", 10) + [3602879701896397/18014398509481984] * r("e2", 11) and r(
+    "e2", 14) === - (- r("e2", 10) * [5404319552844595/18014398509481984]) + [
+    1] + - r("e2", 7) * [1/2] + - r("e2", 8) * [1/2] + - r("e2", 9) * [1/2] + -
+    r("e2", 11) * [5404319552844595/18014398509481984] + [1/2] * r("e2", 7) + [
+    1/2] * r("e2", 8) + [1/2] * r("e2", 9) + [1/2] * r("e2", 10) and r("e2",
+    15) === r(1) + - r("e2", 8) * [3602879701896397/36028797018963968] and r(
+    "e2", 16) === [2] and r("mode", 0) === [1] and b("e2", 5) and b("e2", 6))
+    and [0] === r(0) and [0] === r(1) and r("a", 0) === r("e2", 15) and r("b",
+    0) === r("e2", 12)) || < e : Env | properties : ((TimingProperties::Period
+    => {{5}}) ; HybridAADL::MaxClockDeviation => {{5.0e-1}}),features : (< a :
+    EnvOutPort | content : r("e2", 17) # b("e2", 10),envCache : r("e2", 17) #
+    b("e2", 10),target : cr1 > < b : EnvOutPort | content : r("e2", 18) # b(
+    "e2", 11),envCache : r("e2", 18) # b("e2", 11),target : cr2 > < on1 :
+    EnvInPort | content : [0] # [false],envCache : r("e2", 5) # b("e2", 5),
+    target : cr1 > < on2 : EnvInPort | content : [0] # [false],envCache : r(
+    "e2", 6) # b("e2", 6),target : cr2 > < off1 : EnvInPort | content : [false]
+    # [false],envCache : b("e2", 7) # b("e2", 8),target : cr1 > < off2 :
+    EnvInPort | content : * # [false],envCache : * # b("e2", 9),target : cr2
+    >),subcomponents : (< x : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : r("e2", 13) # [true] > < y
+    : Data | properties : none,features : none,subcomponents : none,connections
+    : empty,value : r("e2", 14) # [true] >),connections : ((x ==> a) ; y ==>
+    b),varGen : < "e2",19,12 >,currMode : loc(r("e2", 16)),jumps : ((loc([0])
+    -[on1]-> loc([2])) ; (loc([0]) -[on2]-> loc([1])) ; (loc([1]) -[on1]-> loc(
+    [3])) ; (loc([1]) -[off2]-> loc([0])) ; (loc([2]) -[on2]-> loc([3])) ; (
+    loc([2]) -[off1]-> loc([0])) ; (loc([3]) -[on2]-> loc([2])) ; loc([3]) -[
+    off1]-> loc([1])),flows : ((loc([0]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] - (v[s] * [[
+    2.9999999999999999e-1]]))]) ; (loc([1]) [(x(t)= (c[x] - (v[t] * [[
+    1.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]) ; (loc([
+    2]) [(x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))) ; y(s)= (c[y] - (
+    v[s] * [[2.9999999999999999e-1]]))]) ; loc([3]) [(x(t)= (c[x] + (v[t] * [[
+    2.0000000000000001e-1]]))) ; y(s)= (c[y] + (v[s] * [[5.0e-1]]))]),sampling
+    : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
+
+No more solutions.
+states: 1  rewrites: 48617
+Bye.

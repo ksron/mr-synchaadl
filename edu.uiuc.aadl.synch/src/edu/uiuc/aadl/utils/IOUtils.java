@@ -33,9 +33,9 @@ public class IOUtils {
 	
 	
 	public static void setFileContent(InputStream content, IFile file) throws CoreException {
-		if (file.exists())
+		if (file.exists()) {
 			file.setContents(content, true, true, null);
-		else {
+		} else {
 			AadlUtil.makeSureFoldersExist(file.getFullPath());
 			file.create(content, true, null);
 		}

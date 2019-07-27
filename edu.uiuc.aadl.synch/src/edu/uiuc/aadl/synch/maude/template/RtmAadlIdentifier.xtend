@@ -4,6 +4,9 @@ import com.google.common.collect.SetMultimap
 import org.osate.aadl2.Element
 import org.osate.aadl2.NamedElement
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager
+import java.util.List
+import java.util.ArrayList
+import java.util.Set
 
 class RtmAadlIdentifier {
 	
@@ -18,8 +21,20 @@ class RtmAadlIdentifier {
 	def generateIds() '''
 		«FOR key: opTable.keySet»
 		ops «opTable.get(key).join(" ")» : -> «key» [ctor] .
+		«IF key.equals("Location")»
+		«locEncode(opTable.get(key))»
+		«ENDIF»
 		«ENDFOR»
 	'''
+	
+	def locEncode(Set<String> names){
+		var idx = 0
+		var encode = ""
+		for(String name : names){
+			encode += "eq " + name + " = loc([" + (idx++) + "]) .\n"
+		}
+		return encode
+	}
 	
 	def check(Element obj, boolean cond, String msg) {
 		cond => [if (!cond) errMgr.error(obj, msg)];
@@ -55,5 +70,13 @@ class RtmAadlIdentifier {
 		else
 			iterable.join(separator)
 			
+	}
+	
+	public def isVarId(String vid){
+		for(String v : opTable.get("VarId")){
+			if(vid.equals(v))
+				return true
+		}
+		return false
 	}
 }

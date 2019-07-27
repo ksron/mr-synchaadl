@@ -43,6 +43,9 @@ import org.osate.ba.aadlba.ParameterHolder
 import org.osate.ba.aadlba.PortCountValue
 import org.osate.ba.aadlba.PortFreshValue
 import com.google.common.collect.SetMultimapimport org.osate.ba.aadlba.PropertySetPropertyReference
+import org.osate.aadl2.ClassifierValue
+import org.osate.ba.aadlba.CommunicationAction
+import org.osate.ba.aadlba.PortSendAction
 
 class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 
@@ -56,13 +59,12 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 		'''(«t.sourceState.id("Location")» -[ «t.compileTransitionGuard» ]-> «t.destinationState.id("Location")» «t.compileTransitionAction»)''' 
 	}
 	
-	
 	/**************************************************************************************************************
 	 * Behavior conditions
 	 */
 	 
 	 private def compileTransitionGuard(BehaviorTransition t) {
-	 	t.condition?.compileCondition ?: "[true]"
+	 	t.condition?.compileCondition ?: "[[true]]"
 	}
 	
 	private def dispatch compileCondition(DispatchCondition dc) {
@@ -134,26 +136,43 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	}
 	
 	private def dispatch CharSequence compileAction(AssignmentAction a) '''
-		({«a.target.compileTarget»} := «a.valueExpression.compileExpression»)'''
+		(«a.target.compilePrefixTarget»{«a.target.compileTarget»} := «a.valueExpression.compileExpression»)'''
 	
 	private def dispatch CharSequence compileAction(SubprogramCallAction a) {
 		// a.check(a.dataAccess == null , "data access for subprogram not supported")
 		'''(«a.subprogram.element.qualifiedId("ClassifierId")» !«IF a.setParameterLabels» («a.parameterLabels.map[compileParameter].filterNull.join(' , ')»)«ENDIF»)'''
 	}
 	
+	
+	private def dispatch CharSequence compileAction(PortSendAction a){
+		'''(f{«a.port.port.name»} !«IF a.valueExpression == null»«ELSE»(«a.valueExpression.compileExpression»)«ENDIF»)'''
+	}
+	
+	
 	private def dispatch CharSequence compileAction(BehaviorActions a) {
 		a.check(false, "Unsupported action: " + a.class.name)
 		null
+	}
+	
+	private def compilePrefixTarget(Target t) {
+		t.check(! (t instanceof IndexableElement) || !(t as IndexableElement).setArrayIndexes, "arrays not supported")
+		switch t {
+			BehaviorVariableHolder:	"v"
+			DataPortHolder:			"f"
+			DataSubcomponentHolder:	"c"
+			ParameterHolder:		"p"
+			default:				null => [t.check(false, "Unsupported action reference: " + t.class.name)]
+		}
 	}
 	
 	
 	private def compileTarget(Target t) {
 		t.check(! (t instanceof IndexableElement) || !(t as IndexableElement).setArrayIndexes, "arrays not supported")
 		switch t {
-			BehaviorVariableHolder:	t.behaviorVariable.name.escape
-			DataPortHolder:			t.dataPort.name.escape
+			BehaviorVariableHolder:	t.behaviorVariable.name.escape 
+			DataPortHolder:			t.dataPort.name.escape 
 			DataSubcomponentHolder:	t.dataSubcomponent.name.escape
-			ParameterHolder:		t.parameter.name.escape
+			ParameterHolder:		t.parameter.name.escape 
 			default:				null => [t.check(false, "Unsupported action reference: " + t.class.name)]
 		}
 	}
@@ -162,7 +181,7 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	private def compileParameter(ParameterLabel p) {
 		switch p {
 			ValueExpression: 	compileExpression(p)
-			Target:				'''[«compileTarget(p)»]'''
+			Target:				'''[[«compileTarget(p)»]]'''
 		}
 		
 	}
@@ -174,10 +193,10 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	 
 	private def dispatch CharSequence compileExpression(ValueVariable e) {
 		switch e {
-			BehaviorVariableHolder:	'''[«e.behaviorVariable.name.escape»]'''
-			DataPortHolder:			'''[«e.dataPort.name.escape»]'''
-			DataSubcomponentHolder:	'''[«e.dataSubcomponent.name.escape»]'''
-			ParameterHolder:		'''[«e.parameter.name.escape»]'''
+			BehaviorVariableHolder:	'''v[«e.behaviorVariable.name.escape»]'''
+			DataPortHolder:			'''f[«e.dataPort.name.escape»]'''
+			DataSubcomponentHolder:	'''c[«e.dataSubcomponent.name.escape»]'''
+			ParameterHolder:		'''p[«e.parameter.name.escape»]'''
 			PortCountValue:			'''count(«e.port.name.escape»)'''	=> [e.check(e.port instanceof DataPort, "only data port supported")]
 			PortFreshValue:			'''fresh(«e.port.name.escape»)'''	=> [e.check(e.port instanceof DataPort, "only data port supported")]
 			default:				null => [e.check(false, "Unsupported expression reference: " + e.class.name)]
@@ -185,10 +204,10 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	}
 	private def dispatch CharSequence compileExpression(ValueConstant e) {
 		switch e {
-			BehaviorBooleanLiteral:		if (e.isValue()) "[true]" else "[false]"
-			BehaviorStringLiteral:		'''["«e.value»"]'''
-			BehaviorRealLiteral:		'''[«e.value»]'''
-			BehaviorIntegerLiteral:		'''[«e.value»]'''
+			BehaviorBooleanLiteral:		if (e.isValue()) "[[true]]" else "[[false]]"
+			BehaviorStringLiteral:		'''[["«e.value»"]]'''
+			BehaviorRealLiteral:		'''[[«e.value»]]'''
+			BehaviorIntegerLiteral:		'''[[«e.value»]]'''
 			PropertySetPropertyReference: e.compilePropertySetPropertyReference
 			BehaviorPropertyConstant:	e.compilePropertyConstant
 			default:					null => [e.check(false, "Unsupported expression constant: " + e.class.name)]
@@ -197,8 +216,10 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	
 	private def compilePropertySetPropertyReference(PropertySetPropertyReference c){
 		val value = c.properties.get(0).property.element
-		if(value instanceof Property)
-			'''[«value.getQualifiedName.escape»]'''
+		if(value instanceof Property){
+			'''[[«value.getQualifiedName.escape»]]'''
+		}
+
 		else
 			null => [c.check(false, "Unsupported property reference : " + c.class.name)]
 	}
@@ -206,8 +227,10 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	
 	private def compilePropertyConstant(BehaviorPropertyConstant c) {
 		val value = c.property.constantValue
-		if (value instanceof PropertyValue)
-			'''[«RtmAadlProperty::compilePropertyValue(value as PropertyValue)»]'''
+		if (value instanceof PropertyValue){
+			'''[[«RtmAadlProperty::compilePropertyValue(value as PropertyValue)»]]'''
+		}
+
 		else
 			null => [c.check(false, "Unsupported property constant: " + c.class.name)]
 	}

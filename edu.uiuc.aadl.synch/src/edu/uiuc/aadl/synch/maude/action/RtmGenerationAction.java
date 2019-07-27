@@ -124,7 +124,8 @@ public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeMode
 
 
 	private static void copyMaudeFiles(IPath loc) throws IOException, CoreException {
-		Enumeration<URL> urls = Activator.getDefault().getBundle().findEntries(RtmAadlSetting.SEMANTICS_PATH, "*", true);
+		Enumeration<URL> urls = Activator.getDefault().getBundle().findEntries(RtmAadlSetting.SEMANTICS_PATH, "*.maude",
+				true);
 		while (urls.hasMoreElements()) {
 			URL su = urls.nextElement();
 			IFile nfile = IOUtils.getFile(loc.append(su.getFile()));
@@ -135,8 +136,10 @@ public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeMode
 	}
 
 	@Override
-	protected void analyzeDeclarativeModel(IProgressMonitor monitor, AnalysisErrorReporterManager errManager, Element declarativeObject) {
+	protected void analyzeDeclarativeModel(IProgressMonitor monitor, AnalysisErrorReporterManager errManager,
+			Element declarativeObject) {
 		Dialog.showError(getActionName(), "Please choose an instance model");
+
 	}
 
 }

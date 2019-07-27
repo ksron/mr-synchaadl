@@ -1,0 +1,211 @@
+mod MODEL-INIT is
+  including DATA-COMPONENT .
+  including ENSEMBLE-COMPONENT .
+  including ASYNC-THREAD-COMPONENT .
+  including ASYNC-ENV-COMPONENT .
+  including ASYNC-DATA-PORT .
+  including ASYNC-ENV-PORT .
+  protecting DEFAULT-PROPERTIES .
+  protecting HYBRID-SYNCHAADL-PROPERTIES .
+  including BEHAVIOR-EXPRESSION-SEMANTICS .
+  protecting CHECKSAT .
+
+  var E : Exp .
+  var R : RealExp .
+  var B : BoolExp .
+  var TY : DataType .
+  var CR : ComponentRef .
+  var CI : ComponentId .
+  var PI : FeatureId .
+  var TS : Set{Time} .
+  vars PN PN' : FeatureRef .
+  var PNS : Set{FeatureRef} .
+  var PROPS : PropertyAssociation .
+  vars CONXS CONXS' : Set{Connection} .
+  vars PORTS PORTS' COMPS COMPS' CONF CONF' : Configuration .
+  var STS RTS : Set{InterTiming} .
+  var SIT : Set{InterTime} .
+  vars SL SU RL RU : Float .
+  var LT UT : Rat .
+  var ATTS : AttributeSet .
+
+  op initialize : Configuration ~> Configuration [format (m! o)] .
+  eq initialize(CONF) = init(CONF, empty, none) .
+
+  op init : Configuration Set{Connection} Configuration ~> Configuration [format (m! o)] .
+
+  --- for an ensemble, initialize its ports and subcomponents.
+  eq init(
+      < CR : C:Ensemble | features : PORTS, 
+                          connections : CONXS,
+                          subcomponents : COMPS, 
+                          ATTS > CONF, CONXS', CONF')
+   = init(CONF, CONXS',
+      < CR : C:Ensemble | features : init(CR,CONXS',CONXS,PORTS,none),  
+                          subcomponents : init(COMPS,CONXS,none), 
+                          ATTS > CONF') .
+
+  --- for a thread , initialize its ports and data subcomponents, and add an execute time.
+  eq init(
+      < CR : C:Thread | features : PORTS, 
+                      subcomponents : COMPS, 
+                      properties : PROPS,
+                      ATTS > CONF, CONXS', CONF')
+   = init(CONF, CONXS',
+      < CR : tr(C:Thread) | features : init(CR,CONXS',empty,PORTS,none), 
+                            subcomponents : init(COMPS,empty,none),  --- only data (no ports)
+                            period : period(PROPS), 
+                            perTimer : 0,
+                            msgTimer : infty,
+                            execTime : threadExecTime(PROPS),
+                            execTimer : infty, 
+                            properties : PROPS, ATTS > CONF')  .
+
+  --- for an environment, initialize its ports and data subcomponents, and add timer
+  eq init(
+      < CR : C:Env | features : PORTS, 
+                     subcomponents : COMPS, 
+                     properties : PROPS,
+                     sampling : STS,
+                     response : RTS, ATTS > CONF, CONXS', CONF')
+   = init(CONF, CONXS',
+       < CR : tr(C:Env) | features : init(CR,CONXS',empty,PORTS,none), 
+                          subcomponents : init(COMPS,empty,none),  --- only data (no ports)
+                          properties : PROPS,
+                          sampling : STS,
+                          response : RTS,
+                          samplingTimes : interTimes(STS),
+                          responseTimes : interTimes(RTS),
+                          period : period(PROPS), 
+                          perTimer : 0,
+                          msgTimer : infty,
+                          envTimer : infty, 
+                          envState : idle,
+                          ATTS > CONF')  .
+
+  --- all data components must be initialized using given initial values (params are not allowed)
+ ceq init(
+      < CR : C:Data | value : null(TY), 
+                      properties : PROPS, ATTS > CONF, CONXS', CONF')
+   = init(CONF, CONXS', 
+      < CR : C:Data | value : E # B, 
+                      properties : PROPS, ATTS > CONF')
+  if E # B := eval(p[DataModel::InitialValue], prop(PROPS)) /\ TY == type(E) .
+
+
+  eq init(none, CONXS, COMPS) = COMPS .
+
+  --- A period specified in properties
+  op period : PropertyAssociation ~> Rat [format (m! o)] .
+ ceq period(PROPS) = rval(R)
+  if R # B := eval(p[TimingProperties::Period], prop(PROPS)) 
+  /\ check-true(B) .
+
+  --- Assume the upperbound of the sampling time is less than the lowerbound the response time
+  op threadExecTime : PropertyAssociation ~> Rat [format (m! o)] .
+  eq threadExecTime((HybridAADL::SamplingTime => {{SL .. SU}}) ;
+                    (HybridAADL::ResponseTime => {{RL .. RU}}) ; PROPS) = rat(SU + RL) / 2 .
+  eq threadExecTime(PROPS) = 0 [owise] .
+
+  --- pick 5 time points between each interval
+  op interTimes : Set{InterTiming} ~> Set{InterTime} .
+  op interTimes : Rat Rat ~> Set{Time} .
+
+  eq interTimes(((CI : (LT,UT)), STS)) = (CI : interTimes(LT,UT)) ; interTimes(STS) .
+  eq interTimes(empty) = empty .
+
+  eq interTimes(LT, UT) = (LT + (UT - LT) * 1/8, 
+                           LT + (UT - LT) * 3/8, 
+                           LT + (UT - LT) * 5/8, 
+                           LT + (UT - LT) * 7/8) .
+
+---
+  op init : ComponentRef Set{Connection} Set{Connection} Configuration Configuration ~> Configuration [format (m! o)] .
+
+  --- all data input ports are initialized as bots
+  --- NOTE: PI should have exactly the DataInPort class.
+  eq init(CR, CONXS', CONXS, 
+      < PI : C:DataInPort | content : null(TY), 
+                            cache : null(TY), 
+                            ATTS > CONF, CONF')
+   = init(CR, CONXS', CONXS, CONF, 
+      < PI : tr(C:DataInPort) | content : bot(TY), 
+                                cache : bot(TY), 
+                                destination : targets(PI,CONXS,empty), --- if ensemble port
+                                ATTS > CONF') .
+
+  --- all env input ports are also initialize as bots 
+  --- NOTE: PI should have exactly the EnvInPort class.
+  eq init(CR, CONXS', CONXS,
+      < PI : C:EnvInPort | content : null(TY), ATTS > CONF, CONF')
+   = init(CR, CONXS', CONXS, CONF,
+      < PI : tr(C:EnvInPort) | content : bot(TY), 
+                               destination : empty, ATTS > CONF') .
+     
+  --- data/env output ports with given initial values are initialized as the values.
+ ceq init(CR, CONXS', CONXS,
+      < PI : C:OutPort | content : null(TY), 
+                         properties : PROPS, 
+                         ATTS > CONF, CONF')
+   = init(CR, CONXS', CONXS, CONF, 
+      < PI : tr(C:OutPort) | content : E # B, 
+                             properties : PROPS, 
+                             destination : targets(CR .. PI, CONXS', empty),
+                             ATTS > CONF') 
+  if E # B := eval(p[DataModel::InitialValue], prop(PROPS)) /\ TY == type(E) .
+
+  --- all other data/env output parts are initialized as bots
+ ceq init(CR, CONXS', CONXS,
+      < PI : C:OutPort | content : null(TY), 
+                         properties : PROPS, 
+                         ATTS > CONF, CONF')
+   = init(CR, CONXS', CONXS, CONF, 
+      < PI : tr(C:OutPort) | content : bot(TY), 
+                             properties : PROPS, 
+                             destination : targets(CR .. PI, CONXS', empty),
+                             ATTS > CONF') 
+  if not $hasMapping(PROPS, DataModel::InitialValue) .
+
+  eq init(CR, CONXS', CONXS, none, PORTS) = PORTS .
+
+--- class transformation
+  op tr : Cid ~> Cid [format (m! o)] .
+  eq tr(Thread)      = AsyncThread .
+  eq tr(Env)         = AsyncEnv .
+  eq tr(DataInPort)  = AsyncDataInPort .
+  eq tr(DataOutPort) = AsyncDataOutPort .
+  eq tr(EnvInPort)   = AsyncEnvInPort .
+  eq tr(EnvOutPort)  = AsyncEnvOutPort .
+
+--- obtain a set of destination ports
+  op targets : ComponentRef Set{Connection} Set{FeatureRef} ~> Set{FeatureRef} [format (m! o)] .
+  eq targets(PN, (PN --> PN') ; CONXS, PNS) = targets(PN, CONXS, (PN',PNS)) .
+  eq targets(PN, CONXS, PNS) = PNS [owise] .
+endm
+
+
+--- Similar to the symbolic version (just no constraints)
+mod MODEL-TRANSITION-SYSTEM is
+  including ENV-DYNAMICS .
+  including THREAD-DYNAMICS .
+  including ENSEMBLE-DYNAMICS .
+  including MODEL-INIT .
+  including CONC-BOOL-EXP .
+  including CONC-REAL-EXP .
+  including COLLAPSE-SINGLE-ENSEMBLE .
+
+  vars OBJ : Object .
+  var T : Time .
+  var NT : NzTime .
+  var TI : TimeInf .
+
+  sort GlobalSystem .
+  op {_|_|_} : Configuration Time TimeInf -> GlobalSystem [ctor] . 
+
+  crl [tick]: 
+      {OBJ | T | TI} => {timeEffect(OBJ,NT) | T + NT | TI}
+   if NT := mte(OBJ)
+   /\ T + NT <= TI .
+endm
+
+

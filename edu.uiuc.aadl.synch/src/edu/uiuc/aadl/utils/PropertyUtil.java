@@ -27,10 +27,12 @@ public class PropertyUtil {
 	/*
 	 * MR-Synch-AADL property set
 	 */
-	static public final String SYNCHAADL = "MR_SynchAADL";
+	static public final String SYNCHAADL = "Hybrid_SynchAADL";
 	static public final String SYNCHRONOUS = "Synchronous";
 	static public final String NONDETERMINISTIC = "Nondeterministic";
 	static public final String INPUT_ADAPTOR = "InputAdaptor";
+	static public final String SAMPLING_TIME = "Sampling_Time";
+	static public final String RESPONSE_TIME = "Response_Time";
 
 	/*
 	 * Hybrid-AADL property set
@@ -38,6 +40,12 @@ public class PropertyUtil {
 	static public final String HYBRIDAADL = "HybridEnvironment";
 	static public final String ENVIRONMENT = "isEnvironment";
 	static public final String ODE = "ODE";
+	static public final String CD = "ContinuousDynamics";
+
+	/*
+	 * Thermostat property set
+	 */
+	static public final String THERMOSTAT = "ThermostatSpec";
 
 	public static ListValue getDataInitialValue(final NamedElement ne) {
 
