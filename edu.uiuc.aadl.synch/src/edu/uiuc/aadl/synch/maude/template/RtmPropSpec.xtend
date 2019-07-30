@@ -23,7 +23,7 @@ class RtmPropSpec {
 		load «top.name».maude .
 		load «RtmAadlSetting::SEMANTICS_PATH»/«RtmAadlSetting::ANALYSIS_FILE» .
 		
-		(tomod «top.name.toUpperCase»-VERIFICATION-DEF is
+		fmod «top.name.toUpperCase»-VERIFICATION-DEF is
 			including «top.name.toUpperCase»-MODEL .
 			including AADL-SIMPLE-COUNTEREXAMPLE .
 			
@@ -41,7 +41,7 @@ class RtmPropSpec {
 			 = «f.value.compileFormula» .
 			
 			«ENDFOR»
-		endtom)
+		endm
 	'''
 	
 	static def compileReqCommand(ReqStatement req) {
@@ -58,6 +58,10 @@ class RtmPropSpec {
 	/**
 	 *  translate LTL formulas
 	 */
+	 
+	 static def compileRewCommand(int bound) '''
+	 	rew {initial} .
+	 '''
 	 
 	private static def dispatch CharSequence compileFormula(BinaryFormula f) 
 	'''(«f.left.compileFormula» «f.op» «f.right.compileFormula»)'''

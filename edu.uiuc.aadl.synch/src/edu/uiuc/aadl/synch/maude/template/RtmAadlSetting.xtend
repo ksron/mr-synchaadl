@@ -6,8 +6,8 @@ import org.osate.aadl2.instance.ComponentInstance
 class RtmAadlSetting {
 
 	public static val SEMANTICS_PATH = "rtmaude";
-	public static val SEMANTICS_FILE = "mr-sync-aadl-interpreter.maude";
-	public static val ANALYSIS_FILE  = "mr-sync-aadl-analysis.maude";
+	public static val SEMANTICS_FILE = "interpreter-symbolic.maude";
+	public static val ANALYSIS_FILE  = "mr-sync-aadl-analysis.maude"; // should be revised. 
 	
 	static def isSync(ComponentInstance o) {
 		switch o.category.value {
@@ -16,8 +16,6 @@ class RtmAadlSetting {
 			case ComponentCategory::THREAD_VALUE:			true
 			case ComponentCategory::DATA_VALUE:				true
 			case ComponentCategory::THREAD_GROUP_VALUE:		true
-			//case ComponentCategory::SUBPROGRAM_VALUE:			true
-			//case ComponentCategory::SUBPROGRAM_GROUP_VALUE:	true
 			default: false
 		}
 	}
@@ -45,6 +43,15 @@ class RtmAadlSetting {
 			case ComponentCategory::DATA_VALUE:			true
 			default: false
 		}
+	}
+	
+	static def isEnv(ComponentInstance o) {
+		for(var i = 0; i < o.ownedPropertyAssociations.size; i++){
+			if(o.ownedPropertyAssociations.get(i).getProperty().name.equals("isEnvironment") &&
+				o.ownedPropertyAssociations.get(i).getProperty().inherit)
+				return true;
+		}
+		return false;	
 	}
 	
 	static def compClass(ComponentInstance o) {

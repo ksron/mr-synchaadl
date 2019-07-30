@@ -11,6 +11,15 @@ import org.osate.aadl2.RealLiteral
 import org.osate.aadl2.StringLiteral
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager
 import org.osate.xtext.aadl2.properties.util.PropertyUtils
+import org.osate.aadl2.PropertyAssociation
+import org.osate.aadl2.ModalPropertyValue
+import org.osate.aadl2.ArrayRange
+import org.osate.aadl2.impl.RangeValueImpl
+import java.text.NumberFormat
+import org.osate.aadl2.impl.IntegerLiteralImpl
+import org.osate.aadl2.RangeValue
+import org.osate.aadl2.NumberValue
+import org.osate.aadl2.ListValue
 
 class RtmAadlProperty extends RtmAadlIdentifier {	
 
@@ -21,7 +30,14 @@ class RtmAadlProperty extends RtmAadlIdentifier {
 	def compilePropertyValue(Property pr, NamedElement ne) {
 		switch (pr.eContainer as NamedElement).name {
 			case PropertyUtil::SYNCHAADL:	pr.compileSynchAadlPropertyValue(ne)
+			case PropertyUtil::DATA_MODEL:	pr.compileDataModelPropertyValue(ne)
 			default:						pr.compileDefaultPropertyValue(ne)
+		}
+	}
+	
+	def compileDataModelPropertyValue(Property pr, NamedElement ne){
+		switch pr.name {
+			case PropertyUtil::INITIAL_VALUE: 			((PropertyUtils::getSimplePropertyValue(ne,pr) as ListValue).ownedListElements.get(0) as StringLiteral).value
 		}
 	}
 	
@@ -29,8 +45,29 @@ class RtmAadlProperty extends RtmAadlIdentifier {
 		//TODO: check fast/slow adaptor types for multirate connections..
 		switch pr.name {
 			case PropertyUtil::INPUT_ADAPTOR:	(PropertyUtils::getSimplePropertyValue(ne,pr) as StringLiteral).value
+			case PropertyUtil::SAMPLING_TIME:	compileRangePropertyValue(pr, ne)
+			case PropertyUtil::RESPONSE_TIME: 	compileRangePropertyValue(pr, ne)
 			default:							pr.compileDefaultPropertyValue(ne)
 		}
+	}
+	
+	def compileRangePropertyValue(Property pr, NamedElement ne) {
+		var range = ""
+
+		val minimum = (ne.getSimplePropertyValue(pr) as RangeValue).minimum
+		val maximum = (ne.getSimplePropertyValue(pr) as RangeValue).maximum
+		
+		if(minimum instanceof IntegerLiteral)
+			range += Float.valueOf((minimum as IntegerLiteral).value.toString) + " .. "
+		else
+			range += Float.valueOf((minimum as RealLiteral).value.toString) + " .. "
+			
+		if(maximum instanceof IntegerLiteral)
+			range += Float.valueOf((maximum as IntegerLiteral).value.toString)
+		else
+			range += Float.valueOf((maximum as RealLiteral).value.toString)
+
+		return range
 	}
 	
 	

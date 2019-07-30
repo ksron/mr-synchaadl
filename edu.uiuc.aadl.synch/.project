@@ -3,6 +3,10 @@
 	<name>edu.uiuc.aadl.synch</name>
 	<comment></comment>
 	<projects>
+		<project>es.upv.dsic.issi.moment.mdt.help</project>
+		<project>es.upv.dsic.issi.moment.mdt.maudedaemon</project>
+		<project>es.upv.dsic.issi.moment.mdt.maudedaemon.tests</project>
+		<project>es.upv.dsic.issi.moment.mdt.maudesimpleGUI</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -14,7 +14,6 @@ import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instance.SystemOperationMode;
-import org.osate.aadl2.modelsupport.AadlConstants;
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.ui.actions.AbstractInstanceOrDeclarativeModelReadOnlyAction;
@@ -102,8 +101,7 @@ public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeMode
 			HashMultimap<String, String> opTable = HashMultimap.create();
 			RtmAadlModel compiler = new RtmAadlModel(monitor, errManager, opTable);
 
-			final StringBuffer code = new StringBuffer("load " + RtmAadlSetting.SEMANTICS_PATH + "/" + RtmAadlSetting.SEMANTICS_FILE);
-			code.append(AadlConstants.newlineChar);
+			final StringBuffer code = new StringBuffer();
 			code.append(compiler.doGenerate(root));
 
 			monitor.setTaskName("Saving the Real-Time Maude model file...");
@@ -124,7 +122,8 @@ public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeMode
 
 
 	private static void copyMaudeFiles(IPath loc) throws IOException, CoreException {
-		Enumeration<URL> urls = Activator.getDefault().getBundle().findEntries(RtmAadlSetting.SEMANTICS_PATH, "*", true);
+		Enumeration<URL> urls = Activator.getDefault().getBundle().findEntries(RtmAadlSetting.SEMANTICS_PATH, "*.maude",
+				true);
 		while (urls.hasMoreElements()) {
 			URL su = urls.nextElement();
 			IFile nfile = IOUtils.getFile(loc.append(su.getFile()));
@@ -135,8 +134,10 @@ public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeMode
 	}
 
 	@Override
-	protected void analyzeDeclarativeModel(IProgressMonitor monitor, AnalysisErrorReporterManager errManager, Element declarativeObject) {
+	protected void analyzeDeclarativeModel(IProgressMonitor monitor, AnalysisErrorReporterManager errManager,
+			Element declarativeObject) {
 		Dialog.showError(getActionName(), "Please choose an instance model");
+
 	}
 
 }

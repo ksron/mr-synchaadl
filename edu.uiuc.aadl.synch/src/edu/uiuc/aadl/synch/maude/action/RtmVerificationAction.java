@@ -72,10 +72,10 @@ public class RtmVerificationAction implements IActionDelegate {
 					maude.sendToMaude("load " + file.getLocation().toOSString() + "\n");
 				}
 
-				for (ReqStatement rq : targets)
-				{
+				for (ReqStatement rq : targets) {
 					maude.sendToMaude(RtmPropSpec.compileReqCommand(rq).toString());
 				}
+
 			} else {
 				Dialog.showError(action.getText(), "No Property Specification file!");
 			}
