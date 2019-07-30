@@ -191,13 +191,14 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		return  componentId + "(" +varId + ")" + " = " + expression.compileExpressionInitial(componentId).
 																		compileExpressionPropertyConstant(ne).
 																			compileExpressionVarId(varId).
-																				compileExpressionMinusValue
+																				compileExpressionConstant.
+																					compileExpressionMinusValue
 	}
 	
 	private def compileExpressionPropertyConstant(String expression, NamedElement ne) {
 		var result = ""
 		for(String token : expression.split(" ")){
-			if(token.contains("::")){
+			if(token.trimBrackets.contains("::")){
 				result += "[["+ GetProperties::lookupPropertyConstant(ne, token.trimBrackets.split("::").get(0), token.trimBrackets.split("::").get(1)).constantValue + "]] "
 			}
 			else{
@@ -207,11 +208,25 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		result
 	}
 	
+	private def compileExpressionConstant(String expression){
+		var result = ""
+		for(String token : expression.split(" ")){
+			println(token.trimBrackets)
+			if(token.trimBrackets.matches("\\d+(\\.\\d+)?")){
+				result += token.replaceAll(token.trimBrackets, "[["+token.trimBrackets+"]] ")
+			}
+			else {
+				result += token + " "
+			}
+		}
+		result 
+	}
+	
 	private def compileExpressionVarId(String expression, String varId) {
 		var result = ""
 		for(String token : expression.split(" ")){
-			if(token.equals(varId)){
-				result += "v{" + token + "} "
+			if(token.trimBrackets.equals(varId)){
+				result += token.replaceAll(token.trimBrackets, "v{" + token.trimBrackets +"} ")
 			} else {
 				result += token + " "
 			}
