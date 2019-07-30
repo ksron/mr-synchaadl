@@ -171,26 +171,27 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		p.property.qualifiedName().contains(PropertyUtil::CD)
 	}
 	
-	private def compileContinuousDynamics(PropertyAssociation p, NamedElement ne){
+	private def compileContinuousDynamics(PropertyAssociation p,ComponentInstance ne){
 		var value = pc.compilePropertyValue(p.property, ne).toString
-		val loc = (ne as ComponentInstance).modeInstances.compileCurrentMode
+		val loc = ne.modeInstances.compileCurrentMode
 		value = value.substring(1, value.length-1)
 		
 		value.split(";").map[if (it.trim.length > 0) "(("+loc+")"+"["+it.trim.compileCDParsing(ne)+"])"].filterNull.join(" ;\n", "empty")
 	}
 	
-	private def compileCDParsing(String value, NamedElement ne){	
+	private def compileCDParsing(String value, ComponentInstance ne){	
 		val componentId = value.split(" ").get(0).substring(0, value.indexOf('('))
 		val varId = value.split(" ").get(0).substring(value.indexOf('(')+1, value.indexOf(')'))
 		varId.id("VarId")
+		componentId.id("VarId")
 		
 		
 		val expression = value.substring(value.indexOf('=') + 1).trim
-		val initial = "0.5"
 		
-		return  componentId + "(" +varId + ")" + " = " + expression.compileExpressionInitial(componentId, initial).
+		return  componentId + "(" +varId + ")" + " = " + expression.compileExpressionInitial(componentId).
 																		compileExpressionPropertyConstant(ne).
-																			compileExpressionVarId(varId)
+																			compileExpressionVarId(varId).
+																				compileExpressionMinusValue
 	}
 	
 	private def compileExpressionPropertyConstant(String expression, NamedElement ne) {
@@ -218,15 +219,15 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		result
 	}
 	
-	private def compileExpressionInitial(String expression, String componentId ,String initialValue) {
-		expression.replaceAll(componentId+"\\(0\\)", "[["+initialValue+"]]")
+	private def compileExpressionInitial(String expression, String componentId) {
+		expression.replaceAll(componentId+"\\(0\\)", "c{"+componentId+"}")
 	}
 	
-	private def compileMinusValue(String expression){
+	private def compileExpressionMinusValue(String expression){
 		var result = ""
 		for(String token : expression.split(" ")){
-			if(token.contains("-")){
-				result += token.replaceFirst("-", "minus(") + ")"
+			if(token.contains("-") && token.length > 1){
+				result += token.replaceAll("-", "minus(") + ")"
 			} else {
 				result += token + " "
 			}
