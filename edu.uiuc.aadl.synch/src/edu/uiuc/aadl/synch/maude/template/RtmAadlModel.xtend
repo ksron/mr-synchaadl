@@ -226,7 +226,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		var result = ""
 		for(String token : expression.split(" ")){
 			if(token.trimBrackets.equals(varId)){
-				result += token.replaceAll(token.trimBrackets, "v{" + token.trimBrackets +"} ")
+				result += token.replaceAll(token.trimBrackets, "v[" + token.trimBrackets +"] ")
 			} else {
 				result += token + " "
 			}
@@ -235,7 +235,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	}
 	
 	private def compileExpressionInitial(String expression, String componentId) {
-		expression.replaceAll(componentId+"\\(0\\)", "c{"+componentId+"}")
+		expression.replaceAll(componentId+"\\(0\\)", "c["+componentId+"]")
 	}
 	
 	private def compileExpressionMinusValue(String expression){
