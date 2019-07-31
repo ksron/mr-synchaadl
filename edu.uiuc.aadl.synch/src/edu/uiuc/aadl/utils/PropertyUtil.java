@@ -33,6 +33,7 @@ public class PropertyUtil {
 	static public final String INPUT_ADAPTOR = "InputAdaptor";
 	static public final String SAMPLING_TIME = "Sampling_Time";
 	static public final String RESPONSE_TIME = "Response_Time";
+	static public final String MAX_CLOCK_DEV = "Max_Clock_Deviation";
 
 	/*
 	 * Hybrid-AADL property set

@@ -42,30 +42,28 @@ class RtmAadlProperty extends RtmAadlIdentifier {
 	}
 	
 	def compileSynchAadlPropertyValue(Property pr, NamedElement ne) {
-		//TODO: check fast/slow adaptor types for multirate connections..
 		switch pr.name {
 			case PropertyUtil::INPUT_ADAPTOR:	(PropertyUtils::getSimplePropertyValue(ne,pr) as StringLiteral).value
+			case PropertyUtil::MAX_CLOCK_DEV:	compileTimePropertyValue(pr, ne)
 			case PropertyUtil::SAMPLING_TIME:	compileRangePropertyValue(pr, ne)
 			case PropertyUtil::RESPONSE_TIME: 	compileRangePropertyValue(pr, ne)
 			default:							pr.compileDefaultPropertyValue(ne)
 		}
 	}
 	
+	def compileTimePropertyValue(Property pr, NamedElement ne) {		
+		val t = (ne.getSimplePropertyValue(pr) as NumberValue).getScaledValue("ms")		
+		return Float.valueOf(t.toString)
+	}
+	
 	def compileRangePropertyValue(Property pr, NamedElement ne) {
 		var range = ""
 
-		val minimum = (ne.getSimplePropertyValue(pr) as RangeValue).minimum
-		val maximum = (ne.getSimplePropertyValue(pr) as RangeValue).maximum
-		
-		if(minimum instanceof IntegerLiteral)
-			range += Float.valueOf((minimum as IntegerLiteral).value.toString) + " .. "
-		else
-			range += Float.valueOf((minimum as RealLiteral).value.toString) + " .. "
-			
-		if(maximum instanceof IntegerLiteral)
-			range += Float.valueOf((maximum as IntegerLiteral).value.toString)
-		else
-			range += Float.valueOf((maximum as RealLiteral).value.toString)
+		val minimum = (((ne.getSimplePropertyValue(pr) as RangeValue).minimum) as NumberValue).getScaledValue("ms")
+		val maximum = (((ne.getSimplePropertyValue(pr) as RangeValue).maximum) as NumberValue).getScaledValue("ms")
+				
+		range += Float.valueOf(minimum.toString) + " .. "			
+		range += Float.valueOf(maximum.toString)
 
 		return range
 	}

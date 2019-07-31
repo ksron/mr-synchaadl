@@ -162,7 +162,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def compileVariables(BehaviorVariable bv){
 		bv.id("VarId")
-		// '''( «bv.name» : «bv.dataClassifier.name» )'''
 		'''( «bv.name» : Real )'''
 		
 	}
@@ -211,7 +210,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	private def compileExpressionConstant(String expression){
 		var result = ""
 		for(String token : expression.split(" ")){
-			println(token.trimBrackets)
 			if(token.trimBrackets.matches("\\d+(\\.\\d+)?")){
 				result += token.replaceAll(token.trimBrackets, "[["+token.trimBrackets+"]] ")
 			}
