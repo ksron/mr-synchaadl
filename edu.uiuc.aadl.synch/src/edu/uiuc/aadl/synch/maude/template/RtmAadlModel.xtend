@@ -136,10 +136,10 @@ class RtmAadlModel extends RtmAadlIdentifier {
 					«o.ownedPropertyAssociations.map[if(isContinuousDynamics) compileContinuousDynamics(o)].filterNull.join(' ;\n', "empty")»
 					),
 				sampling : (
-					«o.compileTargetInstanceList.map[compileSamplingTime].filterNull.join(" ;\n", "empty")»
+					«o.compileTargetInstanceList.map[compileSamplingTime].filterNull.join(" ,\n", "empty")»
 					),
 				response : (
-					«o.compileTargetInstanceList.map[compileResponseTime].filterNull.join(" ;\n", "empty")»
+					«o.compileTargetInstanceList.map[compileResponseTime].filterNull.join(" ,\n", "empty")»
 					),
 				varGen : (
 					< "«o.compileVarGenName»" >
@@ -187,11 +187,11 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		
 		val expression = value.substring(value.indexOf('=') + 1).trim
 		
-		return  componentId + "(" +varId + ")" + " = " + expression.compileExpressionInitial(componentId).
+		return  "(" + componentId + "(" +varId + ")" + " = " + expression.compileExpressionInitial(componentId).
 																		compileExpressionPropertyConstant(ne).
 																			compileExpressionVarId(varId).
 																				compileExpressionConstant.
-																					compileExpressionMinusValue
+																					compileExpressionMinusValue + ")"
 	}
 	
 	private def compileExpressionPropertyConstant(String expression, NamedElement ne) {
