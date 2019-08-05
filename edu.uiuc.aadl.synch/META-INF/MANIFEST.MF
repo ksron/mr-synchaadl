@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: MR-SynchAADL
-Bundle-SymbolicName: edu.uiuc.aadl.synch; singleton:=true
+Bundle-SymbolicName: edu.uiuc.aadl.synch;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: edu.uiuc.aadl.synch.Activator
 Require-Bundle: org.eclipse.ui,
@@ -21,3 +21,6 @@ Require-Bundle: org.eclipse.ui,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: UIUC
+Export-Package: edu.uiuc.aadl.synch.checker.action,
+ edu.uiuc.aadl.synch.propspec,
+ edu.uiuc.aadl.synch.views

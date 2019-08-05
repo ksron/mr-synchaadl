@@ -42,6 +42,7 @@ import org.osate.ba.aadlba.BehaviorVariable
 import java.util.regex.Pattern
 import org.osate.aadl2.PortCategory
 import org.osate.aadl2.ListValue
+import org.osate.aadl2.ModalPropertyValue
 
 class RtmAadlModel extends RtmAadlIdentifier {
 
@@ -133,7 +134,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 					«o.modeTransitionInstances.map[compileJumps].filterNull.join(' ;\n', 'none')»
 					),
 				flows : (
-					«o.ownedPropertyAssociations.map[if(isContinuousDynamics) compileContinuousDynamics(o)].filterNull.join(' ;\n', "empty")»
+					«o.isAndGetContinuousDynamics.map[compileContinuousDynamics(o)].filterNull.join(" ;\n", "empty")»
 					),
 				sampling : (
 					«o.compileTargetInstanceList.map[compileSamplingTime].filterNull.join(" ,\n", "empty")»
@@ -166,16 +167,19 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		
 	}
 	
-	private def isContinuousDynamics(PropertyAssociation p){
-		p.property.qualifiedName().contains(PropertyUtil::CD)
+	private def isAndGetContinuousDynamics(ComponentInstance o){
+		for(PropertyAssociation pa : o.ownedPropertyAssociations){
+			if(pa.property.qualifiedName().contains(PropertyUtil::CD)){
+				return pa.ownedValues
+			}
+		}
 	}
 	
-	private def compileContinuousDynamics(PropertyAssociation p,ComponentInstance ne){
-		var value = pc.compilePropertyValue(p.property, ne).toString
-		val loc = ne.modeInstances.compileCurrentMode
-		value = value.substring(1, value.length-1)
+	private def compileContinuousDynamics(ModalPropertyValue mpv, ComponentInstance o){
+		var mode = mpv.inModes.get(0).toString.split("\\.").get(1)
+		val expression = (mpv.ownedValue as StringLiteral).value
 		
-		value.split(";").map[if (it.trim.length > 0) "(("+loc+")"+"["+it.trim.compileCDParsing(ne)+"])"].filterNull.join(" ;\n", "empty")
+		return "[" + mode + "]" + expression.split(";").map[if(it.trim.length>1) it.trim.compileCDParsing(o)]
 	}
 	
 	private def compileCDParsing(String value, ComponentInstance ne){	
