@@ -43,6 +43,8 @@ import java.util.regex.Pattern
 import org.osate.aadl2.PortCategory
 import org.osate.aadl2.ListValue
 import org.osate.aadl2.ModalPropertyValue
+import org.eclipse.emf.common.util.ECollections
+import java.util.Comparator
 
 class RtmAadlModel extends RtmAadlIdentifier {
 
@@ -150,7 +152,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 					«o.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")»),
 				«IF isEnv»
 				connections : (
-					«conxTable.get(o).map[compileEnvConnection].filterNull.join(' ;\n', "empty")») 
+					«conxTable.get(o).map[compileEnvConnection(o)].filterNull.join(' ;\n', "empty")») 
 				«ELSE»
 				connections : (
 					«conxTable.get(o).map[compileDataConnection].filterNull.join(' ;\n', "empty")»)
@@ -176,10 +178,15 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	}
 	
 	private def compileContinuousDynamics(ModalPropertyValue mpv, ComponentInstance o){
-		var mode = mpv.inModes.get(0).toString.split("\\.").get(1)
+		var mode = ""
+		for(String modes : mpv.inModes.get(0).toString.split("#")){
+			if(modes.contains(o.name)){
+				mode = modes.split("\\.").last
+			}
+		}
 		val expression = (mpv.ownedValue as StringLiteral).value
 		
-		return "[" + mode + "]" + expression.split(";").map[if(it.trim.length>1) it.trim.compileCDParsing(o)]
+		return "([" + mode + "]" + expression.split(";").map[if(it.trim.length>1) it.trim.compileCDParsing(o)] + ")"
 	}
 	
 	private def compileCDParsing(String value, ComponentInstance ne){	
@@ -194,6 +201,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		return  "(" + componentId + "(" +varId + ")" + " = " + expression.compileExpressionInitial(componentId).
 																		compileExpressionPropertyConstant(ne).
 																			compileExpressionVarId(varId).
+																			compileExpressionSubComponent(ne).
 																				compileExpressionConstant.
 																					compileExpressionMinusValue + ")"
 	}
@@ -236,8 +244,40 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		result
 	}
 	
+	private def compileExpressionSubComponent(String expression, ComponentInstance o){
+		val ciNames = new ArrayList<String>();
+		var result = ""
+		var temp = true
+		ECollections.sort(o.componentInstances, new Comparator<ComponentInstance>(){
+			override compare(ComponentInstance o1, ComponentInstance o2) {
+				if(o1.name.toString.length < o2.name.toString.length){
+					return 1;
+				}
+				return -1;
+			}
+		})
+		
+		for(ComponentInstance ci : o.componentInstances){
+			ciNames.add(ci.name)
+		}
+		
+		for(String token : expression.split(" ")){
+			temp = true
+			for(String name : ciNames){
+				if(token.contains(name) && temp){
+					result += token.replaceAll(name, "c["+name+"] ")
+					temp = false
+				}
+			}
+			if(temp){
+				result += token + " "
+			}
+		}
+		result
+	}
+	
 	private def compileExpressionInitial(String expression, String componentId) {
-		expression.replaceAll(componentId+"\\(0\\)", "c["+componentId+"]")
+		expression.replaceAll("\\(0\\)", "")
 	}
 	
 	private def compileExpressionMinusValue(String expression){
@@ -284,7 +324,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		val targetInstances = new ArrayList<ComponentInstance>()
 		for(ComponentInstance ci : conxTable.keySet){
 			for(String target : targets){
-				if(ci.id("ComponentId").equals(target)){
+				if(ci.id("ComponentId").equals(target) && !targetInstances.contains(ci)){
 					targetInstances.add(ci)
 				}
 			}
@@ -359,13 +399,13 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		'''(«c.source.compileConnectionEndName(o)» --> «c.destination.compileConnectionEndName(o)»)'''
 	}
 	
-	private def CharSequence compileEnvConnection(ConnectionReference o) {
+	private def CharSequence compileEnvConnection(ConnectionReference o, ComponentInstance ci) {
 		// TODO: check input adaptors for multirate connecLtions\
 		
 		val c = o.connection => [
 			o.check(it instanceof PortConnection || it instanceof ParameterConnection, "Unsupported connection type")
 		]
-		'''(«c.source.compileConnectionEndName(o)» ==> «c.destination.compileConnectionEndName(o)»)'''
+		'''(«c.source.compileConnectionEndName(o)»«IF ci.isSubcomponentData(c.source.connectionEnd.name.escape)» ==> «ELSE» =>> «ENDIF»«c.destination.compileConnectionEndName(o)»)'''
 	}
 
 	private def compileConnectionEndName(ConnectedElement end, ConnectionReference o) {

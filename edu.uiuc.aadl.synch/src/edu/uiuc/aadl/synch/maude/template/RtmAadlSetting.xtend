@@ -45,6 +45,15 @@ class RtmAadlSetting {
 		}
 	}
 	
+	static def isSubcomponentData(ComponentInstance o, String name){
+		for(ComponentInstance ci : o.componentInstances){
+			if(ci.name.toString.equals(name)){
+				return true
+			}
+		}
+		return false
+	}
+	
 	static def isEnv(ComponentInstance o) {
 		for(var i = 0; i < o.ownedPropertyAssociations.size; i++){
 			if(o.ownedPropertyAssociations.get(i).getProperty().name.equals("isEnvironment") &&
