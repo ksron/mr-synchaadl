@@ -380,7 +380,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		val c = o.category
 		switch c {
 			case DATA_PORT : return "null(Real)"
-			case EVENT_DATA_PORT : return "null(Unit)"
+			case EVENT_DATA_PORT : return "null(Real)"
 			case EVENT_PORT : return "null(Unit)"
 			default : return "null(Real)"
 		}
