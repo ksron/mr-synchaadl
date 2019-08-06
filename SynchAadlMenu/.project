@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>edu.uiuc.aadl.synch</name>
+	<name>SynchAadlMenu</name>
 	<comment></comment>
 	<projects>
-		<project>edu.uiuc.aadl.xtext.propspec</project>
-		<project>edu.uiuc.aadl.xtext.propspec.ui</project>
-		<project>es.upv.dsic.issi.moment.mdt.help</project>
-		<project>es.upv.dsic.issi.moment.mdt.maudedaemon</project>
-		<project>es.upv.dsic.issi.moment.mdt.maudedaemon.tests</project>
-		<project>es.upv.dsic.issi.moment.mdt.maudesimpleGUI</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -26,15 +20,9 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.xtext.ui.shared.xtextBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 	</natures>
 </projectDescription>
