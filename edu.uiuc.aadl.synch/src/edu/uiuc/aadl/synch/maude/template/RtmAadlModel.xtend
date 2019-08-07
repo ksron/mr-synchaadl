@@ -186,7 +186,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		}
 		val expression = (mpv.ownedValue as StringLiteral).value
 		
-		return "([" + mode + "]" + expression.split(";").map[if(it.trim.length>1) it.trim.compileCDParsing(o)] + ")"
+		return "((" + mode + ")" + "[" + expression.split(";").map[if(it.trim.length>1) it.trim.compileCDParsing(o)].filterNull.join(" ; ", "empty") + "])"
 	}
 	
 	private def compileCDParsing(String value, ComponentInstance ne){	
@@ -203,11 +203,11 @@ class RtmAadlModel extends RtmAadlIdentifier {
 																			compileExpressionVarId(varId).
 																			compileExpressionSubComponent(ne).
 																				compileExpressionConstant.
-																					compileExpressionMinusValue + ")"
+																					compileExpressionMinusValue + ") "
 	}
 	
 	private def compileExpressionPropertyConstant(String expression, NamedElement ne) {
-		var result = ""
+		var result = " "
 		for(String token : expression.split(" ")){
 			if(token.trimBrackets.contains("::")){
 				result += "[["+ GetProperties::lookupPropertyConstant(ne, token.trimBrackets.split("::").get(0), token.trimBrackets.split("::").get(1)).constantValue + "]] "
@@ -220,7 +220,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	}
 	
 	private def compileExpressionConstant(String expression){
-		var result = ""
+		var result = " "
 		for(String token : expression.split(" ")){
 			if(token.trimBrackets.matches("\\d+(\\.\\d+)?")){
 				result += token.replaceAll(token.trimBrackets, "[["+token.trimBrackets+"]] ")
@@ -233,7 +233,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	}
 	
 	private def compileExpressionVarId(String expression, String varId) {
-		var result = ""
+		var result = " "
 		for(String token : expression.split(" ")){
 			if(token.trimBrackets.equals(varId)){
 				result += token.replaceAll(token.trimBrackets, "v[" + token.trimBrackets +"] ")
@@ -284,7 +284,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		var result = ""
 		for(String token : expression.split(" ")){
 			if(token.contains("-") && token.length > 1){
-				result += token.replaceAll("-", "minus(") + ")"
+				result += token.replaceAll("-", "minus(") + ") "
 			} else {
 				result += token + " "
 			}
@@ -348,12 +348,12 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		switch f {
 			Port: '''
 			< «f.id("FeatureId")» : Env«f.direction.compileDirection(o)»Port | 
-				content : «IF(f.direction.incoming)»«o.compileInitialValue("null(Unit)")»«ELSE»«o.compileInitialValue("null(Real)")»«ENDIF»,
+				content : «f.category.compileOutFeature(o)»,
 				«IF f.direction.outgoing»
 					target : «compileTarget(f.id("FeatureId"), ci.id("ComponentId"))»,
 				«ENDIF»
 				properties : «o.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")»,
-				envCache : «IF(f.direction.incoming)»«o.compileInitialValue("null(Unit)")»«ELSE»«o.compileInitialValue("null(Real)")»«ENDIF» >'''
+				envCache : «f.category.compileOutFeature(o)» >'''
 			default:
 				null => [o.check(false, "Unsupported feature: " + o.category.getName() + " " + o.name)]
 		}
@@ -365,7 +365,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		switch f {
 			Port: '''
 			< «f.id("FeatureId")» : Data«f.direction.compileDirection(o)»Port | 
-				content : «IF (f.direction.incoming)»null(Real)«ELSE»«f.category.compileOutFeature(o)»«ENDIF» ,
+				content : «f.category.compileOutFeature(o)» ,
 				«IF f.direction.incoming»
 					cache : null(Real),
 				«ENDIF»
