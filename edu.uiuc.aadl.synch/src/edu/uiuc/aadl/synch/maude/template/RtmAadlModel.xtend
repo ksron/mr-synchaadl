@@ -84,23 +84,39 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	}
 	
 	// After test should be removed
-	private def getNotDuplicate(SetMultimap<ComponentInstance, ConnectionReference> smm, ConnectionReference cr, ComponentInstance ci){
-		if(smm.get(ci).length==0){
-			return smm.put(ci, cr)
-		}
+	private def putNotDuplicate(SetMultimap<ComponentInstance, ConnectionReference> smm, ComponentInstance ci, ConnectionReference cr){
+		var check1 = true
+		var check2 = true
+		
 		for(ConnectionReference param : smm.get(ci)){
-			if(param.connection.source.context != null && 
-				cr.connection.source.context != null &&
-				param.connection.source.context.name.equals(cr.connection.source.context)){
-					if(!param.connection.source.connectionEnd.name.equals(cr.connection.source.connectionEnd.name)){
-						return smm.put(ci, cr)
-					}
+			if(param.connection.source.context != null && cr.connection.source.context != null && param.connection.source.context.name.equals(cr.connection.source.context.name)){
+				if(param.connection.source.connectionEnd.name.equals(cr.connection.source.connectionEnd.name)){
+					check1 = false
 				}
-			else{
-				return smm.put(ci, cr)
+			}
+			if(param.connection.source.context == null && cr.connection.source.context == null){
+				if(param.connection.source.connectionEnd.name.equals(cr.connection.source.connectionEnd.name)){
+					check1 = false
+				}
 			}
 		}
-		return null
+		
+		for(ConnectionReference param : smm.get(ci)){
+			if(param.connection.destination.context != null && cr.connection.destination.context != null && param.connection.destination.context.name.equals(cr.connection.destination.context.name)){
+				if(param.connection.destination.connectionEnd.name.equals(cr.connection.destination.connectionEnd.name)){
+					check2 = false
+				}
+			}
+			if(param.connection.destination.context == null && cr.connection.destination.context == null){
+				if(param.connection.destination.connectionEnd.name.equals(cr.connection.destination.connectionEnd.name)){
+					check2 = false
+				}
+			}
+		}
+		
+		if(check1 || check2){
+			smm.put(ci, cr)
+		}
 	}
 	
 	
@@ -117,8 +133,9 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			val behAnx = if(o.behavioral && ! (anxSub.empty)) anxSub.get(0).parsedAnnexSubclause as BehaviorAnnex
 			val isEnv = o.isEnv
 			// conxTable.put(context, it) 
-			o.connectionInstances.forEach[connectionReferences.forEach[conxTable.put(context, it)]]		
-			
+			o.connectionInstances.forEach[connectionReferences.forEach[conxTable.putNotDuplicate(context, it)]]	
+
+
 			'''
 			< «o.id("ComponentId")» : «IF isEnv»Env«ELSE»«o.compClass»«ENDIF» |
 				«IF isEnv»
@@ -344,6 +361,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			}
 		}
 		val targetInstances = new ArrayList<ComponentInstance>()
+		//println(targets)
 		for(ComponentInstance ci : conxTable.keySet){
 			for(String target : targets){
 				if(ci.id("ComponentId").equals(target) && targetInstanceContains(targetInstances, ci.name)){
@@ -351,6 +369,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				}
 			}
 		}
+		//println(targetInstances)
 		return targetInstances
 	}
 	
@@ -431,7 +450,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def CharSequence compileEnvConnection(ConnectionReference o, ComponentInstance ci) {
 		// TODO: check input adaptors for multirate connecLtions\
-		println(ci.name)
 		val c = o.connection => [
 			o.check(it instanceof PortConnection || it instanceof ParameterConnection, "Unsupported connection type")
 		]
