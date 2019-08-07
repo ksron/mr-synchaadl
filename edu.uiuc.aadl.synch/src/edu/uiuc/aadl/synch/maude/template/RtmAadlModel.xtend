@@ -261,7 +261,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	private def compileExpressionConstant(String expression){
 		var result = " "
 		for(String token : expression.split(" ")){
-			if(token.trimBrackets.matches("\\d+(\\.\\d+)?")){
+			if(token.trimBrackets.matches("(\\d+)(\\.\\d+)?")){
 				result += token.replaceAll(token.trimBrackets, "[["+token.trimBrackets+"]] ")
 			}
 			else {
@@ -277,10 +277,11 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			if(token.trimBrackets.equals(varId)){
 				result += token.replaceAll(token.trimBrackets, "v[" + token.trimBrackets +"] ")
 			} else {
-				result += token + " "
+				result += " "+token + " "
 			}
 		}
 		result
+		
 	}
 	
 	private def compileExpressionSubComponent(String expression, ComponentInstance o){
