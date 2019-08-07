@@ -51,7 +51,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	private val RtmAadlBehaviorLanguage bc;
 	private val RtmAadlProperty pc;
 	private val IProgressMonitor monitor;
-	private val HashMultimap<ComponentInstance, ConnectionReference> conxTable = HashMultimap::create() ;
+	private val SetMultimap<ComponentInstance, ConnectionReference> conxTable = HashMultimap::create() ;
 
 
 	new(IProgressMonitor pm, AnalysisErrorReporterManager errMgr, SetMultimap<String, String> opTable) {
@@ -82,6 +82,28 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			endm
 		'''
 	}
+	
+	// After test should be removed
+	private def getNotDuplicate(SetMultimap<ComponentInstance, ConnectionReference> smm, ConnectionReference cr, ComponentInstance ci){
+		if(smm.get(ci).length==0){
+			return smm.put(ci, cr)
+		}
+		for(ConnectionReference param : smm.get(ci)){
+			if(param.connection.source.context != null && 
+				cr.connection.source.context != null &&
+				param.connection.source.context.name.equals(cr.connection.source.context)){
+					if(!param.connection.source.connectionEnd.name.equals(cr.connection.source.connectionEnd.name)){
+						return smm.put(ci, cr)
+					}
+				}
+			else{
+				return smm.put(ci, cr)
+			}
+		}
+		return null
+	}
+	
+	
 
 	private def CharSequence compileComponent(ComponentInstance o) {
 		if (monitor.isCanceled()) // when canceled
@@ -94,7 +116,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 
 			val behAnx = if(o.behavioral && ! (anxSub.empty)) anxSub.get(0).parsedAnnexSubclause as BehaviorAnnex
 			val isEnv = o.isEnv
-			
+			// conxTable.put(context, it) 
 			o.connectionInstances.forEach[connectionReferences.forEach[conxTable.put(context, it)]]		
 			
 			'''
@@ -324,12 +346,20 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		val targetInstances = new ArrayList<ComponentInstance>()
 		for(ComponentInstance ci : conxTable.keySet){
 			for(String target : targets){
-				if(ci.id("ComponentId").equals(target) && !targetInstances.contains(ci)){
+				if(ci.id("ComponentId").equals(target) && targetInstanceContains(targetInstances, ci.name)){
 					targetInstances.add(ci)
 				}
 			}
 		}
 		return targetInstances
+	}
+	
+	private def targetInstanceContains(ArrayList<ComponentInstance> tis, String name){
+		for(ComponentInstance ci : tis){
+			if(ci.name.toString.equals(name))
+				return false
+		}
+		return true
 	}
 	
 	private def compileTarget(String featureId, String componentId){
@@ -401,12 +431,15 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def CharSequence compileEnvConnection(ConnectionReference o, ComponentInstance ci) {
 		// TODO: check input adaptors for multirate connecLtions\
-		
+		println(ci.name)
 		val c = o.connection => [
 			o.check(it instanceof PortConnection || it instanceof ParameterConnection, "Unsupported connection type")
 		]
+		
 		'''(«c.source.compileConnectionEndName(o)»«IF ci.isSubcomponentData(c.source.connectionEnd.name.escape)» ==> «ELSE» =>> «ENDIF»«c.destination.compileConnectionEndName(o)»)'''
 	}
+	
+	
 
 	private def compileConnectionEndName(ConnectedElement end, ConnectionReference o) {
 		switch end {
@@ -419,7 +452,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	private def compileSamplingTime(ComponentInstance o) {
 		var value = "(" + o.id("ComponentId") + " : ("
 		for(PropertyAssociation p : o.ownedPropertyAssociations){
-			if(p.property.name.equals(PropertyUtil::SAMPLING_TIME)){
+			if(p.property.name.contains(PropertyUtil::SAMPLING_TIME)){
 				return value += "rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(0)+"),rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(2)+")))"
 			}
 		}
