@@ -23,5 +23,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: UIUC
 Export-Package: edu.uiuc.aadl.synch.checker.action,
  edu.uiuc.aadl.synch.maude.action,
+ edu.uiuc.aadl.synch.maude.template,
  edu.uiuc.aadl.synch.propspec,
  edu.uiuc.aadl.synch.views

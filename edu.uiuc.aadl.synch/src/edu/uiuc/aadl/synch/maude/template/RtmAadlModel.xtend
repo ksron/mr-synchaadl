@@ -50,6 +50,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 
 	private val RtmAadlBehaviorLanguage bc;
 	private val RtmAadlProperty pc;
+	private val RtmAadlFlowsParser fpc;
 	private val IProgressMonitor monitor;
 	private val SetMultimap<ComponentInstance, ConnectionReference> conxTable = HashMultimap::create() ;
 
@@ -59,6 +60,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		this.monitor = pm;
 		this.bc = new RtmAadlBehaviorLanguage(errMgr, opTable);
 		this.pc = new RtmAadlProperty(errMgr, opTable);
+		this.fpc = new RtmAadlFlowsParser(errMgr, opTable);
 	}
 
 	def doGenerate(SystemInstance model) {
@@ -83,7 +85,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		'''
 	}
 	
-	// After test should be removed
 	private def putNotDuplicate(SetMultimap<ComponentInstance, ConnectionReference> smm, ComponentInstance ci, ConnectionReference cr){
 		var check1 = true
 		var check2 = true
@@ -131,14 +132,12 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			]
 
 			val behAnx = if(o.behavioral && ! (anxSub.empty)) anxSub.get(0).parsedAnnexSubclause as BehaviorAnnex
-			val isEnv = o.isEnv
-			// conxTable.put(context, it) 
 			o.connectionInstances.forEach[connectionReferences.forEach[conxTable.putNotDuplicate(context, it)]]	
 
 
 			'''
-			< «o.id("ComponentId")» : «IF isEnv»Env«ELSE»«o.compClass»«ENDIF» |
-				«IF isEnv»
+			< «o.id("ComponentId")» : «IF o.isEnv»Env«ELSE»«o.compClass»«ENDIF» |
+				«IF o.isEnv»
 				features : (
 					«o.featureInstances.map[compileEnvFeature(o)].filterNull.join('\n', "none")»),
 				«ELSE»
@@ -167,7 +166,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 					< "«o.compileVarGenName»" >
 					),
 				«ENDIF»
-				«IF isEnv»
+				«IF o.isEnv»
 				currMode : (
 					«o.modeInstances.compileCurrentMode»
 					),
@@ -175,7 +174,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 					«o.modeTransitionInstances.map[compileJumps].filterNull.join(' ;\n', 'none')»
 					),
 				flows : (
-					«o.isAndGetContinuousDynamics.map[compileContinuousDynamics(o)].filterNull.join(" ;\n", "empty")»
+					«fpc.isAndGetContinuousDynamics(o).map[fpc.compileContinuousDynamics(it, o)].filterNull.join(" ;\n", "empty")»
 					),
 				sampling : (
 					«o.compileTargetInstanceList.map[compileSamplingTime].filterNull.join(" ,\n", "empty")»
@@ -189,7 +188,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				«ENDIF»
 				properties : (
 					«o.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")»),
-				«IF isEnv»
+				«IF o.isEnv»
 				connections : (
 					«conxTable.get(o).map[compileEnvConnection(o)].filterNull.join(' ;\n', "empty")») 
 				«ELSE»
@@ -202,197 +201,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		}
 	}
 	
-	private def compileVariables(BehaviorVariable bv){
-		bv.id("VarId")
-		'''( «bv.name» : Real )'''
-		
-	}
-	
-	private def isAndGetContinuousDynamics(ComponentInstance o){
-		for(PropertyAssociation pa : o.ownedPropertyAssociations){
-			if(pa.property.qualifiedName().contains(PropertyUtil::CD)){
-				return pa.ownedValues
-			}
-		}
-	}
-	
-	private def compileContinuousDynamics(ModalPropertyValue mpv, ComponentInstance o){
-		var mode = ""
-		for(String modes : mpv.inModes.get(0).toString.split("#")){
-			if(modes.contains(o.name)){
-				mode = modes.split("\\.").last
-			}
-		}
-		val expression = (mpv.ownedValue as StringLiteral).value
-		
-		return "((" + mode + ")" + "[" + expression.split(";").map[if(it.trim.length>1) it.trim.compileCDParsing(o)].filterNull.join(" ; ", "empty") + "])"
-	}
-	
-	private def compileCDParsing(String value, ComponentInstance ne){	
-		val componentId = value.split(" ").get(0).substring(0, value.indexOf('('))
-		val varId = value.split(" ").get(0).substring(value.indexOf('(')+1, value.indexOf(')'))
-		varId.id("VarId")
-		componentId.id("VarId")
-		
-		
-		val expression = value.substring(value.indexOf('=') + 1).trim
-		
-		return  "(" + componentId + "(" +varId + ")" + " = " + expression.compileExpressionInitial(componentId).
-																		compileExpressionPropertyConstant(ne).
-																			compileExpressionVarId(varId).
-																			compileExpressionSubComponent(ne).
-																				compileExpressionConstant.
-																					compileExpressionMinusValue + ") "
-	}
-	
-	private def compileExpressionPropertyConstant(String expression, NamedElement ne) {
-		var result = " "
-		for(String token : expression.split(" ")){
-			if(token.trimBrackets.contains("::")){
-				result += "[["+ GetProperties::lookupPropertyConstant(ne, token.trimBrackets.split("::").get(0), token.trimBrackets.split("::").get(1)).constantValue + "]] "
-			}
-			else{
-				result += token + " "
-			}
-		}
-		result
-	}
-	
-	private def compileExpressionConstant(String expression){
-		var result = " "
-		for(String token : expression.split(" ")){
-			if(token.trimBrackets.matches("(\\d+)(\\.\\d+)?")){
-				result += token.replaceAll(token.trimBrackets, "[["+token.trimBrackets+"]] ")
-			}
-			else {
-				result += token + " "
-			}
-		}
-		result 
-	}
-	
-	private def compileExpressionVarId(String expression, String varId) {
-		var result = " "
-		for(String token : expression.split(" ")){
-			if(token.trimBrackets.equals(varId)){
-				result += token.replaceAll(token.trimBrackets, "v[" + token.trimBrackets +"] ")
-			} else {
-				result += " "+token + " "
-			}
-		}
-		result
-		
-	}
-	
-	private def compileExpressionSubComponent(String expression, ComponentInstance o){
-		val ciNames = new ArrayList<String>();
-		var result = ""
-		var temp = true
-		ECollections.sort(o.componentInstances, new Comparator<ComponentInstance>(){
-			override compare(ComponentInstance o1, ComponentInstance o2) {
-				if(o1.name.toString.length < o2.name.toString.length){
-					return 1;
-				}
-				return -1;
-			}
-		})
-		
-		for(ComponentInstance ci : o.componentInstances){
-			ciNames.add(ci.name)
-		}
-		
-		for(String token : expression.split(" ")){
-			temp = true
-			for(String name : ciNames){
-				if(token.contains(name) && temp){
-					result += token.replaceAll(name, "c["+name+"] ")
-					temp = false
-				}
-			}
-			if(temp){
-				result += token + " "
-			}
-		}
-		result
-	}
-	
-	private def compileExpressionInitial(String expression, String componentId) {
-		expression.replaceAll("\\(0\\)", "")
-	}
-	
-	private def compileExpressionMinusValue(String expression){
-		var result = ""
-		for(String token : expression.split(" ")){
-			if(token.contains("-") && token.length > 1){
-				result += token.replaceAll("-", "minus(") + ") "
-			} else {
-				result += token + " "
-			}
-		}
-		result 
-	}
-	
-	private def trimBrackets(String str){
-		str.replaceAll("\\(", "").replaceAll("\\)", "")
-	}
-	
-	private def isOperator(String op){
-		switch op{
-			case "+": 	return true
-			case "-": 	return true
-			case "/": 	return true
-			case "*":	return true
-			default:	return false
-		}
-	}
-	
-	private def compileVarGenName(ComponentInstance o){
-		if(o.getContainingComponentInstance == null)
-			return o.id("ComponentId")
-		return compileVarGenName(o.getContainingComponentInstance) +"."+ o.id("ComponentId")
-	}
-	
-	private def compileTargetInstanceList(ComponentInstance o){
-		val targets = new ArrayList<String>()
-		for(ConnectionReference cr : conxTable.values){
-			if(cr.connection.source.context != null && cr.connection.destination.context != null){
-				if(cr.connection.source.context.name.equals(o.id("ComponentId"))){
-					targets.add(cr.connection.destination.context.name)
-				}
-			}
-		}
-		val targetInstances = new ArrayList<ComponentInstance>()
-		//println(targets)
-		for(ComponentInstance ci : conxTable.keySet){
-			for(String target : targets){
-				if(ci.id("ComponentId").equals(target) && targetInstanceContains(targetInstances, ci.name)){
-					targetInstances.add(ci)
-				}
-			}
-		}
-		//println(targetInstances)
-		return targetInstances
-	}
-	
-	private def targetInstanceContains(ArrayList<ComponentInstance> tis, String name){
-		for(ComponentInstance ci : tis){
-			if(ci.name.toString.equals(name))
-				return false
-		}
-		return true
-	}
-	
-	private def compileTarget(String featureId, String componentId){
-		for(ConnectionReference cr : conxTable.values){
-			if(cr.connection.source.context!=null && cr.connection.destination.context!=null){
-				if(cr.connection.source.context.name.equals(componentId) && cr.connection.source.connectionEnd.name.equals(featureId)){
-					return cr.connection.destination.context.name
-				}
-			}
-		}
-		return "none"
-	}
-
+	// Compile Features
 	private def compileEnvFeature(FeatureInstance o, ComponentInstance ci) {
 		val f = o.feature
 		switch f {
@@ -407,7 +216,17 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			default:
 				null => [o.check(false, "Unsupported feature: " + o.category.getName() + " " + o.name)]
 		}
-
+	}
+	
+	private def compileTarget(String featureId, String componentId){
+		for(ConnectionReference cr : conxTable.values){
+			if(cr.connection.source.context!=null && cr.connection.destination.context!=null){
+				if(cr.connection.source.context.name.equals(componentId) && cr.connection.source.connectionEnd.name.equals(featureId)){
+					return cr.connection.destination.context.name
+				}
+			}
+		}
+		return "none"
 	}
 
 	private def compileDataFeature(FeatureInstance o) {
@@ -440,32 +259,68 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		o.check(! (type.incoming && type.outgoing), "'in out' features are not supported")
 		'''«IF type.incoming»In«ENDIF»«IF type.outgoing»Out«ENDIF»'''
 	}
-
-	private def CharSequence compileDataConnection(ConnectionReference o) {
-		// TODO: check input adaptors for multirate connecLtions
-		val c = o.connection => [
-			o.check(it instanceof PortConnection || it instanceof ParameterConnection, "Unsupported connection type")
-		]
-		'''(«c.source.compileConnectionEndName(o)» --> «c.destination.compileConnectionEndName(o)»)'''
-	}
 	
-	private def CharSequence compileEnvConnection(ConnectionReference o, ComponentInstance ci) {
-		// TODO: check input adaptors for multirate connecLtions\
-		val c = o.connection => [
-			o.check(it instanceof PortConnection || it instanceof ParameterConnection, "Unsupported connection type")
-		]
+	
+	// Compile Variables
+	private def compileVariables(BehaviorVariable bv){
+		bv.id("VarId")
+		'''( «bv.name» : Real )'''
 		
-		'''(«c.source.compileConnectionEndName(o)»«IF ci.isSubcomponentData(c.source.connectionEnd.name.escape)» ==> «ELSE» =>> «ENDIF»«c.destination.compileConnectionEndName(o)»)'''
 	}
 	
+	// Compile VarGen
+	private def compileVarGenName(ComponentInstance o){
+		if(o.getContainingComponentInstance == null)
+			return o.id("ComponentId")
+		return compileVarGenName(o.getContainingComponentInstance) +"."+ o.id("ComponentId")
+	}
 	
-
-	private def compileConnectionEndName(ConnectedElement end, ConnectionReference o) {
-		switch end {
-			ConnectedElement: '''«IF end.context != null»«end.context.name.escape» .. «ENDIF»«end.connectionEnd.name.escape»'''
-			default:
-				null => [o.check(false, "Unsupported connection end")]
+	// Compile Current Mode
+	private def compileCurrentMode(EList<ModeInstance> mi){
+		mi.forEach[ element | id(element.name, "Location")]
+		for(ModeInstance value : mi){
+			if(value.initial==true){
+				return value.name
+			}
 		}
+		return mi.get(0).name
+	}
+	
+	// Compile Jumps
+	private def compileJumps(ModeTransitionInstance mti){
+		val src = mti.name.split("_").get(0)
+		val dest = mti.name.split("_").get(mti.name.split("_").length-1)
+		val guard = mti.name.substring(src.length+1, mti.name.length-dest.length-1)
+		'''(«src» -[ «guard.escape» ]-> «dest»)'''
+	}
+	
+	// Compile Sampling/Response
+	private def compileTargetInstanceList(ComponentInstance o){
+		val targets = new ArrayList<String>()
+		for(ConnectionReference cr : conxTable.values){
+			if(cr.connection.source.context != null && cr.connection.destination.context != null){
+				if(cr.connection.source.context.name.equals(o.id("ComponentId"))){
+					targets.add(cr.connection.destination.context.name)
+				}
+			}
+		}
+		val targetInstances = new ArrayList<ComponentInstance>()
+		for(ComponentInstance ci : conxTable.keySet){
+			for(String target : targets){
+				if(ci.id("ComponentId").equals(target) && targetInstanceContains(targetInstances, ci.name)){
+					targetInstances.add(ci)
+				}
+			}
+		}
+		return targetInstances
+	}
+	
+	private def targetInstanceContains(ArrayList<ComponentInstance> tis, String name){
+		for(ComponentInstance ci : tis){
+			if(ci.name.toString.equals(name))
+				return false
+		}
+		return true
 	}
 	
 	private def compileSamplingTime(ComponentInstance o) {
@@ -488,6 +343,33 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		return "empty"
 	}
 
+	
+	// Connection
+	private def CharSequence compileDataConnection(ConnectionReference o) {
+		val c = o.connection => [
+			o.check(it instanceof PortConnection || it instanceof ParameterConnection, "Unsupported connection type")
+		]
+		'''(«c.source.compileConnectionEndName(o)» --> «c.destination.compileConnectionEndName(o)»)'''
+	}
+	
+	private def CharSequence compileEnvConnection(ConnectionReference o, ComponentInstance ci) {
+		val c = o.connection => [
+			o.check(it instanceof PortConnection || it instanceof ParameterConnection, "Unsupported connection type")
+		]
+		
+		'''(«c.source.compileConnectionEndName(o)»«IF ci.isSubcomponentData(c.source.connectionEnd.name.escape)» ==> «ELSE» =>> «ENDIF»«c.destination.compileConnectionEndName(o)»)'''
+	}
+
+	private def compileConnectionEndName(ConnectedElement end, ConnectionReference o) {
+		switch end {
+			ConnectedElement: '''«IF end.context != null»«end.context.name.escape» .. «ENDIF»«end.connectionEnd.name.escape»'''
+			default:
+				null => [o.check(false, "Unsupported connection end")]
+		}
+	}
+	
+	
+	// Compile Property
 	private def compilePropertyAssociation(PropertyAssociation p, NamedElement ne) {
 		switch(p.property.name){
 			case PropertyUtil::NONDETERMINISTIC: 	return null
@@ -500,27 +382,10 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		if (value != null) '''(«p.property.qualifiedName().escape» => {{«value»}})'''
 	}
 
+
+	// Utility
 	private def compileInitialValue(NamedElement ne, String none) {
 		val iv = ne.dataInitialValue?.ownedListElements
 		if(! iv.nullOrEmpty) "[[" + (iv.get(0) as StringLiteral).value + "]]" else none // TODO: type checking
 	}
-	
-	private def compileCurrentMode(EList<ModeInstance> mi){
-		mi.forEach[ element | id(element.name, "Location")]
-		for(ModeInstance value : mi){
-			if(value.initial==true){
-				return value.name
-			}
-		}
-		return mi.get(0).name
-	}
-	
-	private def compileJumps(ModeTransitionInstance mti){
-		val src = mti.name.split("_").get(0)
-		val dest = mti.name.split("_").get(mti.name.split("_").length-1)
-		val guard = mti.name.substring(src.length+1, mti.name.length-dest.length-1)
-		'''(«src» -[ «guard.escape» ]-> «dest»)'''
-		
-	}
-
 }

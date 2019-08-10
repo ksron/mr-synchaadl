@@ -12,9 +12,13 @@ Top:
 	&
 	('instance' ':' path=STRING ';')
 	&
+	('mode' ':' mode=STRING ';')
+	&
+	('search' ':' initCond=Formula '==>' finCond=Formula 'in' 'time' bound=INTVALUE ';')
+	|
 	(formulas+=FormulaStatement | requirements+=ReqStatement)*;
-
 	
+
 ReqStatement:
 	'requirement' name=ID ':' value=Formula ('in' 'time' '<=' bound=INTVALUE)? ';';
 	

@@ -19,6 +19,30 @@ import edu.uiuc.aadl.xtext.propspec.propSpec.ReqStatement
 
 class RtmPropSpec {
 	
+	static def compileSearchCommand(Top top)'''
+	load «top.name».maude .
+	
+	mod TEST-«top.name.toUpperCase» is
+		including «top.name.toUpperCase»-MODEL .
+		including MODEL-TRANSITION-SYSTEM .
+		
+		op initConst : -> BoolExp .
+		eq initConst = «top.initCond» .
+		
+		op finalConst : -> BoolExp .
+		eq finalConst = «top.finCond» .
+		
+		op initState : -> Object .
+		eq initState = initialize(initial) .
+		
+		var OBJ : Object .
+		var CONST : BoolExp .
+	endm
+	
+	search [,«top.bound»] {initConst || initState, true} =>+ { CONST || OBJ, true } 
+	 					   such that check-sat(CONST and finalonst) .
+	'''
+	
 	static def compileSpec(Top top) '''
 		load «top.name».maude .
 		load «RtmAadlSetting::SEMANTICS_PATH»/«RtmAadlSetting::ANALYSIS_FILE» .

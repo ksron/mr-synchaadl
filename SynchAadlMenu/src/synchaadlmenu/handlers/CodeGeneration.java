@@ -21,11 +21,11 @@ public class CodeGeneration extends AbstractHandler {
 		PropspecEditorResourceManager res = new PropspecEditorResourceManager();
 		IWorkbenchPart part = HandlerUtil.getActivePart(event);
 
+
 		XtextEditor newEditor = (part.getSite().getId().compareTo("edu.uiuc.aadl.xtext.propspec.PropSpec") == 0)
 				&& (part instanceof XtextEditor) ? (XtextEditor) part : null;
 
 		res.setEditor(newEditor);
-		res.getModelResource();
 
 		codegenAct = new Action("Constraints Check") {
 			@Override

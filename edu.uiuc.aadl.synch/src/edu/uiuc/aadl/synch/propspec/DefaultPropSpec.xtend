@@ -16,7 +16,11 @@ class DefaultPropSpec {
 		-- a path for the corresponding instance model
 		instance: "«modelFile.fullPath»";
 		
-		-- requirements and formulas below
+		-- symbolic / distributed / random mode
+		mode: "symbolic";
+		
+		-- search condition : initialCondition ==> FinalCondition in time INTEGER
+		search: (drone1.drone.droneProc.droneThread | abs(currY) < 1.0 ) ==> (drone1.drone.droneProc.droneThread | abs(currY) < 1.0 ) in time 10 ;
 	'''
 	
 	def static escape(String name) {
