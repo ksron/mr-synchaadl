@@ -19,9 +19,30 @@ import edu.uiuc.aadl.xtext.propspec.propSpec.ReqStatement
 
 class RtmPropSpec {
 	
-	static def compileSearchCommand(Top top)'''
-	load «top.name».maude .
 	
+	static def compileTestCommand(Top top)'''
+	mod TEST-«top.name.toUpperCase» is
+	  including «top.name.toUpperCase»-MODEL-SYMBOLIC .
+	
+	  op initConst : -> BoolExp .
+	  eq initConst = [true] .
+	
+	  op initState : -> Object .
+	  eq initState = initialize(initial) .
+	
+	  op cinitState : -> Object .
+	  eq cinitState = initialize(collapse(initial)) .
+	
+	
+	  eq @m@ = ['«top.name.toUpperCase»-MODEL-SYMBOLIC] .
+	endm
+	
+	red initState .
+	
+	search [,1] {initConst || initState, false} =>+ C:GlobalSystem .
+	'''
+	
+	static def compileSearchCommand(Top top)'''
 	mod TEST-«top.name.toUpperCase» is
 		including «top.name.toUpperCase»-MODEL .
 		including MODEL-TRANSITION-SYSTEM .

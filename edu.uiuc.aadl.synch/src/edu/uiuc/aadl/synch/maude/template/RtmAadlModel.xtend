@@ -307,40 +307,45 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		val targetInstances = new ArrayList<ComponentInstance>()
 		for(ComponentInstance ci : conxTable.keySet){
 			for(String target : targets){
-				if(ci.id("ComponentId").equals(target) && targetInstanceContains(targetInstances, ci.name)){
+				if(ci.id("ComponentId").equals(target) && targetInstanceContains(targetInstances, ci)){
 					targetInstances.add(ci)
 				}
 			}
 		}
+		println(targetInstances);
 		return targetInstances
 	}
 	
-	private def targetInstanceContains(ArrayList<ComponentInstance> tis, String name){
+	private def targetInstanceContains(ArrayList<ComponentInstance> tis, ComponentInstance target){
 		for(ComponentInstance ci : tis){
-			if(ci.name.toString.equals(name))
+			if(ci.name.toString.equals(target.name) && ci.ownedPropertyAssociations.size() == target.ownedPropertyAssociations.size()){
 				return false
+			}
 		}
 		return true
 	}
 	
 	private def compileSamplingTime(ComponentInstance o) {
 		var value = "(" + o.id("ComponentId") + " : ("
+		println(value)
 		for(PropertyAssociation p : o.ownedPropertyAssociations){
 			if(p.property.name.contains(PropertyUtil::SAMPLING_TIME)){
 				return value += "rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(0)+"),rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(2)+")))"
 			}
 		}
-		return "empty"
+		return null;
 	}
 	
 	private def compileResponseTime(ComponentInstance o) {
 		var value = "(" + o.id("ComponentId") + " : ("
+		println(value)
 		for(PropertyAssociation p : o.ownedPropertyAssociations){
+			println("PropertyAssociation : " + p.property.name)
 			if(p.property.name.equals(PropertyUtil::RESPONSE_TIME)){
 				return value += "rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(0)+"),rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(2)+")))"
 			}
 		}
-		return "empty"
+		return null;
 	}
 
 	

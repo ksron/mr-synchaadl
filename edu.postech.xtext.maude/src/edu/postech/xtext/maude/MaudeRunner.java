@@ -1,10 +1,11 @@
 package edu.postech.xtext.maude;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.lang.ProcessBuilder.Redirect;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -13,6 +14,7 @@ public class MaudeRunner {
 	private String BaseDirectory = null;
 	private String Name = null;
 	private StringBuilder Options = null;
+
 	private String ModeFilePath = null;
 	private String TargetPath = null;
 	private String TestFilePath = null;
@@ -20,6 +22,8 @@ public class MaudeRunner {
 	private Process process;
 
 	private BufferedReader buffStdout;
+	private BufferedReader buffStderr;
+	private BufferedWriter buffStdin;
 
 	public void runMaude() {
 		if (!checkParameters()) {
@@ -27,26 +31,15 @@ public class MaudeRunner {
 			return;
 		}
 		try {
-			this.process = Runtime.getRuntime().exec(compileCommandOption());
+			ProcessBuilder builder = new ProcessBuilder(compileCommandOption().split(" "));
+			builder.redirectError(Redirect.INHERIT);
+			builder.redirectOutput(Redirect.INHERIT);
+			this.process = builder.start();
 
-			this.buffStdout = new BufferedReader(new InputStreamReader(this.process.getInputStream()));
-			System.out.println(readOutMaudeNoBlock());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-	}
-
-	private String readOutMaudeNoBlock() {
-		String txt = "";
-		char c = 0;
-		try {
-			while(this.buffStdout.ready()) {
-				txt += (char) buffStdout.read();
-			}
-		} catch (Exception e) {
-		}
-		return txt;
 	}
 
 	public String DebugCompileCommand() {
@@ -89,8 +82,7 @@ public class MaudeRunner {
 
 	private String compileCommandOption() {
 		return this.BaseDirectory + "/" + this.Name + Options.toString() + " "
-				+ this.ModeFilePath + " " + this.TargetPath
-				+ " ";
+				+ this.ModeFilePath + " " + this.TargetPath + " " + this.TestFilePath;
 
 	}
 
@@ -114,6 +106,7 @@ public class MaudeRunner {
 
 	public void setOption(EList<String> options) {
 		this.Options = new StringBuilder();
+
 		for (String option : options) {
 			if(option.contains("maude")) {
 				this.Options.append(" " + this.BaseDirectory + "/" + option);

@@ -49,7 +49,7 @@ public class SearchCommand extends AbstractHandler {
 		maudes.setOption(model.getOptions());
 		maudes.setMode(getMaudeMode(res, spec.getMode()));
 		maudes.setTargetMaude(BaseLocation + TargetMaudePath);
-		maudes.makeMaudeFile(RtmPropSpec.compileSearchCommand(spec).toString());
+		maudes.makeMaudeFile(RtmPropSpec.compileTestCommand(spec).toString());
 		System.out.println(maudes.DebugCompileCommand());
 		maudes.runMaude();
 
