@@ -1,0 +1,21 @@
+set show timing off .
+
+load ../../interpreter-random.maude
+load ../syntax/Thermostat_impl_Instance.maude 
+
+---------------------------------------------
+mod TEST-THERMOSTAT-SYSTEM is
+  including THERMOSTAT_IMPL_INSTANCE-MODEL .
+  including MODEL-TRANSITION-SYSTEM .
+
+  op initState : -> Object .
+  eq initState = initialize(initial) .
+endm
+
+rew [100] {{initState,0}} .
+
+rew [100] {{initState,400}} .
+
+rew [100] {{initState,800}} .
+
+rew [100] {{initState,1200}} .

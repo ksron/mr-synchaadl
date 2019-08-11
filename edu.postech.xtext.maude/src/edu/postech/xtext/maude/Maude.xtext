@@ -1,0 +1,10 @@
+grammar edu.postech.xtext.maude.Maude with org.eclipse.xtext.common.Terminals
+
+generate maude "http://www.postech.edu/xtext/maude/Maude"
+
+Model:
+	('Maude Directory' ':' path=STRING ';')
+	&
+	('Maude' ':' Maude=STRING ';')
+	&
+	'Options' ':' (options+=STRING)* ';';
