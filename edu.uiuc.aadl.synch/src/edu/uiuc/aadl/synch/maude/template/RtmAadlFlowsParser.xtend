@@ -58,8 +58,10 @@ class RtmAadlFlowsParser extends RtmAadlIdentifier{
 	private def compileExpressionPropertyConstant(String expression, NamedElement ne) {
 		var result = " "
 		for(String token : expression.split(" ")){
-			if(token.trimBrackets.contains("::")){
-				result += "[["+ GetProperties::lookupPropertyConstant(ne, token.trimBrackets.split("::").get(0), token.trimBrackets.split("::").get(1)).constantValue + "]] "
+			if(token.contains("::")){
+				result += token.openParenthesis + "[["+ GetProperties::lookupPropertyConstant(ne, token.trimBrackets.split("::").get(0), token.trimBrackets.split("::").get(1)).constantValue + "]] " + token.closeParenthesis;
+				println("Property Token : " + token)
+				println("Property Constant : "+result)
 			}
 			else{
 				result += " " +  token + " "
@@ -67,6 +69,8 @@ class RtmAadlFlowsParser extends RtmAadlIdentifier{
 		}
 		result
 	}
+	
+	
 	
 	private def compileExpressionConstant(String expression){
 		var result = " "
@@ -148,5 +152,35 @@ class RtmAadlFlowsParser extends RtmAadlIdentifier{
 	
 	private def normalizeSpace(String str){
 		str.replaceAll("( )+", " ")
+	}
+	
+	private def openParenthesis(String token) {
+		var k = 0;
+		var result = ""
+		for(var i = 0; i < token.length; i++){
+			if(token.charAt(i)=="(".charAt(0)){
+				k+=1;
+			}
+		}
+		for(var i = 0; i < k; i++){
+			result += "("
+		}
+		println("Debug1 : " + k)
+		println("Debug2 : " + result)
+		result
+	}
+	
+	private def closeParenthesis(String token) {
+				var k = 0;
+		var result = ""
+		for(var i = 0; i < token.length; i++){
+			if(token.charAt(i)==")".charAt(0)){
+				k++;
+			}
+		}
+		for(var i = 0; i < k; i++){
+			result += ")"
+		}
+		result
 	}
 }

@@ -20,7 +20,7 @@ class DefaultPropSpec {
 		mode: "symbolic";
 		
 		-- search condition : initialCondition ==> FinalCondition in time INTEGER
-		search: (drone1.drone.droneProc.droneThread | abs(currY) < 1.0 ) ==> (drone1.drone.droneProc.droneThread | abs(currY) < 1.0 ) in time 10 ;
+		search: (environment | x < 14.3 and x > 1.5 ) ==> (environment | x > 3.4 ) in time 5 ;
 	'''
 	
 	def static escape(String name) {

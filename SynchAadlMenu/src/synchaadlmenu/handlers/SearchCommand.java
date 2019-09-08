@@ -37,6 +37,7 @@ public class SearchCommand extends AbstractHandler {
 
 		Top spec = getPropSpecResource(res);
 
+
 		String TargetMaudePath = res.getCodegenFilePath().toString();
 		String BaseLocation = res.getEditorFile().getLocation().removeLastSegments(3).toString();
 
@@ -50,7 +51,8 @@ public class SearchCommand extends AbstractHandler {
 		maudes.setMode(getMaudeMode(res, spec.getMode()));
 		maudes.setTargetMaude(BaseLocation + TargetMaudePath);
 		maudes.makeMaudeFile(RtmPropSpec.compileTestCommand(spec).toString());
-		System.out.println(maudes.DebugCompileCommand());
+		// System.out.println(RtmPropSpec.compileTestCommand(spec).toString());
+		// System.out.println(maudes.DebugCompileCommand());
 		maudes.runMaude();
 
 		return null;

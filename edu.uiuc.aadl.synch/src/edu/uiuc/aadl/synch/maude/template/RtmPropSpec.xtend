@@ -16,6 +16,7 @@ import org.osate.aadl2.PropertyValue
 
 import static extension edu.uiuc.aadl.synch.maude.template.RtmAadlIdentifier.*
 import edu.uiuc.aadl.xtext.propspec.propSpec.ReqStatement
+import edu.uiuc.aadl.xtext.propspec.propSpec.Prop
 
 class RtmPropSpec {
 	
@@ -39,7 +40,8 @@ class RtmPropSpec {
 	
 	red initState .
 	
-	search [,1] {initConst || initState, false} =>+ C:GlobalSystem .
+	search [,«top.bound»] {lookup(initState, «(top.initCond as Prop).path.compilePath», «(top.initCond as ValueProp).expression.compileExp»)  || initState, false} =>+ 
+		{B:BoolExp || OBJ:Object, false} such that check-sat(B:BoolExp and lookup(OBJ:Object, «(top.finCond as Prop).path.compilePath», «(top.initCond as ValueProp).expression.compileExp») .
 	'''
 	
 	static def compileSearchCommand(Top top)'''
@@ -143,7 +145,7 @@ class RtmPropSpec {
 		val v = e.value
 		switch v {
 			PropertyValue:			'''[«RtmAadlProperty::compilePropertyValue(v)»]'''
-			ContainmentPathElement:	'''[«v.namedElement.name.escape»]'''
+			ContainmentPathElement:	'''c[«v.namedElement.name.escape»]'''
 		}
 	}
 	
