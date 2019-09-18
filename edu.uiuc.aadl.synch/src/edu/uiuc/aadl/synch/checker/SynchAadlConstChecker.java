@@ -299,7 +299,7 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 		}
 	}
 
-
+	// Not used in this time.
 	/************************/
 	private void checkCompSynch(ComponentInstance ci) {
 		if (ci.getCategory() != ComponentCategory.DATA && !PropertyUtil.isEnvironment(ci))
@@ -320,7 +320,6 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 			}
 		}
 	}
-
 
 	/************************/
 	private void checkConnDataPort(ConnectionInstance ci) {

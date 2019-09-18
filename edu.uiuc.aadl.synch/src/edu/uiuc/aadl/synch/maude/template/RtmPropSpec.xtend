@@ -38,10 +38,10 @@ class RtmPropSpec {
 	  eq @m@ = ['«top.name.toUpperCase»-MODEL-SYMBOLIC] .
 	endm
 	
-	red initState .
 	
-	search [,«top.bound»] {lookup(initState, «(top.initCond as Prop).path.compilePath», «(top.initCond as ValueProp).expression.compileExp»)  || initState, false} =>+ 
-		{B:BoolExp || OBJ:Object, false} such that check-sat(B:BoolExp and lookup(OBJ:Object, «(top.finCond as Prop).path.compilePath», «(top.initCond as ValueProp).expression.compileExp») .
+	
+	search [,«top.bound»] {lookup(initState, «top.name.escape+"."+(top.initCond as Prop).path.compilePath», «(top.initCond as ValueProp).expression.compileExp»)  || initState, false} =>+ 
+		{B:BoolExp || OBJ:Object, false} such that check-sat(B:BoolExp and lookup(OBJ:Object, «top.name.escape+"."+(top.finCond as Prop).path.compilePath», «(top.initCond as ValueProp).expression.compileExp») .
 	'''
 	
 	static def compileSearchCommand(Top top)'''

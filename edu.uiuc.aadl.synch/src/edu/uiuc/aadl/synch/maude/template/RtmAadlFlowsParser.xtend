@@ -12,6 +12,13 @@ import org.osate.xtext.aadl2.properties.util.GetProperties
 import java.util.ArrayList
 import org.eclipse.emf.common.util.ECollections
 import java.util.Comparator
+import org.antlr.v4.runtime.CommonTokenStream
+import edu.postech.antlr.parser.FlowsLexer
+import edu.postech.antlr.parser.FlowsParser
+import org.antlr.v4.runtime.ANTLRInputStream
+import edu.postech.antlr.formula.FlowsVisitorConstant
+import edu.postech.antlr.formula.FlowsVisitor
+import edu.postech.antlr.formula.FlowsData
 
 class RtmAadlFlowsParser extends RtmAadlIdentifier{
 	
@@ -35,10 +42,34 @@ class RtmAadlFlowsParser extends RtmAadlIdentifier{
 				mode = modes.split("\\.").last
 			}
 		}
-		val expression = (mpv.ownedValue as StringLiteral).value
+		var expression = (mpv.ownedValue as StringLiteral).value
+		return "((" + mode + ")" + "[" + expression.antlrParsing(o)+"]"
 		
-		return "((" + mode + ")" + "[" + expression.split(";").map[if(it.trim.length>1) it.trim.compileCDParsing(o)].filterNull.join(" ; ", "empty") + "])"
+		//return "((" + mode + ")" + "[" + expression.split(";").map[if(it.trim.length>1) it.trim.compileCDParsing(o)].filterNull.join(" ; ", "empty") + "])"
 	}
+	
+	private def antlrParsing(String expression, ComponentInstance ci){
+		var stream = new ANTLRInputStream(expression)
+		var lexer = new FlowsLexer(stream)
+		var tokens = new CommonTokenStream(lexer)
+		var parser = new FlowsParser(tokens)
+        var flowsData = parser.getFlowsData(ci)
+       	parser.reset
+        val answer = new FlowsVisitor().setFlowsData(flowsData).visitFormula(parser.formula());
+		answer
+	}
+	
+	private def getFlowsData(FlowsParser parser, ComponentInstance ci){
+		var flowsData = new FlowsData();
+		
+		val constants = new FlowsVisitorConstant().visitFormula(parser.formula)
+		for(constant : constants.split(" ")){
+			flowsData.addConstant(constant, GetProperties::lookupPropertyConstant(ci, constant.trimBrackets.split("::").get(0), constant.trimBrackets.split("::").get(1)).constantValue.toString)
+		}
+	
+		flowsData
+	}
+	
 	
 	private def compileCDParsing(String value, ComponentInstance ne){	
 		val componentId = value.split(" ").get(0).substring(0, value.indexOf('('))

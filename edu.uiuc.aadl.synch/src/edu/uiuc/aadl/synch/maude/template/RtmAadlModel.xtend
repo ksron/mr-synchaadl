@@ -134,7 +134,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			val behAnx = if(o.behavioral && ! (anxSub.empty)) anxSub.get(0).parsedAnnexSubclause as BehaviorAnnex
 			o.connectionInstances.forEach[connectionReferences.forEach[conxTable.putNotDuplicate(context, it)]]	
 
-
 			'''
 			< «o.id("ComponentId")» : «IF o.isEnv»Env«ELSE»«o.compClass»«ENDIF» |
 				«IF o.isEnv»
