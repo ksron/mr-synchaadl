@@ -256,7 +256,7 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	
 	
 	private def dispatch CharSequence compileExpression(SimpleExpression e) {
-		val itTerm = e.terms.iterator
+		val itTerm = e.terms.iterator 
 		var result = itTerm.next.compileExpression
 		if (e.setBinaryAddingOperators) {
 			val itOp = e.binaryAddingOperators.iterator

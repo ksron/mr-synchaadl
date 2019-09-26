@@ -16,9 +16,12 @@ import org.antlr.v4.runtime.CommonTokenStream
 import edu.postech.antlr.parser.FlowsLexer
 import edu.postech.antlr.parser.FlowsParser
 import org.antlr.v4.runtime.ANTLRInputStream
-import edu.postech.antlr.formula.FlowsVisitorConstant
-import edu.postech.antlr.formula.FlowsVisitor
-import edu.postech.antlr.formula.FlowsData
+import edu.postech.antlr.firstPath.FlowsVisitorConstant
+import edu.postech.antlr.firstPath.FlowsVisitor
+import edu.postech.antlr.firstPath.FlowsData
+import org.osate.ba.utils.CaseInsensitiveCharStream
+import org.osate.ba.parser.AadlBaLexer
+import org.osate.ba.parser.AadlBaParser
 
 class RtmAadlFlowsParser extends RtmAadlIdentifier{
 	
@@ -35,7 +38,7 @@ class RtmAadlFlowsParser extends RtmAadlIdentifier{
 		}
 	}
 	
-	public def compileContinuousDynamics(ModalPropertyValue mpv, ComponentInstance o){
+	public def compileContinuousDynamics(ModalPropertyValue mpv, ComponentInstance o){		
 		var mode = ""
 		for(String modes : mpv.inModes.get(0).toString.split("#")){
 			if(modes.contains(o.name)){
@@ -43,9 +46,17 @@ class RtmAadlFlowsParser extends RtmAadlIdentifier{
 			}
 		}
 		var expression = (mpv.ownedValue as StringLiteral).value
-		return "((" + mode + ")" + "[" + expression.antlrParsing(o)+"]"
+		expression.compileVarID
+		return "((" + mode + ")" + "[" + expression.antlrParsing(o)+"])"
 		
 		//return "((" + mode + ")" + "[" + expression.split(";").map[if(it.trim.length>1) it.trim.compileCDParsing(o)].filterNull.join(" ; ", "empty") + "])"
+	}
+	
+	private def compileVarID(String value){
+		val componentId = value.split(" ").get(0).substring(0, value.indexOf('('))
+		val varId = value.split(" ").get(0).substring(value.indexOf('(')+1, value.indexOf(')'))
+		varId.id("VarId")
+		componentId.id("VarId")
 	}
 	
 	private def antlrParsing(String expression, ComponentInstance ci){
@@ -53,21 +64,51 @@ class RtmAadlFlowsParser extends RtmAadlIdentifier{
 		var lexer = new FlowsLexer(stream)
 		var tokens = new CommonTokenStream(lexer)
 		var parser = new FlowsParser(tokens)
-        var flowsData = parser.getFlowsData(ci)
+		var flowsData = new FlowsData();
+		
+		var annex_stream = new CaseInsensitiveCharStream(expression)
+		var annex_lexer = new AadlBaLexer(annex_stream)
+		var annex_tokens = new CommonTokenStream(annex_lexer)
+		var annex_parser = new AadlBaParser(annex_tokens)
+		var ba = annex_parser.behavior_annex()
+		
+		println("Debug Behavior Annex : "+ ba)
+		
+		
+       	parser.getFlowsConstantData(ci, flowsData)
+       	parser.getFlowsComponentData(ci, flowsData)
+       	
        	parser.reset
         val answer = new FlowsVisitor().setFlowsData(flowsData).visitFormula(parser.formula());
 		answer
 	}
 	
-	private def getFlowsData(FlowsParser parser, ComponentInstance ci){
-		var flowsData = new FlowsData();
-		
+	private def getFlowsConstantData(FlowsParser parser, ComponentInstance ci, FlowsData flowsData){
 		val constants = new FlowsVisitorConstant().visitFormula(parser.formula)
-		for(constant : constants.split(" ")){
+		
+		if(constants.trim.length==0){
+			return flowsData
+		}
+		
+		for(constant : constants.trim.split(" ")){
 			flowsData.addConstant(constant, GetProperties::lookupPropertyConstant(ci, constant.trimBrackets.split("::").get(0), constant.trimBrackets.split("::").get(1)).constantValue.toString)
 		}
+	}
 	
-		flowsData
+	private def getFlowsComponentData(FlowsParser parser, ComponentInstance ci, FlowsData flowsData){
+		val ciNames = new ArrayList<String>();
+		ECollections.sort(ci.componentInstances, new Comparator<ComponentInstance>(){
+			override compare(ComponentInstance o1, ComponentInstance o2) {
+				if(o1.name.toString.length < o2.name.toString.length){
+					return 1;
+				}
+				return -1;
+			}
+		})
+		for(ComponentInstance o : ci.componentInstances){
+			ciNames.add(o.name)
+			flowsData.addComponentData(o.name.toString)
+		}
 	}
 	
 	

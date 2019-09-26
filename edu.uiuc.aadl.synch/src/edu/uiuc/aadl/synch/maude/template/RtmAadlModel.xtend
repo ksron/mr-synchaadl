@@ -126,12 +126,20 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		if (monitor.isCanceled()) // when canceled
 			throw new OperationCanceledException
 		else {
+			
 			val anxSub = o.componentClassifier.ownedAnnexSubclauses.filter(typeof(DefaultAnnexSubclause)) => [
 				o.check((! o.behavioral) || ! it.empty,
 					"No behavior annex definition in thread: " + o.category.getName() + " " + o.name)
 			]
+			//if(o.behavioral && ! (anxSub.empty)) Thread.dumpStack
+			//println("anxSub : " + anxSub)
+			//println("o.componentClassifier.ownedAnnexSubclauses : " + o.componentClassifier.ownedAnnexSubclauses)
 
 			val behAnx = if(o.behavioral && ! (anxSub.empty)) anxSub.get(0).parsedAnnexSubclause as BehaviorAnnex
+			//println("anxSub.get(0) : "+ if(o.behavioral && ! (anxSub.empty)) anxSub.get(0))
+			//println("anxSub.get(0).parsedAnnexSubclause : " + if(o.behavioral && ! (anxSub.empty)) anxSub.get(0).parsedAnnexSubclause)
+			//println("behAnx : " + behAnx)
+			
 			o.connectionInstances.forEach[connectionReferences.forEach[conxTable.putNotDuplicate(context, it)]]	
 
 			'''

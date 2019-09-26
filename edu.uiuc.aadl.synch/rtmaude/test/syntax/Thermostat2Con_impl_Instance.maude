@@ -62,27 +62,23 @@ mod THERMOSTAT2CON_IMPL_INSTANCE-MODEL is
 									< "Thermostat2ConimplInstance.console.consoleProc.consoleThread" >
 									),
 								properties : (
-									(TimingProperties::Period => {{60}}) ;
+									(TimingProperties::Period => {{10}}) ;
 									(HybridSynchAADL::Synchronous => {{true}})),
 								connections : (
 									empty)
 								> ),
 						properties : (
-							(TimingProperties::Period => {{60}}) ;
+							(TimingProperties::Period => {{10}}) ;
 							(HybridSynchAADL::Synchronous => {{true}})),
 						connections : (
-							(consoleThread .. tempmax --> tempmax) ;
 							(consoleThread .. tempmin --> tempmin) ;
-							(consoleThread .. tempmax --> tempmax) ;
-							(consoleThread .. tempmin --> tempmin))
+							(consoleThread .. tempmax --> tempmax))
 						> ),
 				properties : (
-					(TimingProperties::Period => {{60}}) ;
-					(HybridSynchAADL::MaxClockDeviation => {{1.0}}) ;
+					(TimingProperties::Period => {{10}}) ;
+					(HybridSynchAADL::MaxClockDeviation => {{0.1}}) ;
 					(HybridSynchAADL::Synchronous => {{true}})),
 				connections : (
-					(consoleProc .. tempmax --> tempmax) ;
-					(consoleProc .. tempmin --> tempmin) ;
 					(consoleProc .. tempmax --> tempmax) ;
 					(consoleProc .. tempmin --> tempmin))
 				>
@@ -159,9 +155,9 @@ mod THERMOSTAT2CON_IMPL_INSTANCE-MODEL is
 								transitions : (
 									(init -[ on dispatch ]-> init {
 										if ((f[currtemp] > f[tempmax])){
-											(oncontrol !)}
-										(elsif ((f[currtemp] < f[tempmin])){
 											(offcontrol !)}
+										(elsif ((f[currtemp] < f[tempmin])){
+											(oncontrol !)}
 										)
 										end if
 									})),
@@ -173,34 +169,34 @@ mod THERMOSTAT2CON_IMPL_INSTANCE-MODEL is
 									< "Thermostat2ConimplInstance.controller1.ctrlProc.ctrlThread" >
 									),
 								properties : (
-									(TimingProperties::Period => {{60}}) ;
+									(TimingProperties::Period => {{10}}) ;
 									(HybridSynchAADL::SamplingTime => {{1.0 .. 5.0}}) ;
-									(HybridSynchAADL::ResponseTime => {{14.0 .. 15.0}}) ;
+									(HybridSynchAADL::ResponseTime => {{7.0 .. 9.0}}) ;
 									(HybridSynchAADL::Synchronous => {{true}})),
 								connections : (
 									empty)
 								> ),
 						properties : (
-							(TimingProperties::Period => {{60}}) ;
+							(TimingProperties::Period => {{10}}) ;
 							(HybridSynchAADL::Synchronous => {{true}})),
 						connections : (
-							(ctrlThread .. offcontrol --> offcontrol) ;
 							(currtemp --> ctrlThread .. currtemp) ;
-							(tempmax --> ctrlThread .. tempmax) ;
+							(ctrlThread .. offcontrol --> offcontrol) ;
+							(tempmin --> ctrlThread .. tempmin) ;
 							(ctrlThread .. oncontrol --> oncontrol) ;
-							(tempmin --> ctrlThread .. tempmin))
+							(tempmax --> ctrlThread .. tempmax))
 						> ),
 				properties : (
-					(TimingProperties::Period => {{60}}) ;
-					(HybridSynchAADL::MaxClockDeviation => {{1.0}}) ;
+					(TimingProperties::Period => {{10}}) ;
+					(HybridSynchAADL::MaxClockDeviation => {{0.1}}) ;
 					(HybridSynchAADL::SamplingTime => {{1.0 .. 5.0}}) ;
-					(HybridSynchAADL::ResponseTime => {{14.0 .. 15.0}}) ;
+					(HybridSynchAADL::ResponseTime => {{7.0 .. 9.0}}) ;
 					(HybridSynchAADL::Synchronous => {{true}})),
 				connections : (
-					(ctrlProc .. oncontrol --> oncontrol) ;
-					(tempmin --> ctrlProc .. tempmin) ;
 					(currtemp --> ctrlProc .. currtemp) ;
 					(tempmax --> ctrlProc .. tempmax) ;
+					(ctrlProc .. oncontrol --> oncontrol) ;
+					(tempmin --> ctrlProc .. tempmin) ;
 					(ctrlProc .. offcontrol --> offcontrol))
 				>
 			< controller2 : System |
@@ -276,9 +272,9 @@ mod THERMOSTAT2CON_IMPL_INSTANCE-MODEL is
 								transitions : (
 									(init -[ on dispatch ]-> init {
 										if ((f[currtemp] > f[tempmax])){
-											(oncontrol !)}
-										(elsif ((f[currtemp] < f[tempmin])){
 											(offcontrol !)}
+										(elsif ((f[currtemp] < f[tempmin])){
+											(oncontrol !)}
 										)
 										end if
 									})),
@@ -290,48 +286,48 @@ mod THERMOSTAT2CON_IMPL_INSTANCE-MODEL is
 									< "Thermostat2ConimplInstance.controller2.ctrlProc.ctrlThread" >
 									),
 								properties : (
-									(TimingProperties::Period => {{60}}) ;
-									(HybridSynchAADL::SamplingTime => {{3.0 .. 8.0}}) ;
-									(HybridSynchAADL::ResponseTime => {{30.0 .. 35.0}}) ;
+									(TimingProperties::Period => {{10}}) ;
+									(HybridSynchAADL::SamplingTime => {{2.0 .. 4.0}}) ;
+									(HybridSynchAADL::ResponseTime => {{6.0 .. 8.0}}) ;
 									(HybridSynchAADL::Synchronous => {{true}})),
 								connections : (
 									empty)
 								> ),
 						properties : (
-							(TimingProperties::Period => {{60}}) ;
+							(TimingProperties::Period => {{10}}) ;
 							(HybridSynchAADL::Synchronous => {{true}})),
 						connections : (
+							(tempmax --> ctrlThread .. tempmax) ;
+							(ctrlThread .. oncontrol --> oncontrol) ;
 							(ctrlThread .. offcontrol --> offcontrol) ;
 							(tempmin --> ctrlThread .. tempmin) ;
-							(ctrlThread .. oncontrol --> oncontrol) ;
-							(tempmax --> ctrlThread .. tempmax) ;
 							(currtemp --> ctrlThread .. currtemp))
 						> ),
 				properties : (
-					(TimingProperties::Period => {{60}}) ;
-					(HybridSynchAADL::MaxClockDeviation => {{1.0}}) ;
-					(HybridSynchAADL::SamplingTime => {{3.0 .. 8.0}}) ;
-					(HybridSynchAADL::ResponseTime => {{30.0 .. 35.0}}) ;
+					(TimingProperties::Period => {{10}}) ;
+					(HybridSynchAADL::MaxClockDeviation => {{0.1}}) ;
+					(HybridSynchAADL::SamplingTime => {{2.0 .. 4.0}}) ;
+					(HybridSynchAADL::ResponseTime => {{6.0 .. 8.0}}) ;
 					(HybridSynchAADL::Synchronous => {{true}})),
 				connections : (
 					(tempmax --> ctrlProc .. tempmax) ;
 					(ctrlProc .. oncontrol --> oncontrol) ;
+					(ctrlProc .. offcontrol --> offcontrol) ;
 					(tempmin --> ctrlProc .. tempmin) ;
-					(currtemp --> ctrlProc .. currtemp) ;
-					(ctrlProc .. offcontrol --> offcontrol))
+					(currtemp --> ctrlProc .. currtemp))
 				>
 			< environment : Env |
 				features : (
 					< temp1 : EnvOutPort |
-						content : [[15]],
+						content : null(Real),
 						target : controller1,
-						properties : (DataModel::InitialValue => {{15}}),
-						envCache : [[15]] >
+						properties : none,
+						envCache : null(Real) >
 					< temp2 : EnvOutPort |
-						content : [[15]],
+						content : null(Real),
 						target : controller2,
-						properties : (DataModel::InitialValue => {{15}}),
-						envCache : [[15]] >
+						properties : none,
+						envCache : null(Real) >
 					< onheater1 : EnvInPort |
 						content : null(Unit),
 						properties : none,
@@ -385,45 +381,45 @@ mod THERMOSTAT2CON_IMPL_INSTANCE-MODEL is
 					(s11 -[ offheater2 ]-> s10)
 					),
 				flows : (
-					((s11)[x(t) = [[0.1]] * (([[45.0]] + [[30.0]]) * v[t] - c[x]) ; y(s) = [[0.1]] * (([[45.0]] + [[30.0]]) * v[s] - c[y])]) ;
-					((s00)[x(t) = [[0.1]] * (([[45.0]] + [[30.0]]) * v[t] - c[x]) ; y(s) = [[0.1]] * (- c[y]) * v[s]]) ;
-					((s01)[x(t) = [[0.1]] * (- c[x]) * v[t] ; y(s) = [[0.1]] * (([[45.0]] + [[30.0]]) * v[s] - c[y])]) ;
-					((s11)[x(t) = [[0.1]] * (- c[x]) * v[t] ; y(s) = [[0.1]] * (- c[y]) * v[s]]) ;
+					((s11)[(x(t) =  [[0.1]] * ((([[45.0]] + [[30.0]] ) * v[t]) - [[30.0]] ) )  ; (y(s) =  [[0.1]] * ((([[45.0]] + [[30.0]] ) * v[s]) - [[30.0]] ) ) ]) ;
+					((s10)[(x(t) =  [[0.1]] * ((([[45.0]] + [[30.0]] ) * v[t]) - [[30.0]] ) )  ; (y(s) =  [[0.1]] * ((([[45.0]] ) * v[s]) - [[30.0]] ) ) ]) ;
+					((s01)[(x(t) =  [[0.1]] * ((([[45.0]] ) * v[t]) - [[30.0]] ) )  ; (y(s) =  [[0.1]] * ((([[45.0]] + [[30.0]] ) * v[s]) - [[30.0]] ) ) ]) ;
+					((s00)[(x(t) =  ([[0.1]] * (minus([[30.0]]) )) * v[t] )  ; (y(s) =  ([[0.1]] * (minus([[30.0]]) )) * v[s] ) ])
 					),
 				sampling : (
-					(controller1 : (rat(1.0),rat(5.0))) ;
-					(controller2 : (rat(3.0),rat(8.0)))
+					(controller2 : (rat(2.0),rat(4.0))) ,
+					(controller1 : (rat(1.0),rat(5.0)))
 					),
 				response : (
-					(controller1 : (rat(14.0),rat(15.0))) ;
-					(controller2 : (rat(30.0),rat(35.0)))
+					(controller2 : (rat(6.0),rat(8.0))) ,
+					(controller1 : (rat(7.0),rat(9.0)))
 					),
 				varGen : (
 					< "Thermostat2ConimplInstance.environment" >
 					),
 				properties : (
-					(TimingProperties::Period => {{60}}) ;
-					(HybridSynchAADL::MaxClockDeviation => {{1.0}}) ;
+					(TimingProperties::Period => {{10}}) ;
+					(HybridSynchAADL::MaxClockDeviation => {{0.1}}) ;
 					(HybridSynchAADL::Synchronous => {{true}})),
 				connections : (
 					(y ==> temp2) ;
 					(x ==> temp1))
 				> ),
 		properties : (
-			(TimingProperties::Period => {{60}}) ;
-			(HybridSynchAADL::MaxClockDeviation => {{1.0}}) ;
+			(TimingProperties::Period => {{10}}) ;
+			(HybridSynchAADL::MaxClockDeviation => {{0.1}}) ;
 			(HybridSynchAADL::Synchronous => {{true}})),
 		connections : (
-			(controller2 .. oncontrol --> environment .. onheater2) ;
 			(console .. tempmin --> controller2 .. tempmin) ;
-			(controller1 .. offcontrol --> environment .. offheater1) ;
-			(environment .. temp2 --> controller2 .. currtemp) ;
-			(console .. tempmax --> controller2 .. tempmax) ;
-			(controller2 .. offcontrol --> environment .. offheater2) ;
-			(controller1 .. oncontrol --> environment .. onheater1) ;
-			(console .. tempmin --> controller1 .. tempmin) ;
 			(console .. tempmax --> controller1 .. tempmax) ;
-			(environment .. temp1 --> controller1 .. currtemp))
+			(controller1 .. offcontrol --> environment .. offheater1) ;
+			(environment .. temp1 --> controller1 .. currtemp) ;
+			(console .. tempmax --> controller2 .. tempmax) ;
+			(controller2 .. oncontrol --> environment .. onheater2) ;
+			(console .. tempmin --> controller1 .. tempmin) ;
+			(environment .. temp2 --> controller2 .. currtemp) ;
+			(controller1 .. oncontrol --> environment .. onheater1) ;
+			(controller2 .. offcontrol --> environment .. offheater2))
 		>  .
 endm
 

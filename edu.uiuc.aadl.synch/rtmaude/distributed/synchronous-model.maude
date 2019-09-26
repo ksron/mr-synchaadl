@@ -205,7 +205,7 @@ mod MODEL-TRANSITION-SYSTEM is
   crl [tick]: 
       {OBJ | T | TI} => {timeEffect(OBJ,NT) | T + NT | TI}
    if NT := mte(OBJ)
-   /\ T + NT <= TI .
+   /\ T + NT <= TI [print "tick " NT ] .
 endm
 
 

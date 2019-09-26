@@ -24,24 +24,30 @@ class RtmPropSpec {
 	static def compileTestCommand(Top top)'''
 	mod TEST-«top.name.toUpperCase» is
 	  including «top.name.toUpperCase»-MODEL-SYMBOLIC .
-	
-	  op initConst : -> BoolExp .
-	  eq initConst = [true] .
+	  including SYMBOLIC-ANALYSIS .
 	
 	  op initState : -> Object .
 	  eq initState = initialize(initial) .
-	
-	  op cinitState : -> Object .
-	  eq cinitState = initialize(collapse(initial)) .
-	
-	
-	  eq @m@ = ['«top.name.toUpperCase»-MODEL-SYMBOLIC] .
+	  
+    endm
+    
+    mod TEST-«top.name.toUpperCase»-MODE is
+    	including TEST-«top.name.toUpperCase» .
+	  eq @m@ = ['TEST-«top.name.toUpperCase»] .
+	  
 	endm
+	 
+	red initialize(initial) .
 	
+	search [,«top.bound»]
+	      {lookup(initState, «top.name.escape+" . "+(top.initCond as Prop).path.compilePath», «(top.initCond as ValueProp).expression.compileExp») ||
+		   initState,false} 
+		=>+
+		  {B:BoolExp ||
+		   OBJ:Object,false}
+		such that
+		  check-sat(B:BoolExp and lookup(OBJ:Object, «top.name.escape+" . "+(top.finCond as Prop).path.compilePath»,  «(top.initCond as ValueProp).expression.compileExp»)) .
 	
-	
-	search [,«top.bound»] {lookup(initState, «top.name.escape+"."+(top.initCond as Prop).path.compilePath», «(top.initCond as ValueProp).expression.compileExp»)  || initState, false} =>+ 
-		{B:BoolExp || OBJ:Object, false} such that check-sat(B:BoolExp and lookup(OBJ:Object, «top.name.escape+"."+(top.finCond as Prop).path.compilePath», «(top.initCond as ValueProp).expression.compileExp») .
 	'''
 	
 	static def compileSearchCommand(Top top)'''
@@ -144,7 +150,7 @@ class RtmPropSpec {
 	private static def dispatch CharSequence compileExp(Value e) {
 		val v = e.value
 		switch v {
-			PropertyValue:			'''[«RtmAadlProperty::compilePropertyValue(v)»]'''
+			PropertyValue:			'''[[«RtmAadlProperty::compilePropertyValue(v)»]]'''
 			ContainmentPathElement:	'''c[«v.namedElement.name.escape»]'''
 		}
 	}

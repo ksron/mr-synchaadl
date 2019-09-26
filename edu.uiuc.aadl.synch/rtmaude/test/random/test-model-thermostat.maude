@@ -1,7 +1,7 @@
 set show timing off .
 
 load ../../interpreter-random.maude
-load ../syntax/module-thermostat-noparam.maude 
+load ../syntax/module-thermostat-noparam.maude
 
 ---------------------------------------------
 mod TEST-THERMOSTAT-SYSTEM is
@@ -9,7 +9,7 @@ mod TEST-THERMOSTAT-SYSTEM is
   including MODEL-TRANSITION-SYSTEM .
 
   op initState : -> Object .
-  eq initState = initialize(initial) .
+  eq initState = initialize(model) .
 endm
 
 rew [100] {{initState,0}} .

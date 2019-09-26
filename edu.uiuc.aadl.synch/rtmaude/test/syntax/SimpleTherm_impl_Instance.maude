@@ -1,6 +1,6 @@
 mod SIMPLETHERM_IMPL_INSTANCE-MODEL is
 	including MODEL-TRANSITION-SYSTEM .
-
+	
 	--- AADL identifiers
 	ops offcontrol temp oncontrol : -> FeatureId [ctor] .
 	ops x t : -> VarId [ctor] .
@@ -14,40 +14,40 @@ mod SIMPLETHERM_IMPL_INSTANCE-MODEL is
 		subcomponents : (
 			< controller : System |
 				features : (
-					< temp : DataInPort |
+					< temp : DataInPort | 
 						content : null(Real) ,
 						cache : null(Real),
 						properties : none >
-					< oncontrol : DataOutPort |
+					< oncontrol : DataOutPort | 
 						content : null(Unit) ,
 						properties : none >
-					< offcontrol : DataOutPort |
+					< offcontrol : DataOutPort | 
 						content : null(Unit) ,
 						properties : none >),
 				subcomponents : (
 					< ctrlProc : Process |
 						features : (
-							< temp : DataInPort |
+							< temp : DataInPort | 
 								content : null(Real) ,
 								cache : null(Real),
 								properties : none >
-							< oncontrol : DataOutPort |
+							< oncontrol : DataOutPort | 
 								content : null(Unit) ,
 								properties : none >
-							< offcontrol : DataOutPort |
+							< offcontrol : DataOutPort | 
 								content : null(Unit) ,
 								properties : none >),
 						subcomponents : (
 							< ctrlThread : Thread |
 								features : (
-									< temp : DataInPort |
+									< temp : DataInPort | 
 										content : null(Real) ,
 										cache : null(Real),
 										properties : none >
-									< oncontrol : DataOutPort |
+									< oncontrol : DataOutPort | 
 										content : null(Unit) ,
 										properties : none >
-									< offcontrol : DataOutPort |
+									< offcontrol : DataOutPort | 
 										content : null(Unit) ,
 										properties : none >),
 								subcomponents : (
@@ -61,7 +61,7 @@ mod SIMPLETHERM_IMPL_INSTANCE-MODEL is
 											(DataModel::InitialValue => {{10}})),
 										connections : (
 											empty)
-										>
+										> 
 									< upper : Data |
 										features : (
 											none),
@@ -72,7 +72,7 @@ mod SIMPLETHERM_IMPL_INSTANCE-MODEL is
 											(DataModel::InitialValue => {{30}})),
 										connections : (
 											empty)
-										>
+										> 
 									< curr : Data |
 										features : (
 											none),
@@ -121,8 +121,8 @@ mod SIMPLETHERM_IMPL_INSTANCE-MODEL is
 							(TimingProperties::Period => {{5}})),
 						connections : (
 							(temp --> ctrlThread .. temp) ;
-							(ctrlThread .. offcontrol --> offcontrol) ;
-							(ctrlThread .. oncontrol --> oncontrol))
+							(ctrlThread .. oncontrol --> oncontrol) ;
+							(ctrlThread .. offcontrol --> offcontrol))
 						> ),
 				properties : (
 					(HybridSynchAADL::MaxClockDeviation => {{0.1}}) ;
@@ -131,22 +131,22 @@ mod SIMPLETHERM_IMPL_INSTANCE-MODEL is
 					(HybridSynchAADL::Synchronous => {{true}}) ;
 					(TimingProperties::Period => {{5}})),
 				connections : (
+					(temp --> ctrlProc .. temp) ;
 					(ctrlProc .. oncontrol --> oncontrol) ;
-					(ctrlProc .. offcontrol --> offcontrol) ;
-					(temp --> ctrlProc .. temp))
-				>
+					(ctrlProc .. offcontrol --> offcontrol))
+				> 
 			< environment : Env |
 				features : (
-					< temp : EnvOutPort |
+					< temp : EnvOutPort | 
 						content : null(Real),
 						target : controller,
 						properties : none,
 						envCache : null(Real) >
-					< oncontrol : EnvInPort |
+					< oncontrol : EnvInPort | 
 						content : null(Unit),
 						properties : none,
 						envCache : null(Unit) >
-					< offcontrol : EnvInPort |
+					< offcontrol : EnvInPort | 
 						content : null(Unit),
 						properties : none,
 						envCache : null(Unit) >),
@@ -172,9 +172,8 @@ mod SIMPLETHERM_IMPL_INSTANCE-MODEL is
 					(on -[ offcontrol ]-> off)
 					),
 				flows : (
-					((off)[x(t) = c[x] - (v[t] * [[0.1]] ) ])
-					;
-					((on)[(x(t) = (c[x]) + (v[t] * [[0.2]]))])
+					((on)[(x(t) =  c[x] + (v[t] * [[0.2]] ) ) ]) ;
+					((off)[(x(t) =  c[x] - (v[t] * [[0.1]] ) ) ])
 					),
 				sampling : (
 					(controller : (rat(0.0),rat(2.0)))
@@ -190,23 +189,23 @@ mod SIMPLETHERM_IMPL_INSTANCE-MODEL is
 					(HybridSynchAADL::Synchronous => {{true}}) ;
 					(TimingProperties::Period => {{5}})),
 				connections : (
-					(x ==> temp))
+					(x ==> temp)) 
 				> ),
 		properties : (
 			(HybridSynchAADL::MaxClockDeviation => {{0.1}}) ;
 			(HybridSynchAADL::Synchronous => {{true}}) ;
 			(TimingProperties::Period => {{5}})),
 		connections : (
-			(environment .. temp --> controller .. temp) ;
+			(controller .. offcontrol --> environment .. offcontrol) ;
 			(controller .. oncontrol --> environment .. oncontrol) ;
-			(controller .. offcontrol --> environment .. offcontrol))
+			(environment .. temp --> controller .. temp))
 		>  .
 endm
 
 mod SIMPLETHERM_IMPL_INSTANCE-MODEL-SYMBOLIC is
 	including SIMPLETHERM_IMPL_INSTANCE-MODEL .
 	including BEHAVIOR-SYMBOLIC-LOCATION .
-
+	
 	eq init = loc(real(0)) .
 	eq off = loc(real(1)) .
 	eq on = loc(real(2)) .
