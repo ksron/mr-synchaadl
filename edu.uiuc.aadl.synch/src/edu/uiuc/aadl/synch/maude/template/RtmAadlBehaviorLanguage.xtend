@@ -135,6 +135,9 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 			}'''
 	}
 	
+	private def dispatch CharSequence compileFlowsAction(AssignmentAction a)'''
+	«a.target.compileTarget» = «a.valueExpression.compileExpression»'''
+	
 	private def dispatch CharSequence compileAction(AssignmentAction a) '''
 		(«a.target.compilePrefixTarget»{«a.target.compileTarget»} := «a.valueExpression.compileExpression»)'''
 	
@@ -227,6 +230,7 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	
 	private def compilePropertyConstant(BehaviorPropertyConstant c) {
 		val value = c.property.constantValue
+		println("PropertyConstant : " + c.property.constantValue.class)
 		if (value instanceof PropertyValue){
 			'''[[«RtmAadlProperty::compilePropertyValue(value as PropertyValue)»]]'''
 		}
@@ -238,6 +242,7 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	private def dispatch CharSequence compileExpression(ValueExpression e) {
 		val itRel = e.relations.iterator
 		var result = itRel.next.compileExpression
+		//println("Result : " + result)
 		if (e.setLogicalOperators) {
 			val itOp = e.logicalOperators.iterator
 			while (itRel.hasNext)
@@ -248,14 +253,20 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	
 	
 	private def dispatch CharSequence compileExpression(Relation e) {
-		if (e.secondExpression == null)
+		if (e.secondExpression == null){
+			//println("Check 1-1")
 			e.firstExpression.compileExpression
-		else
+		}
+		else{
+			//println("Check 1-2")
 			'''(«e.firstExpression.compileExpression» «e.relationalOperator.literal» «e.secondExpression.compileExpression»)'''
+		}
+			
 	}
 	
 	
 	private def dispatch CharSequence compileExpression(SimpleExpression e) {
+		//println("Check 2")
 		val itTerm = e.terms.iterator 
 		var result = itTerm.next.compileExpression
 		if (e.setBinaryAddingOperators) {
@@ -275,6 +286,7 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	}
 	
 	private def dispatch CharSequence compileExpression(Term e) {
+		//println("Check 3")
 		val itFact = e.factors.iterator
 		var result = itFact.next.compileExpression
 		if (e.setMultiplyingOperators) {
@@ -285,6 +297,7 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 		return result
 	}
 	private def dispatch CharSequence compileExpression(Factor e) {
+		//println("Check 4")
 		if (e.setUnaryNumericOperator) '''
 			«e.unaryNumericOperator.literal»(«e.firstValue.compileExpression»)'''
 		else if (e.setUnaryBooleanOperator) '''

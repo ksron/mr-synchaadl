@@ -131,14 +131,8 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				o.check((! o.behavioral) || ! it.empty,
 					"No behavior annex definition in thread: " + o.category.getName() + " " + o.name)
 			]
-			//if(o.behavioral && ! (anxSub.empty)) Thread.dumpStack
-			//println("anxSub : " + anxSub)
-			//println("o.componentClassifier.ownedAnnexSubclauses : " + o.componentClassifier.ownedAnnexSubclauses)
-
 			val behAnx = if(o.behavioral && ! (anxSub.empty)) anxSub.get(0).parsedAnnexSubclause as BehaviorAnnex
-			//println("anxSub.get(0) : "+ if(o.behavioral && ! (anxSub.empty)) anxSub.get(0))
-			//println("anxSub.get(0).parsedAnnexSubclause : " + if(o.behavioral && ! (anxSub.empty)) anxSub.get(0).parsedAnnexSubclause)
-			//println("behAnx : " + behAnx)
+
 			
 			o.connectionInstances.forEach[connectionReferences.forEach[conxTable.putNotDuplicate(context, it)]]	
 
@@ -319,7 +313,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				}
 			}
 		}
-		println(targetInstances);
+		//println(targetInstances);
 		return targetInstances
 	}
 	
@@ -334,7 +328,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def compileSamplingTime(ComponentInstance o) {
 		var value = "(" + o.id("ComponentId") + " : ("
-		println(value)
+		//println(value)
 		for(PropertyAssociation p : o.ownedPropertyAssociations){
 			if(p.property.name.contains(PropertyUtil::SAMPLING_TIME)){
 				return value += "rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(0)+"),rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(2)+")))"
@@ -345,9 +339,9 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def compileResponseTime(ComponentInstance o) {
 		var value = "(" + o.id("ComponentId") + " : ("
-		println(value)
+		//println(value)
 		for(PropertyAssociation p : o.ownedPropertyAssociations){
-			println("PropertyAssociation : " + p.property.name)
+			//println("PropertyAssociation : " + p.property.name)
 			if(p.property.name.equals(PropertyUtil::RESPONSE_TIME)){
 				return value += "rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(0)+"),rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(2)+")))"
 			}
