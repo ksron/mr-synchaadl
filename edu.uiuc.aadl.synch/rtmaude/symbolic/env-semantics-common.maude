@@ -58,6 +58,7 @@ mod ENV-TRANSITION-AUX is
 
   var E : Exp .
   var PI : FeatureId .
+  var PRS : Set{FeatureRef} .
   var CI : ComponentId .
   var CR : ComponentRef .
   vars L L' : Location .
@@ -79,11 +80,16 @@ mod ENV-TRANSITION-AUX is
   op allPortsAbsent : Location Set{EnvJump} FeatureMap ComponentRef Configuration BoolExp ~> BoolExp [format (m! o)] .
 
   eq allPortsAbsent(L, JUMPS, FMAP, CR, PORTS) = allPortsAbsent(L, JUMPS, FMAP, CR, PORTS, bool(true)) .
-  eq allPortsAbsent(L, (L -[ PI ]-> L') ; JUMPS, FMAP, CR, 
-                    < PI : C:EnvInPort | target : CR, ATTS > PORTS, CONST)
-   = allPortsAbsent(L, JUMPS, FMAP, CR, 
-                    < PI : C:EnvInPort | target : CR, ATTS > PORTS, CONST and not isPortPresent(PI,FMAP)) .
+  eq allPortsAbsent(L, (L -[ PRS ]-> L') ; JUMPS, FMAP, CR, PORTS, CONST)
+   = allPortsAbsent(L, JUMPS, FMAP, CR, PORTS, CONST and allPortsAbsent(PRS, CR, PORTS, FMAP)) .
   eq allPortsAbsent(L, JUMPS, FMAP, CR, PORTS, CONST) = CONST [owise] .
+
+  --- all ports with target CR whose ids are in PRS are absent
+  op allPortsAbsent : Set{FeatureRef} ComponentRef Configuration FeatureMap ~> BoolExp [format (m! o)] .
+  eq allPortsAbsent((PI, PRS), CR, < PI : C:EnvInPort | target : CR, ATTS > PORTS, FMAP) 
+   = not isPortPresent(PI,FMAP) and 
+     allPortsAbsent(PRS, CR, < PI : C:EnvInPort | target : CR, ATTS > PORTS, FMAP) .
+  eq allPortsAbsent(PRS, CR, PORTS, FMAP) = bool(true) .
 
 --- update the feature map according to the data and the connection
 --- only connections related to CR are considered!

@@ -3,7 +3,7 @@ search [, 5] in TEST-THERMOSTAT-SYSTEM-HIE : {initConst || initState,false} =>+
     C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 5399
+states: 2  rewrites: 4969
 C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [30] < [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] and not [
@@ -39,23 +39,23 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     connections : empty,value : [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] # [true] >),connections : empty,varGen :
     < "top.cthread",0,0 >,currState : loc([0]),completeStates : loc([0]),
-    variables : x : Real,transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(
-    v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(
-    v[x] > c[upper])off !) end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]->
-    loc([0]) {skip}),loopBound : 0,transBound : 2 >,connections : ((temp --> (
-    cthread .. temp)) ; ((cthread .. on) --> on) ; (cthread .. off) --> off) >,
-    connections : ((temp --> (cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc
-    .. off) --> off) > < environment : Env | properties : ((
-    TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
-    {{1.0000000000000001e-1}}),features : (< on : EnvInPort | properties :
-    none,content : * # [false],envCache : * # b("top.environment", 3),target :
-    csys > < off : EnvInPort | properties : none,content : * # [false],envCache
-    : * # b("top.environment", 4),target : csys > < out : EnvOutPort |
-    properties : none,content : r("top.environment", 3) # b("top.environment",
-    5),envCache : r("top.environment", 3) # b("top.environment", 5),target :
-    csys >),subcomponents : < x : Data | properties : DataModel::InitialValue
-    => {{16}},features : none,subcomponents : none,connections : empty,value :
-    [16] + - r("top.environment", 1) * [3602879701896397/18014398509481984] + [
+    variables : x : Real,transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{
+    x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[
+    x] > c[upper])off !) end if ; c{curr} := v[x]},loopBound : 0,transBound : 2
+    >,connections : ((temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ;
+    (cthread .. off) --> off) >,connections : ((temp --> (cproc .. temp)) ; ((
+    cproc .. on) --> on) ; (cproc .. off) --> off) > < environment : Env |
+    properties : ((TimingProperties::Period => {{5}}) ;
+    HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),features :
+    (< on : EnvInPort | properties : none,content : * # [false],envCache : * #
+    b("top.environment", 3),target : csys > < off : EnvInPort | properties :
+    none,content : * # [false],envCache : * # b("top.environment", 4),target :
+    csys > < out : EnvOutPort | properties : none,content : r(
+    "top.environment", 3) # b("top.environment", 5),envCache : r(
+    "top.environment", 3) # b("top.environment", 5),target : csys >),
+    subcomponents : < x : Data | properties : DataModel::InitialValue => {{
+    16}},features : none,subcomponents : none,connections : empty,value : [16]
+    + - r("top.environment", 1) * [3602879701896397/18014398509481984] + [
     3602879701896397/18014398509481984] * r("top.environment", 1) + [
     3602879701896397/18014398509481984] * r("top.environment", 2) # [true] >,
     connections : x ==> out,varGen : < "top.environment",4,6 >,currMode : loc([
@@ -68,7 +68,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     temp)) >,false}
 
 Solution 2 (state 2)
-states: 3  rewrites: 17420
+states: 3  rewrites: 16558
 C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 5) and not [30] < [15/2] + (b("top.environment", 2) ?
@@ -120,19 +120,18 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 0) : [0]) / [4] + (b("top.environment", 5) ? r(
     "top.environment", 3) : r("top.environment", 0)) / [2] # [true] >),
     connections : empty,varGen : < "top.cthread",0,0 >,currState : loc([0]),
-    completeStates : loc([0]),variables : x : Real,transitions : ((loc([0]) -[
-    on dispatch]-> loc([1]) {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x]
-    < c[lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]})
-    ; loc([1]) -[otherwise]-> loc([0]) {skip}),loopBound : 0,transBound : 2 >,
-    connections : ((temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ; (
-    cthread .. off) --> off) >,connections : ((temp --> (cproc .. temp)) ; ((
-    cproc .. on) --> on) ; (cproc .. off) --> off) > < environment : Env |
-    properties : ((TimingProperties::Period => {{5}}) ;
-    HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),features :
-    (< on : EnvInPort | properties : none,content : * # [false],envCache : * #
-    b("top.environment", 6),target : csys > < off : EnvInPort | properties :
-    none,content : * # [false],envCache : * # b("top.environment", 7),target :
-    csys > < out : EnvOutPort | properties : none,content : r(
+    completeStates : loc([0]),variables : x : Real,transitions : loc([0]) -[on
+    dispatch]-> loc([0]) {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] <
+    c[lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]},
+    loopBound : 0,transBound : 2 >,connections : ((temp --> (cthread .. temp))
+    ; ((cthread .. on) --> on) ; (cthread .. off) --> off) >,connections : ((
+    temp --> (cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc .. off) -->
+    off) > < environment : Env | properties : ((TimingProperties::Period => {{
+    5}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
+    features : (< on : EnvInPort | properties : none,content : * # [false],
+    envCache : * # b("top.environment", 6),target : csys > < off : EnvInPort |
+    properties : none,content : * # [false],envCache : * # b("top.environment",
+    7),target : csys > < out : EnvOutPort | properties : none,content : r(
     "top.environment", 6) # b("top.environment", 8),envCache : r(
     "top.environment", 6) # b("top.environment", 8),target : csys >),
     subcomponents : < x : Data | properties : DataModel::InitialValue => {{
@@ -153,7 +152,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     temp)) >,false}
 
 Solution 3 (state 3)
-states: 4  rewrites: 37929
+states: 4  rewrites: 36635
 C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 5) and not [5] < r("top.environment", 7) and not [5] <
@@ -229,24 +228,23 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 8) ? r("top.environment", 6) : r("top.environment", 3))
     / [2] # [true] >),connections : empty,varGen : < "top.cthread",0,0 >,
     currState : loc([0]),completeStates : loc([0]),variables : x : Real,
-    transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(v{x} := ((c[curr] + f[
+    transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]-> loc([0]) {skip}),
-    loopBound : 0,transBound : 2 >,connections : ((temp --> (cthread .. temp))
-    ; ((cthread .. on) --> on) ; (cthread .. off) --> off) >,connections : ((
-    temp --> (cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc .. off) -->
-    off) > < environment : Env | properties : ((TimingProperties::Period => {{
-    5}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
-    features : (< on : EnvInPort | properties : none,content : * # [false],
-    envCache : * # b("top.environment", 9),target : csys > < off : EnvInPort |
-    properties : none,content : * # [false],envCache : * # b("top.environment",
-    10),target : csys > < out : EnvOutPort | properties : none,content : r(
-    "top.environment", 9) # b("top.environment", 11),envCache : r(
-    "top.environment", 9) # b("top.environment", 11),target : csys >),
-    subcomponents : < x : Data | properties : DataModel::InitialValue => {{
-    16}},features : none,subcomponents : none,connections : empty,value : [16]
-    + - r("top.environment", 1) * [3602879701896397/18014398509481984] + - r(
-    "top.environment", 4) * [3602879701896397/18014398509481984] + - r(
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >,connections : ((
+    temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ; (cthread .. off)
+    --> off) >,connections : ((temp --> (cproc .. temp)) ; ((cproc .. on) -->
+    on) ; (cproc .. off) --> off) > < environment : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
+    {{1.0000000000000001e-1}}),features : (< on : EnvInPort | properties :
+    none,content : * # [false],envCache : * # b("top.environment", 9),target :
+    csys > < off : EnvInPort | properties : none,content : * # [false],envCache
+    : * # b("top.environment", 10),target : csys > < out : EnvOutPort |
+    properties : none,content : r("top.environment", 9) # b("top.environment",
+    11),envCache : r("top.environment", 9) # b("top.environment", 11),target :
+    csys >),subcomponents : < x : Data | properties : DataModel::InitialValue
+    => {{16}},features : none,subcomponents : none,connections : empty,value :
+    [16] + - r("top.environment", 1) * [3602879701896397/18014398509481984] + -
+    r("top.environment", 4) * [3602879701896397/18014398509481984] + - r(
     "top.environment", 7) * [3602879701896397/18014398509481984] + [
     3602879701896397/18014398509481984] * r("top.environment", 1) + [
     3602879701896397/18014398509481984] * r("top.environment", 2) + [
@@ -264,7 +262,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     (csys .. temp)) >,false}
 
 Solution 4 (state 4)
-states: 5  rewrites: 68892
+states: 5  rewrites: 67166
 C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 5) and not [5] < r("top.environment", 7) and not [5] <
@@ -368,24 +366,24 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     / [4] + (b("top.environment", 11) ? r("top.environment", 9) : r(
     "top.environment", 6)) / [2] # [true] >),connections : empty,varGen : <
     "top.cthread",0,0 >,currState : loc([0]),completeStates : loc([0]),
-    variables : x : Real,transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(
-    v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(
-    v[x] > c[upper])off !) end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]->
-    loc([0]) {skip}),loopBound : 0,transBound : 2 >,connections : ((temp --> (
-    cthread .. temp)) ; ((cthread .. on) --> on) ; (cthread .. off) --> off) >,
-    connections : ((temp --> (cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc
-    .. off) --> off) > < environment : Env | properties : ((
-    TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
-    {{1.0000000000000001e-1}}),features : (< on : EnvInPort | properties :
-    none,content : * # [false],envCache : * # b("top.environment", 12),target :
-    csys > < off : EnvInPort | properties : none,content : * # [false],envCache
-    : * # b("top.environment", 13),target : csys > < out : EnvOutPort |
-    properties : none,content : r("top.environment", 12) # b("top.environment",
-    14),envCache : r("top.environment", 12) # b("top.environment", 14),target :
-    csys >),subcomponents : < x : Data | properties : DataModel::InitialValue
-    => {{16}},features : none,subcomponents : none,connections : empty,value :
-    [16] + - r("top.environment", 1) * [3602879701896397/18014398509481984] + -
-    r("top.environment", 4) * [3602879701896397/18014398509481984] + - r(
+    variables : x : Real,transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{
+    x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[
+    x] > c[upper])off !) end if ; c{curr} := v[x]},loopBound : 0,transBound : 2
+    >,connections : ((temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ;
+    (cthread .. off) --> off) >,connections : ((temp --> (cproc .. temp)) ; ((
+    cproc .. on) --> on) ; (cproc .. off) --> off) > < environment : Env |
+    properties : ((TimingProperties::Period => {{5}}) ;
+    HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),features :
+    (< on : EnvInPort | properties : none,content : * # [false],envCache : * #
+    b("top.environment", 12),target : csys > < off : EnvInPort | properties :
+    none,content : * # [false],envCache : * # b("top.environment", 13),target :
+    csys > < out : EnvOutPort | properties : none,content : r(
+    "top.environment", 12) # b("top.environment", 14),envCache : r(
+    "top.environment", 12) # b("top.environment", 14),target : csys >),
+    subcomponents : < x : Data | properties : DataModel::InitialValue => {{
+    16}},features : none,subcomponents : none,connections : empty,value : [16]
+    + - r("top.environment", 1) * [3602879701896397/18014398509481984] + - r(
+    "top.environment", 4) * [3602879701896397/18014398509481984] + - r(
     "top.environment", 7) * [3602879701896397/18014398509481984] + - r(
     "top.environment", 10) * [3602879701896397/18014398509481984] + [
     3602879701896397/18014398509481984] * r("top.environment", 1) + [
@@ -406,7 +404,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     (csys .. temp)) >,false}
 
 Solution 5 (state 5)
-states: 6  rewrites: 112396
+states: 6  rewrites: 110238
 C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 5) and not [5] < r("top.environment", 7) and not [5] <
@@ -544,19 +542,18 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 6)) / [4] + (b("top.environment", 14) ? r(
     "top.environment", 12) : r("top.environment", 9)) / [2] # [true] >),
     connections : empty,varGen : < "top.cthread",0,0 >,currState : loc([0]),
-    completeStates : loc([0]),variables : x : Real,transitions : ((loc([0]) -[
-    on dispatch]-> loc([1]) {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x]
-    < c[lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]})
-    ; loc([1]) -[otherwise]-> loc([0]) {skip}),loopBound : 0,transBound : 2 >,
-    connections : ((temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ; (
-    cthread .. off) --> off) >,connections : ((temp --> (cproc .. temp)) ; ((
-    cproc .. on) --> on) ; (cproc .. off) --> off) > < environment : Env |
-    properties : ((TimingProperties::Period => {{5}}) ;
-    HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),features :
-    (< on : EnvInPort | properties : none,content : * # [false],envCache : * #
-    b("top.environment", 15),target : csys > < off : EnvInPort | properties :
-    none,content : * # [false],envCache : * # b("top.environment", 16),target :
-    csys > < out : EnvOutPort | properties : none,content : r(
+    completeStates : loc([0]),variables : x : Real,transitions : loc([0]) -[on
+    dispatch]-> loc([0]) {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] <
+    c[lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]},
+    loopBound : 0,transBound : 2 >,connections : ((temp --> (cthread .. temp))
+    ; ((cthread .. on) --> on) ; (cthread .. off) --> off) >,connections : ((
+    temp --> (cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc .. off) -->
+    off) > < environment : Env | properties : ((TimingProperties::Period => {{
+    5}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
+    features : (< on : EnvInPort | properties : none,content : * # [false],
+    envCache : * # b("top.environment", 15),target : csys > < off : EnvInPort |
+    properties : none,content : * # [false],envCache : * # b("top.environment",
+    16),target : csys > < out : EnvOutPort | properties : none,content : r(
     "top.environment", 15) # b("top.environment", 17),envCache : r(
     "top.environment", 15) # b("top.environment", 17),target : csys >),
     subcomponents : < x : Data | properties : DataModel::InitialValue => {{
@@ -586,13 +583,13 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     (csys .. temp)) >,false}
 
 No more solutions.
-states: 6  rewrites: 131644
+states: 6  rewrites: 129484
 ==========================================
 search [, 5] in TEST-THERMOSTAT-SYSTEM-HIE : {initConst || initState,true} =>+
     C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 4316
+states: 2  rewrites: 4174
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [39631676720860365/18014398509481984] < r(
@@ -665,23 +662,23 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     connections : empty,value : [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] # [true] >),connections : empty,varGen :
     < "top.cthread",0,2 >,currState : loc([0]),completeStates : loc([0]),
-    variables : x : Real,transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(
-    v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(
-    v[x] > c[upper])off !) end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]->
-    loc([0]) {skip}),loopBound : 0,transBound : 2 >,connections : ((temp --> (
-    cthread .. temp)) ; ((cthread .. on) --> on) ; (cthread .. off) --> off) >,
-    connections : ((temp --> (cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc
-    .. off) --> off) > < environment : Env | properties : ((
-    TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
-    {{1.0000000000000001e-1}}),features : (< on : EnvInPort | properties :
-    none,content : * # [false],envCache : * # b("top.environment", 3),target :
-    csys > < off : EnvInPort | properties : none,content : * # [false],envCache
-    : * # b("top.environment", 4),target : csys > < out : EnvOutPort |
-    properties : none,content : r("top.environment", 6) # b("top.environment",
-    5),envCache : r("top.environment", 6) # b("top.environment", 5),target :
-    csys >),subcomponents : < x : Data | properties : DataModel::InitialValue
-    => {{16}},features : none,subcomponents : none,connections : empty,value :
-    r("top.environment", 4) # [true] >,connections : x ==> out,varGen : <
+    variables : x : Real,transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{
+    x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[
+    x] > c[upper])off !) end if ; c{curr} := v[x]},loopBound : 0,transBound : 2
+    >,connections : ((temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ;
+    (cthread .. off) --> off) >,connections : ((temp --> (cproc .. temp)) ; ((
+    cproc .. on) --> on) ; (cproc .. off) --> off) > < environment : Env |
+    properties : ((TimingProperties::Period => {{5}}) ;
+    HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),features :
+    (< on : EnvInPort | properties : none,content : * # [false],envCache : * #
+    b("top.environment", 3),target : csys > < off : EnvInPort | properties :
+    none,content : * # [false],envCache : * # b("top.environment", 4),target :
+    csys > < out : EnvOutPort | properties : none,content : r(
+    "top.environment", 6) # b("top.environment", 5),envCache : r(
+    "top.environment", 6) # b("top.environment", 5),target : csys >),
+    subcomponents : < x : Data | properties : DataModel::InitialValue => {{
+    16}},features : none,subcomponents : none,connections : empty,value : r(
+    "top.environment", 4) # [true] >,connections : x ==> out,varGen : <
     "top.environment",7,6 >,currMode : loc(r("top.environment", 5)),jumps : ((
     loc([0]) -[on]-> loc([1])) ; (loc([0]) -[off]-> loc([0])) ; (loc([1]) -[
     on]-> loc([1])) ; loc([1]) -[off]-> loc([0])),flows : ((loc([0]) [x(t)= (c[
@@ -692,7 +689,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     >,true}
 
 Solution 2 (state 2)
-states: 3  rewrites: 15008
+states: 3  rewrites: 14727
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [39631676720860365/18014398509481984] < r(
@@ -864,19 +861,18 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     "top.environment", 0) : [0]) / [4] + (b("top.environment", 5) ? r(
     "top.environment", 6) : r("top.environment", 0)) / [2] # [true] >),
     connections : empty,varGen : < "top.cthread",0,4 >,currState : loc([0]),
-    completeStates : loc([0]),variables : x : Real,transitions : ((loc([0]) -[
-    on dispatch]-> loc([1]) {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x]
-    < c[lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]})
-    ; loc([1]) -[otherwise]-> loc([0]) {skip}),loopBound : 0,transBound : 2 >,
-    connections : ((temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ; (
-    cthread .. off) --> off) >,connections : ((temp --> (cproc .. temp)) ; ((
-    cproc .. on) --> on) ; (cproc .. off) --> off) > < environment : Env |
-    properties : ((TimingProperties::Period => {{5}}) ;
-    HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),features :
-    (< on : EnvInPort | properties : none,content : * # [false],envCache : * #
-    b("top.environment", 6),target : csys > < off : EnvInPort | properties :
-    none,content : * # [false],envCache : * # b("top.environment", 7),target :
-    csys > < out : EnvOutPort | properties : none,content : r(
+    completeStates : loc([0]),variables : x : Real,transitions : loc([0]) -[on
+    dispatch]-> loc([0]) {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] <
+    c[lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]},
+    loopBound : 0,transBound : 2 >,connections : ((temp --> (cthread .. temp))
+    ; ((cthread .. on) --> on) ; (cthread .. off) --> off) >,connections : ((
+    temp --> (cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc .. off) -->
+    off) > < environment : Env | properties : ((TimingProperties::Period => {{
+    5}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
+    features : (< on : EnvInPort | properties : none,content : * # [false],
+    envCache : * # b("top.environment", 6),target : csys > < off : EnvInPort |
+    properties : none,content : * # [false],envCache : * # b("top.environment",
+    7),target : csys > < out : EnvOutPort | properties : none,content : r(
     "top.environment", 13) # b("top.environment", 8),envCache : r(
     "top.environment", 13) # b("top.environment", 8),target : csys >),
     subcomponents : < x : Data | properties : DataModel::InitialValue => {{
@@ -892,7 +888,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     >,true}
 
 Solution 3 (state 3)
-states: 4  rewrites: 33411
+states: 4  rewrites: 32991
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [39631676720860365/18014398509481984] < r(
@@ -1171,23 +1167,22 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     "top.environment", 8) ? r("top.environment", 13) : r("top.environment", 6))
     / [2] # [true] >),connections : empty,varGen : < "top.cthread",0,6 >,
     currState : loc([0]),completeStates : loc([0]),variables : x : Real,
-    transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(v{x} := ((c[curr] + f[
+    transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]-> loc([0]) {skip}),
-    loopBound : 0,transBound : 2 >,connections : ((temp --> (cthread .. temp))
-    ; ((cthread .. on) --> on) ; (cthread .. off) --> off) >,connections : ((
-    temp --> (cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc .. off) -->
-    off) > < environment : Env | properties : ((TimingProperties::Period => {{
-    5}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
-    features : (< on : EnvInPort | properties : none,content : * # [false],
-    envCache : * # b("top.environment", 9),target : csys > < off : EnvInPort |
-    properties : none,content : * # [false],envCache : * # b("top.environment",
-    10),target : csys > < out : EnvOutPort | properties : none,content : r(
-    "top.environment", 20) # b("top.environment", 11),envCache : r(
-    "top.environment", 20) # b("top.environment", 11),target : csys >),
-    subcomponents : < x : Data | properties : DataModel::InitialValue => {{
-    16}},features : none,subcomponents : none,connections : empty,value : r(
-    "top.environment", 18) # [true] >,connections : x ==> out,varGen : <
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >,connections : ((
+    temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ; (cthread .. off)
+    --> off) >,connections : ((temp --> (cproc .. temp)) ; ((cproc .. on) -->
+    on) ; (cproc .. off) --> off) > < environment : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
+    {{1.0000000000000001e-1}}),features : (< on : EnvInPort | properties :
+    none,content : * # [false],envCache : * # b("top.environment", 9),target :
+    csys > < off : EnvInPort | properties : none,content : * # [false],envCache
+    : * # b("top.environment", 10),target : csys > < out : EnvOutPort |
+    properties : none,content : r("top.environment", 20) # b("top.environment",
+    11),envCache : r("top.environment", 20) # b("top.environment", 11),target :
+    csys >),subcomponents : < x : Data | properties : DataModel::InitialValue
+    => {{16}},features : none,subcomponents : none,connections : empty,value :
+    r("top.environment", 18) # [true] >,connections : x ==> out,varGen : <
     "top.environment",21,12 >,currMode : loc(r("top.environment", 19)),jumps :
     ((loc([0]) -[on]-> loc([1])) ; (loc([0]) -[off]-> loc([0])) ; (loc([1]) -[
     on]-> loc([1])) ; loc([1]) -[off]-> loc([0])),flows : ((loc([0]) [x(t)= (c[
@@ -1198,7 +1193,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     >,true}
 
 Solution 4 (state 4)
-states: 5  rewrites: 59968
+states: 5  rewrites: 59409
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [39631676720860365/18014398509481984] < r(
@@ -1590,23 +1585,23 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     / [4] + (b("top.environment", 11) ? r("top.environment", 20) : r(
     "top.environment", 13)) / [2] # [true] >),connections : empty,varGen : <
     "top.cthread",0,8 >,currState : loc([0]),completeStates : loc([0]),
-    variables : x : Real,transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(
-    v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(
-    v[x] > c[upper])off !) end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]->
-    loc([0]) {skip}),loopBound : 0,transBound : 2 >,connections : ((temp --> (
-    cthread .. temp)) ; ((cthread .. on) --> on) ; (cthread .. off) --> off) >,
-    connections : ((temp --> (cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc
-    .. off) --> off) > < environment : Env | properties : ((
-    TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
-    {{1.0000000000000001e-1}}),features : (< on : EnvInPort | properties :
-    none,content : * # [false],envCache : * # b("top.environment", 12),target :
-    csys > < off : EnvInPort | properties : none,content : * # [false],envCache
-    : * # b("top.environment", 13),target : csys > < out : EnvOutPort |
-    properties : none,content : r("top.environment", 27) # b("top.environment",
-    14),envCache : r("top.environment", 27) # b("top.environment", 14),target :
-    csys >),subcomponents : < x : Data | properties : DataModel::InitialValue
-    => {{16}},features : none,subcomponents : none,connections : empty,value :
-    r("top.environment", 25) # [true] >,connections : x ==> out,varGen : <
+    variables : x : Real,transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{
+    x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[
+    x] > c[upper])off !) end if ; c{curr} := v[x]},loopBound : 0,transBound : 2
+    >,connections : ((temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ;
+    (cthread .. off) --> off) >,connections : ((temp --> (cproc .. temp)) ; ((
+    cproc .. on) --> on) ; (cproc .. off) --> off) > < environment : Env |
+    properties : ((TimingProperties::Period => {{5}}) ;
+    HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),features :
+    (< on : EnvInPort | properties : none,content : * # [false],envCache : * #
+    b("top.environment", 12),target : csys > < off : EnvInPort | properties :
+    none,content : * # [false],envCache : * # b("top.environment", 13),target :
+    csys > < out : EnvOutPort | properties : none,content : r(
+    "top.environment", 27) # b("top.environment", 14),envCache : r(
+    "top.environment", 27) # b("top.environment", 14),target : csys >),
+    subcomponents : < x : Data | properties : DataModel::InitialValue => {{
+    16}},features : none,subcomponents : none,connections : empty,value : r(
+    "top.environment", 25) # [true] >,connections : x ==> out,varGen : <
     "top.environment",28,15 >,currMode : loc(r("top.environment", 26)),jumps :
     ((loc([0]) -[on]-> loc([1])) ; (loc([0]) -[off]-> loc([0])) ; (loc([1]) -[
     on]-> loc([1])) ; loc([1]) -[off]-> loc([0])),flows : ((loc([0]) [x(t)= (c[
@@ -1617,7 +1612,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     >,true}
 
 Solution 5 (state 5)
-states: 6  rewrites: 95084
+states: 6  rewrites: 94386
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [39631676720860365/18014398509481984] < r(
@@ -2129,23 +2124,22 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     "top.environment", 14) ? r("top.environment", 27) : r("top.environment",
     20)) / [2] # [true] >),connections : empty,varGen : < "top.cthread",0,10 >,
     currState : loc([0]),completeStates : loc([0]),variables : x : Real,
-    transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(v{x} := ((c[curr] + f[
+    transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]-> loc([0]) {skip}),
-    loopBound : 0,transBound : 2 >,connections : ((temp --> (cthread .. temp))
-    ; ((cthread .. on) --> on) ; (cthread .. off) --> off) >,connections : ((
-    temp --> (cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc .. off) -->
-    off) > < environment : Env | properties : ((TimingProperties::Period => {{
-    5}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
-    features : (< on : EnvInPort | properties : none,content : * # [false],
-    envCache : * # b("top.environment", 15),target : csys > < off : EnvInPort |
-    properties : none,content : * # [false],envCache : * # b("top.environment",
-    16),target : csys > < out : EnvOutPort | properties : none,content : r(
-    "top.environment", 34) # b("top.environment", 17),envCache : r(
-    "top.environment", 34) # b("top.environment", 17),target : csys >),
-    subcomponents : < x : Data | properties : DataModel::InitialValue => {{
-    16}},features : none,subcomponents : none,connections : empty,value : r(
-    "top.environment", 32) # [true] >,connections : x ==> out,varGen : <
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >,connections : ((
+    temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ; (cthread .. off)
+    --> off) >,connections : ((temp --> (cproc .. temp)) ; ((cproc .. on) -->
+    on) ; (cproc .. off) --> off) > < environment : Env | properties : ((
+    TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
+    {{1.0000000000000001e-1}}),features : (< on : EnvInPort | properties :
+    none,content : * # [false],envCache : * # b("top.environment", 15),target :
+    csys > < off : EnvInPort | properties : none,content : * # [false],envCache
+    : * # b("top.environment", 16),target : csys > < out : EnvOutPort |
+    properties : none,content : r("top.environment", 34) # b("top.environment",
+    17),envCache : r("top.environment", 34) # b("top.environment", 17),target :
+    csys >),subcomponents : < x : Data | properties : DataModel::InitialValue
+    => {{16}},features : none,subcomponents : none,connections : empty,value :
+    r("top.environment", 32) # [true] >,connections : x ==> out,varGen : <
     "top.environment",35,18 >,currMode : loc(r("top.environment", 33)),jumps :
     ((loc([0]) -[on]-> loc([1])) ; (loc([0]) -[off]-> loc([0])) ; (loc([1]) -[
     on]-> loc([1])) ; loc([1]) -[off]-> loc([0])),flows : ((loc([0]) [x(t)= (c[
@@ -2156,13 +2150,13 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     >,true}
 
 No more solutions.
-states: 6  rewrites: 95084
+states: 6  rewrites: 94386
 ==========================================
 search [, 5] in TEST-THERMOSTAT-SYSTEM-HIE : {initConst || cinitState,false}
     =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 4268
+states: 2  rewrites: 4132
 C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [30] < [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] and not [
@@ -2208,16 +2202,15 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     connections : empty,value : [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] # [true] >),connections : empty,varGen :
     < "top.cthread",0,0 >,currState : loc([0]),completeStates : loc([0]),
-    variables : x : Real,transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(
-    v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(
-    v[x] > c[upper])off !) end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]->
-    loc([0]) {skip}),loopBound : 0,transBound : 2 >),connections : (((
-    environment .. out) --> ((csys . cproc . cthread) .. temp)) ; (((csys .
-    cproc . cthread) .. on) --> (environment .. on)) ; ((csys . cproc .
-    cthread) .. off) --> (environment .. off)) >,false}
+    variables : x : Real,transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{
+    x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[
+    x] > c[upper])off !) end if ; c{curr} := v[x]},loopBound : 0,transBound : 2
+    >),connections : (((environment .. out) --> ((csys . cproc . cthread) ..
+    temp)) ; (((csys . cproc . cthread) .. on) --> (environment .. on)) ; ((
+    csys . cproc . cthread) .. off) --> (environment .. off)) >,false}
 
 Solution 2 (state 2)
-states: 3  rewrites: 12701
+states: 3  rewrites: 12429
 C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 5) and not [30] < [15/2] + (b("top.environment", 2) ?
@@ -2282,16 +2275,16 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 0) : [0]) / [4] + (b("top.environment", 5) ? r(
     "top.environment", 3) : r("top.environment", 0)) / [2] # [true] >),
     connections : empty,varGen : < "top.cthread",0,0 >,currState : loc([0]),
-    completeStates : loc([0]),variables : x : Real,transitions : ((loc([0]) -[
-    on dispatch]-> loc([1]) {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x]
-    < c[lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]})
-    ; loc([1]) -[otherwise]-> loc([0]) {skip}),loopBound : 0,transBound : 2 >),
-    connections : (((environment .. out) --> ((csys . cproc . cthread) ..
-    temp)) ; (((csys . cproc . cthread) .. on) --> (environment .. on)) ; ((
-    csys . cproc . cthread) .. off) --> (environment .. off)) >,false}
+    completeStates : loc([0]),variables : x : Real,transitions : loc([0]) -[on
+    dispatch]-> loc([0]) {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] <
+    c[lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]},
+    loopBound : 0,transBound : 2 >),connections : (((environment .. out) --> ((
+    csys . cproc . cthread) .. temp)) ; (((csys . cproc . cthread) .. on) --> (
+    environment .. on)) ; ((csys . cproc . cthread) .. off) --> (environment ..
+    off)) >,false}
 
 Solution 3 (state 3)
-states: 4  rewrites: 24948
+states: 4  rewrites: 24540
 C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 5) and not [5] < r("top.environment", 7) and not [5] <
@@ -2383,16 +2376,15 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 8) ? r("top.environment", 6) : r("top.environment", 3))
     / [2] # [true] >),connections : empty,varGen : < "top.cthread",0,0 >,
     currState : loc([0]),completeStates : loc([0]),variables : x : Real,
-    transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(v{x} := ((c[curr] + f[
+    transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]-> loc([0]) {skip}),
-    loopBound : 0,transBound : 2 >),connections : (((environment .. out) --> ((
-    csys . cproc . cthread) .. temp)) ; (((csys . cproc . cthread) .. on) --> (
-    environment .. on)) ; ((csys . cproc . cthread) .. off) --> (environment ..
-    off)) >,false}
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >),connections : (((
+    environment .. out) --> ((csys . cproc . cthread) .. temp)) ; (((csys .
+    cproc . cthread) .. on) --> (environment .. on)) ; ((csys . cproc .
+    cthread) .. off) --> (environment .. off)) >,false}
 
 Solution 4 (state 4)
-states: 5  rewrites: 41993
+states: 5  rewrites: 41449
 C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 5) and not [5] < r("top.environment", 7) and not [5] <
@@ -2515,16 +2507,15 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     / [4] + (b("top.environment", 11) ? r("top.environment", 9) : r(
     "top.environment", 6)) / [2] # [true] >),connections : empty,varGen : <
     "top.cthread",0,0 >,currState : loc([0]),completeStates : loc([0]),
-    variables : x : Real,transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(
-    v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(
-    v[x] > c[upper])off !) end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]->
-    loc([0]) {skip}),loopBound : 0,transBound : 2 >),connections : (((
-    environment .. out) --> ((csys . cproc . cthread) .. temp)) ; (((csys .
-    cproc . cthread) .. on) --> (environment .. on)) ; ((csys . cproc .
-    cthread) .. off) --> (environment .. off)) >,false}
+    variables : x : Real,transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{
+    x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[
+    x] > c[upper])off !) end if ; c{curr} := v[x]},loopBound : 0,transBound : 2
+    >),connections : (((environment .. out) --> ((csys . cproc . cthread) ..
+    temp)) ; (((csys . cproc . cthread) .. on) --> (environment .. on)) ; ((
+    csys . cproc . cthread) .. off) --> (environment .. off)) >,false}
 
 Solution 5 (state 5)
-states: 6  rewrites: 64781
+states: 6  rewrites: 64101
 C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 5) and not [5] < r("top.environment", 7) and not [5] <
@@ -2685,22 +2676,21 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 14) ? r("top.environment", 12) : r("top.environment",
     9)) / [2] # [true] >),connections : empty,varGen : < "top.cthread",0,0 >,
     currState : loc([0]),completeStates : loc([0]),variables : x : Real,
-    transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(v{x} := ((c[curr] + f[
+    transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]-> loc([0]) {skip}),
-    loopBound : 0,transBound : 2 >),connections : (((environment .. out) --> ((
-    csys . cproc . cthread) .. temp)) ; (((csys . cproc . cthread) .. on) --> (
-    environment .. on)) ; ((csys . cproc . cthread) .. off) --> (environment ..
-    off)) >,false}
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >),connections : (((
+    environment .. out) --> ((csys . cproc . cthread) .. temp)) ; (((csys .
+    cproc . cthread) .. on) --> (environment .. on)) ; ((csys . cproc .
+    cthread) .. off) --> (environment .. off)) >,false}
 
 No more solutions.
-states: 6  rewrites: 73007
+states: 6  rewrites: 72327
 ==========================================
 search [, 5] in TEST-THERMOSTAT-SYSTEM-HIE : {initConst || cinitState,true} =>+
     C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 3557
+states: 2  rewrites: 3415
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [39631676720860365/18014398509481984] < r(
@@ -2781,16 +2771,16 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     subcomponents : none,connections : empty,value : [15/2] + (b(
     "top.environment", 2) ? r("top.environment", 0) : [0]) / [2] # [true] >),
     connections : empty,varGen : < "top.cthread",0,2 >,currState : loc([0]),
-    completeStates : loc([0]),variables : x : Real,transitions : ((loc([0]) -[
-    on dispatch]-> loc([1]) {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x]
-    < c[lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]})
-    ; loc([1]) -[otherwise]-> loc([0]) {skip}),loopBound : 0,transBound : 2 >),
-    connections : (((environment .. out) --> ((csys . cproc . cthread) ..
-    temp)) ; (((csys . cproc . cthread) .. on) --> (environment .. on)) ; ((
-    csys . cproc . cthread) .. off) --> (environment .. off)) >,true}
+    completeStates : loc([0]),variables : x : Real,transitions : loc([0]) -[on
+    dispatch]-> loc([0]) {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] <
+    c[lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]},
+    loopBound : 0,transBound : 2 >),connections : (((environment .. out) --> ((
+    csys . cproc . cthread) .. temp)) ; (((csys . cproc . cthread) .. on) --> (
+    environment .. on)) ; ((csys . cproc . cthread) .. off) --> (environment ..
+    off)) >,true}
 
 Solution 2 (state 2)
-states: 3  rewrites: 11779
+states: 3  rewrites: 11498
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [39631676720860365/18014398509481984] < r(
@@ -2971,16 +2961,15 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     "top.environment", 5) ? r("top.environment", 6) : r("top.environment", 0))
     / [2] # [true] >),connections : empty,varGen : < "top.cthread",0,4 >,
     currState : loc([0]),completeStates : loc([0]),variables : x : Real,
-    transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(v{x} := ((c[curr] + f[
+    transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]-> loc([0]) {skip}),
-    loopBound : 0,transBound : 2 >),connections : (((environment .. out) --> ((
-    csys . cproc . cthread) .. temp)) ; (((csys . cproc . cthread) .. on) --> (
-    environment .. on)) ; ((csys . cproc . cthread) .. off) --> (environment ..
-    off)) >,true}
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >),connections : (((
+    environment .. out) --> ((csys . cproc . cthread) .. temp)) ; (((csys .
+    cproc . cthread) .. on) --> (environment .. on)) ; ((csys . cproc .
+    cthread) .. off) --> (environment .. off)) >,true}
 
 Solution 3 (state 3)
-states: 4  rewrites: 24598
+states: 4  rewrites: 24178
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [39631676720860365/18014398509481984] < r(
@@ -3267,16 +3256,15 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     / [4] + (b("top.environment", 8) ? r("top.environment", 13) : r(
     "top.environment", 6)) / [2] # [true] >),connections : empty,varGen : <
     "top.cthread",0,6 >,currState : loc([0]),completeStates : loc([0]),
-    variables : x : Real,transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(
-    v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(
-    v[x] > c[upper])off !) end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]->
-    loc([0]) {skip}),loopBound : 0,transBound : 2 >),connections : (((
-    environment .. out) --> ((csys . cproc . cthread) .. temp)) ; (((csys .
-    cproc . cthread) .. on) --> (environment .. on)) ; ((csys . cproc .
-    cthread) .. off) --> (environment .. off)) >,true}
+    variables : x : Real,transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{
+    x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[
+    x] > c[upper])off !) end if ; c{curr} := v[x]},loopBound : 0,transBound : 2
+    >),connections : (((environment .. out) --> ((csys . cproc . cthread) ..
+    temp)) ; (((csys . cproc . cthread) .. on) --> (environment .. on)) ; ((
+    csys . cproc . cthread) .. off) --> (environment .. off)) >,true}
 
 Solution 4 (state 4)
-states: 5  rewrites: 42284
+states: 5  rewrites: 41725
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [39631676720860365/18014398509481984] < r(
@@ -3675,16 +3663,16 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     "top.environment", 6)) / [4] + (b("top.environment", 11) ? r(
     "top.environment", 20) : r("top.environment", 13)) / [2] # [true] >),
     connections : empty,varGen : < "top.cthread",0,8 >,currState : loc([0]),
-    completeStates : loc([0]),variables : x : Real,transitions : ((loc([0]) -[
-    on dispatch]-> loc([1]) {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x]
-    < c[lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]})
-    ; loc([1]) -[otherwise]-> loc([0]) {skip}),loopBound : 0,transBound : 2 >),
-    connections : (((environment .. out) --> ((csys . cproc . cthread) ..
-    temp)) ; (((csys . cproc . cthread) .. on) --> (environment .. on)) ; ((
-    csys . cproc . cthread) .. off) --> (environment .. off)) >,true}
+    completeStates : loc([0]),variables : x : Real,transitions : loc([0]) -[on
+    dispatch]-> loc([0]) {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] <
+    c[lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]},
+    loopBound : 0,transBound : 2 >),connections : (((environment .. out) --> ((
+    csys . cproc . cthread) .. temp)) ; (((csys . cproc . cthread) .. on) --> (
+    environment .. on)) ; ((csys . cproc . cthread) .. off) --> (environment ..
+    off)) >,true}
 
 Solution 5 (state 5)
-states: 6  rewrites: 65107
+states: 6  rewrites: 64409
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 1) and not [5] < r(
     "top.environment", 2) and not [39631676720860365/18014398509481984] < r(
@@ -4204,14 +4192,13 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     "top.environment", 14) ? r("top.environment", 27) : r("top.environment",
     20)) / [2] # [true] >),connections : empty,varGen : < "top.cthread",0,10 >,
     currState : loc([0]),completeStates : loc([0]),variables : x : Real,
-    transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(v{x} := ((c[curr] + f[
+    transitions : loc([0]) -[on dispatch]-> loc([0]) {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; loc([1]) -[otherwise]-> loc([0]) {skip}),
-    loopBound : 0,transBound : 2 >),connections : (((environment .. out) --> ((
-    csys . cproc . cthread) .. temp)) ; (((csys . cproc . cthread) .. on) --> (
-    environment .. on)) ; ((csys . cproc . cthread) .. off) --> (environment ..
-    off)) >,true}
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >),connections : (((
+    environment .. out) --> ((csys . cproc . cthread) .. temp)) ; (((csys .
+    cproc . cthread) .. on) --> (environment .. on)) ; ((csys . cproc .
+    cthread) .. off) --> (environment .. off)) >,true}
 
 No more solutions.
-states: 6  rewrites: 65107
+states: 6  rewrites: 64409
 Bye.

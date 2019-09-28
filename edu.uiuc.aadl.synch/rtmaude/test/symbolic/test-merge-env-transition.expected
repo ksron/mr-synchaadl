@@ -5,7 +5,7 @@ reduce in TEST-ENV-TRANSITION-SEMANTICS-META : execEnvMerge(time([0]) mode(loc(
     flows((loc([0]) [x(t)= (c[x] - (v[t] * [[1.0000000000000001e-1]]))]) ; loc(
     [1]) [x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))]) bcf envcon(conx,
     envports)) .
-rewrites: 763
+rewrites: 775
 result BATransResult: loc(r("G", 7)) | on1 |-> ([0] # b(0) : [true]), on2 |-> (
     [0] # b(1) : [true]), off1 |-> ([0] # b(2) : [true]), off2 |-> ([0] # b(3)
     : [true]), a |-> r("G", 8) # [true] | x |=> r("G", 9) # [true], y |=> r(
@@ -27,7 +27,7 @@ reduce in TEST-ENV-TRANSITION-SEMANTICS-META : execEnvMerge(time([0]) mode(loc(
     r("mode", 0))) vargen(< "G",5,5 >) sampling((cr1 :(0,1), cr2 :(3/2,5/2)))
     response((cr1 :(4/7,3), cr2 :(13/4,4))) jumps(trans) flows(flows) bcf
     envcon(conx, envports)) .
-rewrites: 7808
+rewrites: 8160
 result BATransResult: loc(r("G", 10)) | on1 |-> ([0] # b(0) : [true]), on2 |->
     ([0] # b(1) : [true]), off1 |-> ([0] # b(2) : [true]), off2 |-> ([0] # b(3)
     : [true]), a |-> r("G", 8) # [true], b |-> r("G", 9) # [true] | x |=> r(

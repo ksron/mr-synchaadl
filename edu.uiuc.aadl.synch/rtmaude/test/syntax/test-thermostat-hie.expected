@@ -22,28 +22,28 @@ result Object: < top : System | properties : none,features : none,subcomponents
     Real) > < curr : Data | properties : DataModel::InitialValue => {{15}},
     features : none,subcomponents : none,connections : empty,value : null(Real)
     >),connections : empty,varGen : < "top.cthread" >,currState : init,
-    completeStates : init,variables : x : Real,transitions : ((init -[on
-    dispatch]-> state {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[
-    lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]}) ;
-    state -[otherwise]-> init {skip}),loopBound : 0,transBound : 2 >,
-    connections : ((temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ; (
-    cthread .. off) --> off) >,connections : ((temp --> (cproc .. temp)) ; ((
-    cproc .. on) --> on) ; (cproc .. off) --> off) > < environment : Env |
-    properties : ((TimingProperties::Period => {{5}}) ;
-    HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),features :
-    (< on : EnvInPort | properties : none,content : null(Unit),envCache : null(
-    Unit),target : csys > < off : EnvInPort | properties : none,content : null(
-    Unit),envCache : null(Unit),target : csys > < out : EnvOutPort | properties
-    : none,content : null(Real),envCache : null(Real),target : csys >),
-    subcomponents : < x : Data | properties : DataModel::InitialValue => {{
-    16}},features : none,subcomponents : none,connections : empty,value : null(
-    Real) >,connections : x ==> out,varGen : < "top.environment" >,currMode :
-    init,jumps : ((init -[on]-> state) ; (init -[off]-> init) ; (state -[on]->
-    state) ; state -[off]-> init),flows : ((init [x(t)= (c[x] + (v[t] * [[
-    2.0000000000000001e-1]]))]) ; state [x(t)= (c[x] - (v[t] * [[
-    1.0000000000000001e-1]]))]),sampling : csys :(0,2),response : csys :(3,4)
-    >),connections : (((csys .. on) --> (environment .. on)) ; ((csys .. off)
-    --> (environment .. off)) ; (environment .. out) --> (csys .. temp)) >
+    completeStates : init,variables : x : Real,transitions : init -[on
+    dispatch]-> init {(v{x} := ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[
+    lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]},
+    loopBound : 0,transBound : 2 >,connections : ((temp --> (cthread .. temp))
+    ; ((cthread .. on) --> on) ; (cthread .. off) --> off) >,connections : ((
+    temp --> (cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc .. off) -->
+    off) > < environment : Env | properties : ((TimingProperties::Period => {{
+    5}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
+    features : (< on : EnvInPort | properties : none,content : null(Unit),
+    envCache : null(Unit),target : csys > < off : EnvInPort | properties :
+    none,content : null(Unit),envCache : null(Unit),target : csys > < out :
+    EnvOutPort | properties : none,content : null(Real),envCache : null(Real),
+    target : csys >),subcomponents : < x : Data | properties :
+    DataModel::InitialValue => {{16}},features : none,subcomponents : none,
+    connections : empty,value : null(Real) >,connections : x ==> out,varGen : <
+    "top.environment" >,currMode : init,jumps : ((init -[on]-> state) ; (init
+    -[off]-> init) ; (state -[on]-> state) ; state -[off]-> init),flows : ((
+    init [x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))]) ; state [x(t)= (
+    c[x] - (v[t] * [[1.0000000000000001e-1]]))]),sampling : csys :(0,2),
+    response : csys :(3,4) >),connections : (((csys .. on) --> (environment ..
+    on)) ; ((csys .. off) --> (environment .. off)) ; (environment .. out) -->
+    (csys .. temp)) >
 ==========================================
 reduce in TEST-THERMOSTAT-SYSTEM-HIE-MOD : collapse(model) .
 rewrites: 87
@@ -74,11 +74,10 @@ result Object: < top : System | properties : none,features : none,subcomponents
     | properties : DataModel::InitialValue => {{15}},features : none,
     subcomponents : none,connections : empty,value : null(Real) >),connections
     : empty,varGen : < "top.cthread" >,currState : init,completeStates : init,
-    variables : x : Real,transitions : ((init -[on dispatch]-> state {(v{x} :=
-    ((c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[
-    upper])off !) end if ; c{curr} := v[x]}) ; state -[otherwise]-> init {
-    skip}),loopBound : 0,transBound : 2 >),connections : (((environment .. out)
-    --> ((csys . cproc . cthread) .. temp)) ; (((csys . cproc . cthread) .. on)
-    --> (environment .. on)) ; ((csys . cproc . cthread) .. off) --> (
-    environment .. off)) >
+    variables : x : Real,transitions : init -[on dispatch]-> init {(v{x} := ((
+    c[curr] + f[temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[
+    upper])off !) end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >),
+    connections : (((environment .. out) --> ((csys . cproc . cthread) ..
+    temp)) ; (((csys . cproc . cthread) .. on) --> (environment .. on)) ; ((
+    csys . cproc . cthread) .. off) --> (environment .. off)) >
 Bye.

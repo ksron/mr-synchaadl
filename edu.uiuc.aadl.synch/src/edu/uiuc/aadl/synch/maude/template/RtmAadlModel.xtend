@@ -45,12 +45,18 @@ import org.osate.aadl2.ListValue
 import org.osate.aadl2.ModalPropertyValue
 import org.eclipse.emf.common.util.ECollections
 import java.util.Comparator
+import org.antlr.v4.runtime.ANTLRInputStream
+import edu.postech.antlr.parser.FlowsLexer
+import org.antlr.v4.runtime.CommonTokenStream
+import edu.postech.antlr.parser.FlowsParser
+import edu.postech.antlr.firstPath.FlowsVisitor
+import edu.postech.antlr.secondPath.ContinuousFunction
+import org.osate.ba.aadlba.BehaviorActionSequence
 
 class RtmAadlModel extends RtmAadlIdentifier {
 
 	private val RtmAadlBehaviorLanguage bc;
 	private val RtmAadlProperty pc;
-	private val RtmAadlFlowsParser fpc;
 	private val IProgressMonitor monitor;
 	private val SetMultimap<ComponentInstance, ConnectionReference> conxTable = HashMultimap::create() ;
 
@@ -60,7 +66,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		this.monitor = pm;
 		this.bc = new RtmAadlBehaviorLanguage(errMgr, opTable);
 		this.pc = new RtmAadlProperty(errMgr, opTable);
-		this.fpc = new RtmAadlFlowsParser(errMgr, opTable);
 	}
 
 	def doGenerate(SystemInstance model) {
@@ -172,10 +177,10 @@ class RtmAadlModel extends RtmAadlIdentifier {
 					«o.modeInstances.compileCurrentMode»
 					),
 				jumps : (
-					«o.modeTransitionInstances.map[compileJumps].filterNull.join(' ;\n', 'none')»
+					«o.modeTransitionInstances.map[compileJumps].filterNull.join(' ;\n', 'empty')»
 					),
 				flows : (
-					«fpc.isAndGetContinuousDynamics(o).map[fpc.compileContinuousDynamics(it, o)].filterNull.join(" ;\n", "empty")»
+					«isAndGetContinuousDynamics(o).map[compileContinuousDynamics(it, o)].filterNull.join(" ;\n", "empty")»
 					),
 				sampling : (
 					«o.compileTargetInstanceList.map[compileSamplingTime].filterNull.join(" ,\n", "empty")»
@@ -284,6 +289,9 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				return value.name
 			}
 		}
+		if(mi.isEmpty){
+			return "@@default@loc@@"
+		}
 		return mi.get(0).name
 	}
 	
@@ -292,7 +300,53 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		val src = mti.name.split("_").get(0)
 		val dest = mti.name.split("_").get(mti.name.split("_").length-1)
 		val guard = mti.name.substring(src.length+1, mti.name.length-dest.length-1)
-		'''(«src» -[ «guard.escape» ]-> «dest»)'''
+		'''(«mti.source.name» -[ («mti.modeTransition.ownedTriggers.map[it.triggerPort.name.escape].filterNull.join(" , ", "[[true]]")») ]-> «mti.destination.name»)'''
+	}
+	// Compile Flows
+	public def isAndGetContinuousDynamics(ComponentInstance o){
+		for(PropertyAssociation pa : o.ownedPropertyAssociations){
+			if(pa.property.qualifiedName().contains(PropertyUtil::CD)){
+				return pa.ownedValues
+			}
+		}
+	}
+	
+	public def compileContinuousDynamics(ModalPropertyValue mpv, ComponentInstance o){		
+		var mode = ""
+		if(!mpv.inModes.isEmpty){
+			for(String modes : mpv.inModes.get(0).toString.split("#")){
+				if(modes.contains(o.name)){
+					mode = modes.split("\\.").last
+				}
+			}
+		} else {
+			mode = "@@default@loc@@"
+		}
+
+		var expression = (mpv.ownedValue as StringLiteral).value
+		
+		return "((" + mode + ")" + "[" + expression.antlrParsing(o)+"])"
+		
+		//return "((" + mode + ")" + "[" + expression.split(";").map[if(it.trim.length>1) it.trim.compileCDParsing(o)].filterNull.join(" ; ", "empty") + "])"
+	}
+	
+	private def antlrParsing(String expression, ComponentInstance ci){
+		println("Parsing..")
+		
+		var stream = new ANTLRInputStream(expression)
+		var lexer = new FlowsLexer(stream)
+		var tokens = new CommonTokenStream(lexer)
+		var parser = new FlowsParser(tokens)
+		
+		println("Result : " + parser.getBuildParseTree) 
+		
+        val bhaSeq = new FlowsVisitor().setComponentInstance(ci).visitContinuousdynamics(parser.continuousdynamics()) as BehaviorActionSequence;
+		val cf = new ContinuousFunction(bhaSeq, this.bc)
+		cf.parse
+		cf.setVarId(this);
+		
+		cf.getMaude
+		//""
 	}
 	
 	// Compile Sampling/Response

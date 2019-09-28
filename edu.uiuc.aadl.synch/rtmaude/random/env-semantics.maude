@@ -60,13 +60,14 @@ mod ENV-TRANSITION-SEMANTICS is
   var FLOWS : Set{EnvFlow} .
   var FMAP : FeatureMap .
   var D : DataContent .
-  var E : Exp .
-  vars B B' : BoolExp .
+  vars E E' : Exp .
+  vars B B' B'' : BoolExp .
   vars SK PER : RealExp .
   var CONXS : Set{Connection} .
   vars DATA DATA' : DataValuation .
   var CI : ComponentId .
   var PI : FeatureId .
+  var PRS : Set{FeatureRef} .
   var CR : ComponentRef .
   vars ECF ECF' ECF'' : BehaviorConf .
   vars PORTS PORTS' : Configuration .
@@ -121,22 +122,24 @@ mod ENV-TRANSITION-SEMANTICS is
   /\ check-true(B and B')
   /\ T' := rand(max(LT,T), min(UT + 2 * rval(SK), rval(PER)), s N) .
 
-   --- a command has arrived at port PI from controller CR
-   --- assume the mode transition is deterministic.
+   --- a command has arrived at port PI from controller CR, together with other data ports connected to CR
+   --- NOTE: assume the mode transition is deterministic.
  ceq execResp(time(T)  mode(L)  envcon(CONXS,PORTS) feature(FMAP) ECF, CR, T')
    = execResp(time(T') mode(L') envcon(CONXS,PORTS) feature(FMAP) ECF'')
-  if jumps((L -[ PI ]-> L') ; JUMPS) flows((L FLOW) ; FLOWS) ECF' := ECF 
+  if jumps((L -[ PI, PRS ]-> L') ; JUMPS) flows((L FLOW) ; FLOWS) ECF' := ECF 
   /\ check-true(isPortPresent(PI, FMAP)) 
   /\ < PI : C:EnvInPort | target : CR, ATTS > PORTS' := PORTS
   /\ DATA := execFlow(FLOW, real(T' + - T), ECF) 
-  /\ ECF'' := updateEnvData(DATA, updateResponseData(PI, FMAP[PI], CONXS, ECF)) .
+  /\ ECF'' := updateEnvData(DATA, updateResponseData(CONXS, CR, PORTS, FMAP, ECF)) .
 
    --- when no command has arrived from controller CR
+   --- No mode change, but DATA are updated by data input from CR
  ceq execResp(time(T)  mode(L) envcon(CONXS,PORTS) feature(FMAP) ECF, CR, T')
-   = execResp(time(T') mode(L) envcon(CONXS,PORTS) feature(FMAP) updateEnvData(DATA,ECF))
+   = execResp(time(T') mode(L) envcon(CONXS,PORTS) feature(FMAP) ECF'')
   if jumps(JUMPS) flows((L FLOW) ; FLOWS) ECF' := ECF 
   /\ check-true(allPortsAbsent(L, JUMPS, FMAP, CR, PORTS)) 
-  /\ DATA := execFlow(FLOW, real(T' + - T), ECF) .
+  /\ DATA := execFlow(FLOW, real(T' + - T), ECF) 
+  /\ ECF'' := updateEnvData(DATA, updateResponseData(CONXS, CR, PORTS, FMAP, ECF)) .
 
  ceq execResp(time(T) mode(L) prop(PROPS) response(empty) flows((L FLOW) ; FLOWS) randC(N) ECF)
    = transResult(L, prop(PROPS) updateEnvData(DATA,ECF)) | N  
@@ -152,12 +155,19 @@ mod ENV-TRANSITION-SEMANTICS is
     if check-true(B) .
   eq updateEnvData(empty, ECF) = ECF .
 
-  --- update the data according to the data value at PI and the connection.
-  op updateResponseData : FeatureId FeatureMapContent Set{Connection} BehaviorConf ~> BehaviorConf [format (m! o)] .
- ceq updateResponseData(PI, D : B, (PI =>> CI) ; CONXS, data(DATA) ECF)
-   = data(insert(CI, D, DATA)) ECF 
-    if check-true(B) .
-  eq updateResponseData(PI, D : B, CONXS, ECF) = ECF [owise] . --- if no connection from PI exists
+  --- update the data from input ports connected to CR; for absent data ports,
+  --- previous values are used (i.e. no change on data components)
+  op updateResponseData : Set{Connection} ComponentRef Configuration FeatureMap BehaviorConf ~> BehaviorConf [format (m! o)] .
+
+  ceq updateResponseData((PI =>> CI) ; CONXS, CR, PORTS, FMAP, data(DATA) ECF)
+    = updateResponseData(CONXS, CR, PORTS, FMAP, 
+                         data(insert(CI, (B ? E : E') # (B or B'), DATA)) ECF)
+   if < PI : C:EnvInPort | target : CR, ATTS > PORTS' := PORTS
+   /\ E  # B : B'' := FMAP[PI]   --- NOTE: B'' (freshness) is always true
+   /\ E' # B' := DATA[CI] 
+   /\ check-true(B'' and (B or B')) .
+
+  eq updateResponseData(CONXS, CR, PORTS, FMAP, ECF) = ECF [owise] . 
 endm
 
 

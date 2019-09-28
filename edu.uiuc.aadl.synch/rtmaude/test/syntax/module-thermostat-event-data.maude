@@ -9,7 +9,7 @@ mod THERMOSTAT-SYSTEM-SYNTAX is
 
   ops top controller environment lower upper curr x e : -> ComponentId .
   ops x t : -> VarId .
-  ops on off temp out : -> FeatureId .
+  ops on off temp out ce ee : -> FeatureId .
   ops init state : -> Location .
 
   op model : -> Object .
@@ -22,9 +22,11 @@ mod THERMOSTAT-SYSTEM-SYNTAX is
                             < temp : DataInPort | content : null(Real), 
                                                   cache : null(Real),
                                                   properties : none >
-                            < on  : DataOutPort | content : null(Real),
+                            < ce  : DataOutPort | content : null(Real),
+                                                  properties : DataModel::InitialValue => {{0}} >
+                            < on  : DataOutPort | content : null(Unit),
                                                   properties : none >
-                            < off : DataOutPort | content : null(Real),
+                            < off : DataOutPort | content : null(Unit),
                                                   properties : none >,
                         subcomponents :
                             < lower : Data | value : null(Real), 
@@ -50,11 +52,18 @@ mod THERMOSTAT-SYSTEM-SYNTAX is
                         variables : (x : Real),
                         transitions :
                             (init -[ on dispatch ]-> state {
-                                (v{x} := (c[curr] + f[temp]) / [[2]]) ;
-                                if (v[x] < c[lower])
-                                    (on ! ([[1]])) 
-                                (elsif (v[x] > c[upper])
-                                    (off ! ([[-1]])))
+                                (v{x} := (c[curr] + f[temp]) / [[2]]) 
+                                ;
+                                if (v[x] < c[lower]) {
+                                    (on !) 
+                                    ;
+                                    f{ce} := ([[1]])
+                                }
+                                (elsif (v[x] > c[upper]) {
+                                    (off !)
+                                    ;
+                                    f{ce} := ([[-1]])
+                                })
                                 end if 
                                 ;
                                 c{curr} := v[x]
@@ -69,14 +78,18 @@ mod THERMOSTAT-SYSTEM-SYNTAX is
                         connections : empty >
                     < environment : Env |
                         features : 
-                            < on  :  EnvInPort | content  : null(Real), 
+                            < on  :  EnvInPort | content  : null(Unit), 
                                                  properties : none,
-                                                 envCache : null(Real),
+                                                 envCache : null(Unit),
                                                  target : controller >
-                            < off :  EnvInPort | content  : null(Real), 
+                            < off :  EnvInPort | content  : null(Unit), 
                                                  properties : none,
-                                                 envCache : null(Real),
+                                                 envCache : null(Unit),
                                                  target : controller >
+                            < ee  : EnvInPort | content : null(Real),
+                                                properties : none,
+                                                envCache : null(Real),
+                                                target : controller >
                             < out : EnvOutPort | content  : null(Real),
                                                  envCache : null(Real),
                                                  properties : none,
@@ -94,7 +107,7 @@ mod THERMOSTAT-SYSTEM-SYNTAX is
                                          connections : empty >,
                         connections :
                             (x ==> out) ;
-                            (on =>> e) ; (off =>> e),
+                            (ee =>> e),
                         properties : (HybridSynchAADL::MaxClockDeviation => {{0.1}}) ; 
                                      (TimingProperties::Period => {{5}}),
                         currMode : init,
@@ -116,6 +129,7 @@ mod THERMOSTAT-SYSTEM-SYNTAX is
                 connections : 
                     (controller .. on --> environment .. on) ;
                     (controller .. off --> environment .. off) ;
+                    (controller .. ce --> environment .. ee) ;
                     (environment .. out --> controller .. temp),
                 properties : none >
         .

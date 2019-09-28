@@ -198,8 +198,9 @@ mod ENV-DYNAMICS is
   var PROPS : PropertyAssociation .
   vars DATA : DataValuation .
   var PI : FeatureId .
+  var PRS : Set{FeatureRef} .
   vars L L' : Location .
-  vars PORTS COMPS : Configuration .
+  vars PORTS PORTS' COMPS : Configuration .
   vars ATTS ATTS' : AttributeSet .
   var ET : EnvJobType .
   vars ES ES' : EnvState .
@@ -261,19 +262,20 @@ mod ENV-DYNAMICS is
      < CR : C:AsyncEnv | envTimer : 0,
                          envState : [response, CI] ES, 
                          currMode : L,
-                         jumps : (L -[ PI ]-> L') ; JUMPS,
-                         features : < PI : C:EnvInPort | content : E # B, target : CI, ATTS > PORTS, 
+                         jumps : (L -[ PI, PRS ]-> L') ; JUMPS,
+                         features : PORTS, 
                          connections : CONXS, 
                          subcomponents : COMPS, ATTS' >
   =>  
      < CR : C:AsyncEnv | envTimer : 0,
                          envState : ES, 
                          currMode : L',
-                         jumps : (L -[ PI ]-> L') ; JUMPS,
-                         features : < PI : C:EnvInPort | content : E # B, target : CI, ATTS > PORTS, 
+                         jumps : (L -[ PI, PRS ]-> L') ; JUMPS,
+                         features : PORTS, 
                          connections : CONXS, 
-                         subcomponents : updateResponseData(PI, E # B, CONXS, COMPS), ATTS' >
-  if check-true(B) 
+                         subcomponents : updateResponseData(CONXS,CI,PORTS,COMPS), ATTS' >
+  if < PI : C:EnvInPort | content : E # B, target : CI, ATTS > PORTS' := PORTS
+  /\ check-true(B) 
    [print "env response " L " to " L' " with " CI " .. " PI " by " CR] .
 
 
@@ -282,13 +284,17 @@ mod ENV-DYNAMICS is
                          envState : [response, CI] ES, 
                          currMode : L,
                          jumps : JUMPS,
-                         features : PORTS, ATTS' >
+                         features : PORTS, 
+                         connections : CONXS, 
+                         subcomponents : COMPS, ATTS' >
   =>
      < CR : C:AsyncEnv | envTimer : 0,
                          envState : ES, 
                          currMode : L,
                          jumps : JUMPS,
-                         features : PORTS, ATTS' >
+                         features : PORTS, 
+                         connections : CONXS, 
+                         subcomponents : updateResponseData(CONXS,CI,PORTS,COMPS), ATTS' >
   if check-true(allPortsAbsent(L, JUMPS, CR, PORTS)) 
    [print "env response idle at " L " with " CR] .
 
@@ -306,17 +312,33 @@ mod ENV-DYNAMICS is
   op allPortsAbsent : Location Set{EnvJump} ComponentRef Configuration BoolExp ~> BoolExp [format (m! o)] .
 
   eq allPortsAbsent(L, JUMPS, CR, PORTS) = allPortsAbsent(L, JUMPS, CR, PORTS, bool(true)) .
-  eq allPortsAbsent(L, (L -[ PI ]-> L') ; JUMPS, CR, 
-                    < PI : C:EnvInPort | content : E # B, target : CR, ATTS > PORTS, CONST)
-   = allPortsAbsent(L, JUMPS, CR, 
-                    < PI : C:EnvInPort | content : E # B, target : CR, ATTS > PORTS, CONST and not B) .
+  eq allPortsAbsent(L, (L -[ PRS ]-> L') ; JUMPS, CR, PORTS, CONST)
+   = allPortsAbsent(L, JUMPS, CR, PORTS, CONST and allPortsAbsent(PRS, CR, PORTS)) .
   eq allPortsAbsent(L, JUMPS, CR, PORTS, CONST) = CONST [owise] .
 
-  --- update the data according to the data value at PI and the connection.
-  op updateResponseData : FeatureId DataContent Set{Connection} Configuration ~> Configuration [format (m! o)] .
-  eq updateResponseData(PI, D, (PI =>> CI) ; CONXS, < CI : C:Data | value : D', ATTS > COMPS)
-   = < CI : C:Data | value : D, ATTS > COMPS .
-  eq updateResponseData(PI, D, CONXS, COMPS) = COMPS [owise] . --- if no connection from PI exists
+
+  op allPortsAbsent : Set{FeatureRef} ComponentRef Configuration ~> BoolExp [format (m! o)] .
+  eq allPortsAbsent((PI, PRS), CR,
+                    < PI : C:EnvInPort | content : E # B, target : CR, ATTS > PORTS)
+   = not B and 
+     allPortsAbsent(PRS, CR, 
+                    < PI : C:EnvInPort | content : E # B, target : CR, ATTS > PORTS) .
+  eq allPortsAbsent(PRS, CR, PORTS) = bool(true) [owise] .
+
+
+  --- update the data from input ports connected to CR; for absent data ports,
+  --- previous values are used (i.e. no change on data components)
+  op updateResponseData : Set{Connection} ComponentRef Configuration Configuration ~> Configuration [format (m! o)] .
+
+  ceq updateResponseData((PI =>> CI) ; CONXS, CR, PORTS, 
+                         < CI : C:Data | value : D, ATTS > COMPS)
+    = updateResponseData(CONXS, CR, PORTS, 
+                         < CI : C:Data | value : D', ATTS > COMPS)
+   if < PI : C:EnvInPort | content : E # B, target : CR, ATTS > PORTS' := PORTS
+   /\ D' := if check-true(B) then E # bool(true) else D fi .
+
+  eq updateResponseData(CONXS, CR, PORTS, COMPS) = COMPS [owise] .
+
 
 --- time advance with continuous behavior (only data and properties are used for execFlow)
  ceq timeEffect(

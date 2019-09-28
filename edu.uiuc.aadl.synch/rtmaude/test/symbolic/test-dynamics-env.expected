@@ -11,7 +11,7 @@ search in TEST-ENV-DYNAMICS : executeStep([true], env1, false) =>*
     C:ConstConfig .
 
 Solution 1 (state 5)
-states: 6  rewrites: 569
+states: 6  rewrites: 571
 C:ConstConfig --> (not [2] < r("e1", 6) and not [5] < r("e1", 6) and not [5] <
     r("e1", 7) and not r("e1", 6) < [0] and not r("e1", 7) < r("e1", 6) and not
     b("e1", 5) and b(1) === b(0) and [0] === r(0) and r("b", 0) === [1] + [
@@ -30,7 +30,7 @@ C:ConstConfig --> (not [2] < r("e1", 6) and not [5] < r("e1", 6) and not [5] <
     2.0000000000000001e-1]]))],sampling : cr1 :(0,1),response : cr1 :(2,3) >
 
 Solution 2 (state 6)
-states: 7  rewrites: 974
+states: 7  rewrites: 976
 C:ConstConfig --> (not [2] < r("e1", 6) and not [4] < r("e1", 7) and not [5] <
     r("e1", 6) and not [5] < r("e1", 7) and not [5] < r("e1", 8) and not r(
     "e1", 6) < [0] and not r("e1", 7) < [2] and not r("e1", 7) < r("e1", 6) and
@@ -52,13 +52,13 @@ C:ConstConfig --> (not [2] < r("e1", 6) and not [4] < r("e1", 7) and not [5] <
     2.0000000000000001e-1]]))],sampling : cr1 :(0,1),response : cr1 :(2,3) >
 
 No more solutions.
-states: 7  rewrites: 974
+states: 7  rewrites: 976
 ==========================================
 search in TEST-ENV-DYNAMICS : executeStep([true], env1, true) =>* C:ConstConfig
     .
 
 Solution 1 (state 0)
-states: 1  rewrites: 1036
+states: 1  rewrites: 1038
 C:ConstConfig --> ((not [2] < r("e1", 6) and not [5] < r("e1", 6) and not [5] <
     r("e1", 7) and not r("e1", 6) < [0] and not r("e1", 7) < r("e1", 6) and not
     b("e1", 5) and r("e1", 7) === [5] and r("e1", 9) === [1] + - r("e1", 6) * [
@@ -85,13 +85,13 @@ C:ConstConfig --> ((not [2] < r("e1", 6) and not [5] < r("e1", 6) and not [5] <
     2.0000000000000001e-1]]))],sampling : cr1 :(0,1),response : cr1 :(2,3) >
 
 No more solutions.
-states: 1  rewrites: 1036
+states: 1  rewrites: 1038
 ==========================================
 search in TEST-ENV-DYNAMICS : executeStep([true], env2, false) =>*
     C:ConstConfig .
 
 Solution 1 (state 72)
-states: 73  rewrites: 5651
+states: 73  rewrites: 5762
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 8) and not r(
     "e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
@@ -128,7 +128,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 2 (state 77)
-states: 78  rewrites: 6947
+states: 78  rewrites: 7071
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 7) and not r(
     "e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not
@@ -165,7 +165,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 3 (state 82)
-states: 83  rewrites: 8271
+states: 83  rewrites: 8408
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 8) and not r(
     "e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
@@ -203,7 +203,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 4 (state 87)
-states: 88  rewrites: 9569
+states: 88  rewrites: 9719
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 7) and not r(
     "e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not
@@ -241,7 +241,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 5 (state 92)
-states: 93  rewrites: 10864
+states: 93  rewrites: 11026
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 8) and not r(
     "e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
@@ -281,7 +281,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 6 (state 97)
-states: 98  rewrites: 12163
+states: 98  rewrites: 12338
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 7) and not r(
     "e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not
@@ -323,7 +323,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 7 (state 102)
-states: 103  rewrites: 13467
+states: 103  rewrites: 13655
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 8) and not r(
     "e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
@@ -364,7 +364,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 8 (state 107)
-states: 108  rewrites: 14768
+states: 108  rewrites: 14969
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2", 7) and not r(
     "e2", 7) < [0] and not r("e2", 7) < [3/2] and not r("e2", 8) < [0] and not
@@ -407,7 +407,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 9 (state 110)
-states: 111  rewrites: 15793
+states: 111  rewrites: 16007
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
@@ -446,7 +446,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 10 (state 112)
-states: 113  rewrites: 16344
+states: 113  rewrites: 16564
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 8) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
@@ -485,7 +485,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 11 (state 114)
-states: 115  rewrites: 18211
+states: 115  rewrites: 18437
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
@@ -524,7 +524,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 12 (state 116)
-states: 117  rewrites: 18778
+states: 117  rewrites: 19010
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 7) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
@@ -563,7 +563,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 13 (state 118)
-states: 119  rewrites: 20685
+states: 119  rewrites: 20923
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
@@ -604,7 +604,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     9/2)) >
 
 Solution 14 (state 120)
-states: 121  rewrites: 21244
+states: 121  rewrites: 21488
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 8) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
@@ -646,7 +646,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 15 (state 121)
-states: 122  rewrites: 22588
+states: 122  rewrites: 22832
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
@@ -687,7 +687,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     9/2)) >
 
 Solution 16 (state 123)
-states: 124  rewrites: 23129
+states: 124  rewrites: 23379
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
@@ -727,7 +727,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 17 (state 125)
-states: 126  rewrites: 23693
+states: 126  rewrites: 23949
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 7) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
@@ -769,7 +769,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 18 (state 126)
-states: 127  rewrites: 25047
+states: 127  rewrites: 25303
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
@@ -809,7 +809,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 19 (state 128)
-states: 129  rewrites: 25564
+states: 129  rewrites: 25827
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
@@ -852,7 +852,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 20 (state 130)
-states: 131  rewrites: 26104
+states: 131  rewrites: 26374
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 8) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
@@ -896,7 +896,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     9/2)) >
 
 Solution 21 (state 132)
-states: 133  rewrites: 27971
+states: 133  rewrites: 28248
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
@@ -941,7 +941,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 22 (state 134)
-states: 135  rewrites: 28554
+states: 135  rewrites: 28838
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 7) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
@@ -988,7 +988,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     9/2)) >
 
 Solution 23 (state 136)
-states: 137  rewrites: 30480
+states: 137  rewrites: 30771
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
@@ -1034,7 +1034,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     9/2)) >
 
 Solution 24 (state 138)
-states: 139  rewrites: 31036
+states: 139  rewrites: 31334
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 8) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
@@ -1081,7 +1081,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 25 (state 139)
-states: 140  rewrites: 32312
+states: 140  rewrites: 32610
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r(
@@ -1127,7 +1127,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     9/2)) >
 
 Solution 26 (state 141)
-states: 142  rewrites: 32921
+states: 142  rewrites: 33226
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
@@ -1174,7 +1174,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     9/2)) >
 
 Solution 27 (state 143)
-states: 144  rewrites: 33501
+states: 144  rewrites: 33813
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 7) and not [11/2] < r("e2", 9) and not r("e2", 7) < [0] and not
@@ -1222,7 +1222,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 28 (state 144)
-states: 145  rewrites: 34825
+states: 145  rewrites: 35137
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [7/2]
     < r("e2", 7) and not r("e2", 7) < [0] and not r("e2", 7) < [3/2] and not r(
@@ -1269,7 +1269,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     9/2)) >
 
 Solution 29 (state 145)
-states: 146  rewrites: 35626
+states: 146  rewrites: 35938
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 10) and not
@@ -1312,7 +1312,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 30 (state 146)
-states: 147  rewrites: 36360
+states: 147  rewrites: 36672
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 9) and not
@@ -1354,7 +1354,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 31 (state 147)
-states: 148  rewrites: 37118
+states: 148  rewrites: 37430
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 10) and not
@@ -1397,7 +1397,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 32 (state 148)
-states: 149  rewrites: 37876
+states: 149  rewrites: 38188
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 9) and not
@@ -1439,7 +1439,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 33 (state 149)
-states: 150  rewrites: 38595
+states: 150  rewrites: 38907
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 10) and not
@@ -1485,7 +1485,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 34 (state 150)
-states: 151  rewrites: 39351
+states: 151  rewrites: 39663
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 9) and not
@@ -1528,7 +1528,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 35 (state 151)
-states: 152  rewrites: 40101
+states: 152  rewrites: 40413
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 10) and not
@@ -1574,7 +1574,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 36 (state 152)
-states: 153  rewrites: 40862
+states: 153  rewrites: 41174
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 9) and not
@@ -1617,7 +1617,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 37 (state 153)
-states: 154  rewrites: 41572
+states: 154  rewrites: 41884
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 10) and not
@@ -1663,7 +1663,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     9/2)) >
 
 Solution 38 (state 154)
-states: 155  rewrites: 42298
+states: 155  rewrites: 42610
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 9) and not
@@ -1711,7 +1711,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 39 (state 155)
-states: 156  rewrites: 43077
+states: 156  rewrites: 43389
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 10) and not
@@ -1759,7 +1759,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     9/2)) >
 
 Solution 40 (state 156)
-states: 157  rewrites: 43846
+states: 157  rewrites: 44158
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 9) and not
@@ -1809,7 +1809,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 41 (state 157)
-states: 158  rewrites: 44567
+states: 158  rewrites: 44879
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 10) and not
@@ -1857,7 +1857,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 42 (state 158)
-states: 159  rewrites: 45315
+states: 159  rewrites: 45627
 C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 8) and not [11/2] < r("e2", 9) and not
@@ -1907,7 +1907,7 @@ C:ConstConfig --> (not [2] < r("e2", 7) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 43 (state 159)
-states: 160  rewrites: 46086
+states: 160  rewrites: 46398
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 10) and not
@@ -1956,7 +1956,7 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 Solution 44 (state 160)
-states: 161  rewrites: 46858
+states: 161  rewrites: 47170
 C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     r("e2", 8) and not [5] < r("e2", 9) and not [5] < r("e2", 10) and not [5] <
     r("e2", 11) and not [7/2] < r("e2", 7) and not [11/2] < r("e2", 9) and not
@@ -2007,13 +2007,13 @@ C:ConstConfig --> (not [2] < r("e2", 8) and not [5] < r("e2", 7) and not [5] <
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 No more solutions.
-states: 161  rewrites: 46936
+states: 161  rewrites: 47248
 ==========================================
 search in TEST-ENV-DYNAMICS : executeStep([true], env2, true) =>* C:ConstConfig
     .
 
 Solution 1 (state 0)
-states: 1  rewrites: 48809
+states: 1  rewrites: 49121
 C:ConstConfig --> (b(2) and (((not [2] < r("e2", 7) and not [5] < r("e2", 7)
     and not [5] < r("e2", 8) and not [5] < r("e2", 9) and not [7/2] < r("e2",
     8) and not r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) <
@@ -2712,5 +2712,5 @@ C:ConstConfig --> (b(2) and (((not [2] < r("e2", 7) and not [5] < r("e2", 7)
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 No more solutions.
-states: 1  rewrites: 48809
+states: 1  rewrites: 49121
 Bye.

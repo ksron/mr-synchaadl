@@ -49,7 +49,7 @@ search [, 5] in TEST-THERMOSTAT-SYSTEM : {initConst || initState,false} =>+
     C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 2921
+states: 2  rewrites: 2924
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 4) and not [
     39631676720860365/18014398509481984] < r("top.environment", 2) and not [
@@ -111,7 +111,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     false}
 
 Solution 2 (state 2)
-states: 3  rewrites: 4066
+states: 3  rewrites: 4069
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [30] < [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] and not [
@@ -169,7 +169,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 3 (state 3)
-states: 4  rewrites: 5149
+states: 4  rewrites: 5152
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 4) and not [
     39631676720860365/18014398509481984] < r("top.environment", 2) and not [
@@ -232,7 +232,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     false}
 
 Solution 4 (state 4)
-states: 5  rewrites: 9664
+states: 5  rewrites: 9670
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -316,7 +316,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     false}
 
 Solution 5 (state 5)
-states: 6  rewrites: 18478
+states: 6  rewrites: 18487
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [30]
@@ -397,7 +397,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 6 (state 6)
-states: 7  rewrites: 20614
+states: 7  rewrites: 20623
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [30] < [15/2] + (b("top.environment", 2) ?
@@ -477,7 +477,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 7 (state 7)
-states: 8  rewrites: 22728
+states: 8  rewrites: 22737
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [30]
@@ -560,7 +560,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 8 (state 8)
-states: 9  rewrites: 32104
+states: 9  rewrites: 32116
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -653,7 +653,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     false}
 
 Solution 9 (state 9)
-states: 10  rewrites: 38710
+states: 10  rewrites: 38725
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -763,7 +763,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 10 (state 10)
-states: 11  rewrites: 52333
+states: 11  rewrites: 52351
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -873,7 +873,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     false}
 
 Solution 11 (state 11)
-states: 12  rewrites: 65530
+states: 12  rewrites: 65551
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -981,7 +981,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 12 (state 12)
-states: 13  rewrites: 68903
+states: 13  rewrites: 68924
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -1090,7 +1090,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     false}
 
 Solution 13 (state 13)
-states: 14  rewrites: 72290
+states: 14  rewrites: 72311
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -1203,7 +1203,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 14 (state 14)
-states: 15  rewrites: 86211
+states: 15  rewrites: 86235
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -1323,7 +1323,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 15 (state 15)
-states: 16  rewrites: 101196
+states: 16  rewrites: 101223
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -1453,7 +1453,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     false}
 
 Solution 16 (state 16)
-states: 17  rewrites: 110211
+states: 17  rewrites: 110241
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -1593,7 +1593,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 17 (state 17)
-states: 18  rewrites: 129294
+states: 18  rewrites: 129327
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -1734,7 +1734,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 18 (state 18)
-states: 19  rewrites: 148065
+states: 19  rewrites: 148101
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -1876,7 +1876,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 19 (state 19)
-states: 20  rewrites: 166680
+states: 20  rewrites: 166719
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -2018,7 +2018,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     false}
 
 Solution 20 (state 20)
-states: 21  rewrites: 171566
+states: 21  rewrites: 171605
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -2160,7 +2160,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 21 (state 21)
-states: 22  rewrites: 176502
+states: 22  rewrites: 176541
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -2307,7 +2307,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     false}
 
 Solution 22 (state 22)
-states: 23  rewrites: 196003
+states: 23  rewrites: 196045
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -2461,7 +2461,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 23 (state 23)
-states: 24  rewrites: 216568
+states: 24  rewrites: 216613
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -2626,7 +2626,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 24 (state 24)
-states: 25  rewrites: 238533
+states: 25  rewrites: 238581
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -2803,7 +2803,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 25 (state 25)
-states: 26  rewrites: 250284
+states: 26  rewrites: 250335
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -2976,7 +2976,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 26 (state 26)
-states: 27  rewrites: 275397
+states: 27  rewrites: 275451
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -3153,7 +3153,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     false}
 
 Solution 27 (state 27)
-states: 28  rewrites: 300393
+states: 28  rewrites: 300450
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -3332,7 +3332,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     false}
 
 Solution 28 (state 28)
-states: 29  rewrites: 325347
+states: 29  rewrites: 325407
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -3512,7 +3512,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 29 (state 29)
-states: 30  rewrites: 350415
+states: 30  rewrites: 350478
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -3693,7 +3693,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 30 (state 30)
-states: 31  rewrites: 357090
+states: 31  rewrites: 357153
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -3876,7 +3876,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 31 (state 31)
-states: 32  rewrites: 363851
+states: 32  rewrites: 363914
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -4065,7 +4065,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 32 (state 32)
-states: 33  rewrites: 389967
+states: 33  rewrites: 390033
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -4261,7 +4261,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 33 (state 33)
-states: 34  rewrites: 417147
+states: 34  rewrites: 417216
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 8) and not [5] <
@@ -4468,7 +4468,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 Solution 34 (state 34)
-states: 35  rewrites: 445727
+states: 35  rewrites: 445799
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 5) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -4687,7 +4687,7 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     false}
 
 Solution 35 (state 35)
-states: 36  rewrites: 476037
+states: 36  rewrites: 476112
 C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [5] < r("top.environment", 4) and not [5] <
     r("top.environment", 6) and not [5] < r("top.environment", 7) and not [5] <
@@ -4921,13 +4921,13 @@ C:GlobalSystem --> {(not [5] < r("top.environment", 2) and not [5] < r(
     out) --> (controller .. temp)) >,false}
 
 No more solutions.
-states: 36  rewrites: 478044
+states: 36  rewrites: 478119
 ==========================================
 search [, 5] in TEST-THERMOSTAT-SYSTEM : {initConst || initState,true} =>+
     C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 3751
+states: 2  rewrites: 3754
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [39631676720860365/18014398509481984] < r(
@@ -5022,7 +5022,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     out) --> (controller .. temp)) >,true}
 
 Solution 2 (state 2)
-states: 3  rewrites: 12428
+states: 3  rewrites: 12437
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [39631676720860365/18014398509481984] < r(
@@ -5223,7 +5223,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     out) --> (controller .. temp)) >,true}
 
 Solution 3 (state 3)
-states: 4  rewrites: 25892
+states: 4  rewrites: 25907
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [39631676720860365/18014398509481984] < r(
@@ -5537,7 +5537,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     out) --> (controller .. temp)) >,true}
 
 Solution 4 (state 4)
-states: 5  rewrites: 44526
+states: 5  rewrites: 44547
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [39631676720860365/18014398509481984] < r(
@@ -5972,7 +5972,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     out) --> (controller .. temp)) >,true}
 
 Solution 5 (state 5)
-states: 6  rewrites: 68495
+states: 6  rewrites: 68522
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not [5] < r("top.environment", 2) and not [5] < r(
     "top.environment", 3) and not [39631676720860365/18014398509481984] < r(
@@ -6535,5 +6535,5 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     out) --> (controller .. temp)) >,true}
 
 No more solutions.
-states: 6  rewrites: 68495
+states: 6  rewrites: 68522
 Bye.

@@ -1,3 +1,5 @@
+set show timing off .
+
 load ../../interpreter-symbolic.maude
 load ../syntax/SimpleTherm_impl_Instance.maude
 

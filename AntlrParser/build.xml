@@ -1,0 +1,23 @@
+<project default="build" basedir=".">
+
+<target name="clean">
+    <delete dir = "bin"/>
+</target>
+
+<target name="compile" depends="clean">
+    <mkdir dir="src"/>
+    <mkdir dir="bin"/>
+    <javac
+        srcdir="src"
+        destdir="bin"
+        classpath="lib/antlr-4.7.2-complete.jar:classes:src"
+        deprecation="false">
+    </javac>
+</target>
+
+<target name="build" depends="compile">
+    <java classname="edu.postech.antlr.main.FlowsMain" classpath="lib/antlr-4.7.2-complete.jar:bin:src">
+    </java>
+</target>
+
+</project>

@@ -57,11 +57,11 @@ endfm
 
 
 fmod ENV-JUMP is
-  including FEATURE-ID .
+  including SET{FeatureRef} .
   including BEHAVIOR-LOCATION-ID .
 
   sort EnvJump .
-  op _-[_]->_ : Location FeatureId Location -> EnvJump [ctor] .
+  op _-[_]->_ : Location NeSet{FeatureRef} Location -> EnvJump [ctor] .
 endfm
 
 

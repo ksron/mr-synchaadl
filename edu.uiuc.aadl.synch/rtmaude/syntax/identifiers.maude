@@ -29,6 +29,7 @@ endfm
 
 fmod BEHAVIOR-LOCATION-ID is
   sort Location .      --- an identifier for a behavior state
+  op @@default@loc@@ : -> Location .  --- default location for env
 endfm
 
 ------------------------

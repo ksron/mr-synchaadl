@@ -1,11 +1,10 @@
 set show timing off .
 
 load ../../interpreter-distributed.maude
-load ../syntax/Thermostat_impl_Instance.maude 
+load ../syntax/Thermostat1Con_impl_Instance.maude .
 
----------------------------------------------
-mod TEST-THERMOSTAT-SYSTEM is
-  including THERMOSTAT_IMPL_INSTANCE-MODEL .
+mod TEST-THERMOSTAT1CON-SYSTEM is
+  including THERMOSTAT1CON_IMPL_INSTANCE-MODEL .
   including MODEL-TRANSITION-SYSTEM .
 
   var T : Time .
@@ -15,6 +14,7 @@ mod TEST-THERMOSTAT-SYSTEM is
 
   op cinitState : -> Object .
   eq cinitState = initialize(collapse(initial)) .
+
 endm
 
 --- set print attribute on .
@@ -23,7 +23,7 @@ rew  [100] {initState | 0 | infty} .
 
 rew  [100] {cinitState | 0 | infty} .
 
---- the number of reachable states up to 5 synchronous step
-search {initState | 0 | 25} =>* {none | T | 25} .
+--- the number of reachable states up to 2 synchronous step
+search {initState | 0 | 10} =>* {none | T | 10} .
 
-search {cinitState | 0 | 25} =>* {none | T | 25} .
+search {cinitState | 0 | 10} =>* {none | T | 10} .

@@ -1,6 +1,6 @@
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{initState,0}} .
-rewrites: 74260
+rewrites: 73150
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< csys : System | properties : none,features : (< on :
     DataOutPort | properties : none,content : * # [(false).Bool] > < off :
@@ -26,32 +26,31 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     15}},features : none,subcomponents : none,connections : empty,value : [
     9.3596867381845982e+1] # [(true).Bool] >),connections : empty,varGen : <
     "top.cthread" >,currState : init,completeStates : init,variables : x :
-    Real,transitions : ((init -[on dispatch]-> state {(v{x} := ((c[curr] + f[
+    Real,transitions : init -[on dispatch]-> init {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; state -[otherwise]-> init {skip}),loopBound :
-    0,transBound : 2 >,connections : ((temp --> (cthread .. temp)) ; ((cthread
-    .. on) --> on) ; (cthread .. off) --> off) >,connections : ((temp --> (
-    cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc .. off) --> off) > <
-    environment : EnvWithTimer | properties : ((TimingProperties::Period => {{
-    5}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
-    features : (< on : EnvInPort | properties : none,content : * # [(
-    false).Bool],envCache : null(Unit),target : csys > < off : EnvInPort |
-    properties : none,content : * # [(false).Bool],envCache : null(Unit),target
-    : csys > < out : EnvOutPort | properties : none,content : [0.0] # [(
-    false).Bool],envCache : null(Real),target : csys >),subcomponents : < x :
-    Data | properties : DataModel::InitialValue => {{16}},features : none,
-    subcomponents : none,connections : empty,value : [9.5200193572053749e+1] #
-    [(true).Bool] >,connections : x ==> out,varGen : < "top.environment" >,
-    currMode : init,jumps : ((init -[on]-> state) ; (init -[off]-> init) ; (
-    state -[on]-> state) ; state -[off]-> init),flows : ((init [x(t)= (c[x] + (
-    v[t] * [[2.0000000000000001e-1]]))]) ; state [x(t)= (c[x] - (v[t] * [[
-    1.0000000000000001e-1]]))]),sampling : csys :(0,2),response : csys :(3,4),
-    timer : 0,samplingIDs : csys,responseIDs : csys >),connections : (((csys ..
-    on) --> (environment .. on)) ; ((csys .. off) --> (environment .. off)) ; (
-    environment .. out) --> (csys .. temp)) >,400}}
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >,connections : ((
+    temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ; (cthread .. off)
+    --> off) >,connections : ((temp --> (cproc .. temp)) ; ((cproc .. on) -->
+    on) ; (cproc .. off) --> off) > < environment : EnvWithTimer | properties :
+    ((TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation
+    => {{1.0000000000000001e-1}}),features : (< on : EnvInPort | properties :
+    none,content : * # [(false).Bool],envCache : null(Unit),target : csys > <
+    off : EnvInPort | properties : none,content : * # [(false).Bool],envCache :
+    null(Unit),target : csys > < out : EnvOutPort | properties : none,content :
+    [0.0] # [(false).Bool],envCache : null(Real),target : csys >),subcomponents
+    : < x : Data | properties : DataModel::InitialValue => {{16}},features :
+    none,subcomponents : none,connections : empty,value : [
+    9.5200193572053749e+1] # [(true).Bool] >,connections : x ==> out,varGen : <
+    "top.environment" >,currMode : init,jumps : ((init -[on]-> state) ; (init
+    -[off]-> init) ; (state -[on]-> state) ; state -[off]-> init),flows : ((
+    init [x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))]) ; state [x(t)= (
+    c[x] - (v[t] * [[1.0000000000000001e-1]]))]),sampling : csys :(0,2),
+    response : csys :(3,4),timer : 0,samplingIDs : csys,responseIDs : csys >),
+    connections : (((csys .. on) --> (environment .. on)) ; ((csys .. off) -->
+    (environment .. off)) ; (environment .. out) --> (csys .. temp)) >,400}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{initState,400}} .
-rewrites: 74245
+rewrites: 73135
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< csys : System | properties : none,features : (< on :
     DataOutPort | properties : none,content : * # [(false).Bool] > < off :
@@ -77,32 +76,31 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     15}},features : none,subcomponents : none,connections : empty,value : [
     9.3077183654263393e+1] # [(true).Bool] >),connections : empty,varGen : <
     "top.cthread" >,currState : init,completeStates : init,variables : x :
-    Real,transitions : ((init -[on dispatch]-> state {(v{x} := ((c[curr] + f[
+    Real,transitions : init -[on dispatch]-> init {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; state -[otherwise]-> init {skip}),loopBound :
-    0,transBound : 2 >,connections : ((temp --> (cthread .. temp)) ; ((cthread
-    .. on) --> on) ; (cthread .. off) --> off) >,connections : ((temp --> (
-    cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc .. off) --> off) > <
-    environment : EnvWithTimer | properties : ((TimingProperties::Period => {{
-    5}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
-    features : (< on : EnvInPort | properties : none,content : * # [(
-    false).Bool],envCache : null(Unit),target : csys > < off : EnvInPort |
-    properties : none,content : * # [(false).Bool],envCache : null(Unit),target
-    : csys > < out : EnvOutPort | properties : none,content : [0.0] # [(
-    false).Bool],envCache : null(Real),target : csys >),subcomponents : < x :
-    Data | properties : DataModel::InitialValue => {{16}},features : none,
-    subcomponents : none,connections : empty,value : [9.4412683881952546e+1] #
-    [(true).Bool] >,connections : x ==> out,varGen : < "top.environment" >,
-    currMode : init,jumps : ((init -[on]-> state) ; (init -[off]-> init) ; (
-    state -[on]-> state) ; state -[off]-> init),flows : ((init [x(t)= (c[x] + (
-    v[t] * [[2.0000000000000001e-1]]))]) ; state [x(t)= (c[x] - (v[t] * [[
-    1.0000000000000001e-1]]))]),sampling : csys :(0,2),response : csys :(3,4),
-    timer : 0,samplingIDs : csys,responseIDs : csys >),connections : (((csys ..
-    on) --> (environment .. on)) ; ((csys .. off) --> (environment .. off)) ; (
-    environment .. out) --> (csys .. temp)) >,800}}
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >,connections : ((
+    temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ; (cthread .. off)
+    --> off) >,connections : ((temp --> (cproc .. temp)) ; ((cproc .. on) -->
+    on) ; (cproc .. off) --> off) > < environment : EnvWithTimer | properties :
+    ((TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation
+    => {{1.0000000000000001e-1}}),features : (< on : EnvInPort | properties :
+    none,content : * # [(false).Bool],envCache : null(Unit),target : csys > <
+    off : EnvInPort | properties : none,content : * # [(false).Bool],envCache :
+    null(Unit),target : csys > < out : EnvOutPort | properties : none,content :
+    [0.0] # [(false).Bool],envCache : null(Real),target : csys >),subcomponents
+    : < x : Data | properties : DataModel::InitialValue => {{16}},features :
+    none,subcomponents : none,connections : empty,value : [
+    9.4412683881952546e+1] # [(true).Bool] >,connections : x ==> out,varGen : <
+    "top.environment" >,currMode : init,jumps : ((init -[on]-> state) ; (init
+    -[off]-> init) ; (state -[on]-> state) ; state -[off]-> init),flows : ((
+    init [x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))]) ; state [x(t)= (
+    c[x] - (v[t] * [[1.0000000000000001e-1]]))]),sampling : csys :(0,2),
+    response : csys :(3,4),timer : 0,samplingIDs : csys,responseIDs : csys >),
+    connections : (((csys .. on) --> (environment .. on)) ; ((csys .. off) -->
+    (environment .. off)) ; (environment .. out) --> (csys .. temp)) >,800}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{initState,800}} .
-rewrites: 74276
+rewrites: 73176
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< csys : System | properties : none,features : (< on :
     DataOutPort | properties : none,content : * # [(false).Bool] > < off :
@@ -128,32 +126,31 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     15}},features : none,subcomponents : none,connections : empty,value : [
     9.2390812029053592e+1] # [(true).Bool] >),connections : empty,varGen : <
     "top.cthread" >,currState : init,completeStates : init,variables : x :
-    Real,transitions : ((init -[on dispatch]-> state {(v{x} := ((c[curr] + f[
+    Real,transitions : init -[on dispatch]-> init {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; state -[otherwise]-> init {skip}),loopBound :
-    0,transBound : 2 >,connections : ((temp --> (cthread .. temp)) ; ((cthread
-    .. on) --> on) ; (cthread .. off) --> off) >,connections : ((temp --> (
-    cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc .. off) --> off) > <
-    environment : EnvWithTimer | properties : ((TimingProperties::Period => {{
-    5}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
-    features : (< on : EnvInPort | properties : none,content : * # [(
-    false).Bool],envCache : null(Unit),target : csys > < off : EnvInPort |
-    properties : none,content : * # [(false).Bool],envCache : null(Unit),target
-    : csys > < out : EnvOutPort | properties : none,content : [0.0] # [(
-    false).Bool],envCache : null(Real),target : csys >),subcomponents : < x :
-    Data | properties : DataModel::InitialValue => {{16}},features : none,
-    subcomponents : none,connections : empty,value : [9.4039206802397771e+1] #
-    [(true).Bool] >,connections : x ==> out,varGen : < "top.environment" >,
-    currMode : init,jumps : ((init -[on]-> state) ; (init -[off]-> init) ; (
-    state -[on]-> state) ; state -[off]-> init),flows : ((init [x(t)= (c[x] + (
-    v[t] * [[2.0000000000000001e-1]]))]) ; state [x(t)= (c[x] - (v[t] * [[
-    1.0000000000000001e-1]]))]),sampling : csys :(0,2),response : csys :(3,4),
-    timer : 0,samplingIDs : csys,responseIDs : csys >),connections : (((csys ..
-    on) --> (environment .. on)) ; ((csys .. off) --> (environment .. off)) ; (
-    environment .. out) --> (csys .. temp)) >,1200}}
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >,connections : ((
+    temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ; (cthread .. off)
+    --> off) >,connections : ((temp --> (cproc .. temp)) ; ((cproc .. on) -->
+    on) ; (cproc .. off) --> off) > < environment : EnvWithTimer | properties :
+    ((TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation
+    => {{1.0000000000000001e-1}}),features : (< on : EnvInPort | properties :
+    none,content : * # [(false).Bool],envCache : null(Unit),target : csys > <
+    off : EnvInPort | properties : none,content : * # [(false).Bool],envCache :
+    null(Unit),target : csys > < out : EnvOutPort | properties : none,content :
+    [0.0] # [(false).Bool],envCache : null(Real),target : csys >),subcomponents
+    : < x : Data | properties : DataModel::InitialValue => {{16}},features :
+    none,subcomponents : none,connections : empty,value : [
+    9.4039206802397771e+1] # [(true).Bool] >,connections : x ==> out,varGen : <
+    "top.environment" >,currMode : init,jumps : ((init -[on]-> state) ; (init
+    -[off]-> init) ; (state -[on]-> state) ; state -[off]-> init),flows : ((
+    init [x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))]) ; state [x(t)= (
+    c[x] - (v[t] * [[1.0000000000000001e-1]]))]),sampling : csys :(0,2),
+    response : csys :(3,4),timer : 0,samplingIDs : csys,responseIDs : csys >),
+    connections : (((csys .. on) --> (environment .. on)) ; ((csys .. off) -->
+    (environment .. off)) ; (environment .. out) --> (csys .. temp)) >,1200}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{initState,1200}} .
-rewrites: 74238
+rewrites: 73128
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< csys : System | properties : none,features : (< on :
     DataOutPort | properties : none,content : * # [(false).Bool] > < off :
@@ -179,32 +176,31 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     15}},features : none,subcomponents : none,connections : empty,value : [
     9.3668497668111257e+1] # [(true).Bool] >),connections : empty,varGen : <
     "top.cthread" >,currState : init,completeStates : init,variables : x :
-    Real,transitions : ((init -[on dispatch]-> state {(v{x} := ((c[curr] + f[
+    Real,transitions : init -[on dispatch]-> init {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; state -[otherwise]-> init {skip}),loopBound :
-    0,transBound : 2 >,connections : ((temp --> (cthread .. temp)) ; ((cthread
-    .. on) --> on) ; (cthread .. off) --> off) >,connections : ((temp --> (
-    cproc .. temp)) ; ((cproc .. on) --> on) ; (cproc .. off) --> off) > <
-    environment : EnvWithTimer | properties : ((TimingProperties::Period => {{
-    5}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
-    features : (< on : EnvInPort | properties : none,content : * # [(
-    false).Bool],envCache : null(Unit),target : csys > < off : EnvInPort |
-    properties : none,content : * # [(false).Bool],envCache : null(Unit),target
-    : csys > < out : EnvOutPort | properties : none,content : [0.0] # [(
-    false).Bool],envCache : null(Real),target : csys >),subcomponents : < x :
-    Data | properties : DataModel::InitialValue => {{16}},features : none,
-    subcomponents : none,connections : empty,value : [9.4999119325578107e+1] #
-    [(true).Bool] >,connections : x ==> out,varGen : < "top.environment" >,
-    currMode : init,jumps : ((init -[on]-> state) ; (init -[off]-> init) ; (
-    state -[on]-> state) ; state -[off]-> init),flows : ((init [x(t)= (c[x] + (
-    v[t] * [[2.0000000000000001e-1]]))]) ; state [x(t)= (c[x] - (v[t] * [[
-    1.0000000000000001e-1]]))]),sampling : csys :(0,2),response : csys :(3,4),
-    timer : 0,samplingIDs : csys,responseIDs : csys >),connections : (((csys ..
-    on) --> (environment .. on)) ; ((csys .. off) --> (environment .. off)) ; (
-    environment .. out) --> (csys .. temp)) >,1600}}
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >,connections : ((
+    temp --> (cthread .. temp)) ; ((cthread .. on) --> on) ; (cthread .. off)
+    --> off) >,connections : ((temp --> (cproc .. temp)) ; ((cproc .. on) -->
+    on) ; (cproc .. off) --> off) > < environment : EnvWithTimer | properties :
+    ((TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation
+    => {{1.0000000000000001e-1}}),features : (< on : EnvInPort | properties :
+    none,content : * # [(false).Bool],envCache : null(Unit),target : csys > <
+    off : EnvInPort | properties : none,content : * # [(false).Bool],envCache :
+    null(Unit),target : csys > < out : EnvOutPort | properties : none,content :
+    [0.0] # [(false).Bool],envCache : null(Real),target : csys >),subcomponents
+    : < x : Data | properties : DataModel::InitialValue => {{16}},features :
+    none,subcomponents : none,connections : empty,value : [
+    9.4999119325578107e+1] # [(true).Bool] >,connections : x ==> out,varGen : <
+    "top.environment" >,currMode : init,jumps : ((init -[on]-> state) ; (init
+    -[off]-> init) ; (state -[on]-> state) ; state -[off]-> init),flows : ((
+    init [x(t)= (c[x] + (v[t] * [[2.0000000000000001e-1]]))]) ; state [x(t)= (
+    c[x] - (v[t] * [[1.0000000000000001e-1]]))]),sampling : csys :(0,2),
+    response : csys :(3,4),timer : 0,samplingIDs : csys,responseIDs : csys >),
+    connections : (((csys .. on) --> (environment .. on)) ; ((csys .. off) -->
+    (environment .. off)) ; (environment .. out) --> (csys .. temp)) >,1600}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{cinitState,0}} .
-rewrites: 62676
+rewrites: 61566
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< environment : EnvWithTimer | properties : ((
     TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
@@ -236,16 +232,15 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     15}},features : none,subcomponents : none,connections : empty,value : [
     9.3596867381845982e+1] # [(true).Bool] >),connections : empty,varGen : <
     "top.cthread" >,currState : init,completeStates : init,variables : x :
-    Real,transitions : ((init -[on dispatch]-> state {(v{x} := ((c[curr] + f[
+    Real,transitions : init -[on dispatch]-> init {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; state -[otherwise]-> init {skip}),loopBound :
-    0,transBound : 2 >),connections : (((environment .. out) --> ((csys . cproc
-    . cthread) .. temp)) ; (((csys . cproc . cthread) .. on) --> (environment
-    .. on)) ; ((csys . cproc . cthread) .. off) --> (environment .. off)) >,
-    400}}
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >),connections : (((
+    environment .. out) --> ((csys . cproc . cthread) .. temp)) ; (((csys .
+    cproc . cthread) .. on) --> (environment .. on)) ; ((csys . cproc .
+    cthread) .. off) --> (environment .. off)) >,400}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{cinitState,400}} .
-rewrites: 62675
+rewrites: 61565
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< environment : EnvWithTimer | properties : ((
     TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
@@ -277,16 +272,15 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     15}},features : none,subcomponents : none,connections : empty,value : [
     9.3077183654263393e+1] # [(true).Bool] >),connections : empty,varGen : <
     "top.cthread" >,currState : init,completeStates : init,variables : x :
-    Real,transitions : ((init -[on dispatch]-> state {(v{x} := ((c[curr] + f[
+    Real,transitions : init -[on dispatch]-> init {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; state -[otherwise]-> init {skip}),loopBound :
-    0,transBound : 2 >),connections : (((environment .. out) --> ((csys . cproc
-    . cthread) .. temp)) ; (((csys . cproc . cthread) .. on) --> (environment
-    .. on)) ; ((csys . cproc . cthread) .. off) --> (environment .. off)) >,
-    800}}
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >),connections : (((
+    environment .. out) --> ((csys . cproc . cthread) .. temp)) ; (((csys .
+    cproc . cthread) .. on) --> (environment .. on)) ; ((csys . cproc .
+    cthread) .. off) --> (environment .. off)) >,800}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{cinitState,800}} .
-rewrites: 62706
+rewrites: 61606
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< environment : EnvWithTimer | properties : ((
     TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
@@ -318,16 +312,15 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     15}},features : none,subcomponents : none,connections : empty,value : [
     9.2390812029053592e+1] # [(true).Bool] >),connections : empty,varGen : <
     "top.cthread" >,currState : init,completeStates : init,variables : x :
-    Real,transitions : ((init -[on dispatch]-> state {(v{x} := ((c[curr] + f[
+    Real,transitions : init -[on dispatch]-> init {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; state -[otherwise]-> init {skip}),loopBound :
-    0,transBound : 2 >),connections : (((environment .. out) --> ((csys . cproc
-    . cthread) .. temp)) ; (((csys . cproc . cthread) .. on) --> (environment
-    .. on)) ; ((csys . cproc . cthread) .. off) --> (environment .. off)) >,
-    1200}}
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >),connections : (((
+    environment .. out) --> ((csys . cproc . cthread) .. temp)) ; (((csys .
+    cproc . cthread) .. on) --> (environment .. on)) ; ((csys . cproc .
+    cthread) .. off) --> (environment .. off)) >,1200}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{cinitState,1200}} .
-rewrites: 62668
+rewrites: 61558
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< environment : EnvWithTimer | properties : ((
     TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
@@ -359,11 +352,10 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     15}},features : none,subcomponents : none,connections : empty,value : [
     9.3668497668111257e+1] # [(true).Bool] >),connections : empty,varGen : <
     "top.cthread" >,currState : init,completeStates : init,variables : x :
-    Real,transitions : ((init -[on dispatch]-> state {(v{x} := ((c[curr] + f[
+    Real,transitions : init -[on dispatch]-> init {(v{x} := ((c[curr] + f[
     temp]) / [[2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !)
-    end if ; c{curr} := v[x]}) ; state -[otherwise]-> init {skip}),loopBound :
-    0,transBound : 2 >),connections : (((environment .. out) --> ((csys . cproc
-    . cthread) .. temp)) ; (((csys . cproc . cthread) .. on) --> (environment
-    .. on)) ; ((csys . cproc . cthread) .. off) --> (environment .. off)) >,
-    1600}}
+    end if ; c{curr} := v[x]},loopBound : 0,transBound : 2 >),connections : (((
+    environment .. out) --> ((csys . cproc . cthread) .. temp)) ; (((csys .
+    cproc . cthread) .. on) --> (environment .. on)) ; ((csys . cproc .
+    cthread) .. off) --> (environment .. off)) >,1600}}
 Bye.

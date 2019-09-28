@@ -1,8 +1,10 @@
-load ../../interpreter-symbolic.maude
-load ../syntax/Thermostat_impl_Instance.maude
+set show timing off .
 
-mod TEST-THERMOSTAT-SYSTEM is
-  including THERMOSTAT_IMPL_INSTANCE-MODEL-SYMBOLIC .
+load ../../interpreter-symbolic.maude
+load ../syntax/Drones2_impl_Instance.maude
+
+mod TEST-DRONE2-SYSTEM is
+  including DRONES2_IMPL_INSTANCE-MODEL-SYMBOLIC .
 
   op initConst : -> BoolExp .
   eq initConst = [true] .
@@ -14,7 +16,7 @@ mod TEST-THERMOSTAT-SYSTEM is
   eq cinitState = initialize(collapse(initial)) .
 
 
-  eq @m@ = ['THERMOSTAT_IMPL_INSTANCE-MODEL-SYMBOLIC] .
+  eq @m@ = ['DRONES2_IMPL_INSTANCE-MODEL-SYMBOLIC] .
 endm
 
 red initState .
