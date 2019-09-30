@@ -36,8 +36,8 @@ factor
 	;
 	
 value
-	: value_variable
-	| value_constant
+	: value_constant
+	| value_variable
 	| LPAREN value_expression RPAREN
 	;
 
@@ -57,14 +57,14 @@ VALID_ID_START
    ;
 
 
-VALID_ID_CHAR
-   : VALID_ID_START | ('0' .. '9')
-   ;
-
-
 CONSTANT_PROPERTY
    : VALID_ID_CHAR* '::' VALID_ID_CHAR*
    | ('0' .. '9')+
+   | ('0' .. '9')+ ('.' ('0' .. '9')+)?
+   ;
+   
+VALID_ID_CHAR
+   : VALID_ID_START | ('0' .. '9') 
    ;
    
 logical_operator
