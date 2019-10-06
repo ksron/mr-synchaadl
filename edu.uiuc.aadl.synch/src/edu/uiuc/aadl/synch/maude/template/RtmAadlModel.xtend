@@ -153,7 +153,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				subcomponents : (
 					«o.componentInstances.filter[isSync].map[compileComponent].filterNull.join('\n',"none")»),
 				«IF o.isData»
-					value : null(Real),
+					value : null(«IF o.subcomponent.subcomponentType.name.contains("Boolean")»Boolean«ELSE»Real«ENDIF»),
 				«ENDIF»
 				«IF o.behavioral && ! (behAnx == null)»
 				currState : (

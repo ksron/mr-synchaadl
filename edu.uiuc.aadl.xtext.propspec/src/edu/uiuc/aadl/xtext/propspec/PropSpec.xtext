@@ -14,10 +14,12 @@ Top:
 	&
 	('mode' ':' mode=STRING ';')
 	&
-	('search' ':' initCond=Formula '==>' finCond=Formula 'in' 'time' bound=INTVALUE ';')
+	(search+=Search)*
 	|
 	(formulas+=FormulaStatement | requirements+=ReqStatement)*;
 	
+Search:
+	'search' ':' initCond=Formula '==>' finCond=Formula 'in' 'time' bound=INTVALUE ';';
 
 ReqStatement:
 	'requirement' name=ID ':' value=Formula ('in' 'time' '<=' bound=INTVALUE)? ';';

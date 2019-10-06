@@ -1,7 +1,5 @@
 package edu.postech.xtext.maude;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,10 +18,6 @@ public class MaudeRunner {
 	private String TestFilePath = null;
 
 	private Process process;
-
-	private BufferedReader buffStdout;
-	private BufferedReader buffStderr;
-	private BufferedWriter buffStdin;
 
 	public void runMaude() {
 		if (!checkParameters()) {
@@ -65,8 +59,8 @@ public class MaudeRunner {
 		return true;
 	}
 
-	public void makeMaudeFile(String txt) {
-		File file = new File("MaudeTest.maude");
+	public void makeMaudeFile(String txt, int idx) {
+		File file = new File("MaudeTest_" + idx + ".maude");
 		FileWriter fw;
 		try {
 			fw = new FileWriter(file, false);

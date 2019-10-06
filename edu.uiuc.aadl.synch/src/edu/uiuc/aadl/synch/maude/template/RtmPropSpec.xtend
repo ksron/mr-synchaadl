@@ -17,11 +17,12 @@ import org.osate.aadl2.PropertyValue
 import static extension edu.uiuc.aadl.synch.maude.template.RtmAadlIdentifier.*
 import edu.uiuc.aadl.xtext.propspec.propSpec.ReqStatement
 import edu.uiuc.aadl.xtext.propspec.propSpec.Prop
+import edu.uiuc.aadl.xtext.propspec.propSpec.Search
 
 class RtmPropSpec {
 	
 	
-	static def compileTestCommand(Top top)'''
+	static def compileTestCommand(Top top, Search search)'''
 	mod TEST-«top.name.toUpperCase» is
 	  including «top.name.toUpperCase»-MODEL-SYMBOLIC .
 	  including SYMBOLIC-ANALYSIS .
@@ -39,38 +40,17 @@ class RtmPropSpec {
 	 
 	red initialize(initial) .
 	
-	search [,«top.bound»]
-	      {lookup(initState, «top.name.escape+" . "+(top.initCond as Prop).path.compilePath», «(top.initCond as ValueProp).expression.compileExp») ||
+	search [,«search.bound»]
+	      {lookup(initState, «top.name.escape+" . "+(search.initCond as Prop).path.compilePath», «(search.initCond as ValueProp).expression.compileExp») ||
 		   initState,false} 
 		=>+
 		  {B:BoolExp ||
 		   OBJ:Object,false}
 		such that
-		  check-sat(B:BoolExp and lookup(OBJ:Object, «top.name.escape+" . "+(top.finCond as Prop).path.compilePath»,  «(top.initCond as ValueProp).expression.compileExp»)) .
+		  check-sat(B:BoolExp and lookup(OBJ:Object, «top.name.escape+" . "+(search.finCond as Prop).path.compilePath»,  «(search.initCond as ValueProp).expression.compileExp»)) .
 	
 	'''
 	
-	static def compileSearchCommand(Top top)'''
-	mod TEST-«top.name.toUpperCase» is
-		including «top.name.toUpperCase»-MODEL .
-		including MODEL-TRANSITION-SYSTEM .
-		
-		op initConst : -> BoolExp .
-		eq initConst = «top.initCond» .
-		
-		op finalConst : -> BoolExp .
-		eq finalConst = «top.finCond» .
-		
-		op initState : -> Object .
-		eq initState = initialize(initial) .
-		
-		var OBJ : Object .
-		var CONST : BoolExp .
-	endm
-	
-	search [,«top.bound»] {initConst || initState, true} =>+ { CONST || OBJ, true } 
-	 					   such that check-sat(CONST and finalonst) .
-	'''
 	
 	static def compileSpec(Top top) '''
 		load «top.name».maude .

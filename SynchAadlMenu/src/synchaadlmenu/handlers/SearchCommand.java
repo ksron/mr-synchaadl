@@ -21,6 +21,7 @@ import edu.postech.xtext.maude.MaudeRunner;
 import edu.postech.xtext.maude.maude.Model;
 import edu.uiuc.aadl.synch.maude.template.RtmPropSpec;
 import edu.uiuc.aadl.synch.propspec.PropspecEditorResourceManager;
+import edu.uiuc.aadl.xtext.propspec.propSpec.Search;
 import edu.uiuc.aadl.xtext.propspec.propSpec.Top;
 
 public class SearchCommand extends AbstractHandler {
@@ -37,23 +38,27 @@ public class SearchCommand extends AbstractHandler {
 
 		Top spec = getPropSpecResource(res);
 
-
 		String TargetMaudePath = res.getCodegenFilePath().toString();
 		String BaseLocation = res.getEditorFile().getLocation().removeLastSegments(3).toString();
 
 		Model model = getMaudeConfigurationResource(res);
+		int idx = 0;
+		System.out.println("Search commands : " + spec.getSearch());
 
-		// Maude Handler
-		MaudeRunner maudes = new MaudeRunner();
-		maudes.setDirectory(model.getPath());
-		maudes.setName(model.getMaude());
-		maudes.setOption(model.getOptions());
-		maudes.setMode(getMaudeMode(res, spec.getMode()));
-		maudes.setTargetMaude(BaseLocation + TargetMaudePath);
-		maudes.makeMaudeFile(RtmPropSpec.compileTestCommand(spec).toString());
-		System.out.println(RtmPropSpec.compileTestCommand(spec).toString());
-		// System.out.println(maudes.DebugCompileCommand());
-		maudes.runMaude();
+		for(Search search : spec.getSearch()) {
+			System.out.println(idx + "-th iteration");
+			MaudeRunner maudes = new MaudeRunner();
+			maudes.setDirectory(model.getPath());
+			maudes.setName(model.getMaude());
+			maudes.setOption(model.getOptions());
+			maudes.setMode(getMaudeMode(res, spec.getMode()));
+			maudes.setTargetMaude(BaseLocation + TargetMaudePath);
+			maudes.makeMaudeFile(RtmPropSpec.compileTestCommand(spec, search).toString(), idx);
+			System.out.println(RtmPropSpec.compileTestCommand(spec, search).toString());
+			// System.out.println(maudes.DebugCompileCommand());
+			maudes.runMaude();
+			idx += 1;
+		}
 
 		return null;
 	}
