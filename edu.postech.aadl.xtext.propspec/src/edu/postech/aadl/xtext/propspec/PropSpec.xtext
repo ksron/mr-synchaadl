@@ -1,0 +1,120 @@
+grammar edu.postech.aadl.xtext.propspec.PropSpec with org.osate.xtext.aadl2.properties.Properties
+
+import "http://aadl.info/AADL/2.0" as aadl2
+
+generate propSpec "http://www.postech.edu/aadl/xtext/propspec/PropSpec"
+
+
+Top:
+	('name' ':' name=ID ';')
+	&
+	('model' ':' model=[aadl2::ComponentClassifier|QCREF] ';')		
+	&
+	('instance' ':' path=STRING ';')
+	&
+	('mode' ':' mode=STRING ';')
+	&
+	(search+=Search)*
+	|
+	(formulas+=FormulaStatement | requirements+=ReqStatement)*;
+	
+Search:
+	'search' ':' initCond=Formula '==>' finCond=Formula 'in' 'time' bound=INTVALUE ';';
+
+ReqStatement:
+	'requirement' name=ID ':' value=Formula ('in' 'time' '<=' bound=INTVALUE)? ';';
+	
+FormulaStatement:
+	'formula' name=ID ':' value=Formula ';';
+
+/* 
+ * Maude proposition language syntax
+ */
+
+Prop:
+	ValueProp | StateProp;
+
+ValueProp:
+	path=ContainmentPath '|' expression=ValueExpression;	//TODO: type checking needed for boolean exps (in validation)
+	
+StateProp:
+	path=ContainmentPath '@' state=ID;
+
+
+/* 
+ * LTL formula syntax
+ */
+ 
+Formula:
+	InferFormula;
+
+InferFormula returns Formula:
+	TemporalFormula ({BinaryFormula.left=current} op=('<->'|'->'|'=>'|'<=>') right=TemporalFormula)*;
+	
+TemporalFormula returns Formula:
+	DisjFormula ({BinaryFormula.left=current} op=('U'|'R'|'W'|'|->') right=DisjFormula)*;
+
+DisjFormula returns Formula:
+	ConjFormula ({BinaryFormula.left=current} op='\\/' right=ConjFormula)*;
+	
+ConjFormula returns Formula:
+	UnaryFormula ({BinaryFormula.left=current} op='/\\' right=UnaryFormula)*;
+	
+UnaryFormula returns Formula:
+	{UnaryFormula} op=('~'|'O'|'<>'|'[]') child=AtomicFormula
+|	AtomicFormula;
+ 
+AtomicFormula returns Formula:
+	Prop 
+|	PropRef
+|	{UnaryFormula} op=('True'|'False')
+|	'(' Formula ')';
+ 	
+PropRef:
+	def=[FormulaStatement];
+	
+	
+/*
+ * A subset of the behavior expression language
+ */
+
+ValueExpression returns BAExpression:
+    Relation ({BinaryExpression.left=current} op=('and'|'or'|'xor') right=Relation)*;
+
+Relation returns BAExpression:
+    ModifiedExpression ({BinaryExpression.left=current} op=('='|'!='|'<'|'<='|'>'|'>=') right=ModifiedExpression)? ;
+
+ModifiedExpression returns BAExpression:
+	SimpleExpression
+|	{UnaryExpression} op=('+'|'-') child=SimpleExpression;
+
+SimpleExpression returns BAExpression:
+    Term ({BinaryExpression.left=current} op=('+'|'-') right=Term)*;
+
+Term returns BAExpression:
+   Factor ({BinaryExpression.left=current} op=('*'|'/'|'mod'|'rem') right=Factor)*;
+
+Factor returns BAExpression:
+	Value ({BinaryExpression.left=current} op='**' right=Value)?
+|	{UnaryExpression} op=('abs'|'not') child=Value;
+
+Value returns BAExpression:
+	{Value} value=ContainmentPathElement
+|	{Value} value=ValueConstant
+|	'(' ValueExpression ')';
+ 
+ValueConstant returns aadl2::PropertyValue:
+	StringTerm | UnsignedRealTerm | UnsignedIntegerTerm | BooleanLiteral ;	// only a subset
+	
+UnsignedRealTerm returns aadl2::RealLiteral:
+	value=UnsignedReal (unit=[aadl2::UnitLiteral|ID])? ;
+	
+UnsignedIntegerTerm returns aadl2::IntegerLiteral:
+	value=UnsignedInt (unit=[aadl2::UnitLiteral|ID])? ;
+
+UnsignedReal returns aadl2::Real:
+	REAL_LIT ;
+	
+UnsignedInt returns aadl2::Integer:
+	INTEGER_LIT ;
+
