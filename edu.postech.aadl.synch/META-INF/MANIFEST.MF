@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: MR-SynchAADL
 Bundle-SymbolicName: edu.postech.aadl.synch;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: edu.uiuc.aadl.synch.Activator
+Bundle-Activator: edu.postech.aadl.synch.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime;bundle-version="3.8.0",
  org.osate.aadl2;bundle-version="1.0.0",
@@ -33,8 +33,8 @@ Require-Bundle: org.eclipse.ui,
  org.apiguardian
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-Vendor: UIUC
-Export-Package: edu.uiuc.aadl.synch.checker.action,
- edu.uiuc.aadl.synch.maude.action,
- edu.uiuc.aadl.synch.maude.template,
- edu.uiuc.aadl.synch.propspec
+Bundle-Vendor: POSTECH
+Export-Package: edu.postech.aadl.synch.checker.action,
+ edu.postech.aadl.synch.maude.action,
+ edu.postech.aadl.synch.maude.template,
+ edu.postech.aadl.synch.propspec

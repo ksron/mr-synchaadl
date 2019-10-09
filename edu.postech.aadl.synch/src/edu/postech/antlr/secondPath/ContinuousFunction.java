@@ -18,8 +18,8 @@ import org.osate.ba.aadlba.ValueExpression;
 import org.osate.ba.aadlba.ValueVariable;
 import org.osate.ba.aadlba.impl.AadlBaFactoryImpl;
 
-import edu.uiuc.aadl.synch.maude.template.RtmAadlBehaviorLanguage;
-import edu.uiuc.aadl.synch.maude.template.RtmAadlModel;
+import edu.postech.aadl.synch.maude.template.RtmAadlBehaviorLanguage;
+import edu.postech.aadl.synch.maude.template.RtmAadlModel;
 
 public class ContinuousFunction {
 
@@ -80,9 +80,9 @@ public class ContinuousFunction {
 
 	public void testVariable() {
 		for (int i = 0; i < count; i++) {
-			System.out.println("DataSubcomponentHolder : " + funcId.get(i).getDataSubcomponent().getName());
-			System.out.println("BehaviorVariableHolder : " + varId.get(i).getBehaviorVariable().getName());
-			System.out.println("ValueExpression : " + ve.get(i));
+			// System.out.println("DataSubcomponentHolder : " + funcId.get(i).getDataSubcomponent().getName());
+			// System.out.println("BehaviorVariableHolder : " + varId.get(i).getBehaviorVariable().getName());
+			// System.out.println("ValueExpression : " + ve.get(i));
 		}
 
 	}

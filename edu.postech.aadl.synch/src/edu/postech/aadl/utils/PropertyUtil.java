@@ -1,4 +1,4 @@
-package edu.uiuc.aadl.utils;
+package edu.postech.aadl.utils;
 
 import org.osate.aadl2.EnumerationLiteral;
 import org.osate.aadl2.ListValue;

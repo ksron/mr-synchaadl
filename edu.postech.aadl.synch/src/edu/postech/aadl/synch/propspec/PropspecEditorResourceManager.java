@@ -1,4 +1,4 @@
-package edu.uiuc.aadl.synch.propspec;
+package edu.postech.aadl.synch.propspec;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -15,8 +15,8 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 
+import edu.postech.aadl.utils.IOUtils;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
-import edu.uiuc.aadl.utils.IOUtils;
 
 public class PropspecEditorResourceManager {
 

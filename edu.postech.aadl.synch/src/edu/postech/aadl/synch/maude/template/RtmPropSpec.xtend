@@ -1,5 +1,5 @@
 
-package edu.uiuc.aadl.synch.maude.template
+package edu.postech.aadl.synch.maude.template
 
 import edu.postech.aadl.xtext.propspec.propSpec.BinaryExpression
 import edu.postech.aadl.xtext.propspec.propSpec.BinaryFormula
@@ -14,7 +14,7 @@ import org.osate.aadl2.ContainedNamedElement
 import org.osate.aadl2.ContainmentPathElement
 import org.osate.aadl2.PropertyValue
 
-import static extension edu.uiuc.aadl.synch.maude.template.RtmAadlIdentifier.*
+import static extension edu.postech.aadl.synch.maude.template.RtmAadlIdentifier.*
 import edu.postech.aadl.xtext.propspec.propSpec.ReqStatement
 import edu.postech.aadl.xtext.propspec.propSpec.Prop
 import edu.postech.aadl.xtext.propspec.propSpec.Search

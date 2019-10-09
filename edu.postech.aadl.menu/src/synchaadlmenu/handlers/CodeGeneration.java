@@ -9,8 +9,8 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
-import edu.uiuc.aadl.synch.maude.action.RtmGenerationAction;
-import edu.uiuc.aadl.synch.propspec.PropspecEditorResourceManager;
+import edu.postech.aadl.synch.maude.action.RtmGenerationAction;
+import edu.postech.aadl.synch.propspec.PropspecEditorResourceManager;
 
 public class CodeGeneration extends AbstractHandler {
 
@@ -22,7 +22,7 @@ public class CodeGeneration extends AbstractHandler {
 		IWorkbenchPart part = HandlerUtil.getActivePart(event);
 
 
-		XtextEditor newEditor = (part.getSite().getId().compareTo("edu.uiuc.aadl.xtext.propspec.PropSpec") == 0)
+		XtextEditor newEditor = (part.getSite().getId().compareTo("edu.postech.aadl.xtext.propspec.PropSpec") == 0)
 				&& (part instanceof XtextEditor) ? (XtextEditor) part : null;
 
 		res.setEditor(newEditor);

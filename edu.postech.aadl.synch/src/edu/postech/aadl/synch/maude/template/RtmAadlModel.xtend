@@ -1,4 +1,4 @@
-package edu.uiuc.aadl.synch.maude.template
+package edu.postech.aadl.synch.maude.template
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.SetMultimap
@@ -20,8 +20,8 @@ import org.osate.aadl2.instance.FeatureInstance
 import org.osate.aadl2.instance.SystemInstance
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager
 
-import static extension edu.uiuc.aadl.synch.maude.template.RtmAadlSetting.*
-import static extension edu.uiuc.aadl.utils.PropertyUtil.*
+import static extension edu.postech.aadl.synch.maude.template.RtmAadlSetting.*
+import static extension edu.postech.aadl.utils.PropertyUtil.*
 import static extension org.osate.xtext.aadl2.properties.util.GetProperties.*
 import org.osate.ba.aadlba.BehaviorAnnex
 import org.osate.aadl2.DefaultAnnexSubclause
@@ -30,7 +30,7 @@ import java.util.List
 import org.osate.aadl2.instance.ModeInstance
 import org.osate.aadl2.instance.ModeTransitionInstance
 import org.eclipse.emf.common.util.EList
-import edu.uiuc.aadl.utils.PropertyUtil
+import edu.postech.aadl.utils.PropertyUtil
 import org.osate.aadl2.instance.ConnectionInstance
 import org.osate.aadl2.FlowSpecification
 import org.osate.aadl2.instance.FlowSpecificationInstance
@@ -153,7 +153,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				subcomponents : (
 					«o.componentInstances.filter[isSync].map[compileComponent].filterNull.join('\n',"none")»),
 				«IF o.isData»
-					value : null(«IF o.subcomponent.subcomponentType.name.contains("Boolean")»Boolean«ELSE»Real«ENDIF»),
+				value : null(«IF o.subcomponent.subcomponentType.name.contains("Boolean")»Boolean«ELSE»Real«ENDIF»),
 				«ENDIF»
 				«IF o.behavioral && ! (behAnx == null)»
 				currState : (
@@ -214,7 +214,12 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			Port: '''
 			< «f.id("FeatureId")» : Env«f.direction.compileDirection(o)»Port | 
 				content : «f.category.compileOutFeature(o)»,
-				target : «compileTarget(f.id("FeatureId"), ci.id("ComponentId"))»,
+				«IF f.direction.outgoing»
+				target : «compileOutTarget(f.id("FeatureId"), ci.id("ComponentId"))»,
+				«ELSE»
+				target : «compileInTarget(f.id("FeatureId"), ci.id("ComponentId"))»,
+				«ENDIF»
+				
 				properties : «o.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")»,
 				envCache : «f.category.compileOutFeature(o)» >'''
 			default:
@@ -222,11 +227,22 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		}
 	}
 	
-	private def compileTarget(String featureId, String componentId){
+	private def compileOutTarget(String featureId, String componentId){
 		for(ConnectionReference cr : conxTable.values){
 			if(cr.connection.source.context!=null && cr.connection.destination.context!=null){
 				if(cr.connection.source.context.name.equals(componentId) && cr.connection.source.connectionEnd.name.equals(featureId)){
 					return cr.connection.destination.context.name
+				}
+			}
+		}
+		return "none"
+	}
+	
+	private def compileInTarget(String featureId, String componentId){
+		for(ConnectionReference cr : conxTable.values){
+			if(cr.connection.source.context!=null && cr.connection.destination.context!=null){
+				if(cr.connection.destination.context.name.equals(componentId) && cr.connection.destination.connectionEnd.name.equals(featureId)){
+					return cr.connection.source.context.name
 				}
 			}
 		}

@@ -9,8 +9,8 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
-import edu.uiuc.aadl.synch.checker.action.ConstrainsCheckAction;
-import edu.uiuc.aadl.synch.propspec.PropspecEditorResourceManager;
+import edu.postech.aadl.synch.checker.action.ConstrainsCheckAction;
+import edu.postech.aadl.synch.propspec.PropspecEditorResourceManager;
 
 public class ConstraintChecker extends AbstractHandler {
 
@@ -21,7 +21,7 @@ public class ConstraintChecker extends AbstractHandler {
 		PropspecEditorResourceManager res = new PropspecEditorResourceManager();
 		IWorkbenchPart part = HandlerUtil.getActivePart(event);
 
-		XtextEditor newEditor = (part.getSite().getId().compareTo("edu.uiuc.aadl.xtext.propspec.PropSpec") == 0)
+		XtextEditor newEditor = (part.getSite().getId().compareTo("edu.postech.aadl.xtext.propspec.PropSpec") == 0)
 				&& (part instanceof XtextEditor) ? (XtextEditor) part : null;
 
 		res.setEditor(newEditor);

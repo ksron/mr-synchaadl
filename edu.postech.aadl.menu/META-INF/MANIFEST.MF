@@ -24,4 +24,4 @@ Require-Bundle: org.eclipse.ui,
 Automatic-Module-Name: SynchAadlMenu
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: edu.postech.xtext.maude.maude,
- edu.uiuc.aadl.synch.propspec
+ edu.postech.aadl.synch.propspec 

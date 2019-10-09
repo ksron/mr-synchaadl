@@ -1,4 +1,4 @@
-package edu.uiuc.aadl.synch.checker.action;
+package edu.postech.aadl.synch.checker.action;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.osate.aadl2.Element;
@@ -11,8 +11,8 @@ import org.osate.ui.actions.AbstractInstanceOrDeclarativeModelReadOnlyAction;
 import org.osate.ui.dialogs.Dialog;
 import org.osgi.framework.Bundle;
 
-import edu.uiuc.aadl.synch.Activator;
-import edu.uiuc.aadl.synch.checker.SynchAadlConstChecker;
+import edu.postech.aadl.synch.Activator;
+import edu.postech.aadl.synch.checker.SynchAadlConstChecker;
 
 public class ConstrainsCheckAction extends AbstractInstanceOrDeclarativeModelReadOnlyAction {
 
@@ -28,7 +28,7 @@ public class ConstrainsCheckAction extends AbstractInstanceOrDeclarativeModelRea
 
 	@Override
 	protected String getMarkerType() {
-		return "edu.uiuc.aadl.synch.SyncAadlObjectMarker";
+		return "edu.postech.aadl.synch.SyncAadlObjectMarker";
 	}
 
 	@Override

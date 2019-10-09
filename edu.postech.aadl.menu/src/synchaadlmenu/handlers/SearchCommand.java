@@ -17,12 +17,12 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
+import edu.postech.aadl.synch.maude.template.RtmPropSpec;
+import edu.postech.aadl.synch.propspec.PropspecEditorResourceManager;
 import edu.postech.aadl.xtext.propspec.propSpec.Search;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
 import edu.postech.xtext.maude.MaudeRunner;
 import edu.postech.xtext.maude.maude.Model;
-import edu.uiuc.aadl.synch.maude.template.RtmPropSpec;
-import edu.uiuc.aadl.synch.propspec.PropspecEditorResourceManager;
 
 public class SearchCommand extends AbstractHandler {
 
@@ -31,7 +31,7 @@ public class SearchCommand extends AbstractHandler {
 		PropspecEditorResourceManager res = new PropspecEditorResourceManager();
 		IWorkbenchPart part = HandlerUtil.getActivePart(event);
 
-		XtextEditor newEditor = (part.getSite().getId().compareTo("edu.uiuc.aadl.xtext.propspec.PropSpec") == 0)
+		XtextEditor newEditor = (part.getSite().getId().compareTo("edu.postech.aadl.xtext.propspec.PropSpec") == 0)
 				&& (part instanceof XtextEditor) ? (XtextEditor) part : null;
 
 		res.setEditor(newEditor);

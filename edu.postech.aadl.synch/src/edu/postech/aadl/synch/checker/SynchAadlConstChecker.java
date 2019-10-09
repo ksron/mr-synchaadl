@@ -1,4 +1,4 @@
-package edu.uiuc.aadl.synch.checker;
+package edu.postech.aadl.synch.checker;
 
 import java.util.ArrayList;
 
@@ -21,8 +21,8 @@ import org.osate.xtext.aadl2.properties.util.AadlProject;
 import org.osate.xtext.aadl2.properties.util.GetProperties;
 import org.osate.xtext.aadl2.properties.util.PropertyUtils;
 
-import edu.uiuc.aadl.synch.maude.template.RtmAadlSetting;
-import edu.uiuc.aadl.utils.PropertyUtil;
+import edu.postech.aadl.synch.maude.template.RtmAadlSetting;
+import edu.postech.aadl.utils.PropertyUtil;
 
 public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 

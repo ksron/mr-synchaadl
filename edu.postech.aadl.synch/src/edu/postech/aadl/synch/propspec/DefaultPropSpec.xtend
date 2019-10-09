@@ -1,4 +1,4 @@
-package edu.uiuc.aadl.synch.propspec
+package edu.postech.aadl.synch.propspec
 
 import org.osate.aadl2.instance.SystemInstance
 import org.eclipse.core.resources.IFile

@@ -1,7 +1,7 @@
-package edu.uiuc.aadl.synch.maude.template
+package edu.postech.aadl.synch.maude.template
 
 import com.google.common.collect.SetMultimap
-import edu.uiuc.aadl.utils.PropertyUtil
+import edu.postech.aadl.utils.PropertyUtil
 import org.osate.aadl2.BooleanLiteral
 import org.osate.aadl2.IntegerLiteral
 import org.osate.aadl2.NamedElement

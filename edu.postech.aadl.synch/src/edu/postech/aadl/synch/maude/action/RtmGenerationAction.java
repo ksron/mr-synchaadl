@@ -1,4 +1,4 @@
-package edu.uiuc.aadl.synch.maude.action;
+package edu.postech.aadl.synch.maude.action;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -22,10 +22,10 @@ import org.osgi.framework.Bundle;
 
 import com.google.common.collect.HashMultimap;
 
-import edu.uiuc.aadl.synch.Activator;
-import edu.uiuc.aadl.synch.maude.template.RtmAadlModel;
-import edu.uiuc.aadl.synch.maude.template.RtmAadlSetting;
-import edu.uiuc.aadl.utils.IOUtils;
+import edu.postech.aadl.synch.Activator;
+import edu.postech.aadl.synch.maude.template.RtmAadlModel;
+import edu.postech.aadl.synch.maude.template.RtmAadlSetting;
+import edu.postech.aadl.utils.IOUtils;
 
 
 /**
@@ -53,7 +53,7 @@ public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeMode
 
 	@Override
 	protected String getMarkerType() {
-		return "edu.uiuc.aadl.synch.SyncAadlObjectMarker";
+		return "edu.postech.aadl.synch.SyncAadlObjectMarker";
 	}
 
 	@Override

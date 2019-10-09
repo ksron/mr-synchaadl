@@ -1,4 +1,4 @@
-package edu.uiuc.aadl.synch.maude.template
+package edu.postech.aadl.synch.maude.template
 
 import com.google.common.collect.SetMultimap
 import org.osate.aadl2.Element

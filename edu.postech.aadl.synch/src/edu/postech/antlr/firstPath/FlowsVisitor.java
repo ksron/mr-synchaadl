@@ -60,7 +60,7 @@ public class FlowsVisitor extends FlowsBaseVisitor<IBAVisitable> {
 
 	@Override
 	public IBAVisitable visitContinuousdynamics(@NotNull FlowsParser.ContinuousdynamicsContext ctx) {
-		System.out.println("Continuousdynamics : " + ctx.getText());
+		// System.out.println("Continuousdynamics : " + ctx.getText());
 		BehaviorActionSequence bas = aadlbaFactory.createBehaviorActionSequence();
 		for (FlowsParser.AssignmentContext assignment : ctx.assignment()) {
 			bas.getActions().add((BehaviorAction) visitAssignment(assignment));
@@ -70,7 +70,7 @@ public class FlowsVisitor extends FlowsBaseVisitor<IBAVisitable> {
 
 	@Override
 	public IBAVisitable visitAssignment(@NotNull FlowsParser.AssignmentContext ctx) {
-		System.out.println("Assignment: " + ctx.getText());
+		// System.out.println("Assignment: " + ctx.getText());
 		AssignmentAction aa = aadlbaFactory.createAssignmentAction();
 		aa.setTarget((Target) visitTarget(ctx.target()));
 		aa.setValueExpression((ValueExpression) visitValue_expression(ctx.value_expression()));
@@ -79,7 +79,7 @@ public class FlowsVisitor extends FlowsBaseVisitor<IBAVisitable> {
 
 	@Override
 	public IBAVisitable visitTarget(@NotNull FlowsParser.TargetContext ctx) {
-		System.out.println("Target : " + ctx.getText());
+		// System.out.println("Target : " + ctx.getText());
 		DataSubcomponentHolder dscHolder = aadlbaFactory.createDataSubcomponentHolder();
 		DataSubcomponent dsc = aadl2Factory.createDataSubcomponent();
 		dsc.setName(ctx.getText());
@@ -90,7 +90,7 @@ public class FlowsVisitor extends FlowsBaseVisitor<IBAVisitable> {
 
 	@Override
 	public IBAVisitable visitValue_expression(@NotNull FlowsParser.Value_expressionContext ctx) {
-		System.out.println("Value_expression : " + ctx.getText());
+		// System.out.println("Value_expression : " + ctx.getText());
 		ValueExpression ve = aadlbaFactory.createValueExpression();
 		for (RelationContext relation : ctx.relation()) {
 			ve.getRelations().add((Relation) visitRelation(relation));
@@ -100,7 +100,7 @@ public class FlowsVisitor extends FlowsBaseVisitor<IBAVisitable> {
 
 	@Override
 	public IBAVisitable visitRelation(@NotNull FlowsParser.RelationContext ctx) {
-		System.out.println("Continuousdynamics : " + ctx.getText());
+		// System.out.println("Continuousdynamics : " + ctx.getText());
 		Relation re = aadlbaFactory.createRelation();
 		re.setFirstExpression((SimpleExpression) visitSimple_expression(ctx.simple_expression(0)));
 
@@ -109,7 +109,7 @@ public class FlowsVisitor extends FlowsBaseVisitor<IBAVisitable> {
 
 	@Override
 	public IBAVisitable visitSimple_expression(@NotNull FlowsParser.Simple_expressionContext ctx) {
-		System.out.println("Continuousdynamics : " + ctx.getText());
+		// System.out.println("Continuousdynamics : " + ctx.getText());
 		SimpleExpression se = aadlbaFactory.createSimpleExpression();
 		if (ctx.unary_adding_operator() != null) {
 			switch (ctx.unary_adding_operator().getText().charAt(0)) {
@@ -142,7 +142,7 @@ public class FlowsVisitor extends FlowsBaseVisitor<IBAVisitable> {
 
 	@Override
 	public IBAVisitable visitTerm(@NotNull FlowsParser.TermContext ctx) {
-		System.out.println("Term : " + ctx.getText());
+		// System.out.println("Term : " + ctx.getText());
 		Term te = aadlbaFactory.createTerm();
 		Iterator<FactorContext> itFactor = ctx.factor().iterator();
 		Iterator<Multiplying_operatorContext> itOperator = ctx.multiplying_operator().iterator();
@@ -164,7 +164,7 @@ public class FlowsVisitor extends FlowsBaseVisitor<IBAVisitable> {
 
 	@Override
 	public IBAVisitable visitFactor(@NotNull FlowsParser.FactorContext ctx) {
-		System.out.println("Factor : " + ctx.getText());
+		// System.out.println("Factor : " + ctx.getText());
 		Factor fa = aadlbaFactory.createFactor();
 		fa.setFirstValue((Value) visitValue(ctx.value(0)));
 		if (ctx.binary_numeric_operator() != null) {
@@ -177,7 +177,7 @@ public class FlowsVisitor extends FlowsBaseVisitor<IBAVisitable> {
 
 	@Override
 	public IBAVisitable visitValue(@NotNull FlowsParser.ValueContext ctx) {
-		System.out.println("Value : " + ctx.getText());
+		// System.out.println("Value : " + ctx.getText());
 		if (ctx.LPAREN() != null && ctx.RPAREN() != null) {
 			return visitValue_expression(ctx.value_expression());
 		}
@@ -187,7 +187,7 @@ public class FlowsVisitor extends FlowsBaseVisitor<IBAVisitable> {
 
 	@Override
 	public IBAVisitable visitValue_constant(@NotNull FlowsParser.Value_constantContext ctx) {
-		System.out.println("Value_constant : " + ctx.getText());
+		// System.out.println("Value_constant : " + ctx.getText());
 		if (ctx.getText().matches("([0-9]*)\\.([0-9]*)")) {
 			System.out.println("Real Number");
 			BehaviorRealLiteral brl = aadlbaFactory.createBehaviorRealLiteral();
@@ -214,7 +214,7 @@ public class FlowsVisitor extends FlowsBaseVisitor<IBAVisitable> {
 
 	@Override
 	public IBAVisitable visitValue_variable(@NotNull FlowsParser.Value_variableContext ctx) {
-		System.out.println("Value_variable : " + ctx.getText());
+		// System.out.println("Value_variable : " + ctx.getText());
 		ValueVariable vv = null;
 		if (checkDataSubcomponentHolder(ctx.getText())) {
 			vv = aadlbaFactory.createDataSubcomponentHolder();

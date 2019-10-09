@@ -1,4 +1,4 @@
-package edu.uiuc.aadl.synch.maude.template
+package edu.postech.aadl.synch.maude.template
 
 import org.osate.aadl2.DataPort
 import org.osate.aadl2.PropertyValue
