@@ -78,27 +78,29 @@ PropRef:
  * A subset of the behavior expression language
  */
 
-ValueExpression returns BAExpression:
+
+
+ValueExpression returns aadl2::PropertyExpression:
     Relation ({BinaryExpression.left=current} op=('and'|'or'|'xor') right=Relation)*;
 
-Relation returns BAExpression:
+Relation returns aadl2::PropertyExpression:
     ModifiedExpression ({BinaryExpression.left=current} op=('='|'!='|'<'|'<='|'>'|'>=') right=ModifiedExpression)? ;
 
-ModifiedExpression returns BAExpression:
+ModifiedExpression returns aadl2::PropertyExpression:
 	SimpleExpression
 |	{UnaryExpression} op=('+'|'-') child=SimpleExpression;
 
-SimpleExpression returns BAExpression:
+SimpleExpression returns aadl2::PropertyExpression:
     Term ({BinaryExpression.left=current} op=('+'|'-') right=Term)*;
 
-Term returns BAExpression:
+Term returns aadl2::PropertyExpression:
    Factor ({BinaryExpression.left=current} op=('*'|'/'|'mod'|'rem') right=Factor)*;
 
-Factor returns BAExpression:
+Factor returns aadl2::PropertyExpression:
 	Value ({BinaryExpression.left=current} op='**' right=Value)?
 |	{UnaryExpression} op=('abs'|'not') child=Value;
 
-Value returns BAExpression:
+Value returns aadl2::PropertyExpression:
 	{Value} value=ContainmentPathElement
 |	{Value} value=ValueConstant
 |	'(' ValueExpression ')';

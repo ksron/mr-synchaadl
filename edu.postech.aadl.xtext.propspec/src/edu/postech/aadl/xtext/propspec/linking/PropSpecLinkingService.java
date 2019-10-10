@@ -19,13 +19,13 @@ import org.osate.aadl2.FeatureGroup;
 import org.osate.aadl2.FeatureGroupPrototype;
 import org.osate.aadl2.FeatureGroupType;
 import org.osate.aadl2.NamedElement;
+import org.osate.aadl2.PropertyExpression;
 import org.osate.aadl2.Subcomponent;
 import org.osate.aadl2.SubprogramSubcomponent;
 import org.osate.aadl2.ThreadSubcomponent;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.aadl2.modelsupport.util.ResolvePrototypeUtil;
 
-import edu.postech.aadl.xtext.propspec.propSpec.BAExpression;
 import edu.postech.aadl.xtext.propspec.propSpec.Prop;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
 
@@ -54,7 +54,7 @@ public class PropSpecLinkingService extends DefaultLinkingService {
 
 					res = findNamedObject(el, crossRefString);
 				}
-				else if (context.eContainer() instanceof BAExpression) // inside an expression
+				else if (context.eContainer() instanceof PropertyExpression) // inside an expression
 				{
 					ContainmentPathElement pl = getPropPathElement(context);
 					if (pl != null) {

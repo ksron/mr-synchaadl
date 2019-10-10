@@ -38,6 +38,7 @@ class RtmAadlIdentifier {
 		for(String name : names){
 			encode += "eq " + name + " = loc(real(" + (idx++) + ")) .\n"
 		}
+		encode += "eq @@default@loc@@ = loc(real(" + (idx++) + ")) .\n"
 		return encode
 	}
 	
