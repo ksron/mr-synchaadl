@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.osate.aadl2.ComponentCategory;
 import org.osate.aadl2.DirectedFeature;
-import org.osate.aadl2.EnumerationLiteral;
 import org.osate.aadl2.IntegerLiteral;
 import org.osate.aadl2.PropertyAssociation;
 import org.osate.aadl2.RangeValue;
@@ -17,7 +16,6 @@ import org.osate.aadl2.instance.FeatureInstance;
 import org.osate.aadl2.instance.util.InstanceSwitch;
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager;
 import org.osate.aadl2.modelsupport.modeltraversal.AadlProcessingSwitchWithProgress;
-import org.osate.xtext.aadl2.properties.util.AadlProject;
 import org.osate.xtext.aadl2.properties.util.GetProperties;
 import org.osate.xtext.aadl2.properties.util.PropertyUtils;
 
@@ -38,9 +36,6 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 
 			@Override
 			public String caseComponentInstance(ComponentInstance ci) {
-				// System.out.println("[Debug] " + ci.getName());
-				// checkCompSynch(ci);
-
 				checkSinglePeriod(ci);
 				checkSamePeriod(ci);
 				checkDataInitialValue(ci);
@@ -51,23 +46,13 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 
 				checkRealFloatVariable(ci);
 				checkContinuousDynamicsVar(ci);
-
-				// checkThreadDispatchProtocol(ci);
 				monitor.worked(1);
 				return DONE;
 			}
 
 			@Override
 			public String caseConnectionInstance(ConnectionInstance ci) {
-				// System.out.println("[Debug] " + ci.getName());
-
 				checkImmediateDelayedConnectionEnv(ci);
-
-				// checkConnDataPort(ci);
-				// checkConnEventDataPort(ci);
-				// checkConnSrc(ci);
-				// checkConnDst(ci);
-				// checkConnTiming(ci);
 				return DONE;
 			}
 		};
@@ -298,77 +283,4 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 			}
 		}
 	}
-
-	// Not used in this time.
-	/************************/
-	private void checkCompSynch(ComponentInstance ci) {
-		if (ci.getCategory() != ComponentCategory.DATA && !PropertyUtil.isEnvironment(ci))
-		{
-			if(! PropertyUtil.isSynchronous(ci)) {
-				getErrorManager().error(ci, ci.getName() + " is not a synchronous " + ci.getCategory().getLiteral());
-			}
-		}
-	}
-
-
-
-	private void checkThreadDispatchProtocol(ComponentInstance ci) {
-		if (ci.getCategory() == ComponentCategory.THREAD && !PropertyUtil.isEnvironment(ci)) {
-			EnumerationLiteral dp = GetProperties.getDispatchProtocol(ci);
-			if (dp == null || !dp.getName().equalsIgnoreCase(AadlProject.PERIODIC_LITERAL)) {
-				getErrorManager().error(ci, ci.getName() + " is not periodic");
-			}
-		}
-	}
-
-	/************************/
-	private void checkConnDataPort(ConnectionInstance ci) {
-		ComponentInstance src = PropertyUtil.getSrcComponent(ci);
-		ComponentInstance dst = PropertyUtil.getDstComponent(ci);
-		if (!PropertyUtil.isDataPortConnection(ci)) {
-			if ((PropertyUtil.isEnvironment(src) && PropertyUtil.isEnvironment(dst))
-					|| !PropertyUtil.isEnvironment(dst)) {
-				getErrorManager().error(ci, ci.getName() + " is not an data port connection");
-			}
-		}
-	}
-
-	private void checkConnEventDataPort(ConnectionInstance ci) {
-		ComponentInstance dst = PropertyUtil.getDstComponent(ci);
-		if (PropertyUtil.isEnvironment(dst)
-				&& (!PropertyUtil.isEventDataPortConnection(ci) || !PropertyUtil.isEventPortConnection(ci))) {
-			getErrorManager().error(ci, ci.getName() + " is not an event data / eventport connection");
-		}
-	}
-
-	private void checkConnSrc(ConnectionInstance ci) {
-		ComponentInstance src = PropertyUtil.getSrcComponent(ci);
-		if (!PropertyUtil.isEnvironment(src) && (src == null || src.getCategory() != ComponentCategory.THREAD)) {
-			getErrorManager().error(ci, ci.getName() + " is invalid; src must be a non-null thread");
-		}
-	}
-
-	private void checkConnDst(ConnectionInstance ci) {
-		ComponentInstance dst = PropertyUtil.getDstComponent(ci);
-		if (!PropertyUtil.isEnvironment(dst) && (dst == null || dst.getCategory() != ComponentCategory.THREAD)) {
-			getErrorManager().error(ci, ci.getName() + " is invalid; dst must be a non-null thread");
-		}
-	}
-
-	private void checkConnTiming(ConnectionInstance ci) {
-		ComponentInstance src = PropertyUtil.getSrcComponent(ci);
-		ComponentInstance dst = PropertyUtil.getDstComponent(ci);
-		if (!PropertyUtil.isEnvironment(src) && !PropertyUtil.isEnvironment(dst)) {
-			if (!PropertyUtil.isDelayedPortConnection(ci)) {
-				getErrorManager().error(ci, ci.getName() + " is not delayed");
-			}
-		}
-		else {
-			if(PropertyUtil.isDelayedPortConnection(ci) || PropertyUtil.isImmediatePortConnection(ci)) {
-				getErrorManager().error(ci, ci.getName() + " is not non-deterministic");
-			}
-		}
-	}
-
-
 }

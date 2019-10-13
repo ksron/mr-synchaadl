@@ -37,4 +37,5 @@ Bundle-Vendor: POSTECH
 Export-Package: edu.postech.aadl.synch.checker.action,
  edu.postech.aadl.synch.maude.action,
  edu.postech.aadl.synch.maude.template,
- edu.postech.aadl.synch.propspec
+ edu.postech.aadl.synch.propspec,
+ edu.postech.aadl.utils
