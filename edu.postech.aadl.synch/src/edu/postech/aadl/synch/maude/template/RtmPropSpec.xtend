@@ -18,11 +18,12 @@ import static extension edu.postech.aadl.synch.maude.template.RtmAadlIdentifier.
 import edu.postech.aadl.xtext.propspec.propSpec.ReqStatement
 import edu.postech.aadl.xtext.propspec.propSpec.Prop
 import edu.postech.aadl.xtext.propspec.propSpec.Search
+import edu.postech.aadl.xtext.propspec.propSpec.Requirement
 
 class RtmPropSpec {
 	
 	
-	static def compileTestCommand(Top top, Search search)'''
+	static def compileReachabilityCommand(Top top, Search search)'''
 	mod TEST-«top.name.toUpperCase» is
 	  including «top.name.toUpperCase»-MODEL-SYMBOLIC .
 	  including SYMBOLIC-ANALYSIS .
@@ -48,7 +49,36 @@ class RtmPropSpec {
 		   OBJ:Object,false}
 		such that
 		  check-sat(B:BoolExp and lookup(OBJ:Object, «top.name.escape+" . "+(search.finCond as Prop).path.compilePath»,  «(search.initCond as ValueProp).expression.compileExp»)) .
+	quit
+	'''
 	
+	static def compileRequirementCommand(Top top, Requirement req)'''
+	mod TEST-«top.name.toUpperCase» is
+	  including «top.name.toUpperCase»-MODEL-SYMBOLIC .
+	  including SYMBOLIC-ANALYSIS .
+	
+	  op initState : -> Object .
+	  eq initState = initialize(initial) .
+	  
+    endm
+    
+    mod TEST-«top.name.toUpperCase»-MODE is
+    	including TEST-«top.name.toUpperCase» .
+	  eq @m@ = ['TEST-«top.name.toUpperCase»] .
+	  
+	endm
+	 
+	red initialize(initial) .
+	
+	search [,«req.bound»]
+	      {lookup(initState, «top.name.escape+" . "+(req.initCond as Prop).path.compilePath», «(req.initCond as ValueProp).expression.compileExp») ||
+		   initState,false} 
+		=>+
+		  {B:BoolExp ||
+		   OBJ:Object,false}
+		such that
+		  check-sat(B:BoolExp and lookup(OBJ:Object, «top.name.escape+" . "+(req.findCond as Prop).path.compilePath»,  «(req.initCond as ValueProp).expression.compileExp»)) .
+	quit
 	'''
 	
 	

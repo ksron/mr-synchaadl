@@ -27,4 +27,7 @@ Export-Package: edu.postech.xtext.maude.services,
  edu.postech.xtext.maude,
  edu.postech.xtext.maude.scoping,
  edu.postech.xtext.maude.maude
-Import-Package: org.apache.log4j
+Import-Package: edu.postech.aadl.utils,
+ org.apache.log4j,
+ org.eclipse.core.resources,
+ org.eclipse.ui

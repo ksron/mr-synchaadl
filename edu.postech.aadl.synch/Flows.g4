@@ -1,6 +1,7 @@
 grammar Flows;
 
 // x(t) = (-dotx * t) + x(0);
+// dt/d(x) = x + y
 
 continuousdynamics 
 	: (assignment)* EOF
@@ -13,6 +14,7 @@ assignment
 target
 	: DERIV LPAREN value_variable RPAREN 
 	| value_variable LPAREN value_variable RPAREN
+	| 'dt/d' LPAREN value_variable RPAREN
 	;
 
 value_expression

@@ -14,15 +14,18 @@ Top:
 	&
 	('mode' ':' mode=STRING ';')
 	&
-	(search+=Search)*
+	(search+=Search)* (requirement+=Requirement)*
 	|
 	(formulas+=FormulaStatement | requirements+=ReqStatement)*;
 	
 Search:
-	'search' ':' initCond=Formula '==>' finCond=Formula 'in' 'time' bound=INTVALUE ';';
+	'reachability' ':' initCond=Formula '==>' finCond=Formula 'in' 'time' bound=INTVALUE ';';
+
+Requirement:
+	'requirement' ':' initCond=Formula '==>[]' findCond=Formula 'in' 'time' bound=INTVALUE ';';
 
 ReqStatement:
-	'requirement' name=ID ':' value=Formula ('in' 'time' '<=' bound=INTVALUE)? ';';
+	'requirementT' name=ID ':' value=Formula ('in' 'time' '<=' bound=INTVALUE)? ';';
 	
 FormulaStatement:
 	'formula' name=ID ':' value=Formula ';';

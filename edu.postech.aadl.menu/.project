@@ -3,6 +3,7 @@
 	<name>edu.postech.aadl.menu</name>
 	<comment></comment>
 	<projects>
+		<project>edu.postech.maude.view</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
