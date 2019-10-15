@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="AADLModelInstanceBuilder"
+         name="AADL Model Instance Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="edu.postech.aadl.builder.builder.AADLModelInstanceBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="simpleNature"
+         name="Simple Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="edu.postech.aadl.builder.builder.SimpleNature">
+         </run>
+      </runtime>
+      <builder
+            id="edu.postech.aadl.builder.AADLModelInstanceBuilder">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="edu.postech.aadl.builder.builder.AddBuilder"
+            id="edu.postech.aadl.builder.commands.AddBuilder"
+            name="Add Custom Builder">
+      </command>
+      <command
+            defaultHandler="edu.postech.aadl.builder.builder.RemoveBuilder"
+            id="edu.postech.aadl.builder.commands.RemoveBuilder"
+            name="Remove Custom Builder">
+      </command>
+   </extension>
+   
+   <extension
+      point="org.eclipse.ui.menus">
+   <menuContribution
+         allPopups="false"
+         locationURI="popup:org.eclipse.ui.projectConfigure?after=additions">
+      <command
+            commandId="edu.postech.aadl.builder.commands.AddBuilder"
+            style="push">
+      </command>
+      <command
+            commandId="edu.postech.aadl.builder.commands.RemoveBuilder"
+            style="push">
+      </command>
+   </menuContribution>
+	</extension>
+   
+	<extension
+      point="org.eclipse.core.expressions.propertyTesters">
+   <propertyTester
+         class="edu.postech.aadl.builder.builder.TestBuilderEnabled"
+         id="edu.postech.aadl.builder.myBuilderTester"
+         namespace="cedu.postech.aadl.builder"
+         properties="isEnabled"
+         type="java.lang.Object">
+   </propertyTester>
+	</extension>
+
+</plugin>
