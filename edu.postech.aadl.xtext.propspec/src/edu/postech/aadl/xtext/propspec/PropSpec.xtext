@@ -19,10 +19,10 @@ Top:
 	(formulas+=FormulaStatement | requirements+=ReqStatement)*;
 	
 Search:
-	'reachability' ':' initCond=Formula '==>' finCond=Formula 'in' 'time' bound=INTVALUE ';';
+	'reachability' '[' nickname=STRING ']' ':' initCond=Formula '==>' finCond=Formula 'in' 'time' bound=INTVALUE ';';
 
 Requirement:
-	'requirement' ':' initCond=Formula '==>[]' findCond=Formula 'in' 'time' bound=INTVALUE ';';
+	'requirement' '[' nickname=STRING ']' ':' initCond=Formula '==>[]' findCond=Formula 'in' 'time' bound=INTVALUE ';';
 
 ReqStatement:
 	'requirementT' name=ID ':' value=Formula ('in' 'time' '<=' bound=INTVALUE)? ';';

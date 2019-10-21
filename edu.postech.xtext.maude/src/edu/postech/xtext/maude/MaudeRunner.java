@@ -8,17 +8,14 @@ import java.io.InputStreamReader;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.common.util.EList;
 
 import edu.postech.aadl.utils.IOUtils;
-
-
-
 
 public class MaudeRunner {
 	private String maudeDirectory = null;
 	private String Name = null;
 	private StringBuilder Options = null;
+	private String userCommand = null;
 
 	private String ModeFilePath = null;
 	private String TargetPath = null;
@@ -38,20 +35,27 @@ public class MaudeRunner {
 			ProcessBuilder builder = new ProcessBuilder(compileCommandOption().split(" "));
 			IFile maudeResult = IOUtils.getFile(path);
 
-			// builder.redirectOutput(output);
+			// builder.redirectOutput(Redirect.INHERIT);
+			// builder.redirectError(Redirect.INHERIT);
 			this.process = builder.start();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(this.process.getInputStream()));
-			StringBuffer sb = new StringBuffer();
-			String line;
-			while ((line = reader.readLine()) != null) {
-				sb.append(line + "\n");
-			}
-			result = resultMaudeParse(sb.toString());
-			IOUtils.setFileContent(new ByteArrayInputStream(result.getBytes()), maudeResult);
+			result = maudeSimpleParse(maudeResult);
 
 		} catch (IOException | CoreException e) {
 			e.printStackTrace();
 		}
+		return result;
+	}
+
+	public String maudeSimpleParse(IFile file) throws IOException, CoreException {
+		String result = "< Analysis Command > \n\n" + userCommand + "\n\n" + "< Result >\n";
+		BufferedReader reader = new BufferedReader(new InputStreamReader(this.process.getInputStream()));
+		StringBuffer sb = new StringBuffer();
+		String line;
+		while ((line = reader.readLine()) != null) {
+			sb.append(line + "\n");
+		}
+		result += resultMaudeParse(sb.toString());
+		IOUtils.setFileContent(new ByteArrayInputStream(result.getBytes()), file);
 		return result;
 	}
 
@@ -100,7 +104,7 @@ public class MaudeRunner {
 
 
 	private String compileCommandOption() {
-		return this.maudeDirectory + "/" + this.Name + Options.toString() + " "
+		return this.Name + Options.toString() + " "
 				+ this.ModeFilePath + " " + this.TargetPath + " " + this.TestFilePath;
 
 	}
@@ -122,10 +126,14 @@ public class MaudeRunner {
 		this.ModeFilePath = modeFilePath;
 	}
 
-	public void setOption(EList<String> options) {
+	public void setUserCommand(String userCommand) {
+		this.userCommand = userCommand;
+	}
+
+	public void setOption(String options) {
 		this.Options = new StringBuilder();
 
-		for (String option : options) {
+		for (String option : options.split(" ")) {
 			if(option.contains("maude")) {
 				this.Options.append(" " + this.maudeDirectory + "/" + option);
 			} else {

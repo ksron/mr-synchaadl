@@ -52,6 +52,7 @@ import edu.postech.antlr.parser.FlowsParser
 import edu.postech.antlr.firstPath.FlowsVisitor
 import edu.postech.antlr.secondPath.ContinuousFunction
 import org.osate.ba.aadlba.BehaviorActionSequence
+import org.osate.xtext.aadl2.properties.util.PropertyUtils
 
 class RtmAadlModel extends RtmAadlIdentifier {
 
@@ -152,7 +153,9 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				«ENDIF»
 				subcomponents : (
 					«o.componentInstances.filter[isSync].map[compileComponent].filterNull.join('\n',"none")»),
-				«IF o.isData»
+				«IF o.isData && o.isParam»
+				value : param(«IF o.subcomponent.subcomponentType.name.contains("Boolean")»Boolean«ELSE»Real«ENDIF»),
+				«ELSEIF o.isData»
 				value : null(«IF o.subcomponent.subcomponentType.name.contains("Boolean")»Boolean«ELSE»Real«ENDIF»),
 				«ENDIF»
 				«IF o.behavioral && ! (behAnx == null)»
@@ -205,6 +208,17 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				monitor.worked(1)
 			]	
 		}
+	}
+	
+	private def isParam(ComponentInstance ci){
+		for(PropertyAssociation pa : ci.ownedPropertyAssociations){
+			if(pa.property.name.equals(PropertyUtil::INITIAL_VALUE)){
+				if(((PropertyUtils::getSimplePropertyValue(ci, pa.property) as ListValue).ownedListElements.get(0) as StringLiteral).value.equals("param")){
+					return true
+				}
+			}
+		}
+		return false
 	}
 	
 	// Compile Features
@@ -453,7 +467,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		}
 		
 		val value = pc.compilePropertyValue(p.property, ne)
-		if (value != null) '''(«p.property.qualifiedName().escape» => {{«value»}})'''
+		if (value != null && !value.equals("param")) '''(«p.property.qualifiedName().escape» => {{«value»}})'''
 	}
 
 

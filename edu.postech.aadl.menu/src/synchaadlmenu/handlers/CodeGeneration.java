@@ -1,13 +1,8 @@
 package synchaadlmenu.handlers;
 
-import java.io.ByteArrayInputStream;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IWorkbenchPart;
@@ -16,7 +11,6 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 
 import edu.postech.aadl.synch.maude.action.RtmGenerationAction;
 import edu.postech.aadl.synch.propspec.PropspecEditorResourceManager;
-import edu.postech.aadl.utils.IOUtils;
 
 public class CodeGeneration extends AbstractHandler {
 
@@ -48,22 +42,6 @@ public class CodeGeneration extends AbstractHandler {
 		};
 
 		codegenAct.run();
-		IPath path = res.getCodegenFilePath().removeLastSegments(1).append("Maude_Configuration.config");
-		System.out.println("Debug : " + path);
-		makeMaudeConfigFile(path);
 		return null;
-	}
-
-	private void makeMaudeConfigFile(IPath path) {
-		IFile xtextFile = IOUtils.getFile(path);
-		String code = "Maude Directory : \"/Users/jaehun/dropbox/research/Maude-Alpha\";\n" + "\n"
-				+ "Maude: \"maude-Yices2.darwin64\";\n" + "\n"
-				+ "Options : \"-no-prelude\" \"prelude.maude\" \"smt.maude\";";
-
-		try {
-			IOUtils.setFileContent(new ByteArrayInputStream(code.toString().getBytes()), xtextFile);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
 	}
 }

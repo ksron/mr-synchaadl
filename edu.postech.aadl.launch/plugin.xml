@@ -1,0 +1,37 @@
+<plugin>
+<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+    <launchConfigurationType
+        name="AADL Analysis Launch"
+        delegate="edu.postech.aadl.launch.AADLLaunchConfiguration"
+        modes="run, debug"
+        id="edu.postech.aadl.launch.launchConfigurationType">
+    </launchConfigurationType>
+</extension>
+<extension
+    point="org.eclipse.debug.ui.launchShortcuts">
+    <shortcut
+        class="edu.postech.aadl.launch.AADLLaunchShortcut"
+        id="edu.postech.aadl.launch.shortcut"
+        label="AADL Analysis"
+        modes="run, debug">
+        <contextualLaunch>
+            <enablement>
+                <with
+                    variable="selection">
+                    <count
+                        value="+">
+                    </count>
+                </with>
+            </enablement>
+        </contextualLaunch>
+    </shortcut>
+</extension>
+<extension
+    point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+    <launchConfigurationTabGroup
+        class="edu.postech.aadl.launch.AADLLaunchTabGroup"
+        id="edu.postech.aadl.launch.launchConfigurationTabGroup"
+        type="edu.postech.aadl.launch.launchConfigurationType">
+    </launchConfigurationTabGroup>
+</extension>
+</plugin>

@@ -20,10 +20,10 @@ class DefaultPropSpec {
 		mode: "symbolic";
 		
 		-- reachability condition : initialCondition ==> FinalCondition in time INTEGER
-		reachability: (drone1.environment | x < 14.3 and x > 1.5 ) ==> (drone1.environment | x > 3.4 ) in time 5 ;
+		reachability [ "nickname1" ] : ( environment | x < 14.3 and x > 1.5 ) ==> ( environment | x > 3.4 ) in time 5 ;
 		
 		-- requirement condition : initialCondition ==> FinalCondition in time INTEGER
-		requirement: ( drone1.environment | x < 14.3 and x > 1.5 ) ==>[] ( drone1.environment | x > 3.4 ) in time 10;
+		requirement [ "nickname2" ] : ( environment | x < 14.3 and x > 1.5 ) ==>[] ( environment | x > 3.4 ) in time 10;
 	'''
 	
 	def static escape(String name) {

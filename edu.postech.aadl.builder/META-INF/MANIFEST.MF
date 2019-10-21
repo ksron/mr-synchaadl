@@ -1,21 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: AADLBuilder
+Bundle-Name: Builder
 Bundle-SymbolicName: edu.postech.aadl.builder;singleton:=true
 Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: POSTECH
 Require-Bundle: org.eclipse.core.resources,
  org.eclipse.core.runtime,
- org.eclipse.ui.editors,
- org.eclipse.swt,
- org.osate.ui,
- edu.postech.aadl.synch,
  org.eclipse.ui
 Automatic-Module-Name: edu.postech.aadl.builder
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Import-Package: edu.postech.aadl.synch.propspec,
- org.eclipse.core.expressions,
- org.eclipse.jface.action,
- org.eclipse.jface.viewers,
- org.eclipse.ui,
- org.eclipse.ui.commands,
- org.eclipse.xtext.ui.editor

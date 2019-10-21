@@ -1,14 +1,18 @@
 package edu.postech.maude.view.views;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.action.Action;
@@ -62,7 +66,6 @@ public class MaudeConsoleView extends ViewPart {
 
 	private TableViewer viewer;
 	private Action doubleClickAction;
-	private List<IPath> paths;
 
 	class ViewLabelProvider extends LabelProvider implements ITableLabelProvider {
 		@Override
@@ -83,6 +86,17 @@ public class MaudeConsoleView extends ViewPart {
 	public void createPartControl(Composite parent) {
 		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 
+		TableViewerColumn tvc0 = new TableViewerColumn(viewer, SWT.LEFT);
+		tvc0.getColumn().setText("Nickname");
+		tvc0.getColumn().setResizable(true);
+		tvc0.getColumn().setMoveable(true);
+		tvc0.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				MaudeResult mr = (MaudeResult) element;
+				return mr.nickname;
+			}
+		});
 
 		TableViewerColumn tvc1 = new TableViewerColumn(viewer, SWT.LEFT);
 		tvc1.getColumn().setText("Result");
@@ -100,29 +114,57 @@ public class MaudeConsoleView extends ViewPart {
 		tvc2.getColumn().setText("Location");
 		tvc2.getColumn().setResizable(true);
 		tvc2.getColumn().setMoveable(true);
-		tvc2.setLabelProvider(new ColumnLabelProvider() {
+
+		LinkOpener linkHandler = rowObject -> {
+			MaudeResult mr = (MaudeResult)rowObject;
+			IWorkspace workspace = ResourcesPlugin.getWorkspace();
+			IWorkspaceRoot root = workspace.getRoot();
+			IPath path = new Path(mr.location);
+			IFile ifile = root.getFile(path);
+			try {
+				IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), ifile);
+			} catch (PartInitException e) {
+				e.printStackTrace();
+			}
+		};
+
+		tvc2.setLabelProvider(new LinkLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				MaudeResult mr = (MaudeResult) element;
-				return mr.name;
+				return mr.location;
+			}
+		}, linkHandler));
+
+		TableViewerColumn tvc3 = new TableViewerColumn(viewer, SWT.LEFT);
+		tvc3.getColumn().setText("ElapsedTime");
+		tvc3.getColumn().setResizable(true);
+		tvc3.getColumn().setMoveable(true);
+		tvc3.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				MaudeResult mr = (MaudeResult) element;
+				return mr.elapsedTime;
 			}
 		});
 
 		TableLayout layout = new TableLayout();
+		layout.addColumnData(new ColumnWeightData(1, true));
 		layout.addColumnData(new ColumnWeightData(2, true));
+		layout.addColumnData(new ColumnWeightData(1, true));
 		layout.addColumnData(new ColumnWeightData(1, true));
 
 		viewer.getTable().setLayout(layout);
 		viewer.getTable().setHeaderVisible(true);
 		viewer.getTable().setLinesVisible(true);
 
-		// List<MaudeResult> mrList = new ArrayList<MaudeResult>();
-		// mrList.add(new MaudeResult("Test1", "Test2"));
-		// mrList.add(new MaudeResult("Test3", "Test4"));
-		// mrList.add(new MaudeResult("Test5", "Test6"));
+		List<MaudeResult> mrList = new ArrayList<MaudeResult>();
+		mrList.add(new MaudeResult("nickname 1", "Result 1", "Location 1", "1.0ms"));
+		mrList.add(new MaudeResult("nickname 2", "Result 2", "Location 2", "2.0ms"));
+		mrList.add(new MaudeResult("nickname 3", "Result 3", "Location 3", "3.0ms"));
 
-		// viewer.setContentProvider(new ArrayContentProvider());
-		// viewer.setInput(mrList);
+		viewer.setContentProvider(new ArrayContentProvider());
+		viewer.setInput(mrList);
 
 		// Create the help context id for the viewer's control
 		workbench.getHelpSystem().setHelp(viewer.getControl(), "edu.postech.maude.view.viewer");
@@ -139,22 +181,22 @@ public class MaudeConsoleView extends ViewPart {
 				IStructuredSelection selection = viewer.getStructuredSelection();
 				Object obj = selection.getFirstElement();
 				MaudeResult mr = (MaudeResult) obj;
-
-				System.out.println("mr location : " + mr.name);
-
+				IPath path = new Path(mr.location);
+				path = path.removeLastSegments(2);
 				IWorkspace workspace = ResourcesPlugin.getWorkspace();
 				IWorkspaceRoot root = workspace.getRoot();
-				IPath path = new Path(mr.name);
-				IFile ifile = root.getFile(path);
-
 				try {
-					IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), ifile);
-				} catch (PartInitException e) {
+					for (IResource resource : ((IContainer) root.findMember(path)).members()) {
+						if (resource.getName().contains(".pspc")) {
+							IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(),
+									(IFile) resource);
+						}
+					}
+				} catch (CoreException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
 				}
 
-				//iuieditor.open(URI.createURI(ire.getFullPath().toString()), true);
 			}
 		};
 	}
@@ -168,9 +210,8 @@ public class MaudeConsoleView extends ViewPart {
 		viewer.getControl().setFocus();
 	}
 
-	public void refreshData(List<MaudeResult> mrList, List<IPath> paths) {
+	public void refreshData(List<MaudeResult> mrList) {
 		// System.out.println("Refresh Data : " + viewer);
-		this.paths = paths;
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.setInput(mrList);
 		getSite().setSelectionProvider(viewer);

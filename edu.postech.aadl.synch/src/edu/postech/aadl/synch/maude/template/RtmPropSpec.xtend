@@ -52,6 +52,13 @@ class RtmPropSpec {
 	quit
 	'''
 	
+	static def getReachabilityCommand(Top top, Search search)'''
+	reachability : 
+	(«top.name.escape+" . "+(search.initCond as Prop).path.compilePath» | «(search.initCond as ValueProp).expression.compileExpForUser»)
+	==>
+	(«top.name.escape+" . "+(search.finCond as Prop).path.compilePath» | «(search.finCond as ValueProp).expression.compileExpForUser»)
+	'''
+	
 	static def compileRequirementCommand(Top top, Requirement req)'''
 	mod TEST-«top.name.toUpperCase» is
 	  including «top.name.toUpperCase»-MODEL-SYMBOLIC .
@@ -79,6 +86,13 @@ class RtmPropSpec {
 		such that
 		  check-sat(B:BoolExp and lookup(OBJ:Object, «top.name.escape+" . "+(req.findCond as Prop).path.compilePath»,  «(req.initCond as ValueProp).expression.compileExp»)) .
 	quit
+	'''
+	
+	static def getRequirementCommand(Top top, Requirement req)'''
+	requirement : 
+	(«top.name.escape+" . "+(req.initCond as Prop).path.compilePath» | «(req.initCond as ValueProp).expression.compileExpForUser»)
+	==> []
+	(«top.name.escape+" . "+(req.findCond as Prop).path.compilePath» | «(req.findCond as ValueProp).expression.compileExpForUser»)
 	'''
 	
 	
@@ -145,6 +159,34 @@ class RtmPropSpec {
 	private static def dispatch CharSequence compileFormula(ValueProp prop) 
 	'''«prop.path.compilePath» | «prop.expression.compileExp»'''
 	 
+	/*
+	 * get Raw user reachability / requirement
+	 */ 
+	 
+	private static def dispatch CharSequence compileExpForUser(BinaryExpression e) '''
+		«e.left.compileExpForUser» «e.op» «e.right.compileExpForUser»'''
+		
+		
+	private static def dispatch CharSequence compileExpForUser(UnaryExpression e) '''
+		«e.op.translateUnaryOpForUser»«e.child.compileExpForUser»'''
+	
+	
+	private static def dispatch CharSequence compileExpForUser(Value e) {
+		val v = e.value
+		switch v {
+			PropertyValue:			'''«RtmAadlProperty::compilePropertyValue(v)»'''
+			ContainmentPathElement:	'''«v.namedElement.name.escape»'''
+		}
+	}
+	
+	private static def translateUnaryOpForUser(String op) {
+		switch op {
+			case "+":	"+"
+			case "-":	"-"
+			default:	op
+		}
+	}
+	
 	  
 	/**
 	 *  translate BA expressions
