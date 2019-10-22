@@ -30,4 +30,5 @@ Export-Package: edu.postech.xtext.maude.services,
 Import-Package: edu.postech.aadl.utils,
  org.apache.log4j,
  org.eclipse.core.resources,
+ org.eclipse.swt.widgets,
  org.eclipse.ui

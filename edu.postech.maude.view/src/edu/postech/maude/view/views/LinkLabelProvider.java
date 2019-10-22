@@ -44,6 +44,7 @@ class LinkLabelProvider extends StyledCellLabelProvider {
 
 	@Override
 	public void update(ViewerCell cell) {
+		System.out.println("LinkLabelProvider update method call");
 		shin.update(cell);
 		StyleRange s = new StyleRange();
 		s.foreground = cell.getItem().getDisplay().getSystemColor(SWT.COLOR_BLUE);

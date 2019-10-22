@@ -1,8 +1,8 @@
 package edu.postech.maude.view.views;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -16,26 +16,26 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.ISharedImages;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ViewPart;
-
-import edu.postech.xtext.maude.MaudeResult;
 
 /**
  * This sample class demonstrates how to plug-in a new
@@ -62,25 +62,14 @@ public class MaudeConsoleView extends ViewPart {
 	 */
 	public static final String ID = "edu.postech.maude.view.views.MaudeConsoleView";
 
-	@Inject IWorkbench workbench;
+	@Inject
+	public IWorkbench workbench;
 
 	private TableViewer viewer;
 	private Action doubleClickAction;
+	private Action action1;
 
-	class ViewLabelProvider extends LabelProvider implements ITableLabelProvider {
-		@Override
-		public String getColumnText(Object obj, int index) {
-			return getText(obj);
-		}
-		@Override
-		public Image getColumnImage(Object obj, int index) {
-			return getImage(obj);
-		}
-		@Override
-		public Image getImage(Object obj) {
-			return workbench.getSharedImages().getImage(ISharedImages.IMG_OBJ_ELEMENT);
-		}
-	}
+	private Map<String, Long> maudeThreadMap;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -94,7 +83,7 @@ public class MaudeConsoleView extends ViewPart {
 			@Override
 			public String getText(Object element) {
 				MaudeResult mr = (MaudeResult) element;
-				return mr.nickname;
+				return mr.nickName;
 			}
 		});
 
@@ -158,13 +147,13 @@ public class MaudeConsoleView extends ViewPart {
 		viewer.getTable().setHeaderVisible(true);
 		viewer.getTable().setLinesVisible(true);
 
-		List<MaudeResult> mrList = new ArrayList<MaudeResult>();
-		mrList.add(new MaudeResult("nickname 1", "Result 1", "Location 1", "1.0ms"));
-		mrList.add(new MaudeResult("nickname 2", "Result 2", "Location 2", "2.0ms"));
-		mrList.add(new MaudeResult("nickname 3", "Result 3", "Location 3", "3.0ms"));
+		// List<MaudeResult> mrList = new ArrayList<MaudeResult>();
+		// mrList.add(new MaudeResult("nickname 1", "Result 1", "Location 1", "1.0ms"));
+		// mrList.add(new MaudeResult("nickname 2", "Result 2", "Location 2", "2.0ms"));
+		// mrList.add(new MaudeResult("nickname 3", "Result 3", "Location 3", "3.0ms"));
 
 		viewer.setContentProvider(new ArrayContentProvider());
-		viewer.setInput(mrList);
+		// viewer.setInput(mrList);
 
 		// Create the help context id for the viewer's control
 		workbench.getHelpSystem().setHelp(viewer.getControl(), "edu.postech.maude.view.viewer");
@@ -172,9 +161,41 @@ public class MaudeConsoleView extends ViewPart {
 
 		makeActions();
 		hookDoubleClickAction();
+		hookContextMenu();
+		viewer.refresh();
+	}
+
+	private void hookContextMenu() {
+		MenuManager menuMgr = new MenuManager("#PopupMenu");
+		menuMgr.setRemoveAllWhenShown(true);
+		menuMgr.addMenuListener(manager -> MaudeConsoleView.this.fillContextMenu(manager));
+		Menu menu = menuMgr.createContextMenu(viewer.getControl());
+		viewer.getControl().setMenu(menu);
+		getSite().registerContextMenu(menuMgr, viewer);
+	}
+
+	private void fillContextMenu(IMenuManager manager) {
+		manager.add(action1);
+		// Other plug-ins can contribute there actions here
+		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
 	private void makeActions() {
+		action1 = new Action() {
+			@Override
+			public void run() {
+				MaudeResult mr = (MaudeResult) viewer.getStructuredSelection().getFirstElement();
+				String nickname = mr.nickName;
+				for (Thread thread : Thread.getAllStackTraces().keySet()) {
+					if (thread.getId() == maudeThreadMap.get(nickname)) {
+						thread.interrupt();
+					}
+				}
+			}
+		};
+		action1.setText("Terminate");
+		action1.setToolTipText("Action 1 tooltip");
+
 		doubleClickAction = new Action() {
 			@Override
 			public void run() {
@@ -201,6 +222,10 @@ public class MaudeConsoleView extends ViewPart {
 		};
 	}
 
+	private void showMessage(String message) {
+		MessageDialog.openInformation(viewer.getControl().getShell(), "Sample View", message);
+	}
+
 	private void hookDoubleClickAction() {
 		viewer.addDoubleClickListener(event -> doubleClickAction.run());
 	}
@@ -210,11 +235,23 @@ public class MaudeConsoleView extends ViewPart {
 		viewer.getControl().setFocus();
 	}
 
-	public void refreshData(List<MaudeResult> mrList) {
-		// System.out.println("Refresh Data : " + viewer);
-		viewer.setContentProvider(new ArrayContentProvider());
-		viewer.setInput(mrList);
-		getSite().setSelectionProvider(viewer);
+	public void setThreadId(String nickname, long id) {
+		if (maudeThreadMap == null) {
+			maudeThreadMap = new HashMap<String, Long>();
+		}
+		maudeThreadMap.put(nickname, new Long(id));
+	}
+
+	public MaudeResult initialData(String nickName) {
+		MaudeResult mr = new MaudeResult(nickName, "Processing...", "...", "...");
+		viewer.add(mr);
+		return mr;
+	}
+
+	public void refreshData(MaudeResult oldElement, MaudeResult newElement) {
+		viewer.add(newElement);
+		viewer.remove(oldElement);
+		System.out.println("refreshData method");
 
 	}
 

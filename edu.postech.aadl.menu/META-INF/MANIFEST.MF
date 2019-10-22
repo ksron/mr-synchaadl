@@ -17,13 +17,12 @@ Require-Bundle: org.eclipse.ui,
  org.osate.xtext.aadl2.properties;bundle-version="1.0.0",
  org.osate.ba;bundle-version="1.0.0",
  org.eclipse.ui.workbench,
- edu.postech.aadl.synch, 
- edu.postech.maude.view,
+ edu.postech.aadl.synch,
  org.eclipse.xtext.ui,
  org.eclipse.jdt.ui,
- edu.postech.xtext.maude
+ edu.postech.xtext.maude,
+ edu.postech.maude.view;bundle-version="1.0.0"
 Automatic-Module-Name: SynchAadlMenu
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Import-Package: edu.postech.xtext.maude.maude,
- edu.postech.aadl.synch.propspec 
+Import-Package: edu.postech.aadl.synch.propspec
 Export-Package: synchaadlmenu.handlers

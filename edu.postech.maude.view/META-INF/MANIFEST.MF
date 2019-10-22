@@ -6,12 +6,13 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: POSTECH
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
- edu.postech.xtext.maude,
  org.eclipse.swt,
  org.eclipse.ui,
  org.eclipse.ui.editors,
  org.eclipse.ui.workbench,
- org.eclipse.emf.ecore
+ org.eclipse.emf.ecore,
+ edu.postech.xtext.maude;bundle-version="1.0.0",
+ org.eclipse.jface
 Automatic-Module-Name: edu.postech.maude.view
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: edu.postech.aadl.synch.propspec,

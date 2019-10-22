@@ -23,7 +23,7 @@
             name="Analysis"
             id="SynchAadlMenu.commands.sampleCommand3">
       </command>
-            <command
+      <command
             categoryId="SynchAadlMenu.commands.category"
             name="Run"
             id="SynchAadlMenu.commands.sampleCommand4">
@@ -45,10 +45,10 @@
             class="synchaadlmenu.handlers.SearchCommand"
             commandId="SynchAadlMenu.commands.sampleCommand3">
       </handler>
-            <handler
+      <handler
             class="synchaadlmenu.handlers.Run"
             commandId="SynchAadlMenu.commands.sampleCommand4">
-      </handler>
+        </handler>
    </extension>
    
    
@@ -72,7 +72,7 @@
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+8">
       </key>
-            <key
+      <key
             commandId="SynchAadlMenu.commands.sampleCommand4"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             contextId="org.eclipse.ui.contexts.window"

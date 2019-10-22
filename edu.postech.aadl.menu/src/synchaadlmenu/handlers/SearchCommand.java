@@ -1,8 +1,5 @@
 package synchaadlmenu.handlers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -18,9 +15,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -30,100 +25,90 @@ import edu.postech.aadl.synch.propspec.PropspecEditorResourceManager;
 import edu.postech.aadl.xtext.propspec.propSpec.Requirement;
 import edu.postech.aadl.xtext.propspec.propSpec.Search;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
-import edu.postech.maude.view.views.MaudeConsoleView;
-import edu.postech.xtext.maude.MaudeResult;
-import edu.postech.xtext.maude.MaudeRunner;
 
 public class SearchCommand extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		PropspecEditorResourceManager res = new PropspecEditorResourceManager();
+		PropspecEditorResourceManager resManager = new PropspecEditorResourceManager();
 		IWorkbenchPart part = HandlerUtil.getActivePart(event);
 
-		XtextEditor newEditor = (part.getSite().getId().compareTo("edu.postech.aadl.xtext.propspec.PropSpec") == 0)
+		XtextEditor xtextEditor = (part.getSite().getId().compareTo("edu.postech.aadl.xtext.propspec.PropSpec") == 0)
 				&& (part instanceof XtextEditor) ? (XtextEditor) part : null;
 
-		IViewPart view = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-				.findView("edu.postech.maude.view.views.MaudeConsoleView");
+		resManager.setEditor(xtextEditor);
+		Top propSpecRes = getPropSpecResource(resManager);
 
-		res.setEditor(newEditor);
+		IPreferenceStore pref = new ScopedPreferenceStore(InstanceScope.INSTANCE, "edu.postech.maude.preferences.page");
+		String maudeDirPath = pref.getString("MAUDE_DIRECTORY");
+		String maudeExecPath = pref.getString("MAUDE");
+		String maudeOptions = pref.getString("MAUDE_OPTIONS");
+		System.out.println("maudeDirPath : " + maudeDirPath);
+		System.out.println("maudeExecPath : " + maudeExecPath);
+		System.out.println("maudeOptions : " + maudeOptions);
 
-		Top spec = getPropSpecResource(res);
-
-		String TargetMaudePath = res.getCodegenFilePath().toString();
-		String BaseLocation = res.getEditorFile().getLocation().removeLastSegments(3).toString();
-
-		IPreferenceStore store = new ScopedPreferenceStore(InstanceScope.INSTANCE,
-				"edu.postech.maude.preferences.page");
-		String runMaudeDirectory = store.getString("MAUDE_DIRECTORY");
-		String runMaude = store.getString("MAUDE");
-		String runMaudeOptions = store.getString("MAUDE_OPTIONS");
+		String aadlMaudePath = resManager.getCodegenFilePath().toString();
+		String aadlMaudeBaseDir = resManager.getEditorFile().getLocation().removeLastSegments(3).toString();
+		String aadlMaudeFullPath = aadlMaudeBaseDir + aadlMaudePath;
+		System.out.println("aadlMaudeFullPath : " + aadlMaudeFullPath);
 
 		int idx = 0;
+		for (Search search : propSpecRes.getSearch()) {
+			Maude maudes = new Maude();
+			maudes.setMaudeDirPath(maudeDirPath);
+			maudes.setMaudeExecPath(maudeExecPath);
+			maudes.setOption(maudeOptions);
 
-		List<MaudeResult> Lmr = new ArrayList<MaudeResult>();
+			maudes.setTargetMaude(aadlMaudeFullPath);
 
-		for(Search search : spec.getSearch()) {
-			MaudeRunner maudes = new MaudeRunner();
-			maudes.setMaudeDirectory(runMaudeDirectory);
-			maudes.setUserCommand(RtmPropSpec.getReachabilityCommand(spec, search).toString());
-			maudes.setName(runMaude);
-			maudes.setOption(runMaudeOptions);
-			maudes.setMode(getMaudeMode(res, spec.getMode()));
-			maudes.setTargetMaude(BaseLocation + TargetMaudePath);
-			maudes.makeMaudeFile(RtmPropSpec.compileReachabilityCommand(spec, search).toString(),
-					res.getCodegenFilePath().removeLastSegments(1).append("result")
-							.append("Maude_Reachability" + idx + ".maude"));
-			// System.out.println(RtmPropSpec.compileReachabilityCommand(spec, search).toString());
-			// System.out.println(maudes.DebugCompileCommand());
-			String rm = maudes.runMaude(res.getCodegenFilePath().removeLastSegments(1).append("result")
-					.append("Maude_Reachability_Result_" + idx + ".txt"));
+			String mode = getMaudeMode(resManager, propSpecRes.getMode());
+			maudes.setMode(mode);
 
-			IPath path = res.getCodegenFilePath().removeLastSegments(1).append("result")
+			String userFormula = RtmPropSpec.getReachabilityCommand(propSpecRes, search).toString();
+			maudes.setUserFormula(userFormula);
+
+			String searchMaudeContents = RtmPropSpec.compileReachabilityCommand(propSpecRes, search).toString();
+			IPath searchMaudePath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
+					.append("Maude_Reachability" + idx + ".maude");
+			maudes.writeSearchMaudeFile(searchMaudeContents, searchMaudePath);
+
+			IPath resultPath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 					.append("Maude_Reachability_Result_" + idx + ".txt");
-			Lmr.add(new MaudeResult(search.getNickname(), resultMaude(rm), path.toString(), "1.0ms"));
-			idx++;
+			String nickName = search.getNickname();
+			maudes.runMaude(resultPath, nickName);
+			idx += 1;
 		}
 
 		idx = 0;
+		for (Requirement req : propSpecRes.getRequirement()) {
+			Maude maudes = new Maude();
+			maudes.setMaudeDirPath(maudeDirPath);
+			maudes.setMaudeExecPath(maudeExecPath);
+			maudes.setOption(maudeOptions);
 
-		for (Requirement req : spec.getRequirement()) {
-			MaudeRunner maudes = new MaudeRunner();
-			maudes.setMaudeDirectory(runMaudeDirectory);
-			maudes.setUserCommand(RtmPropSpec.getRequirementCommand(spec, req).toString());
-			maudes.setName(runMaude);
-			maudes.setOption(runMaudeOptions);
-			maudes.setMode(getMaudeMode(res, spec.getMode()));
-			maudes.setTargetMaude(BaseLocation + TargetMaudePath);
-			maudes.makeMaudeFile(RtmPropSpec.compileRequirementCommand(spec, req).toString(),
-					res.getCodegenFilePath()
-							.removeLastSegments(1).append("result").append("Maude_Requirement" + idx + ".maude"));
-			// System.out.println(RtmPropSpec.compileRequirementCommand(spec, req).toString());
-			// System.out.println(maudes.DebugCompileCommand());
-			String rm = maudes.runMaude(res.getCodegenFilePath().removeLastSegments(1).append("result")
-					.append("Maude_Requirement_Result_" + idx + ".txt"));
+			maudes.setTargetMaude(aadlMaudeFullPath);
 
-			IPath path = res.getCodegenFilePath().removeLastSegments(1).append("result")
+			String mode = getMaudeMode(resManager, propSpecRes.getMode());
+			maudes.setMode(mode);
+
+			String userFormula = RtmPropSpec.getRequirementCommand(propSpecRes, req).toString();
+			maudes.setUserFormula(userFormula);
+
+			String searchMaudeContents = RtmPropSpec.compileRequirementCommand(propSpecRes, req).toString();
+			IPath searchMaudePath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
+					.append("Maude_Requirement" + idx + ".maude");
+			maudes.writeSearchMaudeFile(searchMaudeContents, searchMaudePath);
+
+			IPath resultPath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 					.append("Maude_Requirement_Result_" + idx + ".txt");
-			Lmr.add(new MaudeResult(req.getNickname(), resultMaude(rm), path.toString(), "1.0ms"));
-			idx++;
+			String nickName = req.getNickname();
+			maudes.runMaude(resultPath, nickName);
+			idx += 1;
 		}
-
-		((MaudeConsoleView) view).refreshData(Lmr);
 
 		return null;
 	}
 
-	public String resultMaude(String rm) {
-		if (rm.indexOf("No solution") != -1) {
-			return "UnReachable";
-		} else if (rm.indexOf("Solution 1") != -1) {
-			return "Reachable";
-		} else {
-			return "Error Occured!";
-		}
-	}
 
 	private String getMaudeMode(PropspecEditorResourceManager res, String mode) {
 		return res.getEditorFile().getLocation().removeLastSegments(1).append("rtmaude")
