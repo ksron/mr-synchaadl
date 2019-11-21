@@ -1,6 +1,6 @@
 ==========================================
 rewrite [100] in TEST-THERMOSTAT2CON-SYSTEM : {initState | 0 | infty} .
-rewrites: 3971
+rewrites: 5319
 result GlobalSystem: {< Thermostat2ConimplInstance : System | properties : ((
     TimingProperties::Period => {{10}}) ; (HybridSynchAADL::Synchronous => {{(
     true).Bool}}) ; HybridSynchAADL::MaxClockDeviation => {{
@@ -162,7 +162,7 @@ result GlobalSystem: {< Thermostat2ConimplInstance : System | properties : ((
     10,execTime : 6,execTimer : 1 > > >) > | 5 | infty}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT2CON-SYSTEM : {cinitState | 0 | infty} .
-rewrites: 3294
+rewrites: 4022
 result GlobalSystem: {< Thermostat2ConimplInstance : System | properties : ((
     TimingProperties::Period => {{10}}) ; (HybridSynchAADL::Synchronous => {{(
     true).Bool}}) ; HybridSynchAADL::MaxClockDeviation => {{
@@ -267,15 +267,15 @@ result GlobalSystem: {< Thermostat2ConimplInstance : System | properties : ((
     currtemp] < f[tempmin]){oncontrol !}) end if},loopBound : 10,transBound :
     10,execTime : 6,execTimer : 1 >) > | 5 | infty}
 ==========================================
-search in TEST-THERMOSTAT2CON-SYSTEM : {initState | 0 | 20} =>* {none | T | 20}
-    .
+search [, 2] in TEST-THERMOSTAT2CON-SYSTEM : {initState | 0 | infty} =>* {none
+    | T | infty} .
 
 No solution.
-states: 50836  rewrites: 5387350
+states: 3812  rewrites: 97624
 ==========================================
-search in TEST-THERMOSTAT2CON-SYSTEM : {cinitState | 0 | 20} =>* {none | T |
-    20} .
+search [, 2] in TEST-THERMOSTAT2CON-SYSTEM : {cinitState | 0 | infty} =>* {none
+    | T | infty} .
 
 No solution.
-states: 50836  rewrites: 4065562
+states: 3812  rewrites: 90478
 Bye.

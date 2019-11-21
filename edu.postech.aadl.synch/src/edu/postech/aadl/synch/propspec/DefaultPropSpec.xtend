@@ -17,13 +17,16 @@ class DefaultPropSpec {
 		instance: "«modelFile.fullPath»";
 		
 		-- symbolic / distributed / random mode
-		mode: "symbolic";
+		mode: symbolic;
 		
-		-- reachability condition : initialCondition ==> FinalCondition in time INTEGER
-		reachability [ "nickname1" ] : ( environment | x < 14.3 and x > 1.5 ) ==> ( environment | x > 3.4 ) in time 5 ;
+		-- proposition [id] : AADL Boolean Expression 
+		proposition [ prop ] : env1 | ( x >= 10 and x <= 25 ) ;
 		
-		-- requirement condition : initialCondition ==> FinalCondition in time INTEGER
-		requirement [ "nickname2" ] : ( environment | x < 14.3 and x > 1.5 ) ==>[] ( environment | x > 3.4 ) in time 10;
+		-- reachability property [id] : initialCondition ==> FinalCondition in time INTEGER
+		reachability [ reach ] : ( env1 | x >= 10 and x <= 25 ) ==> ( env1 | x >= 10 and x <= 25 ) in time 5 ;
+		
+		-- invariant property [id] : initialCondition ==> FinalCondition in time INTEGER
+		invariant [ inv ] : ( env1 | x >= 10 and x <= 25 ) ==> ( env1 | x >= 10 and x <= 25 ) in time 10 ;
 	'''
 	
 	def static escape(String name) {

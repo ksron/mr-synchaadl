@@ -28,6 +28,6 @@ rew  [100] {cinitState | 0 | infty} .
 rew  [100] {cinitState | 0 | infty} .
 
 ---the number of reachable states up to 5 synchronous step
-search {initState | 0 | 25} =>* {none | T | 25} .
+search [,5] {initState | 0 | infty} =>* {none | T:Time | infty} .
 
-search {cinitState | 0 | 25} =>* {none | T | 25} .
+search [,5] {cinitState | 0 | infty} =>* {none | T:Time | infty} .

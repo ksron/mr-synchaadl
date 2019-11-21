@@ -68,13 +68,14 @@ public class SearchCommand extends AbstractHandler {
 			maudes.setUserFormula(userFormula);
 
 			String searchMaudeContents = RtmPropSpec.compileReachabilityCommand(propSpecRes, search).toString();
+			System.out.println("Reachability Formula Maude : " + searchMaudeContents);
 			IPath searchMaudePath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 					.append("Maude_Reachability" + idx + ".maude");
 			maudes.writeSearchMaudeFile(searchMaudeContents, searchMaudePath);
 
 			IPath resultPath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 					.append("Maude_Reachability_Result_" + idx + ".txt");
-			String nickName = search.getNickname();
+			String nickName = search.getName();
 			maudes.runMaude(resultPath, nickName);
 			idx += 1;
 		}
@@ -94,6 +95,8 @@ public class SearchCommand extends AbstractHandler {
 			String userFormula = RtmPropSpec.getRequirementCommand(propSpecRes, req).toString();
 			maudes.setUserFormula(userFormula);
 
+			maudes.setRequirement(true);
+
 			String searchMaudeContents = RtmPropSpec.compileRequirementCommand(propSpecRes, req).toString();
 			IPath searchMaudePath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 					.append("Maude_Requirement" + idx + ".maude");
@@ -101,7 +104,7 @@ public class SearchCommand extends AbstractHandler {
 
 			IPath resultPath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 					.append("Maude_Requirement_Result_" + idx + ".txt");
-			String nickName = req.getNickname();
+			String nickName = req.getName();
 			maudes.runMaude(resultPath, nickName);
 			idx += 1;
 		}

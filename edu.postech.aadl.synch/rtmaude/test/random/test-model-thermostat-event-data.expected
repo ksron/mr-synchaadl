@@ -1,6 +1,6 @@
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{initState,0}} .
-rewrites: 70153
+rewrites: 74453
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< controller : Thread | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::SamplingTime => {{
@@ -44,7 +44,7 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     400}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{initState,400}} .
-rewrites: 70270
+rewrites: 74590
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< controller : Thread | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::SamplingTime => {{
@@ -88,7 +88,7 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     800}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{initState,800}} .
-rewrites: 70200
+rewrites: 74500
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< controller : Thread | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::SamplingTime => {{
@@ -132,7 +132,7 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     1200}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{initState,1200}} .
-rewrites: 70179
+rewrites: 74489
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< controller : Thread | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::SamplingTime => {{

@@ -40,7 +40,7 @@ result ConfigWithRand: {< environment : EnvWithTimer | properties : ((
 ==========================================
 reduce in TEST-ENV-DYNAMICS : execResponse(execSample({env transIn(* # bool(
     true), environment .. on),0})) .
-rewrites: 381
+rewrites: 378
 result ConfigWithRand: {< environment : EnvWithTimer | properties : ((
     TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
     {{1.0000000000000001e-1}}),features : (< on : EnvInPort | properties :
@@ -60,7 +60,7 @@ result ConfigWithRand: {< environment : EnvWithTimer | properties : ((
 ==========================================
 reduce in TEST-ENV-DYNAMICS : execResponse(execSample({env transIn(* # bool(
     true), environment .. off),0})) .
-rewrites: 386
+rewrites: 383
 result ConfigWithRand: {< environment : EnvWithTimer | properties : ((
     TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
     {{1.0000000000000001e-1}}),features : (< on : EnvInPort | properties :

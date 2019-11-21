@@ -93,7 +93,7 @@ public class Run extends AbstractHandler {
 
 			IPath resultPath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 					.append("Maude_Reachability_Result_" + idx + ".txt");
-			String nickName = search.getNickname();
+			String nickName = search.getName();
 			maudes.runMaude(resultPath, nickName);
 			idx += 1;
 		}
@@ -120,7 +120,7 @@ public class Run extends AbstractHandler {
 
 			IPath resultPath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 					.append("Maude_Requirement_Result_" + idx + ".txt");
-			String nickName = req.getNickname();
+			String nickName = req.getName();
 			maudes.runMaude(resultPath, nickName);
 			idx += 1;
 		}

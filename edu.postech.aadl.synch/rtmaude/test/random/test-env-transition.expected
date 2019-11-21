@@ -26,7 +26,7 @@ result Tuple{Time,BATransResult,Nat}: 1727259078790938883/819855291783094090 |
 reduce in TEST-ENV-TRANSITION-SEMANTICS : execResp(time(3) mode(st1) sampling(
     empty) response(cr1 :(4/7,3)) jumps(trans) flows(flows) sIds(cr1) rIds(cr1)
     randC(0) bcf envcon(conx, envports)) .
-rewrites: 182
+rewrites: 179
 result Tuple{BATransResult,Nat}: st2 | on1 |-> ([0.0] # [(true).Bool] : [(
     true).Bool]), on2 |-> ([0.0] # [(false).Bool] : [(true).Bool]), off1 |-> ([
     0.0] # [(false).Bool] : [(true).Bool]), off2 |-> ([0.0] # [(true).Bool] : [
@@ -36,7 +36,7 @@ result Tuple{BATransResult,Nat}: st2 | on1 |-> ([0.0] # [(true).Bool] : [(
 reduce in TEST-ENV-TRANSITION-SEMANTICS : execResp(time(3) mode(st1) sampling(
     empty) response((cr1 :(4/7,3), cr2 :(13/4,4))) jumps(trans) flows(flows)
     sIds(cr1 cr2) rIds(cr1 cr2) randC(0) bcf envcon(conx, envports)) .
-rewrites: 337
+rewrites: 335
 result Tuple{BATransResult,Nat}: st2 | on1 |-> ([0.0] # [(true).Bool] : [(
     true).Bool]), on2 |-> ([0.0] # [(false).Bool] : [(true).Bool]), off1 |-> ([
     0.0] # [(false).Bool] : [(true).Bool]), off2 |-> ([0.0] # [(true).Bool] : [

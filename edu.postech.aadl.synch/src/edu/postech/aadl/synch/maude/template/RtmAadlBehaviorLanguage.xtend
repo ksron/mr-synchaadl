@@ -111,12 +111,13 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	private def dispatch CharSequence compileAction(IfStatement a) {
 		if (a.elif) '''
 			(elsif («a.logicalValueExpression.compileExpression»){
-				«a.behaviorActions.compileAction»}
-			«a.elseStatement?.compileAction»)'''
+				«a.behaviorActions.compileAction»})
+							«IF a.elseStatement instanceof IfStatement»«ELSE»)«ENDIF»
+			«a.elseStatement?.compileAction»'''
 		else '''
 			if («a.logicalValueExpression.compileExpression»){
 				«a.behaviorActions.compileAction»}
-			«a.elseStatement?.compileAction»
+			«IF a.elseStatement instanceof IfStatement»(«ENDIF»«a.elseStatement?.compileAction»
 			end if'''
 	}
 	

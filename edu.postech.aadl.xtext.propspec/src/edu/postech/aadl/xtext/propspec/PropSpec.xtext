@@ -12,23 +12,26 @@ Top:
 	&
 	('instance' ':' path=STRING ';')
 	&
-	('mode' ':' mode=STRING ';')
+	('mode' ':' mode=ID ';')
 	&
-	(search+=Search)* (requirement+=Requirement)*
+	(formulas+=FormulaStatement)* (search+=Search)* (requirement+=Requirement)*
 	|
-	(formulas+=FormulaStatement | requirements+=ReqStatement)*;
+	(requirements+=ReqStatement)*;
+	
+	
 	
 Search:
-	'reachability' '[' nickname=STRING ']' ':' initCond=Formula '==>' finCond=Formula 'in' 'time' bound=INTVALUE ';';
+	'reachability' '[' name=ID ']' ':' ( initCond=Formula | initCondID=ID) '==>' (finCond=Formula | finCondID=ID) 'in' 'time' bound=INTVALUE ';';
 
 Requirement:
-	'requirement' '[' nickname=STRING ']' ':' initCond=Formula '==>[]' findCond=Formula 'in' 'time' bound=INTVALUE ';';
+	'invariant' '[' name=ID ']' ':' ( initCond=Formula | initCondID=ID) '==>' (finCond=Formula | finCondID=ID) 'in' 'time' bound=INTVALUE ';';
 
 ReqStatement:
 	'requirementT' name=ID ':' value=Formula ('in' 'time' '<=' bound=INTVALUE)? ';';
 	
 FormulaStatement:
-	'formula' name=ID ':' value=Formula ';';
+	'proposition' '[' name=ID ']' ':' value=Formula ';';
+	
 
 /* 
  * Maude proposition language syntax
@@ -38,7 +41,7 @@ Prop:
 	ValueProp | StateProp;
 
 ValueProp:
-	path=ContainmentPath '|' expression=ValueExpression;	//TODO: type checking needed for boolean exps (in validation)
+	path=[aadl2::NamedElement] '|'  (expression=ValueExpression | '(' value=ValueProp ')' ) ;	//TODO: type checking needed for boolean exps (in validation)
 	
 StateProp:
 	path=ContainmentPath '@' state=ID;

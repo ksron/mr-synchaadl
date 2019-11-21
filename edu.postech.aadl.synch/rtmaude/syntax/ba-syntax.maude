@@ -16,10 +16,10 @@ fmod BEHAVIOR-EXPRESSION-SYNTAX is
 --- access feature/port/local-var names..
   sort VarAADLExp .
   subsort VarAADLExp < AADLExp .
-  op f[_] : FeatureId -> AADLExp [ctor] .     --- reference
-  op v[_] : VarId -> AADLExp [ctor] .         --- reference
-  op c[_] : ComponentRef -> AADLExp [ctor] .  --- reference
-  op p[_] : PropertyId -> AADLExp [ctor] .    --- reference
+  op f[_] : FeatureId -> VarAADLExp [ctor] .     --- reference
+  op v[_] : VarId -> VarAADLExp [ctor] .         --- reference
+  op c[_] : ComponentRef -> VarAADLExp [ctor] .  --- reference
+  op p[_] : PropertyId -> VarAADLExp [ctor] .    --- reference
 
   op count : FeatureId -> VarAADLExp [ctor] .    --- p'count
   op fresh : FeatureId -> VarAADLExp [ctor] .    --- p'fresh

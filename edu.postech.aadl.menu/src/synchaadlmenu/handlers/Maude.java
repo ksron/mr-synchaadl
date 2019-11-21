@@ -26,6 +26,7 @@ public class Maude {
 	private static int count = 0;
 	private Process process;
 	private MaudeConsoleView viewer;
+	private boolean req = false;
 
 	class MaudeRunner extends Thread {
 		private String[] commandOptions;
@@ -37,8 +38,9 @@ public class Maude {
 		private String elapsedTime;
 		private MaudeConsoleView view;
 		private Display display;
+		private boolean req = false;
 
-		public MaudeRunner(String[] commandOptions, IPath path, String nickName) {
+		public MaudeRunner(String[] commandOptions, IPath path, String nickName, boolean requirement) {
 			this.commandOptions = commandOptions;
 			this.path = path;
 			this.location = path.toString();
@@ -47,6 +49,7 @@ public class Maude {
 					.findView("edu.postech.maude.view.views.MaudeConsoleView");
 			;
 			this.display = view.workbench.getDisplay();
+			this.req = requirement;
 		}
 
 		@Override
@@ -57,13 +60,15 @@ public class Maude {
 				long start = System.currentTimeMillis();
 				ProcessBuilder builder = new ProcessBuilder(commandOptions);
 				IFile maudeResult = IOUtils.getFile(path);
+				// builder.redirectError(Redirect.INHERIT);
+				// builder.redirectOutput(Redirect.INHERIT);
 				process = builder.start();
-				process.waitFor();
+				// process.waitFor();
 				long end = System.currentTimeMillis();
-				elapsedTime = Long.toString((end - start) / 1000);
+				elapsedTime = Double.toString((end - start)) + " ms";
 				result = createMaudeResultFile(maudeResult);
-				result = resultMaude(result);
-			} catch (IOException | InterruptedException | CoreException e) {
+				result = resultMaude(result, req);
+			} catch (IOException | CoreException e) {
 				System.out.println("Terminated!");
 				result = "Terminated";
 				location = "...";
@@ -82,10 +87,22 @@ public class Maude {
 		private String createMaudeResultFile(IFile file) throws IOException, CoreException {
 			String result = "< Analysis Command > \n\n" + userCommand + "\n\n" + "< Result >\n";
 			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+			System.out.println("Error buffer");
+			StringBuffer esb = new StringBuffer();
+			String eline;
+			while ((eline = error.readLine()) != null) {
+				// System.out.println("Error : " + eline);
+				esb.append(eline + "\n");
+			}
+
+			System.out.println("Output buffer");
 			StringBuffer sb = new StringBuffer();
 			String line;
 			while ((line = reader.readLine()) != null) {
-				sb.append(line + "\n");
+				sb.append(line);
+				System.out.println("Output : " + line);
 			}
 			result += getSolutionString(sb.toString());
 			IOUtils.setFileContent(new ByteArrayInputStream(result.getBytes()), file);
@@ -102,13 +119,23 @@ public class Maude {
 			}
 		}
 
-		private String resultMaude(String rm) {
-			if (rm.indexOf("No solution") != -1) {
-				return "UnReachable";
-			} else if (rm.indexOf("Solution 1") != -1) {
-				return "Reachable";
+		private String resultMaude(String rm, boolean req) {
+			if (req) {
+				if (rm.indexOf("No solution") != -1) {
+					return "Counter-Example Not Found";
+				} else if (rm.indexOf("Solution 1") != -1) {
+					return "Counter-Example Found";
+				} else {
+					return "Error Occured!";
+				}
 			} else {
-				return "Error Occured!";
+				if (rm.indexOf("No solution") != -1) {
+					return "UnReachable";
+				} else if (rm.indexOf("Solution 1") != -1) {
+					return "Reachable";
+				} else {
+					return "Error Occured!";
+				}
 			}
 		}
 	}
@@ -118,10 +145,13 @@ public class Maude {
 			System.out.println("Maude Incomplete Build!!");
 			return;
 		}
-		MaudeRunner mrt = new MaudeRunner(compileCommandOption().split(" "), path, nickName);
+		MaudeRunner mrt = new MaudeRunner(compileCommandOption().split(" "), path, nickName, req);
 		mrt.run();
 	}
 
+	public void setRequirement(boolean req) {
+		this.req = req;
+	}
 
 	private boolean checkParameters() {
 		if (maudeDirectory == null) {

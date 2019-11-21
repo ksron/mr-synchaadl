@@ -243,7 +243,7 @@ result ConfigWithRand: {< top : System | properties : none,features : none,
 ==========================================
 reduce in TEST-ENSEMBLE-DYNAMICS : execResponseSub(transferResults(
     propagateExecSub(transferInputs(execSampleSub({ensemble,0}))))) .
-rewrites: 675
+rewrites: 672
 result ConfigWithRand: {< top : System | properties : none,features : none,
     subcomponents : (< controller : Thread | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::SamplingTime => {{
@@ -283,7 +283,7 @@ result ConfigWithRand: {< top : System | properties : none,features : none,
     controller .. temp)) >,4}
 ==========================================
 reduce in TEST-ENSEMBLE-DYNAMICS : executeStep({ensemble,0}) .
-rewrites: 676
+rewrites: 673
 result ConfigWithRand: {< top : System | properties : none,features : none,
     subcomponents : (< controller : Thread | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::SamplingTime => {{

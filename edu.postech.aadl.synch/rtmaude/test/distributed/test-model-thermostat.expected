@@ -1,6 +1,6 @@
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {initState | 0 | infty} .
-rewrites: 7363
+rewrites: 7325
 result GlobalSystem: {< top : System | properties : none,features : none,
     subcomponents : (< controller : AsyncThread | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::SamplingTime => {{
@@ -22,7 +22,7 @@ result GlobalSystem: {< top : System | properties : none,features : none,
     transitions : ((l1 -[on dispatch]-> l2 {(v{x} := ((c[curr] + f[temp]) / [[
     2]])) ; if(v[x] < c[lower])(on !) (elsif(v[x] > c[upper])off !) end if ; c{
     curr} := v[x]}) ; l2 -[otherwise]-> l1 {skip}),loopBound : 0,transBound :
-    2,period : 5,perTimer : 13/8,msgTimer : infty,execTime : 5/2,execTimer :
+    2,period : 5,perTimer : 5/2,msgTimer : infty,execTime : 5/2,execTimer :
     infty > < environment : AsyncEnv | properties : ((TimingProperties::Period
     => {{5}}) ; HybridSynchAADL::MaxClockDeviation => {{
     1.0000000000000001e-1}}),features : (< on : AsyncEnvInPort | properties :
@@ -33,18 +33,20 @@ result GlobalSystem: {< top : System | properties : none,features : none,
     none,content : [0.0] # [(false).Bool],envCache : null(Real),target :
     controller,destination : (controller .. temp) >),subcomponents : < x : Data
     | properties : DataModel::InitialValue => {{16}},features : none,
-    subcomponents : none,connections : empty,value : [1.4174999999999999e+1] #
+    subcomponents : none,connections : empty,value : [1.4262499999999999e+1] #
     [(true).Bool] >,connections : x ==> out,varGen : < "top.environment" >,
     currMode : l2,jumps : ((l1 -[on]-> l2) ; (l1 -[off]-> l1) ; (l2 -[on]-> l2)
     ; l2 -[off]-> l1),flows : ((l1 [x(t)= (c[x] + (v[t] * [[
     2.0000000000000001e-1]]))]) ; l2 [x(t)= (c[x] - (v[t] * [[
     1.0000000000000001e-1]]))]),sampling : controller :(0,2),response :
-    controller :(3,4),period : 5,perTimer : 13/8,msgTimer : infty,samplingTimes
+    controller :(3,4),period : 5,perTimer : 5/2,msgTimer : infty,samplingTimes
     : controller : (1/4, 3/4, 5/4, 7/4),responseTimes : controller : (25/8,
-    27/8, 29/8, 31/8),envState : idle,envTimer : 0 >) > | 227/8 | infty}
+    27/8, 29/8, 31/8),envState : [response,controller],envTimer : 7/8 >) > |
+    55/2 | infty}
 ==========================================
-search in TEST-THERMOSTAT-SYSTEM : {initState | 0 | 25} =>* {none | T | 25} .
+search [, 5] in TEST-THERMOSTAT-SYSTEM : {initState | 0 | infty} =>* {none | T
+    | infty} .
 
 No solution.
-states: 311835  rewrites: 18395249
+states: 264  rewrites: 10698
 Bye.

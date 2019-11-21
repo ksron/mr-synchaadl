@@ -233,7 +233,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				«ELSE»
 				target : «compileInTarget(f.id("FeatureId"), ci.id("ComponentId"))»,
 				«ENDIF»
-				
 				properties : «o.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")»,
 				envCache : «f.category.compileOutFeature(o)» >'''
 			default:
@@ -244,7 +243,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	private def compileOutTarget(String featureId, String componentId){
 		for(ConnectionReference cr : conxTable.values){
 			if(cr.connection.source.context!=null && cr.connection.destination.context!=null){
-				if(cr.connection.source.context.name.equals(componentId) && cr.connection.source.connectionEnd.name.equals(featureId)){
+				if(cr.connection.source.context.name.escape.equals(componentId) && cr.connection.source.connectionEnd.name.escape.equals(featureId)){
 					return cr.connection.destination.context.name
 				}
 			}
@@ -255,7 +254,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	private def compileInTarget(String featureId, String componentId){
 		for(ConnectionReference cr : conxTable.values){
 			if(cr.connection.source.context!=null && cr.connection.destination.context!=null){
-				if(cr.connection.destination.context.name.equals(componentId) && cr.connection.destination.connectionEnd.name.equals(featureId)){
+				if(cr.connection.destination.context.name.escape.equals(componentId) && cr.connection.destination.connectionEnd.name.escape.equals(featureId)){
 					return cr.connection.source.context.name
 				}
 			}

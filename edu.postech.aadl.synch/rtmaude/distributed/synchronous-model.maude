@@ -8,6 +8,7 @@ mod MODEL-INIT is
   protecting DEFAULT-PROPERTIES .
   protecting HYBRID-SYNCHAADL-PROPERTIES .
   including BEHAVIOR-EXPRESSION-SEMANTICS .
+  including COMPONENT-DYNAMICS .
   protecting CHECKSAT .
 
   var E : Exp .
@@ -22,7 +23,7 @@ mod MODEL-INIT is
   var PNS : Set{FeatureRef} .
   var PROPS : PropertyAssociation .
   vars CONXS CONXS' : Set{Connection} .
-  vars PORTS PORTS' COMPS COMPS' CONF CONF' : Configuration .
+  vars PORTS PORTS' COMPS COMPS' CONF CONF' MSGS : Configuration .
   var STS RTS : Set{InterTiming} .
   var SIT : Set{InterTime} .
   vars SL SU RL RU : Float .
@@ -41,9 +42,10 @@ mod MODEL-INIT is
                           subcomponents : COMPS, 
                           ATTS > CONF, CONXS', CONF')
    = init(CONF, CONXS',
+      feedbackSend(
       < CR : C:Ensemble | features : init(CR,CONXS',CONXS,PORTS,none),  
                           subcomponents : init(COMPS,CONXS,none), 
-                          ATTS > CONF') .
+                          ATTS >, none) CONF') .
 
   --- for a thread , initialize its ports and data subcomponents, and add an execute time.
   eq init(
@@ -52,6 +54,7 @@ mod MODEL-INIT is
                       properties : PROPS,
                       ATTS > CONF, CONXS', CONF')
    = init(CONF, CONXS',
+      feedbackSend(
       < CR : tr(C:Thread) | features : init(CR,CONXS',empty,PORTS,none), 
                             subcomponents : init(COMPS,empty,none),  --- only data (no ports)
                             period : period(PROPS), 
@@ -59,7 +62,17 @@ mod MODEL-INIT is
                             msgTimer : infty,
                             execTime : threadExecTime(PROPS),
                             execTimer : infty, 
-                            properties : PROPS, ATTS > CONF')  .
+                            properties : PROPS, ATTS >, none) CONF')  .
+
+  --- generate msgs from feedback outputs
+  op feedbackSend : Configuration Configuration ~> Configuration [format (m! o)] .
+ ceq feedbackSend(< CR : C:AsyncComponent | features : PORTS, ATTS > CONF, CONF')
+   = feedbackSend(CONF, < CR : C:AsyncComponent | features : PORTS', ATTS > MSGS CONF') 
+  if {PORTS',MSGS} := send(PORTS,none,none) 
+   [print "init send " MSGS " by " CR] .
+
+  eq feedbackSend(CONF, CONF') = CONF CONF' [owise] .
+
 
   --- for an environment, initialize its ports and data subcomponents, and add timer
   eq init(
@@ -107,17 +120,15 @@ mod MODEL-INIT is
                     (HybridSynchAADL::ResponseTime => {{RL .. RU}}) ; PROPS) = rat(SU + RL) / 2 .
   eq threadExecTime(PROPS) = 0 [owise] .
 
-  --- pick 5 time points between each interval
+  --- pick 3 time points between each interval
   op interTimes : Set{InterTiming} ~> Set{InterTime} .
   op interTimes : Rat Rat ~> Set{Time} .
 
   eq interTimes(((CI : (LT,UT)), STS)) = (CI : interTimes(LT,UT)) ; interTimes(STS) .
   eq interTimes(empty) = empty .
 
-  eq interTimes(LT, UT) = (LT + (UT - LT) * 1/8, 
-                           LT + (UT - LT) * 3/8, 
-                           LT + (UT - LT) * 5/8, 
-                           LT + (UT - LT) * 7/8) .
+  eq interTimes(LT, UT) = (LT + (UT - LT) * 1/3, 
+                           LT + (UT - LT) * 2/3) .
 
 ---
   op init : ComponentRef Set{Connection} Set{Connection} Configuration Configuration ~> Configuration [format (m! o)] .

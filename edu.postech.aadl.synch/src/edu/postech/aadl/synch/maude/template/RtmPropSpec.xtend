@@ -37,18 +37,19 @@ class RtmPropSpec {
     	including TEST-«top.name.toUpperCase» .
 	  eq @m@ = ['TEST-«top.name.toUpperCase»] .
 	  
+	  eq MFlag = true .
+	  
 	endm
 	 
 	red initialize(initial) .
 	
-	search [,«search.bound»]
-	      {lookup(initState, «top.name.escape+" . "+(search.initCond as Prop).path.compilePath», «(search.initCond as ValueProp).expression.compileExp») ||
-		   initState,false} 
-		=>+
-		  {B:BoolExp ||
-		   OBJ:Object,false}
+	search 
+	      {eval(«top.name.escape+" . "+(search.initCond as Prop).path.compilePath», «(search.initCond as ValueProp).expression.compileExp», initState) ||
+		   initState,0,«search.bound»} 
+		=>*
+		  {B:BoolExp || OBJ:Object,T:Time,«search.bound»} 
 		such that
-		  check-sat(B:BoolExp and lookup(OBJ:Object, «top.name.escape+" . "+(search.finCond as Prop).path.compilePath»,  «(search.initCond as ValueProp).expression.compileExp»)) .
+		  check-sat(B:BoolExp and eval(«top.name.escape+" . "+(search.finCond as Prop).path.compilePath»,  «(search.initCond as ValueProp).expression.compileExp», OBJ:Object)) .
 	quit
 	'''
 	
@@ -72,30 +73,29 @@ class RtmPropSpec {
     mod TEST-«top.name.toUpperCase»-MODE is
     	including TEST-«top.name.toUpperCase» .
 	  eq @m@ = ['TEST-«top.name.toUpperCase»] .
-	  
+  	  eq MFlag = true .
 	endm
 	 
 	red initialize(initial) .
 	
-	search [,«req.bound»]
-	      {lookup(initState, «top.name.escape+" . "+(req.initCond as Prop).path.compilePath», «(req.initCond as ValueProp).expression.compileExp») ||
-		   initState,false} 
-		=>+
-		  {B:BoolExp ||
-		   OBJ:Object,false}
+	search
+	      {eval(«top.name.escape+" . "+(req.initCond as Prop).path.compilePath», «(req.initCond as ValueProp).expression.compileExp», initState) ||
+		   initState,0,«req.bound»} 
+		=>*
+		  {B:BoolExp || OBJ:Object,T:Time,«req.bound»}
 		such that
-		  check-sat(B:BoolExp and lookup(OBJ:Object, «top.name.escape+" . "+(req.findCond as Prop).path.compilePath»,  «(req.initCond as ValueProp).expression.compileExp»)) .
+		  check-sat(B:BoolExp and eval(«top.name.escape+" . "+(req.finCond as Prop).path.compilePath»,  «(req.initCond as ValueProp).expression.compileExp», OBJ:Object)) .
 	quit
 	'''
 	
 	static def getRequirementCommand(Top top, Requirement req)'''
-	requirement : 
+	invariant : 
 	(«top.name.escape+" . "+(req.initCond as Prop).path.compilePath» | «(req.initCond as ValueProp).expression.compileExpForUser»)
-	==> []
-	(«top.name.escape+" . "+(req.findCond as Prop).path.compilePath» | «(req.findCond as ValueProp).expression.compileExpForUser»)
+	==>
+	(«top.name.escape+" . "+(req.finCond as Prop).path.compilePath» | «(req.finCond as ValueProp).expression.compileExpForUser»)
 	'''
 	
-	
+	/* 
 	static def compileSpec(Top top) '''
 		load «top.name».maude .
 		load «RtmAadlSetting::SEMANTICS_PATH»/«RtmAadlSetting::ANALYSIS_FILE» .
@@ -132,6 +132,8 @@ class RtmPropSpec {
 		(trew {initial} in time <= «bound»  .)
 	'''
 	
+	* 
+	*/
 	/**
 	 *  translate LTL formulas
 	 */
@@ -148,8 +150,8 @@ class RtmPropSpec {
 		if (f.child == null) f.op else '''(«f.op» «f.child.compileFormula»)'''
 	}
 			
-	private static def dispatch CharSequence compileFormula(PropRef pr) 
-	'''«pr.def.name»'''
+	// private static def dispatch CharSequence compileFormula(PropRef pr) 
+	// '''«pr.def.name»'''
 	
 	
 	private static def dispatch CharSequence compileFormula(StateProp prop) 

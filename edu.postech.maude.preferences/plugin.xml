@@ -6,7 +6,7 @@
       <page
             class="edu.postech.maude.preferences.MaudePrefPage"
             id="edu.postech.maude.preferences.page"
-            name="Test Maude Preferences">
+            name="Maude Preferences">
       </page>
    </extension>
     <extension point="org.eclipse.core.runtime.preferences">

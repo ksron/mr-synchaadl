@@ -40,7 +40,8 @@ fmod COMPONENT-REF is
   including COMPONENT-ID .
   sort ComponentRef .
   subsort ComponentId < ComponentRef .
-  op _._ : ComponentRef ComponentRef -> ComponentRef [ctor assoc] .  --- for a subcomponent 
+  op nilComponentRef : -> ComponentRef [ctor] .
+  op _._ : ComponentRef ComponentRef -> ComponentRef [ctor assoc id: nilComponentRef] .
 endfm
 
 fmod FEATURE-REF is

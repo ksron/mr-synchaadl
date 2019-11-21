@@ -22,4 +22,6 @@ load distributed/async-component.maude
 load distributed/component-dynamics.maude
 load distributed/synchronous-model.maude
 
+load symbolic/specification-language.maude
+
 

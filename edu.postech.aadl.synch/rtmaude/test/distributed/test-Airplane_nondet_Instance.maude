@@ -25,7 +25,7 @@ rew  [200] {cinitState | 0 | infty} .
 rew  [300] {cinitState | 0 | infty} .
 
 --- count the number of reachable states up to bound 100
-search [,30] {initState | 0 | infty} =>* {none | T:Time | infty} .
+search [,5] {initState | 0 | infty} =>* {none | T:Time | infty} .
 
-search [,30] {cinitState | 0 | infty} =>* {none | T:Time | infty} .
+search [,5] {cinitState | 0 | infty} =>* {none | T:Time | infty} .
 

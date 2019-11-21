@@ -26,4 +26,4 @@ load symbolic/transfer-results.maude
 load symbolic/component-dynamics.maude
 load symbolic/synchronous-model.maude
 
-load symbolic/symbolic-analysis.maude
+load symbolic/specification-language.maude

@@ -1,6 +1,6 @@
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{initState,0}} .
-rewrites: 73150
+rewrites: 72926
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< csys : System | properties : none,features : (< on :
     DataOutPort | properties : none,content : * # [(false).Bool] > < off :
@@ -50,7 +50,7 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     (environment .. off)) ; (environment .. out) --> (csys .. temp)) >,400}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{initState,400}} .
-rewrites: 73135
+rewrites: 72911
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< csys : System | properties : none,features : (< on :
     DataOutPort | properties : none,content : * # [(false).Bool] > < off :
@@ -100,7 +100,7 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     (environment .. off)) ; (environment .. out) --> (csys .. temp)) >,800}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{initState,800}} .
-rewrites: 73176
+rewrites: 72956
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< csys : System | properties : none,features : (< on :
     DataOutPort | properties : none,content : * # [(false).Bool] > < off :
@@ -150,7 +150,7 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     (environment .. off)) ; (environment .. out) --> (csys .. temp)) >,1200}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{initState,1200}} .
-rewrites: 73128
+rewrites: 72904
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< csys : System | properties : none,features : (< on :
     DataOutPort | properties : none,content : * # [(false).Bool] > < off :
@@ -200,7 +200,7 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     (environment .. off)) ; (environment .. out) --> (csys .. temp)) >,1600}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{cinitState,0}} .
-rewrites: 61566
+rewrites: 61342
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< environment : EnvWithTimer | properties : ((
     TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
@@ -240,7 +240,7 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     cthread) .. off) --> (environment .. off)) >,400}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{cinitState,400}} .
-rewrites: 61565
+rewrites: 61341
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< environment : EnvWithTimer | properties : ((
     TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
@@ -280,7 +280,7 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     cthread) .. off) --> (environment .. off)) >,800}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{cinitState,800}} .
-rewrites: 61606
+rewrites: 61386
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< environment : EnvWithTimer | properties : ((
     TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
@@ -320,7 +320,7 @@ result GlobalSystem: {{< top : System | properties : none,features : none,
     cthread) .. off) --> (environment .. off)) >,1200}}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM-HIE : {{cinitState,1200}} .
-rewrites: 61558
+rewrites: 61334
 result GlobalSystem: {{< top : System | properties : none,features : none,
     subcomponents : (< environment : EnvWithTimer | properties : ((
     TimingProperties::Period => {{5}}) ; HybridSynchAADL::MaxClockDeviation =>
