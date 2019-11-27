@@ -26,8 +26,10 @@ import org.osate.aadl2.ThreadSubcomponent;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.aadl2.modelsupport.util.ResolvePrototypeUtil;
 
+import edu.postech.aadl.xtext.propspec.propSpec.FormulaStatement;
 import edu.postech.aadl.xtext.propspec.propSpec.Prop;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
+import edu.postech.aadl.xtext.propspec.propSpec.ValueProp;
 
 public class PropSpecLinkingService extends DefaultLinkingService {
 
@@ -44,6 +46,7 @@ public class PropSpecLinkingService extends DefaultLinkingService {
 
 		final String crossRefString = getCrossRefNodeAsString(node);
 
+
 		if (Aadl2Package.eINSTANCE.getNamedElement() == requiredType) {
 			if (context instanceof ContainmentPathElement) {
 				EObject res = null;
@@ -51,21 +54,28 @@ public class PropSpecLinkingService extends DefaultLinkingService {
 				if (context.eContainer() instanceof ContainmentPathElement) // inside a path
 				{
 					ContainmentPathElement el = (ContainmentPathElement) ((ContainmentPathElement) context).getOwner();
-
 					res = findNamedObject(el, crossRefString);
-				}
-				else if (context.eContainer() instanceof PropertyExpression) // inside an expression
+				} else if (context.eContainer() instanceof PropertyExpression) // inside an expression
 				{
 					ContainmentPathElement pl = getPropPathElement(context);
+					System.out.println("ContainmentPathElement : " + pl);
+					System.out.println("CrossRefString : " + crossRefString);
 					if (pl != null) {
 						res = findNamedObject(pl, crossRefString);
+						System.out.println("Resource : " + res);
 					}
 				}
 				else {
-					// the first containment path element
-					ComponentClassifier ns = getContainingModelClassifier(context);
-					if (ns != null) {
-						res = ns.findNamedElement(crossRefString);
+					if (context.eContainer().eContainer().eContainer() instanceof FormulaStatement) {
+						ComponentClassifier ns = getContainingModelClassifier(context);
+						if (ns != null) {
+							res = ns.findNamedElement(crossRefString);
+						}
+					} else if (context.eContainer().eContainer().eContainer() instanceof ValueProp) {
+						ContainedNamedElement path = ((ValueProp)context.eContainer().eContainer().eContainer()).getPath();
+						List<ContainmentPathElement> list = path.getContainmentPathElements();
+						ContainmentPathElement el = list.get(list.size() - 1);
+						res = findNamedObject(el, crossRefString);
 					}
 				}
 				if (res != null && res instanceof NamedElement) {

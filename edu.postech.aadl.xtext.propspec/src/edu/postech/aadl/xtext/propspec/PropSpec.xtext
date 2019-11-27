@@ -14,17 +14,16 @@ Top:
 	&
 	('mode' ':' mode=ID ';')
 	&
-	(formulas+=FormulaStatement)* (search+=Search)* (requirement+=Requirement)*
+	(formulas+=FormulaStatement)* (search+=Search)* (requirement+=Requirement)* (test+=Test)*
 	|
 	(requirements+=ReqStatement)*;
 	
 	
-	
 Search:
-	'reachability' '[' name=ID ']' ':' ( initCond=Formula | initCondID=ID) '==>' (finCond=Formula | finCondID=ID) 'in' 'time' bound=INTVALUE ';';
+	'reachability' '[' name=ID ']' ':' ( initCond=Formula | initProp=[FormulaStatement] ) '==>' (finCond=Formula | goalProp=[FormulaStatement] ) 'in' 'time' bound=INTVALUE ';';
 
 Requirement:
-	'invariant' '[' name=ID ']' ':' ( initCond=Formula | initCondID=ID) '==>' (finCond=Formula | finCondID=ID) 'in' 'time' bound=INTVALUE ';';
+	'invariant' '[' name=ID ']' ':' ( initCond=Formula | initProp=[FormulaStatement] ) '==>' (finCond=Formula | goalProp=[FormulaStatement] ) 'in' 'time' bound=INTVALUE ';';
 
 ReqStatement:
 	'requirementT' name=ID ':' value=Formula ('in' 'time' '<=' bound=INTVALUE)? ';';
@@ -32,6 +31,8 @@ ReqStatement:
 FormulaStatement:
 	'proposition' '[' name=ID ']' ':' value=Formula ';';
 	
+Test:
+	'test' ':' value=TestProp ';' ;
 
 /* 
  * Maude proposition language syntax
@@ -41,11 +42,15 @@ Prop:
 	ValueProp | StateProp;
 
 ValueProp:
-	path=[aadl2::NamedElement] '|'  (expression=ValueExpression | '(' value=ValueProp ')' ) ;	//TODO: type checking needed for boolean exps (in validation)
+	path=ContainmentPath '|'  (expression=ValueExpression | '(' value=ValueProp ')' ) ;	//TODO: type checking needed for boolean exps (in validation)
 	
 StateProp:
 	path=ContainmentPath '@' state=ID;
 
+
+TestProp:
+	path=[aadl2::NamedElement]
+;
 
 /* 
  * LTL formula syntax

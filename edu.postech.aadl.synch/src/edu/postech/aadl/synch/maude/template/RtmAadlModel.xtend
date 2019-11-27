@@ -254,6 +254,8 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	private def compileInTarget(String featureId, String componentId){
 		for(ConnectionReference cr : conxTable.values){
 			if(cr.connection.source.context!=null && cr.connection.destination.context!=null){
+				println("source : " + cr.connection.source.context)
+				println("dest : " + cr.connection.destination.context)
 				if(cr.connection.destination.context.name.escape.equals(componentId) && cr.connection.destination.connectionEnd.name.escape.equals(featureId)){
 					return cr.connection.source.context.name
 				}

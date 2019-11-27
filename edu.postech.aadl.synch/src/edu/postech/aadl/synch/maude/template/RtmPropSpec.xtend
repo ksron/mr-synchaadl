@@ -19,6 +19,7 @@ import edu.postech.aadl.xtext.propspec.propSpec.ReqStatement
 import edu.postech.aadl.xtext.propspec.propSpec.Prop
 import edu.postech.aadl.xtext.propspec.propSpec.Search
 import edu.postech.aadl.xtext.propspec.propSpec.Requirement
+import org.osate.aadl2.NamedElement
 
 class RtmPropSpec {
 	
@@ -44,7 +45,7 @@ class RtmPropSpec {
 	red initialize(initial) .
 	
 	search 
-	      {eval(«top.name.escape+" . "+(search.initCond as Prop).path.compilePath», «(search.initCond as ValueProp).expression.compileExp», initState) ||
+	      {eval(«top.name.escape+" . "+(search.initCond as  Prop).path.compilePath», «(search.initCond as ValueProp).expression.compileExp», initState) ||
 		   initState,0,«search.bound»} 
 		=>*
 		  {B:BoolExp || OBJ:Object,T:Time,«search.bound»} 
