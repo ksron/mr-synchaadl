@@ -1,0 +1,56 @@
+==========================================
+reduce in TEST-THERMOSTAT-SYSTEM : initCond .
+rewrites: 1
+result PropSpec: ((top . environment) | ((c[e] < [[(1).NzNat]]) and (c[e] > [[(
+    0).Zero]]))) or not((top . controller) | (c[lower] < [[(20).NzNat]]))
+==========================================
+reduce in TEST-THERMOSTAT-SYSTEM : goalCond .
+rewrites: 1
+result PropSpec: top | ((controller | c[curr]) > environment | c[x])
+==========================================
+reduce in TEST-THERMOSTAT-SYSTEM : normalize(nilComponentRef, initCond) .
+rewrites: 15
+result NPropSpec: ((((top . environment) | c[e]) < [[(1).NzNat]]) and (((top .
+    environment) | c[e]) > [[(0).Zero]])) or not(((top . controller) | c[
+    lower]) < [[(20).NzNat]])
+==========================================
+reduce in TEST-THERMOSTAT-SYSTEM : eval([[(true).Bool]], initState) .
+rewrites: 130
+result SMTBoolValue: [(true).Bool]
+==========================================
+reduce in TEST-THERMOSTAT-SYSTEM : eval([[(false).Bool]], initState) .
+rewrites: 28
+result SMTBoolValue: [(false).Bool]
+==========================================
+reduce in TEST-THERMOSTAT-SYSTEM : eval((top . controller) | (c[lower] < [[(
+    20).NzNat]]), initState) .
+rewrites: 62
+result SMTBoolValue: [(true).Bool]
+==========================================
+reduce in TEST-THERMOSTAT-SYSTEM : eval((top . controller) | (c[lower] > [[(
+    20).NzNat]]), initState) .
+rewrites: 54
+result SMTBoolValue: [(false).Bool]
+==========================================
+reduce in TEST-THERMOSTAT-SYSTEM : eval((top . environment) | ((c[e] < [[(
+    1).NzNat]]) and (c[e] > [[(0).Zero]])), initState) .
+rewrites: 78
+result BoolExp: [(0).Zero] < r("top.environment", 1) and r("top.environment",
+    1) < [(1).NzNat]
+==========================================
+reduce in TEST-THERMOSTAT-SYSTEM : eval(initCond, initState) .
+rewrites: 143
+result BoolExp: [(0).Zero] < r("top.environment", 1) and r("top.environment",
+    1) < [(1).NzNat]
+==========================================
+reduce in TEST-THERMOSTAT-SYSTEM : eval(goalCond, initState) .
+rewrites: 73
+result SMTBoolValue: [(false).Bool]
+==========================================
+search [1, 5] in TEST-THERMOSTAT-SYSTEM : {eval(initCond, initState) ||
+    initState,(false).Bool} =>* {B:BoolExp || OBJ:Object,(false).Bool} such
+    that check-sat(B:BoolExp and eval(goalCond, OBJ:Object)) = (true).Bool .
+
+No solution.
+states: 6  rewrites: 108619
+Bye.

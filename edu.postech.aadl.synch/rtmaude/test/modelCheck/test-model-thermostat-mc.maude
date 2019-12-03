@@ -1,0 +1,43 @@
+set show timing off .
+
+load ../../interpreter-model-check.maude
+load ../syntax/module-thermostat.maude
+
+---------------------------------------------
+mod TEST-THERMOSTAT-SYSTEM-MOD is
+  including THERMOSTAT-SYSTEM .
+  including MODEL-TRANSITION-SYSTEM .
+  including SPECIFICATION-LANGUAGE-SEMANTICS .
+
+  op initState : -> Object .
+  eq initState = initialize(model) .
+endm
+
+mod TEST-THERMOSTAT-SYSTEM is
+  including TEST-THERMOSTAT-SYSTEM-MOD .
+
+  eq @m@ = ['TEST-THERMOSTAT-SYSTEM-MOD] .
+endm
+
+red initState .
+
+mod TEST-MODEL-CHECK is
+    including TEST-THERMOSTAT-SYSTEM .
+    including MODEL-CHECKER .
+    including LTL-SIMPLIFIER .
+
+    op modelState : -> State .
+    subsort Configuration < State .
+    eq modelState = initState .
+
+    op initFormula : -> Prop .
+    op goalFormula : -> Prop .
+
+    var C : Configuration .
+
+    eq C |= initFormula = check-sat(eval(top . controller | ((c[curr] < [[30.0]]) and (c[curr] > [[10.0]])), initState)) .
+    eq C |= goalFormula = check-sat(eval(top . controller | (c[curr] < [[20.0]]), C)) .
+
+endm
+
+red modelCheck(modelState, initFormula -> <> goalFormula) .

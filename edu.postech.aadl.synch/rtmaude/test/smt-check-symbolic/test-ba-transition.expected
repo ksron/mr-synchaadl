@@ -1,0 +1,156 @@
+==========================================
+search in TEST-BEHAVIOR-TRANSITION-SEMANTICS : execTrans(location(loc([(
+    0).Zero])) complete(loc([(0).Zero])) bcf trans(trans1)) =>+ R:BATransResult
+    .
+
+Solution 1 (state 3)
+states: 4  rewrites: 352
+R:BATransResult --> loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> r(0) + [(-1).NzInt] # [(true).Bool] | cr |=> r(0) + r(
+    0) + r(1) + r(2) + [(8739798026865869/140737488355328).PosRat] # [(
+    true).Bool] | b(0) and b(1) and b(2) and [(3).NzNat] < r(0) and [(4).NzNat]
+    < r(0) | < "a.b",100,200 >
+
+No more solutions.
+states: 7  rewrites: 714
+==========================================
+search in TEST-BEHAVIOR-TRANSITION-SEMANTICS : execTrans(location(loc([(
+    0).Zero])) complete(loc([(0).Zero])) bcf trans(trans2)) =>+ R:BATransResult
+    .
+
+Solution 1 (state 2)
+states: 3  rewrites: 329
+R:BATransResult --> loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> [(0).Zero] # [(false).Bool] | cr |=> r(0) + r(1) # [(
+    true).Bool] | b(0) and b(1) and (not b(0) or not r(0) < [(-1).NzInt]) and (
+    not b(0) or not [(4).NzNat] < r(0)) | < "a.b",100,200 >
+
+Solution 2 (state 3)
+states: 4  rewrites: 407
+R:BATransResult --> loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> [(0).Zero] # [(false).Bool] | cr |=> - r(1) + r(0) # [(
+    true).Bool] | b(0) and b(1) and r(0) < [(-1).NzInt] | < "a.b",100,200 >
+
+Solution 3 (state 5)
+states: 6  rewrites: 554
+R:BATransResult --> loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> r(0) + [(-1).NzInt] # [(true).Bool] | cr |=> r(0) + r(
+    1) + r(2) + [(2).NzNat] # [(true).Bool] | b(0) and b(1) and b(2) and [(
+    3).NzNat] < r(0) and [(4).NzNat] < r(0) | < "a.b",100,200 >
+
+No more solutions.
+states: 9  rewrites: 834
+==========================================
+search in TEST-BEHAVIOR-TRANSITION-SEMANTICS : execTrans(location(loc([(
+    0).Zero])) complete(loc([(0).Zero])) bcf trans(trans3)) =>+ R:BATransResult
+    .
+
+Solution 1 (state 2)
+states: 3  rewrites: 248
+R:BATransResult --> loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> [(0).Zero] # [(false).Bool] | cr |=> r(0) + r(1) # [(
+    true).Bool] | not [(4).NzNat] < r(0) + [(1).NzNat] and b(0) and b(1) | <
+    "a.b",100,200 >
+
+Solution 2 (state 6)
+states: 7  rewrites: 542
+R:BATransResult --> loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> r(0) + [(-1).NzInt] # [(true).Bool] | cr |=> r(0) + r(
+    1) # [(true).Bool] | not [(4).NzNat] < r(0) + r(1) + r(2) + [(2).NzNat] and
+    b(0) and b(1) and b(2) and [(3).NzNat] < r(0) and [(4).NzNat] < r(0) + [(
+    1).NzNat] | < "a.b",100,200 >
+
+Solution 3 (state 16)
+states: 17  rewrites: 1465
+R:BATransResult --> loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> r(0) + [(-1).NzInt] # [(true).Bool] | cr |=> r(0) + r(
+    1) # [(true).Bool] | not [(4).NzNat] < r(0) + r(1) + r(1) + r(2) + r(2) + [
+    (3).NzNat] and b(0) and b(1) and b(2) and [(3).NzNat] < r(0) and [(
+    4).NzNat] < r(0) + [(1).NzNat] and [(4).NzNat] < r(0) + r(1) + r(2) + [(
+    2).NzNat] | < "a.b",100,200 >
+
+Solution 4 (state 33)
+states: 34  rewrites: 2874
+R:BATransResult --> loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> r(0) + [(-1).NzInt] # [(true).Bool] | cr |=> r(0) + r(
+    1) # [(true).Bool] | not [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(2) +
+    r(2) + r(2) + [(4).NzNat] and b(0) and b(1) and b(2) and [(3).NzNat] < r(0)
+    and [(4).NzNat] < r(0) + [(1).NzNat] and [(4).NzNat] < r(0) + r(1) + r(2) +
+    [(2).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(2) + r(2) + [(
+    3).NzNat] | < "a.b",100,200 >
+
+Solution 5 (state 54)
+states: 55  rewrites: 5130
+R:BATransResult --> loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> r(0) + [(-1).NzInt] # [(true).Bool] | cr |=> r(0) + r(
+    1) # [(true).Bool] | not [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) +
+    r(2) + r(2) + r(2) + r(2) + [(5).NzNat] and b(0) and b(1) and b(2) and [(
+    3).NzNat] < r(0) and [(4).NzNat] < r(0) + [(1).NzNat] and [(4).NzNat] < r(
+    0) + r(1) + r(2) + [(2).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(2)
+    + r(2) + [(3).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(2) +
+    r(2) + r(2) + [(4).NzNat] | < "a.b",100,200 >
+
+Solution 6 (state 75)
+states: 76  rewrites: 7661
+R:BATransResult --> loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> r(0) + [(-1).NzInt] # [(true).Bool] | cr |=> r(0) + r(
+    1) # [(true).Bool] | not [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) +
+    r(1) + r(2) + r(2) + r(2) + r(2) + r(2) + [(6).NzNat] and b(0) and b(1) and
+    b(2) and [(3).NzNat] < r(0) and [(4).NzNat] < r(0) + [(1).NzNat] and [(
+    4).NzNat] < r(0) + r(1) + r(2) + [(2).NzNat] and [(4).NzNat] < r(0) + r(1)
+    + r(1) + r(2) + r(2) + [(3).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) +
+    r(1) + r(2) + r(2) + r(2) + [(4).NzNat] and [(4).NzNat] < r(0) + r(1) + r(
+    1) + r(1) + r(1) + r(2) + r(2) + r(2) + r(2) + [(5).NzNat] | < "a.b",100,
+    200 >
+
+Solution 7 (state 94)
+states: 95  rewrites: 9856
+R:BATransResult --> loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> r(0) + [(-1).NzInt] # [(true).Bool] | cr |=> r(0) + r(
+    1) # [(true).Bool] | not [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) +
+    r(1) + r(1) + r(2) + r(2) + r(2) + r(2) + r(2) + r(2) + [(7).NzNat] and b(
+    0) and b(1) and b(2) and [(3).NzNat] < r(0) and [(4).NzNat] < r(0) + [(
+    1).NzNat] and [(4).NzNat] < r(0) + r(1) + r(2) + [(2).NzNat] and [(
+    4).NzNat] < r(0) + r(1) + r(1) + r(2) + r(2) + [(3).NzNat] and [(4).NzNat]
+    < r(0) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2) + [(4).NzNat] and [(
+    4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2) + r(2) +
+    [(5).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(1) + r(
+    2) + r(2) + r(2) + r(2) + r(2) + [(6).NzNat] | < "a.b",100,200 >
+
+Solution 8 (state 115)
+states: 116  rewrites: 12565
+R:BATransResult --> loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> r(0) + [(-1).NzInt] # [(true).Bool] | cr |=> r(0) + r(
+    1) # [(true).Bool] | not [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) +
+    r(1) + r(1) + r(1) + r(2) + r(2) + r(2) + r(2) + r(2) + r(2) + r(2) + [(
+    8).NzNat] and b(0) and b(1) and b(2) and [(3).NzNat] < r(0) and [(4).NzNat]
+    < r(0) + [(1).NzNat] and [(4).NzNat] < r(0) + r(1) + r(2) + [(2).NzNat] and
+    [(4).NzNat] < r(0) + r(1) + r(1) + r(2) + r(2) + [(3).NzNat] and [(
+    4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2) + [(4).NzNat]
+    and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2) +
+    r(2) + [(5).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(
+    1) + r(2) + r(2) + r(2) + r(2) + r(2) + [(6).NzNat] and [(4).NzNat] < r(0)
+    + r(1) + r(1) + r(1) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2) + r(2) + r(
+    2) + r(2) + [(7).NzNat] | < "a.b",100,200 >
+
+Solution 9 (state 136)
+states: 137  rewrites: 15619
+R:BATransResult --> loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> r(0) + [(-1).NzInt] # [(true).Bool] | cr |=> r(0) + r(
+    1) # [(true).Bool] | not [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) +
+    r(1) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2) + r(2) + r(2) + r(2) + r(2)
+    + r(2) + [(9).NzNat] and b(0) and b(1) and b(2) and [(3).NzNat] < r(0) and
+    [(4).NzNat] < r(0) + [(1).NzNat] and [(4).NzNat] < r(0) + r(1) + r(2) + [(
+    2).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(2) + r(2) + [(3).NzNat]
+    and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2) + [(
+    4).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(2) + r(2)
+    + r(2) + r(2) + [(5).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) +
+    r(1) + r(1) + r(2) + r(2) + r(2) + r(2) + r(2) + [(6).NzNat] and [(
+    4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(1) + r(1) + r(2) + r(2) +
+    r(2) + r(2) + r(2) + r(2) + [(7).NzNat] and [(4).NzNat] < r(0) + r(1) + r(
+    1) + r(1) + r(1) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2) + r(2) + r(2) +
+    r(2) + r(2) + [(8).NzNat] | < "a.b",100,200 >
+
+No more solutions.
+states: 184  rewrites: 23162
+Bye.

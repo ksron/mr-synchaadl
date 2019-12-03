@@ -16,7 +16,7 @@ load random/ba-semantics.maude
 load symbolic/env-semantics-common.maude
 load random/env-semantics.maude
 
-load distributed/time-domain.maude
+load syntax/time-domain.maude
 load distributed/async-feature.maude
 load distributed/async-component.maude
 load distributed/component-dynamics.maude

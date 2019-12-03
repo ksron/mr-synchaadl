@@ -1,0 +1,21 @@
+#!/bin/bash
+MAUDESMT_DIR=$HOME/Dropbox/Research/maude-z3/
+MAUDESMT_BIN=maude
+
+MAUDESMT_COM="$MAUDESMT_DIR/$MAUDESMT_BIN -no-advise -no-prelude -no-banner $MAUDESMT_DIR/prelude.maude $MAUDESMT_DIR/smt.maude"
+
+echo "Run.."
+for file in $(find smt-check-symbolic -name "test-*.maude")
+do
+    echo Running $file ...
+    echo "quit" | $MAUDESMT_COM $file > ${file%.*}.expected
+done
+
+echo "Diff.."
+for file in $(find smt-check-symbolic -name "test-*.maude")
+do
+    symbolicResult=${file%.*}.expected
+    symbolicResult=symbolic${symbolicResult#smt-check-symbolic}
+    smtResult=${file%.*}.expected
+    diff ${smtResult} ${symbolicResult}
+done

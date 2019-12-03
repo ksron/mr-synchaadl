@@ -1,0 +1,42 @@
+==========================================
+reduce in SMT-CHECKSAT : check-sat(r(0) < [(3).NzNat] and r(0) > [(1).NzNat]) .
+rewrites: 38
+result Bool: (true).Bool
+==========================================
+reduce in SMT-CHECKSAT : check-sat(r(0) < [(3).NzNat] and r(0) > [(1).NzNat]) .
+rewrites: 30
+result Bool: (true).Bool
+==========================================
+reduce in SMT-CHECKSAT : check-sat(r("a.b", 0) < [(3).NzNat] and r("a.b", 0) >
+    [(1).NzNat]) .
+rewrites: 34
+result Bool: (true).Bool
+==========================================
+reduce in SMT-CHECKSAT : check-sat(r("a", 0) < [(3/1).Rat] and r("b", 0) > [(
+    1).NzNat]) .
+rewrites: 35
+result Bool: (true).Bool
+==========================================
+reduce in SMT-CHECKSAT : check-sat(r(0) < [(3).NzNat] and r(0) > [(1/2).Rat]) .
+rewrites: 38
+result Bool: (true).Bool
+==========================================
+reduce in SMT-CHECKSAT : check-sat(r(0) < [(3/7).Rat] and r(0) > [(1/2).Rat]) .
+rewrites: 38
+result Bool: (false).Bool
+==========================================
+reduce in SMT-CHECKSAT : check-sat(r("a.b", 0) < [(3).NzNat] and r("a.b", 0) >
+    [(1/2).Rat]) .
+rewrites: 34
+result Bool: (true).Bool
+==========================================
+reduce in SMT-CHECKSAT : check-sat(r("a", 0) < [(3/7).Rat] and r("b", 0) > [(
+    1/2).Rat]) .
+rewrites: 34
+result Bool: (true).Bool
+==========================================
+reduce in SMT-CHECKSAT : check-sat(r("a", 0) < [(3/7).Rat] and r("a", 0) > [(
+    1/2).Rat]) .
+rewrites: 34
+result Bool: (false).Bool
+Bye.

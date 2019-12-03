@@ -27,7 +27,9 @@ import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.aadl2.modelsupport.util.ResolvePrototypeUtil;
 
 import edu.postech.aadl.xtext.propspec.propSpec.FormulaStatement;
+import edu.postech.aadl.xtext.propspec.propSpec.Invariant;
 import edu.postech.aadl.xtext.propspec.propSpec.Prop;
+import edu.postech.aadl.xtext.propspec.propSpec.Reachability;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
 import edu.postech.aadl.xtext.propspec.propSpec.ValueProp;
 
@@ -46,7 +48,6 @@ public class PropSpecLinkingService extends DefaultLinkingService {
 
 		final String crossRefString = getCrossRefNodeAsString(node);
 
-
 		if (Aadl2Package.eINSTANCE.getNamedElement() == requiredType) {
 			if (context instanceof ContainmentPathElement) {
 				EObject res = null;
@@ -58,15 +59,14 @@ public class PropSpecLinkingService extends DefaultLinkingService {
 				} else if (context.eContainer() instanceof PropertyExpression) // inside an expression
 				{
 					ContainmentPathElement pl = getPropPathElement(context);
-					System.out.println("ContainmentPathElement : " + pl);
-					System.out.println("CrossRefString : " + crossRefString);
 					if (pl != null) {
 						res = findNamedObject(pl, crossRefString);
-						System.out.println("Resource : " + res);
 					}
 				}
 				else {
-					if (context.eContainer().eContainer().eContainer() instanceof FormulaStatement) {
+					if (context.eContainer().eContainer().eContainer() instanceof FormulaStatement
+							|| context.eContainer().eContainer().eContainer() instanceof Reachability
+							|| context.eContainer().eContainer().eContainer() instanceof Invariant) {
 						ComponentClassifier ns = getContainingModelClassifier(context);
 						if (ns != null) {
 							res = ns.findNamedElement(crossRefString);

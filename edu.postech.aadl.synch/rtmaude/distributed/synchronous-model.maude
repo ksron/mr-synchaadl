@@ -29,6 +29,7 @@ mod MODEL-INIT is
   vars SL SU RL RU : Float .
   var LT UT : Rat .
   var ATTS : AttributeSet .
+  var N M : Nat .
 
   op initialize : Configuration ~> Configuration [format (m! o)] .
   eq initialize(CONF) = init(CONF, empty, none) .
@@ -87,8 +88,8 @@ mod MODEL-INIT is
                           properties : PROPS,
                           sampling : STS,
                           response : RTS,
-                          samplingTimes : interTimes(STS),
-                          responseTimes : interTimes(RTS),
+                          samplingTimes : timing(STS),
+                          responseTimes : timing(RTS),
                           period : period(PROPS), 
                           perTimer : 0,
                           msgTimer : infty,
@@ -121,15 +122,22 @@ mod MODEL-INIT is
   eq threadExecTime(PROPS) = 0 [owise] .
 
   --- pick 3 time points between each interval
-  op interTimes : Set{InterTiming} ~> Set{InterTime} .
-  op interTimes : Rat Rat ~> Set{Time} .
+  op timing : Set{InterTiming} -> Set{InterTime} .
 
-  eq interTimes(((CI : (LT,UT)), STS)) = (CI : interTimes(LT,UT)) ; interTimes(STS) .
-  eq interTimes(empty) = empty .
+  op interTimes : Set{InterTiming} Nat ~> Set{InterTime} .
+  op interTimes : Rat Rat Nat ~> Set{Time} .
+  op interTimes : Rat Rat Nat Nat ~> Set{Time} .
 
-  eq interTimes(LT, UT) = (LT + (UT - LT) * 1/3, 
-                           LT + (UT - LT) * 2/3) .
+  eq interTimes(((CI : (LT,UT)), STS), N) = (CI : interTimes(LT,UT, N)) ; interTimes(STS, N) .
+  eq interTimes(empty, N) = empty .
 
+  eq interTimes(LT, UT, N) = interTimes(LT, UT, N, N) .
+  
+  ceq interTimes(LT, UT, N, s(M)) = ( LT + (UT - LT) * (M / N) , 
+                                      interTimes(LT, UT, N, M)) 
+   if M > 0 .
+  eq interTimes(LT, UT, N, M) = empty [owise].
+  
 ---
   op init : ComponentRef Set{Connection} Set{Connection} Configuration Configuration ~> Configuration [format (m! o)] .
 
@@ -211,10 +219,10 @@ mod MODEL-TRANSITION-SYSTEM is
   var TI : TimeInf .
 
   sort GlobalSystem .
-  op {_|_|_} : Configuration Time TimeInf -> GlobalSystem [ctor] . 
+  op {_,_,_} : Configuration Time TimeInf -> GlobalSystem [ctor] . 
 
   crl [tick]: 
-      {OBJ | T | TI} => {timeEffect(OBJ,NT) | T + NT | TI}
+      {OBJ, T, TI} => {timeEffect(OBJ,NT), T + NT, TI}
    if NT := mte(OBJ)
    /\ T + NT <= TI [print "tick " NT ] .
 endm

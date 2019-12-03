@@ -1,0 +1,77 @@
+fmod SMT-CHECKSAT-TRANSFORM is
+    protecting SMT-REAL-EXP .
+    protecting SMT-BOOL-EXP .
+    protecting REAL-EXP .
+    protecting BOOL-EXP .
+    protecting SMT-Check .
+    including META-TERM .
+    including META-LEVEL .
+
+    var Rl : Real .
+    var Bl : Boolean .
+
+    op smtResult : SmtCheckResult ~> Bool .
+    eq smtResult(sat) = true .
+    eq smtResult(unknown) = false .
+    eq smtResult(unsat) = false .
+
+    vars BE BE1 BE2 : BoolExp .
+    vars RE RE1 RE2 : RealExp .
+    var SR : SMTRealValue .
+    var SB : SMTBoolValue .
+    var N : Nat .
+    var S : String .
+
+    op toR : SMTRealValue -> Real .
+    eq toR([Rl]) = Rl .
+    op toB : SMTBoolValue -> Boolean .
+    eq toB([Bl]) = Bl .
+
+    op toRV : SMTRealVar -> RealVar .
+    eq toRV(r(S, N)) = r(qid(string(N, 10) + "##" + S)) .
+    eq toRV(r(N)) = r(qid(string(N, 10))) .
+
+    op toBV : SMTBoolVar -> BooleanVar .
+    eq toBV(b(S, N)) = b(qid(string(N, 10) + "##" + S)) .
+    eq toBV(b(N)) = b(qid(string(N, 10))) .
+
+    op toRE : RealExp -> Real .
+    eq toRE(SR) = toR(SR) .
+    eq toRE(r(S, N)) = toRV(r(S, N)) .
+    eq toRE(r(N)) = toRV(r(N)) .
+    eq toRE(- RE) = - toRE(RE) .
+    eq toRE(RE1 + RE2) = toRE(RE1) + toRE(RE2) .
+    eq toRE(RE1 - RE2) = toRE(RE1) - toRE(RE2) .
+    eq toRE(RE1 * RE2) = toRE(RE1) * toRE(RE2) .
+    eq toRE(RE1 / RE2) = toRE(RE1) / toRE(RE2) .
+    eq toRE(RE + r(S, N)) = toRE(RE) + toRV(r(S, N)) .
+    eq toRE(RE - r(S, N)) = toRE(RE) - toRV(r(S, N)) .
+    eq toRE(RE * r(S, N)) = toRE(RE) * toRV(r(S, N)) .
+    eq toRE(RE / r(S, N)) = toRE(RE) / toRV(r(S, N)) .
+    eq toRE(RE + r(N)) = toRE(RE) + toRV(r(N)) .
+    eq toRE(RE - r(N)) = toRE(RE) - toRV(r(N)) .
+    eq toRE(RE * r(N)) = toRE(RE) + toRV(r(N)) .
+    eq toRE(RE / r(N)) = toRE(RE) / toRV(r(N)) .
+    eq toRE(BE ? RE1 : RE2) = toBE(BE) ? toRE(RE1) : toRE(RE2) .
+
+    op toBE : BoolExp -> Boolean .
+    eq toBE(SB) = toB(SB) .
+    eq toBE(b(S, N)) = toBV(b(S, N)) .
+    eq toBE(b(N)) = toBV(b(N)) .
+    eq toBE(RE1 < RE2) = toRE(RE1) < toRE(RE2) .
+    eq toBE(RE1 <= RE2) = toRE(RE1) <= toRE(RE2) .
+    eq toBE(RE1 > RE2) = toRE(RE1) > toRE(RE2) .
+    eq toBE(RE1 >= RE2) = toRE(RE1) >= toRE(RE2) .
+    eq toBE(RE1 === RE2) = toRE(RE1) === toRE(RE2) .
+    eq toBE(RE1 =/== RE2) = toRE(RE1) =/== toRE(RE2) .
+
+    eq toBE(not BE) = not toBE(BE) .
+    eq toBE(BE1 and BE2) = toBE(BE1) and toBE(BE2) .
+    eq toBE(BE1 xor BE2) = toBE(BE1) xor toBE(BE2) .
+    eq toBE(BE1 or BE2) = toBE(BE1) or toBE(BE2) .
+    eq toBE(BE1 implies BE2) = toBE(BE1) implies toBE(BE2) .
+    eq toBE(BE1 === BE2) = toBE(BE1) === toBE(BE2) .
+    eq toBE(BE1 =/== BE2) = toBE(BE1) =/== toBE(BE2) .
+    eq toBE(BE ? BE1 : BE2) = toBE(BE) ? toBE(BE1) : toBE(BE2) .
+
+endfm

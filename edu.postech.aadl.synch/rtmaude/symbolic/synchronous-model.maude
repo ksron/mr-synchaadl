@@ -1,4 +1,3 @@
-
 mod MODEL-INIT is
   including DATA-PORT .
   including ENV-PORT .
@@ -81,6 +80,7 @@ mod MODEL-INIT is
   if E # B := eval(p[DataModel::InitialValue], prop(PROPS)) /\ TY == type(E) .
 
   --- all other output parts are initialized as bots
+
  ceq initialize(< PI : C:DataOutPort | content : null(TY), 
                                        properties : PROPS, ATTS > CONF, CONF', GEN)
    = initialize(CONF, < PI : C:DataOutPort | content : bot(TY), 
@@ -121,28 +121,36 @@ mod MODEL-TRANSITION-SYSTEM is
   including COND-EXP-SIMPLIFICATION .
   protecting SMT-CHECKSAT .
   including COLLAPSE-SINGLE-ENSEMBLE .
-
-  var MF : Bool .
+  including TIME .
+  
   var CR : ComponentRef . 
   vars OBJ OBJ' : Object .
-  vars CONST CONST' : BoolExp .
+  vars B CONST CONST' : BoolExp .
   var ATTS : AttributeSet .
-
+  var T : Time .
+  var NT : NzTime .
+  var TI : TimeInf .
+  var PER : RealExp .
+  var PROPS : PropertyAssociation .
+  
   sort GlobalSystem .
-  op {_,_} : ConstConfig Bool -> GlobalSystem [ctor] .
+  op {_,_,_} : ConstConfig Time TimeInf -> GlobalSystem [ctor] .
+  op MFlag : -> Bool .
 
   crl [step]: 
-      {CONST || OBJ, MF}
+      {CONST || OBJ, T, TI}
    =>
-      {(CONST and CONST') || OBJ', MF}
+      {(CONST and CONST') || OBJ', T + NT, TI}
    if 
-      < CR : C:System | features : none, ATTS > := OBJ
-   /\ 
-      executeStep(CONST, OBJ, MF) => CONST' || OBJ' .
+      < CR : C:System | features : none, properties : PROPS, ATTS > := OBJ
+   /\ PER # B := eval(p[TimingProperties::Period], prop(PROPS))
+   /\ NT := rval(PER) 
+   /\ T + NT <= TI
+   /\ executeStep(CONST, OBJ, MFlag) => CONST' || OBJ' .
 
   --- final condition
   op finalConst : GlobalSystem ~> BoolExp .
-  eq finalConst({CONST || OBJ, MF}) = CONST and finalConst(OBJ) .
+  eq finalConst({CONST || OBJ, T, TI}) = CONST and finalConst(OBJ) .
 endm
 
 

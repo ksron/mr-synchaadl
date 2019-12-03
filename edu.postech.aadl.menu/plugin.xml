@@ -26,7 +26,7 @@
       <command
             categoryId="SynchAadlMenu.commands.category"
             name="Run"
-            id="SynchAadlMenu.commands.sampleCommand4">
+            id="SynchAadlMenu.commands.sampleCommand5">
       </command>
    </extension>
    
@@ -34,20 +34,20 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="synchaadlmenu.handlers.ConstraintChecker"
+            class="handlers.ConstraintChecker"
             commandId="SynchAadlMenu.commands.sampleCommand">
       </handler>
       <handler
-            class="synchaadlmenu.handlers.CodeGeneration"
+            class="handlers.CodeGeneration"
             commandId="SynchAadlMenu.commands.sampleCommand2">
       </handler>
       <handler
-            class="synchaadlmenu.handlers.SearchCommand"
+            class="handlers.SearchCommand"
             commandId="SynchAadlMenu.commands.sampleCommand3">
       </handler>
       <handler
-            class="synchaadlmenu.handlers.Run"
-            commandId="SynchAadlMenu.commands.sampleCommand4">
+            class="handlers.Run"
+            commandId="SynchAadlMenu.commands.sampleCommand5">
         </handler>
    </extension>
    
@@ -58,26 +58,26 @@
             commandId="SynchAadlMenu.commands.sampleCommand"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+6">
+            sequence="M1+5">
       </key>
       <key
             commandId="SynchAadlMenu.commands.sampleCommand2"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+7">
+            sequence="M1+6">
       </key>
       <key
             commandId="SynchAadlMenu.commands.sampleCommand3"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+8">
+            sequence="M1+7">
       </key>
-      <key
-            commandId="SynchAadlMenu.commands.sampleCommand4"
+        <key
+            commandId="SynchAadlMenu.commands.sampleCommand5"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+9">
-      </key>
+      </key>f
    </extension>
    
    
@@ -105,8 +105,8 @@
                   mnemonic="S">
             </command>
             <command
-                  commandId="SynchAadlMenu.commands.sampleCommand4"
-                  id="SynchAadlMenu.menus.sampleCommand4"
+                  commandId="SynchAadlMenu.commands.sampleCommand5"
+                  id="SynchAadlMenu.menus.sampleCommand5"
                   mnemonic="S">
             </command>
          </menu>

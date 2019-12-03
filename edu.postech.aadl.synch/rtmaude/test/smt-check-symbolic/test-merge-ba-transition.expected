@@ -1,0 +1,89 @@
+==========================================
+reduce in TEST-BEHAVIOR-TRANSITION-SEMANTICS-META : execTransMerge(location(
+    loc([(0).Zero])) complete(loc([(0).Zero])) bcf trans(trans1)) .
+rewrites: 731
+result BATransResult: loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> r(0) + [(-1).NzInt] # [(true).Bool] | cr |=> r(0) + r(
+    0) + r(1) + r(2) + [(8739798026865869/140737488355328).PosRat] # [(
+    true).Bool] | b(0) and b(1) and b(2) and [(3).NzNat] < r(0) and [(4).NzNat]
+    < r(0) | < "a.b",100,200 >
+==========================================
+reduce in TEST-BEHAVIOR-TRANSITION-SEMANTICS-META : execTransMerge(location(
+    loc([(0).Zero])) complete(loc([(0).Zero])) bcf trans(trans2)) .
+rewrites: 975
+result BATransResult: loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> r("a.b", 101) # b("a.b", 200) | cr |=> r("a.b", 100) #
+    [(true).Bool] | not b("a.b", 200) and (b(0) and b(1) and r("a.b", 100) ===
+    - r(1) + r(0) and r(0) < [(-1).NzInt] or b(0) and b(1) and (not b(0) or not
+    r(0) < [(-1).NzInt]) and (not b(0) or not [(4).NzNat] < r(0)) and r("a.b",
+    100) === r(0) + r(1)) and r("a.b", 101) === [(0).Zero] or b(0) and b(1) and
+    b(2) and r("a.b", 100) === r(0) + r(1) + r(2) + [(2).NzNat] and r("a.b",
+    101) === r(0) + [(-1).NzInt] and [(3).NzNat] < r(0) and [(4).NzNat] < r(0)
+    and b("a.b", 200) | < "a.b",102,201 >
+==========================================
+reduce in TEST-BEHAVIOR-TRANSITION-SEMANTICS-META : execTransMerge(location(
+    loc([(0).Zero])) complete(loc([(0).Zero])) bcf trans(trans3)) .
+rewrites: 23796
+result BATransResult: loc([(0).Zero]) | a |-> (r(2) + [(1).NzNat] # b(2) : [(
+    true).Bool]), b |-> r("a.b", 100) # b("a.b", 200) | cr |=> r(0) + r(1) # [(
+    true).Bool] | not [(4).NzNat] < r(0) + [(1).NzNat] and not b("a.b", 200)
+    and b(0) and b(1) and r("a.b", 100) === [(0).Zero] or not [(4).NzNat] < r(
+    0) + r(1) + r(2) + [(2).NzNat] and b(0) and b(1) and b(2) and r("a.b", 100)
+    === r(0) + [(-1).NzInt] and [(3).NzNat] < r(0) and [(4).NzNat] < r(0) + [(
+    1).NzNat] and b("a.b", 200) or not [(4).NzNat] < r(0) + r(1) + r(1) + r(2)
+    + r(2) + [(3).NzNat] and b(0) and b(1) and b(2) and r("a.b", 100) === r(0)
+    + [(-1).NzInt] and [(3).NzNat] < r(0) and [(4).NzNat] < r(0) + [(1).NzNat]
+    and [(4).NzNat] < r(0) + r(1) + r(2) + [(2).NzNat] and b("a.b", 200) or not
+    [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2) + [(4).NzNat]
+    and b(0) and b(1) and b(2) and r("a.b", 100) === r(0) + [(-1).NzInt] and [(
+    3).NzNat] < r(0) and [(4).NzNat] < r(0) + [(1).NzNat] and [(4).NzNat] < r(
+    0) + r(1) + r(2) + [(2).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(2)
+    + r(2) + [(3).NzNat] and b("a.b", 200) or not [(4).NzNat] < r(0) + r(1) +
+    r(1) + r(1) + r(1) + r(2) + r(2) + r(2) + r(2) + [(5).NzNat] and b(0) and
+    b(1) and b(2) and r("a.b", 100) === r(0) + [(-1).NzInt] and [(3).NzNat] <
+    r(0) and [(4).NzNat] < r(0) + [(1).NzNat] and [(4).NzNat] < r(0) + r(1) +
+    r(2) + [(2).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(2) + r(2) + [(
+    3).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2)
+    + [(4).NzNat] and b("a.b", 200) or not [(4).NzNat] < r(0) + r(1) + r(1) +
+    r(1) + r(1) + r(1) + r(2) + r(2) + r(2) + r(2) + r(2) + [(6).NzNat] and b(
+    0) and b(1) and b(2) and r("a.b", 100) === r(0) + [(-1).NzInt] and [(
+    3).NzNat] < r(0) and [(4).NzNat] < r(0) + [(1).NzNat] and [(4).NzNat] < r(
+    0) + r(1) + r(2) + [(2).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(2)
+    + r(2) + [(3).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(2) +
+    r(2) + r(2) + [(4).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(
+    1) + r(2) + r(2) + r(2) + r(2) + [(5).NzNat] and b("a.b", 200) or not [(
+    4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(1) + r(1) + r(2) + r(2) +
+    r(2) + r(2) + r(2) + r(2) + [(7).NzNat] and b(0) and b(1) and b(2) and r(
+    "a.b", 100) === r(0) + [(-1).NzInt] and [(3).NzNat] < r(0) and [(4).NzNat]
+    < r(0) + [(1).NzNat] and [(4).NzNat] < r(0) + r(1) + r(2) + [(2).NzNat] and
+    [(4).NzNat] < r(0) + r(1) + r(1) + r(2) + r(2) + [(3).NzNat] and [(
+    4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2) + [(4).NzNat]
+    and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2) +
+    r(2) + [(5).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(
+    1) + r(2) + r(2) + r(2) + r(2) + r(2) + [(6).NzNat] and b("a.b", 200) or
+    not [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(1) + r(1) + r(1) +
+    r(2) + r(2) + r(2) + r(2) + r(2) + r(2) + r(2) + [(8).NzNat] and b(0) and
+    b(1) and b(2) and r("a.b", 100) === r(0) + [(-1).NzInt] and [(3).NzNat] <
+    r(0) and [(4).NzNat] < r(0) + [(1).NzNat] and [(4).NzNat] < r(0) + r(1) +
+    r(2) + [(2).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(2) + r(2) + [(
+    3).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2)
+    + [(4).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(2) +
+    r(2) + r(2) + r(2) + [(5).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(
+    1) + r(1) + r(1) + r(2) + r(2) + r(2) + r(2) + r(2) + [(6).NzNat] and [(
+    4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(1) + r(1) + r(2) + r(2) +
+    r(2) + r(2) + r(2) + r(2) + [(7).NzNat] and b("a.b", 200) or not [(
+    4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(1) + r(1) + r(1) + r(1) +
+    r(2) + r(2) + r(2) + r(2) + r(2) + r(2) + r(2) + r(2) + [(9).NzNat] and b(
+    0) and b(1) and b(2) and r("a.b", 100) === r(0) + [(-1).NzInt] and [(
+    3).NzNat] < r(0) and [(4).NzNat] < r(0) + [(1).NzNat] and [(4).NzNat] < r(
+    0) + r(1) + r(2) + [(2).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(2)
+    + r(2) + [(3).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(2) +
+    r(2) + r(2) + [(4).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(
+    1) + r(2) + r(2) + r(2) + r(2) + [(5).NzNat] and [(4).NzNat] < r(0) + r(1)
+    + r(1) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2) + r(2) + r(2) + [(
+    6).NzNat] and [(4).NzNat] < r(0) + r(1) + r(1) + r(1) + r(1) + r(1) + r(1)
+    + r(2) + r(2) + r(2) + r(2) + r(2) + r(2) + [(7).NzNat] and [(4).NzNat] <
+    r(0) + r(1) + r(1) + r(1) + r(1) + r(1) + r(1) + r(1) + r(2) + r(2) + r(2)
+    + r(2) + r(2) + r(2) + r(2) + [(8).NzNat] and b("a.b", 200) | < "a.b",101,
+    201 >
+Bye.

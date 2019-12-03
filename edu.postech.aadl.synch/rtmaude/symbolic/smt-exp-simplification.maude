@@ -2,9 +2,10 @@
 --- Some simplification rules for Boolean constraints
 fmod BOOL-EXP-SIMPLIFICATION is
   including SMT-BOOL-EXP .
+  including META-LEVEL .
 
   vars B B1 B2 : BoolExp .
-  vars C C1 C2 : Bool . 
+  vars C C1 C2 : Bool .
 
 --- simplifying concrete exps
   eq not [C]       = [not C] .
@@ -16,7 +17,7 @@ fmod BOOL-EXP-SIMPLIFICATION is
   eq [C1] ===     [C2] = [C1 == C2] .  --- only work for ground terms
   eq [C1] =/==    [C2] = [C1 =/= C2] . --- only work for ground terms
 
---- simplifying true/false 
+--- simplifying true/false
   eq [true]  and B = B .
   eq [false] and B = [false] .
 
@@ -57,6 +58,7 @@ endfm
 --- Note: Real ops are neither associative nor commutative
 fmod REAL-EXP-SIMPLIFICATION is
   including SMT-REAL-EXP .
+  including META-LEVEL .
 
   vars C C1 C2 : Rat .
   vars R R1 R2 R3 R4 : RealExp .

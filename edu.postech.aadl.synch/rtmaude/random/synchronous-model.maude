@@ -105,18 +105,31 @@ mod MODEL-TRANSITION-SYSTEM is
   including CONC-BOOL-EXP .
   including CONC-REAL-EXP .
   including COLLAPSE-SINGLE-ENSEMBLE .
-
+  including TIME .
+  
   var CR : ComponentRef . 
   vars OBJ OBJ' : Object .
   var ATTS : AttributeSet .
+  var PROPS : PropertyAssociation .
   vars N N' : Nat .
-
+  var T : Time .
+  var NT : NzTime .
+  var TI : TimeInf .
+  var PER : RealExp .
+  var B : BoolExp .
+  
   sort GlobalSystem .
-  op {_} : ConfigWithRand -> GlobalSystem [ctor] .
+  op {_,_,_} : ConfigWithRand Time TimeInf -> GlobalSystem [ctor] .
 
   crl [step]: 
-      {{OBJ,N}} => {executeStep({OBJ,N})}
-   if < CR : C:System | features : none, ATTS > := OBJ .
+      {{OBJ,N}, T, TI} 
+   => 
+      {executeStep({OBJ,N}), T + NT, TI}
+   if 
+      < CR : C:System | features : none, properties : PROPS, ATTS > := OBJ 
+   /\ PER # B := eval(p[TimingProperties::Period], prop(PROPS)) 
+   /\ NT := rval(PER)
+   /\ T + NT <= TI .
 endm
 
 

@@ -12,28 +12,22 @@ Top:
 	&
 	('instance' ':' path=STRING ';')
 	&
-	('mode' ':' mode=ID ';')
+	('mode' ':' mode=Mode ';')?
+	// symbolic [-merge, -no-merge]
+	// random #(initial seed)
+	// distributed #(degree)
 	&
-	(formulas+=FormulaStatement)* (search+=Search)* (requirement+=Requirement)* (test+=Test)*
-	|
-	(requirements+=ReqStatement)*;
+	(formulas+=FormulaStatement)* (reach+=Reachability)* (inv+=Invariant)*;
 	
-	
-Search:
-	'reachability' '[' name=ID ']' ':' ( initCond=Formula | initProp=[FormulaStatement] ) '==>' (finCond=Formula | goalProp=[FormulaStatement] ) 'in' 'time' bound=INTVALUE ';';
+Reachability:
+	'reachability' '[' name=ID ']' ':' initCond=Formula '==>' goalCond=Formula 'in' 'time' bound=INTVALUE ';';
 
-Requirement:
-	'invariant' '[' name=ID ']' ':' ( initCond=Formula | initProp=[FormulaStatement] ) '==>' (finCond=Formula | goalProp=[FormulaStatement] ) 'in' 'time' bound=INTVALUE ';';
-
-ReqStatement:
-	'requirementT' name=ID ':' value=Formula ('in' 'time' '<=' bound=INTVALUE)? ';';
+Invariant:
+	'invariant' '[' name=ID ']' ':' initCond=Formula '==>' goalCond=Formula 'in' 'time' bound=INTVALUE ';';
 	
 FormulaStatement:
 	'proposition' '[' name=ID ']' ':' value=Formula ';';
-	
-Test:
-	'test' ':' value=TestProp ';' ;
-
+		
 /* 
  * Maude proposition language syntax
  */
@@ -130,4 +124,24 @@ UnsignedReal returns aadl2::Real:
 	
 UnsignedInt returns aadl2::Integer:
 	INTEGER_LIT ;
+
+Mode:
+	SYMBOLIC | RANDOM | DISTRIBUTED | MODELCHECK
+;
+
+SYMBOLIC:
+	"symbolic" option=("-merge" | "-no-merge")
+;
+
+RANDOM:
+	"random" seed=INTVALUE
+;
+
+DISTRIBUTED:
+	"distributed" degree=INTVALUE
+;
+
+MODELCHECK:
+	"model-check" option=("-merge" | "-no-merge")
+;
 

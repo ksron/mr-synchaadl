@@ -1,0 +1,198 @@
+==========================================
+reduce in TEST-ENSEMBLE-DYNAMICS : finalConst(obj3) .
+rewrites: 54
+result SMTBoolValue: [(true).Bool]
+==========================================
+search in TEST-ENSEMBLE-DYNAMICS : executeStep([(true).Bool], obj3, false) =>*
+    C:ConstConfig .
+
+Solution 1 (state 12)
+states: 13  rewrites: 2009
+C:ConstConfig --> (not [(2).NzNat] < r(0) * [(1/2).PosRat] and r(2) < r(1) + [(
+    1).NzNat] and [(0).Zero] < r(0)) || < c3 : System | properties : none,
+    features : < outp : DataOutPort | properties : none,content : [(-2).NzInt]
+    + r(0) * [(1/2).PosRat] # [(true).Bool] >,subcomponents : (< c1 : Thread |
+    properties : none,features : (< inp : DataInPort | properties : none,
+    content : [(0).Zero] # [(false).Bool],cache : r(2) # [(true).Bool] > < outp
+    : DataOutPort | properties : none,content : r(2) + [(2).NzNat] # [(
+    true).Bool] >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + [(1).NzNat] #
+    [(true).Bool] > < y : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : r(2) # [(true).Bool] >),
+    connections : empty,varGen : < "c1",1,2 >,currState : loc([(0).Zero]),
+    completeStates : loc([(0).Zero]),variables : ((a : Real) ; b : Real),
+    transitions : ((loc([(0).Zero]) -[on dispatch]-> loc([(1).NzNat]) {(c{x} :=
+    (c[x] + [[(1).NzNat]])) ; (v{a} := f[inp]) ; c{y} := v[a]}) ; loc([(
+    1).NzNat]) -[c[x] > c[y]]-> loc([(0).Zero]) {(v{b} := (c[y] + [[(
+    1).NzNat]])) ; f{outp} := (v[b] + [[(1).NzNat]])}),loopBound : 10,
+    transBound : 10 > < c2 : Thread | properties : none,features : (< inp :
+    DataInPort | properties : none,content : [(0).Zero] # [(false).Bool],cache
+    : r(0) # [(true).Bool] > < outp : DataOutPort | properties : none,content :
+    [(-2).NzInt] + r(0) * [(1/2).PosRat] # [(true).Bool] >),subcomponents : < z
+    : Data | properties : none,features : none,subcomponents : none,connections
+    : empty,value : r(0) * [(1/2).PosRat] # [(true).Bool] >,connections :
+    empty,varGen : < "c2",10,20 >,currState : loc([(2).NzNat]),completeStates :
+    (loc([(0).Zero]) loc([(2).NzNat])),variables : a : Real,transitions : ((
+    loc([(0).Zero]) -[on dispatch]-> loc([(1).NzNat]) {(v{a} := f[inp]) ; if(v[
+    a] > [[(0).Zero]])c{z} := (v[a] * [[5.0e-1]]) end if}) ; (loc([(1).NzNat])
+    -[otherwise]-> loc([(2).NzNat]) {f{outp} := (c[z] - [[(2).NzNat]])}) ; (
+    loc([(1).NzNat]) -[c[z] > [[(2).NzNat]]]-> loc([(2).NzNat]) {f{outp} := (c[
+    z] + [[(1).NzNat]])}) ; loc([(2).NzNat]) -[on dispatch]-> loc([(0).Zero]) {
+    skip}),loopBound : 10,transBound : 10 >),connections : (((c1 .. outp) --> (
+    c2 .. inp)) ; ((c2 .. outp) --> outp) ; (c2 .. outp) --> (c1 .. inp)) >
+
+Solution 2 (state 13)
+states: 14  rewrites: 2312
+C:ConstConfig --> (r(2) < r(1) + [(1).NzNat] and [(0).Zero] < r(0) and [(
+    2).NzNat] < r(0) * [(1/2).PosRat]) || < c3 : System | properties : none,
+    features : < outp : DataOutPort | properties : none,content : [(1).NzNat] +
+    r(0) * [(1/2).PosRat] # [(true).Bool] >,subcomponents : (< c1 : Thread |
+    properties : none,features : (< inp : DataInPort | properties : none,
+    content : [(0).Zero] # [(false).Bool],cache : r(2) # [(true).Bool] > < outp
+    : DataOutPort | properties : none,content : r(2) + [(2).NzNat] # [(
+    true).Bool] >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + [(1).NzNat] #
+    [(true).Bool] > < y : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : r(2) # [(true).Bool] >),
+    connections : empty,varGen : < "c1",1,2 >,currState : loc([(0).Zero]),
+    completeStates : loc([(0).Zero]),variables : ((a : Real) ; b : Real),
+    transitions : ((loc([(0).Zero]) -[on dispatch]-> loc([(1).NzNat]) {(c{x} :=
+    (c[x] + [[(1).NzNat]])) ; (v{a} := f[inp]) ; c{y} := v[a]}) ; loc([(
+    1).NzNat]) -[c[x] > c[y]]-> loc([(0).Zero]) {(v{b} := (c[y] + [[(
+    1).NzNat]])) ; f{outp} := (v[b] + [[(1).NzNat]])}),loopBound : 10,
+    transBound : 10 > < c2 : Thread | properties : none,features : (< inp :
+    DataInPort | properties : none,content : [(0).Zero] # [(false).Bool],cache
+    : r(0) # [(true).Bool] > < outp : DataOutPort | properties : none,content :
+    [(1).NzNat] + r(0) * [(1/2).PosRat] # [(true).Bool] >),subcomponents : < z
+    : Data | properties : none,features : none,subcomponents : none,connections
+    : empty,value : r(0) * [(1/2).PosRat] # [(true).Bool] >,connections :
+    empty,varGen : < "c2",10,20 >,currState : loc([(2).NzNat]),completeStates :
+    (loc([(0).Zero]) loc([(2).NzNat])),variables : a : Real,transitions : ((
+    loc([(0).Zero]) -[on dispatch]-> loc([(1).NzNat]) {(v{a} := f[inp]) ; if(v[
+    a] > [[(0).Zero]])c{z} := (v[a] * [[5.0e-1]]) end if}) ; (loc([(1).NzNat])
+    -[otherwise]-> loc([(2).NzNat]) {f{outp} := (c[z] - [[(2).NzNat]])}) ; (
+    loc([(1).NzNat]) -[c[z] > [[(2).NzNat]]]-> loc([(2).NzNat]) {f{outp} := (c[
+    z] + [[(1).NzNat]])}) ; loc([(2).NzNat]) -[on dispatch]-> loc([(0).Zero]) {
+    skip}),loopBound : 10,transBound : 10 >),connections : (((c1 .. outp) --> (
+    c2 .. inp)) ; ((c2 .. outp) --> outp) ; (c2 .. outp) --> (c1 .. inp)) >
+
+Solution 3 (state 14)
+states: 15  rewrites: 2610
+C:ConstConfig --> (not [(0).Zero] < r(0) and not [(2).NzNat] < r(3) and r(2) <
+    r(1) + [(1).NzNat]) || < c3 : System | properties : none,features : < outp
+    : DataOutPort | properties : none,content : r(3) + [(-2).NzInt] # [(
+    true).Bool] >,subcomponents : (< c1 : Thread | properties : none,features :
+    (< inp : DataInPort | properties : none,content : [(0).Zero] # [(
+    false).Bool],cache : r(2) # [(true).Bool] > < outp : DataOutPort |
+    properties : none,content : r(2) + [(2).NzNat] # [(true).Bool] >),
+    subcomponents : (< x : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : r(1) + [(1).NzNat] # [(
+    true).Bool] > < y : Data | properties : none,features : none,subcomponents
+    : none,connections : empty,value : r(2) # [(true).Bool] >),connections :
+    empty,varGen : < "c1",1,2 >,currState : loc([(0).Zero]),completeStates :
+    loc([(0).Zero]),variables : ((a : Real) ; b : Real),transitions : ((loc([(
+    0).Zero]) -[on dispatch]-> loc([(1).NzNat]) {(c{x} := (c[x] + [[(
+    1).NzNat]])) ; (v{a} := f[inp]) ; c{y} := v[a]}) ; loc([(1).NzNat]) -[c[x]
+    > c[y]]-> loc([(0).Zero]) {(v{b} := (c[y] + [[(1).NzNat]])) ; f{outp} := (
+    v[b] + [[(1).NzNat]])}),loopBound : 10,transBound : 10 > < c2 : Thread |
+    properties : none,features : (< inp : DataInPort | properties : none,
+    content : [(0).Zero] # [(false).Bool],cache : r(0) # [(true).Bool] > < outp
+    : DataOutPort | properties : none,content : r(3) + [(-2).NzInt] # [(
+    true).Bool] >),subcomponents : < z : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(3) # [(true).Bool]
+    >,connections : empty,varGen : < "c2",10,20 >,currState : loc([(2).NzNat]),
+    completeStates : (loc([(0).Zero]) loc([(2).NzNat])),variables : a : Real,
+    transitions : ((loc([(0).Zero]) -[on dispatch]-> loc([(1).NzNat]) {(v{a} :=
+    f[inp]) ; if(v[a] > [[(0).Zero]])c{z} := (v[a] * [[5.0e-1]]) end if}) ; (
+    loc([(1).NzNat]) -[otherwise]-> loc([(2).NzNat]) {f{outp} := (c[z] - [[(
+    2).NzNat]])}) ; (loc([(1).NzNat]) -[c[z] > [[(2).NzNat]]]-> loc([(
+    2).NzNat]) {f{outp} := (c[z] + [[(1).NzNat]])}) ; loc([(2).NzNat]) -[on
+    dispatch]-> loc([(0).Zero]) {skip}),loopBound : 10,transBound : 10 >),
+    connections : (((c1 .. outp) --> (c2 .. inp)) ; ((c2 .. outp) --> outp) ; (
+    c2 .. outp) --> (c1 .. inp)) >
+
+Solution 4 (state 15)
+states: 16  rewrites: 2907
+C:ConstConfig --> (not [(0).Zero] < r(0) and r(2) < r(1) + [(1).NzNat] and [(
+    2).NzNat] < r(3)) || < c3 : System | properties : none,features : < outp :
+    DataOutPort | properties : none,content : r(3) + [(1).NzNat] # [(
+    true).Bool] >,subcomponents : (< c1 : Thread | properties : none,features :
+    (< inp : DataInPort | properties : none,content : [(0).Zero] # [(
+    false).Bool],cache : r(2) # [(true).Bool] > < outp : DataOutPort |
+    properties : none,content : r(2) + [(2).NzNat] # [(true).Bool] >),
+    subcomponents : (< x : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : r(1) + [(1).NzNat] # [(
+    true).Bool] > < y : Data | properties : none,features : none,subcomponents
+    : none,connections : empty,value : r(2) # [(true).Bool] >),connections :
+    empty,varGen : < "c1",1,2 >,currState : loc([(0).Zero]),completeStates :
+    loc([(0).Zero]),variables : ((a : Real) ; b : Real),transitions : ((loc([(
+    0).Zero]) -[on dispatch]-> loc([(1).NzNat]) {(c{x} := (c[x] + [[(
+    1).NzNat]])) ; (v{a} := f[inp]) ; c{y} := v[a]}) ; loc([(1).NzNat]) -[c[x]
+    > c[y]]-> loc([(0).Zero]) {(v{b} := (c[y] + [[(1).NzNat]])) ; f{outp} := (
+    v[b] + [[(1).NzNat]])}),loopBound : 10,transBound : 10 > < c2 : Thread |
+    properties : none,features : (< inp : DataInPort | properties : none,
+    content : [(0).Zero] # [(false).Bool],cache : r(0) # [(true).Bool] > < outp
+    : DataOutPort | properties : none,content : r(3) + [(1).NzNat] # [(
+    true).Bool] >),subcomponents : < z : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(3) # [(true).Bool]
+    >,connections : empty,varGen : < "c2",10,20 >,currState : loc([(2).NzNat]),
+    completeStates : (loc([(0).Zero]) loc([(2).NzNat])),variables : a : Real,
+    transitions : ((loc([(0).Zero]) -[on dispatch]-> loc([(1).NzNat]) {(v{a} :=
+    f[inp]) ; if(v[a] > [[(0).Zero]])c{z} := (v[a] * [[5.0e-1]]) end if}) ; (
+    loc([(1).NzNat]) -[otherwise]-> loc([(2).NzNat]) {f{outp} := (c[z] - [[(
+    2).NzNat]])}) ; (loc([(1).NzNat]) -[c[z] > [[(2).NzNat]]]-> loc([(
+    2).NzNat]) {f{outp} := (c[z] + [[(1).NzNat]])}) ; loc([(2).NzNat]) -[on
+    dispatch]-> loc([(0).Zero]) {skip}),loopBound : 10,transBound : 10 >),
+    connections : (((c1 .. outp) --> (c2 .. inp)) ; ((c2 .. outp) --> outp) ; (
+    c2 .. outp) --> (c1 .. inp)) >
+
+No more solutions.
+states: 16  rewrites: 2907
+==========================================
+search in TEST-ENSEMBLE-DYNAMICS : executeStep([(true).Bool], obj3, true) =>*
+    C:ConstConfig .
+
+Solution 1 (state 0)
+states: 1  rewrites: 2122
+C:ConstConfig --> (((not [(0).Zero] < r(0) and not [(2).NzNat] < r(3) and r(
+    "c2", 10) === r(3) + [(-2).NzInt] or not [(0).Zero] < r(0) and r("c2", 10)
+    === r(3) + [(1).NzNat] and [(2).NzNat] < r(3)) and r("c2", 11) === r(3) or
+    not [(2).NzNat] < r(0) * [(1/2).PosRat] and r("c2", 10) === [(-2).NzInt] +
+    r(0) * [(1/2).PosRat] and r("c2", 11) === r(0) * [(1/2).PosRat] and [(
+    0).Zero] < r(0) or r("c2", 10) === [(1).NzNat] + r(0) * [(1/2).PosRat] and
+    r("c2", 11) === r(0) * [(1/2).PosRat] and [(0).Zero] < r(0) and [(2).NzNat]
+    < r(0) * [(1/2).PosRat]) and r(2) < r(1) + [(1).NzNat]) || < c3 : System |
+    properties : none,features : < outp : DataOutPort | properties : none,
+    content : r("c2", 10) # [(true).Bool] >,subcomponents : (< c1 : Thread |
+    properties : none,features : (< inp : DataInPort | properties : none,
+    content : [(0).Zero] # [(false).Bool],cache : r(2) # [(true).Bool] > < outp
+    : DataOutPort | properties : none,content : r(2) + [(2).NzNat] # [(
+    true).Bool] >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + [(1).NzNat] #
+    [(true).Bool] > < y : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : r(2) # [(true).Bool] >),
+    connections : empty,varGen : < "c1",1,2 >,currState : loc([(0).Zero]),
+    completeStates : loc([(0).Zero]),variables : ((a : Real) ; b : Real),
+    transitions : ((loc([(0).Zero]) -[on dispatch]-> loc([(1).NzNat]) {(c{x} :=
+    (c[x] + [[(1).NzNat]])) ; (v{a} := f[inp]) ; c{y} := v[a]}) ; loc([(
+    1).NzNat]) -[c[x] > c[y]]-> loc([(0).Zero]) {(v{b} := (c[y] + [[(
+    1).NzNat]])) ; f{outp} := (v[b] + [[(1).NzNat]])}),loopBound : 10,
+    transBound : 10 > < c2 : Thread | properties : none,features : (< inp :
+    DataInPort | properties : none,content : [(0).Zero] # [(false).Bool],cache
+    : r(0) # [(true).Bool] > < outp : DataOutPort | properties : none,content :
+    r("c2", 10) # [(true).Bool] >),subcomponents : < z : Data | properties :
+    none,features : none,subcomponents : none,connections : empty,value : r(
+    "c2", 11) # [(true).Bool] >,connections : empty,varGen : < "c2",12,20 >,
+    currState : loc([(2).NzNat]),completeStates : (loc([(0).Zero]) loc([(
+    2).NzNat])),variables : a : Real,transitions : ((loc([(0).Zero]) -[on
+    dispatch]-> loc([(1).NzNat]) {(v{a} := f[inp]) ; if(v[a] > [[(0).Zero]])c{
+    z} := (v[a] * [[5.0e-1]]) end if}) ; (loc([(1).NzNat]) -[otherwise]-> loc([
+    (2).NzNat]) {f{outp} := (c[z] - [[(2).NzNat]])}) ; (loc([(1).NzNat]) -[c[z]
+    > [[(2).NzNat]]]-> loc([(2).NzNat]) {f{outp} := (c[z] + [[(1).NzNat]])}) ;
+    loc([(2).NzNat]) -[on dispatch]-> loc([(0).Zero]) {skip}),loopBound : 10,
+    transBound : 10 >),connections : (((c1 .. outp) --> (c2 .. inp)) ; ((c2 ..
+    outp) --> outp) ; (c2 .. outp) --> (c1 .. inp)) >
+
+No more solutions.
+states: 1  rewrites: 2122
+Bye.

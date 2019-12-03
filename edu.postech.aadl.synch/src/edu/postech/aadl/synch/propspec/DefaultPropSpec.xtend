@@ -16,8 +16,8 @@ class DefaultPropSpec {
 		-- a path for the corresponding instance model
 		instance: "«modelFile.fullPath»";
 		
-		-- symbolic / distributed / random mode
-		mode: symbolic;
+		-- symbolic ["-merge" | "-no-merge"] / distributed [degree(Number)] / random mode [seed(Number)]
+		mode: symbolic -merge;
 		
 		-- proposition [id] : AADL Boolean Expression 
 		proposition [ prop ] : env1 | ( x >= 10 and x <= 25 ) ;

@@ -8,7 +8,7 @@ load syntax/env-syntax.maude
 load syntax/features.maude
 load syntax/component.maude
 load syntax/flatten-ensemble.maude
-
+load syntax/time-domain.maude
 
 load symbolic/smt-exp.maude
 load symbolic/smt-interface.maude

@@ -1,0 +1,24 @@
+==========================================
+reduce in BOOL-EXP-SIMPLIFICATION : b(0) and (b(0) or [(false).Bool]) .
+rewrites: 2
+result SMTBoolVar: b(0)
+==========================================
+reduce in BOOL-EXP-SIMPLIFICATION : b(2) and [(true).Bool] or b(4) === [(
+    false).Bool] .
+rewrites: 2
+result BoolExp: not b(4) or b(2)
+==========================================
+reduce in BOOL-EXP-SIMPLIFICATION : b(0) === b(0) ? b(2) and [(true).Bool] : b(
+    3) .
+rewrites: 2
+result BoolExp: [(true).Bool] ? b(2) : b(3)
+==========================================
+reduce in REAL-EXP-SIMPLIFICATION : [(3).NzNat] * [(3/4).Rat] < r(0) .
+rewrites: 30
+result BoolExp: [(9/4).PosRat] < r(0)
+==========================================
+reduce in REAL-EXP-SIMPLIFICATION : r(1) > r(1) ? [(2).NzNat] / [(5).NzNat] : [
+    (6).NzNat] + [(1).NzNat] * [(3).NzNat] .
+rewrites: 72
+result RealExp: [(false).Bool] ? [(2/5).PosRat] : [(9).NzNat]
+Bye.
