@@ -13,83 +13,65 @@ Top:
 	('instance' ':' path=STRING ';')
 	&
 	('mode' ':' mode=Mode ';')?
-	// symbolic [-merge, -no-merge]
-	// random #(initial seed)
-	// distributed #(degree)
 	&
-	(formulas+=FormulaStatement)* (reach+=Reachability)* (inv+=Invariant)*;
+	(
+		(proposition+=Proposition) 
+		| 
+		(property+=Property)
+	)*;
+	
+Property:
+	Reachability | Invariant;
 	
 Reachability:
-	'reachability' '[' name=ID ']' ':' initCond=Formula '==>' goalCond=Formula 'in' 'time' bound=INTVALUE ';';
+	'reachability' '[' name=ID ']' ':' initCond=ValueExpression '==>' goalCond=ValueExpression 'in' 'time' bound=INTVALUE ';';
 
 Invariant:
-	'invariant' '[' name=ID ']' ':' initCond=Formula '==>' goalCond=Formula 'in' 'time' bound=INTVALUE ';';
+	'invariant' '[' name=ID ']' ':' initCond=ValueExpression '==>' goalCond=ValueExpression 'in' 'time' bound=INTVALUE ';';
 	
-FormulaStatement:
-	'proposition' '[' name=ID ']' ':' value=Formula ';';
-		
+Proposition:
+	'proposition' '[' name=ID ']' ':' expression=ValueExpression ';';	
+
+
+/*
+ * Mode declaration (for internal use)
+ */
+
+Mode:
+	SYMBOLIC| MODELCHECK | RANDOM | DISTRIBUTED
+;
+
+SYMBOLIC:
+	"symbolic" option=("-merge")?
+;
+
+MODELCHECK:
+	"model-check" option=("-merge")?
+;
+
+RANDOM:
+	"random" seed=INTVALUE;
+
+
+DISTRIBUTED:
+	"distributed" degree=INTVALUE;
+
+
 /* 
  * Maude proposition language syntax
  */
-
-Prop:
-	ValueProp | StateProp;
-
-ValueProp:
-	path=ContainmentPath '|'  (expression=ValueExpression | '(' value=ValueProp ')' ) ;	//TODO: type checking needed for boolean exps (in validation)
 	
-StateProp:
-	path=ContainmentPath '@' state=ID;
 
-
-TestProp:
-	path=[aadl2::NamedElement]
-;
-
-/* 
- * LTL formula syntax
- */
- 
-Formula:
-	InferFormula;
-
-InferFormula returns Formula:
-	TemporalFormula ({BinaryFormula.left=current} op=('<->'|'->'|'=>'|'<=>') right=TemporalFormula)*;
-	
-TemporalFormula returns Formula:
-	DisjFormula ({BinaryFormula.left=current} op=('U'|'R'|'W'|'|->') right=DisjFormula)*;
-
-DisjFormula returns Formula:
-	ConjFormula ({BinaryFormula.left=current} op='\\/' right=ConjFormula)*;
-	
-ConjFormula returns Formula:
-	UnaryFormula ({BinaryFormula.left=current} op='/\\' right=UnaryFormula)*;
-	
-UnaryFormula returns Formula:
-	{UnaryFormula} op=('~'|'O'|'<>'|'[]') child=AtomicFormula
-|	AtomicFormula;
- 
-AtomicFormula returns Formula:
-	Prop 
-|	PropRef
-|	{UnaryFormula} op=('True'|'False')
-|	'(' Formula ')';
- 	
-PropRef:
-	def=[FormulaStatement];
-	
-	
 /*
  * A subset of the behavior expression language
  */
 
-
-
 ValueExpression returns aadl2::PropertyExpression:
-    Relation ({BinaryExpression.left=current} op=('and'|'or'|'xor') right=Relation)*;
+    (Relation) ({BinaryExpression.left=current} op=('and'|'or'|'xor') right=Relation)*;
+    
 
 Relation returns aadl2::PropertyExpression:
-    ModifiedExpression ({BinaryExpression.left=current} op=('='|'!='|'<'|'<='|'>'|'>=') right=ModifiedExpression)? ;
+    ModifiedExpression ({BinaryExpression.left=current} op=('='|'!='|'<'|'<='|'>'|'>=') right=ModifiedExpression)?;
 
 ModifiedExpression returns aadl2::PropertyExpression:
 	SimpleExpression
@@ -99,16 +81,22 @@ SimpleExpression returns aadl2::PropertyExpression:
     Term ({BinaryExpression.left=current} op=('+'|'-') right=Term)*;
 
 Term returns aadl2::PropertyExpression:
-   Factor ({BinaryExpression.left=current} op=('*'|'/'|'mod'|'rem') right=Factor)*;
+   Value ({BinaryExpression.left=current} op=('*'|'/') right=Value)*
+|  {UnaryExpression} op=('abs'|'not') child=Value;
 
-Factor returns aadl2::PropertyExpression:
-	Value ({BinaryExpression.left=current} op='**' right=Value)?
-|	{UnaryExpression} op=('abs'|'not') child=Value;
 
 Value returns aadl2::PropertyExpression:
-	{Value} value=ContainmentPathElement
+	ScopedValue
 |	{Value} value=ValueConstant
+|	{Value} value=ContainmentPath
 |	'(' ValueExpression ')';
+
+ScopedValue:
+	path=ContainmentPath '|' '(' expression=ValueExpression ')';
+
+/*
+ * A value constant (string, unsigned real, unsigned integer, boolean)
+ */
  
 ValueConstant returns aadl2::PropertyValue:
 	StringTerm | UnsignedRealTerm | UnsignedIntegerTerm | BooleanLiteral ;	// only a subset
@@ -124,24 +112,3 @@ UnsignedReal returns aadl2::Real:
 	
 UnsignedInt returns aadl2::Integer:
 	INTEGER_LIT ;
-
-Mode:
-	SYMBOLIC | RANDOM | DISTRIBUTED | MODELCHECK
-;
-
-SYMBOLIC:
-	"symbolic" option=("-merge" | "-no-merge")
-;
-
-RANDOM:
-	"random" seed=INTVALUE
-;
-
-DISTRIBUTED:
-	"distributed" degree=INTVALUE
-;
-
-MODELCHECK:
-	"model-check" option=("-merge" | "-no-merge")
-;
-

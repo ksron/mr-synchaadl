@@ -60,7 +60,7 @@ public class DestSelectionControl {
 			destPathText.setText(modelRes != null ? modelRes.getProject().getFullPath().toString() : "");
 
 			destContainerText.setEnabled(false);
-			destContainerText.setText(modelRes != null ? defalutLoc : "");
+			destContainerText.setText(modelRes != null ? "requirement" : "");
 
 			browseLocation.setEnabled(false);
 		}

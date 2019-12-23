@@ -9,24 +9,10 @@ class DefaultPropSpec {
 	def static deGenerate(SystemInstance model, IFile modelFile) '''
 		name: «model.name»;
 		
-		-- an AADL implementation
 		model: «model.name.escape»;
 		
-		
-		-- a path for the corresponding instance model
 		instance: "«modelFile.fullPath»";
-		
-		-- symbolic ["-merge" | "-no-merge"] / distributed [degree(Number)] / random mode [seed(Number)]
-		mode: symbolic -merge;
-		
-		-- proposition [id] : AADL Boolean Expression 
-		proposition [ prop ] : env1 | ( x >= 10 and x <= 25 ) ;
-		
-		-- reachability property [id] : initialCondition ==> FinalCondition in time INTEGER
-		reachability [ reach ] : ( env1 | x >= 10 and x <= 25 ) ==> ( env1 | x >= 10 and x <= 25 ) in time 5 ;
-		
-		-- invariant property [id] : initialCondition ==> FinalCondition in time INTEGER
-		invariant [ inv ] : ( env1 | x >= 10 and x <= 25 ) ==> ( env1 | x >= 10 and x <= 25 ) in time 10 ;
+
 	'''
 	
 	def static escape(String name) {

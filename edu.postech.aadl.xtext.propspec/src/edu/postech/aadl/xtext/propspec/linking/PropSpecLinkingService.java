@@ -1,4 +1,5 @@
 package edu.postech.aadl.xtext.propspec.linking;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -26,12 +27,10 @@ import org.osate.aadl2.ThreadSubcomponent;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.aadl2.modelsupport.util.ResolvePrototypeUtil;
 
-import edu.postech.aadl.xtext.propspec.propSpec.FormulaStatement;
-import edu.postech.aadl.xtext.propspec.propSpec.Invariant;
-import edu.postech.aadl.xtext.propspec.propSpec.Prop;
-import edu.postech.aadl.xtext.propspec.propSpec.Reachability;
+import edu.postech.aadl.xtext.propspec.propSpec.BinaryExpression;
+import edu.postech.aadl.xtext.propspec.propSpec.ScopedValue;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
-import edu.postech.aadl.xtext.propspec.propSpec.ValueProp;
+import edu.postech.aadl.xtext.propspec.propSpec.UnaryExpression;
 
 public class PropSpecLinkingService extends DefaultLinkingService {
 
@@ -61,21 +60,48 @@ public class PropSpecLinkingService extends DefaultLinkingService {
 					ContainmentPathElement pl = getPropPathElement(context);
 					if (pl != null) {
 						res = findNamedObject(pl, crossRefString);
-					}
-				}
-				else {
-					if (context.eContainer().eContainer().eContainer() instanceof FormulaStatement
-							|| context.eContainer().eContainer().eContainer() instanceof Reachability
-							|| context.eContainer().eContainer().eContainer() instanceof Invariant) {
+					} else {
+						// Top Formula is non-scoped Value
 						ComponentClassifier ns = getContainingModelClassifier(context);
 						if (ns != null) {
 							res = ns.findNamedElement(crossRefString);
 						}
-					} else if (context.eContainer().eContainer().eContainer() instanceof ValueProp) {
-						ContainedNamedElement path = ((ValueProp)context.eContainer().eContainer().eContainer()).getPath();
+					}
+				} else {
+					if (context.eContainer().eContainer().eContainer() instanceof ScopedValue) {
+						ContainedNamedElement path = ((ScopedValue) context.eContainer().eContainer().eContainer())
+								.getPath();
 						List<ContainmentPathElement> list = path.getContainmentPathElements();
 						ContainmentPathElement el = list.get(list.size() - 1);
 						res = findNamedObject(el, crossRefString);
+					} else if (context.eContainer().eContainer().eContainer() instanceof BinaryExpression
+							|| context.eContainer().eContainer().eContainer() instanceof UnaryExpression) {
+
+						EObject container = context.eContainer().eContainer().eContainer();
+						while (container != null) {
+							if (container instanceof ScopedValue) {
+								break;
+							}
+							container = container.eContainer();
+						}
+						if (container instanceof ScopedValue) {
+							ContainedNamedElement path = ((ScopedValue) container).getPath();
+							List<ContainmentPathElement> list = path.getContainmentPathElements();
+							ContainmentPathElement el = list.get(list.size() - 1);
+							res = findNamedObject(el, crossRefString);
+						} else {
+							// Non scoped Value
+							ComponentClassifier ns = getContainingModelClassifier(context);
+							if (ns != null) {
+								res = ns.findNamedElement(crossRefString);
+							}
+						}
+
+					} else {
+						ComponentClassifier ns = getContainingModelClassifier(context);
+						if (ns != null) {
+							res = ns.findNamedElement(crossRefString);
+						}
 					}
 				}
 				if (res != null && res instanceof NamedElement) {
@@ -101,9 +127,8 @@ public class PropSpecLinkingService extends DefaultLinkingService {
 	private static ContainmentPathElement getPropPathElement(EObject element) {
 		EObject container = element;
 		while (container != null) {
-			if (container instanceof Prop)
-			{
-				ContainedNamedElement path = ((Prop) container).getPath();
+			if (container instanceof ScopedValue) {
+				ContainedNamedElement path = ((ScopedValue) container).getPath();
 				List<ContainmentPathElement> list = path.getContainmentPathElements();
 				return list.get(list.size() - 1);
 			}

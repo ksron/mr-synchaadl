@@ -25,6 +25,11 @@
       </command>
       <command
             categoryId="SynchAadlMenu.commands.category"
+            name="Req Generation"
+            id="SynchAadlMenu.commands.sampleCommand4">
+      </command>
+      <command
+            categoryId="SynchAadlMenu.commands.category"
             name="Run"
             id="SynchAadlMenu.commands.sampleCommand5">
       </command>
@@ -44,6 +49,10 @@
       <handler
             class="handlers.SearchCommand"
             commandId="SynchAadlMenu.commands.sampleCommand3">
+      </handler>
+      <handler
+            class="handlers.ReqGeneration"
+            commandId="SynchAadlMenu.commands.sampleCommand4">
       </handler>
       <handler
             class="handlers.Run"
@@ -71,6 +80,12 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+7">
+      </key>
+      <key
+            commandId="SynchAadlMenu.commands.sampleCommand3"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+8">
       </key>
         <key
             commandId="SynchAadlMenu.commands.sampleCommand5"
@@ -102,6 +117,11 @@
             <command
                   commandId="SynchAadlMenu.commands.sampleCommand3"
                   id="SynchAadlMenu.menus.sampleCommand3"
+                  mnemonic="S">
+            </command>
+            <command
+                  commandId="SynchAadlMenu.commands.sampleCommand3"
+                  id="SynchAadlMenu.menus.sampleCommand4"
                   mnemonic="S">
             </command>
             <command

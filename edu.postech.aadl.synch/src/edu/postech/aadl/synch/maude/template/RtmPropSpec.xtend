@@ -2,284 +2,104 @@
 package edu.postech.aadl.synch.maude.template
 
 import edu.postech.aadl.xtext.propspec.propSpec.BinaryExpression
-import edu.postech.aadl.xtext.propspec.propSpec.BinaryFormula
-import edu.postech.aadl.xtext.propspec.propSpec.PropRef
-import edu.postech.aadl.xtext.propspec.propSpec.StateProp
 import edu.postech.aadl.xtext.propspec.propSpec.Top
+import edu.postech.aadl.xtext.propspec.propSpec.Property
 import edu.postech.aadl.xtext.propspec.propSpec.UnaryExpression
-import edu.postech.aadl.xtext.propspec.propSpec.UnaryFormula
 import edu.postech.aadl.xtext.propspec.propSpec.Value
-import edu.postech.aadl.xtext.propspec.propSpec.ValueProp
 import org.osate.aadl2.ContainedNamedElement
 import org.osate.aadl2.ContainmentPathElement
 import org.osate.aadl2.PropertyValue
 
 import static extension edu.postech.aadl.synch.maude.template.RtmAadlIdentifier.*
-import edu.postech.aadl.xtext.propspec.propSpec.Prop
-import org.osate.aadl2.NamedElement
 import edu.postech.aadl.xtext.propspec.propSpec.Reachability
 import edu.postech.aadl.xtext.propspec.propSpec.Invariant
-import edu.postech.aadl.xtext.propspec.propSpec.SYMBOLIC
 import edu.postech.aadl.xtext.propspec.propSpec.Mode
-import edu.postech.aadl.xtext.propspec.propSpec.RANDOM
-import edu.postech.aadl.xtext.propspec.propSpec.DISTRIBUTED
-import edu.postech.aadl.xtext.propspec.propSpec.MODELCHECK
+import edu.postech.aadl.xtext.propspec.propSpec.ScopedValue
+import org.eclipse.emf.common.util.EList
+import org.osate.aadl2.PropertyExpression
 
 class RtmPropSpec {
 	
-	static def compileReachabilityCommand(Top top, Reachability reach, Mode mode)'''
+	static def compilePropertyCommand(Top top, Property prop, Mode mode)'''
 	mod TEST-«top.name.toUpperCase» is
 	  including «top.name.toUpperCase»-MODEL-SYMBOLIC .
+	  including MODEL-TRANSITION-SYSTEM .
 	  including SPECIFICATION-LANGUAGE-SEMANTICS .
 	
 	  op initState : -> Object .
 	  eq initState = initialize(initial) .
 	  
+	  op prop : -> AADLExp.
+	  eq prop = 
+	  
     endm
     
-    «top.compileByMode(reach, mode)»
+    «IF prop instanceof Reachability»«top.compileByMode((prop as Reachability), mode)»
+    «ELSEIF prop instanceof Invariant»«top.compileByMode((prop as Invariant), mode)»
+    «ELSE»[Error] Invalid Property type
+    «ENDIF»
     
 	quit
 	'''
 	
-	static def compileByMode(Top top, Reachability reach ,Mode mode)'''
-	«IF mode == null»
+	
+	static def compileByMode(Top top, Reachability reach, Mode mode)'''
     mod TEST-«top.name.toUpperCase»-MODE is
     	including TEST-«top.name.toUpperCase» .
-		  
-	  eq @m@ = ['TEST-«top.name.toUpperCase»] . 
-	  eq MFlag = true .
+	  eq @m@ = ['TEST-«top.name.toUpperCase»] .
 	endm
 	
 	search 
-	      {eval(«top.name.escape+" . "+(reach.initCond as  Prop).path.compilePath» | «(reach.initCond as ValueProp).expression.compileExp», initState) ||
-		   initState,0,«reach.bound»} 
+	      {eval(«top.name.escape+" | "+ reach.initCond.compileValueExp», initState) ||
+		   initState | 0 | «reach.bound»} 
 		=>*
-		  {B:BoolExp || OBJ:Object,T:Time,«reach.bound»} 
+		  {B:BoolExp || OBJ:Object | T:Time | «reach.bound»} 
 		such that
-		  check-sat(B:BoolExp and eval(«top.name.escape+" . "+(reach.goalCond as Prop).path.compilePath» | «(reach.goalCond as ValueProp).expression.compileExp», OBJ:Object)) .
-	«ELSEIF mode instanceof RANDOM»
-	search 
-		{{initState, «(mode as RANDOM).seed»}, 0, «reach.bound»} =>+
-	 	{{OBJ:Object, N:Nat}, T:Time, «reach.bound»} such that check-true(eval(«top.name.escape+" . "+(reach.goalCond as Prop).path.compilePath» | «(reach.goalCond as ValueProp).expression.compileExp», OBJ:Object)) .
-	«ELSEIF mode instanceof DISTRIBUTED»
+		  check-sat(B:BoolExp and eval(«top.name.escape+" | "+ reach.initCond.compileValueExp», OBJ:Object)) .
+	'''
+	
+	static def compileByMode(Top top, Invariant inv, Mode mode)'''
     mod TEST-«top.name.toUpperCase»-MODE is
     	including TEST-«top.name.toUpperCase» .
-	  
-	  var TS : Set{InterTiming} .
-	  eq timing(TS) = interTimes(TS, «(mode as DISTRIBUTED).degree») .
+	  eq @m@ = ['TEST-«top.name.toUpperCase»] .
 	endm
 	
 	search 
-		{initState , 0 , «reach.bound»} =>* 
-		{none , T:Time , «reach.bound»} .
-	«ELSEIF mode instanceof MODELCHECK»
-    mod TEST-«top.name.toUpperCase»-MODE is
-    	including TEST-«top.name.toUpperCase» .
-	  
-	  eq @m@ = ['TEST-«top.name.toUpperCase»] . 
-	  «IF (mode as MODELCHECK).getOption.equals("-merge")»eq MFlag = true .«ELSE»eq MFlag = false .«ENDIF»
-	endm
-	
-	mod TEST-«top.name.toUpperCase»-MODEL-CHECK is
-		including TEST-«top.name.toUpperCase»-MODE .
-	    including MODEL-CHECKER .
-	    including LTL-SIMPLIFIER .
-	    
-        op modelState : -> State .
-        subsort Configuration < State .
-        eq modelState = initState .
-    
-        op initFormula : -> Prop .
-        op goalFormula : -> Prop .
-    
-        var C : Configuration .
-    
-        eq C |= initFormula = check-sat(eval(«top.name.escape+" . "+(reach.initCond as  Prop).path.compilePath» | «(reach.initCond as ValueProp).expression.compileExp», C)) .
-        eq C |= goalFormula = check-sat(eval(«top.name.escape+" . "+(reach.goalCond as  Prop).path.compilePath» | «(reach.goalCond as ValueProp).expression.compileExp», C)) .
-    endm
-    
-    red modelCheck(modelState, initFormula -> <> goalFormula) .
-	«ELSEIF mode instanceof SYMBOLIC»
-    mod TEST-«top.name.toUpperCase»-MODE is
-    	including TEST-«top.name.toUpperCase» .
-	  
-	  eq @m@ = ['TEST-«top.name.toUpperCase»] . 
-	  «IF (mode as SYMBOLIC).getOption.equals("-merge")»eq MFlag = true .«ELSE»eq MFlag = false .«ENDIF»
-	endm
-	
-	search 
-	      {eval(«top.name.escape+" . "+(reach.initCond as  Prop).path.compilePath» | «(reach.initCond as ValueProp).expression.compileExp», initState) ||
-		   initState,0,«reach.bound»} 
+	      {eval(«top.name.escape+" | "+ inv.initCond.compileValueExp», initState) ||
+		   initState | 0 | «inv.bound»} 
 		=>*
-		  {B:BoolExp || OBJ:Object,T:Time,«reach.bound»} 
+		  {B:BoolExp || OBJ:Object | T:Time | «inv.bound»} 
 		such that
-		  check-sat(B:BoolExp and eval(«top.name.escape+" . "+(reach.goalCond as Prop).path.compilePath» | «(reach.goalCond as ValueProp).expression.compileExp», OBJ:Object)) .
-	«ENDIF»
+		  check-sat(B:BoolExp and eval(«top.name.escape+" | not("+ inv.initCond.compileValueExp»)), OBJ:Object)) .
 	'''
 	
 	static def getReachabilityCommand(Top top, Reachability reach)'''
 	reachability : 
-	(«top.name.escape+" . "+(reach.initCond as Prop).path.compilePath» | «(reach.initCond as ValueProp).expression.compileExpForUser»)
+	(«top.name.escape+" | "+ reach.initCond.compileValueExp»)
 	==>
-	(«top.name.escape+" . "+(reach.goalCond as Prop).path.compilePath» | «(reach.goalCond as ValueProp).expression.compileExpForUser»)
-	'''
-	
-	// invariant
-	static def compileRequirementCommand(Top top, Invariant inv, Mode mode)'''
-	mod TEST-«top.name.toUpperCase» is
-	  including «top.name.toUpperCase»-MODEL-SYMBOLIC .
-	  including SPECIFICATION-LANGUAGE-SEMANTICS .
-	
-	  op initState : -> Object .
-	  eq initState = initialize(initial) .
-	  
-    endm
-    
-    «top.compileByMode(inv, mode)»
-    
-	quit
-	'''
-	
-	static def compileByMode(Top top, Invariant inv ,Mode mode)'''
-	«IF mode == null»
-    mod TEST-«top.name.toUpperCase»-MODE is
-    	including TEST-«top.name.toUpperCase» .
-		  
-	  eq @m@ = ['TEST-«top.name.toUpperCase»] . 
-	  eq MFlag = true .
-	endm
-	
-	search 
-	      {eval(«top.name.escape+" . "+(inv.initCond as  Prop).path.compilePath» | «(inv.initCond as ValueProp).expression.compileExp», initState) ||
-		   initState,0,«inv.bound»} 
-		=>*
-		  {B:BoolExp || OBJ:Object,T:Time,«inv.bound»} 
-		such that
-		  check-sat(B:BoolExp and eval(«top.name.escape+" . "+(inv.goalCond as Prop).path.compilePath» | not ( «(inv.goalCond as ValueProp).expression.compileExp» ), OBJ:Object)) .
-	«ELSEIF mode instanceof RANDOM»
-	search 
-		{{initState, «(mode as RANDOM).seed»}, 0, «inv.bound»} =>+
-	 	{{OBJ:Object, N:Nat}, T:Time, «inv.bound»} such that check-true(eval(«top.name.escape+" . "+(inv.goalCond as Prop).path.compilePath» | not ( «(inv.goalCond as ValueProp).expression.compileExp» ), OBJ:Object)) .
-	«ELSEIF mode instanceof DISTRIBUTED»
-    mod TEST-«top.name.toUpperCase»-MODE is
-    	including TEST-«top.name.toUpperCase» .
-	  
-	  var TS : Set{InterTiming} .
-	  eq timing(TS) = interTimes(TS, «(mode as DISTRIBUTED).degree») .
-	endm
-	
-	search 
-		{initState , 0 , «inv.bound»} =>* 
-		{none , T:Time , «inv.bound»} .
-	«ELSEIF mode instanceof MODELCHECK»
-    mod TEST-«top.name.toUpperCase»-MODE is
-    	including TEST-«top.name.toUpperCase» .
-	  
-	  eq @m@ = ['TEST-«top.name.toUpperCase»] . 
-	  «IF (mode as MODELCHECK).getOption.equals("-merge")»eq MFlag = true .«ELSE»eq MFlag = false .«ENDIF»
-	endm
-	
-	mod TEST-«top.name.toUpperCase»-MODEL-CHECK is
-		including TEST-«top.name.toUpperCase»-MODE .
-	    including MODEL-CHECKER .
-	    including LTL-SIMPLIFIER .
-	    
-        op modelState : -> State .
-        subsort Configuration < State .
-        eq modelState = initState .
-    
-        op initFormula : -> Prop .
-        op goalFormula : -> Prop .
-    
-        var C : Configuration .
-    
-        eq C |= initFormula = check-sat(eval(«top.name.escape+" . "+(inv.initCond as  Prop).path.compilePath» | «(inv.initCond as ValueProp).expression.compileExp», C)) .
-        eq C |= goalFormula = check-sat(eval(«top.name.escape+" . "+(inv.goalCond as  Prop).path.compilePath» | «(inv.goalCond as ValueProp).expression.compileExp», C)) .
-    endm
-    
-    red modelCheck(modelState, initFormula -> [] goalFormula) .
-	«ELSEIF mode instanceof SYMBOLIC»
-    mod TEST-«top.name.toUpperCase»-MODE is
-    	including TEST-«top.name.toUpperCase» .
-	  
-	  eq @m@ = ['TEST-«top.name.toUpperCase»] . 
-	  «IF (mode as SYMBOLIC).getOption.equals("-merge")»eq MFlag = true .«ELSE»eq MFlag = false .«ENDIF»
-	endm
-	
-	search 
-	      {eval(«top.name.escape+" . "+(inv.initCond as  Prop).path.compilePath» | «(inv.initCond as ValueProp).expression.compileExp», initState) ||
-		   initState,0,«inv.bound»} 
-		=>*
-		  {B:BoolExp || OBJ:Object,T:Time,«inv.bound»} 
-		such that
-		  check-sat(B:BoolExp and eval(«top.name.escape+" . "+(inv.goalCond as Prop).path.compilePath» | not( «(inv.goalCond as ValueProp).expression.compileExp» ), OBJ:Object)) .
-	«ENDIF»
+	(«top.name.escape+" | "+ reach.goalCond.compileValueExp»)
 	'''
 	
 	static def getRequirementCommand(Top top, Invariant inv)'''
 	invariant : 
-	(«top.name.escape+" . "+(inv.initCond as Prop).path.compilePath» | «(inv.initCond as ValueProp).expression.compileExp»)
+	(«top.name.escape+" | "+ inv.initCond.compileValueExp»)
 	==>
-	(«top.name.escape+" . "+(inv.goalCond as Prop).path.compilePath» | «(inv.goalCond as ValueProp).expression.compileExp»)
+	(«top.name.escape+" | not("+ inv.goalCond.compileValueExp»)
 	'''
 	
-	/**
-	 *  translate LTL formulas
-	 */
-	 
-	 static def compileRewCommand(int bound) '''
-	 	rew {initial} .
-	 '''
-	 
-	private static def dispatch CharSequence compileFormula(BinaryFormula f) 
-	'''(«f.left.compileFormula» «f.op» «f.right.compileFormula»)'''
-			
 	
-	private static def dispatch CharSequence compileFormula(UnaryFormula f) {
-		if (f.child == null) f.op else '''(«f.op» «f.child.compileFormula»)'''
-	}
-			
-	// private static def dispatch CharSequence compileFormula(PropRef pr) 
-	// '''«pr.def.name»'''
-	
-	
-	private static def dispatch CharSequence compileFormula(StateProp prop) 
-	'''«prop.path.compilePath» @ «prop.state»'''
-	
-	
-	private static def dispatch CharSequence compileFormula(ValueProp prop) 
-	'''«prop.path.compilePath» | «prop.expression.compileExp»'''
-	 
-	/*
-	 * get Raw user reachability / requirement
-	 */ 
-	 
-	private static def dispatch CharSequence compileExpForUser(BinaryExpression e) '''
-		«e.left.compileExpForUser» «e.op» «e.right.compileExpForUser»'''
-		
-		
-	private static def dispatch CharSequence compileExpForUser(UnaryExpression e) '''
-		«e.op.translateUnaryOpForUser»«e.child.compileExpForUser»'''
-	
-	
-	private static def dispatch CharSequence compileExpForUser(Value e) {
-		val v = e.value
-		switch v {
-			PropertyValue:			'''«RtmAadlProperty::compilePropertyValue(v)»'''
-			ContainmentPathElement:	'''«v.namedElement.name.escape»'''
+	static def compileValueExp(PropertyExpression pe){
+		if(pe instanceof ScopedValue){
+			'''«(pe as ScopedValue).path.compilePath» | «(pe as ScopedValue).expression.compileExp»'''
+		} else if (pe instanceof BinaryExpression) {
+			'''«(pe as BinaryExpression).compileExp»'''
+		} else if (pe instanceof UnaryExpression) {
+			'''«(pe as UnaryExpression).compileExp»'''
+		} else if (pe instanceof Value){
+			'''«(pe as Value).compileExp»'''
 		}
 	}
-	
-	private static def translateUnaryOpForUser(String op) {
-		switch op {
-			case "+":	"+"
-			case "-":	"-"
-			default:	op 
-		}
-	}
-	
-	  
+
 	/**
 	 *  translate BA expressions
 	 */
@@ -290,12 +110,31 @@ class RtmPropSpec {
 	private static def dispatch CharSequence compileExp(UnaryExpression e) '''
 		«e.op.translateUnaryOp»(«e.child.compileExp»)'''
 	
-	
+	private static def dispatch CharSequence compileExp(ScopedValue e)'''
+		(«e.path.compilePath» | ( «e.expression.compileExp» ))
+	'''
+
 	private static def dispatch CharSequence compileExp(Value e) {
 		val v = e.value
-		switch v {
-			PropertyValue:			'''[[«RtmAadlProperty::compilePropertyValue(v)»]]'''
-			ContainmentPathElement:	'''c[«v.namedElement.name.escape»]'''
+		
+		if(v instanceof ContainedNamedElement){
+			var lastElement = (v as ContainedNamedElement).containmentPathElements.last.namedElement.name
+			var path = ""
+			var EList<ContainmentPathElement> ecpe = (v as ContainedNamedElement).containmentPathElements;
+			for(var i = 0; i < ecpe.length-1; i++){
+				if(path.length==0){
+					path += ecpe.get(i).namedElement.name
+				} else {
+					path += " . " + ecpe.get(i).namedElement.name
+				}
+			}
+			if(path.length==0){
+				return '''c[«lastElement»]'''
+			} else {
+				return '''( «path» | c[«lastElement»] )'''
+			}
+		}else{
+			return '''[[«RtmAadlProperty::compilePropertyValue(v as PropertyValue)»]]'''
 		}
 	}
 	

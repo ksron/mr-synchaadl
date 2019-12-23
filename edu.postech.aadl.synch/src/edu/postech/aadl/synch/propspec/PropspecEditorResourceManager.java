@@ -76,7 +76,7 @@ public class PropspecEditorResourceManager {
 		IFile efile = getEditorFile();
 		if (efile != null && getModelResource() != null) {
 			SystemInstance si = (SystemInstance)AadlUtil.getElement(getModelResource());
-			IPath context = efile.getFullPath().removeLastSegments(1);
+			IPath context = efile.getFullPath().removeLastSegments(2).append("verification");
 			System.out.println(IOUtils.getCodegenPath(context, si));
 			return IOUtils.getCodegenPath(context, si);
 		}

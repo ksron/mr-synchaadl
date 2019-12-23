@@ -5,7 +5,7 @@ import org.osate.aadl2.instance.ComponentInstance
 
 class RtmAadlSetting {
 
-	public static val SEMANTICS_PATH = "rtmaude";
+	public static val SEMANTICS_PATH = "semantics";
 	public static val SEMANTICS_FILE = "interpreter-symbolic.maude";
 	public static val ANALYSIS_FILE  = "mr-sync-aadl-analysis.maude"; // should be revised. 
 	
