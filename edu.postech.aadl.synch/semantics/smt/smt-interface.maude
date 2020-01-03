@@ -1,0 +1,27 @@
+
+--- SMT interface for checking (un)satisfiability of Boolean expressions
+fmod SMT-CHECKSAT is
+  protecting SMT-REAL-EXP .
+  protecting SMT-TRANS .
+  including BOOL-EXP-SIMPLIFICATION .
+  including REAL-EXP-SIMPLIFICATION .
+  including COND-EXP-SIMPLIFICATION .
+  including CHECKSAT .
+
+  var B : BoolExp .
+  var E : Exp .
+
+  --- checks if the given Boolean expression is satisfiable
+  eq check-sat(B)
+   = if B == [false] then
+       false
+     else if B == [true] then
+       true
+     else
+       metaCheck(['REAL-INTEGER], tr(upTerm(B)))
+     fi fi .
+
+  --- the simplify function does nothing 
+  eq simplify(E) = E .
+endfm
+

@@ -55,5 +55,5 @@ fmod SMT-CHECKSAT is
        true
      else
        smtResult(smtCheck (toBE(B)) ff)
-     fi fi [print "B=" B].
+     fi fi .
 endfm

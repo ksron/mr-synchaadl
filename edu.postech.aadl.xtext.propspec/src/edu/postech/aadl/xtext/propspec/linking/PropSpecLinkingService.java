@@ -28,7 +28,7 @@ import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.aadl2.modelsupport.util.ResolvePrototypeUtil;
 
 import edu.postech.aadl.xtext.propspec.propSpec.BinaryExpression;
-import edu.postech.aadl.xtext.propspec.propSpec.ScopedValue;
+import edu.postech.aadl.xtext.propspec.propSpec.ScopedExpression;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
 import edu.postech.aadl.xtext.propspec.propSpec.UnaryExpression;
 
@@ -68,8 +68,8 @@ public class PropSpecLinkingService extends DefaultLinkingService {
 						}
 					}
 				} else {
-					if (context.eContainer().eContainer().eContainer() instanceof ScopedValue) {
-						ContainedNamedElement path = ((ScopedValue) context.eContainer().eContainer().eContainer())
+					if (context.eContainer().eContainer().eContainer() instanceof ScopedExpression) {
+						ContainedNamedElement path = ((ScopedExpression) context.eContainer().eContainer().eContainer())
 								.getPath();
 						List<ContainmentPathElement> list = path.getContainmentPathElements();
 						ContainmentPathElement el = list.get(list.size() - 1);
@@ -79,13 +79,13 @@ public class PropSpecLinkingService extends DefaultLinkingService {
 
 						EObject container = context.eContainer().eContainer().eContainer();
 						while (container != null) {
-							if (container instanceof ScopedValue) {
+							if (container instanceof ScopedExpression) {
 								break;
 							}
 							container = container.eContainer();
 						}
-						if (container instanceof ScopedValue) {
-							ContainedNamedElement path = ((ScopedValue) container).getPath();
+						if (container instanceof ScopedExpression) {
+							ContainedNamedElement path = ((ScopedExpression) container).getPath();
 							List<ContainmentPathElement> list = path.getContainmentPathElements();
 							ContainmentPathElement el = list.get(list.size() - 1);
 							res = findNamedObject(el, crossRefString);
@@ -127,8 +127,8 @@ public class PropSpecLinkingService extends DefaultLinkingService {
 	private static ContainmentPathElement getPropPathElement(EObject element) {
 		EObject container = element;
 		while (container != null) {
-			if (container instanceof ScopedValue) {
-				ContainedNamedElement path = ((ScopedValue) container).getPath();
+			if (container instanceof ScopedExpression) {
+				ContainedNamedElement path = ((ScopedExpression) container).getPath();
 				List<ContainmentPathElement> list = path.getContainmentPathElements();
 				return list.get(list.size() - 1);
 			}

@@ -1,0 +1,19 @@
+
+--- SMT interface (redeclration)
+fmod SMT-CHECKSAT is
+  protecting SMT-REAL-EXP .
+  including CHECKSAT .
+  including SMT-CHECK .
+
+  var B  : BooleanExpr .
+  var R  : RealExpr .
+
+  --- checks if the given Boolean expression is satisfiable
+  eq check-sat([false]) = false .
+  eq check-sat([true])  = true .
+  eq check-sat([B])     = smtCheck(B) .
+
+  --- the simplify function calls simplifyFormula
+  eq simplify([B]) = [simplifyFormula(B)] .
+  eq simplify([R]) = [simplifyFormula(R)] .
+endfm

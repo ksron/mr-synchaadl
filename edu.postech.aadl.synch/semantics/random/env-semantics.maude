@@ -98,10 +98,10 @@ mod ENV-TRANSITION-SEMANTICS is
   /\ CR CRL' := randomPick(CRL, N) 
   /\ T' := rand(max(LT,T), min(UT + 2 * rval(SK), rval(PER)), s N) .
 
- ceq execSample(time(T)  mode(L) flows((L FLOW) ; FLOWS) envcon(CONXS,PORTS) ECF, CR, T')
-   = execSample(time(T') mode(L) flows((L FLOW) ; FLOWS) envcon(CONXS,PORTS) 
-                updateEnvFeature(CONXS, PORTS, CR, updateEnvData(DATA,ECF))) 
-  if DATA := execFlow(FLOW, real(T' + - T), ECF) .
+ ceq execSample(time(T)  mode(L) flows((L FLOW) ; FLOWS) ECF, CR, T')
+   = execSample(time(T') mode(L) flows((L FLOW) ; FLOWS) ECF') 
+  if DATA := execFlow(FLOW, real(T' + - T), ECF) 
+  /\ ECF' := updateEnvFeature(CR, updateEnvData(DATA,ECF)) .
 
   eq execSample(time(T) mode(L) sampling(empty) randC(N) ECF) 
    = T | transResult(L,ECF) | N .
@@ -124,22 +124,22 @@ mod ENV-TRANSITION-SEMANTICS is
 
    --- a command has arrived at port PI from controller CR, together with other data ports connected to CR
    --- NOTE: assume the mode transition is deterministic.
- ceq execResp(time(T)  mode(L)  envcon(CONXS,PORTS) feature(FMAP) ECF, CR, T')
-   = execResp(time(T') mode(L') envcon(CONXS,PORTS) feature(FMAP) ECF'')
+ ceq execResp(time(T)  mode(L)  ECF, CR, T')
+   = execResp(time(T') mode(L') ECF'')
   if jumps((L -[ PI, PRS ]-> L') ; JUMPS) flows((L FLOW) ; FLOWS) ECF' := ECF 
-  /\ check-true(isPortPresent(PI, FMAP)) 
-  /\ < PI : C:EnvInPort | target : CR, ATTS > PORTS' := PORTS
+  /\ validTarget(PI, CR, ECF) 
+  /\ check-true(isPortPresent(PI, ECF)) 
   /\ DATA := execFlow(FLOW, real(T' + - T), ECF) 
-  /\ ECF'' := updateEnvData(DATA, updateResponseData(CONXS, CR, PORTS, FMAP, ECF)) .
+  /\ ECF'' := updateEnvData(DATA, updateResponseData(CR, ECF)) .
 
    --- when no command has arrived from controller CR
    --- No mode change, but DATA are updated by data input from CR
- ceq execResp(time(T)  mode(L) envcon(CONXS,PORTS) feature(FMAP) ECF, CR, T')
-   = execResp(time(T') mode(L) envcon(CONXS,PORTS) feature(FMAP) ECF'')
+ ceq execResp(time(T)  mode(L) ECF, CR, T')
+   = execResp(time(T') mode(L) ECF'')
   if jumps(JUMPS) flows((L FLOW) ; FLOWS) ECF' := ECF 
-  /\ check-true(allPortsAbsent(L, JUMPS, FMAP, CR, PORTS)) 
+  /\ check-true(allPortsAbsent(L, CR, ECF)) 
   /\ DATA := execFlow(FLOW, real(T' + - T), ECF) 
-  /\ ECF'' := updateEnvData(DATA, updateResponseData(CONXS, CR, PORTS, FMAP, ECF)) .
+  /\ ECF'' := updateEnvData(DATA, updateResponseData(CR, ECF)) .
 
  ceq execResp(time(T) mode(L) prop(PROPS) response(empty) flows((L FLOW) ; FLOWS) randC(N) ECF)
    = transResult(L, prop(PROPS) updateEnvData(DATA,ECF)) | N  
@@ -157,17 +157,19 @@ mod ENV-TRANSITION-SEMANTICS is
 
   --- update the data from input ports connected to CR; for absent data ports,
   --- previous values are used (i.e. no change on data components)
-  op updateResponseData : Set{Connection} ComponentRef Configuration FeatureMap BehaviorConf ~> BehaviorConf [format (m! o)] .
+  op updateResponseData : ComponentRef BehaviorConf ~> BehaviorConf [format (m! o)] .
+  op updateResponseData : Set{Connection} ComponentRef FeatureMap BehaviorConf ~> BehaviorConf [format (m! o)] .
 
-  ceq updateResponseData((PI =>> CI) ; CONXS, CR, PORTS, FMAP, data(DATA) ECF)
-    = updateResponseData(CONXS, CR, PORTS, FMAP, 
-                         data(insert(CI, (B ? E : E') # (B or B'), DATA)) ECF)
-   if < PI : C:EnvInPort | target : CR, ATTS > PORTS' := PORTS
+  eq updateResponseData(CR, envcon(CONXS,PORTS) feature(FMAP) ECF)
+   = updateResponseData(CONXS, CR, FMAP, envcon(CONXS,PORTS) feature(FMAP) ECF) .
+  ceq updateResponseData((PI =>> CI) ; CONXS, CR, FMAP, data(DATA) ECF)
+    = updateResponseData(CONXS, CR, FMAP, data(DATA') ECF)
+   if validTarget(PI, CR, ECF)
    /\ E  # B : B'' := FMAP[PI]   --- NOTE: B'' (freshness) is always true
    /\ E' # B' := DATA[CI] 
+   /\ DATA' := insert(CI, (B ? E : E') # (B or B'), DATA)
    /\ check-true(B'' and (B or B')) .
-
-  eq updateResponseData(CONXS, CR, PORTS, FMAP, ECF) = ECF [owise] . 
+  eq updateResponseData(CONXS, CR, FMAP, ECF) = ECF [owise] . 
 endm
 
 

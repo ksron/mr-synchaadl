@@ -96,6 +96,9 @@ fmod CHECKSAT is
   --- checks if the given Boolean expression is satisfiable
   op check-sat : BoolExp ~> Bool [format (m! o)] .
 
+  --- simplify a given Boolean expression (intended for the extended Maude-SMT)
+  op simplify : BoolExp ~> BoolExp [format (m! o)] .
+
   --- checks if the given Boolean expression is true (no SMT solving)
   op check-true : BoolExp ~> Bool [format (m! o)] .
  ceq check-true(B) = true if bool(true) == B .

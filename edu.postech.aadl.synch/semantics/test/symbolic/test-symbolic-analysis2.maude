@@ -21,14 +21,6 @@ mod TEST-THERMOSTAT-SYSTEM-MOD is
     top | ((controller | c[curr]) > (environment | c[x])) .
 endm
 
-
-mod TEST-THERMOSTAT-SYSTEM is
-  including TEST-THERMOSTAT-SYSTEM-MOD .
-
-  eq @m@ = ['TEST-THERMOSTAT-SYSTEM-MOD] .
-endm
-
-
 --- red initState .
 
 red initCond .
@@ -50,8 +42,8 @@ red eval(initCond, initState) .
 red eval(goalCond, initState) .
 
 
-search [1,5]
-  { eval(initCond, initState) || initState, false } =>* { B:BoolExp || OBJ:Object, false } 
+search [1,10]
+  { eval(initCond, initState) || initState | 0 | infty} =>* { B:BoolExp || OBJ:Object | T:Time | infty} 
   such that
   check-sat(B:BoolExp and eval(goalCond, OBJ:Object)) .
 

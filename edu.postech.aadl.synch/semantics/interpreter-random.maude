@@ -1,4 +1,6 @@
 
+set include BOOLEAN off .
+
 load syntax/abstract-exp.maude
 load syntax/identifiers.maude
 load syntax/aadl-value-property.maude
@@ -20,7 +22,6 @@ load random/env-semantics.maude
 load symbolic/transfer-input.maude
 load random/transfer-results.maude
 load random/component-dynamics.maude
-load random/synchronous-model.maude
-
 
 load symbolic/specification-language.maude
+load random/synchronous-model.maude

@@ -26,30 +26,30 @@ mod MODEL-INIT is
   eq initialize(CONF) = initialize(CONF, none) .
 
   --- for an ensemble, initialize its ports and subcomponents.
-  eq initialize(< CR : C:Ensemble | features : PORTS, 
+  eq initialize(< CR : C:Ensemble | features : PORTS,
                                     subcomponents : COMPS, ATTS > CONF, CONF')
-   = initialize(CONF, < CR : C:Ensemble | features : initialize(PORTS), 
+   = initialize(CONF, < CR : C:Ensemble | features : initialize(PORTS),
                                           subcomponents : initialize(COMPS), ATTS > CONF') .
 
-  --- for a thread , initialize its ports and data subcomponents 
-  eq initialize(< CR : C:Thread | features : PORTS, 
+  --- for a thread , initialize its ports and data subcomponents
+  eq initialize(< CR : C:Thread | features : PORTS,
                                   subcomponents : COMPS, ATTS > CONF, CONF')
-   = initialize(CONF, < CR : C:Thread | features : initialize(PORTS), 
+   = initialize(CONF, < CR : C:Thread | features : initialize(PORTS),
                                         subcomponents : initialize(COMPS), ATTS > CONF')  .
 
   --- for an environment, initialize its ports and data subcomponents, and add timer
   --- NOTE: CR should exactly have the Env class.
-  eq initialize(< CR : Env | features : PORTS, 
-                             subcomponents : COMPS, 
+  eq initialize(< CR : Env | features : PORTS,
+                             subcomponents : COMPS,
                              sampling : STS,
                              response : RTS, ATTS > CONF, CONF')
-   = initialize(CONF, < CR : EnvWithTimer | features : initialize(PORTS), 
-                                            subcomponents : initialize(COMPS), 
+   = initialize(CONF, < CR : EnvWithTimer | features : initialize(PORTS),
+                                            subcomponents : initialize(COMPS),
                                             sampling : STS,
                                             response : RTS,
                                             samplingIDs : getIdList(STS),
                                             responseIDs : getIdList(RTS),
-                                            timer : 0, 
+                                            timer : 0,
                                             ATTS > CONF')  .
 
   --- generate a list of ids (this will be used for random choice)
@@ -59,33 +59,33 @@ mod MODEL-INIT is
 
 
   --- all data input ports are initialized as bots
-  eq initialize(< PI : C:DataInPort | content : null(TY), 
+  eq initialize(< PI : C:DataInPort | content : null(TY),
                                       cache : null(TY), ATTS > CONF, CONF')
-   = initialize(CONF, < PI : C:DataInPort | content : bot(TY), 
+   = initialize(CONF, < PI : C:DataInPort | content : bot(TY),
                                             cache : bot(TY), ATTS > CONF') .
 
-  --- all env ports are also initialize as bots 
+  --- all env ports are also initialize as bots
   eq initialize(< PI : C:EnvInPort | content : null(TY), ATTS > CONF, CONF')
    = initialize(CONF, < PI : C:EnvInPort | content : bot(TY), ATTS > CONF') .
-     
+
   --- data/env output ports with given initial values are initialized as the values.
- ceq initialize(< PI : C:OutPort | content : null(TY), 
+ ceq initialize(< PI : C:OutPort | content : null(TY),
                                    properties : PROPS, ATTS > CONF, CONF')
-   = initialize(CONF, < PI : C:OutPort | content : E # B, 
-                                         properties : PROPS, ATTS > CONF') 
+   = initialize(CONF, < PI : C:OutPort | content : E # B,
+                                         properties : PROPS, ATTS > CONF')
   if E # B := eval(p[DataModel::InitialValue], prop(PROPS)) /\ TY == type(E) .
 
   --- all other data/env output parts are initialized as bots
- ceq initialize(< PI : C:OutPort | content : null(TY), 
+ ceq initialize(< PI : C:OutPort | content : null(TY),
                                    properties : PROPS, ATTS > CONF, CONF')
-   = initialize(CONF, < PI : C:OutPort | content : bot(TY), 
-                                         properties : PROPS, ATTS > CONF') 
+   = initialize(CONF, < PI : C:OutPort | content : bot(TY),
+                                         properties : PROPS, ATTS > CONF')
   if not $hasMapping(PROPS, DataModel::InitialValue) .
 
   --- all data components must be initialized using given initial values (params are not allowed)
- ceq initialize(< CR : C:Data | value : null(TY), 
+ ceq initialize(< CR : C:Data | value : null(TY),
                                 properties : PROPS, ATTS > CONF, CONF')
-   = initialize(CONF, < CR : C:Data | value : E # B, 
+   = initialize(CONF, < CR : C:Data | value : E # B,
                                       properties : PROPS, ATTS > CONF')
   if E # B := eval(p[DataModel::InitialValue], prop(PROPS)) /\ TY == type(E) .
 
@@ -106,8 +106,8 @@ mod MODEL-TRANSITION-SYSTEM is
   including CONC-REAL-EXP .
   including COLLAPSE-SINGLE-ENSEMBLE .
   including TIME .
-  
-  var CR : ComponentRef . 
+
+  var CR : ComponentRef .
   vars OBJ OBJ' : Object .
   var ATTS : AttributeSet .
   var PROPS : PropertyAssociation .
@@ -117,19 +117,68 @@ mod MODEL-TRANSITION-SYSTEM is
   var TI : TimeInf .
   var PER : RealExp .
   var B : BoolExp .
-  
-  sort GlobalSystem .
-  op {_,_,_} : ConfigWithRand Time TimeInf -> GlobalSystem [ctor] .
 
-  crl [step]: 
-      {{OBJ,N}, T, TI} 
-   => 
-      {executeStep({OBJ,N}), T + NT, TI}
-   if 
-      < CR : C:System | features : none, properties : PROPS, ATTS > := OBJ 
-   /\ PER # B := eval(p[TimingProperties::Period], prop(PROPS)) 
+  sort GlobalSystem .
+  op {_|_|_} : ConfigWithRand Time TimeInf -> GlobalSystem [ctor] .
+
+  crl [step]:
+      {{OBJ,N} | T | TI}
+   =>
+      {executeStep({OBJ,N}) | T + NT | TI}
+   if
+      < CR : C:System | features : none, properties : PROPS, ATTS > := OBJ
+   /\ PER # B := eval(p[TimingProperties::Period], prop(PROPS))
    /\ NT := rval(PER)
    /\ T + NT <= TI .
 endm
 
 
+--- Similar to the above transition system except not using rewrite rules
+mod RANDOM-SIMULATION is
+    including MODEL-TRANSITION-SYSTEM .
+    including SPECIFICATION-LANGUAGE-SEMANTICS .
+
+    var CR : ComponentRef .
+    var SYSTEM : GlobalSystem .
+    vars OBJ OBJ' : Object .
+    var ATTS : AttributeSet .
+    var PROPS : PropertyAssociation .
+    vars N N' : Nat .
+    var T : Time .
+    var NT : NzTime .
+    var TI : TimeInf .
+    var PER : RealExp .
+    var B : BoolExp .
+    var FLAG : Bool .
+    var AE  : PropSpec .
+
+
+    sort FlaggedGlobalSystem .
+    op _:_ : GlobalSystem Bool -> FlaggedGlobalSystem [ctor] .
+
+
+    op reachGoal : GlobalSystem PropSpec -> FlaggedGlobalSystem .
+   ceq reachGoal({{OBJ,N} | T | TI}, AE)
+     = {{OBJ,N} | T | TI} : true
+    if check-true(eval(AE, OBJ)) .
+
+   ceq reachGoal({{OBJ,N} | T | TI}, AE)
+     = reachGoal({executeStep({OBJ,N}) | T + getPeriod(OBJ) | TI}, AE)
+    if check-false(eval(AE, OBJ)) and T + getPeriod(OBJ) <= TI .
+
+    eq reachGoal({{OBJ,N} | T | TI}, AE)
+     = {{OBJ,N} | T | TI} : false [owise] .
+
+    op repeat : GlobalSystem PropSpec -> GlobalSystem .
+   ceq repeat({{OBJ,N} | T | TI}, AE)
+     = if FLAG then SYSTEM else repeat({{OBJ,getSeed(SYSTEM)} | T | TI}, AE) fi
+    if SYSTEM : FLAG := reachGoal({{OBJ,N} | T | TI}, AE) .
+
+    --- aux functions
+    op getPeriod : Object ~> Time .
+    ceq getPeriod(< CR : C:System | properties : PROPS, ATTS >) = rval(PER)
+     if PER # B := eval(p[TimingProperties::Period], prop(PROPS)) .
+
+    op getSeed : GlobalSystem ~> Nat .
+    eq getSeed({{OBJ,N} | T | TI}) = N .
+ endm

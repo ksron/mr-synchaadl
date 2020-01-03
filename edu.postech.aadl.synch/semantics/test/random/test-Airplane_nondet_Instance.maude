@@ -17,19 +17,19 @@ mod TEST-AIRPLANE_NONDET_INSTANCE-MODEL is
 endm
 
 
-rew [100] {{initState,0}} .
+rew [100] {{initState,0} | 0 | infty} .
 
-rew [100] {{initState,400}} .
+rew [100] {{initState,400} | 0 | infty} .
 
-rew [100] {{initState,800}} .
+rew [100] {{initState,800} | 0 | infty} .
 
-rew [100] {{initState,1200}} .
+rew [100] {{initState,1200} | 0 | infty} .
 
 
-rew [100] {{cinitState,0}} .
+rew [100] {{cinitState,0} | 0 | infty} .
 
-rew [100] {{cinitState,400}} .
+rew [100] {{cinitState,400} | 0 | infty} .
 
-rew [100] {{cinitState,800}} .
+rew [100] {{cinitState,800} | 0 | infty} .
 
-rew [100] {{cinitState,1200}} .
+rew [100] {{cinitState,1200} | 0 | infty} .

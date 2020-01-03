@@ -11,7 +11,7 @@ endm
 
 red toenv-tb(conn,comps) .
 
-red transEnvOut(comps,outer-tb(conn),inner-tb(conn),toenv-tb(conn,comps)) .
+red transEnvOut(comps,outer-tb(conn),inner-tb(conn),toenv-tb(conn,comps)) . --- msgs are at the kind level
 
 red transferResults(system) .
 

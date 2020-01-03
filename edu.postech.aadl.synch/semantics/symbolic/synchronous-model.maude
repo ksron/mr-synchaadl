@@ -22,7 +22,7 @@ mod MODEL-INIT is
   var ATTS : AttributeSet .
 
   op initialize : Configuration ~> Configuration .
-  op * : -> VarGen [ctor] . --- a dummy variable generator. 
+  op * : -> VarGen [ctor] . --- a dummy variable generator.
 
  ceq initialize(CONF) = CONF' if {CONF',*} := initialize(CONF, *) .
 
@@ -36,28 +36,28 @@ mod MODEL-INIT is
   eq initialize(CONF, GEN) = initialize(CONF, none, GEN) .
 
   --- for an ensemble, initialize its ports and subcomponents.
- ceq initialize(< CR : C:Ensemble | features : PORTS, 
+ ceq initialize(< CR : C:Ensemble | features : PORTS,
                                     subcomponents : COMPS, ATTS > CONF, CONF', GEN)
-   = initialize(CONF, < CR : C:Ensemble | features : PORTS', 
+   = initialize(CONF, < CR : C:Ensemble | features : PORTS',
                                           subcomponents : COMPS', ATTS > CONF', GEN'')
-  if {PORTS',GEN'}  := initialize(PORTS,GEN) 
+  if {PORTS',GEN'}  := initialize(PORTS,GEN)
   /\ {COMPS',GEN''} := initialize(COMPS,GEN') .
 
   --- for a thread or an environment, initialize its ports and data subcomponents using its variable generator
- ceq initialize(< CR : C:BehComponent | features : PORTS, 
-                                        subcomponents : COMPS, 
+ ceq initialize(< CR : C:BehComponent | features : PORTS,
+                                        subcomponents : COMPS,
                                         varGen : GEN, ATTS > CONF, CONF', GEN#)
-   = initialize(CONF, < CR : C:BehComponent | features : PORTS', 
-                                              subcomponents : COMPS', 
-                                              varGen : GEN'', ATTS > CONF', GEN#) 
-  if {PORTS',GEN'}  := initialize(PORTS, init(GEN)) 
+   = initialize(CONF, < CR : C:BehComponent | features : PORTS',
+                                              subcomponents : COMPS',
+                                              varGen : GEN'', ATTS > CONF', GEN#)
+  if {PORTS',GEN'}  := initialize(PORTS, init(GEN))
   /\ {COMPS',GEN''} := initialize(COMPS,GEN') .
 
 
   --- all data components, except parameters, must be initialized using given initial values.
- ceq initialize(< CR : C:Data | value : null(TY), 
+ ceq initialize(< CR : C:Data | value : null(TY),
                                 properties : PROPS, ATTS > CONF, CONF', GEN)
-   = initialize(CONF, < CR : C:Data | value : E # B, 
+   = initialize(CONF, < CR : C:Data | value : E # B,
                                       properties : PROPS, ATTS > CONF', GEN)
   if E # B := eval(p[DataModel::InitialValue], prop(PROPS)) /\ TY == type(E) .
 
@@ -67,40 +67,40 @@ mod MODEL-INIT is
   if {V,GEN'} := gen(GEN,TY) .
 
   --- all input ports are initialized as bots
-  eq initialize(< PI : C:DataInPort | content : null(TY), 
+  eq initialize(< PI : C:DataInPort | content : null(TY),
                                       cache : null(TY), ATTS > CONF, CONF', GEN)
-   = initialize(CONF, < PI : C:DataInPort | content : bot(TY), 
+   = initialize(CONF, < PI : C:DataInPort | content : bot(TY),
                                             cache : bot(TY), ATTS > CONF', GEN) .
-     
+
   --- output ports with given initial values are initialized as the values.
- ceq initialize(< PI : C:DataOutPort | content : null(TY), 
+ ceq initialize(< PI : C:DataOutPort | content : null(TY),
                                        properties : PROPS, ATTS > CONF, CONF', GEN)
-   = initialize(CONF, < PI : C:DataOutPort | content : E # B, 
-                                             properties : PROPS, ATTS > CONF', GEN) 
+   = initialize(CONF, < PI : C:DataOutPort | content : E # B,
+                                             properties : PROPS, ATTS > CONF', GEN)
   if E # B := eval(p[DataModel::InitialValue], prop(PROPS)) /\ TY == type(E) .
 
   --- all other output parts are initialized as bots
 
- ceq initialize(< PI : C:DataOutPort | content : null(TY), 
+ ceq initialize(< PI : C:DataOutPort | content : null(TY),
                                        properties : PROPS, ATTS > CONF, CONF', GEN)
-   = initialize(CONF, < PI : C:DataOutPort | content : bot(TY), 
-                                             properties : PROPS, ATTS > CONF', GEN) 
+   = initialize(CONF, < PI : C:DataOutPort | content : bot(TY),
+                                             properties : PROPS, ATTS > CONF', GEN)
   if not $hasMapping(PROPS, DataModel::InitialValue) .
 
   --- for an env input port, its envCache is initialized as a variable.
- ceq initialize(< PI : C:EnvInPort | content : null(TY), 
+ ceq initialize(< PI : C:EnvInPort | content : null(TY),
                                      envCache : null(TY), ATTS > CONF, CONF', GEN)
-   = initialize(CONF, < PI : C:EnvInPort | content : bot(TY), 
-                                           envCache : V # BV, ATTS > CONF', GEN'') 
-  if {V,GEN'}   := gen(GEN,TY) 
+   = initialize(CONF, < PI : C:EnvInPort | content : bot(TY),
+                                           envCache : V # BV, ATTS > CONF', GEN'')
+  if {V,GEN'}   := gen(GEN,TY)
   /\ {BV,GEN''} := gen(GEN',Boolean) .
 
   --- for an env output port, both content and envCacne are initialized as the SAME variable.
- ceq initialize(< PI : C:EnvOutPort | content : null(TY), 
+ ceq initialize(< PI : C:EnvOutPort | content : null(TY),
                                       envCache : null(TY), ATTS > CONF, CONF', GEN)
-   = initialize(CONF, < PI : C:EnvOutPort | content : V # BV, 
+   = initialize(CONF, < PI : C:EnvOutPort | content : V # BV,
                                             envCache : V # BV, ATTS > CONF', GEN'')
-  if {V,GEN'}   := gen(GEN,TY) 
+  if {V,GEN'}   := gen(GEN,TY)
   /\ {BV,GEN''} := gen(GEN',Boolean) .
 
   eq initialize(none, CONF, GEN) = {CONF,GEN} .
@@ -108,7 +108,7 @@ endm
 
 
 
---- We assume that there is no port in the top-level component; 
+--- We assume that there is no port in the top-level component;
 --- otherwise, we need to clear the output ports for each step
 mod MODEL-TRANSITION-SYSTEM is
   including ENV-DYNAMICS .
@@ -116,14 +116,11 @@ mod MODEL-TRANSITION-SYSTEM is
   including THREAD-DYNAMICS .
   including ENSEMBLE-DYNAMICS .
   including MODEL-INIT .
-  including BOOL-EXP-SIMPLIFICATION .
-  including REAL-EXP-SIMPLIFICATION .
-  including COND-EXP-SIMPLIFICATION .
   protecting SMT-CHECKSAT .
   including COLLAPSE-SINGLE-ENSEMBLE .
   including TIME .
-  
-  var CR : ComponentRef . 
+
+  var CR : ComponentRef .
   vars OBJ OBJ' : Object .
   vars B CONST CONST' : BoolExp .
   var ATTS : AttributeSet .
@@ -132,25 +129,22 @@ mod MODEL-TRANSITION-SYSTEM is
   var TI : TimeInf .
   var PER : RealExp .
   var PROPS : PropertyAssociation .
-  
-  sort GlobalSystem .
-  op {_,_,_} : ConstConfig Time TimeInf -> GlobalSystem [ctor] .
-  op MFlag : -> Bool .
 
-  crl [step]: 
-      {CONST || OBJ, T, TI}
+  sort GlobalSystem .
+  op {_|_|_} : ConstConfig Time TimeInf -> GlobalSystem [ctor] .
+
+  crl [step]:
+      {CONST || OBJ | T | TI}
    =>
-      {(CONST and CONST') || OBJ', T + NT, TI}
-   if 
+      {(CONST and CONST') || OBJ' | T + NT | TI}
+   if
       < CR : C:System | features : none, properties : PROPS, ATTS > := OBJ
    /\ PER # B := eval(p[TimingProperties::Period], prop(PROPS))
-   /\ NT := rval(PER) 
+   /\ NT := rval(PER)
    /\ T + NT <= TI
-   /\ executeStep(CONST, OBJ, MFlag) => CONST' || OBJ' .
+   /\ executeStep(CONST, OBJ) => CONST' || OBJ' .
 
   --- final condition
   op finalConst : GlobalSystem ~> BoolExp .
-  eq finalConst({CONST || OBJ, T, TI}) = CONST and finalConst(OBJ) .
+  eq finalConst({CONST || OBJ | T | TI}) = CONST and finalConst(OBJ) .
 endm
-
-

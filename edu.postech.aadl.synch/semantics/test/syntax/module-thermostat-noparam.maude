@@ -17,7 +17,7 @@ mod THERMOSTAT-SYSTEM-NOPARAM is
   eq objC =
     < controller : Thread |
         features :
-            < temp : DataInPort | content : null(Real), 
+            < temp : DataInPort | content : null(Real),
                                   cache : null(Real),
                                   properties : none >
             < on  : DataOutPort | content : null(Unit),
@@ -25,19 +25,19 @@ mod THERMOSTAT-SYSTEM-NOPARAM is
             < off : DataOutPort | content : null(Unit),
                                   properties : none >,
         subcomponents :
-            < lower : Data | value : null(Real), 
+            < lower : Data | value : null(Real),
                              features : none,
-                             subcomponents : none, 
+                             subcomponents : none,
                              properties : DataModel::InitialValue => {{10}},
                              connections : empty >
-            < upper : Data | value : null(Real), 
+            < upper : Data | value : null(Real),
                              features : none,
-                             subcomponents : none, 
+                             subcomponents : none,
                              properties : DataModel::InitialValue => {{30}},
                              connections : empty >
-            < curr : Data | value : null(Real), 
+            < curr : Data | value : null(Real),
                             features : none,
-                            subcomponents : none, 
+                            subcomponents : none,
                             properties : DataModel::InitialValue => {{0}},
                             connections : empty >,
         properties : (TimingProperties::Period => {{5}}) ;
@@ -50,10 +50,10 @@ mod THERMOSTAT-SYSTEM-NOPARAM is
             (l1 -[ on dispatch ]-> l2 {
                 (v{x} := (c[curr] + f[temp]) / [[2]]) ;
                 if (v[x] < c[lower])
-                    (on !) 
+                    (on !)
                 (elsif (v[x] > c[upper])
                     (off !))
-                end if 
+                end if
                 ;
                 c{curr} := v[x]
             })
@@ -66,14 +66,14 @@ mod THERMOSTAT-SYSTEM-NOPARAM is
         varGen : < "top.controller" >,
         connections : empty > .
 
-  eq objE = 
+  eq objE =
         < environment : Env |
-            features : 
-                < on  :  EnvInPort | content  : null(Unit), 
+            features :
+                < on  :  EnvInPort | content  : null(Unit),
                                      properties : none,
                                      envCache : null(Unit),
                                      target : controller >
-                < off :  EnvInPort | content  : null(Unit), 
+                < off :  EnvInPort | content  : null(Unit),
                                      properties : none,
                                      envCache : null(Unit),
                                      target : controller >
@@ -92,11 +92,11 @@ mod THERMOSTAT-SYSTEM-NOPARAM is
             properties : (HybridSynchAADL::MaxClockDeviation => {{0.1}}) ; (TimingProperties::Period => {{5}}),
             currMode : l1,
             jumps :
-                (l1 -[ on  ]-> l2) 
+                (l1 -[ on  ]-> l2)
                 ;
-                (l1 -[ off ]-> l1) 
+                (l1 -[ off ]-> l1)
                 ;
-                (l2 -[ on  ]-> l2) 
+                (l2 -[ on  ]-> l2)
                 ;
                 (l2 -[ off ]-> l1),
             flows :
@@ -111,10 +111,10 @@ mod THERMOSTAT-SYSTEM-NOPARAM is
         < top : System |
                 features : none,
                 subcomponents : objC objE,
-                connections : 
+                connections :
                     (controller .. on --> environment .. on) ;
                     (controller .. off --> environment .. off) ;
                     (environment .. out --> controller .. temp),
-                properties : none >
+                properties : (TimingProperties::Period => {{5}}) >
         .
 endm

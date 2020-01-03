@@ -116,7 +116,7 @@ mod THERMOSTAT-SYSTEM-SYNTAX is
                     (controller .. on --> environment .. on) ;
                     (controller .. off --> environment .. off) ;
                     (environment .. out --> controller .. temp),
-                properties : none >
+                properties : (TimingProperties::Period => {{5}}) >
         .
 endm
 

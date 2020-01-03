@@ -1,0 +1,144 @@
+
+--- In this version, we merge two constraints using the operator _?_:_ and Boolean variables.
+--- This may increase the size of overall formulas. But unline the first version, formulas
+--- in linear arithmetic are still linear after merging
+
+fmod SYM-MERGE-EXP is
+  protecting REAL-EXP .
+  protecting VAR-GEN .
+
+  var BV : BoolExp .
+  vars E E' : Exp .
+
+  --- Given a Boolean flag B, symbolically merge exps E and E' into BV ? E : E' 
+  op symMerge : Exp Exp BoolExp ~> Exp .
+  eq symMerge(E, E,  BV) = E .
+ ceq symMerge(E, E', BV) = BV ? E : E'  if type(E) == type(E') [owise] .
+endfm
+
+
+fmod SYM-MERGE-LOCATION is
+  including BEHAVIOR-SYMBOLIC-LOCATION .
+  including SYM-MERGE-EXP .
+
+  var BV : BoolExp .
+  vars R R' : RealExp .
+
+  op symMerge : Location Location BoolExp ~> Location .
+  eq symMerge(loc(R), loc(R'), BV) = loc(symMerge(R, R', BV)) .
+endfm
+
+
+fmod SYM-MERGE-DATA-CONTENT is
+  including DATA-CONTENT .
+  including SYM-MERGE-EXP .
+
+  vars E E' : Exp .
+  vars BV B B' : BoolExp .
+
+  op symMerge : DataContent DataContent BoolExp ~> DataContent .
+  eq symMerge(E # B, E' # B', BV) = symMerge(E,E',BV) # symMerge(B,B',BV) .
+endfm
+
+
+fmod SYM-MERGE-FEATURE-MAP-CONTENT is
+  including FEATURE-MAP-CONTENT .
+  including SYM-MERGE-DATA-CONTENT .
+
+  var F : FeatureMapContent .
+  vars D D' : DataContent .
+  vars BV B B' B'' CS1 CS1' CS2 CS2' : BoolExp .
+  var GEN GEN1 GEN2 GEN# : VarGen .
+
+  op symMerge : FeatureMapContent FeatureMapContent BoolExp ~> FeatureMapContent .
+  eq symMerge(D : B, D' : B', BV) = symMerge(D,D',BV) : symMerge(B,B',BV) .
+endfm
+
+
+
+fmod SYM-MERGE-FEATURE-MAP is
+  including FEATURE-MAP .
+  including SYM-MERGE-FEATURE-MAP-CONTENT .
+
+  var BV : BoolExp .
+  vars FC FC' : FeatureMapContent .
+  vars FMAP FMAP' FMAP'' : FeatureMap . 
+  var PI : FeatureId .
+
+  op symMerge : FeatureMap FeatureMap BoolExp ~> FeatureMap .
+  op symMerge : FeatureMap FeatureMap FeatureMap BoolExp ~> FeatureMap .
+
+  eq symMerge(FMAP, FMAP', BV) = symMerge(FMAP, FMAP', empty, BV) .
+
+  eq symMerge((PI |-> FC, FMAP), (PI |-> FC', FMAP'), FMAP'', BV)
+   = symMerge(FMAP, FMAP', (FMAP'', PI |-> symMerge(FC,FC',BV)), BV) .
+
+  eq symMerge(empty, empty, FMAP, BV) = FMAP .
+endfm
+
+
+
+mod SYM-MERGE-DATA-VALUATION is
+  including DATA-VALUATION .
+  including SYM-MERGE-DATA-CONTENT .
+
+  var BV : BoolExp .
+  vars D D' : DataContent .
+  vars DATA DATA' DATA'' : DataValuation . 
+  var CR : ComponentRef .  
+
+  --- create new variables
+  op symMerge : DataValuation DataValuation BoolExp ~> DataValuation .
+  op symMerge : DataValuation DataValuation DataValuation BoolExp ~> DataValuation .
+
+  eq symMerge(DATA, DATA', BV) = symMerge(DATA, DATA', empty, BV) .
+
+  eq symMerge((CR |=> D, DATA), (CR |=> D', DATA'), DATA'', BV)
+   = symMerge(DATA, DATA', (DATA'', CR |=> symMerge(D,D',BV)), BV) .
+
+  eq symMerge(empty, empty, DATA, BV) = DATA .
+endm
+
+
+
+mod SYM-MERGE-TRANSITION-RESULT is
+  protecting SET{BATransResult} * (op _,_ : Set{BATransResult} Set{BATransResult} -> Set{BATransResult} to _;;_) .
+  including SYM-MERGE-LOCATION .
+  including SYM-MERGE-FEATURE-MAP .
+  including SYM-MERGE-DATA-VALUATION .
+
+  var BTR : BATransResult .
+  var BTRS : Set{BATransResult} .
+  vars L L' L'' : Location .
+  vars FMAP FMAP' FMAP'' : FeatureMap .
+  vars DATA DATA' DATA'' : DataValuation .
+  vars BV CS CS' : BoolExp .
+  var GEN GEN' GEN0 GEN1 : VarGen .
+
+
+--- symbolically merge transition results
+  op symMerge : NeSet{BATransResult} ~> BATransResult [format (m! o)] .
+  op symMerge : BATransResult Set{BATransResult} VarGen ~> BATransResult [format (m! o)] .
+
+  eq symMerge(BTR ;; BTRS) = symMerge(BTR, BTRS, maxGen(BTR ;; BTRS)) .
+
+  ceq symMerge((L  | FMAP  | DATA  | CS  | GEN), 
+               (L' | FMAP' | DATA' | CS' | GEN') ;; BTRS, GEN0) 
+    =
+      symMerge(L'' | FMAP'' | DATA'' | ((CS and BV) or (CS' and not BV)) | GEN1, BTRS, GEN1)
+  if {BV,GEN1} := gen(GEN0,Boolean)
+  /\ L''    := symMerge(L,    L',    BV) 
+  /\ FMAP'' := symMerge(FMAP, FMAP', BV)
+  /\ DATA'' := symMerge(DATA, DATA', BV) .
+
+  eq symMerge(BTR, empty, GEN') = BTR .
+
+--- find maximal vargen
+  op maxGen : NeSet{BATransResult} ~> VarGen [format (m! o)] .
+  op maxGen : Set{BATransResult} VarGen ~> VarGen [format (m! o)] .
+
+  eq maxGen((L | FMAP | DATA | CS | GEN) ;; BTRS) = maxGen(BTRS, GEN) .
+  eq maxGen((L | FMAP | DATA | CS | GEN) ;; BTRS, GEN') = maxGen(BTRS, max(GEN,GEN')) .
+  eq maxGen(empty, GEN) = GEN .
+endm
+

@@ -82,7 +82,7 @@
             sequence="M1+7">
       </key>
       <key
-            commandId="SynchAadlMenu.commands.sampleCommand3"
+            commandId="SynchAadlMenu.commands.sampleCommand4"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+8">
@@ -120,7 +120,7 @@
                   mnemonic="S">
             </command>
             <command
-                  commandId="SynchAadlMenu.commands.sampleCommand3"
+                  commandId="SynchAadlMenu.commands.sampleCommand4"
                   id="SynchAadlMenu.menus.sampleCommand4"
                   mnemonic="S">
             </command>

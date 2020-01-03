@@ -19,7 +19,7 @@ mod THERMOSTAT-SYSTEM-SYNTAX is
                 subcomponents :
                     < controller : Thread |
                         features :
-                            < temp : DataInPort | content : null(Real), 
+                            < temp : DataInPort | content : null(Real),
                                                   cache : null(Real),
                                                   properties : none >
                             < on  : DataOutPort | content : null(Real),
@@ -27,19 +27,19 @@ mod THERMOSTAT-SYSTEM-SYNTAX is
                             < off : DataOutPort | content : null(Real),
                                                   properties : none >,
                         subcomponents :
-                            < lower : Data | value : null(Real), 
+                            < lower : Data | value : null(Real),
                                              features : none,
-                                             subcomponents : none, 
+                                             subcomponents : none,
                                              properties : DataModel::InitialValue => {{10}},
                                              connections : empty >
-                            < upper : Data | value : null(Real), 
+                            < upper : Data | value : null(Real),
                                              features : none,
-                                             subcomponents : none, 
+                                             subcomponents : none,
                                              properties : DataModel::InitialValue => {{30}},
                                              connections : empty >
-                            < curr : Data | value : null(Real), 
+                            < curr : Data | value : null(Real),
                                             features : none,
-                                            subcomponents : none, 
+                                            subcomponents : none,
                                             properties : DataModel::InitialValue => {{15}},
                                             connections : empty >,
                         properties : (TimingProperties::Period => {{5}}) ;
@@ -52,10 +52,10 @@ mod THERMOSTAT-SYSTEM-SYNTAX is
                             (init -[ on dispatch ]-> state {
                                 (v{x} := (c[curr] + f[temp]) / [[2]]) ;
                                 if (v[x] < c[lower])
-                                    (on ! ([[1]])) 
+                                    (on ! ([[1]]))
                                 (elsif (v[x] > c[upper])
                                     (off ! ([[-1]])))
-                                end if 
+                                end if
                                 ;
                                 c{curr} := v[x]
                             })
@@ -68,12 +68,12 @@ mod THERMOSTAT-SYSTEM-SYNTAX is
                         varGen : < "top.controller" >,
                         connections : empty >
                     < environment : Env |
-                        features : 
-                            < on  :  EnvInPort | content  : null(Real), 
+                        features :
+                            < on  :  EnvInPort | content  : null(Real),
                                                  properties : none,
                                                  envCache : null(Real),
                                                  target : controller >
-                            < off :  EnvInPort | content  : null(Real), 
+                            < off :  EnvInPort | content  : null(Real),
                                                  properties : none,
                                                  envCache : null(Real),
                                                  target : controller >
@@ -95,15 +95,15 @@ mod THERMOSTAT-SYSTEM-SYNTAX is
                         connections :
                             (x ==> out) ;
                             (on =>> e) ; (off =>> e),
-                        properties : (HybridSynchAADL::MaxClockDeviation => {{0.1}}) ; 
+                        properties : (HybridSynchAADL::MaxClockDeviation => {{0.1}}) ;
                                      (TimingProperties::Period => {{5}}),
                         currMode : init,
                         jumps :
-                            (init -[ on  ]-> state) 
+                            (init -[ on  ]-> state)
                             ;
-                            (init -[ off ]-> init) 
+                            (init -[ off ]-> init)
                             ;
-                            (state -[ on  ]-> state) 
+                            (state -[ on  ]-> state)
                             ;
                             (state -[ off ]-> init),
                         flows :
@@ -113,10 +113,10 @@ mod THERMOSTAT-SYSTEM-SYNTAX is
                         varGen : < "top.environment" >,
                         sampling : ((controller : (0,2))),
                         response : ((controller : (3,4))) >,
-                connections : 
+                connections :
                     (controller .. on --> environment .. on) ;
                     (controller .. off --> environment .. off) ;
                     (environment .. out --> controller .. temp),
-                properties : none >
+                properties : (TimingProperties::Period => {{5}}) >
         .
 endm

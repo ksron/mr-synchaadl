@@ -1,4 +1,3 @@
-
 mod ENV-CONF is
   including BEHAVIOR-EXPRESSION-CONF .
   including INTERACTION-TIMING-SET .
@@ -22,12 +21,16 @@ mod ENV-CONTINUOUS-SEMANTICS is
   including BEHAVIOR-EXPRESSION-SEMANTICS .
   including BEHAVIOR-ACTION-CONF .
   including ENV-FLOW-SET .
+  including ENV-CONF .
 
   var VI : VarId .
+  var L : Location .
   var AE : AADLExp .
   var T : RealExp .
   var D : DataContent .
   var CR : ComponentRef .
+  var FLOW : FlowItem .
+  var FLOWS : Set{EnvFlow} .
   var FUNCS : Set{AADLEnvFunc} . 
   vars DATA : DataValuation .
   var ECF : BehaviorConf .
@@ -71,36 +74,55 @@ mod ENV-TRANSITION-AUX is
   var ATTS : AttributeSet .
   var PORTS : Configuration .
 
+--- check if a port has a given target .
+  op validTarget : FeatureId ComponentRef BehaviorConf ~> Bool [format (m! o)] .
+  op validTarget : FeatureId ComponentRef Configuration ~> Bool [format (m! o)] .
+
+  eq validTarget(PI, CR, envcon(CONXS,PORTS) ECF) = validTarget(PI, CR, PORTS) .
+  eq validTarget(PI, CR, < PI : C:EnvPort | target : CR, ATTS > PORTS) = true .
+  eq validTarget(PI, CR, PORTS) = false [owise] .
+
+
 --- check if a port is present
+  op isPortPresent : FeatureId BehaviorConf ~> BoolExp [format (m! o)] .
+  eq isPortPresent(PI, feature(FMAP) ECF) = isPortPresent(PI, FMAP) .
+
   op isPortPresent : FeatureId FeatureMap ~> BoolExp [format (m! o)] .
   eq isPortPresent(PI, (PI |-> (E # B : B'), FMAP)) = B and B' .
 
 --- check if for each transition from L, the related port is absent, provided the port is connected to CR
-  op allPortsAbsent : Location Set{EnvJump} FeatureMap ComponentRef Configuration ~> BoolExp [format (m! o)] .
-  op allPortsAbsent : Location Set{EnvJump} FeatureMap ComponentRef Configuration BoolExp ~> BoolExp [format (m! o)] .
+  op allPortsAbsent : Location ComponentRef BehaviorConf ~> BoolExp [format (m! o)] .
+  eq allPortsAbsent(L, CR, jumps(JUMPS) ECF)
+   = allPortsAbsent(L, JUMPS, CR, ECF) .
 
-  eq allPortsAbsent(L, JUMPS, FMAP, CR, PORTS) = allPortsAbsent(L, JUMPS, FMAP, CR, PORTS, bool(true)) .
-  eq allPortsAbsent(L, (L -[ PRS ]-> L') ; JUMPS, FMAP, CR, PORTS, CONST)
-   = allPortsAbsent(L, JUMPS, FMAP, CR, PORTS, CONST and allPortsAbsent(PRS, CR, PORTS, FMAP)) .
-  eq allPortsAbsent(L, JUMPS, FMAP, CR, PORTS, CONST) = CONST [owise] .
+  op allPortsAbsent : Location Set{EnvJump} ComponentRef BehaviorConf  ~> BoolExp [format (m! o)] .
+  op allPortsAbsent : Location Set{EnvJump} ComponentRef BehaviorConf  BoolExp ~> BoolExp [format (m! o)] .
+
+  eq allPortsAbsent(L, JUMPS, CR, ECF) = allPortsAbsent(L, JUMPS, CR, ECF, bool(true)) .
+  eq allPortsAbsent(L, (L -[ PRS ]-> L') ; JUMPS, CR, ECF, CONST)
+   = allPortsAbsent(L, JUMPS, CR, ECF, CONST and allPortsAbsent(PRS, CR, ECF)) .
+  eq allPortsAbsent(L, JUMPS, CR, ECF, CONST) = CONST [owise] .
 
   --- all ports with target CR whose ids are in PRS are absent
-  op allPortsAbsent : Set{FeatureRef} ComponentRef Configuration FeatureMap ~> BoolExp [format (m! o)] .
-  eq allPortsAbsent((PI, PRS), CR, < PI : C:EnvInPort | target : CR, ATTS > PORTS, FMAP) 
-   = not isPortPresent(PI,FMAP) and 
-     allPortsAbsent(PRS, CR, < PI : C:EnvInPort | target : CR, ATTS > PORTS, FMAP) .
-  eq allPortsAbsent(PRS, CR, PORTS, FMAP) = bool(true) .
+  op allPortsAbsent : Set{FeatureRef} ComponentRef BehaviorConf ~> BoolExp [format (m! o)] .
+ ceq allPortsAbsent((PI, PRS), CR, ECF) 
+   = not isPortPresent(PI,ECF) and allPortsAbsent(PRS, CR, ECF)
+   if validTarget(PI, CR, ECF) .
+  eq allPortsAbsent(PRS, CR, ECF) = bool(true) [owise] .
 
 --- update the feature map according to the data and the connection
 --- only connections related to CR are considered!
-  op updateEnvFeature : Set{Connection} Configuration ComponentRef BehaviorConf ~> BehaviorConf .
-  eq updateEnvFeature((CI ==> PI) ; CONXS, < PI : C:EnvOutPort | target : CR, ATTS > PORTS, CR, 
-                      data(DATA) feature(FMAP) ECF)
+  op updateEnvFeature : ComponentRef BehaviorConf ~> BehaviorConf .
+  eq updateEnvFeature(CR, envcon(CONXS,PORTS) ECF)
+   = updateEnvFeature(CONXS, CR, envcon(CONXS,PORTS) ECF) .
+
+  op updateEnvFeature : Set{Connection} ComponentRef BehaviorConf ~> BehaviorConf .
+ ceq updateEnvFeature((CI ==> PI) ; CONXS, CR, data(DATA) feature(FMAP) ECF)
                       
-   = updateEnvFeature(CONXS, < PI : C:EnvOutPort | target : CR, ATTS > PORTS, CR, 
-                      data(DATA) feature(insert(PI, DATA[CI], FMAP)) ECF) .
+   = updateEnvFeature(CONXS, CR, data(DATA) feature(insert(PI, DATA[CI], FMAP)) ECF)
+   if validTarget(PI, CR, ECF) .
                       
-  eq updateEnvFeature(CONXS, PORTS, CR, ECF) = ECF [owise] .
+  eq updateEnvFeature(CONXS, CR, ECF) = ECF [owise] .
 endm
 
 

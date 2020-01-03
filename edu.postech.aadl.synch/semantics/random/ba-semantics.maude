@@ -3,6 +3,13 @@
 mod BEHAVIOR-ACTION-CONF is
   including VAR-GEN .
   including BEHAVIOR-CONF .
+  protecting CHECKSAT .
+
+  var BCF : BehaviorConf .
+  var CONST : BoolExp .
+
+  op addConst : BehaviorConf BoolExp ~> BehaviorConf [format (b! o)] .
+  ceq addConst(BCF, CONST) = BCF if check-true(CONST) .
 endm
 
 
@@ -11,8 +18,8 @@ endm
 --- Also, bound information is not necessary.
 mod BEHAVIOR-ACTION-SEMANTICS is
   including BEHAVIOR-ACTION-SYNTAX .
+  including BEHAVIOR-ACTION-CONF .
   including BEHAVIOR-EXPRESSION-SEMANTICS .
-  protecting CHECKSAT .
 
   var N : Nat .
   var E : Exp .

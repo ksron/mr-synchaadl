@@ -253,7 +253,7 @@ mod ENV-DYNAMICS is
                          features : writeEnvFeature(FMAP,PORTS),
                          connections : CONXS, 
                          subcomponents : COMPS, ATTS >
-  if feature(FMAP) ECF := updateEnvFeature(CONXS, PORTS, CI, feature(empty) data(readData(COMPS))) 
+  if feature(FMAP) ECF := updateEnvFeature(CONXS, CI, envcon(CONXS,PORTS) feature(empty) data(readData(COMPS))) 
    [print "env sampling " FMAP " by " CR] .
 
 

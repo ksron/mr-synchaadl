@@ -177,7 +177,7 @@ endv
 
 
 --- NOTE: we do not support a transition priority yet.
-mod BEHAVIOR-TRANSITION-SEMANTICS is
+mod BEHAVIOR-TRANSITION-EXEC is
   including BEHAVIOR-ACTION-SEMANTICS .
   including BEHAVIOR-TRANSITION-RESULT .
   including BEHAVIOR-SYMBOLIC-LOCATION .
@@ -199,11 +199,11 @@ mod BEHAVIOR-TRANSITION-SEMANTICS is
   op tbound : Nat -> BehaviorConfItem [ctor format (b! o)] .
 
 --- Execute (nondeterministic) transitions until reaching a complete state,
-  op execTrans : BehaviorConf ~> BATransResult [format (m! o)] .
+  op execBehTrans : BehaviorConf ~> BATransResult [format (m! o)] .
 
 --- NOTE: SL can be potentially a symbolic location
   crl [trans]:
-     execTrans(location(SL) trans(TRS) tbound(s(N)) local(VAL) BCF)
+     execBehTrans(location(SL) trans(TRS) tbound(s(N)) local(VAL) BCF)
    =>
      execTStep(VAL, addConst(location(L') trans(TRS) tbound(N) execAction(ACT, local(VAL) BCF), B and B'))
    if (L -[GUARD]-> L' ACT) ; TRS' := TRS
@@ -216,6 +216,13 @@ mod BEHAVIOR-TRANSITION-SEMANTICS is
    eq execTStep(VAL, location(L) complete(LS) local(VAL') BCF) 
     = if L in LS
       then transResult(L, BCF) 
-      else execTrans(location(L) complete(LS) local(VAL) BCF) fi .
+      else execBehTrans(location(L) complete(LS) local(VAL) BCF) fi .
 endm
 
+
+mod BEHAVIOR-TRANSITION-SEMANTICS is
+  protecting BEHAVIOR-TRANSITION-EXEC .
+
+  op execTrans : BehaviorConf ~> BATransResult [format (m! o)] .
+  eq execTrans(BCF:BehaviorConf) = execBehTrans(BCF:BehaviorConf) .
+endm

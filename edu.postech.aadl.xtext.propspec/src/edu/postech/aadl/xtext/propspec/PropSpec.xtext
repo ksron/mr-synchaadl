@@ -24,13 +24,13 @@ Property:
 	Reachability | Invariant;
 	
 Reachability:
-	'reachability' '[' name=ID ']' ':' initCond=ValueExpression '==>' goalCond=ValueExpression 'in' 'time' bound=INTVALUE ';';
+	'reachability' '[' name=ID ']' ':' (initCond=PSExpression '==>')? goalCond=PSExpression 'in' 'time' bound=INTVALUE ';';
 
 Invariant:
-	'invariant' '[' name=ID ']' ':' initCond=ValueExpression '==>' goalCond=ValueExpression 'in' 'time' bound=INTVALUE ';';
+	'invariant' '[' name=ID ']' ':' (initCond=PSExpression '==>')? goalCond=PSExpression 'in' 'time' bound=INTVALUE ';';
 	
-Proposition:
-	'proposition' '[' name=ID ']' ':' expression=ValueExpression ';';	
+Proposition :
+	'proposition' '[' name=ID ']' ':' expression=PSExpression ';';	
 
 
 /*
@@ -38,23 +38,23 @@ Proposition:
  */
 
 Mode:
-	SYMBOLIC| MODELCHECK | RANDOM | DISTRIBUTED
+	(SYMBOLIC| MODELCHECK | RANDOM | DISTRIBUTED) verbose=("-verbose")?
 ;
 
 SYMBOLIC:
-	"symbolic" option=("-merge")?
+	name="symbolic" option=("-merge")?
 ;
 
 MODELCHECK:
-	"model-check" option=("-merge")?
+	name="model-check" option=("-merge")?
 ;
 
 RANDOM:
-	"random" seed=INTVALUE;
+	name="random";
 
 
 DISTRIBUTED:
-	"distributed" degree=INTVALUE;
+	name="distributed" '(' sample=INTVALUE ',' response=INTVALUE ')';
 
 
 /* 
@@ -66,33 +66,45 @@ DISTRIBUTED:
  * A subset of the behavior expression language
  */
 
-ValueExpression returns aadl2::PropertyExpression:
-    (Relation) ({BinaryExpression.left=current} op=('and'|'or'|'xor') right=Relation)*;
+
+PSExpression:
+	ScopedExpression ({BinaryExpression.left=current} op=('and'|'or'|'xor') right=PSExpression)*	
+|	Relation ({BinaryExpression.left=current} op=('and'|'or'|'xor') right=Relation)*	
+;
     
 
-Relation returns aadl2::PropertyExpression:
-    ModifiedExpression ({BinaryExpression.left=current} op=('='|'!='|'<'|'<='|'>'|'>=') right=ModifiedExpression)?;
+Relation returns PSExpression:
+    ModifiedExpression ({BinaryExpression.left=current} op=('='|'!='|'<'|'<='|'>'|'>=') right=ModifiedExpression)?
+|	'!' PropRef
+;
 
-ModifiedExpression returns aadl2::PropertyExpression:
+ModifiedExpression returns PSExpression:
 	SimpleExpression
-|	{UnaryExpression} op=('+'|'-') child=SimpleExpression;
+|	{UnaryExpression} op=('+'|'-') child=SimpleExpression
+;
 
-SimpleExpression returns aadl2::PropertyExpression:
-    Term ({BinaryExpression.left=current} op=('+'|'-') right=Term)*;
+SimpleExpression returns PSExpression:
+    Term ({BinaryExpression.left=current} op=('+'|'-') right=Term)*
+;
 
-Term returns aadl2::PropertyExpression:
+Term returns PSExpression:
    Value ({BinaryExpression.left=current} op=('*'|'/') right=Value)*
-|  {UnaryExpression} op=('abs'|'not') child=Value;
+|  {UnaryExpression} op=('abs'|'not') child=Value
+;
 
-
-Value returns aadl2::PropertyExpression:
-	ScopedValue
-|	{Value} value=ValueConstant
+Value returns PSExpression:
+    {Value} value=ValueConstant
 |	{Value} value=ContainmentPath
-|	'(' ValueExpression ')';
+|	'(' PSExpression ')'
+;
 
-ScopedValue:
-	path=ContainmentPath '|' '(' expression=ValueExpression ')';
+PropRef:
+	def=[Proposition]
+;
+
+ScopedExpression:
+	path=ContainmentPath '|'  expression=PSExpression
+;
 
 /*
  * A value constant (string, unsigned real, unsigned integer, boolean)

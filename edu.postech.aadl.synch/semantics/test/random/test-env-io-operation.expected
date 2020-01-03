@@ -8,17 +8,14 @@ reduce in TEST-ENV-FEATURE-OPERATION : readEnvFeature((((< d : EnvOutPort |
     EnvInPort | content : real(0) # bool(true),envCache : real(0) # bool(true)
     >) .
 rewrites: 48
-result EnvFeatureReadResult: [< a : EnvInPort | content : [0.0] # [(
-    false).Bool],envCache : [0.0] # [(true).Bool] > < b : EnvInPort | content :
-    [(false).Bool] # [(false).Bool],envCache : [(false).Bool] # [(true).Bool] >
-    < c : EnvInPort | content : [0.0] # [(false).Bool],envCache : [2.0] # [(
-    false).Bool] > < d : EnvOutPort | content : [0.0] # [(false).Bool],envCache
-    : [3.0] # [(true).Bool],target : cr1 > < e : EnvOutPort | content : [(
-    true).Bool] # [(true).Bool],envCache : [4.0] # [(false).Bool],target : cr2
-    >,a |-> ([0.0] # [(true).Bool] : [(true).Bool]), b |-> ([(true).Bool] # [(
-    true).Bool] : [(true).Bool]), c |-> ([1.0] # [(false).Bool] : [(
-    true).Bool]), d |-> [0.0] # [(false).Bool], e |-> [(false).Bool] # [(
-    false).Bool]]
+result EnvFeatureReadResult: [< a : EnvInPort | content : [0.0] # [false],
+    envCache : [0.0] # [true] > < b : EnvInPort | content : [false] # [false],
+    envCache : [false] # [true] > < c : EnvInPort | content : [0.0] # [false],
+    envCache : [2.0] # [false] > < d : EnvOutPort | content : [0.0] # [false],
+    envCache : [3.0] # [true],target : cr1 > < e : EnvOutPort | content : [
+    true] # [true],envCache : [4.0] # [false],target : cr2 >,a |-> ([0.0] # [
+    true] : [true]), b |-> ([true] # [true] : [true]), c |-> ([1.0] # [false] :
+    [true]), d |-> [0.0] # [false], e |-> [false] # [false]]
 ==========================================
 reduce in TEST-ENV-FEATURE-OPERATION : writeEnvFeature(e |-> real(10000) #
     bool(true), (((< d : EnvOutPort | content : real(0) # bool(false),envCache
@@ -29,11 +26,10 @@ reduce in TEST-ENV-FEATURE-OPERATION : writeEnvFeature(e |-> real(10000) #
     bool(false) # bool(true) >) < a : EnvInPort | content : real(0) # bool(
     true),envCache : real(0) # bool(true) >) .
 rewrites: 22
-result Configuration: < a : EnvInPort | content : [0.0] # [(true).Bool],
-    envCache : [0.0] # [(true).Bool] > < b : EnvInPort | content : [(
-    true).Bool] # [(true).Bool],envCache : [(false).Bool] # [(true).Bool] > < c
-    : EnvInPort | content : [1.0] # [(false).Bool],envCache : [2.0] # [(
-    false).Bool] > < d : EnvOutPort | content : [0.0] # [(false).Bool],envCache
-    : [3.0] # [(true).Bool],target : cr1 > < e : EnvOutPort | content : [
-    1.0e+4] # [(true).Bool],envCache : [4.0] # [(false).Bool],target : cr2 >
+result Configuration: < a : EnvInPort | content : [0.0] # [true],envCache : [
+    0.0] # [true] > < b : EnvInPort | content : [true] # [true],envCache : [
+    false] # [true] > < c : EnvInPort | content : [1.0] # [false],envCache : [
+    2.0] # [false] > < d : EnvOutPort | content : [0.0] # [false],envCache : [
+    3.0] # [true],target : cr1 > < e : EnvOutPort | content : [1.0e+4] # [
+    true],envCache : [4.0] # [false],target : cr2 >
 Bye.

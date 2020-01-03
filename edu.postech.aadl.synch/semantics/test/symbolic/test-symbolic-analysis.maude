@@ -14,29 +14,23 @@ mod TEST-SYMBOLIC-ANALYSIS-MOD is
 
 endm
 
-mod TEST-SYMBOLIC-ANALYSIS is
-  including TEST-SYMBOLIC-ANALYSIS-MOD .
-
-  eq @m@ = ['TEST-SYMBOLIC-ANALYSIS-MOD] .
-endm
 
 search [,5]
       { eval(top . environment | ((c[e] < [[14.3]]) and (c[e] > [[1.5]])), initState) 
         || 
-        initState, false}
+        initState | 0 | infty}
  =>*
-      {B:BoolExp || OBJ:Object, false}
+      {B:BoolExp || OBJ:Object | T:Time | infty}
  such that
-      check-sat(B:BoolExp and 
-                eval(top . environment | (c[e] > [[3.4]]), OBJ:Object)) .
+      check-sat(B:BoolExp and eval(top . environment | (c[e] > [[3.4]]), OBJ:Object)) .
       
 
 search [,5]
     { eval(top . environment | ((c[e] < [[14.3]]) and (c[e] > [[1.5]])), initState)
       ||
-      initState, false}
+      initState | 0 | infty}
  =>*
-      {B:BoolExp || OBJ:Object, false}
+      {B:BoolExp || OBJ:Object | T:Time | infty}
  such that
       check-sat(B:BoolExp and 
                 eval(

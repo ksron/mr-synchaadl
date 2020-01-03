@@ -1,4 +1,6 @@
 
+set include BOOLEAN off .
+
 load syntax/abstract-exp.maude
 load syntax/identifiers.maude
 load syntax/aadl-value-property.maude
@@ -20,8 +22,7 @@ load syntax/time-domain.maude
 load distributed/async-feature.maude
 load distributed/async-component.maude
 load distributed/component-dynamics.maude
-load distributed/synchronous-model.maude
 
 load symbolic/specification-language.maude
-
+load distributed/synchronous-model.maude
 

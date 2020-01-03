@@ -1,3 +1,6 @@
+
+set include BOOLEAN off .
+
 load symbolic/smt-prelude.maude
 load syntax/abstract-exp.maude
 load syntax/identifiers.maude

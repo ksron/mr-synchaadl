@@ -30,7 +30,6 @@ import edu.postech.aadl.xtext.propspec.propSpec.Reachability;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
 
 public class ReqGeneration extends AbstractHandler {
-	private Top propSpecRes;
 
 	private PropspecEditorResourceManager resManager;
 
@@ -44,13 +43,16 @@ public class ReqGeneration extends AbstractHandler {
 
 		resManager.setEditor(xtextEditor);
 
-		propSpecRes = getPropSpecResource(resManager);
+		Top propSpecRes = getPropSpecResource(resManager);
+		String propSpecFileName = resManager.getEditorFile().getName();
+		propSpecFileName = propSpecFileName.substring(0, propSpecFileName.indexOf("."));
+
 
 		for (Property pr : propSpecRes.getProperty()) {
 			if (pr instanceof Reachability) {
-				maudeWithReachability((Reachability) pr);
+				maudeWithReachability(propSpecRes, (Reachability) pr, propSpecFileName);
 			} else if (pr instanceof Invariant) {
-				maudeWithInvariant((Invariant) pr);
+				maudeWithInvariant(propSpecRes, (Invariant) pr, propSpecFileName);
 			} else {
 				System.out.println("Not allowed property type");
 			}
@@ -58,21 +60,32 @@ public class ReqGeneration extends AbstractHandler {
 		return null;
 	}
 
-	private void maudeWithReachability(Reachability reach) {
-		String userFormulaMaude = RtmPropSpec.compilePropertyCommand(propSpecRes, reach, propSpecRes.getMode())
+	private void maudeWithReachability(Top propSpecRes, Reachability reach, String propSpecFileName) {
+		String userFormulaMaude = RtmPropSpec
+				.compilePropertyCommand(propSpecRes, reach, propSpecRes.getMode(), propSpecFileName)
 				.toString();
-		IPath userFormulaMaudePath = resManager.getCodegenFilePath().append("_" + reach.getName() + ".maude");
+		IPath userFormulaMaudePath = resManager.getCodegenFilePath().removeLastSegments(1)
+				.append(propSpecFileName + "-" + propSpecRes.getName() + getName(reach) + ".maude");
 
 		writeSearchMaudeFile(userFormulaMaude, userFormulaMaudePath);
 	}
 
 
-	private void maudeWithInvariant(Invariant inv) {
-		String userFormulaMaude = RtmPropSpec.compilePropertyCommand(propSpecRes, inv, propSpecRes.getMode())
+	private void maudeWithInvariant(Top propSpecRes, Invariant inv, String propSpecFileName) {
+		String userFormulaMaude = RtmPropSpec
+				.compilePropertyCommand(propSpecRes, inv, propSpecRes.getMode(), propSpecFileName)
 				.toString();
-		IPath userFormulaMaudePath = resManager.getCodegenFilePath().append("_" + inv.getName() + ".maude");
+		IPath userFormulaMaudePath = resManager.getCodegenFilePath().removeLastSegments(1)
+				.append(propSpecFileName + "-" + propSpecRes.getName() + getName(inv) + ".maude");
 
 		writeSearchMaudeFile(userFormulaMaude, userFormulaMaudePath);
+	}
+
+	private String getName(Property pr) {
+		if (pr.getName() != null) {
+			return "-" + pr.getName();
+		}
+		return "";
 	}
 
 	public void writeSearchMaudeFile(String txt, IPath path) {

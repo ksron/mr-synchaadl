@@ -1,0 +1,46 @@
+
+
+--- Boolean expressions
+fmod SMT-BOOL-EXP is
+  including SMT-BOOL-EXP-SYNTAX .
+
+  var N : Nat .
+  var S : String .
+  var B : Bool .
+
+  --- Boolean constants, enclosed by [_]
+  op [_] : Bool -> SMTBoolValue [ctor] .
+
+  eq getIndex(b(N)) = N .
+  eq getIndex(b(S, N)) = N .
+
+  eq bool(B) = [B] .
+  eq bval([B]) = B .
+endfm
+
+
+--- Real expressions.
+--- We consider SMT theories over reals with rational constants. That is,
+--- every concrete value is actually a rational constant, but a variable can
+--- have a real valuation.
+fmod SMT-REAL-EXP is
+  protecting SMT-BOOL-EXP .
+  including SMT-REAL-EXP-SYNTAX .
+
+  var N : Nat .
+  var S : String .
+  var R : Rat .
+  var F : Float .
+
+  --- rational constants, enclosed by [_]
+  op [_] : Rat -> SMTRealValue [ctor] .
+
+  eq getIndex(r(N)) = N .
+  eq getIndex(r(S, N)) = N .
+
+  eq real(R) = [R] .
+  eq real(F) = [rat(F)] .
+
+  eq fval([R]) = float(R) .
+  eq rval([R]) = R .
+endfm

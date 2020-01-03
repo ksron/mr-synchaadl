@@ -93,7 +93,7 @@ public class Run extends AbstractHandler {
 		String userFormula = RtmPropSpec.getReachabilityCommand(propSpecRes, reach).toString();
 		maude.setUserFormula(userFormula);
 
-		String userFormulaMaude = RtmPropSpec.compilePropertyCommand(propSpecRes, reach, propSpecRes.getMode())
+		String userFormulaMaude = RtmPropSpec.compilePropertyCommand(propSpecRes, reach, propSpecRes.getMode(), "")
 				.toString();
 
 		IPath userFormulaMaudePath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
@@ -103,7 +103,7 @@ public class Run extends AbstractHandler {
 		IPath resultPath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 				.append(getStringMergeOption(propSpecRes.getMode())).append("_" + reach.getName() + ".txt");
 
-		String nickName = reach.getName();
+		String nickName = "not implemented";
 		maude.runMaude(resultPath, nickName);
 	}
 
@@ -114,12 +114,10 @@ public class Run extends AbstractHandler {
 		String itptrPath = getMaudeInterpreterPath(propSpecRes.getMode());
 		maude.setMode(itptrPath);
 
-		String userFormula = RtmPropSpec.getRequirementCommand(propSpecRes, inv).toString();
-		maude.setUserFormula(userFormula);
 
 		maude.setRequirement(true);
 
-		String userFormulaMaude = RtmPropSpec.compilePropertyCommand(propSpecRes, inv, propSpecRes.getMode())
+		String userFormulaMaude = RtmPropSpec.compilePropertyCommand(propSpecRes, inv, propSpecRes.getMode(), "")
 				.toString();
 
 		IPath userFormulaMaudePath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
@@ -129,7 +127,7 @@ public class Run extends AbstractHandler {
 		IPath resultPath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 				.append(getStringMergeOption(propSpecRes.getMode())).append("_" + inv.getName() + ".txt");
 
-		String nickName = inv.getName();
+		String nickName = "not implemented";
 		maude.runMaude(resultPath, nickName);
 	}
 

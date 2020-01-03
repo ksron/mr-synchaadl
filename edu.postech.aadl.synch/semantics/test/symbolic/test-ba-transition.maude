@@ -15,5 +15,3 @@ search execTrans(location(loc([0])) complete(loc([0])) trans(trans1) bcf) =>+ R:
 search execTrans(location(loc([0])) complete(loc([0])) trans(trans2) bcf) =>+ R:BATransResult .
 
 search execTrans(location(loc([0])) complete(loc([0])) trans(trans3) bcf) =>+ R:BATransResult .
-
-

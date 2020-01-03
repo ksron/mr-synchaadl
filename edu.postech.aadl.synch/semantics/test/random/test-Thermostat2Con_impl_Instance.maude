@@ -18,10 +18,10 @@ mod TEST-THERMOSTAT-SYSTEM is
   eq cinitState = initialize(collapse(initial)) .
 endm
 
-rew [100] {{initState,0}} .
-rew [100] {{initState,800}} .
-rew [100] {{initState,1600}} .
+rew [100] {{initState,0} | 0 | infty} .
+rew [100] {{initState,800} | 0 | infty} .
+rew [100] {{initState,1600} | 0 | infty} .
 
-rew [100] {{cinitState,0}} .
-rew [100] {{cinitState,800}} .
-rew [100] {{cinitState,1600}} .
+rew [100] {{cinitState,0} | 0 | infty} .
+rew [100] {{cinitState,800} | 0 | infty} .
+rew [100] {{cinitState,1600} | 0 | infty} .

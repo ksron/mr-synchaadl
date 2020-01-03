@@ -1,0 +1,25 @@
+==========================================
+reduce in TEST-SYM-MERGE-TRANSITION-RESULT : symMerge((loc(r(2)) | a |-> (r(1)
+    # [false] : b(0)), b |-> (r(0) # b(1) : [true]), c |-> (r(0) # b(2) : b(
+    3)), d |-> r(2) # [false], e |-> [0] # [false] | c1 |=> r(1) # b(1), c2 |=>
+    r(0) # [false], c3 |=> [true] # b(2) | b("b", 0) | < "a.b",3,4 >) ;; loc(b(
+    0) ? r(0) : r(1)) | a |-> (r(1) # [false] : [false]), b |-> (r(0) # [true]
+    : [true]), c |-> (r(0) # (b(0) or b(1)) : b(0)), d |-> [0] # [false], e |->
+    [0] # [false] | c1 |=> [3/4] # b(1), c2 |=> r(0) # b(2), c3 |=> [true] # b(
+    2) | b("a", 0) | < "a.b",2,3 >) .
+rewrites: 116
+result BATransResult: loc(r("a.b", 3)) | a |-> (r(1) # [false] : b("a.b", 4)),
+    b |-> (r(0) # b("a.b", 5) : [true]), c |-> (r(0) # b("a.b", 6) : b("a.b",
+    7)), d |-> r("a.b", 4) # [false], e |-> [0] # [false] | c1 |=> r("a.b", 5)
+    # b(1), c2 |=> r(0) # b("a.b", 8), c3 |=> [true] # b(2) | not b("a.b", 9)
+    and [true] and [true] and [true] and [true] and [true] and [true] and [
+    true] and [true] and [true] and b("a.b", 4) === [false] and b("a.b", 5) ===
+    [true] and b("a.b", 6) === (b(0) or b(1)) and b("a.b", 7) === b(0) and b(
+    "a.b", 8) === b(2) and r("a.b", 3) === (b(0) ? r(0) : r(1)) and r("a.b", 4)
+    === [0] and r("a.b", 5) === [3/4] and b("a", 0) or [true] and [true] and [
+    true] and [true] and [true] and [true] and [true] and [true] and [true] and
+    b("a.b", 4) === b(0) and b("a.b", 5) === b(1) and b("a.b", 6) === b(2) and
+    b("a.b", 7) === b(3) and b("a.b", 8) === [false] and r("a.b", 3) === r(2)
+    and r("a.b", 4) === r(2) and r("a.b", 5) === r(1) and b("a.b", 9) and b(
+    "b", 0) | < "a.b",6,10 >
+Bye.

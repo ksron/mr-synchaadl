@@ -1,0 +1,15 @@
+set show timing off .
+
+load ../../interpreter-random.maude
+load ../syntax/module-thermostat-noparam.maude
+
+---------------------------------------------
+mod TEST-THERMOSTAT-SYSTEM is
+  including THERMOSTAT-SYSTEM-NOPARAM .
+  including RANDOM-SIMULATION .
+
+  op initState : -> Object .
+  eq initState = initialize(model) .
+endm
+
+red repeat({{initState,0} | 0 | 50}, [[false]]) .

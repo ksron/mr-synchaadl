@@ -1,0 +1,51 @@
+==========================================
+reduce in TEST-THREAD-DYNAMICS : finalConst(obj1) .
+rewrites: 4
+result SMTBoolValue: [true]
+==========================================
+reduce in TEST-THREAD-DYNAMICS : finalConst(obj2) .
+rewrites: 4
+result SMTBoolValue: [true]
+==========================================
+search in TEST-THREAD-DYNAMICS : executeStep(bool(true), obj1 transIn(real(4) #
+    bool(true), c1 .. inp)) =>* C:ConstConfig .
+
+Solution 1 (state 0)
+states: 1  rewrites: 344
+C:ConstConfig --> [4] < r(1) + [1] || < c1 : Thread | properties : none,
+    features : (< inp : DataInPort | properties : none,content : [0] # [false],
+    cache : [4] # [true] > < outp : DataOutPort | properties : none,content : [
+    6] # [true] >),subcomponents : (< x : Data | properties : none,features :
+    none,subcomponents : none,connections : empty,value : r(1) + [1] # [true] >
+    < y : Data | properties : none,features : none,subcomponents : none,
+    connections : empty,value : [4] # [true] >),connections : empty,varGen : <
+    "c1",1,2 >,currState : loc([0]),completeStates : loc([0]),variables : ((a :
+    Real) ; b : Real),transitions : ((loc([0]) -[on dispatch]-> loc([1]) {(c{x}
+    := (c[x] + [[1]])) ; (v{a} := f[inp]) ; c{y} := v[a]}) ; loc([1]) -[c[x] >
+    c[y]]-> loc([0]) {(v{b} := (c[y] + [[1]])) ; f{outp} := (v[b] + [[1]])}),
+    loopBound : 10,transBound : 10 >
+
+No more solutions.
+states: 1  rewrites: 344
+==========================================
+search in TEST-THREAD-DYNAMICS : executeStep(bool(true), obj2 transIn(real(5) #
+    bool(true), c2 .. inp)) =>* C:ConstConfig .
+
+Solution 1 (state 0)
+states: 1  rewrites: 615
+C:ConstConfig --> [true] || < c2 : Thread | properties : none,features : (< inp
+    : DataInPort | properties : none,content : [0] # [false],cache : [5] # [
+    true] > < outp : DataOutPort | properties : none,content : [7/2] # [true]
+    >),subcomponents : < z : Data | properties : none,features : none,
+    subcomponents : none,connections : empty,value : [5/2] # [true] >,
+    connections : empty,varGen : < "c2",10,20 >,currState : loc([2]),
+    completeStates : (loc([0]) loc([2])),variables : a : Real,transitions : ((
+    loc([0]) -[on dispatch]-> loc([1]) {(v{a} := f[inp]) ; if(v[a] > [[0]])c{z}
+    := (v[a] * [[5.0e-1]]) end if}) ; (loc([1]) -[otherwise]-> loc([2]) {f{
+    outp} := (c[z] - [[2]])}) ; (loc([1]) -[c[z] > [[2]]]-> loc([2]) {f{outp}
+    := (c[z] + [[1]])}) ; loc([2]) -[on dispatch]-> loc([0]) {skip}),loopBound
+    : 10,transBound : 10 >
+
+No more solutions.
+states: 1  rewrites: 615
+Bye.

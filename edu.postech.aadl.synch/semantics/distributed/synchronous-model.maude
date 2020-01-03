@@ -1,4 +1,13 @@
+fmod DIST-MODEL-PARAM is
+  including NAT .
+
+  --- must declared for each model
+  ops #sample #response : ~> Nat [format (m! o)] .
+endfm
+
+
 mod MODEL-INIT is
+  including DIST-MODEL-PARAM .
   including DATA-COMPONENT .
   including ENSEMBLE-COMPONENT .
   including ASYNC-THREAD-COMPONENT .
@@ -88,8 +97,8 @@ mod MODEL-INIT is
                           properties : PROPS,
                           sampling : STS,
                           response : RTS,
-                          samplingTimes : timing(STS),
-                          responseTimes : timing(RTS),
+                          samplingTimes : interTimes(STS, #sample),
+                          responseTimes : interTimes(RTS, #response),
                           period : period(PROPS), 
                           perTimer : 0,
                           msgTimer : infty,
@@ -121,22 +130,14 @@ mod MODEL-INIT is
                     (HybridSynchAADL::ResponseTime => {{RL .. RU}}) ; PROPS) = rat(SU + RL) / 2 .
   eq threadExecTime(PROPS) = 0 [owise] .
 
-  --- pick 3 time points between each interval
-  op timing : Set{InterTiming} -> Set{InterTime} .
-
-  op interTimes : Set{InterTiming} Nat ~> Set{InterTime} .
-  op interTimes : Rat Rat Nat ~> Set{Time} .
-  op interTimes : Rat Rat Nat Nat ~> Set{Time} .
-
-  eq interTimes(((CI : (LT,UT)), STS), N) = (CI : interTimes(LT,UT, N)) ; interTimes(STS, N) .
+  --- pick N time points between each interval
+  op interTimes : Set{InterTiming} Nat ~> Set{InterTime} [format (m! o)] .
+  eq interTimes(((CI : (LT,UT)), STS), N) = (CI : genTimes(LT,UT,N,N)) ; interTimes(STS, N) .
   eq interTimes(empty, N) = empty .
-
-  eq interTimes(LT, UT, N) = interTimes(LT, UT, N, N) .
   
-  ceq interTimes(LT, UT, N, s(M)) = ( LT + (UT - LT) * (M / N) , 
-                                      interTimes(LT, UT, N, M)) 
-   if M > 0 .
-  eq interTimes(LT, UT, N, M) = empty [owise].
+  op genTimes : Rat Rat Nat Nat ~> Set{Time} [format (m! o)] .
+  eq genTimes(LT, UT, N, s(M)) = (LT + (UT - LT) * ((1 / (2 * N)) + M / N), genTimes(LT,UT,N,M)) .
+  eq genTimes(LT, UT, N, 0) = empty .
   
 ---
   op init : ComponentRef Set{Connection} Set{Connection} Configuration Configuration ~> Configuration [format (m! o)] .
@@ -219,10 +220,10 @@ mod MODEL-TRANSITION-SYSTEM is
   var TI : TimeInf .
 
   sort GlobalSystem .
-  op {_,_,_} : Configuration Time TimeInf -> GlobalSystem [ctor] . 
+  op {_|_|_} : Configuration Time TimeInf -> GlobalSystem [ctor] . 
 
   crl [tick]: 
-      {OBJ, T, TI} => {timeEffect(OBJ,NT), T + NT, TI}
+      {OBJ | T | TI} => {timeEffect(OBJ,NT) | T + NT | TI}
    if NT := mte(OBJ)
    /\ T + NT <= TI [print "tick " NT ] .
 endm
