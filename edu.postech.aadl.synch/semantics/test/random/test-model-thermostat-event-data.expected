@@ -1,6 +1,6 @@
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{initState,0} | 0 | infty} .
-rewrites: 77680
+rewrites: 77880
 result GlobalSystem: {{< top : System | properties : TimingProperties::Period
     => {{5}},features : none,subcomponents : (< controller : Thread |
     properties : ((TimingProperties::Period => {{5}}) ; (
@@ -44,7 +44,7 @@ result GlobalSystem: {{< top : System | properties : TimingProperties::Period
     controller .. temp)) >,400} | 500 | infty}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{initState,400} | 0 | infty} .
-rewrites: 77834
+rewrites: 78034
 result GlobalSystem: {{< top : System | properties : TimingProperties::Period
     => {{5}},features : none,subcomponents : (< controller : Thread |
     properties : ((TimingProperties::Period => {{5}}) ; (
@@ -88,7 +88,7 @@ result GlobalSystem: {{< top : System | properties : TimingProperties::Period
     controller .. temp)) >,800} | 500 | infty}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{initState,800} | 0 | infty} .
-rewrites: 77730
+rewrites: 77930
 result GlobalSystem: {{< top : System | properties : TimingProperties::Period
     => {{5}},features : none,subcomponents : (< controller : Thread |
     properties : ((TimingProperties::Period => {{5}}) ; (
@@ -132,7 +132,7 @@ result GlobalSystem: {{< top : System | properties : TimingProperties::Period
     controller .. temp)) >,1200} | 500 | infty}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{initState,1200} | 0 | infty} .
-rewrites: 77723
+rewrites: 77923
 result GlobalSystem: {{< top : System | properties : TimingProperties::Period
     => {{5}},features : none,subcomponents : (< controller : Thread |
     properties : ((TimingProperties::Period => {{5}}) ; (

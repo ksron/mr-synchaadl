@@ -8,19 +8,15 @@ fmod SMT-CHECKSAT is
   including COND-EXP-SIMPLIFICATION .
   including CHECKSAT .
 
-  var B : BoolExp .
-  var E : Exp .
+  vars B B1 B2 : BoolExp .
+  vars E E1 E2 : Exp .
+  vars R1 R2 : RealExp .
 
   --- checks if the given Boolean expression is satisfiable
-  eq check-sat(B)
-   = if B == [false] then
-       false
-     else if B == [true] then
-       true
-     else
-       metaCheck(['REAL-INTEGER], tr(upTerm(B)))
-     fi fi .
-
+  eq check-sat([false]) = false .
+  eq check-sat([true])  = true .
+  eq check-sat(B)       = metaCheck(['REAL-INTEGER], tr(upTerm(B))) .
+  
   --- the simplify function does nothing 
   eq simplify(E) = E .
 endfm

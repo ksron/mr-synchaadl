@@ -9,21 +9,21 @@ load module-ba-semantics
 select TEST-FEATURE-OPERATION .
 
 red readFeature(
-    < a :  DataInPort | content : (r(0) # [false]), cache : (r(1) # [false]) >
-    < b :  DataInPort | content : (r(0) # [true]),   cache : (r(1) # [true])  >
+    < a :  DataInPort | content : (r(0) # bool(false)), cache : (r(1) # bool(false)) >
+    < b :  DataInPort | content : (r(0) # bool(true)),   cache : (r(1) # bool(true))  >
     < c :  DataInPort | content : (r(0) # b(0)),    cache : (r(0) # b(1))    >
     < d : DataOutPort | content : (* # b(0)) >
-    < e : DataOutPort | content : ([0] # [false]) >
+    < e : DataOutPort | content : (real(0) # bool(false)) >
   ) .
 
 red writeFeature(
-    (d |-> (* # [true]), e |-> (r(1) # b(1)))
+    (d |-> (* # bool(true)), e |-> (r(1) # b(1)))
 ,
-    < a :  DataInPort | content : (r(0) # [false]), cache : (r(1) # [false]) >
-    < b :  DataInPort | content : (r(0) # [true]),  cache : (r(1) # [true])  >
+    < a :  DataInPort | content : (r(0) # bool(false)), cache : (r(1) # bool(false)) >
+    < b :  DataInPort | content : (r(0) # bool(true)),  cache : (r(1) # bool(true))  >
     < c :  DataInPort | content : (r(0) # b(0)),    cache : (r(0) # b(1))    >
     < d : DataOutPort | content : (* # b(0)) >
-    < e : DataOutPort | content : ([0] # [false]) >
+    < e : DataOutPort | content : (real(0) # bool(false)) >
   ) .
 
 
@@ -31,11 +31,11 @@ red writeFeature(
 select TEST-DATA-OPERATION .
 
 red readData(
-    < c1 : Data | value : [3/4] # b(1), features : none, subcomponents : none, connections : empty, properties : none >
-    < c2 : Data | value : r(0) # [true], features : none, subcomponents : none, connections : empty, properties : none >) .
+    < c1 : Data | value : real(3/4) # b(1), features : none, subcomponents : none, connections : empty, properties : none >
+    < c2 : Data | value : r(0) # bool(true), features : none, subcomponents : none, connections : empty, properties : none >) .
 
-red writeData((c1 |=> [0] # [true], c2 |=> [1] # b(1)),
-    < c1 : Data | value : [3/4] # b(1), features : none, subcomponents : none, connections : empty, properties : none >
-    < c2 : Data | value : r(0) # [true], features : none, subcomponents : none, connections : empty, properties : none >) .
+red writeData((c1 |=> real(0) # bool(true), c2 |=> real(1) # b(1)),
+    < c1 : Data | value : real(3/4) # b(1), features : none, subcomponents : none, connections : empty, properties : none >
+    < c2 : Data | value : r(0) # bool(true), features : none, subcomponents : none, connections : empty, properties : none >) .
 
 

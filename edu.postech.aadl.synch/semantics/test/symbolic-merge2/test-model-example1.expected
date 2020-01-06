@@ -3,7 +3,7 @@ search [, 50] in TEST-MODEL-TRANSITION-SYSTEM : {bool(true) || obj4 | 0 |
     infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 1915
+states: 2  rewrites: 1836
 C:GlobalSystem --> {((((not [0] < r(0) and not [2] < r(3) and not b("c2", 20)
     and r("c2", 10) === r(3) + [-2] or not [0] < r(0) and r("c2", 10) === r(3)
     + [1] and [2] < r(3) and b("c2", 20)) and r("c2", 11) === r(3) and b("c2",
@@ -39,7 +39,7 @@ C:GlobalSystem --> {((((not [0] < r(0) and not [2] < r(3) and not b("c2", 20)
     .. outp) --> (c1 .. inp)) > | 60 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 3290
+states: 3  rewrites: 3167
 C:GlobalSystem --> {((((not [0] < r(0) and not [2] < r(3) and not b("c2", 20)
     and r("c2", 10) === r(3) + [-2] or not [0] < r(0) and r("c2", 10) === r(3)
     + [1] and [2] < r(3) and b("c2", 20)) and r("c2", 11) === r(3) and b("c2",
@@ -76,7 +76,7 @@ C:GlobalSystem --> {((((not [0] < r(0) and not [2] < r(3) and not b("c2", 20)
     .. outp) --> (c1 .. inp)) > | 120 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 6096
+states: 4  rewrites: 5885
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -123,7 +123,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 180 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 8436
+states: 5  rewrites: 8181
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -170,7 +170,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 240 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 12195
+states: 6  rewrites: 11852
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -226,7 +226,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 300 | infty}
 
 Solution 6 (state 6)
-states: 7  rewrites: 15492
+states: 7  rewrites: 15105
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -283,7 +283,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 360 | infty}
 
 Solution 7 (state 7)
-states: 8  rewrites: 20208
+states: 8  rewrites: 19733
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -349,7 +349,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 420 | infty}
 
 Solution 8 (state 8)
-states: 9  rewrites: 24462
+states: 9  rewrites: 23943
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -416,7 +416,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 480 | infty}
 
 Solution 9 (state 9)
-states: 10  rewrites: 30135
+states: 10  rewrites: 29528
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -492,7 +492,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 540 | infty}
 
 Solution 10 (state 10)
-states: 11  rewrites: 35346
+states: 11  rewrites: 34695
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -569,7 +569,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) > | 600 | infty}
 
 Solution 11 (state 11)
-states: 12  rewrites: 41976
+states: 12  rewrites: 41237
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -655,7 +655,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 660 | infty}
 
 Solution 12 (state 12)
-states: 13  rewrites: 48144
+states: 13  rewrites: 47361
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -742,7 +742,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) > | 720 | infty}
 
 Solution 13 (state 13)
-states: 14  rewrites: 55731
+states: 14  rewrites: 54860
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -838,7 +838,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 780 | infty}
 
 Solution 14 (state 14)
-states: 15  rewrites: 62856
+states: 15  rewrites: 61941
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -935,7 +935,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) > | 840 | infty}
 
 Solution 15 (state 15)
-states: 16  rewrites: 71400
+states: 16  rewrites: 70397
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -1041,7 +1041,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 900 | infty}
 
 Solution 16 (state 16)
-states: 17  rewrites: 79482
+states: 17  rewrites: 78435
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -1148,7 +1148,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) > | 960 | infty}
 
 Solution 17 (state 17)
-states: 18  rewrites: 88983
+states: 18  rewrites: 87848
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -1264,7 +1264,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1020 | infty}
 
 Solution 18 (state 18)
-states: 19  rewrites: 98022
+states: 19  rewrites: 96843
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -1381,7 +1381,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) > | 1080 | infty}
 
 Solution 19 (state 19)
-states: 20  rewrites: 108480
+states: 20  rewrites: 107213
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -1507,7 +1507,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 1140 | infty}
 
 Solution 20 (state 20)
-states: 21  rewrites: 118476
+states: 21  rewrites: 117165
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -1633,7 +1633,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1200 | infty}
 
 Solution 21 (state 21)
-states: 22  rewrites: 129891
+states: 22  rewrites: 128492
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -1769,7 +1769,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 1260 | infty}
 
 Solution 22 (state 22)
-states: 23  rewrites: 140844
+states: 23  rewrites: 139401
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -1905,7 +1905,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1320 | infty}
 
 Solution 23 (state 23)
-states: 24  rewrites: 153216
+states: 24  rewrites: 151685
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -2051,7 +2051,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 1380 | infty}
 
 Solution 24 (state 24)
-states: 25  rewrites: 165126
+states: 25  rewrites: 163551
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -2197,7 +2197,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1440 | infty}
 
 Solution 25 (state 25)
-states: 26  rewrites: 178455
+states: 26  rewrites: 176792
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -2353,7 +2353,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 1500 | infty}
 
 Solution 26 (state 26)
-states: 27  rewrites: 191322
+states: 27  rewrites: 189615
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -2509,7 +2509,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1560 | infty}
 
 Solution 27 (state 27)
-states: 28  rewrites: 205608
+states: 28  rewrites: 203813
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -2675,7 +2675,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 1620 | infty}
 
 Solution 28 (state 28)
-states: 29  rewrites: 219432
+states: 29  rewrites: 217593
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -2841,7 +2841,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1680 | infty}
 
 Solution 29 (state 29)
-states: 30  rewrites: 234675
+states: 30  rewrites: 232748
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -3017,7 +3017,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 1740 | infty}
 
 Solution 30 (state 30)
-states: 31  rewrites: 249456
+states: 31  rewrites: 247485
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -3193,7 +3193,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1800 | infty}
 
 Solution 31 (state 31)
-states: 32  rewrites: 265656
+states: 32  rewrites: 263597
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -3379,7 +3379,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 1860 | infty}
 
 Solution 32 (state 32)
-states: 33  rewrites: 281394
+states: 33  rewrites: 279291
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -3565,7 +3565,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1920 | infty}
 
 Solution 33 (state 33)
-states: 34  rewrites: 298551
+states: 34  rewrites: 296360
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -3761,7 +3761,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 1980 | infty}
 
 Solution 34 (state 34)
-states: 35  rewrites: 315246
+states: 35  rewrites: 313011
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -3957,7 +3957,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 2040 | infty}
 
 Solution 35 (state 35)
-states: 36  rewrites: 333360
+states: 36  rewrites: 331037
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -4162,7 +4162,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2100 | infty}
 
 Solution 36 (state 36)
-states: 37  rewrites: 351012
+states: 37  rewrites: 348645
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -4368,7 +4368,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 2160 | infty}
 
 Solution 37 (state 37)
-states: 38  rewrites: 370083
+states: 38  rewrites: 367628
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -4583,7 +4583,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2220 | infty}
 
 Solution 38 (state 38)
-states: 39  rewrites: 388692
+states: 39  rewrites: 386193
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -4799,7 +4799,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 2280 | infty}
 
 Solution 39 (state 39)
-states: 40  rewrites: 408720
+states: 40  rewrites: 406133
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -5024,7 +5024,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2340 | infty}
 
 Solution 40 (state 40)
-states: 41  rewrites: 428286
+states: 41  rewrites: 425655
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -5250,7 +5250,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 2400 | infty}
 
 Solution 41 (state 41)
-states: 42  rewrites: 449271
+states: 42  rewrites: 446552
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -5485,7 +5485,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2460 | infty}
 
 Solution 42 (state 42)
-states: 43  rewrites: 469794
+states: 43  rewrites: 467031
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -5721,7 +5721,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 2520 | infty}
 
 Solution 43 (state 43)
-states: 44  rewrites: 491736
+states: 44  rewrites: 488885
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -5966,7 +5966,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2580 | infty}
 
 Solution 44 (state 44)
-states: 45  rewrites: 513216
+states: 45  rewrites: 510321
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -6212,7 +6212,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 2640 | infty}
 
 Solution 45 (state 45)
-states: 46  rewrites: 536115
+states: 46  rewrites: 533132
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -6467,7 +6467,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2700 | infty}
 
 Solution 46 (state 46)
-states: 47  rewrites: 558552
+states: 47  rewrites: 555525
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -6723,7 +6723,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 2760 | infty}
 
 Solution 47 (state 47)
-states: 48  rewrites: 582408
+states: 48  rewrites: 579293
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -6988,7 +6988,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2820 | infty}
 
 Solution 48 (state 48)
-states: 49  rewrites: 605802
+states: 49  rewrites: 602643
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -7254,7 +7254,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) > | 2880 | infty}
 
 Solution 49 (state 49)
-states: 50  rewrites: 630615
+states: 50  rewrites: 627368
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -7529,7 +7529,7 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     .. outp) --> (c1 .. inp)) > | 2940 | infty}
 
 Solution 50 (state 50)
-states: 51  rewrites: 654966
+states: 51  rewrites: 651675
 C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     r("c2", 11) and r("c2", 13) === r("c2", 11) and [2] < r("c2", 11) and b(
     "c2", 23) or not b("c2", 23) and r("c2", 12) === [2] + [1/2] * r("c2", 10)
@@ -7804,5 +7804,5 @@ C:GlobalSystem --> {((((not [0] < [2] + r("c2", 10) and r("c2", 12) === [1] +
     inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 3000 | infty}
 
 No more solutions.
-states: 51  rewrites: 654966
+states: 51  rewrites: 651675
 Bye.

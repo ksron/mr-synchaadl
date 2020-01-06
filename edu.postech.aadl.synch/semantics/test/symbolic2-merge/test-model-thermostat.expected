@@ -1,0 +1,61 @@
+==========================================
+reduce in TEST-THERMOSTAT-SYSTEM : initState .
+rewrites: 185
+result Object: < top : System | properties : TimingProperties::Period => {{(
+    5).NzNat}},features : none,subcomponents : (< controller : Thread |
+    properties : ((TimingProperties::Period => {{(5).NzNat}}) ; (
+    HybridSynchAADL::SamplingTime => {{0.0 .. 2.0}}) ;
+    HybridSynchAADL::ResponseTime => {{3.0 .. 4.0}}),features : (< on :
+    DataOutPort | properties : none,content : * # [(false).Boolean] > < off :
+    DataOutPort | properties : none,content : * # [(false).Boolean] > < temp :
+    DataInPort | properties : none,content : [(0/1).Real] # [(false).Boolean],
+    cache : [(0/1).Real] # [(false).Boolean] >),subcomponents : (< lower : Data
+    | properties : DataModel::InitialValue => {{(10).NzNat}},features : none,
+    subcomponents : none,connections : empty,value : [(10/1).Real] # [(
+    true).Boolean] > < upper : Data | properties : DataModel::InitialValue => {
+    {(30).NzNat}},features : none,subcomponents : none,connections : empty,
+    value : [(30/1).Real] # [(true).Boolean] > < curr : Data | properties :
+    DataModel::InitialValue => {{(15).NzNat}},features : none,subcomponents :
+    none,connections : empty,value : [(15/1).Real] # [(true).Boolean] >),
+    connections : empty,varGen : < "top.controller",0,0 >,currState : loc([(
+    0/1).Real]),completeStates : loc([(0/1).Real]),variables : x : Real,
+    transitions : ((loc([(0/1).Real]) -[on dispatch]-> loc([(1/1).Real]) {(v{x}
+    := ((c[curr] + f[temp]) / [[(2).NzNat]])) ; if(v[x] < c[lower])(on !) (
+    elsif(v[x] > c[upper])off !) end if ; c{curr} := v[x]}) ; loc([(1/1).Real])
+    -[otherwise]-> loc([(0/1).Real]) {skip}),loopBound : 0,transBound : 2 > <
+    environment : Env | properties : ((TimingProperties::Period => {{(
+    5).NzNat}}) ; HybridSynchAADL::MaxClockDeviation => {{
+    1.0000000000000001e-1}}),features : (< on : EnvInPort | properties : none,
+    content : * # [(false).Boolean],envCache : * # [b('top.environment#$#0)],
+    target : controller > < off : EnvInPort | properties : none,content : * # [
+    (false).Boolean],envCache : * # [b('top.environment#$#1)],target :
+    controller > < out : EnvOutPort | properties : none,content : [r(
+    'top.environment#$#0)] # [b('top.environment#$#2)],envCache : [r(
+    'top.environment#$#0)] # [b('top.environment#$#2)],target : controller >),
+    subcomponents : (< x : Data | properties : DataModel::InitialValue => {{(
+    16).NzNat}},features : none,subcomponents : none,connections : empty,value
+    : [(16/1).Real] # [(true).Boolean] > < e : Data | properties : none,
+    features : none,subcomponents : none,connections : empty,value : [r(
+    'top.environment#$#1)] # [(true).Boolean] >),connections : x ==> out,varGen
+    : < "top.environment",2,3 >,currMode : loc([(0/1).Real]),jumps : ((loc([(
+    0/1).Real]) -[on]-> loc([(1/1).Real])) ; (loc([(0/1).Real]) -[off]-> loc([(
+    0/1).Real])) ; (loc([(1/1).Real]) -[on]-> loc([(1/1).Real])) ; loc([(
+    1/1).Real]) -[off]-> loc([(0/1).Real])),flows : ((loc([(0/1).Real]) [x(t)=
+    ((c[x] + c[e]) + (v[t] * [[2.0000000000000001e-1]]))]) ; loc([(1/1).Real])
+    [x(t)= ((c[x] + c[e]) - (v[t] * [[1.0000000000000001e-1]]))]),sampling :
+    controller :(0,2),response : controller :(3,4) >),connections : (((
+    controller .. on) --> (environment .. on)) ; ((controller .. off) --> (
+    environment .. off)) ; (environment .. out) --> (controller .. temp)) >
+==========================================
+reduce in TEST-THERMOSTAT-SYSTEM : finalConst(initState) .
+rewrites: 254
+result SMTBoolExp: [(true).Boolean and ((true).Boolean and ((true).Boolean and
+    ((true).Boolean and (false).Boolean === b('top.environment#$#0)) and ((
+    true).Boolean and (false).Boolean === b('top.environment#$#1))))]
+==========================================
+search [, 5] in TEST-THERMOSTAT-SYSTEM : {bool(true) || initState | 0 | infty}
+    =>+ C:GlobalSystem .
+
+No solution.
+states: 1  rewrites: 373
+Bye.

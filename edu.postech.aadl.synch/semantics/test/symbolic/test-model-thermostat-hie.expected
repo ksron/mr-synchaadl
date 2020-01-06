@@ -3,7 +3,7 @@ search [, 5] in TEST-THERMOSTAT-SYSTEM-HIE-MOD : {bool(true) || initState | 0 |
     infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 5645
+states: 2  rewrites: 5450
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 1) and not [
@@ -67,7 +67,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     temp)) > | 5 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 17564
+states: 3  rewrites: 17112
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 2) ? r("top.environment", 0) : [0]) / [4] + (b(
@@ -150,7 +150,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     temp)) > | 10 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 37420
+states: 4  rewrites: 36711
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 2) ? r("top.environment", 0) : [0]) / [4] + (b(
@@ -257,7 +257,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     (csys .. temp)) > | 15 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 67242
+states: 5  rewrites: 66276
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 2) ? r("top.environment", 0) : [0]) / [4] + (b(
@@ -395,7 +395,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     (csys .. temp)) > | 20 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 109180
+states: 6  rewrites: 107957
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 2) ? r("top.environment", 0) : [0]) / [4] + (b(
@@ -569,13 +569,13 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     (csys .. temp)) > | 25 | infty}
 
 No more solutions.
-states: 6  rewrites: 127142
+states: 6  rewrites: 125857
 ==========================================
 search [, 5] in TEST-THERMOSTAT-SYSTEM-HIE-MOD : {bool(true) || cinitState | 0
     | infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 5723
+states: 2  rewrites: 5483
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 1) and not [
@@ -628,7 +628,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     csys . cproc . cthread) .. off) --> (environment .. off)) > | 5 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 16616
+states: 3  rewrites: 16000
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 2) ? r("top.environment", 0) : [0]) / [4] + (b(
@@ -701,7 +701,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     off)) > | 10 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 31828
+states: 4  rewrites: 30836
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 2) ? r("top.environment", 0) : [0]) / [4] + (b(
@@ -798,7 +798,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     cthread) .. off) --> (environment .. off)) > | 15 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 52604
+states: 5  rewrites: 51236
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 2) ? r("top.environment", 0) : [0]) / [4] + (b(
@@ -925,7 +925,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     csys . cproc . cthread) .. off) --> (environment .. off)) > | 20 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 80141
+states: 6  rewrites: 78397
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 2) ? r("top.environment", 0) : [0]) / [4] + (b(
@@ -1089,5 +1089,5 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 2) ? r(
     cthread) .. off) --> (environment .. off)) > | 25 | infty}
 
 No more solutions.
-states: 6  rewrites: 91111
+states: 6  rewrites: 89231
 Bye.

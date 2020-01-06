@@ -3,7 +3,7 @@ search [, 5] in TEST-THERMOSTAT-SYSTEM-HIE : {bool(true) || initState | 0 |
     infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 5270
+states: 2  rewrites: 5124
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not b("top.controller", 1) and r("top.controller", 0) === [1] and
     [15/2] + (b("top.environment", 3) ? r("top.environment", 1) : [0]) / [2] <
@@ -112,7 +112,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     controller .. temp)) > | 5 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 17278
+states: 3  rewrites: 16898
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not b("top.controller", 1) and r("top.controller", 0) === [1] and
     [15/2] + (b("top.environment", 3) ? r("top.environment", 1) : [0]) / [2] <
@@ -363,7 +363,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     | 10 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 35885
+states: 4  rewrites: 35271
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not b("top.controller", 1) and r("top.controller", 0) === [1] and
     [15/2] + (b("top.environment", 3) ? r("top.environment", 1) : [0]) / [2] <
@@ -786,7 +786,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     | 15 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 62125
+states: 5  rewrites: 61277
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not b("top.controller", 1) and r("top.controller", 0) === [1] and
     [15/2] + (b("top.environment", 3) ? r("top.environment", 1) : [0]) / [2] <
@@ -1413,7 +1413,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     | 20 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 97024
+states: 6  rewrites: 95942
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not b("top.controller", 1) and r("top.controller", 0) === [1] and
     [15/2] + (b("top.environment", 3) ? r("top.environment", 1) : [0]) / [2] <
@@ -2270,5 +2270,5 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     controller .. temp)) > | 25 | infty}
 
 No more solutions.
-states: 6  rewrites: 97024
+states: 6  rewrites: 95942
 Bye.

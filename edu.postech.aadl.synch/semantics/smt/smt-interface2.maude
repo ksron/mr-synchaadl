@@ -5,8 +5,8 @@ fmod SMT-CHECKSAT is
   including CHECKSAT .
   including SMT-CHECK .
 
-  var B  : BooleanExpr .
-  var R  : RealExpr .
+  vars B B1 B2 : BooleanExpr .
+  vars R R1 R2 : RealExpr .
 
   --- checks if the given Boolean expression is satisfiable
   eq check-sat([false]) = false .

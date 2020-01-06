@@ -1,6 +1,6 @@
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{initState,0} | 0 | infty} .
-rewrites: 71665
+rewrites: 71865
 result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -62,7 +62,7 @@ result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     | infty}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{initState,400} | 0 | infty} .
-rewrites: 71708
+rewrites: 71908
 result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -124,7 +124,7 @@ result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     | infty}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{initState,800} | 0 | infty} .
-rewrites: 71706
+rewrites: 71906
 result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -186,7 +186,7 @@ result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     | infty}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{initState,1200} | 0 | infty} .
-rewrites: 71643
+rewrites: 71843
 result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -248,7 +248,7 @@ result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     | infty}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{cinitState,0} | 0 | infty} .
-rewrites: 60107
+rewrites: 60307
 result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -295,7 +295,7 @@ result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     environment .. oncontrol)) >,400} | 500 | infty}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{cinitState,400} | 0 | infty} .
-rewrites: 60164
+rewrites: 60364
 result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -342,7 +342,7 @@ result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     environment .. oncontrol)) >,800} | 500 | infty}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{cinitState,800} | 0 | infty} .
-rewrites: 60162
+rewrites: 60362
 result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -389,7 +389,7 @@ result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     environment .. oncontrol)) >,1200} | 500 | infty}
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {{cinitState,1200} | 0 | infty} .
-rewrites: 60099
+rewrites: 60299
 result GlobalSystem: {{< SimpleThermimplInstance : System | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),

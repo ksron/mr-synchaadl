@@ -1,56 +1,55 @@
 ==========================================
 reduce in TEST-BEHAVIOR-EXPRESSION-SEMANTICS : eval([[true]], bcf) .
-rewrites: 4
+rewrites: 8
 result DataContent: [true] # [true]
 ==========================================
 reduce in TEST-BEHAVIOR-EXPRESSION-SEMANTICS : eval([[1.2]], bcf) .
-rewrites: 5
+rewrites: 9
 result DataContent: [5404319552844595/4503599627370496] # [true]
 ==========================================
 reduce in TEST-BEHAVIOR-EXPRESSION-SEMANTICS : eval(v[x], bcf) .
-rewrites: 5
+rewrites: 9
 result DataContent: [2] # [true]
 ==========================================
 reduce in TEST-BEHAVIOR-EXPRESSION-SEMANTICS : eval(p[
     TimingProperties::Period], bcf) .
-rewrites: 10
+rewrites: 14
 result DataContent: [8458323050155213/140737488355328] # [true]
 ==========================================
 reduce in TEST-BEHAVIOR-EXPRESSION-SEMANTICS : eval(f[a], bcf) .
-rewrites: 6
+rewrites: 10
 result DataContent: [100] # b(0)
 ==========================================
 reduce in TEST-BEHAVIOR-EXPRESSION-SEMANTICS : eval(count(a), bcf) .
-rewrites: 8
-result DataContent: ([true] ? [1] : [0]) # b(0)
+rewrites: 14
+result DataContent: [1] # b(0)
 ==========================================
 reduce in TEST-BEHAVIOR-EXPRESSION-SEMANTICS : eval(fresh(a), bcf) .
-rewrites: 6
+rewrites: 10
 result DataContent: [true] # b(0)
 ==========================================
 reduce in TEST-BEHAVIOR-EXPRESSION-SEMANTICS : eval(c[cr], bcf) .
-rewrites: 5
+rewrites: 9
 result DataContent: [3/4] # b(1)
 ==========================================
 reduce in TEST-BEHAVIOR-EXPRESSION-SEMANTICS : eval([[1.2]] + [[
     2.2999999999999998]], bcf) .
-rewrites: 20
+rewrites: 24
 result DataContent: [15762598695796735/4503599627370496] # [true]
 ==========================================
 reduce in TEST-BEHAVIOR-EXPRESSION-SEMANTICS : eval(v[x] * p[
     TimingProperties::Period], bcf) .
-rewrites: 22
+rewrites: 26
 result DataContent: [8458323050155213/70368744177664] # [true]
 ==========================================
 reduce in TEST-BEHAVIOR-EXPRESSION-SEMANTICS : eval((abs(f[a]) > v[x]) or (
     count(a) > c[cr]), bcf) .
-rewrites: 37
-result DataContent: ([2] < ([true] ? [100] : [-100]) or [3/4] < ([true] ? [1] :
-    [0])) # (b(0) and b(1))
+rewrites: 51
+result DataContent: [true] # (b(0) and b(1))
 ==========================================
 reduce in TEST-BEHAVIOR-ACTION-SEMANTICS : execAction({(v{x} := ([[4]] + [[
     6]])) ; skip}, bcf) .
-rewrites: 24
+rewrites: 29
 result BehaviorConf: const([true]) local((x |-> [10] # [true]) ; y |-> [4] # b(
     0)) feature((a |-> ([100] # b(1) : [true]), b |-> * # b(2))) data(cr |=> [
     3/4] # b(2)) prop(TimingProperties::Period => {{6.0100000000000001e+1}})
@@ -61,42 +60,42 @@ search in TEST-BEHAVIOR-ACTION-SEMANTICS : execAction({if(v[x] > [[3]]){(f{a}
     y] * v[x]) + [[1]])}, bcf') =>+ CF:BehaviorConf .
 
 Solution 1 (state 1)
-states: 2  rewrites: 74
+states: 2  rewrites: 78
 CF:BehaviorConf --> const(b(0) and [3] < r(0)) local((x |-> r(0) # b(0)) ; y
     |-> [1] + r(0) * r(1) # [true]) feature((a |-> r(0) + [-1] # [true], b |->
     * # [true])) data(cr |=> [3/4] # b(2)) prop(TimingProperties::Period => {{
     6.0100000000000001e+1}}) lbound(5)
 
 Solution 2 (state 2)
-states: 3  rewrites: 135
+states: 3  rewrites: 139
 CF:BehaviorConf --> const(not [3] < r(0) and b(0)) local((x |-> r(0) # b(0)) ;
     y |-> [1] + r(0) * r(1) # [true]) feature((a |-> r(0) + [1] # [true], b |->
     * # [false])) data(cr |=> [3/4] # b(2)) prop(TimingProperties::Period => {{
     6.0100000000000001e+1}}) lbound(5)
 
 No more solutions.
-states: 3  rewrites: 135
+states: 3  rewrites: 139
 ==========================================
 search in TEST-BEHAVIOR-ACTION-SEMANTICS : execAction({if(v[x] > [[3]])v{x} :=
     (v[x] - [[1]]) else v{x} := (v[x] + [[1]]) end if ; v{y} := ((v[y] * v[x])
     + [[1]])}, bcf') =>+ CF:BehaviorConf .
 
 Solution 1 (state 1)
-states: 2  rewrites: 66
+states: 2  rewrites: 70
 CF:BehaviorConf --> const(b(0) and [3] < r(0)) local((x |-> r(0) + [-1] # [
     true]) ; y |-> [1] + r(0) * r(1) + r(1) * [-1] # [true]) feature((a |-> (r(
     2) + [1] # b(1) : [true]), b |-> * # [false])) data(cr |=> [3/4] # b(2))
     prop(TimingProperties::Period => {{6.0100000000000001e+1}}) lbound(5)
 
 Solution 2 (state 2)
-states: 3  rewrites: 130
+states: 3  rewrites: 134
 CF:BehaviorConf --> const(not [3] < r(0) and b(0)) local((x |-> r(0) + [1] # [
     true]) ; y |-> [1] + r(0) * r(1) + r(1) * [1] # [true]) feature((a |-> (r(
     2) + [1] # b(1) : [true]), b |-> * # [false])) data(cr |=> [3/4] # b(2))
     prop(TimingProperties::Period => {{6.0100000000000001e+1}}) lbound(5)
 
 No more solutions.
-states: 3  rewrites: 130
+states: 3  rewrites: 134
 ==========================================
 search in TEST-BEHAVIOR-ACTION-SEMANTICS : execAction({if(v[x] > [[3]])(v{x} :=
     (v[x] - [[1]])) (elsif(v[y] < [[4]])v{y} := (v[x] + [[3]])) else v{x} := (
@@ -104,7 +103,7 @@ search in TEST-BEHAVIOR-ACTION-SEMANTICS : execAction({if(v[x] > [[3]])(v{x} :=
     TimingProperties::Period])}, bcf') =>+ CF:BehaviorConf .
 
 Solution 1 (state 1)
-states: 2  rewrites: 87
+states: 2  rewrites: 91
 CF:BehaviorConf --> const(b(0) and b(1) and [3] < r(0)) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [1] # [
     true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b |-> * # [false]))
@@ -112,7 +111,7 @@ CF:BehaviorConf --> const(b(0) and b(1) and [3] < r(0)) local((x |-> r(2) + [
     6.0100000000000001e+1}}) lbound(5)
 
 Solution 2 (state 3)
-states: 4  rewrites: 189
+states: 4  rewrites: 193
 CF:BehaviorConf --> const(not [3] < r(0) and b(0) and b(1) and r(1) < [4])
     local((x |-> r(2) + [8599060538510541/140737488355328] # [true]) ; y |-> r(
     0) + r(2) + [4] # [true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b
@@ -120,7 +119,7 @@ CF:BehaviorConf --> const(not [3] < r(0) and b(0) and b(1) and r(1) < [4])
     => {{6.0100000000000001e+1}}) lbound(5)
 
 Solution 3 (state 4)
-states: 5  rewrites: 274
+states: 5  rewrites: 278
 CF:BehaviorConf --> const(not r(1) < [4] and not [3] < r(0) and b(0) and b(1))
     local((x |-> r(2) + [8599060538510541/140737488355328] # [true]) ; y |-> r(
     1) + r(2) + [1] # [true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b
@@ -128,14 +127,14 @@ CF:BehaviorConf --> const(not r(1) < [4] and not [3] < r(0) and b(0) and b(1))
     => {{6.0100000000000001e+1}}) lbound(5)
 
 No more solutions.
-states: 5  rewrites: 274
+states: 5  rewrites: 278
 ==========================================
 search in TEST-BEHAVIOR-ACTION-SEMANTICS : execAction({while(v[x] > [[5]]){(v{
     x} := (v[x] - [[1]])) ; v{y} := (v[y] + [[2]])} ; (v{y} := (v[y] + f[a])) ;
     v{x} := (f[a] + p[TimingProperties::Period])}, bcf') =>+ CF:BehaviorConf .
 
 Solution 1 (state 2)
-states: 3  rewrites: 126
+states: 3  rewrites: 130
 CF:BehaviorConf --> const(not [5] < r(0) and b(0) and b(1)) local((x |-> r(2) +
     [8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [1] # [
     true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b |-> * # [false]))
@@ -143,7 +142,7 @@ CF:BehaviorConf --> const(not [5] < r(0) and b(0) and b(1)) local((x |-> r(2) +
     6.0100000000000001e+1}}) lbound(5)
 
 Solution 2 (state 4)
-states: 5  rewrites: 259
+states: 5  rewrites: 263
 CF:BehaviorConf --> const(not [5] < r(0) + [-1] and b(0) and b(1) and [5] < r(
     0)) local((x |-> r(2) + [8599060538510541/140737488355328] # [true]) ; y
     |-> r(1) + r(2) + [3] # [true]) feature((a |-> (r(2) + [1] # b(1) : [
@@ -151,7 +150,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-1] and b(0) and b(1) and [5] < r(
     TimingProperties::Period => {{6.0100000000000001e+1}}) lbound(4)
 
 Solution 3 (state 6)
-states: 7  rewrites: 392
+states: 7  rewrites: 396
 CF:BehaviorConf --> const(not [5] < r(0) + [-2] and b(0) and b(1) and [5] < r(
     0) and [5] < r(0) + [-1]) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [5] # [
@@ -160,7 +159,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-2] and b(0) and b(1) and [5] < r(
     6.0100000000000001e+1}}) lbound(3)
 
 Solution 4 (state 8)
-states: 9  rewrites: 525
+states: 9  rewrites: 529
 CF:BehaviorConf --> const(not [5] < r(0) + [-3] and b(0) and b(1) and [5] < r(
     0) and [5] < r(0) + [-1] and [5] < r(0) + [-2]) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [7] # [
@@ -169,7 +168,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-3] and b(0) and b(1) and [5] < r(
     6.0100000000000001e+1}}) lbound(2)
 
 Solution 5 (state 10)
-states: 11  rewrites: 658
+states: 11  rewrites: 662
 CF:BehaviorConf --> const(not [5] < r(0) + [-4] and b(0) and b(1) and [5] < r(
     0) and [5] < r(0) + [-1] and [5] < r(0) + [-2] and [5] < r(0) + [-3])
     local((x |-> r(2) + [8599060538510541/140737488355328] # [true]) ; y |-> r(
@@ -178,7 +177,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-4] and b(0) and b(1) and [5] < r(
     => {{6.0100000000000001e+1}}) lbound(1)
 
 Solution 6 (state 11)
-states: 12  rewrites: 728
+states: 12  rewrites: 732
 CF:BehaviorConf --> const(not [5] < r(0) + [-5] and b(0) and b(1) and [5] < r(
     0) and [5] < r(0) + [-1] and [5] < r(0) + [-2] and [5] < r(0) + [-3] and [
     5] < r(0) + [-4]) local((x |-> r(2) + [8599060538510541/140737488355328] #
@@ -187,7 +186,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-5] and b(0) and b(1) and [5] < r(
     TimingProperties::Period => {{6.0100000000000001e+1}}) lbound(0)
 
 No more solutions.
-states: 12  rewrites: 728
+states: 12  rewrites: 732
 ==========================================
 search in TEST-BEHAVIOR-ACTION-SEMANTICS : execAction({while(v[x] > [[5]]){
     while(v[y] < [[10]]){(c{cr} := (v[x] + [[1]])) ; v{y} := (v[y] + [[2]])} ;
@@ -195,7 +194,7 @@ search in TEST-BEHAVIOR-ACTION-SEMANTICS : execAction({while(v[x] > [[5]]){
     TimingProperties::Period])}, bcf') =>+ CF:BehaviorConf .
 
 Solution 1 (state 2)
-states: 3  rewrites: 85
+states: 3  rewrites: 89
 CF:BehaviorConf --> const(not [5] < r(0) and b(0) and b(1)) local((x |-> r(2) +
     [8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [1] # [
     true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b |-> * # [false]))
@@ -203,7 +202,7 @@ CF:BehaviorConf --> const(not [5] < r(0) and b(0) and b(1)) local((x |-> r(2) +
     6.0100000000000001e+1}}) lbound(5)
 
 Solution 2 (state 8)
-states: 9  rewrites: 360
+states: 9  rewrites: 364
 CF:BehaviorConf --> const(not r(1) < [10] and not [5] < r(0) + [-1] and b(0)
     and b(1) and [5] < r(0)) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [1] # [
@@ -212,7 +211,7 @@ CF:BehaviorConf --> const(not r(1) < [10] and not [5] < r(0) + [-1] and b(0)
     6.0100000000000001e+1}}) lbound(4)
 
 Solution 3 (state 12)
-states: 13  rewrites: 543
+states: 13  rewrites: 547
 CF:BehaviorConf --> const(not [5] < r(0) + [-1] and not r(1) + [2] < [10] and
     b(0) and b(1) and r(1) < [10] and [5] < r(0)) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [3] # [
@@ -221,7 +220,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-1] and not r(1) + [2] < [10] and
     6.0100000000000001e+1}}) lbound(3)
 
 Solution 4 (state 18)
-states: 19  rewrites: 832
+states: 19  rewrites: 836
 CF:BehaviorConf --> const(not [5] < r(0) + [-1] and not r(1) + [4] < [10] and
     b(0) and b(1) and r(1) < [10] and [5] < r(0) and r(1) + [2] < [10]) local((
     x |-> r(2) + [8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(
@@ -230,7 +229,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-1] and not r(1) + [4] < [10] and
     {{6.0100000000000001e+1}}) lbound(2)
 
 Solution 5 (state 23)
-states: 24  rewrites: 1133
+states: 24  rewrites: 1137
 CF:BehaviorConf --> const(not r(1) < [10] and not [5] < r(0) + [-2] and b(0)
     and b(1) and [5] < r(0) and [5] < r(0) + [-1]) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [1] # [
@@ -239,7 +238,7 @@ CF:BehaviorConf --> const(not r(1) < [10] and not [5] < r(0) + [-2] and b(0)
     6.0100000000000001e+1}}) lbound(3)
 
 Solution 6 (state 26)
-states: 27  rewrites: 1259
+states: 27  rewrites: 1263
 CF:BehaviorConf --> const(not [5] < r(0) + [-1] and not r(1) + [6] < [10] and
     b(0) and b(1) and r(1) < [10] and [5] < r(0) and r(1) + [2] < [10] and r(1)
     + [4] < [10]) local((x |-> r(2) + [8599060538510541/140737488355328] # [
@@ -248,7 +247,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-1] and not r(1) + [6] < [10] and
     TimingProperties::Period => {{6.0100000000000001e+1}}) lbound(1)
 
 Solution 7 (state 31)
-states: 32  rewrites: 1562
+states: 32  rewrites: 1566
 CF:BehaviorConf --> const(not [5] < r(0) + [-2] and not r(1) + [2] < [10] and
     b(0) and b(1) and r(1) < [10] and [5] < r(0) and [5] < r(0) + [-1]) local((
     x |-> r(2) + [8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(
@@ -257,7 +256,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-2] and not r(1) + [2] < [10] and
     {{6.0100000000000001e+1}}) lbound(2)
 
 Solution 8 (state 33)
-states: 34  rewrites: 1652
+states: 34  rewrites: 1656
 CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [3] # [
     true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b |-> * # [false]))
@@ -265,7 +264,7 @@ CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     6.0100000000000001e+1}}) lbound(2)
 
 Solution 9 (state 36)
-states: 37  rewrites: 1827
+states: 37  rewrites: 1831
 CF:BehaviorConf --> const(not [5] < r(0) + [-1] and not r(1) + [8] < [10] and
     b(0) and b(1) and r(1) < [10] and [5] < r(0) and r(1) + [2] < [10] and r(1)
     + [4] < [10] and r(1) + [6] < [10]) local((x |-> r(2) + [
@@ -275,7 +274,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-1] and not r(1) + [8] < [10] and
     6.0100000000000001e+1}}) lbound(0)
 
 Solution 10 (state 40)
-states: 41  rewrites: 2001
+states: 41  rewrites: 2005
 CF:BehaviorConf --> const(not [5] < r(0) + [-2] and not r(1) + [4] < [10] and
     b(0) and b(1) and r(1) < [10] and [5] < r(0) and [5] < r(0) + [-1] and r(1)
     + [2] < [10]) local((x |-> r(2) + [8599060538510541/140737488355328] # [
@@ -284,7 +283,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-2] and not r(1) + [4] < [10] and
     TimingProperties::Period => {{6.0100000000000001e+1}}) lbound(1)
 
 Solution 11 (state 42)
-states: 43  rewrites: 2091
+states: 43  rewrites: 2095
 CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [5] # [
     true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b |-> * # [false]))
@@ -292,7 +291,7 @@ CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     6.0100000000000001e+1}}) lbound(1)
 
 Solution 12 (state 48)
-states: 49  rewrites: 2497
+states: 49  rewrites: 2501
 CF:BehaviorConf --> const(not r(1) < [10] and not [5] < r(0) + [-3] and b(0)
     and b(1) and [5] < r(0) and [5] < r(0) + [-1] and [5] < r(0) + [-2]) local(
     (x |-> r(2) + [8599060538510541/140737488355328] # [true]) ; y |-> r(1) +
@@ -301,7 +300,7 @@ CF:BehaviorConf --> const(not r(1) < [10] and not [5] < r(0) + [-3] and b(0)
     6.0100000000000001e+1}}) lbound(2)
 
 Solution 13 (state 49)
-states: 50  rewrites: 2567
+states: 50  rewrites: 2571
 CF:BehaviorConf --> const(not [5] < r(0) + [-2] and not r(1) + [6] < [10] and
     b(0) and b(1) and r(1) < [10] and [5] < r(0) and [5] < r(0) + [-1] and r(1)
     + [2] < [10] and r(1) + [4] < [10]) local((x |-> r(2) + [
@@ -311,7 +310,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-2] and not r(1) + [6] < [10] and
     6.0100000000000001e+1}}) lbound(0)
 
 Solution 14 (state 50)
-states: 51  rewrites: 2639
+states: 51  rewrites: 2643
 CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [7] # [
     true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b |-> * # [false]))
@@ -319,7 +318,7 @@ CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     6.0100000000000001e+1}}) lbound(0)
 
 Solution 15 (state 55)
-states: 56  rewrites: 2857
+states: 56  rewrites: 2861
 CF:BehaviorConf --> const(not [5] < r(0) + [-3] and not r(1) + [2] < [10] and
     b(0) and b(1) and r(1) < [10] and [5] < r(0) and [5] < r(0) + [-1] and [5]
     < r(0) + [-2]) local((x |-> r(2) + [8599060538510541/140737488355328] # [
@@ -328,7 +327,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-3] and not r(1) + [2] < [10] and
     TimingProperties::Period => {{6.0100000000000001e+1}}) lbound(1)
 
 Solution 16 (state 57)
-states: 58  rewrites: 2947
+states: 58  rewrites: 2951
 CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [3] # [
     true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b |-> * # [false]))
@@ -336,7 +335,7 @@ CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     6.0100000000000001e+1}}) lbound(1)
 
 Solution 17 (state 59)
-states: 60  rewrites: 3037
+states: 60  rewrites: 3041
 CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [3] # [
     true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b |-> * # [false]))
@@ -344,7 +343,7 @@ CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     6.0100000000000001e+1}}) lbound(1)
 
 Solution 18 (state 62)
-states: 63  rewrites: 3212
+states: 63  rewrites: 3216
 CF:BehaviorConf --> const(not [5] < r(0) + [-3] and not r(1) + [4] < [10] and
     b(0) and b(1) and r(1) < [10] and [5] < r(0) and [5] < r(0) + [-1] and [5]
     < r(0) + [-2] and r(1) + [2] < [10]) local((x |-> r(2) + [
@@ -354,7 +353,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-3] and not r(1) + [4] < [10] and
     6.0100000000000001e+1}}) lbound(0)
 
 Solution 19 (state 63)
-states: 64  rewrites: 3284
+states: 64  rewrites: 3288
 CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [5] # [
     true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b |-> * # [false]))
@@ -362,7 +361,7 @@ CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     6.0100000000000001e+1}}) lbound(0)
 
 Solution 20 (state 64)
-states: 65  rewrites: 3356
+states: 65  rewrites: 3360
 CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [5] # [
     true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b |-> * # [false]))
@@ -370,7 +369,7 @@ CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     6.0100000000000001e+1}}) lbound(0)
 
 Solution 21 (state 70)
-states: 71  rewrites: 3616
+states: 71  rewrites: 3620
 CF:BehaviorConf --> const(not r(1) < [10] and not [5] < r(0) + [-4] and b(0)
     and b(1) and [5] < r(0) and [5] < r(0) + [-1] and [5] < r(0) + [-2] and [5]
     < r(0) + [-3]) local((x |-> r(2) + [8599060538510541/140737488355328] # [
@@ -379,7 +378,7 @@ CF:BehaviorConf --> const(not r(1) < [10] and not [5] < r(0) + [-4] and b(0)
     TimingProperties::Period => {{6.0100000000000001e+1}}) lbound(1)
 
 Solution 22 (state 71)
-states: 72  rewrites: 3686
+states: 72  rewrites: 3690
 CF:BehaviorConf --> const(not [5] < r(0) + [-4] and not r(1) + [2] < [10] and
     b(0) and b(1) and r(1) < [10] and [5] < r(0) and [5] < r(0) + [-1] and [5]
     < r(0) + [-2] and [5] < r(0) + [-3]) local((x |-> r(2) + [
@@ -389,7 +388,7 @@ CF:BehaviorConf --> const(not [5] < r(0) + [-4] and not r(1) + [2] < [10] and
     6.0100000000000001e+1}}) lbound(0)
 
 Solution 23 (state 72)
-states: 73  rewrites: 3758
+states: 73  rewrites: 3762
 CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [3] # [
     true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b |-> * # [false]))
@@ -397,7 +396,7 @@ CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     6.0100000000000001e+1}}) lbound(0)
 
 Solution 24 (state 73)
-states: 74  rewrites: 3830
+states: 74  rewrites: 3834
 CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [3] # [
     true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b |-> * # [false]))
@@ -405,7 +404,7 @@ CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     6.0100000000000001e+1}}) lbound(0)
 
 Solution 25 (state 74)
-states: 75  rewrites: 3902
+states: 75  rewrites: 3906
 CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     8599060538510541/140737488355328] # [true]) ; y |-> r(1) + r(2) + [3] # [
     true]) feature((a |-> (r(2) + [1] # b(1) : [true]), b |-> * # [false]))
@@ -413,7 +412,7 @@ CF:BehaviorConf --> const([false]) local((x |-> r(2) + [
     6.0100000000000001e+1}}) lbound(0)
 
 Solution 26 (state 76)
-states: 77  rewrites: 4013
+states: 77  rewrites: 4017
 CF:BehaviorConf --> const(not r(1) < [10] and not [5] < r(0) + [-5] and b(0)
     and b(1) and [5] < r(0) and [5] < r(0) + [-1] and [5] < r(0) + [-2] and [5]
     < r(0) + [-3] and [5] < r(0) + [-4]) local((x |-> r(2) + [
@@ -423,5 +422,5 @@ CF:BehaviorConf --> const(not r(1) < [10] and not [5] < r(0) + [-5] and b(0)
     6.0100000000000001e+1}}) lbound(0)
 
 No more solutions.
-states: 77  rewrites: 4013
+states: 77  rewrites: 4017
 Bye.

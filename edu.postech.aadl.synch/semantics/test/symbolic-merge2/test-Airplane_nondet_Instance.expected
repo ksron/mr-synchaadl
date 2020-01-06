@@ -208,7 +208,7 @@ result Object: < AirplanenondetInstance : System | properties : ((
 ==========================================
 rewrite [5] in TEST-AIRPLANE_NONDET_INSTANCE-MODEL-SYMBOLIC : {bool(true) ||
     initialize(initial) | 0 | infty} .
-rewrites: 254547
+rewrites: 251351
 result GlobalSystem: {((not b(
     "AirplanenondetInstance.pilotConsole.pilotConsoleProc.pilotConsoleThread",
     1) and r(
@@ -1576,7 +1576,7 @@ G:GlobalSystem --> {[true] || < AirplanenondetInstance : System | properties :
     infty}
 
 Solution 2 (state 1)
-states: 2  rewrites: 12488
+states: 2  rewrites: 11964
 G:GlobalSystem --> {(not b(
     "AirplanenondetInstance.pilotConsole.pilotConsoleProc.pilotConsoleThread",
     1) and r(
@@ -1800,7 +1800,7 @@ G:GlobalSystem --> {(not b(
     infty}
 
 Solution 3 (state 2)
-states: 3  rewrites: 34640
+states: 3  rewrites: 33454
 G:GlobalSystem --> {((not b(
     "AirplanenondetInstance.pilotConsole.pilotConsoleProc.pilotConsoleThread",
     1) and r(
@@ -2225,7 +2225,7 @@ G:GlobalSystem --> {((not b(
     infty}
 
 Solution 4 (state 3)
-states: 4  rewrites: 78761
+states: 4  rewrites: 76905
 G:GlobalSystem --> {((not b(
     "AirplanenondetInstance.pilotConsole.pilotConsoleProc.pilotConsoleThread",
     1) and r(
@@ -2896,7 +2896,7 @@ G:GlobalSystem --> {((not b(
     infty}
 
 Solution 5 (state 4)
-states: 5  rewrites: 151089
+states: 5  rewrites: 148563
 G:GlobalSystem --> {((not b(
     "AirplanenondetInstance.pilotConsole.pilotConsoleProc.pilotConsoleThread",
     1) and r(
@@ -3810,7 +3810,7 @@ G:GlobalSystem --> {((not b(
     infty}
 
 Solution 6 (state 5)
-states: 6  rewrites: 253114
+states: 6  rewrites: 249918
 G:GlobalSystem --> {((not b(
     "AirplanenondetInstance.pilotConsole.pilotConsoleProc.pilotConsoleThread",
     1) and r(
@@ -4967,5 +4967,5 @@ G:GlobalSystem --> {((not b(
     infty}
 
 No more solutions.
-states: 6  rewrites: 253114
+states: 6  rewrites: 249918
 Bye.

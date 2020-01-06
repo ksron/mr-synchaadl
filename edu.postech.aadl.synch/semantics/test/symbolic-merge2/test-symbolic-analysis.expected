@@ -6,7 +6,7 @@ search [, 5] in TEST-SYMBOLIC-ANALYSIS : {eval((top . environment) | ((c[e] < [
     3.3999999999999999]]), OBJ:Object)) = true .
 
 Solution 1 (state 0)
-states: 1  rewrites: 267
+states: 1  rewrites: 263
 B:BoolExp --> [3/2] < r("top.environment", 1) and r("top.environment", 1) < [
     4025092166962381/281474976710656]
 OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
@@ -51,7 +51,7 @@ OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
 T:Time --> 0
 
 Solution 2 (state 1)
-states: 2  rewrites: 5697
+states: 2  rewrites: 5543
 B:BoolExp --> not b("top.environment", 0) and not b("top.environment", 1) and (
     (not b("top.controller", 1) and [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] < [10] and b("top.controller", 0) and b(
@@ -149,7 +149,7 @@ OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
 T:Time --> 5
 
 Solution 3 (state 2)
-states: 3  rewrites: 18070
+states: 3  rewrites: 17678
 B:BoolExp --> not b("top.environment", 0) and not b("top.environment", 1) and (
     ((((not [39631676720860365/18014398509481984] < r("top.environment", 8) and
     not r("top.environment", 8) < [0] and not r("top.environment", 9) < r(
@@ -353,7 +353,7 @@ OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
 T:Time --> 10
 
 Solution 4 (state 3)
-states: 4  rewrites: 36375
+states: 4  rewrites: 35745
 B:BoolExp --> not b("top.environment", 0) and not b("top.environment", 1) and (
     ((((not [39631676720860365/18014398509481984] < r("top.environment", 8) and
     not r("top.environment", 8) < [0] and not r("top.environment", 9) < r(
@@ -670,7 +670,7 @@ OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
 T:Time --> 15
 
 Solution 5 (state 4)
-states: 5  rewrites: 60976
+states: 5  rewrites: 60108
 B:BoolExp --> not b("top.environment", 0) and not b("top.environment", 1) and (
     ((((not [39631676720860365/18014398509481984] < r("top.environment", 8) and
     not r("top.environment", 8) < [0] and not r("top.environment", 9) < r(
@@ -1107,7 +1107,7 @@ OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
 T:Time --> 20
 
 Solution 6 (state 5)
-states: 6  rewrites: 92241
+states: 6  rewrites: 91135
 B:BoolExp --> not b("top.environment", 0) and not b("top.environment", 1) and (
     ((((not [39631676720860365/18014398509481984] < r("top.environment", 8) and
     not r("top.environment", 8) < [0] and not r("top.environment", 9) < r(
@@ -1671,7 +1671,7 @@ OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
 T:Time --> 25
 
 No more solutions.
-states: 6  rewrites: 92241
+states: 6  rewrites: 91135
 ==========================================
 search [, 5] in TEST-SYMBOLIC-ANALYSIS : {eval((top . environment) | ((c[e] < [
     [1.4300000000000001e+1]]) and (c[e] > [[1.5]])), initState) || initState |
@@ -1681,7 +1681,7 @@ search [, 5] in TEST-SYMBOLIC-ANALYSIS : {eval((top . environment) | ((c[e] < [
     initState)) = true .
 
 Solution 1 (state 0)
-states: 1  rewrites: 388
+states: 1  rewrites: 384
 B:BoolExp --> [3/2] < r("top.environment", 1) and r("top.environment", 1) < [
     4025092166962381/281474976710656]
 OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
@@ -1726,7 +1726,7 @@ OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
 T:Time --> 0
 
 Solution 2 (state 1)
-states: 2  rewrites: 5483
+states: 2  rewrites: 5329
 B:BoolExp --> not b("top.environment", 0) and not b("top.environment", 1) and (
     (not b("top.controller", 1) and [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] < [10] and b("top.controller", 0) and b(
@@ -1824,7 +1824,7 @@ OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
 T:Time --> 5
 
 Solution 3 (state 2)
-states: 3  rewrites: 17575
+states: 3  rewrites: 17183
 B:BoolExp --> not b("top.environment", 0) and not b("top.environment", 1) and (
     ((((not [39631676720860365/18014398509481984] < r("top.environment", 8) and
     not r("top.environment", 8) < [0] and not r("top.environment", 9) < r(
@@ -2028,7 +2028,7 @@ OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
 T:Time --> 10
 
 Solution 4 (state 3)
-states: 4  rewrites: 35607
+states: 4  rewrites: 34977
 B:BoolExp --> not b("top.environment", 0) and not b("top.environment", 1) and (
     ((((not [39631676720860365/18014398509481984] < r("top.environment", 8) and
     not r("top.environment", 8) < [0] and not r("top.environment", 9) < r(
@@ -2345,7 +2345,7 @@ OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
 T:Time --> 15
 
 Solution 5 (state 4)
-states: 5  rewrites: 59939
+states: 5  rewrites: 59071
 B:BoolExp --> not b("top.environment", 0) and not b("top.environment", 1) and (
     ((((not [39631676720860365/18014398509481984] < r("top.environment", 8) and
     not r("top.environment", 8) < [0] and not r("top.environment", 9) < r(
@@ -2782,7 +2782,7 @@ OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
 T:Time --> 20
 
 Solution 6 (state 5)
-states: 6  rewrites: 90931
+states: 6  rewrites: 89825
 B:BoolExp --> not b("top.environment", 0) and not b("top.environment", 1) and (
     ((((not [39631676720860365/18014398509481984] < r("top.environment", 8) and
     not r("top.environment", 8) < [0] and not r("top.environment", 9) < r(
@@ -3346,5 +3346,5 @@ OBJ:Object --> < top : System | properties : TimingProperties::Period => {{5}},
 T:Time --> 25
 
 No more solutions.
-states: 6  rewrites: 90931
+states: 6  rewrites: 89825
 Bye.

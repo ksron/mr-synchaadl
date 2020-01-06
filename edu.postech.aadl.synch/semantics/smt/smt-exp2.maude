@@ -7,11 +7,17 @@ fmod SMT-VAR-CONVERSION is
   var S : String .
   var Q : Qid .
 
+  op #escStr# : ~> String [memo] .
+  eq #escStr# = "#$#" .
+
+  op #escLen# : ~> Nat [memo] .
+  eq #escLen# = length(#escStr#) .
+
   op varStr : String Nat ~> Qid .
-  eq varStr(S, N) = qid(string(N, 10) + "#$#" + S) .
+  eq varStr(S, N) = qid(S + #escStr# + string(N, 10)) .
 
   op varIndex : Qid ~> Nat .
- ceq varIndex(Q) = rat(substr(S, 0, find(S, "#$#", 0)), 10)
+ ceq varIndex(Q) = rat(substr(S, find(S,#escStr#,0) + #escLen#, length(S)), 10)
    if S := string(Q) .
 
 endfm

@@ -1,0 +1,7 @@
+==========================================
+search [, 50] in TEST-MODEL-TRANSITION-SYSTEM : {[(true).Boolean] || obj4 | 0 |
+    infty} =>+ C:GlobalSystem .
+
+No solution.
+states: 1  rewrites: 335
+Bye.

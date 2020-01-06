@@ -3,7 +3,7 @@ search [, 5] in TEST-THERMOSTAT-SYSTEM-MOD : {bool(true) || initState | 0 |
     infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 4493
+states: 2  rewrites: 4304
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "top.environment", 4) and not [75660473739824333/18014398509481984] < r(
     "top.environment", 5) and not r("top.environment", 4) < [0] and not r(
@@ -70,7 +70,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     | 5 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 5718
+states: 3  rewrites: 5478
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -133,7 +133,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 5 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 6515
+states: 4  rewrites: 6241
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -197,7 +197,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 5 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 7641
+states: 5  rewrites: 7316
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "top.environment", 4) and not [75660473739824333/18014398509481984] < r(
     "top.environment", 5) and not [15/2] + (b("top.environment", 3) ? r(
@@ -265,7 +265,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     | 5 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 14042
+states: 6  rewrites: 13511
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "top.environment", 4) and not [39631676720860365/18014398509481984] < r(
     "top.environment", 9) and not [75660473739824333/18014398509481984] < r(
@@ -357,7 +357,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     controller .. temp)) > | 10 | infty}
 
 Solution 6 (state 6)
-states: 7  rewrites: 26173
+states: 7  rewrites: 25294
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -446,7 +446,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 10 | infty}
 
 Solution 7 (state 7)
-states: 8  rewrites: 28338
+states: 8  rewrites: 27408
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -532,7 +532,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 10 | infty}
 
 Solution 8 (state 8)
-states: 9  rewrites: 29869
+states: 9  rewrites: 28905
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -618,7 +618,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 10 | infty}
 
 Solution 9 (state 9)
-states: 10  rewrites: 31971
+states: 10  rewrites: 30956
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -709,7 +709,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 10 | infty}
 
 Solution 10 (state 10)
-states: 11  rewrites: 38340
+states: 11  rewrites: 37119
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -800,7 +800,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 10 | infty}
 
 Solution 11 (state 11)
-states: 12  rewrites: 40517
+states: 12  rewrites: 39245
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -888,7 +888,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 10 | infty}
 
 Solution 12 (state 12)
-states: 13  rewrites: 42060
+states: 13  rewrites: 40754
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -976,7 +976,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 10 | infty}
 
 Solution 13 (state 13)
-states: 14  rewrites: 44174
+states: 14  rewrites: 42817
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -1069,7 +1069,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 10 | infty}
 
 Solution 14 (state 14)
-states: 15  rewrites: 57000
+states: 15  rewrites: 55295
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "top.environment", 4) and not [39631676720860365/18014398509481984] < r(
     "top.environment", 9) and not [75660473739824333/18014398509481984] < r(
@@ -1169,7 +1169,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     controller .. temp)) > | 10 | infty}
 
 Solution 15 (state 15)
-states: 16  rewrites: 66194
+states: 16  rewrites: 64283
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "top.environment", 4) and not [39631676720860365/18014398509481984] < r(
     "top.environment", 9) and not [39631676720860365/18014398509481984] < r(
@@ -1298,7 +1298,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     | 15 | infty}
 
 Solution 16 (state 16)
-states: 17  rewrites: 84790
+states: 17  rewrites: 82531
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -1425,7 +1425,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 17 (state 17)
-states: 18  rewrites: 88143
+states: 18  rewrites: 85833
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -1552,7 +1552,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 18 (state 18)
-states: 19  rewrites: 90611
+states: 19  rewrites: 88267
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -1680,7 +1680,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 19 (state 19)
-states: 20  rewrites: 102900
+states: 20  rewrites: 100297
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -1804,7 +1804,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 20 (state 20)
-states: 21  rewrites: 106305
+states: 21  rewrites: 103651
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -1925,7 +1925,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 15 | infty}
 
 Solution 21 (state 21)
-states: 22  rewrites: 108799
+states: 22  rewrites: 106111
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -2047,7 +2047,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 22 (state 22)
-states: 23  rewrites: 112177
+states: 23  rewrites: 109438
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -2174,7 +2174,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 23 (state 23)
-states: 24  rewrites: 121214
+states: 24  rewrites: 118269
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -2299,7 +2299,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 24 (state 24)
-states: 25  rewrites: 124628
+states: 25  rewrites: 121632
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -2421,7 +2421,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 15 | infty}
 
 Solution 25 (state 25)
-states: 26  rewrites: 127131
+states: 26  rewrites: 124101
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -2544,7 +2544,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 26 (state 26)
-states: 27  rewrites: 130518
+states: 27  rewrites: 127437
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -2672,7 +2672,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 27 (state 27)
-states: 28  rewrites: 149578
+states: 28  rewrites: 146149
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -2809,7 +2809,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 28 (state 28)
-states: 29  rewrites: 158834
+states: 29  rewrites: 155199
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -2939,7 +2939,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 29 (state 29)
-states: 30  rewrites: 162247
+states: 30  rewrites: 158561
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -3069,7 +3069,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 30 (state 30)
-states: 31  rewrites: 164763
+states: 31  rewrites: 161043
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -3200,7 +3200,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 31 (state 31)
-states: 32  rewrites: 177280
+states: 32  rewrites: 173301
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -3327,7 +3327,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 32 (state 32)
-states: 33  rewrites: 180745
+states: 33  rewrites: 176715
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -3451,7 +3451,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 15 | infty}
 
 Solution 33 (state 33)
-states: 34  rewrites: 183287
+states: 34  rewrites: 179223
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -3576,7 +3576,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 34 (state 34)
-states: 35  rewrites: 186725
+states: 35  rewrites: 182610
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -3706,7 +3706,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 35 (state 35)
-states: 36  rewrites: 195930
+states: 36  rewrites: 191609
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -3834,7 +3834,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 36 (state 36)
-states: 37  rewrites: 199404
+states: 37  rewrites: 195032
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -3959,7 +3959,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 37 (state 37)
-states: 38  rewrites: 201955
+states: 38  rewrites: 197549
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -4085,7 +4085,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 38 (state 38)
-states: 39  rewrites: 205402
+states: 39  rewrites: 200945
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -4216,7 +4216,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 39 (state 39)
-states: 40  rewrites: 224798
+states: 40  rewrites: 219993
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -4356,7 +4356,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 15 | infty}
 
 Solution 40 (state 40)
-states: 41  rewrites: 245244
+states: 41  rewrites: 240091
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "top.environment", 4) and not [39631676720860365/18014398509481984] < r(
     "top.environment", 9) and not [39631676720860365/18014398509481984] < r(
@@ -4505,7 +4505,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     | 15 | infty}
 
 Solution 41 (state 41)
-states: 42  rewrites: 258139
+states: 42  rewrites: 252780
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "top.environment", 4) and not [39631676720860365/18014398509481984] < r(
     "top.environment", 9) and not [39631676720860365/18014398509481984] < r(
@@ -4680,7 +4680,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     | 20 | infty}
 
 Solution 42 (state 42)
-states: 43  rewrites: 263300
+states: 43  rewrites: 257890
 C:GlobalSystem --> {(not [30] < [15/16] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [16] + (b("top.environment", 7) ? r(
     "top.environment", 7) : r("top.environment", 1)) / [8] + (b(
@@ -4855,7 +4855,7 @@ C:GlobalSystem --> {(not [30] < [15/16] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 43 (state 43)
-states: 44  rewrites: 267164
+states: 44  rewrites: 261720
 C:GlobalSystem --> {(not [30] < [15/16] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [16] + (b("top.environment", 7) ? r(
     "top.environment", 7) : r("top.environment", 1)) / [8] + (b(
@@ -5031,7 +5031,7 @@ C:GlobalSystem --> {(not [30] < [15/16] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 44 (state 44)
-states: 45  rewrites: 285191
+states: 45  rewrites: 279488
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -5205,7 +5205,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 45 (state 45)
-states: 46  rewrites: 290232
+states: 46  rewrites: 284478
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/16] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [16] + (b(
@@ -5380,7 +5380,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 46 (state 46)
-states: 47  rewrites: 294007
+states: 47  rewrites: 288219
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/16] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [16] + (b(
@@ -5556,7 +5556,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 47 (state 47)
-states: 48  rewrites: 317251
+states: 48  rewrites: 311151
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -5727,7 +5727,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 48 (state 48)
-states: 49  rewrites: 321125
+states: 49  rewrites: 314991
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -5898,7 +5898,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 49 (state 49)
-states: 50  rewrites: 344610
+states: 50  rewrites: 338164
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -6070,7 +6070,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 50 (state 50)
-states: 51  rewrites: 348493
+states: 51  rewrites: 342013
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -6242,7 +6242,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 51 (state 51)
-states: 52  rewrites: 371261
+states: 52  rewrites: 364469
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -6414,7 +6414,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 52 (state 52)
-states: 53  rewrites: 374953
+states: 53  rewrites: 368127
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -6586,7 +6586,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 53 (state 53)
-states: 54  rewrites: 397520
+states: 54  rewrites: 390382
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -6751,7 +6751,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 54 (state 54)
-states: 55  rewrites: 401283
+states: 55  rewrites: 394111
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -6917,7 +6917,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 55 (state 55)
-states: 56  rewrites: 406339
+states: 56  rewrites: 399116
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -7089,7 +7089,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 56 (state 56)
-states: 57  rewrites: 424066
+states: 57  rewrites: 416584
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -7256,7 +7256,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 57 (state 57)
-states: 58  rewrites: 427838
+states: 58  rewrites: 420322
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -7424,7 +7424,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 58 (state 58)
-states: 59  rewrites: 432903
+states: 59  rewrites: 425336
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -7598,7 +7598,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 59 (state 59)
-states: 60  rewrites: 460261
+states: 60  rewrites: 452346
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -7781,7 +7781,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 60 (state 60)
-states: 61  rewrites: 477990
+states: 61  rewrites: 469816
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -7955,7 +7955,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 61 (state 61)
-states: 62  rewrites: 481718
+states: 62  rewrites: 473510
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -8130,7 +8130,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 62 (state 62)
-states: 63  rewrites: 504501
+states: 63  rewrites: 495981
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -8298,7 +8298,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 63 (state 63)
-states: 64  rewrites: 508300
+states: 64  rewrites: 499746
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -8467,7 +8467,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 64 (state 64)
-states: 65  rewrites: 513401
+states: 65  rewrites: 504796
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -8642,7 +8642,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 65 (state 65)
-states: 66  rewrites: 531299
+states: 66  rewrites: 522435
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -8812,7 +8812,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 66 (state 66)
-states: 67  rewrites: 535107
+states: 67  rewrites: 526209
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -8983,7 +8983,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 67 (state 67)
-states: 68  rewrites: 540217
+states: 68  rewrites: 531268
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -9160,7 +9160,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 68 (state 68)
-states: 69  rewrites: 567827
+states: 69  rewrites: 558530
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -9346,7 +9346,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 69 (state 69)
-states: 70  rewrites: 596811
+states: 70  rewrites: 587166
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -9543,7 +9543,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 70 (state 70)
-states: 71  rewrites: 610001
+states: 71  rewrites: 600150
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -9721,7 +9721,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 71 (state 71)
-states: 72  rewrites: 615150
+states: 72  rewrites: 605248
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/16] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [16] + (b(
@@ -9900,7 +9900,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 72 (state 72)
-states: 73  rewrites: 619009
+states: 73  rewrites: 609073
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/16] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [16] + (b(
@@ -10080,7 +10080,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 73 (state 73)
-states: 74  rewrites: 642745
+states: 74  rewrites: 632497
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -10255,7 +10255,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 74 (state 74)
-states: 75  rewrites: 646703
+states: 75  rewrites: 636421
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -10430,7 +10430,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 75 (state 75)
-states: 76  rewrites: 670680
+states: 76  rewrites: 660086
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -10606,7 +10606,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 76 (state 76)
-states: 77  rewrites: 674647
+states: 77  rewrites: 664019
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -10782,7 +10782,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 77 (state 77)
-states: 78  rewrites: 697907
+states: 78  rewrites: 686967
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -10958,7 +10958,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 78 (state 78)
-states: 79  rewrites: 701683
+states: 79  rewrites: 690709
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -11134,7 +11134,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 79 (state 79)
-states: 80  rewrites: 724742
+states: 80  rewrites: 713456
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -11303,7 +11303,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 80 (state 80)
-states: 81  rewrites: 728589
+states: 81  rewrites: 717269
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -11473,7 +11473,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 81 (state 81)
-states: 82  rewrites: 733753
+states: 82  rewrites: 722382
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -11649,7 +11649,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 82 (state 82)
-states: 83  rewrites: 751864
+states: 83  rewrites: 740234
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -11820,7 +11820,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 83 (state 83)
-states: 84  rewrites: 755720
+states: 84  rewrites: 744056
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -11992,7 +11992,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 84 (state 84)
-states: 85  rewrites: 760893
+states: 85  rewrites: 749178
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -12170,7 +12170,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 85 (state 85)
-states: 86  rewrites: 788827
+states: 86  rewrites: 776764
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -12357,7 +12357,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 86 (state 86)
-states: 87  rewrites: 806940
+states: 87  rewrites: 794618
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -12535,7 +12535,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 87 (state 87)
-states: 88  rewrites: 810752
+states: 88  rewrites: 798396
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -12714,7 +12714,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 88 (state 88)
-states: 89  rewrites: 834027
+states: 89  rewrites: 821359
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -12886,7 +12886,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 89 (state 89)
-states: 90  rewrites: 837910
+states: 90  rewrites: 825208
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -13059,7 +13059,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 90 (state 90)
-states: 91  rewrites: 843119
+states: 91  rewrites: 830366
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -13238,7 +13238,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 91 (state 91)
-states: 92  rewrites: 861401
+states: 92  rewrites: 848389
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -13412,7 +13412,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 92 (state 92)
-states: 93  rewrites: 865293
+states: 93  rewrites: 852247
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -13586,7 +13586,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 93 (state 93)
-states: 94  rewrites: 870511
+states: 94  rewrites: 857414
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -13766,7 +13766,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 94 (state 94)
-states: 95  rewrites: 898697
+states: 95  rewrites: 885252
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -13956,7 +13956,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 95 (state 95)
-states: 96  rewrites: 928257
+states: 96  rewrites: 914464
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -14157,7 +14157,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 20 | infty}
 
 Solution 96 (state 96)
-states: 97  rewrites: 959262
+states: 97  rewrites: 945121
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "top.environment", 4) and not [39631676720860365/18014398509481984] < r(
     "top.environment", 9) and not [39631676720860365/18014398509481984] < r(
@@ -14369,7 +14369,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     | 20 | infty}
 
 Solution 97 (state 97)
-states: 98  rewrites: 977009
+states: 98  rewrites: 962662
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "top.environment", 4) and not [39631676720860365/18014398509481984] < r(
     "top.environment", 9) and not [39631676720860365/18014398509481984] < r(
@@ -14606,7 +14606,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     | 25 | infty}
 
 Solution 98 (state 98)
-states: 99  rewrites: 984309
+states: 99  rewrites: 969911
 C:GlobalSystem --> {(not [30] < [15/32] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [32] + (b("top.environment", 7) ? r(
     "top.environment", 7) : r("top.environment", 1)) / [16] + (b(
@@ -14843,7 +14843,7 @@ C:GlobalSystem --> {(not [30] < [15/32] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 99 (state 99)
-states: 100  rewrites: 989825
+states: 100  rewrites: 975393
 C:GlobalSystem --> {(not [30] < [15/32] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [32] + (b("top.environment", 7) ? r(
     "top.environment", 7) : r("top.environment", 1)) / [16] + (b(
@@ -15080,7 +15080,7 @@ C:GlobalSystem --> {(not [30] < [15/32] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 100 (state 100)
-states: 101  rewrites: 1022912
+states: 101  rewrites: 1008168
 C:GlobalSystem --> {(not [30] < [15/16] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [16] + (b("top.environment", 7) ? r(
     "top.environment", 7) : r("top.environment", 1)) / [8] + (b(
@@ -15313,7 +15313,7 @@ C:GlobalSystem --> {(not [30] < [15/16] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 101 (state 101)
-states: 102  rewrites: 1028572
+states: 102  rewrites: 1013794
 C:GlobalSystem --> {(not [30] < [15/16] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [16] + (b("top.environment", 7) ? r(
     "top.environment", 7) : r("top.environment", 1)) / [8] + (b(
@@ -15547,7 +15547,7 @@ C:GlobalSystem --> {(not [30] < [15/16] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 102 (state 102)
-states: 103  rewrites: 1061981
+states: 103  rewrites: 1046891
 C:GlobalSystem --> {(not [30] < [15/16] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [16] + (b("top.environment", 7) ? r(
     "top.environment", 7) : r("top.environment", 1)) / [8] + (b(
@@ -15782,7 +15782,7 @@ C:GlobalSystem --> {(not [30] < [15/16] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 103 (state 103)
-states: 104  rewrites: 1067650
+states: 104  rewrites: 1052526
 C:GlobalSystem --> {(not [30] < [15/16] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [16] + (b("top.environment", 7) ? r(
     "top.environment", 7) : r("top.environment", 1)) / [8] + (b(
@@ -16018,7 +16018,7 @@ C:GlobalSystem --> {(not [30] < [15/16] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 104 (state 104)
-states: 105  rewrites: 1100222
+states: 105  rewrites: 1084786
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/32] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [32] + (b(
@@ -16256,7 +16256,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 105 (state 105)
-states: 106  rewrites: 1105661
+states: 106  rewrites: 1090191
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/32] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [32] + (b(
@@ -16494,7 +16494,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 106 (state 106)
-states: 107  rewrites: 1138317
+states: 107  rewrites: 1122535
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/16] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [16] + (b(
@@ -16726,7 +16726,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 107 (state 107)
-states: 108  rewrites: 1143900
+states: 108  rewrites: 1128084
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/16] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [16] + (b(
@@ -16959,7 +16959,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 108 (state 108)
-states: 109  rewrites: 1176878
+states: 109  rewrites: 1160750
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/16] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [16] + (b(
@@ -17193,7 +17193,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 109 (state 109)
-states: 110  rewrites: 1182470
+states: 110  rewrites: 1166308
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/16] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [16] + (b(
@@ -17428,7 +17428,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 110 (state 110)
-states: 111  rewrites: 1215355
+states: 111  rewrites: 1198881
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -17656,7 +17656,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 111 (state 111)
-states: 112  rewrites: 1220941
+states: 112  rewrites: 1204433
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -17885,7 +17885,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 112 (state 112)
-states: 113  rewrites: 1253896
+states: 113  rewrites: 1237076
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -18114,7 +18114,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 113 (state 113)
-states: 114  rewrites: 1259491
+states: 114  rewrites: 1242637
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -18343,7 +18343,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 114 (state 114)
-states: 115  rewrites: 1292563
+states: 115  rewrites: 1275397
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -18573,7 +18573,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 115 (state 115)
-states: 116  rewrites: 1298185
+states: 116  rewrites: 1280985
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -18804,7 +18804,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 116 (state 116)
-states: 117  rewrites: 1331356
+states: 117  rewrites: 1313844
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -19035,7 +19035,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 117 (state 117)
-states: 118  rewrites: 1336987
+states: 118  rewrites: 1319441
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -19266,7 +19266,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 118 (state 118)
-states: 119  rewrites: 1369597
+states: 119  rewrites: 1351739
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -19497,7 +19497,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 119 (state 119)
-states: 120  rewrites: 1375082
+states: 120  rewrites: 1357190
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -19729,7 +19729,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 120 (state 120)
-states: 121  rewrites: 1407498
+states: 121  rewrites: 1389294
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -19961,7 +19961,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 121 (state 121)
-states: 122  rewrites: 1412992
+states: 122  rewrites: 1394754
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -20193,7 +20193,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 122 (state 122)
-states: 123  rewrites: 1444875
+states: 123  rewrites: 1426325
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -20418,7 +20418,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 123 (state 123)
-states: 124  rewrites: 1450267
+states: 124  rewrites: 1431683
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -20644,7 +20644,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 124 (state 124)
-states: 125  rewrites: 1457475
+states: 125  rewrites: 1438840
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -20876,7 +20876,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 125 (state 125)
-states: 126  rewrites: 1482071
+states: 126  rewrites: 1463177
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -21103,7 +21103,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 126 (state 126)
-states: 127  rewrites: 1487472
+states: 127  rewrites: 1468544
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -21331,7 +21331,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 127 (state 127)
-states: 128  rewrites: 1494689
+states: 128  rewrites: 1475710
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -21565,7 +21565,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 128 (state 128)
-states: 129  rewrites: 1532769
+states: 129  rewrites: 1513442
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -21811,7 +21811,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 129 (state 129)
-states: 130  rewrites: 1557497
+states: 130  rewrites: 1537911
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -22038,7 +22038,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 130 (state 130)
-states: 131  rewrites: 1562925
+states: 131  rewrites: 1543305
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -22266,7 +22266,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 131 (state 131)
-states: 132  rewrites: 1570178
+states: 132  rewrites: 1550507
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -22501,7 +22501,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 132 (state 132)
-states: 133  rewrites: 1594945
+states: 133  rewrites: 1575015
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -22730,7 +22730,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 133 (state 133)
-states: 134  rewrites: 1600382
+states: 134  rewrites: 1580418
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -22959,7 +22959,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 134 (state 134)
-states: 135  rewrites: 1607644
+states: 135  rewrites: 1587629
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -23196,7 +23196,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 135 (state 135)
-states: 136  rewrites: 1645976
+states: 136  rewrites: 1625613
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -23443,7 +23443,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 136 (state 136)
-states: 137  rewrites: 1672411
+states: 137  rewrites: 1651789
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -23695,7 +23695,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 137 (state 137)
-states: 138  rewrites: 1678213
+states: 138  rewrites: 1657557
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -23948,7 +23948,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 138 (state 138)
-states: 139  rewrites: 1685931
+states: 139  rewrites: 1665224
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -24208,7 +24208,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 139 (state 139)
-states: 140  rewrites: 1711331
+states: 140  rewrites: 1690365
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -24442,7 +24442,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 140 (state 140)
-states: 141  rewrites: 1716879
+states: 141  rewrites: 1695879
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -24677,7 +24677,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 141 (state 141)
-states: 142  rewrites: 1749664
+states: 142  rewrites: 1728352
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -24912,7 +24912,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 142 (state 142)
-states: 143  rewrites: 1755221
+states: 143  rewrites: 1733875
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -25148,7 +25148,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 143 (state 143)
-states: 144  rewrites: 1787473
+states: 144  rewrites: 1765815
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -25376,7 +25376,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 144 (state 144)
-states: 145  rewrites: 1792928
+states: 145  rewrites: 1771236
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -25605,7 +25605,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 145 (state 145)
-states: 146  rewrites: 1800217
+states: 146  rewrites: 1778474
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -25841,7 +25841,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 146 (state 146)
-states: 147  rewrites: 1825101
+states: 147  rewrites: 1803099
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -26071,7 +26071,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 147 (state 147)
-states: 148  rewrites: 1830565
+states: 148  rewrites: 1808529
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -26301,7 +26301,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 148 (state 148)
-states: 149  rewrites: 1837863
+states: 149  rewrites: 1815776
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -26539,7 +26539,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 149 (state 149)
-states: 150  rewrites: 1876375
+states: 150  rewrites: 1853940
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -26787,7 +26787,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 150 (state 150)
-states: 151  rewrites: 1901391
+states: 151  rewrites: 1878697
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -27018,7 +27018,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 151 (state 151)
-states: 152  rewrites: 1906882
+states: 152  rewrites: 1884154
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -27250,7 +27250,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 152 (state 152)
-states: 153  rewrites: 1914216
+states: 153  rewrites: 1891437
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -27489,7 +27489,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 153 (state 153)
-states: 154  rewrites: 1939271
+states: 154  rewrites: 1916233
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -27722,7 +27722,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 154 (state 154)
-states: 155  rewrites: 1944771
+states: 155  rewrites: 1921699
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -27955,7 +27955,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 155 (state 155)
-states: 156  rewrites: 1952114
+states: 156  rewrites: 1928991
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -28196,7 +28196,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 156 (state 156)
-states: 157  rewrites: 1990878
+states: 157  rewrites: 1967407
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -28447,7 +28447,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 157 (state 157)
-states: 158  rewrites: 2017601
+states: 158  rewrites: 1993871
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -28703,7 +28703,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 158 (state 158)
-states: 159  rewrites: 2023466
+states: 159  rewrites: 1999702
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -28959,7 +28959,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 159 (state 159)
-states: 160  rewrites: 2031265
+states: 160  rewrites: 2007450
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -29223,7 +29223,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 160 (state 160)
-states: 161  rewrites: 2073652
+states: 161  rewrites: 2049489
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -29501,7 +29501,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 161 (state 161)
-states: 162  rewrites: 2099303
+states: 162  rewrites: 2074881
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/32] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [32] + (b(
@@ -29744,7 +29744,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 162 (state 162)
-states: 163  rewrites: 2104862
+states: 163  rewrites: 2080406
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/32] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [32] + (b(
@@ -29987,7 +29987,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 163 (state 163)
-states: 164  rewrites: 2138214
+states: 164  rewrites: 2113446
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/16] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [16] + (b(
@@ -30224,7 +30224,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 164 (state 164)
-states: 165  rewrites: 2143917
+states: 165  rewrites: 2119115
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/16] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [16] + (b(
@@ -30462,7 +30462,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 165 (state 165)
-states: 166  rewrites: 2177591
+states: 166  rewrites: 2152477
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/16] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [16] + (b(
@@ -30701,7 +30701,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 166 (state 166)
-states: 167  rewrites: 2183303
+states: 167  rewrites: 2158155
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/16] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [16] + (b(
@@ -30941,7 +30941,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 167 (state 167)
-states: 168  rewrites: 2216884
+states: 168  rewrites: 2191424
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -31174,7 +31174,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 168 (state 168)
-states: 169  rewrites: 2222590
+states: 169  rewrites: 2197096
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -31408,7 +31408,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 169 (state 169)
-states: 170  rewrites: 2256241
+states: 170  rewrites: 2230435
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -31642,7 +31642,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 170 (state 170)
-states: 171  rewrites: 2261956
+states: 171  rewrites: 2236116
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -31876,7 +31876,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 171 (state 171)
-states: 172  rewrites: 2295724
+states: 172  rewrites: 2269572
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -32111,7 +32111,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 172 (state 172)
-states: 173  rewrites: 2301466
+states: 173  rewrites: 2275280
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -32347,7 +32347,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 173 (state 173)
-states: 174  rewrites: 2335333
+states: 174  rewrites: 2308835
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -32583,7 +32583,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 174 (state 174)
-states: 175  rewrites: 2341084
+states: 175  rewrites: 2314552
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/8] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [8] + (b(
@@ -32819,7 +32819,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 175 (state 175)
-states: 176  rewrites: 2374390
+states: 176  rewrites: 2347546
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -33055,7 +33055,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 176 (state 176)
-states: 177  rewrites: 2379995
+states: 177  rewrites: 2353117
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -33292,7 +33292,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 177 (state 177)
-states: 178  rewrites: 2413107
+states: 178  rewrites: 2385917
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -33529,7 +33529,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 178 (state 178)
-states: 179  rewrites: 2418721
+states: 179  rewrites: 2391497
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -33766,7 +33766,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 179 (state 179)
-states: 180  rewrites: 2451300
+states: 180  rewrites: 2423764
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -33996,7 +33996,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 180 (state 180)
-states: 181  rewrites: 2456812
+states: 181  rewrites: 2429242
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -34227,7 +34227,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 181 (state 181)
-states: 182  rewrites: 2464176
+states: 182  rewrites: 2436555
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -34464,7 +34464,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 182 (state 182)
-states: 183  rewrites: 2489312
+states: 183  rewrites: 2461432
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -34696,7 +34696,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 183 (state 183)
-states: 184  rewrites: 2494833
+states: 184  rewrites: 2466919
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -34929,7 +34929,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 184 (state 184)
-states: 185  rewrites: 2502206
+states: 185  rewrites: 2474241
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -35168,7 +35168,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 185 (state 185)
-states: 186  rewrites: 2541102
+states: 186  rewrites: 2512789
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -35419,7 +35419,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 186 (state 186)
-states: 187  rewrites: 2566370
+states: 187  rewrites: 2537798
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -35651,7 +35651,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 187 (state 187)
-states: 188  rewrites: 2571918
+states: 188  rewrites: 2543312
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -35884,7 +35884,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 188 (state 188)
-states: 189  rewrites: 2579327
+states: 189  rewrites: 2550670
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -36124,7 +36124,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 189 (state 189)
-states: 190  rewrites: 2604634
+states: 190  rewrites: 2575718
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -36358,7 +36358,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 190 (state 190)
-states: 191  rewrites: 2610191
+states: 191  rewrites: 2581241
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -36592,7 +36592,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 191 (state 191)
-states: 192  rewrites: 2617609
+states: 192  rewrites: 2588608
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -36834,7 +36834,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 192 (state 192)
-states: 193  rewrites: 2656757
+states: 193  rewrites: 2627408
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -37086,7 +37086,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 193 (state 193)
-states: 194  rewrites: 2683732
+states: 194  rewrites: 2654124
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -37343,7 +37343,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 194 (state 194)
-states: 195  rewrites: 2689654
+states: 195  rewrites: 2660012
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -37601,7 +37601,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 195 (state 195)
-states: 196  rewrites: 2697528
+states: 196  rewrites: 2667835
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -37866,7 +37866,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 196 (state 196)
-states: 197  rewrites: 2723468
+states: 197  rewrites: 2693516
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -38105,7 +38105,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 197 (state 197)
-states: 198  rewrites: 2729136
+states: 198  rewrites: 2699150
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -38345,7 +38345,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 198 (state 198)
-states: 199  rewrites: 2762617
+states: 199  rewrites: 2732319
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -38585,7 +38585,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 199 (state 199)
-states: 200  rewrites: 2768294
+states: 200  rewrites: 2737962
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -38826,7 +38826,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 200 (state 200)
-states: 201  rewrites: 2801242
+states: 201  rewrites: 2770598
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -39059,7 +39059,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 201 (state 201)
-states: 202  rewrites: 2806817
+states: 202  rewrites: 2776139
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -39293,7 +39293,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 202 (state 202)
-states: 203  rewrites: 2814262
+states: 203  rewrites: 2783533
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -39534,7 +39534,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 203 (state 203)
-states: 204  rewrites: 2839686
+states: 204  rewrites: 2808698
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -39769,7 +39769,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 204 (state 204)
-states: 205  rewrites: 2845270
+states: 205  rewrites: 2814248
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -40004,7 +40004,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 205 (state 205)
-states: 206  rewrites: 2852724
+states: 206  rewrites: 2821651
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -40247,7 +40247,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 206 (state 206)
-states: 207  rewrites: 2892052
+states: 207  rewrites: 2860631
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -40500,7 +40500,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 207 (state 207)
-states: 208  rewrites: 2917608
+states: 208  rewrites: 2885928
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -40735,7 +40735,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 208 (state 208)
-states: 209  rewrites: 2923219
+states: 209  rewrites: 2891505
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -40971,7 +40971,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 209 (state 209)
-states: 210  rewrites: 2930709
+states: 210  rewrites: 2898944
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -41214,7 +41214,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 210 (state 210)
-states: 211  rewrites: 2956304
+states: 211  rewrites: 2924280
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -41451,7 +41451,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 211 (state 211)
-states: 212  rewrites: 2961924
+states: 212  rewrites: 2929866
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -41688,7 +41688,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 212 (state 212)
-states: 213  rewrites: 2969423
+states: 213  rewrites: 2937314
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -41933,7 +41933,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 213 (state 213)
-states: 214  rewrites: 3009003
+states: 214  rewrites: 2976546
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -42188,7 +42188,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 214 (state 214)
-states: 215  rewrites: 3036266
+states: 215  rewrites: 3003550
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -42449,7 +42449,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 215 (state 215)
-states: 216  rewrites: 3042251
+states: 216  rewrites: 3009501
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -42710,7 +42710,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     controller .. temp)) > | 25 | infty}
 
 Solution 216 (state 216)
-states: 217  rewrites: 3050206
+states: 217  rewrites: 3017405
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [30] < [15/4] + (b(
     "top.environment", 3) ? r("top.environment", 1) : [0]) / [4] + (b(
@@ -42979,7 +42979,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 217 (state 217)
-states: 218  rewrites: 3093409
+states: 218  rewrites: 3060260
 C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     "top.environment", 1) : [0]) / [2] and not [
     39631676720860365/18014398509481984] < r("top.environment", 4) and not [
@@ -43262,7 +43262,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b("top.environment", 3) ? r(
     | 25 | infty}
 
 Solution 218 (state 218)
-states: 219  rewrites: 3138449
+states: 219  rewrites: 3104952
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "top.environment", 4) and not [39631676720860365/18014398509481984] < r(
     "top.environment", 9) and not [39631676720860365/18014398509481984] < r(
@@ -43559,5 +43559,5 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     | 25 | infty}
 
 No more solutions.
-states: 219  rewrites: 3140573
+states: 219  rewrites: 3107059
 Bye.

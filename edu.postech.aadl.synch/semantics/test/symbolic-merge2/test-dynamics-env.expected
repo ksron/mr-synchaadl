@@ -1,16 +1,16 @@
 ==========================================
 reduce in TEST-ENV-DYNAMICS : finalConst(env1) .
-rewrites: 27
+rewrites: 30
 result BoolExp: b(1) === b(0) and [0] === r(0)
 ==========================================
 reduce in TEST-ENV-DYNAMICS : finalConst(env2) .
-rewrites: 71
+rewrites: 76
 result BoolExp: b(2) and [0] === r(0) and [0] === r(1)
 ==========================================
 search in TEST-ENV-DYNAMICS : executeStep(bool(true), env1) =>* C:ConstConfig .
 
 Solution 1 (state 0)
-states: 1  rewrites: 1804
+states: 1  rewrites: 1764
 C:ConstConfig --> (((not [2] < r("e1", 6) and not r("e1", 6) < [0] and not r(
     "e1", 7) < r("e1", 6) and not b("e1", 5) and r("e1", 7) === [5] and r("e1",
     9) === [1] + - r("e1", 6) * [3602879701896397/18014398509481984] + [
@@ -48,12 +48,12 @@ C:ConstConfig --> (((not [2] < r("e1", 6) and not r("e1", 6) < [0] and not r(
     1),response : cr1 :(2,3) >
 
 No more solutions.
-states: 1  rewrites: 1804
+states: 1  rewrites: 1764
 ==========================================
 search in TEST-ENV-DYNAMICS : executeStep(bool(true), env2) =>* C:ConstConfig .
 
 Solution 1 (state 0)
-states: 1  rewrites: 147961
+states: 1  rewrites: 140587
 C:ConstConfig --> (b(2) and (((((((((((((((((((((((((((((((((((((((((((((((((((
     ((((((((((((((((((not [2] < r("e2", 7) and not [7/2] < r("e2", 8) and not
     r("e2", 7) < [0] and not r("e2", 8) < [3/2] and not r("e2", 8) < r("e2", 7)
@@ -1142,5 +1142,5 @@ C:ConstConfig --> (b(2) and (((((((((((((((((((((((((((((((((((((((((((((((((((
     : (cr1 :(0,1), cr2 :(3/2,5/2)),response : (cr1 :(3,4), cr2 :(7/2,9/2)) >
 
 No more solutions.
-states: 1  rewrites: 147961
+states: 1  rewrites: 140587
 Bye.

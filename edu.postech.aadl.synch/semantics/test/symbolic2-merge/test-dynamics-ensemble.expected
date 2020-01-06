@@ -1,0 +1,11 @@
+==========================================
+reduce in TEST-ENSEMBLE-DYNAMICS : finalConst(obj3) .
+rewrites: 110
+result SMTBoolValue: [(true).Boolean and (true).Boolean]
+==========================================
+search in TEST-ENSEMBLE-DYNAMICS : executeStep(bool(true), obj3) =>*
+    C:ConstConfig .
+
+No solution.
+states: 1  rewrites: 294
+Bye.

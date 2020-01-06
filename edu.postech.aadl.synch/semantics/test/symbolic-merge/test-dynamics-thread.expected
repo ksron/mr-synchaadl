@@ -1,17 +1,17 @@
 ==========================================
 reduce in TEST-THREAD-DYNAMICS : finalConst(obj1) .
-rewrites: 4
+rewrites: 8
 result SMTBoolValue: [true]
 ==========================================
 reduce in TEST-THREAD-DYNAMICS : finalConst(obj2) .
-rewrites: 4
+rewrites: 9
 result SMTBoolValue: [true]
 ==========================================
 search in TEST-THREAD-DYNAMICS : executeStep(bool(true), obj1 transIn(real(4) #
     bool(true), c1 .. inp)) =>* C:ConstConfig .
 
 Solution 1 (state 0)
-states: 1  rewrites: 344
+states: 1  rewrites: 327
 C:ConstConfig --> [4] < r(1) + [1] || < c1 : Thread | properties : none,
     features : (< inp : DataInPort | properties : none,content : [0] # [false],
     cache : [4] # [true] > < outp : DataOutPort | properties : none,content : [
@@ -26,13 +26,13 @@ C:ConstConfig --> [4] < r(1) + [1] || < c1 : Thread | properties : none,
     loopBound : 10,transBound : 10 >
 
 No more solutions.
-states: 1  rewrites: 344
+states: 1  rewrites: 327
 ==========================================
 search in TEST-THREAD-DYNAMICS : executeStep(bool(true), obj2 transIn(real(5) #
     bool(true), c2 .. inp)) =>* C:ConstConfig .
 
 Solution 1 (state 0)
-states: 1  rewrites: 615
+states: 1  rewrites: 561
 C:ConstConfig --> [true] || < c2 : Thread | properties : none,features : (< inp
     : DataInPort | properties : none,content : [0] # [false],cache : [5] # [
     true] > < outp : DataOutPort | properties : none,content : [7/2] # [true]
@@ -47,5 +47,5 @@ C:ConstConfig --> [true] || < c2 : Thread | properties : none,features : (< inp
     : 10,transBound : 10 >
 
 No more solutions.
-states: 1  rewrites: 615
+states: 1  rewrites: 561
 Bye.

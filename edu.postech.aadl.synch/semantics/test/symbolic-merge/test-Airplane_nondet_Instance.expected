@@ -208,7 +208,7 @@ result Object: < AirplanenondetInstance : System | properties : ((
 ==========================================
 rewrite [5] in TEST-AIRPLANE_NONDET_INSTANCE-MODEL-SYMBOLIC : {bool(true) ||
     initialize(initial) | 0 | infty} .
-rewrites: 238209
+rewrites: 235013
 result GlobalSystem: {((not [1] < (not - r("AirplanenondetInstance.turningCtrl.leftWingController.ctrlProc.ctrlThread", 1) + r(
     "AirplanenondetInstance.turningCtrl.mainController.ctrlProc.ctrlThread", 3)
     < [0] ? - r("AirplanenondetInstance.turningCtrl.leftWingController.ctrlProc.ctrlThread", 1) + r(
@@ -1450,7 +1450,7 @@ G:GlobalSystem --> {[true] || < AirplanenondetInstance : System | properties :
     infty}
 
 Solution 2 (state 1)
-states: 2  rewrites: 12374
+states: 2  rewrites: 11850
 G:GlobalSystem --> {(r(
     "AirplanenondetInstance.pilotConsole.pilotConsoleProc.pilotConsoleThread",
     0) === [0] or r(
@@ -1666,7 +1666,7 @@ G:GlobalSystem --> {(r(
     infty}
 
 Solution 3 (state 2)
-states: 3  rewrites: 33626
+states: 3  rewrites: 32440
 G:GlobalSystem --> {((r(
     "AirplanenondetInstance.pilotConsole.pilotConsoleProc.pilotConsoleThread",
     0) === [0] or r(
@@ -2055,7 +2055,7 @@ G:GlobalSystem --> {((r(
     infty}
 
 Solution 4 (state 3)
-states: 4  rewrites: 75110
+states: 4  rewrites: 73254
 G:GlobalSystem --> {((not [1] < (not [-1] + r(
     "AirplanenondetInstance.turningCtrl.mainController.ctrlProc.ctrlThread", 0)
     < [0] ? [-1] + r(
@@ -2660,7 +2660,7 @@ G:GlobalSystem --> {((not [1] < (not [-1] + r(
     infty}
 
 Solution 5 (state 4)
-states: 5  rewrites: 142540
+states: 5  rewrites: 140014
 G:GlobalSystem --> {((not [1] < (not - r("AirplanenondetInstance.turningCtrl.leftWingController.ctrlProc.ctrlThread", 1) + r(
     "AirplanenondetInstance.turningCtrl.mainController.ctrlProc.ctrlThread", 3)
     < [0] ? - r("AirplanenondetInstance.turningCtrl.leftWingController.ctrlProc.ctrlThread", 1) + r(
@@ -3478,7 +3478,7 @@ G:GlobalSystem --> {((not [1] < (not - r("AirplanenondetInstance.turningCtrl.lef
     infty}
 
 Solution 6 (state 5)
-states: 6  rewrites: 237406
+states: 6  rewrites: 234210
 G:GlobalSystem --> {((not [1] < (not - r("AirplanenondetInstance.turningCtrl.leftWingController.ctrlProc.ctrlThread", 1) + r(
     "AirplanenondetInstance.turningCtrl.mainController.ctrlProc.ctrlThread", 3)
     < [0] ? - r("AirplanenondetInstance.turningCtrl.leftWingController.ctrlProc.ctrlThread", 1) + r(
@@ -4509,5 +4509,5 @@ G:GlobalSystem --> {((not [1] < (not - r("AirplanenondetInstance.turningCtrl.lef
     infty}
 
 No more solutions.
-states: 6  rewrites: 237406
+states: 6  rewrites: 234210
 Bye.

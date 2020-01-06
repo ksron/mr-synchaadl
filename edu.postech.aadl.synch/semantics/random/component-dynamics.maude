@@ -5,7 +5,7 @@
 mod COMPONENT-DYNAMICS is
   protecting COMPONENT .
   protecting PORT .
-  protecting CHECKSAT .
+  protecting CONC-CHECKSAT .
 
   sort ConfigWithRand .
   subsort Configuration < ConfigWithRand .

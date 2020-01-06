@@ -84,7 +84,7 @@ mod THREAD-DYNAMICS is
  ceq execThread(CONST, 
       < CR : C:Thread | features : PORTS, subcomponents : COMPS, currState : L, varGen : GEN, ATTS >, 
       PORTS', L' | FMAP | DATA | CONST' | GEN')
-   = CONST' ||
+   = simplify(CONST') ||
       < CR : C:Thread | features : writeFeature(FMAP,PORTS'),
                         subcomponents : writeData(DATA,COMPS), currState : L', varGen : GEN', ATTS > 
   if check-sat(CONST and CONST') .
@@ -143,7 +143,7 @@ mod ENSEMBLE-DYNAMICS is
   --- 2] Each executeStep will be rewritten to a constrained object.
   --- 3] transfer results in the output ports to the enclosing ensemble
   op execEnsemble : BoolExp ConstConfig ~> ConstConfig [format (m! o)] .
- ceq execEnsemble(CONST, CONST' || OBJ) = CONST' || OBJ'
+ ceq execEnsemble(CONST, CONST' || OBJ) = simplify(CONST') || OBJ'
   if OBJ' := transferResults(OBJ)
   /\ check-sat(CONST and CONST' and finalConst(OBJ')) .  
 
@@ -227,7 +227,7 @@ mod ENV-DYNAMICS is
                      ATTS >,
       PORTS', ICONST, L' | FMAP | DATA | CONST' | GEN1)
    = 
-      (ICONST and CONST' and OCONST) || 
+      simplify(ICONST and CONST' and OCONST) || 
       < CR : C:Env | features : PORTS'',
                      subcomponents : writeData(DATA,COMPS), 
                      currMode : L', 

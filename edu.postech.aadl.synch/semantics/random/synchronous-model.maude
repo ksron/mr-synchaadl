@@ -132,7 +132,6 @@ mod MODEL-TRANSITION-SYSTEM is
    /\ T + NT <= TI .
 endm
 
-
 --- Similar to the above transition system except not using rewrite rules
 mod RANDOM-SIMULATION is
     including MODEL-TRANSITION-SYSTEM .
@@ -172,7 +171,7 @@ mod RANDOM-SIMULATION is
     op repeat : GlobalSystem PropSpec -> GlobalSystem .
    ceq repeat({{OBJ,N} | T | TI}, AE)
      = if FLAG then SYSTEM else repeat({{OBJ,getSeed(SYSTEM)} | T | TI}, AE) fi
-    if SYSTEM : FLAG := reachGoal({{OBJ,N} | T | TI}, AE) .
+    if SYSTEM : FLAG := reachGoal({{OBJ,N} | T | TI}, AE) [print "repeat-call!"].
 
     --- aux functions
     op getPeriod : Object ~> Time .

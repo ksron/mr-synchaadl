@@ -136,7 +136,7 @@ mod MODEL-TRANSITION-SYSTEM is
   crl [step]:
       {CONST || OBJ | T | TI}
    =>
-      {(CONST and CONST') || OBJ' | T + NT | TI}
+      {simplify(CONST and CONST') || OBJ' | T + NT | TI}
    if
       < CR : C:System | features : none, properties : PROPS, ATTS > := OBJ
    /\ PER # B := eval(p[TimingProperties::Period], prop(PROPS))

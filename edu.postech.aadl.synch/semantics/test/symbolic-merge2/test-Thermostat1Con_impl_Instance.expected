@@ -96,7 +96,7 @@ search [, 5] in TEST-THERMOSTATCON1CON-SYSTEM : {bool(true) || initState | 0 |
     infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 3255
+states: 2  rewrites: 3170
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "Thermostat1ConimplInstance.environment", 1) and not r(
     "Thermostat1ConimplInstance.environment", 1) < [0] and not r(
@@ -231,7 +231,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 8169
+states: 3  rewrites: 7999
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "Thermostat1ConimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -411,7 +411,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 15187
+states: 4  rewrites: 14932
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "Thermostat1ConimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -636,7 +636,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 24309
+states: 5  rewrites: 23969
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "Thermostat1ConimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -906,7 +906,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 35535
+states: 6  rewrites: 35110
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "Thermostat1ConimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -1221,13 +1221,13 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     infty}
 
 No more solutions.
-states: 6  rewrites: 35535
+states: 6  rewrites: 35110
 ==========================================
 search [, 5] in TEST-THERMOSTATCON1CON-SYSTEM : {bool(true) || cinitState | 0 |
     infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 2245
+states: 2  rewrites: 2172
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "Thermostat1ConimplInstance.environment", 1) and not r(
     "Thermostat1ConimplInstance.environment", 1) < [0] and not r(
@@ -1332,7 +1332,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     | 5 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 5151
+states: 3  rewrites: 5005
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "Thermostat1ConimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -1482,7 +1482,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     | 10 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 9109
+states: 4  rewrites: 8890
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "Thermostat1ConimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -1677,7 +1677,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     environment .. offcontrol)) > | 15 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 14119
+states: 5  rewrites: 13827
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "Thermostat1ConimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -1917,7 +1917,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     environment .. offcontrol)) > | 20 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 20181
+states: 6  rewrites: 19816
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "Thermostat1ConimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -2202,5 +2202,5 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     environment .. offcontrol)) > | 25 | infty}
 
 No more solutions.
-states: 6  rewrites: 20181
+states: 6  rewrites: 19816
 Bye.

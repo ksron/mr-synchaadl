@@ -1,7 +1,7 @@
 ==========================================
 reduce in TEST-BEHAVIOR-TRANSITION-SEMANTICS-META : execTrans(location(loc([
     0])) complete(loc([0])) bcf trans(trans1)) .
-rewrites: 638
+rewrites: 614
 result BATransResult: loc([0]) | a |-> (r(2) + [1] # b(2) : [true]), b |-> r(0)
     + [-1] # [true] | cr |=> r(0) + r(0) + r(1) + r(2) + [
     8739798026865869/140737488355328] # [true] | b(0) and b(1) and b(2) and [3]
@@ -9,7 +9,7 @@ result BATransResult: loc([0]) | a |-> (r(2) + [1] # b(2) : [true]), b |-> r(0)
 ==========================================
 reduce in TEST-BEHAVIOR-TRANSITION-SEMANTICS-META : execTrans(location(loc([
     0])) complete(loc([0])) bcf trans(trans2)) .
-rewrites: 876
+rewrites: 828
 result BATransResult: loc([0]) | a |-> (r(2) + [1] # b(2) : [true]), b |-> r(
     "a.b", 101) # b("a.b", 200) | cr |=> r("a.b", 100) # [true] | not b("a.b",
     200) and (b(0) and b(1) and r("a.b", 100) === - r(1) + r(0) and r(0) < [-1]
@@ -21,7 +21,7 @@ result BATransResult: loc([0]) | a |-> (r(2) + [1] # b(2) : [true]), b |-> r(
 ==========================================
 reduce in TEST-BEHAVIOR-TRANSITION-SEMANTICS-META : execTrans(location(loc([
     0])) complete(loc([0])) bcf trans(trans3)) .
-rewrites: 19611
+rewrites: 18909
 result BATransResult: loc([0]) | a |-> (r(2) + [1] # b(2) : [true]), b |-> r(
     "a.b", 100) # b("a.b", 200) | cr |=> r(0) + r(1) # [true] | not [4] < r(0)
     + [1] and not b("a.b", 200) and b(0) and b(1) and r("a.b", 100) === [0] or

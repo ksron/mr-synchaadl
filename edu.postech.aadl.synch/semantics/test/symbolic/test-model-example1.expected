@@ -3,7 +3,7 @@ search [, 50] in TEST-MODEL-TRANSITION-SYSTEM-MOD : {[true] || obj4 | 0 |
     infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 1595
+states: 2  rewrites: 1483
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and r(2) < r(1) + [1] and [0] < r(
     0)) || < c4 : System | properties : ((TimingProperties::Period => {{60}}) ;
     HybridSynchAADL::Synchronous => {{true}}),features : none,subcomponents : (
@@ -33,7 +33,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and r(2) < r(1) + [1] and [0] < r(
     .. outp) --> (c1 .. inp)) > | 60 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 1829
+states: 3  rewrites: 1700
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [2] < r(0) * [1/2])
     || < c4 : System | properties : ((TimingProperties::Period => {{60}}) ;
     HybridSynchAADL::Synchronous => {{true}}),features : none,subcomponents : (
@@ -63,7 +63,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [2] < r(0) * [1/2])
     .. outp) --> (c1 .. inp)) > | 60 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 2064
+states: 4  rewrites: 1918
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and r(2) < r(1) + [1])
     || < c4 : System | properties : ((TimingProperties::Period => {{60}}) ;
     HybridSynchAADL::Synchronous => {{true}}),features : none,subcomponents : (
@@ -93,7 +93,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and r(2) < r(1) + [1])
     .. outp) --> (c1 .. inp)) > | 60 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 2296
+states: 5  rewrites: 2133
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [2] < r(3)) || <
     c4 : System | properties : ((TimingProperties::Period => {{60}}) ;
     HybridSynchAADL::Synchronous => {{true}}),features : none,subcomponents : (
@@ -123,7 +123,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [2] < r(3)) || <
     .. outp) --> (c1 .. inp)) > | 60 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 3013
+states: 6  rewrites: 2806
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and r(2) < r(1) + [1] and [0] < r(
     0) and [-2] + r(0) * [1/2] < r(1) + [2]) || < c4 : System | properties : ((
     TimingProperties::Period => {{60}}) ; HybridSynchAADL::Synchronous => {{
@@ -154,7 +154,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and r(2) < r(1) + [1] and [0] < r(
     .. outp) --> (c1 .. inp)) > | 120 | infty}
 
 Solution 6 (state 6)
-states: 7  rewrites: 3716
+states: 7  rewrites: 3465
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [2] < r(0) * [1/2]
     and [1] + r(0) * [1/2] < r(1) + [2]) || < c4 : System | properties : ((
     TimingProperties::Period => {{60}}) ; HybridSynchAADL::Synchronous => {{
@@ -185,7 +185,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [2] < r(0) * [1/2]
     .. outp) --> (c1 .. inp)) > | 120 | infty}
 
 Solution 7 (state 7)
-states: 8  rewrites: 4408
+states: 8  rewrites: 4113
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and r(2) < r(1) + [1]
     and r(3) + [-2] < r(1) + [2]) || < c4 : System | properties : ((
     TimingProperties::Period => {{60}}) ; HybridSynchAADL::Synchronous => {{
@@ -215,7 +215,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and r(2) < r(1) + [1]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 120 | infty}
 
 Solution 8 (state 8)
-states: 9  rewrites: 5090
+states: 9  rewrites: 4751
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [2] < r(3) and r(
     3) + [1] < r(1) + [2]) || < c4 : System | properties : ((
     TimingProperties::Period => {{60}}) ; HybridSynchAADL::Synchronous => {{
@@ -246,7 +246,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [2] < r(3) and r(
     .. outp) --> (c1 .. inp)) > | 120 | infty}
 
 Solution 9 (state 9)
-states: 10  rewrites: 6671
+states: 10  rewrites: 6236
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and r(2)
     < r(1) + [1] and [0] < r(0) and [0] < r(0) * [1/2] and [-2] + r(0) * [1/2]
     < r(1) + [2] and [-2] + r(0) * [1/2] < r(1) + [3]) || < c4 : System |
@@ -278,7 +278,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and r(2)
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 180 | infty}
 
 Solution 10 (state 10)
-states: 11  rewrites: 8218
+states: 11  rewrites: 7689
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [2] < [3/2] + r(0) * [1/4] and [2] < r(0) * [1/2] and [1] + r(0) *
     [1/2] < r(1) + [2] and [1] + r(0) * [1/2] < r(1) + [3]) || < c4 : System |
@@ -311,7 +311,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     infty}
 
 Solution 11 (state 11)
-states: 12  rewrites: 9796
+states: 12  rewrites: 9164
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and r(2) < r(1) + [1] and [0] < r(3) and r(3) + [-2] < r(1) + [2] and
     r(3) + [-2] < r(1) + [3]) || < c4 : System | properties : ((
@@ -343,7 +343,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     inp)) > | 180 | infty}
 
 Solution 12 (state 12)
-states: 13  rewrites: 10152
+states: 13  rewrites: 9503
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [
     3]) || < c4 : System | properties : ((TimingProperties::Period => {{60}}) ;
@@ -374,7 +374,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 180 | infty}
 
 Solution 13 (state 13)
-states: 14  rewrites: 11599
+states: 14  rewrites: 10856
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [2] < r(3) and [2] < [3/2] + r(3) * [1/2] and r(3) + [1] < r(1) + [2]
     and r(3) + [1] < r(1) + [3]) || < c4 : System | properties : ((
@@ -406,7 +406,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     .. outp) --> (c1 .. inp)) > | 180 | infty}
 
 Solution 14 (state 14)
-states: 15  rewrites: 12553
+states: 15  rewrites: 11766
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and r(2)
     < r(1) + [1] and [0] < r(0) and [0] < r(0) * [1/2] and [-2] + r(0) * [1/2]
     < r(1) + [2] and [-2] + r(0) * [1/2] < r(1) + [3] and [-2] + r(0) * [1/4] <
@@ -439,7 +439,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and r(2)
     .. outp) --> (c1 .. inp)) > | 240 | infty}
 
 Solution 15 (state 15)
-states: 16  rewrites: 13526
+states: 16  rewrites: 12695
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [2] < [3/2] + r(0) * [1/4] and [2] < r(0) * [1/2] and [1] + r(0) *
     [1/2] < r(1) + [2] and [1] + r(0) * [1/2] < r(1) + [3] and [5/2] + r(0) * [
@@ -472,7 +472,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     .. outp) --> (c1 .. inp)) > | 240 | infty}
 
 Solution 16 (state 16)
-states: 17  rewrites: 14425
+states: 17  rewrites: 13550
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and r(2) < r(1) + [1] and [0] < r(3) and r(3) + [-2] < r(1) + [2] and
     r(3) + [-2] < r(1) + [3] and [-2] + r(3) * [1/2] < r(1) + [4]) || < c4 :
@@ -504,7 +504,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 240 | infty}
 
 Solution 17 (state 17)
-states: 18  rewrites: 15267
+states: 18  rewrites: 14348
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4]) || < c4 : System | properties : ((
@@ -535,7 +535,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 240 | infty}
 
 Solution 18 (state 18)
-states: 19  rewrites: 16181
+states: 19  rewrites: 15218
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [2] < r(3) and [2] < [3/2] + r(3) * [1/2] and r(3) + [1] < r(1) + [2]
     and r(3) + [1] < r(1) + [3] and [5/2] + r(3) * [1/2] < r(1) + [4]) || < c4
@@ -568,7 +568,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     infty}
 
 Solution 19 (state 19)
-states: 20  rewrites: 18157
+states: 20  rewrites: 17098
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and r(2) < r(1) + [1] and [0] < r(0) and [0] < r(0) * [
     1/2] and [0] < r(0) * [1/4] and [-2] + r(0) * [1/2] < r(1) + [2] and [-2] +
@@ -602,7 +602,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 300 | infty}
 
 Solution 20 (state 20)
-states: 21  rewrites: 20079
+states: 21  rewrites: 18926
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [2] < [3/2] + r(0) * [1/4] and [2]
     < [9/4] + r(0) * [1/8] and [2] < r(0) * [1/2] and [1] + r(0) * [1/2] < r(1)
@@ -636,7 +636,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     .. outp) --> (c1 .. inp)) > | 300 | infty}
 
 Solution 21 (state 21)
-states: 22  rewrites: 21958
+states: 22  rewrites: 20709
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and r(2) < r(1) + [1] and [0] < r(3) and [
     0] < r(3) * [1/2] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
@@ -669,7 +669,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 300 | infty}
 
 Solution 22 (state 22)
-states: 23  rewrites: 23366
+states: 23  rewrites: 22025
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5]) || < c4 : System
@@ -701,7 +701,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 300 | infty}
 
 Solution 23 (state 23)
-states: 24  rewrites: 25204
+states: 24  rewrites: 23769
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [2] < r(3) and [2] < [3/2] + r(3) * [
     1/2] and [2] < [9/4] + r(3) * [1/4] and r(3) + [1] < r(1) + [2] and r(3) +
@@ -735,7 +735,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     .. outp) --> (c1 .. inp)) > | 300 | infty}
 
 Solution 24 (state 24)
-states: 25  rewrites: 26395
+states: 25  rewrites: 24916
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and r(2) < r(1) + [1] and [0] < r(0) and [0] < r(0) * [
     1/2] and [0] < r(0) * [1/4] and [-2] + r(0) * [1/2] < r(1) + [2] and [-2] +
@@ -769,7 +769,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 360 | infty}
 
 Solution 25 (state 25)
-states: 26  rewrites: 27626
+states: 26  rewrites: 26103
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [2] < [3/2] + r(0) * [1/4] and [2]
     < [9/4] + r(0) * [1/8] and [2] < r(0) * [1/2] and [1] + r(0) * [1/2] < r(1)
@@ -804,7 +804,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     .. outp) --> (c1 .. inp)) > | 360 | infty}
 
 Solution 26 (state 26)
-states: 27  rewrites: 28762
+states: 27  rewrites: 27195
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and r(2) < r(1) + [1] and [0] < r(3) and [
     0] < r(3) * [1/2] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
@@ -838,7 +838,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 360 | infty}
 
 Solution 27 (state 27)
-states: 28  rewrites: 29718
+states: 28  rewrites: 28107
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -870,7 +870,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 360 | infty}
 
 Solution 28 (state 28)
-states: 29  rewrites: 30890
+states: 29  rewrites: 29235
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [2] < r(3) and [2] < [3/2] + r(3) * [
     1/2] and [2] < [9/4] + r(3) * [1/4] and r(3) + [1] < r(1) + [2] and r(3) +
@@ -905,7 +905,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c1 .. inp)) > | 360 | infty}
 
 Solution 29 (state 29)
-states: 30  rewrites: 33261
+states: 30  rewrites: 31510
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and r(2) < r(1) + [1] and [
     0] < r(0) and [0] < r(0) * [1/2] and [0] < r(0) * [1/4] and [0] < r(0) * [
@@ -940,7 +940,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 420 | infty}
 
 Solution 30 (state 30)
-states: 31  rewrites: 35527
+states: 31  rewrites: 33682
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [2]
     < [3/2] + r(0) * [1/4] and [2] < [9/4] + r(0) * [1/8] and [2] < [21/8] + r(
@@ -976,7 +976,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 420 | infty}
 
 Solution 31 (state 31)
-states: 32  rewrites: 37801
+states: 32  rewrites: 35860
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and r(2) < r(1)
     + [1] and [0] < r(3) and [0] < r(3) * [1/2] and [0] < r(3) * [1/4] and r(3)
@@ -1011,7 +1011,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 420 | infty}
 
 Solution 32 (state 32)
-states: 33  rewrites: 39323
+states: 33  rewrites: 37290
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -1043,7 +1043,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 420 | infty}
 
 Solution 33 (state 33)
-states: 34  rewrites: 41505
+states: 34  rewrites: 39378
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [2] < r(
     3) and [2] < [3/2] + r(3) * [1/2] and [2] < [9/4] + r(3) * [1/4] and [2] <
@@ -1079,7 +1079,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     .. outp) --> (c1 .. inp)) > | 420 | infty}
 
 Solution 34 (state 34)
-states: 35  rewrites: 42933
+states: 35  rewrites: 40762
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and r(2) < r(1) + [1] and [
     0] < r(0) and [0] < r(0) * [1/2] and [0] < r(0) * [1/4] and [0] < r(0) * [
@@ -1115,7 +1115,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 480 | infty}
 
 Solution 35 (state 35)
-states: 36  rewrites: 44422
+states: 36  rewrites: 42207
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [2]
     < [3/2] + r(0) * [1/4] and [2] < [9/4] + r(0) * [1/8] and [2] < [21/8] + r(
@@ -1152,7 +1152,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c1 .. inp)) > | 480 | infty}
 
 Solution 36 (state 36)
-states: 37  rewrites: 45795
+states: 37  rewrites: 43536
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and r(2) < r(1)
     + [1] and [0] < r(3) and [0] < r(3) * [1/2] and [0] < r(3) * [1/4] and r(3)
@@ -1188,7 +1188,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 480 | infty}
 
 Solution 37 (state 37)
-states: 38  rewrites: 46865
+states: 38  rewrites: 44562
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -1221,7 +1221,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 480 | infty}
 
 Solution 38 (state 38)
-states: 39  rewrites: 48295
+states: 39  rewrites: 45948
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [2] < r(
     3) and [2] < [3/2] + r(3) * [1/2] and [2] < [9/4] + r(3) * [1/4] and [2] <
@@ -1257,7 +1257,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     .. outp) --> (c1 .. inp)) > | 480 | infty}
 
 Solution 39 (state 39)
-states: 40  rewrites: 51061
+states: 40  rewrites: 48618
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and r(2) < r(1) + [1] and [0] < r(0) and [0] < r(0) * [1/2] and [0] < r(0)
@@ -1294,7 +1294,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 540 | infty}
 
 Solution 40 (state 40)
-states: 41  rewrites: 53671
+states: 41  rewrites: 51134
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [2] < [3/2] + r(0) * [1/4] and [2] < [9/4] +
@@ -1332,7 +1332,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 540 | infty}
 
 Solution 41 (state 41)
-states: 42  rewrites: 56340
+states: 42  rewrites: 53707
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and r(2) < r(1) + [1] and [0] < r(3) and [0] < r(3) * [1/2] and
@@ -1369,7 +1369,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 540 | infty}
 
 Solution 42 (state 42)
-states: 43  rewrites: 57976
+states: 43  rewrites: 55251
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -1402,7 +1402,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 540 | infty}
 
 Solution 43 (state 43)
-states: 44  rewrites: 60502
+states: 44  rewrites: 57683
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [2] < r(3) and [2] < [3/2] + r(3) * [1/2] and [2]
@@ -1440,7 +1440,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     .. outp) --> (c1 .. inp)) > | 540 | infty}
 
 Solution 44 (state 44)
-states: 45  rewrites: 62167
+states: 45  rewrites: 59304
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and r(2) < r(1) + [1] and [0] < r(0) and [0] < r(0) * [1/2] and [0] < r(0)
@@ -1478,7 +1478,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 600 | infty}
 
 Solution 45 (state 45)
-states: 46  rewrites: 63914
+states: 46  rewrites: 61007
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [2] < [3/2] + r(0) * [1/4] and [2] < [9/4] +
@@ -1517,7 +1517,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     .. outp) --> (c1 .. inp)) > | 600 | infty}
 
 Solution 46 (state 46)
-states: 47  rewrites: 65524
+states: 47  rewrites: 62573
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and r(2) < r(1) + [1] and [0] < r(3) and [0] < r(3) * [1/2] and
@@ -1554,7 +1554,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 600 | infty}
 
 Solution 47 (state 47)
-states: 48  rewrites: 66708
+states: 48  rewrites: 63713
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -1588,7 +1588,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 600 | infty}
 
 Solution 48 (state 48)
-states: 49  rewrites: 68396
+states: 49  rewrites: 65357
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [2] < r(3) and [2] < [3/2] + r(3) * [1/2] and [2]
@@ -1627,7 +1627,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c1 .. inp)) > | 600 | infty}
 
 Solution 49 (state 49)
-states: 50  rewrites: 71557
+states: 50  rewrites: 68422
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and r(2) < r(1) + [1] and [0] < r(0) and [0] <
@@ -1666,7 +1666,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 660 | infty}
 
 Solution 50 (state 50)
-states: 51  rewrites: 74511
+states: 51  rewrites: 71282
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [2] < [3/2]
@@ -1706,7 +1706,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 660 | infty}
 
 Solution 51 (state 51)
-states: 52  rewrites: 77575
+states: 52  rewrites: 74250
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and r(2) < r(1) + [1] and [0] < r(
@@ -1744,7 +1744,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 660 | infty}
 
 Solution 52 (state 52)
-states: 53  rewrites: 79325
+states: 53  rewrites: 75908
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -1778,7 +1778,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 660 | infty}
 
 Solution 53 (state 53)
-states: 54  rewrites: 82195
+states: 54  rewrites: 78684
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [2] < r(3) and [
@@ -1818,7 +1818,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 660 | infty}
 
 Solution 54 (state 54)
-states: 55  rewrites: 84097
+states: 55  rewrites: 80542
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and r(2) < r(1) + [1] and [0] < r(0) and [0] <
@@ -1857,7 +1857,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 720 | infty}
 
 Solution 55 (state 55)
-states: 56  rewrites: 86102
+states: 56  rewrites: 82503
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [2] < [3/2]
@@ -1898,7 +1898,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     .. outp) --> (c1 .. inp)) > | 720 | infty}
 
 Solution 56 (state 56)
-states: 57  rewrites: 87949
+states: 57  rewrites: 84306
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and r(2) < r(1) + [1] and [0] < r(
@@ -1937,7 +1937,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 720 | infty}
 
 Solution 57 (state 57)
-states: 58  rewrites: 89247
+states: 58  rewrites: 85560
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -1971,7 +1971,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 720 | infty}
 
 Solution 58 (state 58)
-states: 59  rewrites: 91193
+states: 59  rewrites: 87462
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [2] < r(3) and [
@@ -2012,7 +2012,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     .. outp) --> (c1 .. inp)) > | 720 | infty}
 
 Solution 59 (state 59)
-states: 60  rewrites: 94749
+states: 60  rewrites: 90922
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and r(2) < r(1) +
@@ -2053,7 +2053,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 780 | infty}
 
 Solution 60 (state 60)
-states: 61  rewrites: 98047
+states: 61  rewrites: 94126
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -2096,7 +2096,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     .. outp) --> (c1 .. inp)) > | 780 | infty}
 
 Solution 61 (state 61)
-states: 62  rewrites: 101506
+states: 62  rewrites: 97489
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and r(
@@ -2136,7 +2136,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 780 | infty}
 
 Solution 62 (state 62)
-states: 63  rewrites: 103370
+states: 63  rewrites: 99261
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -2171,7 +2171,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 780 | infty}
 
 Solution 63 (state 63)
-states: 64  rewrites: 106584
+states: 64  rewrites: 102381
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -2213,7 +2213,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 780 | infty}
 
 Solution 64 (state 64)
-states: 65  rewrites: 108723
+states: 65  rewrites: 104476
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and r(2) < r(1) +
@@ -2255,7 +2255,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     inp)) > | 840 | infty}
 
 Solution 65 (state 65)
-states: 66  rewrites: 110986
+states: 66  rewrites: 106695
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -2299,7 +2299,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     .. outp) --> (c1 .. inp)) > | 840 | infty}
 
 Solution 66 (state 66)
-states: 67  rewrites: 113070
+states: 67  rewrites: 108735
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and r(
@@ -2340,7 +2340,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 840 | infty}
 
 Solution 67 (state 67)
-states: 68  rewrites: 114482
+states: 68  rewrites: 110103
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -2375,7 +2375,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 840 | infty}
 
 Solution 68 (state 68)
-states: 69  rewrites: 116686
+states: 69  rewrites: 112263
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -2418,7 +2418,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     .. outp) --> (c1 .. inp)) > | 840 | infty}
 
 Solution 69 (state 69)
-states: 70  rewrites: 120637
+states: 70  rewrites: 116118
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -2461,7 +2461,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 900 | infty}
 
 Solution 70 (state 70)
-states: 71  rewrites: 124279
+states: 71  rewrites: 119666
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -2506,7 +2506,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     .. outp) --> (c1 .. inp)) > | 900 | infty}
 
 Solution 71 (state 71)
-states: 72  rewrites: 128133
+states: 72  rewrites: 123424
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -2548,7 +2548,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 900 | infty}
 
 Solution 72 (state 72)
-states: 73  rewrites: 130111
+states: 73  rewrites: 125310
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -2584,7 +2584,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 900 | infty}
 
 Solution 73 (state 73)
-states: 74  rewrites: 133669
+states: 74  rewrites: 128774
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -2629,7 +2629,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     infty}
 
 Solution 74 (state 74)
-states: 75  rewrites: 136045
+states: 75  rewrites: 131106
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -2672,7 +2672,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 960 | infty}
 
 Solution 75 (state 75)
-states: 76  rewrites: 138566
+states: 76  rewrites: 133583
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -2718,7 +2718,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     .. outp) --> (c1 .. inp)) > | 960 | infty}
 
 Solution 76 (state 76)
-states: 77  rewrites: 140887
+states: 77  rewrites: 135860
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -2761,7 +2761,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 960 | infty}
 
 Solution 77 (state 77)
-states: 78  rewrites: 142413
+states: 78  rewrites: 137342
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -2797,7 +2797,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 960 | infty}
 
 Solution 78 (state 78)
-states: 79  rewrites: 144875
+states: 79  rewrites: 139760
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -2842,7 +2842,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 960 | infty}
 
 Solution 79 (state 79)
-states: 80  rewrites: 149221
+states: 80  rewrites: 144010
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -2887,7 +2887,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 1020 | infty}
 
 Solution 80 (state 80)
-states: 81  rewrites: 153207
+states: 81  rewrites: 147902
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -2935,7 +2935,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     | infty}
 
 Solution 81 (state 81)
-states: 82  rewrites: 157456
+states: 82  rewrites: 152055
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -2979,7 +2979,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 1020 | infty}
 
 Solution 82 (state 82)
-states: 83  rewrites: 159548
+states: 83  rewrites: 154055
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -3015,7 +3015,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1020 | infty}
 
 Solution 83 (state 83)
-states: 84  rewrites: 163450
+states: 84  rewrites: 157863
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -3062,7 +3062,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     | infty}
 
 Solution 84 (state 84)
-states: 85  rewrites: 166063
+states: 85  rewrites: 160432
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -3107,7 +3107,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 1080 | infty}
 
 Solution 85 (state 85)
-states: 86  rewrites: 168842
+states: 86  rewrites: 163167
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -3155,7 +3155,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1080 | infty}
 
 Solution 86 (state 86)
-states: 87  rewrites: 171400
+states: 87  rewrites: 165681
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -3200,7 +3200,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     inp)) > | 1080 | infty}
 
 Solution 87 (state 87)
-states: 88  rewrites: 173040
+states: 88  rewrites: 167277
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -3237,7 +3237,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 1080 | infty}
 
 Solution 88 (state 88)
-states: 89  rewrites: 175760
+states: 89  rewrites: 169953
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -3284,7 +3284,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1080 | infty}
 
 Solution 89 (state 89)
-states: 90  rewrites: 180501
+states: 90  rewrites: 174598
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -3330,7 +3330,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 1140 | infty}
 
 Solution 90 (state 90)
-states: 91  rewrites: 184831
+states: 91  rewrites: 178834
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -3380,7 +3380,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     | infty}
 
 Solution 91 (state 91)
-states: 92  rewrites: 189475
+states: 92  rewrites: 183382
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -3426,7 +3426,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 1140 | infty}
 
 Solution 92 (state 92)
-states: 93  rewrites: 191681
+states: 93  rewrites: 185496
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -3463,7 +3463,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1140 | infty}
 
 Solution 93 (state 93)
-states: 94  rewrites: 195927
+states: 94  rewrites: 189648
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -3512,7 +3512,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1140 | infty}
 
 Solution 94 (state 94)
-states: 95  rewrites: 198777
+states: 95  rewrites: 192454
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -3559,7 +3559,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 1200 | infty}
 
 Solution 95 (state 95)
-states: 96  rewrites: 201814
+states: 96  rewrites: 195447
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -3609,7 +3609,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1200 | infty}
 
 Solution 96 (state 96)
-states: 97  rewrites: 204609
+states: 97  rewrites: 198198
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -3656,7 +3656,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     inp)) > | 1200 | infty}
 
 Solution 97 (state 97)
-states: 98  rewrites: 206363
+states: 98  rewrites: 199908
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -3694,7 +3694,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 1200 | infty}
 
 Solution 98 (state 98)
-states: 99  rewrites: 209341
+states: 99  rewrites: 202842
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -3744,7 +3744,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1200 | infty}
 
 Solution 99 (state 99)
-states: 100  rewrites: 214477
+states: 100  rewrites: 207882
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -3792,7 +3792,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 1260 | infty}
 
 Solution 100 (state 100)
-states: 101  rewrites: 219151
+states: 101  rewrites: 212462
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -3844,7 +3844,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1260 | infty}
 
 Solution 101 (state 101)
-states: 102  rewrites: 224190
+states: 102  rewrites: 217405
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -3892,7 +3892,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 1260 | infty}
 
 Solution 102 (state 102)
-states: 103  rewrites: 226510
+states: 103  rewrites: 219633
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -3930,7 +3930,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 1260 | infty}
 
 Solution 103 (state 103)
-states: 104  rewrites: 231100
+states: 104  rewrites: 224129
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -3982,7 +3982,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     | infty}
 
 Solution 104 (state 104)
-states: 105  rewrites: 234187
+states: 105  rewrites: 227172
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -4031,7 +4031,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     inp)) > | 1320 | infty}
 
 Solution 105 (state 105)
-states: 106  rewrites: 237482
+states: 106  rewrites: 230423
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -4084,7 +4084,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1320 | infty}
 
 Solution 106 (state 106)
-states: 107  rewrites: 240514
+states: 107  rewrites: 233411
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -4132,7 +4132,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 1320 | infty}
 
 Solution 107 (state 107)
-states: 108  rewrites: 242382
+states: 108  rewrites: 235235
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -4170,7 +4170,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1320 | infty}
 
 Solution 108 (state 108)
-states: 109  rewrites: 245618
+states: 109  rewrites: 238427
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -4222,7 +4222,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1320 | infty}
 
 Solution 109 (state 109)
-states: 110  rewrites: 251149
+states: 110  rewrites: 243862
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -4272,7 +4272,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 1380 | infty}
 
 Solution 110 (state 110)
-states: 111  rewrites: 256167
+states: 111  rewrites: 248786
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -4326,7 +4326,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1380 | infty}
 
 Solution 111 (state 111)
-states: 112  rewrites: 261601
+states: 112  rewrites: 254124
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -4376,7 +4376,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 1380 | infty}
 
 Solution 112 (state 112)
-states: 113  rewrites: 264035
+states: 113  rewrites: 256466
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -4415,7 +4415,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 1380 | infty}
 
 Solution 113 (state 113)
-states: 114  rewrites: 268969
+states: 114  rewrites: 261306
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -4469,7 +4469,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     inp)) > | 1380 | infty}
 
 Solution 114 (state 114)
-states: 115  rewrites: 272293
+states: 115  rewrites: 264586
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -4520,7 +4520,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     inp)) > | 1440 | infty}
 
 Solution 115 (state 115)
-states: 116  rewrites: 275846
+states: 116  rewrites: 268095
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -4576,7 +4576,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     | infty}
 
 Solution 116 (state 116)
-states: 117  rewrites: 279115
+states: 117  rewrites: 271320
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -4626,7 +4626,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 1440 | infty}
 
 Solution 117 (state 117)
-states: 118  rewrites: 281097
+states: 118  rewrites: 273258
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -4665,7 +4665,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1440 | infty}
 
 Solution 118 (state 118)
-states: 119  rewrites: 284591
+states: 119  rewrites: 276708
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -4720,7 +4720,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     | infty}
 
 Solution 119 (state 119)
-states: 120  rewrites: 290517
+states: 120  rewrites: 282538
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -4772,7 +4772,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 1500 | infty}
 
 Solution 120 (state 120)
-states: 121  rewrites: 295879
+states: 121  rewrites: 287806
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -4829,7 +4829,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c1 .. inp)) > | 1500 | infty}
 
 Solution 121 (state 121)
-states: 122  rewrites: 301708
+states: 122  rewrites: 293539
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -4881,7 +4881,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 1500 | infty}
 
 Solution 122 (state 122)
-states: 123  rewrites: 304256
+states: 123  rewrites: 295995
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -4921,7 +4921,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 1500 | infty}
 
 Solution 123 (state 123)
-states: 124  rewrites: 309534
+states: 124  rewrites: 301179
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -4977,7 +4977,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1500 | infty}
 
 Solution 124 (state 124)
-states: 125  rewrites: 313095
+states: 125  rewrites: 304696
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -5030,7 +5030,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     inp)) > | 1560 | infty}
 
 Solution 125 (state 125)
-states: 126  rewrites: 316906
+states: 126  rewrites: 308463
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -5088,7 +5088,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     | infty}
 
 Solution 126 (state 126)
-states: 127  rewrites: 320412
+states: 127  rewrites: 311925
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -5140,7 +5140,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 1560 | infty}
 
 Solution 127 (state 127)
-states: 128  rewrites: 322508
+states: 128  rewrites: 313977
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -5180,7 +5180,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 1560 | infty}
 
 Solution 128 (state 128)
-states: 129  rewrites: 326260
+states: 129  rewrites: 317685
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -5237,7 +5237,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1560 | infty}
 
 Solution 129 (state 129)
-states: 130  rewrites: 332581
+states: 130  rewrites: 323910
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -5291,7 +5291,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 1620 | infty}
 
 Solution 130 (state 130)
-states: 131  rewrites: 338287
+states: 131  rewrites: 329522
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -5351,7 +5351,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     | infty}
 
 Solution 131 (state 131)
-states: 132  rewrites: 344511
+states: 132  rewrites: 335650
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -5404,7 +5404,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 1620 | infty}
 
 Solution 132 (state 132)
-states: 133  rewrites: 347173
+states: 133  rewrites: 338220
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -5444,7 +5444,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1620 | infty}
 
 Solution 133 (state 133)
-states: 134  rewrites: 352795
+states: 134  rewrites: 343748
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -5502,7 +5502,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1620 | infty}
 
 Solution 134 (state 134)
-states: 135  rewrites: 356593
+states: 135  rewrites: 347502
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -5557,7 +5557,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 1680 | infty}
 
 Solution 135 (state 135)
-states: 136  rewrites: 360662
+states: 136  rewrites: 351527
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -5618,7 +5618,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     | infty}
 
 Solution 136 (state 136)
-states: 137  rewrites: 364405
+states: 137  rewrites: 355226
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -5672,7 +5672,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     inp)) > | 1680 | infty}
 
 Solution 137 (state 137)
-states: 138  rewrites: 366615
+states: 138  rewrites: 357392
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -5713,7 +5713,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 1680 | infty}
 
 Solution 138 (state 138)
-states: 139  rewrites: 370625
+states: 139  rewrites: 361358
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -5773,7 +5773,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     | infty}
 
 Solution 139 (state 139)
-states: 140  rewrites: 377341
+states: 140  rewrites: 367978
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -5829,7 +5829,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 1740 | infty}
 
 Solution 140 (state 140)
-states: 141  rewrites: 383391
+states: 141  rewrites: 373934
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -5891,7 +5891,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c1 .. inp)) > | 1740 | infty}
 
 Solution 141 (state 141)
-states: 142  rewrites: 390010
+states: 142  rewrites: 380457
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -5946,7 +5946,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1740 | infty}
 
 Solution 142 (state 142)
-states: 143  rewrites: 392786
+states: 143  rewrites: 383141
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -5987,7 +5987,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1740 | infty}
 
 Solution 143 (state 143)
-states: 144  rewrites: 398752
+states: 144  rewrites: 389013
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -6049,7 +6049,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     | infty}
 
 Solution 144 (state 144)
-states: 145  rewrites: 402787
+states: 145  rewrites: 393004
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -6105,7 +6105,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1800 | infty}
 
 Solution 145 (state 145)
-states: 146  rewrites: 407114
+states: 146  rewrites: 397287
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -6168,7 +6168,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     | infty}
 
 Solution 146 (state 146)
-states: 147  rewrites: 411094
+states: 147  rewrites: 401223
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -6224,7 +6224,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 1800 | infty}
 
 Solution 147 (state 147)
-states: 148  rewrites: 413418
+states: 148  rewrites: 403503
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -6266,7 +6266,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 1800 | infty}
 
 Solution 148 (state 148)
-states: 149  rewrites: 417686
+states: 149  rewrites: 407727
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -6329,7 +6329,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     | infty}
 
 Solution 149 (state 149)
-states: 150  rewrites: 424797
+states: 150  rewrites: 414742
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -6387,7 +6387,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 1860 | infty}
 
 Solution 150 (state 150)
-states: 151  rewrites: 431191
+states: 151  rewrites: 421042
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -6452,7 +6452,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     inp)) > | 1860 | infty}
 
 Solution 151 (state 151)
-states: 152  rewrites: 438205
+states: 152  rewrites: 427960
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -6509,7 +6509,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1860 | infty}
 
 Solution 152 (state 152)
-states: 153  rewrites: 441095
+states: 153  rewrites: 430758
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -6551,7 +6551,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 1860 | infty}
 
 Solution 153 (state 153)
-states: 154  rewrites: 447405
+states: 154  rewrites: 436974
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -6615,7 +6615,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1860 | infty}
 
 Solution 154 (state 154)
-states: 155  rewrites: 451677
+states: 155  rewrites: 441202
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -6673,7 +6673,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1920 | infty}
 
 Solution 155 (state 155)
-states: 156  rewrites: 456262
+states: 156  rewrites: 445743
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -6739,7 +6739,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     inp)) > | 1920 | infty}
 
 Solution 156 (state 156)
-states: 157  rewrites: 460479
+states: 157  rewrites: 449916
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -6797,7 +6797,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 1920 | infty}
 
 Solution 157 (state 157)
-states: 158  rewrites: 462917
+states: 158  rewrites: 452310
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -6839,7 +6839,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1920 | infty}
 
 Solution 158 (state 158)
-states: 159  rewrites: 467443
+states: 159  rewrites: 456792
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -6904,7 +6904,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     inp)) > | 1920 | infty}
 
 Solution 159 (state 159)
-states: 160  rewrites: 474949
+states: 160  rewrites: 464202
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -6964,7 +6964,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 1980 | infty}
 
 Solution 160 (state 160)
-states: 161  rewrites: 481687
+states: 161  rewrites: 470846
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -7031,7 +7031,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1980 | infty}
 
 Solution 161 (state 161)
-states: 162  rewrites: 489096
+states: 162  rewrites: 478159
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -7090,7 +7090,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 1980 | infty}
 
 Solution 162 (state 162)
-states: 163  rewrites: 492100
+states: 163  rewrites: 481071
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -7133,7 +7133,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 1980 | infty}
 
 Solution 163 (state 163)
-states: 164  rewrites: 498754
+states: 164  rewrites: 487631
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -7200,7 +7200,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     inp)) > | 1980 | infty}
 
 Solution 164 (state 164)
-states: 165  rewrites: 503263
+states: 165  rewrites: 492096
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -7260,7 +7260,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2040 | infty}
 
 Solution 165 (state 165)
-states: 166  rewrites: 508106
+states: 166  rewrites: 496895
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -7328,7 +7328,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2040 | infty}
 
 Solution 166 (state 166)
-states: 167  rewrites: 512560
+states: 167  rewrites: 501305
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -7388,7 +7388,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 2040 | infty}
 
 Solution 167 (state 167)
-states: 168  rewrites: 515112
+states: 168  rewrites: 503813
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -7431,7 +7431,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2040 | infty}
 
 Solution 168 (state 168)
-states: 169  rewrites: 519896
+states: 169  rewrites: 508553
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -7499,7 +7499,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     inp)) > | 2040 | infty}
 
 Solution 169 (state 169)
-states: 170  rewrites: 527797
+states: 170  rewrites: 516358
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -7561,7 +7561,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 2100 | infty}
 
 Solution 170 (state 170)
-states: 171  rewrites: 534879
+states: 171  rewrites: 523346
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -7631,7 +7631,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2100 | infty}
 
 Solution 171 (state 171)
-states: 172  rewrites: 542683
+states: 172  rewrites: 531054
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -7692,7 +7692,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2100 | infty}
 
 Solution 172 (state 172)
-states: 173  rewrites: 545801
+states: 173  rewrites: 534080
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -7736,7 +7736,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 2100 | infty}
 
 Solution 173 (state 173)
-states: 174  rewrites: 552799
+states: 174  rewrites: 540984
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -7806,7 +7806,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     inp)) > | 2100 | infty}
 
 Solution 174 (state 174)
-states: 175  rewrites: 557545
+states: 175  rewrites: 545686
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -7868,7 +7868,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2160 | infty}
 
 Solution 175 (state 175)
-states: 176  rewrites: 562646
+states: 176  rewrites: 550743
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -7939,7 +7939,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     inp)) > | 2160 | infty}
 
 Solution 176 (state 176)
-states: 177  rewrites: 567337
+states: 177  rewrites: 555390
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -8001,7 +8001,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 2160 | infty}
 
 Solution 177 (state 177)
-states: 178  rewrites: 570003
+states: 178  rewrites: 558012
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -8045,7 +8045,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 2160 | infty}
 
 Solution 178 (state 178)
-states: 179  rewrites: 575045
+states: 179  rewrites: 563010
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -8115,7 +8115,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2160 | infty}
 
 Solution 179 (state 179)
-states: 180  rewrites: 583341
+states: 180  rewrites: 571210
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -8179,7 +8179,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 2220 | infty}
 
 Solution 180 (state 180)
-states: 181  rewrites: 590767
+states: 181  rewrites: 578542
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -8252,7 +8252,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2220 | infty}
 
 Solution 181 (state 181)
-states: 182  rewrites: 598966
+states: 182  rewrites: 586645
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -8315,7 +8315,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2220 | infty}
 
 Solution 182 (state 182)
-states: 183  rewrites: 602198
+states: 183  rewrites: 589785
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -8359,7 +8359,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2220 | infty}
 
 Solution 183 (state 183)
-states: 184  rewrites: 609540
+states: 184  rewrites: 597033
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -8432,7 +8432,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c1 .. inp)) > | 2220 | infty}
 
 Solution 184 (state 184)
-states: 185  rewrites: 614523
+states: 185  rewrites: 601972
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -8496,7 +8496,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 2280 | infty}
 
 Solution 185 (state 185)
-states: 186  rewrites: 619882
+states: 186  rewrites: 607287
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -8570,7 +8570,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2280 | infty}
 
 Solution 186 (state 186)
-states: 187  rewrites: 624810
+states: 187  rewrites: 612171
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -8634,7 +8634,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 2280 | infty}
 
 Solution 187 (state 187)
-states: 188  rewrites: 627590
+states: 188  rewrites: 614907
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -8679,7 +8679,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 2280 | infty}
 
 Solution 188 (state 188)
-states: 189  rewrites: 632890
+states: 189  rewrites: 620163
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -8752,7 +8752,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2280 | infty}
 
 Solution 189 (state 189)
-states: 190  rewrites: 641581
+states: 190  rewrites: 628758
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -8818,7 +8818,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 2340 | infty}
 
 Solution 190 (state 190)
-states: 191  rewrites: 649351
+states: 191  rewrites: 636434
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -8895,7 +8895,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     | infty}
 
 Solution 191 (state 191)
-states: 192  rewrites: 657945
+states: 192  rewrites: 644932
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -8960,7 +8960,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2340 | infty}
 
 Solution 192 (state 192)
-states: 193  rewrites: 661291
+states: 193  rewrites: 648186
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -9005,7 +9005,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2340 | infty}
 
 Solution 193 (state 193)
-states: 194  rewrites: 668977
+states: 194  rewrites: 655778
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -9081,7 +9081,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     | infty}
 
 Solution 194 (state 194)
-states: 195  rewrites: 674197
+states: 195  rewrites: 660954
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -9147,7 +9147,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2400 | infty}
 
 Solution 195 (state 195)
-states: 196  rewrites: 679814
+states: 196  rewrites: 666527
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -9224,7 +9224,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     .. outp) --> (c1 .. inp)) > | 2400 | infty}
 
 Solution 196 (state 196)
-states: 197  rewrites: 684979
+states: 197  rewrites: 671648
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -9290,7 +9290,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 2400 | infty}
 
 Solution 197 (state 197)
-states: 198  rewrites: 687873
+states: 198  rewrites: 674498
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -9336,7 +9336,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 2400 | infty}
 
 Solution 198 (state 198)
-states: 199  rewrites: 693431
+states: 199  rewrites: 680012
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -9412,7 +9412,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     .. outp) --> (c1 .. inp)) > | 2400 | infty}
 
 Solution 199 (state 199)
-states: 200  rewrites: 702517
+states: 200  rewrites: 689002
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -9480,7 +9480,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 2460 | infty}
 
 Solution 200 (state 200)
-states: 201  rewrites: 710631
+states: 201  rewrites: 697022
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -9559,7 +9559,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c1 .. inp)) > | 2460 | infty}
 
 Solution 201 (state 201)
-states: 202  rewrites: 719620
+states: 202  rewrites: 705915
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -9626,7 +9626,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2460 | infty}
 
 Solution 202 (state 202)
-states: 203  rewrites: 723080
+states: 203  rewrites: 709283
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -9672,7 +9672,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 2460 | infty}
 
 Solution 203 (state 203)
-states: 204  rewrites: 731110
+states: 204  rewrites: 717219
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -9751,7 +9751,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     | infty}
 
 Solution 204 (state 204)
-states: 205  rewrites: 736567
+states: 205  rewrites: 722632
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -9819,7 +9819,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2520 | infty}
 
 Solution 205 (state 205)
-states: 206  rewrites: 742442
+states: 206  rewrites: 728463
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -9898,7 +9898,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2520 | infty}
 
 Solution 206 (state 206)
-states: 207  rewrites: 747844
+states: 207  rewrites: 733821
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -9966,7 +9966,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 2520 | infty}
 
 Solution 207 (state 207)
-states: 208  rewrites: 750852
+states: 208  rewrites: 736785
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -10012,7 +10012,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2520 | infty}
 
 Solution 208 (state 208)
-states: 209  rewrites: 756668
+states: 209  rewrites: 742557
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -10091,7 +10091,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2520 | infty}
 
 Solution 209 (state 209)
-states: 210  rewrites: 766149
+states: 210  rewrites: 751942
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -10161,7 +10161,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2580 | infty}
 
 Solution 210 (state 210)
-states: 211  rewrites: 774607
+states: 211  rewrites: 760306
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -10243,7 +10243,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c1 .. inp)) > | 2580 | infty}
 
 Solution 211 (state 211)
-states: 212  rewrites: 783991
+states: 212  rewrites: 769594
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -10312,7 +10312,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 2580 | infty}
 
 Solution 212 (state 212)
-states: 213  rewrites: 787565
+states: 213  rewrites: 773076
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -10359,7 +10359,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 2580 | infty}
 
 Solution 213 (state 213)
-states: 214  rewrites: 795939
+states: 214  rewrites: 781356
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -10441,7 +10441,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c1 .. inp)) > | 2580 | infty}
 
 Solution 214 (state 214)
-states: 215  rewrites: 801633
+states: 215  rewrites: 787006
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -10512,7 +10512,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 2640 | infty}
 
 Solution 215 (state 215)
-states: 216  rewrites: 807766
+states: 216  rewrites: 793095
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -10595,7 +10595,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2640 | infty}
 
 Solution 216 (state 216)
-states: 217  rewrites: 813405
+states: 217  rewrites: 798690
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -10664,7 +10664,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2640 | infty}
 
 Solution 217 (state 217)
-states: 218  rewrites: 816527
+states: 218  rewrites: 801768
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -10711,7 +10711,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2640 | infty}
 
 Solution 218 (state 218)
-states: 219  rewrites: 822601
+states: 219  rewrites: 807798
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -10793,7 +10793,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2640 | infty}
 
 Solution 219 (state 219)
-states: 220  rewrites: 832477
+states: 220  rewrites: 817578
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -10865,7 +10865,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 2700 | infty}
 
 Solution 220 (state 220)
-states: 221  rewrites: 841279
+states: 221  rewrites: 826286
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -10950,7 +10950,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     .. outp) --> (c1 .. inp)) > | 2700 | infty}
 
 Solution 221 (state 221)
-states: 222  rewrites: 851058
+states: 222  rewrites: 835969
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -11021,7 +11021,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2700 | infty}
 
 Solution 222 (state 222)
-states: 223  rewrites: 854746
+states: 223  rewrites: 839565
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -11069,7 +11069,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 2700 | infty}
 
 Solution 223 (state 223)
-states: 224  rewrites: 863464
+states: 224  rewrites: 848189
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -11153,7 +11153,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     .. outp) --> (c1 .. inp)) > | 2700 | infty}
 
 Solution 224 (state 224)
-states: 225  rewrites: 869395
+states: 225  rewrites: 854076
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -11225,7 +11225,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2760 | infty}
 
 Solution 225 (state 225)
-states: 226  rewrites: 875786
+states: 226  rewrites: 860423
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -11310,7 +11310,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2760 | infty}
 
 Solution 226 (state 226)
-states: 227  rewrites: 881662
+states: 227  rewrites: 866255
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -11382,7 +11382,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 2760 | infty}
 
 Solution 227 (state 227)
-states: 228  rewrites: 884898
+states: 228  rewrites: 869447
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -11430,7 +11430,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 2760 | infty}
 
 Solution 228 (state 228)
-states: 229  rewrites: 891230
+states: 229  rewrites: 875735
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -11515,7 +11515,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2760 | infty}
 
 Solution 229 (state 229)
-states: 230  rewrites: 901501
+states: 230  rewrites: 885910
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -11589,7 +11589,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 2820 | infty}
 
 Solution 230 (state 230)
-states: 231  rewrites: 910647
+states: 231  rewrites: 894962
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -11677,7 +11677,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     .. outp) --> (c1 .. inp)) > | 2820 | infty}
 
 Solution 231 (state 231)
-states: 232  rewrites: 920821
+states: 232  rewrites: 905040
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -11750,7 +11750,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2820 | infty}
 
 Solution 232 (state 232)
-states: 233  rewrites: 924623
+states: 233  rewrites: 908750
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -11798,7 +11798,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2820 | infty}
 
 Solution 233 (state 233)
-states: 234  rewrites: 933685
+states: 234  rewrites: 917718
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -11885,7 +11885,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     .. outp) --> (c1 .. inp)) > | 2820 | infty}
 
 Solution 234 (state 234)
-states: 235  rewrites: 939853
+states: 235  rewrites: 923842
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -11959,7 +11959,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2880 | infty}
 
 Solution 235 (state 235)
-states: 236  rewrites: 946502
+states: 236  rewrites: 930447
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -12048,7 +12048,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2880 | infty}
 
 Solution 236 (state 236)
-states: 237  rewrites: 952615
+states: 237  rewrites: 936516
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -12122,7 +12122,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 2880 | infty}
 
 Solution 237 (state 237)
-states: 238  rewrites: 955965
+states: 238  rewrites: 939822
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -12171,7 +12171,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 2880 | infty}
 
 Solution 238 (state 238)
-states: 239  rewrites: 962555
+states: 239  rewrites: 946368
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -12259,7 +12259,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2880 | infty}
 
 Solution 239 (state 239)
-states: 240  rewrites: 973221
+states: 240  rewrites: 956938
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -12335,7 +12335,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2940 | infty}
 
 Solution 240 (state 240)
-states: 241  rewrites: 982711
+states: 241  rewrites: 966334
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -12426,7 +12426,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     .. outp) --> (c1 .. inp)) > | 2940 | infty}
 
 Solution 241 (state 241)
-states: 242  rewrites: 993280
+states: 242  rewrites: 976807
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -12501,7 +12501,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2940 | infty}
 
 Solution 242 (state 242)
-states: 243  rewrites: 997196
+states: 243  rewrites: 980631
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -12550,7 +12550,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 2940 | infty}
 
 Solution 243 (state 243)
-states: 244  rewrites: 1006602
+states: 244  rewrites: 989943
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -12640,7 +12640,7 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     .. outp) --> (c1 .. inp)) > | 2940 | infty}
 
 Solution 244 (state 244)
-states: 245  rewrites: 1013007
+states: 245  rewrites: 996304
 C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     [2] < r(0) * [1/8] and not [2] < r(0) * [1/16] and not [2] < r(0) * [1/32]
     and not [2] < r(0) * [1/64] and not [2] < r(0) * [1/128] and not [2] < r(0)
@@ -12717,7 +12717,7 @@ C:GlobalSystem --> {(not [2] < r(0) * [1/2] and not [2] < r(0) * [1/4] and not
     .. outp) --> (c1 .. inp)) > | 3000 | infty}
 
 Solution 245 (state 245)
-states: 246  rewrites: 1019914
+states: 246  rewrites: 1003167
 C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     1/2] and [0] < [9/2] + r(0) * [1/4] and [0] < [21/4] + r(0) * [1/8] and [0]
     < [45/8] + r(0) * [1/16] and [0] < [93/16] + r(0) * [1/32] and [0] < [
@@ -12809,7 +12809,7 @@ C:GlobalSystem --> {(r(2) < r(1) + [1] and [0] < r(0) and [0] < [3] + r(0) * [
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 3000 | infty}
 
 Solution 246 (state 246)
-states: 247  rewrites: 1026264
+states: 247  rewrites: 1009473
 C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     1/2] and not [2] < r(3) * [1/4] and not [2] < r(3) * [1/8] and not [2] < r(
     3) * [1/16] and not [2] < r(3) * [1/32] and not [2] < r(3) * [1/64] and not
@@ -12885,7 +12885,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [2] < r(3) and not [2] < r(3) * [
     .. outp) --> (c1 .. inp)) > | 3000 | infty}
 
 Solution 247 (state 247)
-states: 248  rewrites: 1029728
+states: 248  rewrites: 1012893
 C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     r(2) < r(1) + [1] and r(3) + [-2] < r(1) + [2] and r(3) + [-2] < r(1) + [3]
     and r(3) + [-2] < r(1) + [4] and r(3) + [-2] < r(1) + [5] and r(3) + [-2] <
@@ -12935,7 +12935,7 @@ C:GlobalSystem --> {(not [0] < r(0) and not [0] < r(3) and not [2] < r(3) and
     .. outp) --> (c1 .. inp)) > | 3000 | infty}
 
 Solution 248 (state 248)
-states: 249  rewrites: 1036576
+states: 249  rewrites: 1019697
 C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     and [0] < [9/2] + r(3) * [1/2] and [0] < [21/4] + r(3) * [1/4] and [0] < [
     45/8] + r(3) * [1/8] and [0] < [93/16] + r(3) * [1/16] and [0] < [189/32] +
@@ -13026,5 +13026,5 @@ C:GlobalSystem --> {(not [0] < r(0) and r(2) < r(1) + [1] and [0] < r(3) + [3]
     outp) --> (c2 .. inp)) ; (c2 .. outp) --> (c1 .. inp)) > | 3000 | infty}
 
 No more solutions.
-states: 249  rewrites: 1036576
+states: 249  rewrites: 1019697
 Bye.

@@ -67,7 +67,7 @@ search [, 5] in TEST-THERMOSTAT-SYSTEM : {bool(true) || initState | 0 | infty}
     =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 3333
+states: 2  rewrites: 3244
 C:GlobalSystem --> {(not [30] < [15/2] + (b(
     "SimpleThermimplInstance.environment", 2) ? r(
     "SimpleThermimplInstance.environment", 0) : [0]) / [2] and not [
@@ -155,7 +155,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b(
     infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 9035
+states: 3  rewrites: 8857
 C:GlobalSystem --> {(not [30] < [15/2] + (b(
     "SimpleThermimplInstance.environment", 2) ? r(
     "SimpleThermimplInstance.environment", 0) : [0]) / [2] and not [30] < [
@@ -274,7 +274,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b(
     infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 18060
+states: 4  rewrites: 17793
 C:GlobalSystem --> {(not [30] < [15/2] + (b(
     "SimpleThermimplInstance.environment", 2) ? r(
     "SimpleThermimplInstance.environment", 0) : [0]) / [2] and not [30] < [
@@ -432,7 +432,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b(
     infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 31062
+states: 5  rewrites: 30706
 C:GlobalSystem --> {(not [30] < [15/2] + (b(
     "SimpleThermimplInstance.environment", 2) ? r(
     "SimpleThermimplInstance.environment", 0) : [0]) / [2] and not [30] < [
@@ -637,7 +637,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b(
     infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 48707
+states: 6  rewrites: 48262
 C:GlobalSystem --> {(not [30] < [15/2] + (b(
     "SimpleThermimplInstance.environment", 2) ? r(
     "SimpleThermimplInstance.environment", 0) : [0]) / [2] and not [30] < [
@@ -897,13 +897,13 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b(
     infty}
 
 No more solutions.
-states: 6  rewrites: 48707
+states: 6  rewrites: 48262
 ==========================================
 search [, 5] in TEST-THERMOSTAT-SYSTEM : {bool(true) || cinitState | 0 | infty}
     =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 3931
+states: 2  rewrites: 3791
 C:GlobalSystem --> {(not [30] < [15/2] + (b(
     "SimpleThermimplInstance.environment", 2) ? r(
     "SimpleThermimplInstance.environment", 0) : [0]) / [2] and not [
@@ -977,7 +977,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b(
     environment .. oncontrol)) > | 5 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 10511
+states: 3  rewrites: 10213
 C:GlobalSystem --> {(not [30] < [15/2] + (b(
     "SimpleThermimplInstance.environment", 2) ? r(
     "SimpleThermimplInstance.environment", 0) : [0]) / [2] and not [30] < [
@@ -1081,7 +1081,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b(
     ctrlThread) .. oncontrol) --> (environment .. oncontrol)) > | 10 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 20497
+states: 4  rewrites: 20041
 C:GlobalSystem --> {(not [30] < [15/2] + (b(
     "SimpleThermimplInstance.environment", 2) ? r(
     "SimpleThermimplInstance.environment", 0) : [0]) / [2] and not [30] < [
@@ -1224,7 +1224,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b(
     ctrlThread) .. oncontrol) --> (environment .. oncontrol)) > | 15 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 34605
+states: 5  rewrites: 33991
 C:GlobalSystem --> {(not [30] < [15/2] + (b(
     "SimpleThermimplInstance.environment", 2) ? r(
     "SimpleThermimplInstance.environment", 0) : [0]) / [2] and not [30] < [
@@ -1414,7 +1414,7 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b(
     ctrlThread) .. oncontrol) --> (environment .. oncontrol)) > | 20 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 53540
+states: 6  rewrites: 52768
 C:GlobalSystem --> {(not [30] < [15/2] + (b(
     "SimpleThermimplInstance.environment", 2) ? r(
     "SimpleThermimplInstance.environment", 0) : [0]) / [2] and not [30] < [
@@ -1659,5 +1659,5 @@ C:GlobalSystem --> {(not [30] < [15/2] + (b(
     ctrlThread) .. oncontrol) --> (environment .. oncontrol)) > | 25 | infty}
 
 No more solutions.
-states: 6  rewrites: 56047
+states: 6  rewrites: 55257
 Bye.

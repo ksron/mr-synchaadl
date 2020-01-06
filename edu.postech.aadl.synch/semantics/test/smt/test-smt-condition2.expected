@@ -4,37 +4,37 @@ rewrites: 0
 result SMTBoolValue: [true]
 ==========================================
 reduce in SMT-BOOL-EXP : b(2) .
-rewrites: 6
-result SMTBoolVar: [b('2#$#)]
+rewrites: 7
+result SMTBoolVar: [b('#$#2)]
 ==========================================
 reduce in SMT-BOOL-EXP : b("a", 2) .
-rewrites: 6
-result SMTBoolVar: [b('2#$#a)]
+rewrites: 7
+result SMTBoolVar: [b('a#$#2)]
 ==========================================
 reduce in SMT-BOOL-EXP : getIndex(b(2)) .
-rewrites: 12
+rewrites: 19
 result NzNat: 2
 ==========================================
 reduce in SMT-BOOL-EXP : getIndex(b(21)) .
-rewrites: 12
+rewrites: 17
 result NzNat: 21
 ==========================================
 reduce in SMT-BOOL-EXP : getIndex(b("a", 2)) .
-rewrites: 12
+rewrites: 17
 result NzNat: 2
 ==========================================
 reduce in SMT-BOOL-EXP : getIndex(b("ab", 21)) .
-rewrites: 12
+rewrites: 17
 result NzNat: 21
 ==========================================
 reduce in SMT-BOOL-EXP : b(2) and [true] or b(4) === [false] .
-rewrites: 15
-result SMTBoolExp: [true and b('2#$#) or b('4#$#) === false]
+rewrites: 17
+result SMTBoolExp: [true and b('#$#2) or b('#$#4) === false]
 ==========================================
 reduce in SMT-BOOL-EXP : b(2) or b(4) === [false] ? [true] : [false] or b("a",
     3) .
-rewrites: 22
-result SMTBoolExp: [b('2#$#) or b('4#$#) === false ? true : false or b('3#$#a)]
+rewrites: 25
+result SMTBoolExp: [b('#$#2) or b('#$#4) === false ? true : false or b('a#$#3)]
 ==========================================
 reduce in SMT-BOOL-EXP : bool(true) .
 rewrites: 1
@@ -57,42 +57,42 @@ rewrites: 0
 result SMTRealValue: [(2/3).Real]
 ==========================================
 reduce in SMT-REAL-EXP : b(0) + [(4/3).Real] .
-rewrites: 6
-result [Exp]: [b('0#$#)] + [(4/3).Real]
+rewrites: 7
+result [Exp]: [b('#$#0)] + [(4/3).Real]
 ==========================================
 reduce in SMT-REAL-EXP : r(0) + [(4/3).Real] .
-rewrites: 7
-result SMTRealExp: [(4/3).Real + r('0#$#)]
+rewrites: 8
+result SMTRealExp: [(4/3).Real + r('#$#0)]
 ==========================================
 reduce in SMT-REAL-EXP : r("b", 2) .
-rewrites: 6
-result SMTRealVar: [r('2#$#b)]
+rewrites: 7
+result SMTRealVar: [r('b#$#2)]
 ==========================================
 reduce in SMT-REAL-EXP : getIndex(r(2)) .
-rewrites: 12
+rewrites: 19
 result NzNat: 2
 ==========================================
 reduce in SMT-REAL-EXP : getIndex(r(21)) .
-rewrites: 12
+rewrites: 17
 result NzNat: 21
 ==========================================
 reduce in SMT-REAL-EXP : getIndex(r("a", 2)) .
-rewrites: 12
+rewrites: 17
 result NzNat: 2
 ==========================================
 reduce in SMT-REAL-EXP : getIndex(r("ab", 21)) .
-rewrites: 12
+rewrites: 17
 result NzNat: 21
 ==========================================
 reduce in SMT-REAL-EXP : r(4) === r(5) or [(0/1).Real] > r(2) .
-rewrites: 21
-result SMTBoolExp: [(0/1).Real > r('2#$#) or r('4#$#) === r('5#$#)]
+rewrites: 24
+result SMTBoolExp: [(0/1).Real > r('#$#2) or r('#$#4) === r('#$#5)]
 ==========================================
 reduce in SMT-REAL-EXP : r(4) === r(5) ? [(1/2).Real] + r("a", 1) : r(4) * r(5)
     .
-rewrites: 22
-result SMTRealExp: [r('4#$#) === r('5#$#) ? (1/2).Real + r('1#$#a) : r('4#$#) *
-    r('5#$#)]
+rewrites: 25
+result SMTRealExp: [r('#$#4) === r('#$#5) ? (1/2).Real + r('a#$#1) : r('#$#4) *
+    r('#$#5)]
 ==========================================
 reduce in SMT-REAL-EXP : real(0) .
 rewrites: 8

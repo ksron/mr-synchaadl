@@ -1,13 +1,13 @@
 ==========================================
 reduce in TEST-ENSEMBLE-DYNAMICS : finalConst(obj3) .
-rewrites: 36
+rewrites: 47
 result SMTBoolValue: [true]
 ==========================================
 search in TEST-ENSEMBLE-DYNAMICS : executeStep(bool(true), obj3) =>*
     C:ConstConfig .
 
 Solution 1 (state 0)
-states: 1  rewrites: 1794
+states: 1  rewrites: 1716
 C:ConstConfig --> (((not [0] < r(0) and not [2] < r(3) and r("c2", 10) === r(3)
     + [-2] or not [0] < r(0) and r("c2", 10) === r(3) + [1] and [2] < r(3)) and
     r("c2", 11) === r(3) or not [2] < r(0) * [1/2] and r("c2", 10) === [-2] +
@@ -41,5 +41,5 @@ C:ConstConfig --> (((not [0] < r(0) and not [2] < r(3) and r("c2", 10) === r(3)
     c2 .. outp) --> outp) ; (c2 .. outp) --> (c1 .. inp)) >
 
 No more solutions.
-states: 1  rewrites: 1794
+states: 1  rewrites: 1716
 Bye.

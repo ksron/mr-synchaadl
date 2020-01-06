@@ -160,7 +160,7 @@ search [, 3] in TEST-THERMOSTAT2CON2CON-SYSTEM : {bool(true) || initState | 0 |
     infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 64924
+states: 2  rewrites: 61525
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -362,7 +362,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 10 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 65696
+states: 3  rewrites: 62274
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -564,7 +564,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 10 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 167166
+states: 4  rewrites: 160191
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -808,7 +808,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 20 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 168923
+states: 5  rewrites: 161925
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -1052,7 +1052,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 20 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 276144
+states: 6  rewrites: 265593
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -1296,7 +1296,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 20 | infty}
 
 Solution 6 (state 6)
-states: 7  rewrites: 277901
+states: 7  rewrites: 267327
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -1540,7 +1540,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 20 | infty}
 
 Solution 7 (state 7)
-states: 8  rewrites: 419055
+states: 8  rewrites: 404928
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -1826,7 +1826,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 30 | infty}
 
 Solution 8 (state 8)
-states: 9  rewrites: 421820
+states: 9  rewrites: 407670
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -2112,7 +2112,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 30 | infty}
 
 Solution 9 (state 9)
-states: 10  rewrites: 568857
+states: 10  rewrites: 551154
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -2398,7 +2398,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 30 | infty}
 
 Solution 10 (state 10)
-states: 11  rewrites: 571622
+states: 11  rewrites: 553896
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -2684,7 +2684,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 30 | infty}
 
 Solution 11 (state 11)
-states: 12  rewrites: 718659
+states: 12  rewrites: 697380
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -2970,7 +2970,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 30 | infty}
 
 Solution 12 (state 12)
-states: 13  rewrites: 721424
+states: 13  rewrites: 700122
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -3256,7 +3256,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 30 | infty}
 
 Solution 13 (state 13)
-states: 14  rewrites: 868461
+states: 14  rewrites: 843606
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -3542,7 +3542,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 30 | infty}
 
 Solution 14 (state 14)
-states: 15  rewrites: 871226
+states: 15  rewrites: 846348
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -3828,13 +3828,13 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     | 30 | infty}
 
 No more solutions.
-states: 15  rewrites: 887872
+states: 15  rewrites: 862840
 ==========================================
 search [, 3] in TEST-THERMOSTAT2CON2CON-SYSTEM : {bool(true) || cinitState | 0
     | infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 57043
+states: 2  rewrites: 54089
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -3985,7 +3985,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 10 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 59424
+states: 3  rewrites: 56425
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -4136,7 +4136,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 10 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 152156
+states: 4  rewrites: 145873
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -4329,7 +4329,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 20 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 155991
+states: 5  rewrites: 149663
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -4522,7 +4522,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 20 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 258423
+states: 6  rewrites: 248811
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -4715,7 +4715,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 20 | infty}
 
 Solution 6 (state 6)
-states: 7  rewrites: 262258
+states: 7  rewrites: 252601
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -4908,7 +4908,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 20 | infty}
 
 Solution 7 (state 7)
-states: 8  rewrites: 385606
+states: 8  rewrites: 372665
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -5143,7 +5143,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 30 | infty}
 
 Solution 8 (state 8)
-states: 9  rewrites: 390953
+states: 9  rewrites: 377967
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -5378,7 +5378,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 30 | infty}
 
 Solution 9 (state 9)
-states: 10  rewrites: 524381
+states: 10  rewrites: 508111
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -5613,7 +5613,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 30 | infty}
 
 Solution 10 (state 10)
-states: 11  rewrites: 529728
+states: 11  rewrites: 513413
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -5848,7 +5848,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 30 | infty}
 
 Solution 11 (state 11)
-states: 12  rewrites: 663156
+states: 12  rewrites: 643557
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -6083,7 +6083,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 30 | infty}
 
 Solution 12 (state 12)
-states: 13  rewrites: 668503
+states: 13  rewrites: 648859
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -6318,7 +6318,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 30 | infty}
 
 Solution 13 (state 13)
-states: 14  rewrites: 801931
+states: 14  rewrites: 779003
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -6553,7 +6553,7 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 30 | infty}
 
 Solution 14 (state 14)
-states: 15  rewrites: 807278
+states: 15  rewrites: 784305
 C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     ? r("Thermostat2ConimplInstance.environment", 0) : [0]) and not [50] < (b(
     "Thermostat2ConimplInstance.environment", 5) ? r(
@@ -6788,5 +6788,5 @@ C:GlobalSystem --> {(not [50] < (b("Thermostat2ConimplInstance.environment", 4)
     oncontrol) --> (environment .. onheater1)) > | 30 | infty}
 
 No more solutions.
-states: 15  rewrites: 843083
+states: 15  rewrites: 819780
 Bye.

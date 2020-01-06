@@ -50,5 +50,5 @@ search [1, 10] in TEST-THERMOSTAT-SYSTEM : {eval(initCond, initState) ||
     that check-sat(B:BoolExp and eval(goalCond, OBJ:Object)) = true .
 
 No solution.
-states: 11  rewrites: 345947
+states: 11  rewrites: 343653
 Bye.

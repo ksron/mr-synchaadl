@@ -194,7 +194,7 @@ search [, 5] in TEST-DRONE2-SYSTEM : {bool(true) || initState | 0 | infty} =>+
     C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 13198
+states: 2  rewrites: 12900
 C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     "Drones2implInstance.refDrone.env", 2) : [0]) and not [12] < (b(
     "Drones2implInstance.refDrone.env", 3) ? r(
@@ -467,7 +467,7 @@ C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     30 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 37974
+states: 3  rewrites: 37374
 C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     "Drones2implInstance.refDrone.env", 2) : [0]) and not [12] < (b(
     "Drones2implInstance.refDrone.env", 3) ? r(
@@ -854,7 +854,7 @@ C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     60 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 81914
+states: 4  rewrites: 81012
 C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     "Drones2implInstance.refDrone.env", 2) : [0]) and not [12] < (b(
     "Drones2implInstance.refDrone.env", 3) ? r(
@@ -1378,7 +1378,7 @@ C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     90 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 150147
+states: 5  rewrites: 148943
 C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     "Drones2implInstance.refDrone.env", 2) : [0]) and not [12] < (b(
     "Drones2implInstance.refDrone.env", 3) ? r(
@@ -2059,7 +2059,7 @@ C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     120 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 246639
+states: 6  rewrites: 245133
 C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     "Drones2implInstance.refDrone.env", 2) : [0]) and not [12] < (b(
     "Drones2implInstance.refDrone.env", 3) ? r(
@@ -2919,13 +2919,13 @@ C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     150 | infty}
 
 No more solutions.
-states: 6  rewrites: 246664
+states: 6  rewrites: 245154
 ==========================================
 search [, 5] in TEST-DRONE2-SYSTEM : {bool(true) || cinitState | 0 | infty} =>+
     C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 10323
+states: 2  rewrites: 10062
 C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     "Drones2implInstance.refDrone.env", 2) : [0]) and not [12] < (b(
     "Drones2implInstance.refDrone.env", 3) ? r(
@@ -3154,7 +3154,7 @@ C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     30 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 30073
+states: 3  rewrites: 29534
 C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     "Drones2implInstance.refDrone.env", 2) : [0]) and not [12] < (b(
     "Drones2implInstance.refDrone.env", 3) ? r(
@@ -3497,7 +3497,7 @@ C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     60 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 64748
+states: 4  rewrites: 63931
 C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     "Drones2implInstance.refDrone.env", 2) : [0]) and not [12] < (b(
     "Drones2implInstance.refDrone.env", 3) ? r(
@@ -3977,7 +3977,7 @@ C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     90 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 118272
+states: 5  rewrites: 117177
 C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     "Drones2implInstance.refDrone.env", 2) : [0]) and not [12] < (b(
     "Drones2implInstance.refDrone.env", 3) ? r(
@@ -4614,7 +4614,7 @@ C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     120 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 193693
+states: 6  rewrites: 192320
 C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     "Drones2implInstance.refDrone.env", 2) : [0]) and not [12] < (b(
     "Drones2implInstance.refDrone.env", 3) ? r(
@@ -5430,5 +5430,5 @@ C:GlobalSystem --> {(not [12] < (b("Drones2implInstance.refDrone.env", 2) ? r(
     150 | infty}
 
 No more solutions.
-states: 6  rewrites: 203127
+states: 6  rewrites: 201737
 Bye.

@@ -25,9 +25,8 @@ import edu.postech.aadl.xtext.propspec.propSpec.DISTRIBUTED
 
 class RtmPropSpec {
 	
-	static def compilePropertyCommand(Top top, Property prop, Mode mode, String pspcName)'''
-	load ./semantics/«mode.compileInterpreter»
-	load «pspcName + "-" + top.name».maude
+	static def compilePropertyCommand(Top top, Property prop, Mode mode, String maudeDirPath)'''
+	«top.compileLoadFiles(mode, maudeDirPath)»
 	mod TEST-«top.name.toUpperCase» is
 	  including «top.name.toUpperCase»-MODEL-SYMBOLIC .
 	  including «mode.compileModelTrans» .
@@ -41,14 +40,26 @@ class RtmPropSpec {
   	«top.compileMode»
 	endm
 		  
-	«top.compileVerbose(prop, mode)»
-	«top.compileProperty(prop, mode)»
+	«top.compileRequirement(prop, mode)»
 	quit
 	'''
 	
-	static def compileVerbose(Top top, Property prop, Mode mode){
+	static def compileLoadFiles(Top top, Mode mode, String maudeDirPath)'''
+	load «maudeDirPath»/prelude.maude
+	«IF mode == null || (mode != null && mode instanceof SYMBOLIC)»
+	load «maudeDirPath»/smt.maude
+	load «maudeDirPath»/smtCheck.maude
+	«ENDIF»
+	load ./semantics/«mode.compileInterpreter»
+	load «top.name».maude
+	'''
+	
+	static def compileRequirement(Top top, Property prop, Mode mode){
 		var verbose = ""
 		if(mode.verbose!=null){
+			verbose += "set show timing off .\n"
+			verbose += "set show stats off .\n"
+			verbose += "set show command off .\n"
 			if(prop != null){
 				verbose += "red \"time-bound: \" + " + "string(" + prop.bound + ", 10) .\n"
 			}
@@ -56,6 +67,17 @@ class RtmPropSpec {
 				verbose += "red \"sample: \" + " + "string(" + (mode as DISTRIBUTED).sample + ", 10) .\n"
 				verbose += "red \"response: \" + " + "string(" + (mode as DISTRIBUTED).response + ", 10) .\n"
 			}
+			verbose += "set show timing on .\n"
+			verbose += "set show stats on .\n"
+			verbose += "set show command on .\n\n"
+			
+			verbose += "set verbose on .\n"
+			verbose += "set print attribute on .\n"
+			verbose += top.compileProperty(prop, mode)
+			verbose += "set verbose off .\n"
+			verbose += "set print attribute off .\n\n"
+		} else {
+			verbose += top.compileProperty(prop, mode)
 		}
 		return verbose
 	}

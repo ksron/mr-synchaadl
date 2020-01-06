@@ -15,8 +15,8 @@ mod TEST-BEHAVIOR-TRANSITION-SEMANTICS-META is
 endm
 
 
-red execTrans(location(loc([0])) complete(loc([0])) trans(trans1) bcf) .
+red execTrans(location(loc(real(0))) complete(loc(real(0))) trans(trans1) bcf) .
 
-red execTrans(location(loc([0])) complete(loc([0])) trans(trans2) bcf) .
+red execTrans(location(loc(real(0))) complete(loc(real(0))) trans(trans2) bcf) .
 
-red execTrans(location(loc([0])) complete(loc([0])) trans(trans3) bcf) .
+red execTrans(location(loc(real(0))) complete(loc(real(0))) trans(trans3) bcf) .

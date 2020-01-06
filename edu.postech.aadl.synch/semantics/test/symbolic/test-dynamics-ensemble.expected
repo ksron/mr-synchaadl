@@ -1,13 +1,13 @@
 ==========================================
 reduce in TEST-ENSEMBLE-DYNAMICS-MOD : finalConst(obj3) .
-rewrites: 36
+rewrites: 47
 result SMTBoolValue: [true]
 ==========================================
 search in TEST-ENSEMBLE-DYNAMICS-MOD : executeStep(bool(true), obj3) =>*
     C:ConstConfig .
 
 Solution 1 (state 12)
-states: 13  rewrites: 1585
+states: 13  rewrites: 1474
 C:ConstConfig --> (not [2] < r(0) * [1/2] and r(2) < r(1) + [1] and [0] < r(0))
     || < c3 : System | properties : none,features : < outp : DataOutPort |
     properties : none,content : [-2] + r(0) * [1/2] # [true] >,subcomponents :
@@ -37,7 +37,7 @@ C:ConstConfig --> (not [2] < r(0) * [1/2] and r(2) < r(1) + [1] and [0] < r(0))
     c2 .. outp) --> outp) ; (c2 .. outp) --> (c1 .. inp)) >
 
 Solution 2 (state 13)
-states: 14  rewrites: 1823
+states: 14  rewrites: 1694
 C:ConstConfig --> (r(2) < r(1) + [1] and [0] < r(0) and [2] < r(0) * [1/2]) ||
     < c3 : System | properties : none,features : < outp : DataOutPort |
     properties : none,content : [1] + r(0) * [1/2] # [true] >,subcomponents : (
@@ -67,7 +67,7 @@ C:ConstConfig --> (r(2) < r(1) + [1] and [0] < r(0) and [2] < r(0) * [1/2]) ||
     c2 .. outp) --> outp) ; (c2 .. outp) --> (c1 .. inp)) >
 
 Solution 3 (state 14)
-states: 15  rewrites: 2062
+states: 15  rewrites: 1915
 C:ConstConfig --> (not [0] < r(0) and not [2] < r(3) and r(2) < r(1) + [1]) ||
     < c3 : System | properties : none,features : < outp : DataOutPort |
     properties : none,content : r(3) + [-2] # [true] >,subcomponents : (< c1 :
@@ -97,7 +97,7 @@ C:ConstConfig --> (not [0] < r(0) and not [2] < r(3) and r(2) < r(1) + [1]) ||
     c2 .. outp) --> outp) ; (c2 .. outp) --> (c1 .. inp)) >
 
 Solution 4 (state 15)
-states: 16  rewrites: 2298
+states: 16  rewrites: 2133
 C:ConstConfig --> (not [0] < r(0) and r(2) < r(1) + [1] and [2] < r(3)) || < c3
     : System | properties : none,features : < outp : DataOutPort | properties :
     none,content : r(3) + [1] # [true] >,subcomponents : (< c1 : Thread |
@@ -127,5 +127,5 @@ C:ConstConfig --> (not [0] < r(0) and r(2) < r(1) + [1] and [2] < r(3)) || < c3
     c2 .. outp) --> outp) ; (c2 .. outp) --> (c1 .. inp)) >
 
 No more solutions.
-states: 16  rewrites: 2298
+states: 16  rewrites: 2133
 Bye.

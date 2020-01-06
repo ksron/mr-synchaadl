@@ -57,3 +57,19 @@ fmod CONC-REAL-EXP is
   eq [F1] =/==    [F2] = [F1 =/= F2] .
   eq [C] ? [F1] : [F2] = [if C then F1 else F2 fi] .
 endfm
+
+
+fmod CONC-CHECKSAT is
+  protecting CONC-REAL-EXP .
+  including CHECKSAT .
+
+  vars B : BoolExp .
+  vars E : Exp .
+
+  --- checks if the given Boolean expression is satisfiable
+  eq check-sat([false]) = false .
+  eq check-sat([true])  = true .
+  
+  --- the simplify function does nothing 
+  eq simplify(E) = E .
+endfm

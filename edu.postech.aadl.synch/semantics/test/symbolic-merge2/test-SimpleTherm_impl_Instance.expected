@@ -67,7 +67,7 @@ search [, 5] in TEST-THERMOSTAT-SYSTEM : {bool(true) || initState | 0 | infty}
     =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 3052
+states: 2  rewrites: 2992
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "SimpleThermimplInstance.environment", 1) and not r(
     "SimpleThermimplInstance.environment", 1) < [0] and not r(
@@ -175,7 +175,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 7916
+states: 3  rewrites: 7796
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "SimpleThermimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -345,7 +345,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 15391
+states: 4  rewrites: 15211
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "SimpleThermimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -594,7 +594,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 25978
+states: 5  rewrites: 25738
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "SimpleThermimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -939,7 +939,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 40190
+states: 6  rewrites: 39890
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "SimpleThermimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -1397,13 +1397,13 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     infty}
 
 No more solutions.
-states: 6  rewrites: 40190
+states: 6  rewrites: 39890
 ==========================================
 search [, 5] in TEST-THERMOSTAT-SYSTEM : {bool(true) || cinitState | 0 | infty}
     =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 2128
+states: 2  rewrites: 2074
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "SimpleThermimplInstance.environment", 1) and not r(
     "SimpleThermimplInstance.environment", 1) < [0] and not r(
@@ -1497,7 +1497,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     environment .. oncontrol)) > | 5 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 5292
+states: 3  rewrites: 5184
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "SimpleThermimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -1652,7 +1652,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     ctrlThread) .. oncontrol) --> (environment .. oncontrol)) > | 10 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 10033
+states: 4  rewrites: 9871
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "SimpleThermimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -1886,7 +1886,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     ctrlThread) .. oncontrol) --> (environment .. oncontrol)) > | 15 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 16654
+states: 5  rewrites: 16438
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "SimpleThermimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -2216,7 +2216,7 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     ctrlThread) .. oncontrol) --> (environment .. oncontrol)) > | 20 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 25458
+states: 6  rewrites: 25188
 C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     "SimpleThermimplInstance.environment", 1) and not [
     39631676720860365/18014398509481984] < r(
@@ -2659,5 +2659,5 @@ C:GlobalSystem --> {(not [39631676720860365/18014398509481984] < r(
     ctrlThread) .. oncontrol) --> (environment .. oncontrol)) > | 25 | infty}
 
 No more solutions.
-states: 6  rewrites: 25458
+states: 6  rewrites: 25188
 Bye.

@@ -1,0 +1,25 @@
+==========================================
+reduce in TEST-ENV-DYNAMICS-MOD : finalConst(env1) .
+rewrites: 98
+result SMTBoolExp: [(true).Boolean and ((true).Boolean and (b('#$#1) === b(
+    '#$#0) and (0/1).Real === r('#$#0)))]
+==========================================
+reduce in TEST-ENV-DYNAMICS-MOD : finalConst(env2) .
+rewrites: 226
+result SMTBoolExp: [(true).Boolean and ((true).Boolean and b('#$#3) === b(
+    '#$#3) and ((true).Boolean and (b('#$#0) === b('#$#0) and (0/1).Real === r(
+    '#$#0)) and (b('#$#1) === b('#$#1) and (0/1).Real === r('#$#1)) and ((
+    true).Boolean === b('#$#2) and b('#$#2) === b('#$#2))))]
+==========================================
+search in TEST-ENV-DYNAMICS-MOD : executeStep(bool(true), env1) =>*
+    C:ConstConfig .
+
+No solution.
+states: 1  rewrites: 104
+==========================================
+search in TEST-ENV-DYNAMICS-MOD : executeStep(bool(true), env2) =>*
+    C:ConstConfig .
+
+No solution.
+states: 1  rewrites: 246
+Bye.

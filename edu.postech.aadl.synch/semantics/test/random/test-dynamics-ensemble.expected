@@ -161,7 +161,7 @@ result ConfigWithRand: {< top : System | properties : TimingProperties::Period
 ==========================================
 reduce in TEST-ENSEMBLE-DYNAMICS : propagateExecSub(transferInputs(
     execSampleSub({ensemble,0}))) .
-rewrites: 443
+rewrites: 445
 result ConfigWithRand: {< top : System | properties : TimingProperties::Period
     => {{5}},features : none,subcomponents : (< controller : Thread |
     properties : ((TimingProperties::Period => {{5}}) ; (
@@ -203,7 +203,7 @@ result ConfigWithRand: {< top : System | properties : TimingProperties::Period
 ==========================================
 reduce in TEST-ENSEMBLE-DYNAMICS : transferResults(propagateExecSub(
     transferInputs(execSampleSub({ensemble,0})))) .
-rewrites: 467
+rewrites: 469
 result ConfigWithRand: {< top : System | properties : TimingProperties::Period
     => {{5}},features : none,subcomponents : (< controller : Thread |
     properties : ((TimingProperties::Period => {{5}}) ; (
@@ -245,7 +245,7 @@ result ConfigWithRand: {< top : System | properties : TimingProperties::Period
 ==========================================
 reduce in TEST-ENSEMBLE-DYNAMICS : execResponseSub(transferResults(
     propagateExecSub(transferInputs(execSampleSub({ensemble,0}))))) .
-rewrites: 679
+rewrites: 681
 result ConfigWithRand: {< top : System | properties : TimingProperties::Period
     => {{5}},features : none,subcomponents : (< controller : Thread |
     properties : ((TimingProperties::Period => {{5}}) ; (
@@ -285,7 +285,7 @@ result ConfigWithRand: {< top : System | properties : TimingProperties::Period
     controller .. temp)) >,4}
 ==========================================
 reduce in TEST-ENSEMBLE-DYNAMICS : executeStep({ensemble,0}) .
-rewrites: 680
+rewrites: 682
 result ConfigWithRand: {< top : System | properties : TimingProperties::Period
     => {{5}},features : none,subcomponents : (< controller : Thread |
     properties : ((TimingProperties::Period => {{5}}) ; (

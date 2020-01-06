@@ -1,6 +1,6 @@
 ==========================================
 rewrite [100] in TEST-DRONE2-SYSTEM : {initState | 0 | infty} .
-rewrites: 16955
+rewrites: 16999
 result GlobalSystem: {< Drones2implInstance : System | properties : ((
     TimingProperties::Period => {{30}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -184,7 +184,7 @@ result GlobalSystem: {< Drones2implInstance : System | properties : ((
     infty > > >) >) > | 139/2 | infty}
 ==========================================
 rewrite [100] in TEST-DRONE2-SYSTEM : {cinitState | 0 | infty} .
-rewrites: 14212
+rewrites: 14248
 result GlobalSystem: {< Drones2implInstance : System | properties : ((
     TimingProperties::Period => {{30}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),

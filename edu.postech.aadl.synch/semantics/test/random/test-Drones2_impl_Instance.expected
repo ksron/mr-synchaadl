@@ -1,6 +1,6 @@
 ==========================================
 rewrite [100] in TEST-DRONE2-SYSTEM : {{initState,0} | 0 | infty} .
-rewrites: 238749
+rewrites: 239949
 result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     TimingProperties::Period => {{30}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -174,7 +174,7 @@ result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     drone1 .. refY)) >,800} | 3000 | infty}
 ==========================================
 rewrite [100] in TEST-DRONE2-SYSTEM : {{initState,800} | 0 | infty} .
-rewrites: 238680
+rewrites: 239880
 result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     TimingProperties::Period => {{30}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -348,7 +348,7 @@ result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     drone1 .. refY)) >,1600} | 3000 | infty}
 ==========================================
 rewrite [100] in TEST-DRONE2-SYSTEM : {{initState,1600} | 0 | infty} .
-rewrites: 238655
+rewrites: 239855
 result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     TimingProperties::Period => {{30}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -522,7 +522,7 @@ result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     drone1 .. refY)) >,2400} | 3000 | infty}
 ==========================================
 rewrite [100] in TEST-DRONE2-SYSTEM : {{initState,2400} | 0 | infty} .
-rewrites: 238642
+rewrites: 239842
 result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     TimingProperties::Period => {{30}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -696,7 +696,7 @@ result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     drone1 .. refY)) >,3200} | 3000 | infty}
 ==========================================
 rewrite [100] in TEST-DRONE2-SYSTEM : {{cinitState,0} | 0 | infty} .
-rewrites: 202425
+rewrites: 203625
 result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     TimingProperties::Period => {{30}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -825,7 +825,7 @@ result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     800} | 3000 | infty}
 ==========================================
 rewrite [100] in TEST-DRONE2-SYSTEM : {{cinitState,800} | 0 | infty} .
-rewrites: 202402
+rewrites: 203602
 result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     TimingProperties::Period => {{30}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -954,7 +954,7 @@ result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     1600} | 3000 | infty}
 ==========================================
 rewrite [100] in TEST-DRONE2-SYSTEM : {{cinitState,1600} | 0 | infty} .
-rewrites: 202377
+rewrites: 203577
 result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     TimingProperties::Period => {{30}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),
@@ -1082,7 +1082,7 @@ result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     refY) --> (drone1 .. refY)) >,2400} | 3000 | infty}
 ==========================================
 rewrite [100] in TEST-DRONE2-SYSTEM : {{cinitState,2400} | 0 | infty} .
-rewrites: 202364
+rewrites: 203564
 result GlobalSystem: {{< Drones2implInstance : System | properties : ((
     TimingProperties::Period => {{30}}) ; (HybridSynchAADL::Synchronous => {{
     true}}) ; HybridSynchAADL::MaxClockDeviation => {{1.0000000000000001e-1}}),

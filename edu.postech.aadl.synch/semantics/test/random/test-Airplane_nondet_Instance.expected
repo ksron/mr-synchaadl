@@ -1,7 +1,7 @@
 ==========================================
 rewrite [100] in TEST-AIRPLANE_NONDET_INSTANCE-MODEL : {{initState,0} | 0 |
     infty} .
-rewrites: 202389
+rewrites: 203989
 result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
     TimingProperties::Period => {{60}}) ; HybridSynchAADL::Synchronous => {{
     true}}),features : none,subcomponents : (< turningCtrl : System |
@@ -210,7 +210,7 @@ result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
 ==========================================
 rewrite [100] in TEST-AIRPLANE_NONDET_INSTANCE-MODEL : {{initState,400} | 0 |
     infty} .
-rewrites: 202251
+rewrites: 203851
 result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
     TimingProperties::Period => {{60}}) ; HybridSynchAADL::Synchronous => {{
     true}}),features : none,subcomponents : (< turningCtrl : System |
@@ -419,7 +419,7 @@ result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
 ==========================================
 rewrite [100] in TEST-AIRPLANE_NONDET_INSTANCE-MODEL : {{initState,800} | 0 |
     infty} .
-rewrites: 202251
+rewrites: 203851
 result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
     TimingProperties::Period => {{60}}) ; HybridSynchAADL::Synchronous => {{
     true}}),features : none,subcomponents : (< turningCtrl : System |
@@ -628,7 +628,7 @@ result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
 ==========================================
 rewrite [100] in TEST-AIRPLANE_NONDET_INSTANCE-MODEL : {{initState,1200} | 0 |
     infty} .
-rewrites: 202251
+rewrites: 203851
 result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
     TimingProperties::Period => {{60}}) ; HybridSynchAADL::Synchronous => {{
     true}}),features : none,subcomponents : (< turningCtrl : System |
@@ -837,7 +837,7 @@ result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
 ==========================================
 rewrite [100] in TEST-AIRPLANE_NONDET_INSTANCE-MODEL : {{cinitState,0} | 0 |
     infty} .
-rewrites: 141506
+rewrites: 143106
 result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
     TimingProperties::Period => {{60}}) ; HybridSynchAADL::Synchronous => {{
     true}}),features : none,subcomponents : (< turningCtrl : System |
@@ -972,7 +972,7 @@ result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
 ==========================================
 rewrite [100] in TEST-AIRPLANE_NONDET_INSTANCE-MODEL : {{cinitState,400} | 0 |
     infty} .
-rewrites: 141468
+rewrites: 143068
 result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
     TimingProperties::Period => {{60}}) ; HybridSynchAADL::Synchronous => {{
     true}}),features : none,subcomponents : (< turningCtrl : System |
@@ -1107,7 +1107,7 @@ result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
 ==========================================
 rewrite [100] in TEST-AIRPLANE_NONDET_INSTANCE-MODEL : {{cinitState,800} | 0 |
     infty} .
-rewrites: 141468
+rewrites: 143068
 result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
     TimingProperties::Period => {{60}}) ; HybridSynchAADL::Synchronous => {{
     true}}),features : none,subcomponents : (< turningCtrl : System |
@@ -1242,7 +1242,7 @@ result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
 ==========================================
 rewrite [100] in TEST-AIRPLANE_NONDET_INSTANCE-MODEL : {{cinitState,1200} | 0 |
     infty} .
-rewrites: 141468
+rewrites: 143068
 result GlobalSystem: {{< AirplanenondetInstance : System | properties : ((
     TimingProperties::Period => {{60}}) ; HybridSynchAADL::Synchronous => {{
     true}}),features : none,subcomponents : (< turningCtrl : System |

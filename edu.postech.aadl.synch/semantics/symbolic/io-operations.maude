@@ -62,6 +62,7 @@ mod FEATURE-OPERATION is
   including DATA-PORT .
   protecting REAL-EXP .
   protecting FEATURE-MAP .
+  protecting CHECKSAT .
 
   var FMAP : FeatureMap . 
   vars FTS FTS' : Configuration .  
@@ -94,7 +95,7 @@ mod FEATURE-OPERATION is
        < PI : C:DataInPort | 
            content : bot(type(E)),
            cache : E # B, ATTS > FTS', 
-       insert(PI, ((B ? E : E') # (B or B')) : B, FMAP)) .
+       insert(PI, (simplify(B ? E : E') # simplify(B or B')) : B, FMAP)) .
 
   --- NOTE: using a new variable instead of the conditional expression seems to
   --- significantly increase SMT solving time...

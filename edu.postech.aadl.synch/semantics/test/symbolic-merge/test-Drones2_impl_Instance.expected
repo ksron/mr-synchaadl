@@ -194,7 +194,7 @@ search [, 5] in TEST-DRONE2-SYSTEM : {bool(true) || initState | 0 | infty} =>+
     C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 8082
+states: 2  rewrites: 7918
 C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     "Drones2implInstance.drone1.environment", 6) and not [
     93674872249306317/18014398509481984] < r(
@@ -496,7 +496,7 @@ C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     30 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 21934
+states: 3  rewrites: 21606
 C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     "Drones2implInstance.drone1.environment", 6) and not [
     93674872249306317/18014398509481984] < r(
@@ -951,7 +951,7 @@ C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     60 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 44486
+states: 4  rewrites: 43994
 C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     "Drones2implInstance.drone1.environment", 6) and not [
     93674872249306317/18014398509481984] < r(
@@ -1582,7 +1582,7 @@ C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     90 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 77280
+states: 5  rewrites: 76624
 C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     "Drones2implInstance.drone1.environment", 6) and not [
     93674872249306317/18014398509481984] < r(
@@ -2409,7 +2409,7 @@ C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     120 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 121552
+states: 6  rewrites: 120732
 C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     "Drones2implInstance.drone1.environment", 6) and not [
     93674872249306317/18014398509481984] < r(
@@ -3454,13 +3454,13 @@ C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     150 | infty}
 
 No more solutions.
-states: 6  rewrites: 121552
+states: 6  rewrites: 120732
 ==========================================
 search [, 5] in TEST-DRONE2-SYSTEM : {bool(true) || cinitState | 0 | infty} =>+
     C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 6128
+states: 2  rewrites: 5976
 C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     "Drones2implInstance.drone1.environment", 6) and not [
     93674872249306317/18014398509481984] < r(
@@ -3718,7 +3718,7 @@ C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     30 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 15990
+states: 3  rewrites: 15686
 C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     "Drones2implInstance.drone1.environment", 6) and not [
     93674872249306317/18014398509481984] < r(
@@ -4129,7 +4129,7 @@ C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     60 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 31556
+states: 4  rewrites: 31100
 C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     "Drones2implInstance.drone1.environment", 6) and not [
     93674872249306317/18014398509481984] < r(
@@ -4716,7 +4716,7 @@ C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     90 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 53764
+states: 5  rewrites: 53156
 C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     "Drones2implInstance.drone1.environment", 6) and not [
     93674872249306317/18014398509481984] < r(
@@ -5499,7 +5499,7 @@ C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     120 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 83394
+states: 6  rewrites: 82634
 C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     "Drones2implInstance.drone1.environment", 6) and not [
     93674872249306317/18014398509481984] < r(
@@ -6500,5 +6500,5 @@ C:GlobalSystem --> {(not [93674872249306317/18014398509481984] < r(
     150 | infty}
 
 No more solutions.
-states: 6  rewrites: 83394
+states: 6  rewrites: 82634
 Bye.

@@ -40,7 +40,7 @@ result ConfigWithRand: {< controller : Thread | properties : ((
     -[otherwise]-> l1 {skip}),loopBound : 0,transBound : 2 >,0}
 ==========================================
 reduce in TEST-THREAD-DYNAMICS : executeStep({thread,0}) .
-rewrites: 148
+rewrites: 150
 result [ConfigWithRand]: execThread(< controller : Thread | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::SamplingTime => {{
     0.0 .. 2.0}}) ; HybridSynchAADL::ResponseTime => {{3.0 .. 4.0}}),features :
@@ -74,7 +74,7 @@ result [ConfigWithRand]: execThread(< controller : Thread | properties : ((
 ==========================================
 reduce in TEST-THREAD-DYNAMICS : executeStep({thread transIn(real(10) # bool(
     true), controller .. temp),0}) .
-rewrites: 232
+rewrites: 234
 result ConfigWithRand: {< controller : Thread | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::SamplingTime => {{
     0.0 .. 2.0}}) ; HybridSynchAADL::ResponseTime => {{3.0 .. 4.0}}),features :
@@ -95,7 +95,7 @@ result ConfigWithRand: {< controller : Thread | properties : ((
 ==========================================
 reduce in TEST-THREAD-DYNAMICS : executeStep({thread transIn(real(0) # bool(
     true), controller .. temp),0}) .
-rewrites: 232
+rewrites: 234
 result ConfigWithRand: {< controller : Thread | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::SamplingTime => {{
     0.0 .. 2.0}}) ; HybridSynchAADL::ResponseTime => {{3.0 .. 4.0}}),features :
@@ -116,7 +116,7 @@ result ConfigWithRand: {< controller : Thread | properties : ((
 ==========================================
 reduce in TEST-THREAD-DYNAMICS : executeStep({thread transIn(real(50) # bool(
     true), controller .. temp),0}) .
-rewrites: 291
+rewrites: 293
 result ConfigWithRand: {< controller : Thread | properties : ((
     TimingProperties::Period => {{5}}) ; (HybridSynchAADL::SamplingTime => {{
     0.0 .. 2.0}}) ; HybridSynchAADL::ResponseTime => {{3.0 .. 4.0}}),features :

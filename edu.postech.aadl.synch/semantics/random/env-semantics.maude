@@ -49,7 +49,7 @@ mod ENV-TRANSITION-SEMANTICS is
   including SAMPLER .
   protecting DEFAULT-PROPERTIES .
   protecting HYBRID-SYNCHAADL-PROPERTIES .
-  protecting CHECKSAT .
+  protecting CONC-CHECKSAT .
 
   vars L L' : Location .
   vars T T' LT UT : Rat .

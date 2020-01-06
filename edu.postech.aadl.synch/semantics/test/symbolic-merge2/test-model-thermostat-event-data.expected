@@ -3,7 +3,7 @@ search [, 5] in TEST-THERMOSTAT-SYSTEM-HIE : {bool(true) || initState | 0 |
     infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 5448
+states: 2  rewrites: 5302
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and (((not [39631676720860365/18014398509481984] < r("top.environment",
     4) and not r("top.environment", 4) < [0] and not r("top.environment", 5) <
@@ -117,7 +117,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     controller .. temp)) > | 5 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 17949
+states: 3  rewrites: 17569
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and (((((((not [39631676720860365/18014398509481984] < r(
     "top.environment", 11) and not r("top.environment", 11) < [0] and not r(
@@ -386,7 +386,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     | 10 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 37352
+states: 4  rewrites: 36738
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and (((((((not [39631676720860365/18014398509481984] < r(
     "top.environment", 11) and not r("top.environment", 11) < [0] and not r(
@@ -837,7 +837,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     | 15 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 64691
+states: 5  rewrites: 63843
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and (((((((not [39631676720860365/18014398509481984] < r(
     "top.environment", 11) and not r("top.environment", 11) < [0] and not r(
@@ -1500,7 +1500,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     | 20 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 100992
+states: 6  rewrites: 99910
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and (((((((not [39631676720860365/18014398509481984] < r(
     "top.environment", 11) and not r("top.environment", 11) < [0] and not r(
@@ -2404,5 +2404,5 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     controller .. temp)) > | 25 | infty}
 
 No more solutions.
-states: 6  rewrites: 100992
+states: 6  rewrites: 99910
 Bye.

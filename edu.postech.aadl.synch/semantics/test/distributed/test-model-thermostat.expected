@@ -1,6 +1,6 @@
 ==========================================
 rewrite [100] in TEST-THERMOSTAT-SYSTEM : {initState | 0 | infty} .
-rewrites: 7407
+rewrites: 7419
 result GlobalSystem: {< top : System | properties : TimingProperties::Period =>
     {{5}},features : none,subcomponents : (< controller : AsyncThread |
     properties : ((TimingProperties::Period => {{5}}) ; (

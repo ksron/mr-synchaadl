@@ -3,7 +3,7 @@
 mod BEHAVIOR-ACTION-CONF is
   including VAR-GEN .
   including BEHAVIOR-CONF .
-  protecting CHECKSAT .
+  protecting CONC-CHECKSAT .
 
   var BCF : BehaviorConf .
   var CONST : BoolExp .

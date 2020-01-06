@@ -7,7 +7,7 @@ search in TEST-ENV-TRANSITION-SEMANTICS : execEnv(time([0]) mode(loc(r("mode",
     RESULT:BATransResult .
 
 Solution 1 (state 11)
-states: 12  rewrites: 611
+states: 12  rewrites: 586
 RESULT:BATransResult --> loc([0]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     # b(1) : [true]), off1 |-> ([0] # b(2) : [true]), off2 |-> ([0] # b(3) : [
     true]), a |-> [3/4] + - r("G", 5) * [3602879701896397/36028797018963968] #
@@ -17,7 +17,7 @@ RESULT:BATransResult --> loc([0]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     === [0] | < "G",7,5 >
 
 Solution 2 (state 12)
-states: 13  rewrites: 852
+states: 13  rewrites: 811
 RESULT:BATransResult --> loc([1]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     # b(1) : [true]), off1 |-> ([0] # b(2) : [true]), off2 |-> ([0] # b(3) : [
     true]), a |-> [3/4] + [3602879701896397/18014398509481984] * r("G", 5) # [
@@ -28,7 +28,7 @@ RESULT:BATransResult --> loc([1]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     "G", 5) and r("G", 6) === [5] and r("mode", 0) === [1] | < "G",7,5 >
 
 No more solutions.
-states: 13  rewrites: 992
+states: 13  rewrites: 939
 ==========================================
 search in TEST-ENV-TRANSITION-SEMANTICS : execEnv(time([0]) mode(loc(r("mode",
     0))) vargen(< "G",5,5 >) sampling((cr1 :(0,1), cr2 :(3/2,5/2))) response((
@@ -36,7 +36,7 @@ search in TEST-ENV-TRANSITION-SEMANTICS : execEnv(time([0]) mode(loc(r("mode",
     envports)) =>+ RESULT:BATransResult .
 
 Solution 1 (state 137)
-states: 138  rewrites: 12442
+states: 138  rewrites: 11537
 RESULT:BATransResult --> loc([0]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     # b(1) : [true]), off1 |-> ([0] # b(2) : [true]), off2 |-> ([0] # b(3) : [
     true]), a |-> [3/4] + - r("G", 5) * [3602879701896397/36028797018963968] #
@@ -49,7 +49,7 @@ RESULT:BATransResult --> loc([0]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     7) === [5] and r("mode", 0) === [0] | < "G",8,5 >
 
 Solution 2 (state 138)
-states: 139  rewrites: 12984
+states: 139  rewrites: 12051
 RESULT:BATransResult --> loc([0]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     # b(1) : [true]), off1 |-> ([0] # b(2) : [true]), off2 |-> ([0] # b(3) : [
     true]), a |-> [3/4] + - r("G", 6) * [3602879701896397/36028797018963968] #
@@ -62,7 +62,7 @@ RESULT:BATransResult --> loc([0]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     7) < r("G", 6) and r("G", 7) === [5] and r("mode", 0) === [0] | < "G",8,5 >
 
 Solution 3 (state 139)
-states: 140  rewrites: 13538
+states: 140  rewrites: 12577
 RESULT:BATransResult --> loc([1]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     # b(1) : [true]), off1 |-> ([0] # b(2) : [true]), off2 |-> ([0] # b(3) : [
     true]), a |-> [3/4] + - r("G", 5) * [3602879701896397/36028797018963968] #
@@ -76,7 +76,7 @@ RESULT:BATransResult --> loc([1]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     1] | < "G",8,5 >
 
 Solution 4 (state 140)
-states: 141  rewrites: 14075
+states: 141  rewrites: 13086
 RESULT:BATransResult --> loc([1]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     # b(1) : [true]), off1 |-> ([0] # b(2) : [true]), off2 |-> ([0] # b(3) : [
     true]), a |-> [3/4] + - r("G", 6) * [3602879701896397/36028797018963968] #
@@ -89,7 +89,7 @@ RESULT:BATransResult --> loc([1]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     "G", 7) === [5] and r("mode", 0) === [1] | < "G",8,5 >
 
 Solution 5 (state 141)
-states: 142  rewrites: 14624
+states: 142  rewrites: 13607
 RESULT:BATransResult --> loc([2]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     # b(1) : [true]), off1 |-> ([0] # b(2) : [true]), off2 |-> ([0] # b(3) : [
     true]), a |-> [3/4] + [3602879701896397/18014398509481984] * r("G", 5) # [
@@ -105,7 +105,7 @@ RESULT:BATransResult --> loc([2]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     "G", 7) === [5] and r("mode", 0) === [2] | < "G",8,5 >
 
 Solution 6 (state 142)
-states: 143  rewrites: 15158
+states: 143  rewrites: 14113
 RESULT:BATransResult --> loc([2]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     # b(1) : [true]), off1 |-> ([0] # b(2) : [true]), off2 |-> ([0] # b(3) : [
     true]), a |-> [3/4] + - r("G", 5) * [3602879701896397/18014398509481984] +
@@ -123,7 +123,7 @@ RESULT:BATransResult --> loc([2]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     8,5 >
 
 Solution 7 (state 143)
-states: 144  rewrites: 15704
+states: 144  rewrites: 14631
 RESULT:BATransResult --> loc([3]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     # b(1) : [true]), off1 |-> ([0] # b(2) : [true]), off2 |-> ([0] # b(3) : [
     true]), a |-> [3/4] + [3602879701896397/18014398509481984] * r("G", 5) # [
@@ -140,7 +140,7 @@ RESULT:BATransResult --> loc([3]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     "mode", 0) === [3] | < "G",8,5 >
 
 Solution 8 (state 144)
-states: 145  rewrites: 16233
+states: 145  rewrites: 15132
 RESULT:BATransResult --> loc([3]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     # b(1) : [true]), off1 |-> ([0] # b(2) : [true]), off2 |-> ([0] # b(3) : [
     true]), a |-> [3/4] + - r("G", 5) * [3602879701896397/18014398509481984] +
@@ -158,5 +158,5 @@ RESULT:BATransResult --> loc([3]) | on1 |-> ([0] # b(0) : [true]), on2 |-> ([0]
     "G", 7) === [5] and r("mode", 0) === [3] | < "G",8,5 >
 
 No more solutions.
-states: 145  rewrites: 16636
+states: 145  rewrites: 15511
 Bye.

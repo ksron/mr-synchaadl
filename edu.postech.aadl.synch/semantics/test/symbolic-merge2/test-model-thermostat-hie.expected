@@ -3,7 +3,7 @@ search [, 5] in TEST-THERMOSTAT-SYSTEM-HIE : {bool(true) || initState | 0 |
     infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 5132
+states: 2  rewrites: 5008
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not b("top.cthread", 1) and [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] < [10] and b("top.cthread", 0) and b(
@@ -103,7 +103,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     | 5 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 16999
+states: 3  rewrites: 16663
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and (((((not [39631676720860365/18014398509481984] < r(
     "top.environment", 7) and not r("top.environment", 7) < [0] and not r(
@@ -302,7 +302,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     | 10 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 35952
+states: 4  rewrites: 35404
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and (((((not [39631676720860365/18014398509481984] < r(
     "top.environment", 7) and not r("top.environment", 7) < [0] and not r(
@@ -608,7 +608,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     | 15 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 62445
+states: 5  rewrites: 61685
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and (((((not [39631676720860365/18014398509481984] < r(
     "top.environment", 7) and not r("top.environment", 7) < [0] and not r(
@@ -1027,7 +1027,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     | 20 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 96936
+states: 6  rewrites: 95964
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and (((((not [39631676720860365/18014398509481984] < r(
     "top.environment", 7) and not r("top.environment", 7) < [0] and not r(
@@ -1565,13 +1565,13 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     | 25 | infty}
 
 No more solutions.
-states: 6  rewrites: 96936
+states: 6  rewrites: 95964
 ==========================================
 search [, 5] in TEST-THERMOSTAT-SYSTEM-HIE : {bool(true) || cinitState | 0 |
     infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 4026
+states: 2  rewrites: 3908
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and ((not b("top.cthread", 1) and [15/2] + (b("top.environment", 2) ? r(
     "top.environment", 0) : [0]) / [2] < [10] and b("top.cthread", 0) and b(
@@ -1661,7 +1661,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     off)) > | 5 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 13224
+states: 3  rewrites: 12900
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and (((((not [39631676720860365/18014398509481984] < r(
     "top.environment", 7) and not r("top.environment", 7) < [0] and not r(
@@ -1850,7 +1850,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     cthread) .. off) --> (environment .. off)) > | 10 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 26680
+states: 4  rewrites: 26150
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and (((((not [39631676720860365/18014398509481984] < r(
     "top.environment", 7) and not r("top.environment", 7) < [0] and not r(
@@ -2145,7 +2145,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     csys . cproc . cthread) .. off) --> (environment .. off)) > | 15 | infty}
 
 Solution 4 (state 4)
-states: 5  rewrites: 44664
+states: 5  rewrites: 43928
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and (((((not [39631676720860365/18014398509481984] < r(
     "top.environment", 7) and not r("top.environment", 7) < [0] and not r(
@@ -2554,7 +2554,7 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     off)) > | 20 | infty}
 
 Solution 5 (state 5)
-states: 6  rewrites: 67446
+states: 6  rewrites: 66504
 C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     1) and (((((not [39631676720860365/18014398509481984] < r(
     "top.environment", 7) and not r("top.environment", 7) < [0] and not r(
@@ -3082,5 +3082,5 @@ C:GlobalSystem --> {(not b("top.environment", 0) and not b("top.environment",
     cthread) .. off) --> (environment .. off)) > | 25 | infty}
 
 No more solutions.
-states: 6  rewrites: 67446
+states: 6  rewrites: 66504
 Bye.

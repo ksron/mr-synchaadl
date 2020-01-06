@@ -160,7 +160,7 @@ search [, 3] in TEST-THERMOSTAT2CON2CON-SYSTEM : {bool(true) || initState | 0 |
     infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 9410
+states: 2  rewrites: 9042
 C:GlobalSystem --> {(not b("Thermostat2ConimplInstance.environment", 0) and not
     b("Thermostat2ConimplInstance.environment", 1) and not b(
     "Thermostat2ConimplInstance.environment", 2) and not b(
@@ -422,7 +422,7 @@ C:GlobalSystem --> {(not b("Thermostat2ConimplInstance.environment", 0) and not
     | 10 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 25183
+states: 3  rewrites: 24447
 C:GlobalSystem --> {(not b("Thermostat2ConimplInstance.environment", 0) and not
     b("Thermostat2ConimplInstance.environment", 1) and not b(
     "Thermostat2ConimplInstance.environment", 2) and not b(
@@ -792,7 +792,7 @@ C:GlobalSystem --> {(not b("Thermostat2ConimplInstance.environment", 0) and not
     | 20 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 48172
+states: 4  rewrites: 47068
 C:GlobalSystem --> {(not b("Thermostat2ConimplInstance.environment", 0) and not
     b("Thermostat2ConimplInstance.environment", 1) and not b(
     "Thermostat2ConimplInstance.environment", 2) and not b(
@@ -1270,13 +1270,13 @@ C:GlobalSystem --> {(not b("Thermostat2ConimplInstance.environment", 0) and not
     | 30 | infty}
 
 No more solutions.
-states: 4  rewrites: 48172
+states: 4  rewrites: 47068
 ==========================================
 search [, 3] in TEST-THERMOSTAT2CON2CON-SYSTEM : {bool(true) || cinitState | 0
     | infty} =>+ C:GlobalSystem .
 
 Solution 1 (state 1)
-states: 2  rewrites: 7714
+states: 2  rewrites: 7364
 C:GlobalSystem --> {(not b("Thermostat2ConimplInstance.environment", 0) and not
     b("Thermostat2ConimplInstance.environment", 1) and not b(
     "Thermostat2ConimplInstance.environment", 2) and not b(
@@ -1485,7 +1485,7 @@ C:GlobalSystem --> {(not b("Thermostat2ConimplInstance.environment", 0) and not
     oncontrol) --> (environment .. onheater1)) > | 10 | infty}
 
 Solution 2 (state 2)
-states: 3  rewrites: 18023
+states: 3  rewrites: 17323
 C:GlobalSystem --> {(not b("Thermostat2ConimplInstance.environment", 0) and not
     b("Thermostat2ConimplInstance.environment", 1) and not b(
     "Thermostat2ConimplInstance.environment", 2) and not b(
@@ -1802,7 +1802,7 @@ C:GlobalSystem --> {(not b("Thermostat2ConimplInstance.environment", 0) and not
     oncontrol) --> (environment .. onheater1)) > | 20 | infty}
 
 Solution 3 (state 3)
-states: 4  rewrites: 31612
+states: 4  rewrites: 30562
 C:GlobalSystem --> {(not b("Thermostat2ConimplInstance.environment", 0) and not
     b("Thermostat2ConimplInstance.environment", 1) and not b(
     "Thermostat2ConimplInstance.environment", 2) and not b(
@@ -2227,5 +2227,5 @@ C:GlobalSystem --> {(not b("Thermostat2ConimplInstance.environment", 0) and not
     oncontrol) --> (environment .. onheater1)) > | 30 | infty}
 
 No more solutions.
-states: 4  rewrites: 31612
+states: 4  rewrites: 30562
 Bye.
