@@ -15,5 +15,7 @@ public class MaudePrefInitializer extends AbstractPreferenceInitializer {
 		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE,
 				"edu.postech.maude.preferences.page");
 		scopedPreferenceStore.setDefault("MAUDEOPTIONS", "-no-prelude prelude.maude smt.maude");
+		scopedPreferenceStore.setDefault("MAUDE", "maude-z3-ubuntu");
+		scopedPreferenceStore.setDefault("MAUDE_DIRECTORY", "/home/jaehun/maude-z3-ubuntu");
 	}
 }

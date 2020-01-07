@@ -20,7 +20,6 @@ Require-Bundle: org.eclipse.ui,
  edu.postech.aadl.synch,
  org.eclipse.xtext.ui,
  org.eclipse.jdt.ui,
- edu.postech.xtext.maude,
  edu.postech.maude.view;bundle-version="1.0.0"
 Automatic-Module-Name: SynchAadlMenu
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

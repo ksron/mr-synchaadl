@@ -22,6 +22,12 @@ import edu.postech.aadl.xtext.propspec.propSpec.SYMBOLIC
 import edu.postech.aadl.xtext.propspec.propSpec.MODELCHECK
 import edu.postech.aadl.xtext.propspec.propSpec.RANDOM
 import edu.postech.aadl.xtext.propspec.propSpec.DISTRIBUTED
+import org.osate.ba.utils.AadlBaUtils
+import org.osate.aadl2.NamedElement
+import org.osate.aadl2.DataPort
+import org.osate.aadl2.DataSubcomponent
+import org.osate.ba.aadlba.BehaviorVariable
+import org.osate.ba.aadlba.ParameterHolder
 
 class RtmPropSpec {
 	
@@ -44,11 +50,12 @@ class RtmPropSpec {
 	quit
 	'''
 	
+	// For experiment in ubuntu, maudeDirPath variable isn't used.
 	static def compileLoadFiles(Top top, Mode mode, String maudeDirPath)'''
-	load «maudeDirPath»/prelude.maude
+	load /home/jaehun/maude-z3-ubuntu/prelude.maude
 	«IF mode == null || (mode != null && mode instanceof SYMBOLIC)»
-	load «maudeDirPath»/smt.maude
-	load «maudeDirPath»/smtCheck.maude
+	load /home/jaehun/maude-z3-ubuntu/smt.maude
+	load /home/jaehun/maude-z3-ubuntu/smtCheck.maude
 	«ENDIF»
 	load ./semantics/«mode.compileInterpreter»
 	load «top.name».maude
@@ -248,7 +255,7 @@ class RtmPropSpec {
 			}else if(const.equals("[[false]]")){
 				return '''[[false]]'''
 			}else{
-				return const
+				return top.name.escape+" | "+ const
 			}
 		}
 		if (!goal){
@@ -304,7 +311,7 @@ class RtmPropSpec {
 		val v = e.value
 		
 		if(v instanceof ContainedNamedElement){
-			var lastElement = (v as ContainedNamedElement).containmentPathElements.last.namedElement.name
+			var lastElement = (v as ContainedNamedElement).containmentPathElements.last.namedElement
 			var path = ""
 			var EList<ContainmentPathElement> ecpe = (v as ContainedNamedElement).containmentPathElements;
 			for(var i = 0; i < ecpe.length-1; i++){
@@ -315,12 +322,26 @@ class RtmPropSpec {
 				}
 			}
 			if(path.length==0){
-				return '''c[«lastElement»]'''
+				return '''«lastElement.compilePrefix»'''
 			} else {
-				return '''( «path» | c[«lastElement»] )'''
+				return '''( «path» | «lastElement.compilePrefix» )'''
 			}
 		}else{
 			return '''[[«RtmAadlProperty::compilePropertyValue(v as PropertyValue)»]]'''
+		}
+	}
+	
+	private static def compilePrefix(NamedElement ne){
+		if(ne instanceof DataPort){
+			'''f[«ne.name»]'''
+		}else if(ne instanceof DataSubcomponent){
+			'''c[«ne.name»]'''
+		}else if (ne instanceof BehaviorVariable){
+			'''v[«ne.name»]'''
+		}else if (ne instanceof ParameterHolder){
+			'''p[«ne.name»]'''
+		}else{
+			'''ErrorPrefix'''
 		}
 	}
 	
