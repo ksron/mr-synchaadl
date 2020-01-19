@@ -42,7 +42,7 @@ Mode:
 ;
 
 SYMBOLIC:
-	name="symbolic" option=("-merge")?
+	name=("symbolic" | "symbolic2") option=("-merge")?
 ;
 
 MODELCHECK:

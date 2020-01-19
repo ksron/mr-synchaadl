@@ -127,9 +127,9 @@ class RtmPropSpec {
 		} else if (mode instanceof DISTRIBUTED){
 			return "interpreter-distributed.maude"
 		} else if (mode instanceof SYMBOLIC && (mode as SYMBOLIC).option != null){
-			return "interpreter-symbolic-merge.maude"
+			return "interpreter-"+mode.name+"-merge.maude"
 		} else {
-			return "interpreter-symbolic.maude"
+			return "interpreter-"+mode.name+".maude"
 		}
 	}
 	
