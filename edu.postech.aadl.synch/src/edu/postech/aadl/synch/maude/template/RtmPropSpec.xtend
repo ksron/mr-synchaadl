@@ -52,9 +52,9 @@ class RtmPropSpec {
 	
 	// For experiment in ubuntu, maudeDirPath variable isn't used.
 	static def compileLoadFiles(Top top, Mode mode, String maudeDirPath)'''
-	load /home/jaehun/maude-z3-ubuntu/prelude.maude
+	load /home/jaehun/maude-ubuntu/prelude.maude
 	«IF mode == null || (mode != null && mode instanceof SYMBOLIC)»
-	load /home/jaehun/maude-z3-ubuntu/smt.maude
+	load /home/jaehun/maude-ubuntu/smt.maude
 	«ENDIF»
 	load ./semantics/«mode.compileInterpreter»
 	load «top.name».maude
