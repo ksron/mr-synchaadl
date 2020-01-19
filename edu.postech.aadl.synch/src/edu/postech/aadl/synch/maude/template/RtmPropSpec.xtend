@@ -55,7 +55,6 @@ class RtmPropSpec {
 	load /home/jaehun/maude-z3-ubuntu/prelude.maude
 	«IF mode == null || (mode != null && mode instanceof SYMBOLIC)»
 	load /home/jaehun/maude-z3-ubuntu/smt.maude
-	load /home/jaehun/maude-z3-ubuntu/smtCheck.maude
 	«ENDIF»
 	load ./semantics/«mode.compileInterpreter»
 	load «top.name».maude

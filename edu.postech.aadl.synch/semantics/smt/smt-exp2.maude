@@ -1,11 +1,12 @@
 
 fmod SMT-VAR-CONVERSION is
-  protecting QID .
   protecting CONVERSION .
+  protecting VAR-ID .
+
+  subsort String < SMTVarId .
 
   var N : Nat .
   var S : String .
-  var Q : Qid .
 
   op #escStr# : ~> String [memo] .
   eq #escStr# = "#$#" .
@@ -13,12 +14,11 @@ fmod SMT-VAR-CONVERSION is
   op #escLen# : ~> Nat [memo] .
   eq #escLen# = length(#escStr#) .
 
-  op varStr : String Nat ~> Qid .
-  eq varStr(S, N) = qid(S + #escStr# + string(N, 10)) .
+  op varStr : String Nat ~> String .
+  eq varStr(S, N) = S + #escStr# + string(N, 10) .
 
-  op varIndex : Qid ~> Nat .
- ceq varIndex(Q) = rat(substr(S, find(S,#escStr#,0) + #escLen#, length(S)), 10)
-   if S := string(Q) .
+  op varIndex : String ~> Nat .
+  eq varIndex(S) = rat(substr(S, find(S,#escStr#,0) + #escLen#, length(S)), 10) .
 
 endfm
 
@@ -31,7 +31,6 @@ fmod SMT-BOOL-EXP is
 
   var N : Nat .
   var S : String .
-  var Q : Qid .
   vars BE BE' BE'' : BooleanExpr .
 
   op [_] : BooleanExpr -> SMTBoolExp [ctor] .
@@ -42,7 +41,7 @@ fmod SMT-BOOL-EXP is
   eq b(S, N) = [b(varStr(S,N))] .
   eq b(N) = [b(varStr("",N))] .
 
-  eq getIndex([b(Q)]) = varIndex(Q) .
+  eq getIndex([b(S)]) = varIndex(S) .
 
 --- conversion
   eq bool(true)  = [true] .
@@ -78,7 +77,6 @@ fmod SMT-REAL-EXP is
   var S : String .
   var R : Rat .
   var F : Float .
-  var Q : Qid .
   var BE : BooleanExpr .
   vars RE RE' : RealExpr .
 
@@ -90,7 +88,7 @@ fmod SMT-REAL-EXP is
   eq r(S, N) = [r(varStr(S,N))] .
   eq r(N) = [r(varStr("",N))] .
 
-  eq getIndex([r(Q)]) = varIndex(Q) .
+  eq getIndex([r(S)]) = varIndex(S) .
 
 --- conversion
   op errorReal : ~> Real [ctor] .

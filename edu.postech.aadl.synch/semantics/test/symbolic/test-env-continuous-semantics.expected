@@ -1,8 +1,0 @@
-==========================================
-reduce in TEST-ENV-CONTINUOUS-SEMANTICS : execFlow([funcs], r("time", 0), bcf)
-    .
-rewrites: 102
-result DataValuation: x |=> [407/4] + r("time", 0) * r("time", 0) # (b(0) and
-    b(1)), y |=> [25586075382998631/562949953421312] + - r("y", 0) * [
-    8528691794332877/140737488355328] + r("time", 0) # b(1)
-Bye.

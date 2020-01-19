@@ -1,7 +1,0 @@
-==========================================
-search [, 5] in TEST-THERMOSTAT-SYSTEM-MOD : {bool(true) || initState | 0 |
-    infty} =>+ C:GlobalSystem .
-
-No solution.
-states: 1  rewrites: 461
-Bye.

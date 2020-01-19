@@ -1,9 +1,0 @@
-
-set show timing off .
-
-load ../../interpreter-symbolic.maude
-load module-synchronous-model.maude
-
-select TEST-MODEL-TRANSITION-SYSTEM-MOD .
-
-search [,50] {[true] || obj4 | 0 | infty} =>+ C:GlobalSystem .
