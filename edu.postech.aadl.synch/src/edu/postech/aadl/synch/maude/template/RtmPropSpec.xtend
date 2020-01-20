@@ -31,6 +31,41 @@ import org.osate.ba.aadlba.ParameterHolder
 
 class RtmPropSpec {
 	
+	static def compileStatesTestCommand(Top top, Property prop, Mode mode, String maudeDirPath)'''
+	«top.compileLoadFiles(mode, maudeDirPath)»
+	mod TEST-«top.name.toUpperCase» is
+	  including «top.name.toUpperCase»-MODEL-SYMBOLIC .
+	  including «mode.compileModelTrans» .
+	  including SPECIFICATION-LANGUAGE-SEMANTICS .
+	  including CONVERSION .
+	
+	  op initState : -> Object .
+	  eq initState = initialize(collapse(initial)) .
+	  
+	«top.compileProp»
+  	«top.compileMode»
+	endm
+		  
+	set show timing off .
+	set show stats off .
+	set show command off .
+	red time-bound: string(«prop.bound», 10) .
+	set show timing on .
+	set show stats on .
+	set show command on .
+	
+	set verbose off .
+	set print attribute off .
+	search [1]
+	      {«top.compileInitConst(prop as Reachability)» ||
+		   initState | 0 | «prop.bound»} 
+		=>+
+		  {B:BoolExp || none | T:Time | «prop.bound»} .
+	set verbose on .
+	set print attribute on .
+	quit
+	'''
+	
 	static def compilePropertyCommand(Top top, Property prop, Mode mode, String maudeDirPath)'''
 	«top.compileLoadFiles(mode, maudeDirPath)»
 	mod TEST-«top.name.toUpperCase» is

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
    <extension
          point="org.eclipse.ui.commands">
       <category
@@ -28,6 +27,11 @@
             name="Run"
             id="SynchAadlMenu.commands.sampleCommand4">
       </command>
+    <command
+            categoryId="SynchAadlMenu.commands.category"
+            name="StatesTest"
+            id="SynchAadlMenu.commands.sampleCommand5">
+      </command>
    </extension>
    
    
@@ -48,6 +52,10 @@
       <handler
             class="handlers.Run"
             commandId="SynchAadlMenu.commands.sampleCommand4">
+        </handler>
+      <handler
+            class="handlers.SimpleTestGeneration"
+            commandId="SynchAadlMenu.commands.sampleCommand5">
         </handler>
    </extension>
    
@@ -77,7 +85,13 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+8">
-      </key>f
+      </key>
+      <key
+            commandId="SynchAadlMenu.commands.sampleCommand5"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+9">
+      </key>
    </extension>
    
    
@@ -107,6 +121,11 @@
             <command
                   commandId="SynchAadlMenu.commands.sampleCommand4"
                   id="SynchAadlMenu.menus.sampleCommand4"
+                  mnemonic="S">
+            </command>
+            <command
+                  commandId="SynchAadlMenu.commands.sampleCommand5"
+                  id="SynchAadlMenu.menus.sampleCommand5"
                   mnemonic="S">
             </command>
          </menu>
