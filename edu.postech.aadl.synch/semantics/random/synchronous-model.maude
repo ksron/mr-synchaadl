@@ -132,7 +132,6 @@ mod MODEL-TRANSITION-SYSTEM is
    /\ T + NT <= TI .
 endm
 
---- Similar to the above transition system except not using rewrite rules
 mod RANDOM-SIMULATION is
     including MODEL-TRANSITION-SYSTEM .
     including SPECIFICATION-LANGUAGE-SEMANTICS .
