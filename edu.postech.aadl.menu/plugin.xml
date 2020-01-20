@@ -32,6 +32,11 @@
             name="StatesTest"
             id="SynchAadlMenu.commands.sampleCommand5">
       </command>
+      <command
+            categoryId="SynchAadlMenu.commands.category"
+            name="StepTest"
+            id="SynchAadlMenu.commands.sampleCommand6">
+      </command>
    </extension>
    
    
@@ -56,6 +61,10 @@
       <handler
             class="handlers.SimpleTestGeneration"
             commandId="SynchAadlMenu.commands.sampleCommand5">
+        </handler>
+      <handler
+            class="handlers.StepTestGeneration"
+            commandId="SynchAadlMenu.commands.sampleCommand6">
         </handler>
    </extension>
    
@@ -92,6 +101,12 @@
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+9">
       </key>
+        <key
+            commandId="SynchAadlMenu.commands.sampleCommand6"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+0">
+      </key>
    </extension>
    
    
@@ -126,6 +141,11 @@
             <command
                   commandId="SynchAadlMenu.commands.sampleCommand5"
                   id="SynchAadlMenu.menus.sampleCommand5"
+                  mnemonic="S">
+            </command>
+            <command
+                  commandId="SynchAadlMenu.commands.sampleCommand6"
+                  id="SynchAadlMenu.menus.sampleCommand6"
                   mnemonic="S">
             </command>
          </menu>
