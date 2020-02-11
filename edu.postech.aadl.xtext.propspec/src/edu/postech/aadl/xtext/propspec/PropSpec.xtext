@@ -75,7 +75,7 @@ PSExpression:
 
 Relation returns PSExpression:
     ModifiedExpression ({BinaryExpression.left=current} op=('='|'!='|'<'|'<='|'>'|'>=') right=ModifiedExpression)?
-|	'!' PropRef
+|	'?' PropRef
 ;
 
 ModifiedExpression returns PSExpression:

@@ -5,6 +5,7 @@ mod COMPONENT-DYNAMICS is
   protecting ASYNC-MSG .
 
   var E : Exp .
+  var BB : Bool .
   var B : BoolExp .
   var P : FeatureId .
   var CR : ComponentRef .
@@ -41,25 +42,31 @@ mod COMPONENT-DYNAMICS is
      < CR : C:AsyncComponent | features : PORTS,  msgTimer : 0,     ATTS >
   => 
      < CR : C:AsyncComponent | features : PORTS', msgTimer : infty, ATTS > MSGS
-  if {PORTS',MSGS} := send(PORTS,none,none) 
+  if {PORTS',MSGS} := send(PORTS,none,none,false) 
    [print "send " MSGS " by " CR] .
 
   --- generate messages
   sort MsgResultPair .
   op {_,_} : Configuration Configuration -> MsgResultPair [ctor] .
 
-  op send : Configuration Configuration Configuration ~> MsgResultPair [format (m! o)] .
+  --- the last argument is true for feedback
+  op send : Configuration Configuration Configuration Bool ~> MsgResultPair [format (m! o)] .
   eq send(
       < P : C:AsyncOutPort | content : E # B, 
-                             destination : PNS, ATTS > PORTS, PORTS', MSGS)
+                             destination : PNS, ATTS > PORTS, PORTS', MSGS, BB)
    = send(PORTS, 
        < P : C:AsyncOutPort | content : bot(type(E)), 
-                              destination : PNS, ATTS > PORTS', MSGS send(E # B, PNS)) .
-  eq send(PORTS, PORTS', MSGS) = {PORTS PORTS', MSGS} [owise] .
+                              destination : PNS, ATTS > PORTS', MSGS send(E # B, PNS, BB), BB) .
+  eq send(PORTS, PORTS', MSGS, BB) = {PORTS PORTS', MSGS} [owise] .
   
-  op send : DataContent Set{FeatureRef} ~> Configuration [format (m! o)] .
-  eq send(D, (PN, PNS)) = (msg D to PN) send(D, PNS) .
-  eq send(D, empty) = none .
+  op send : DataContent Set{FeatureRef} Bool ~> Configuration [format (m! o)] .
+  eq send(D, (PN, PNS), BB) = genMsg(D, PN, BB) send(D, PNS, BB) .
+  eq send(D, empty, BB) = none .
+
+  op genMsg : DataContent FeatureRef Bool ~> Msg [format (m! o)] .
+  eq genMsg(D, PN,      false) = msg D to PN .
+  eq genMsg(D, CR .. P, true)  = msg D to CR .. P .
+  eq genMsg(D, P      , true)  = none .
 endm
 
 
@@ -82,7 +89,7 @@ mod ENSEMBLE-DYNAMICS is
                          subcomponents : COMPS, ATTS' > 
    =  
      < CR : C:Ensemble | features : < P : C:InPort | destination : PNS, ATTS > PORTS, 
-                         subcomponents : COMPS send(D, PNS), ATTS' > 
+                         subcomponents : COMPS send(D, PNS, false), ATTS' > 
    [print "re-route " D " from " CR " .. " P " to " PNS] .
 
   eq < CR : C:Ensemble | features : < P : C:OutPort | destination : PNS, ATTS > PORTS, 
@@ -90,7 +97,7 @@ mod ENSEMBLE-DYNAMICS is
    = 
      < CR : C:Ensemble | features : < P : C:OutPort | destination : PNS, ATTS > PORTS, 
                          subcomponents : COMPS, ATTS' >
-     send(D, PNS) 
+     send(D, PNS, false) 
    [print "re-route " D " from " P " to " PNS " in " CR] .
 
 --- time advance
@@ -345,6 +352,7 @@ mod ENV-DYNAMICS is
       < CR : C:AsyncEnv | perTimer : TI1, 
                           msgTimer : TI2, 
                           envTimer : TI3, 
+                          envState : ES,
                           currMode : L,
                           flows : (L FLOW) ; FLOWS,
                           subcomponents : COMPS, 
@@ -353,6 +361,7 @@ mod ENV-DYNAMICS is
       < CR : C:AsyncEnv | perTimer : TI1 monus T, 
                           msgTimer : TI2 monus T, 
                           envTimer : TI3 monus T, 
+                          envState : timeEffect(ES, T),
                           currMode : L,
                           flows : (L FLOW) ; FLOWS,
                           subcomponents : writeData(DATA,COMPS), 

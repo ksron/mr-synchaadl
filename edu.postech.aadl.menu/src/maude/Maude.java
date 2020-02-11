@@ -66,7 +66,7 @@ public class Maude {
 				// process.waitFor();
 				long end = System.currentTimeMillis();
 				elapsedTime = Double.toString((end - start)) + " ms";
-				result = createMaudeResultFile(maudeResult);
+				result = getMaudeResult(maudeResult);
 				result = resultMaude(result, req);
 			} catch (IOException | CoreException e) {
 				System.out.println("Terminated!");
@@ -84,7 +84,7 @@ public class Maude {
 					new MaudeResult(nickName, result, location, elapsedTime)));
 		}
 
-		private String createMaudeResultFile(IFile file) throws IOException, CoreException {
+		private String getMaudeResult(IFile file) throws IOException, CoreException {
 			String result = "< Analysis Command > \n\n" + userCommand + "\n\n" + "< Result >\n";
 			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
@@ -176,13 +176,8 @@ public class Maude {
 		return compileCommandOption();
 	}
 
-	public void writeSearchMaudeFile(String txt, IPath path) {
+	public void setTestFilePath(IPath path) {
 		IFile maudeSearchFile = IOUtils.getFile(path);
-		try {
-			IOUtils.setFileContent(new ByteArrayInputStream(txt.getBytes()), maudeSearchFile);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
 		this.TestFilePath = maudeSearchFile.getLocation().toFile().getPath();
 	}
 

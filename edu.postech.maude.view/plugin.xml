@@ -5,12 +5,12 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            name="MaudeConsoleView"
+            name="HybridSynchAADL Result"
             id="edu.postech.maude.view">
       </category>
       <view
             id="edu.postech.maude.view.views.MaudeConsoleView"
-            name="MaudeConsoleView"
+            name="HybridSynchAADL Result"
             icon="icons/sample.png"
             class="edu.postech.maude.view.views.MaudeConsoleView"
             category="edu.postech.maude.view"

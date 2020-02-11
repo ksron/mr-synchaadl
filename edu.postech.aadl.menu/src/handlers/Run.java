@@ -98,7 +98,7 @@ public class Run extends AbstractHandler {
 
 		IPath userFormulaMaudePath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 				.append(getStringMergeOption(propSpecRes.getMode())).append("_" + reach.getName() + ".maude");
-		maude.writeSearchMaudeFile(userFormulaMaude, userFormulaMaudePath);
+		// maude.writeSearchMaudeFile(userFormulaMaude, userFormulaMaudePath);
 
 		IPath resultPath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 				.append(getStringMergeOption(propSpecRes.getMode())).append("_" + reach.getName() + ".txt");
@@ -122,7 +122,7 @@ public class Run extends AbstractHandler {
 
 		IPath userFormulaMaudePath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 				.append(getStringMergeOption(propSpecRes.getMode())).append("_" + inv.getName() + ".maude");
-		maude.writeSearchMaudeFile(userFormulaMaude, userFormulaMaudePath);
+		// maude.writeSearchMaudeFile(userFormulaMaude, userFormulaMaudePath);
 
 		IPath resultPath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 				.append(getStringMergeOption(propSpecRes.getMode())).append("_" + inv.getName() + ".txt");

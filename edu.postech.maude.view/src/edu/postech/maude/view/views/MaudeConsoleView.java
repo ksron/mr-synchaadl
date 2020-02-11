@@ -76,7 +76,7 @@ public class MaudeConsoleView extends ViewPart {
 		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 
 		TableViewerColumn tvc0 = new TableViewerColumn(viewer, SWT.LEFT);
-		tvc0.getColumn().setText("Nickname");
+		tvc0.getColumn().setText("Property Id");
 		tvc0.getColumn().setResizable(true);
 		tvc0.getColumn().setMoveable(true);
 		tvc0.setLabelProvider(new ColumnLabelProvider() {

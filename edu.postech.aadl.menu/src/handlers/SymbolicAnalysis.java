@@ -20,17 +20,16 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
-import edu.postech.aadl.synch.maude.template.RtmPropSpec;
 import edu.postech.aadl.synch.propspec.PropspecEditorResourceManager;
 import edu.postech.aadl.xtext.propspec.propSpec.Invariant;
-import edu.postech.aadl.xtext.propspec.propSpec.Mode;
 import edu.postech.aadl.xtext.propspec.propSpec.Property;
 import edu.postech.aadl.xtext.propspec.propSpec.Reachability;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
 import maude.Maude;
 import maude.Symbolic;
 
-public class SearchCommand extends AbstractHandler {
+public class SymbolicAnalysis extends AbstractHandler {
+
 
 	private String maudeDirPath;
 	private String maudeExecPath;
@@ -55,6 +54,7 @@ public class SearchCommand extends AbstractHandler {
 		resManager.setEditor(xtextEditor);
 
 		propSpecFileName = resManager.getEditorFile().getName();
+		propSpecFileName = propSpecFileName.substring(0, propSpecFileName.indexOf("."));
 		propSpecRes = getPropSpecResource(resManager);
 
 		IPreferenceStore pref = new ScopedPreferenceStore(InstanceScope.INSTANCE, "edu.postech.maude.preferences.page");
@@ -86,47 +86,32 @@ public class SearchCommand extends AbstractHandler {
 		Maude maude = new Symbolic();
 		maude = maudeDefaultBuilder(maude);
 
-		String itptrPath = getMaudeInterpreterPath(propSpecRes.getMode());
-		maude.setMode(itptrPath);
+		IPath pspcGeneratedMaudePath = resManager.getCodegenFilePath().removeLastSegments(1)
+				.append(propSpecFileName + "-" + propSpecRes.getName() + getName(reach) + ".maude");
 
-		String userFormula = RtmPropSpec.getReachabilityCommand(propSpecRes, reach).toString();
-		maude.setUserFormula(userFormula);
-
-		String userFormulaMaude = RtmPropSpec.compilePropertyCommand(propSpecRes, reach, propSpecRes.getMode(), "")
-				.toString();
-
-		IPath userFormulaMaudePath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
-				.append(getStringMergeOption(propSpecRes.getMode())).append("_" + reach.getName() + ".maude");
-		maude.writeSearchMaudeFile(userFormulaMaude, userFormulaMaudePath);
+		maude.setTestFilePath(pspcGeneratedMaudePath);
 
 		IPath resultPath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
-				.append(getStringMergeOption(propSpecRes.getMode())).append("_" + reach.getName() + ".txt");
+				.append(propSpecFileName + "-" + reach.getName() + ".txt");
 
-		String nickName = "not implemented";
+		String nickName = reach.getName();
 		maude.runMaude(resultPath, nickName);
 	}
 
 	private void maudeWithInvariant(Invariant inv) {
 		Maude maude = new Symbolic();
 		maude = maudeDefaultBuilder(maude);
-
-		String itptrPath = getMaudeInterpreterPath(propSpecRes.getMode());
-		maude.setMode(itptrPath);
-
-
 		maude.setRequirement(true);
 
-		String userFormulaMaude = RtmPropSpec.compilePropertyCommand(propSpecRes, inv, propSpecRes.getMode(), "")
-				.toString();
+		IPath pspcGeneratedMaudePath = resManager.getCodegenFilePath().removeLastSegments(1)
+				.append(propSpecFileName + "-" + propSpecRes.getName() + getName(inv) + ".maude");
 
-		IPath userFormulaMaudePath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
-				.append(getStringMergeOption(propSpecRes.getMode())).append("_" + inv.getName() + ".maude");
-		maude.writeSearchMaudeFile(userFormulaMaude, userFormulaMaudePath);
+		maude.setTestFilePath(pspcGeneratedMaudePath);
 
 		IPath resultPath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
-				.append(getStringMergeOption(propSpecRes.getMode())).append("_" + inv.getName() + ".txt");
+				.append(propSpecFileName + "-" + inv.getName() + ".txt");
 
-		String nickName = "not implemented";
+		String nickName = inv.getName();
 		maude.runMaude(resultPath, nickName);
 	}
 
@@ -139,21 +124,11 @@ public class SearchCommand extends AbstractHandler {
 		return maude;
 	}
 
-	private String getMaudeInterpreterPath(Mode mode) {
-		String state = getStringMergeOption(mode);
-		return resManager.getEditorFile().getLocation().removeLastSegments(1).append("semantics")
-				.append("interpreter-" + state)
-				.addFileExtension("maude").toString();
-	}
-
-	private String getStringMergeOption(Mode mode) {
-		String interpreter = "symbolic";
-		return interpreter;
-	}
-
-	private String getMaudeInterpreterPath(String state) {
-		return resManager.getEditorFile().getLocation().removeLastSegments(1).append("semantics")
-				.append("interpreter-" + state).addFileExtension("maude").toString();
+	private String getName(Property pr) {
+		if (pr.getName() != null) {
+			return "-" + pr.getName();
+		}
+		return "";
 	}
 
 	private Top getPropSpecResource(PropspecEditorResourceManager res) {

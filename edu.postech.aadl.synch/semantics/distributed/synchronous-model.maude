@@ -24,6 +24,7 @@ mod MODEL-INIT is
   var R : RealExp .
   var B : BoolExp .
   var TY : DataType .
+  var D : DataContent .
   var CR : ComponentRef .
   var CI : ComponentId .
   var PI : FeatureId .
@@ -76,9 +77,16 @@ mod MODEL-INIT is
 
   --- generate msgs from feedback outputs
   op feedbackSend : Configuration Configuration ~> Configuration [format (m! o)] .
+
  ceq feedbackSend(< CR : C:AsyncComponent | features : PORTS, ATTS > CONF, CONF')
    = feedbackSend(CONF, < CR : C:AsyncComponent | features : PORTS', ATTS > MSGS CONF') 
-  if {PORTS',MSGS} := send(PORTS,none,none) 
+  if {PORTS',MSGS} := send(PORTS,none,none,true) 
+   [print "init send " MSGS " by " CR] .
+
+ --- Also need to also consider system!!!
+ ceq feedbackSend(< CR : C:Ensemble | features : PORTS, ATTS > CONF, CONF')
+   = feedbackSend(CONF, < CR : C:Ensemble | features : PORTS', ATTS > MSGS CONF') 
+  if {PORTS',MSGS} := send(PORTS,none,none,true) 
    [print "init send " MSGS " by " CR] .
 
   eq feedbackSend(CONF, CONF') = CONF CONF' [owise] .

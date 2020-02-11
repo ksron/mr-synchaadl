@@ -19,23 +19,13 @@
       </command>
       <command
             categoryId="SynchAadlMenu.commands.category"
-            name="Analysis"
+            name="Symbolic Analysis"
             id="SynchAadlMenu.commands.sampleCommand3">
       </command>
       <command
             categoryId="SynchAadlMenu.commands.category"
             name="Run"
             id="SynchAadlMenu.commands.sampleCommand4">
-      </command>
-    <command
-            categoryId="SynchAadlMenu.commands.category"
-            name="StatesTest"
-            id="SynchAadlMenu.commands.sampleCommand5">
-      </command>
-      <command
-            categoryId="SynchAadlMenu.commands.category"
-            name="StepTest"
-            id="SynchAadlMenu.commands.sampleCommand6">
       </command>
    </extension>
    
@@ -51,20 +41,12 @@
             commandId="SynchAadlMenu.commands.sampleCommand2">
       </handler>
       <handler
-            class="handlers.SearchCommand"
+            class="handlers.SymbolicAnalysis"
             commandId="SynchAadlMenu.commands.sampleCommand3">
       </handler>
       <handler
             class="handlers.Run"
             commandId="SynchAadlMenu.commands.sampleCommand4">
-        </handler>
-      <handler
-            class="handlers.SimpleTestGeneration"
-            commandId="SynchAadlMenu.commands.sampleCommand5">
-        </handler>
-      <handler
-            class="handlers.StepTestGeneration"
-            commandId="SynchAadlMenu.commands.sampleCommand6">
         </handler>
    </extension>
    
@@ -95,18 +77,6 @@
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+8">
       </key>
-      <key
-            commandId="SynchAadlMenu.commands.sampleCommand5"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+9">
-      </key>
-        <key
-            commandId="SynchAadlMenu.commands.sampleCommand6"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+0">
-      </key>
    </extension>
    
    
@@ -116,7 +86,7 @@
             locationURI="menu:org.eclipse.ui.main.menu?after=additions">
          <menu
                id="SynchAadlMenu.menus.sampleMenu"
-               label="SynchAADL Verifier"
+               label="HybridSynchAADL Verifier"
                mnemonic="M">
             <command
                   commandId="SynchAadlMenu.commands.sampleCommand"
@@ -136,16 +106,6 @@
             <command
                   commandId="SynchAadlMenu.commands.sampleCommand4"
                   id="SynchAadlMenu.menus.sampleCommand4"
-                  mnemonic="S">
-            </command>
-            <command
-                  commandId="SynchAadlMenu.commands.sampleCommand5"
-                  id="SynchAadlMenu.menus.sampleCommand5"
-                  mnemonic="S">
-            </command>
-            <command
-                  commandId="SynchAadlMenu.commands.sampleCommand6"
-                  id="SynchAadlMenu.menus.sampleCommand6"
                   mnemonic="S">
             </command>
          </menu>

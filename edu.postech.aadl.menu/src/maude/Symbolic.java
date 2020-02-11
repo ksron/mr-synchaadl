@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -20,7 +22,6 @@ public class Symbolic extends Maude {
 	private String maudeExecPath = null;
 	private StringBuilder Options = null;
 	private String userCommand = null;
-	private String ModeFilePath = null;
 	private String TargetPath = null;
 	private String TestFilePath = null;
 	private static int count = 0;
@@ -35,6 +36,7 @@ public class Symbolic extends Maude {
 		private IPath path;
 		private String location;
 		private String result;
+		private String simpleResult;
 		private String elapsedTime;
 		private MaudeConsoleView view;
 		private Display display;
@@ -57,31 +59,22 @@ public class Symbolic extends Maude {
 			System.out.println("MaudeRunner Thread start!");
 			MaudeResult initialMaudeResult = view.initialData(nickName);
 			try {
-				long start = System.currentTimeMillis();
 				ProcessBuilder builder = new ProcessBuilder(commandOptions);
-				IFile maudeResult = IOUtils.getFile(path);
+				IFile maudeResultFile = IOUtils.getFile(path);
 				// builder.redirectError(Redirect.INHERIT);
 				// builder.redirectOutput(Redirect.INHERIT);
 				process = builder.start();
-				// process.waitFor();
-				long end = System.currentTimeMillis();
-				elapsedTime = Double.toString((end - start)) + " ms";
-				result = createMaudeResultFile(maudeResult);
-				result = resultMaude(result, req);
+				result = createMaudeResultFile(maudeResultFile);
+				simpleResult = getMaudeSimpleResult(result, req);
+				elapsedTime = getMaudeElapsedTime(result);
 			} catch (IOException | CoreException e) {
 				System.out.println("Terminated!");
 				result = "Terminated";
 				location = "...";
 				elapsedTime = "...";
 			}
-			System.out.println("MaudeRunner Thread end!");
-			System.out.println("NickName : " + nickName);
-			System.out.println("Result : " + result);
-			System.out.println("Location : " + location);
-			System.out.println("elapsedTime : " + elapsedTime);
-
 			display.asyncExec(() -> view.refreshData(initialMaudeResult,
-					new MaudeResult(nickName, result, location, elapsedTime)));
+					new MaudeResult(nickName, simpleResult, location, elapsedTime)));
 		}
 
 		private String createMaudeResultFile(IFile file) throws IOException, CoreException {
@@ -93,7 +86,7 @@ public class Symbolic extends Maude {
 			StringBuffer esb = new StringBuffer();
 			String eline;
 			while ((eline = error.readLine()) != null) {
-				// System.out.println("Error : " + eline);
+				System.out.println("Error : " + eline);
 				esb.append(eline + "\n");
 			}
 
@@ -105,7 +98,7 @@ public class Symbolic extends Maude {
 				System.out.println("Output : " + line);
 			}
 			result += getSolutionString(sb.toString());
-			IOUtils.setFileContent(new ByteArrayInputStream(result.getBytes()), file);
+			IOUtils.setFileContent(new ByteArrayInputStream(sb.toString().getBytes()), file);
 			return result;
 		}
 
@@ -119,7 +112,7 @@ public class Symbolic extends Maude {
 			}
 		}
 
-		public String resultMaude(String rm, boolean req) {
+		public String getMaudeSimpleResult(String rm, boolean req) {
 			if (req) {
 				if (rm.indexOf("No solution") != -1) {
 					return "Counter-Example Not Found";
@@ -137,6 +130,16 @@ public class Symbolic extends Maude {
 					return "Error Occured!";
 				}
 			}
+		}
+
+		public String getMaudeElapsedTime(String rm) {
+			Pattern p = Pattern.compile("[0-9]+ms cpu");
+			Matcher m = p.matcher(rm);
+			String elapsedTime = "..";
+			if (m.find()) {
+				elapsedTime = m.group().split(" ")[0];
+			}
+			return elapsedTime;
 		}
 	}
 
@@ -179,19 +182,15 @@ public class Symbolic extends Maude {
 		return compileCommandOption();
 	}
 
+
 	@Override
-	public void writeSearchMaudeFile(String txt, IPath path) {
+	public void setTestFilePath(IPath path) {
 		IFile maudeSearchFile = IOUtils.getFile(path);
-		try {
-			IOUtils.setFileContent(new ByteArrayInputStream(txt.getBytes()), maudeSearchFile);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
 		this.TestFilePath = maudeSearchFile.getLocation().toFile().getPath();
 	}
 
 	private String compileCommandOption() {
-		return maudeExecPath + Options.toString() + " " + this.ModeFilePath + " " + this.TargetPath + " "
+		return maudeExecPath + Options.toString() + " " + this.TargetPath + " "
 				+ this.TestFilePath;
 	}
 
@@ -208,11 +207,6 @@ public class Symbolic extends Maude {
 	@Override
 	public void setMaudeDirPath(String directory) {
 		this.maudeDirectory = directory;
-	}
-
-	@Override
-	public void setMode(String modeFilePath) {
-		this.ModeFilePath = modeFilePath;
 	}
 
 	@Override

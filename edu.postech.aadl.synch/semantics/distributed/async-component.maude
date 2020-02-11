@@ -62,11 +62,16 @@ fmod ASYNC-ENV-STATE is
   var ET : EnvJobType .
   var ES : EnvState .
   var CI : ComponentId .
-  var T : Time .
+  vars T T' : Time .
 
   op lasttime : EnvState ~> Time .
   eq lasttime(idle) = 0 .
   eq lasttime(ES [ET,CI,T]) = T .
+
+  op timeEffect : EnvState Time ~> EnvState [format (m! o)] .
+  eq timeEffect([ET, CI, T] ES, T') = [ET, CI, T monus T'] timeEffect(ES, T') .
+  eq timeEffect([ET, CI]    ES, T') = [ET, CI]             timeEffect(ES, T') .
+  eq timeEffect(idle,           T') = idle .
 endfm
 
 
