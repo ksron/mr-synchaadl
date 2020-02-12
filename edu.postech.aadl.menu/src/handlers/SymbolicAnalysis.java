@@ -26,7 +26,6 @@ import edu.postech.aadl.xtext.propspec.propSpec.Property;
 import edu.postech.aadl.xtext.propspec.propSpec.Reachability;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
 import maude.Maude;
-import maude.Symbolic;
 
 public class SymbolicAnalysis extends AbstractHandler {
 
@@ -83,7 +82,7 @@ public class SymbolicAnalysis extends AbstractHandler {
 	}
 
 	private void maudeWithReachability(Reachability reach) {
-		Maude maude = new Symbolic();
+		Maude maude = new Maude();
 		maude = maudeDefaultBuilder(maude);
 
 		IPath pspcGeneratedMaudePath = resManager.getCodegenFilePath().removeLastSegments(1)
@@ -99,7 +98,7 @@ public class SymbolicAnalysis extends AbstractHandler {
 	}
 
 	private void maudeWithInvariant(Invariant inv) {
-		Maude maude = new Symbolic();
+		Maude maude = new Maude();
 		maude = maudeDefaultBuilder(maude);
 		maude.setRequirement(true);
 

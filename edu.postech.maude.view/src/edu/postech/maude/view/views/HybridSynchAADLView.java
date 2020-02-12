@@ -55,7 +55,7 @@ import org.eclipse.ui.part.ViewPart;
  * <p>
  */
 
-public class MaudeConsoleView extends ViewPart {
+public class HybridSynchAADLView extends ViewPart {
 
 	/**
 	 * The ID of the view as specified by the extension.
@@ -168,7 +168,7 @@ public class MaudeConsoleView extends ViewPart {
 	private void hookContextMenu() {
 		MenuManager menuMgr = new MenuManager("#PopupMenu");
 		menuMgr.setRemoveAllWhenShown(true);
-		menuMgr.addMenuListener(manager -> MaudeConsoleView.this.fillContextMenu(manager));
+		menuMgr.addMenuListener(manager -> HybridSynchAADLView.this.fillContextMenu(manager));
 		Menu menu = menuMgr.createContextMenu(viewer.getControl());
 		viewer.getControl().setMenu(menu);
 		getSite().registerContextMenu(menuMgr, viewer);
@@ -242,10 +242,15 @@ public class MaudeConsoleView extends ViewPart {
 		maudeThreadMap.put(nickname, new Long(id));
 	}
 
-	public MaudeResult initialData(String nickName) {
-		MaudeResult mr = new MaudeResult(nickName, "Processing...", "...", "...");
+	public MaudeResult initialData(String propId) {
+		MaudeResult mr = new MaudeResult(propId, "Processing...", "...", "...");
 		viewer.add(mr);
 		return mr;
+	}
+
+	public void updateData(MaudeResult element) {
+		viewer.add(element);
+		System.out.println("Update Data");
 	}
 
 	public void refreshData(MaudeResult oldElement, MaudeResult newElement) {
@@ -253,6 +258,10 @@ public class MaudeConsoleView extends ViewPart {
 		viewer.remove(oldElement);
 		System.out.println("refreshData method");
 
+	}
+
+	public void clear() {
+		viewer.getTable().removeAll();
 	}
 
 }

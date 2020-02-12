@@ -22,11 +22,6 @@
             name="Symbolic Analysis"
             id="SynchAadlMenu.commands.sampleCommand3">
       </command>
-      <command
-            categoryId="SynchAadlMenu.commands.category"
-            name="Run"
-            id="SynchAadlMenu.commands.sampleCommand4">
-      </command>
    </extension>
    
    
@@ -44,10 +39,6 @@
             class="handlers.SymbolicAnalysis"
             commandId="SynchAadlMenu.commands.sampleCommand3">
       </handler>
-      <handler
-            class="handlers.Run"
-            commandId="SynchAadlMenu.commands.sampleCommand4">
-        </handler>
    </extension>
    
    
@@ -70,12 +61,6 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+7">
-      </key>
-      <key
-            commandId="SynchAadlMenu.commands.sampleCommand4"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+8">
       </key>
    </extension>
    
@@ -101,11 +86,6 @@
             <command
                   commandId="SynchAadlMenu.commands.sampleCommand3"
                   id="SynchAadlMenu.menus.sampleCommand3"
-                  mnemonic="S">
-            </command>
-            <command
-                  commandId="SynchAadlMenu.commands.sampleCommand4"
-                  id="SynchAadlMenu.menus.sampleCommand4"
                   mnemonic="S">
             </command>
          </menu>
