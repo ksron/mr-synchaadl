@@ -83,7 +83,7 @@ public class HybridSynchAADLView extends ViewPart {
 			@Override
 			public String getText(Object element) {
 				MaudeResult mr = (MaudeResult) element;
-				return mr.nickName;
+				return mr.propId;
 			}
 		});
 
@@ -185,7 +185,7 @@ public class HybridSynchAADLView extends ViewPart {
 			@Override
 			public void run() {
 				MaudeResult mr = (MaudeResult) viewer.getStructuredSelection().getFirstElement();
-				String nickname = mr.nickName;
+				String nickname = mr.propId;
 				for (Thread thread : Thread.getAllStackTraces().keySet()) {
 					if (thread.getId() == maudeThreadMap.get(nickname)) {
 						thread.interrupt();
@@ -193,7 +193,7 @@ public class HybridSynchAADLView extends ViewPart {
 				}
 			}
 		};
-		action1.setText("Terminate");
+		action1.setText("Stop Thread");
 		action1.setToolTipText("Action 1 tooltip");
 
 		doubleClickAction = new Action() {
@@ -203,21 +203,21 @@ public class HybridSynchAADLView extends ViewPart {
 				Object obj = selection.getFirstElement();
 				MaudeResult mr = (MaudeResult) obj;
 				IPath path = new Path(mr.location);
-				path = path.removeLastSegments(2);
+				String pspcFile = path.lastSegment().substring(0,
+						path.lastSegment().indexOf("-" + mr.propId)) + ".pspc";
+				path = path.removeLastSegments(3).append("requirement");
 				IWorkspace workspace = ResourcesPlugin.getWorkspace();
 				IWorkspaceRoot root = workspace.getRoot();
 				try {
 					for (IResource resource : ((IContainer) root.findMember(path)).members()) {
-						if (resource.getName().contains(".pspc")) {
+						if (resource.getName().contains(pspcFile)) {
 							IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(),
 									(IFile) resource);
 						}
 					}
 				} catch (CoreException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
 			}
 		};
 	}
