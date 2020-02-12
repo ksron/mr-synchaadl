@@ -194,7 +194,7 @@ public class HybridSynchAADLView extends ViewPart {
 				}
 			}
 		};
-		stopProcessAction.setText("Stop Thread");
+		stopProcessAction.setText("Stop Process");
 		stopProcessAction.setToolTipText("Action 1 tooltip");
 
 		deleteResultAction = new Action() {
