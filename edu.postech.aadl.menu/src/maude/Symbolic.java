@@ -77,6 +77,8 @@ public class Symbolic extends Maude {
 					new MaudeResult(nickName, simpleResult, location, elapsedTime)));
 		}
 
+		// Should Run in Thread
+		// This point takes a lot of time
 		private String createMaudeResultFile(IFile file) throws IOException, CoreException {
 			String result = "< Analysis Command > \n\n" + userCommand + "\n\n" + "< Result >\n";
 			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -115,9 +117,9 @@ public class Symbolic extends Maude {
 		public String getMaudeSimpleResult(String rm, boolean req) {
 			if (req) {
 				if (rm.indexOf("No solution") != -1) {
-					return "Counter-Example Not Found";
+					return "No counterexample found";
 				} else if (rm.indexOf("Solution 1") != -1) {
-					return "Counter-Example Found";
+					return "No counterexample found";
 				} else {
 					return "Error Occured!";
 				}

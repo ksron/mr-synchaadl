@@ -29,7 +29,7 @@ class RtmAadlProperty extends RtmAadlIdentifier {
 	
 	def compilePropertyValue(Property pr, NamedElement ne) {
 		switch (pr.eContainer as NamedElement).name {
-			case PropertyUtil::SYNCHAADL:	pr.compileSynchAadlPropertyValue(ne)
+			case PropertyUtil::HYBRIDSYNCHAADL:	pr.compileSynchAadlPropertyValue(ne)
 			case PropertyUtil::DATA_MODEL:	pr.compileDataModelPropertyValue(ne)
 			default:						pr.compileDefaultPropertyValue(ne)
 		}
