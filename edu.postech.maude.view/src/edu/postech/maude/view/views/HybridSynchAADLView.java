@@ -67,7 +67,8 @@ public class HybridSynchAADLView extends ViewPart {
 
 	private TableViewer viewer;
 	private Action doubleClickAction;
-	private Action action1;
+	private Action stopProcessAction;
+	private Action deleteResultAction;
 
 	private Map<String, Long> maudeThreadMap;
 
@@ -175,26 +176,36 @@ public class HybridSynchAADLView extends ViewPart {
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
-		manager.add(action1);
+		manager.add(stopProcessAction);
+		manager.add(deleteResultAction);
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
 	private void makeActions() {
-		action1 = new Action() {
+		stopProcessAction = new Action() {
 			@Override
 			public void run() {
 				MaudeResult mr = (MaudeResult) viewer.getStructuredSelection().getFirstElement();
-				String nickname = mr.propId;
-				for (Thread thread : Thread.getAllStackTraces().keySet()) {
-					if (thread.getId() == maudeThreadMap.get(nickname)) {
-						thread.interrupt();
-					}
+				if (mr.checkProcess()) {
+					mr.killProcess();
+					mr.result = "Terminated";
+					viewer.update(mr, null);
 				}
 			}
 		};
-		action1.setText("Stop Thread");
-		action1.setToolTipText("Action 1 tooltip");
+		stopProcessAction.setText("Stop Thread");
+		stopProcessAction.setToolTipText("Action 1 tooltip");
+
+		deleteResultAction = new Action() {
+			@Override
+			public void run() {
+				MaudeResult mr = (MaudeResult) viewer.getStructuredSelection().getFirstElement();
+				viewer.remove(mr);
+			}
+		};
+		deleteResultAction.setText("Delete Result");
+		deleteResultAction.setToolTipText("Action 1 tooltip");
 
 		doubleClickAction = new Action() {
 			@Override
@@ -235,15 +246,14 @@ public class HybridSynchAADLView extends ViewPart {
 		viewer.getControl().setFocus();
 	}
 
-	public void setThreadId(String nickname, long id) {
+	public void setThreadId(String propId, long id) {
 		if (maudeThreadMap == null) {
 			maudeThreadMap = new HashMap<String, Long>();
 		}
-		maudeThreadMap.put(nickname, new Long(id));
+		maudeThreadMap.put(propId, new Long(id));
 	}
 
-	public MaudeResult initialData(String propId) {
-		MaudeResult mr = new MaudeResult(propId, "Processing...", "...", "...");
+	public MaudeResult initialData(MaudeResult mr) {
 		viewer.add(mr);
 		return mr;
 	}

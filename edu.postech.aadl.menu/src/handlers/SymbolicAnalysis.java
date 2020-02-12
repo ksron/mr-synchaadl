@@ -25,6 +25,7 @@ import edu.postech.aadl.xtext.propspec.propSpec.Invariant;
 import edu.postech.aadl.xtext.propspec.propSpec.Property;
 import edu.postech.aadl.xtext.propspec.propSpec.Reachability;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
+import edu.postech.maude.view.views.DisplayView;
 import maude.Maude;
 
 public class SymbolicAnalysis extends AbstractHandler {
@@ -68,6 +69,8 @@ public class SymbolicAnalysis extends AbstractHandler {
 		aadlMaudeBaseDir = resManager.getEditorFile().getLocation().removeLastSegments(3).toString();
 		aadlMaudeFullPath = aadlMaudeBaseDir + aadlMaudePath;
 		System.out.println("aadlMaudeFullPath : " + aadlMaudeFullPath);
+
+		DisplayView.clearView();
 
 		for (Property pr : propSpecRes.getProperty()) {
 			if(pr instanceof Reachability) {

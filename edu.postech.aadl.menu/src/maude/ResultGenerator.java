@@ -10,17 +10,12 @@ import java.util.regex.Pattern;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PlatformUI;
 
 import edu.postech.aadl.utils.IOUtils;
-import edu.postech.maude.view.views.HybridSynchAADLView;
+import edu.postech.maude.view.views.DisplayView;
 import edu.postech.maude.view.views.MaudeResult;
 
 public class ResultGenerator extends Thread {
-
-	private Display display;
-	private HybridSynchAADLView view;
 	private IFile maudeResultFile;
 	private Process process;
 	private String propId;
@@ -33,22 +28,22 @@ public class ResultGenerator extends Thread {
 		this.location = path.toString();
 		this.propId = propId;
 		this.inv = inv;
-
-		this.view = (HybridSynchAADLView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-				.findView("edu.postech.maude.view.views.MaudeConsoleView");
-		this.display = view.workbench.getDisplay();
 	}
 
 	@Override
 	public void run() {
-		display.asyncExec(() -> view.clear());
+		MaudeResult initial = new MaudeResult(propId, "Running", "", "");
+		initial.setProcess(process);
 
+		DisplayView.initDataView(initial);
 		try {
 			String result = createMaudeResultFile(maudeResultFile);
 			String simplifiedResult = getMaudeSimpleResult(result, inv);
 			String elapsedTime = getMaudeElapsedTime(result);
-
-			display.asyncExec(() -> view.updateData(new MaudeResult(propId, simplifiedResult, location, elapsedTime)));
+			if (initial.result.equals("Terminated")) {
+				return;
+			}
+			DisplayView.refreshDataView(initial, new MaudeResult(propId, simplifiedResult, location, elapsedTime));
 		} catch (IOException | CoreException e) {
 			e.printStackTrace();
 		}
