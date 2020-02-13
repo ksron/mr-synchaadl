@@ -19,20 +19,22 @@ public class ResultGenerator extends Thread {
 	private IFile maudeResultFile;
 	private Process process;
 	private String propId;
+	private String pspcFileName;
 	private String location;
 	private Boolean inv;
 
-	public ResultGenerator(Process process, IPath path, String propId, boolean inv) {
+	public ResultGenerator(Process process, IPath path, String pspcFileName, String propId, boolean inv) {
 		this.process = process;
 		this.maudeResultFile = IOUtils.getFile(path);
 		this.location = path.toString();
+		this.pspcFileName = pspcFileName;
 		this.propId = propId;
 		this.inv = inv;
 	}
 
 	@Override
 	public void run() {
-		MaudeResult initial = new MaudeResult(propId, "Running", "", "");
+		MaudeResult initial = new MaudeResult(pspcFileName, propId, "Running", "", "");
 		initial.setProcess(process);
 
 		DisplayView.initDataView(initial);
@@ -43,7 +45,8 @@ public class ResultGenerator extends Thread {
 			if (initial.result.equals("Terminated")) {
 				return;
 			}
-			DisplayView.refreshDataView(initial, new MaudeResult(propId, simplifiedResult, location, elapsedTime));
+			DisplayView.refreshDataView(initial,
+					new MaudeResult(pspcFileName, propId, simplifiedResult, location, elapsedTime));
 		} catch (IOException | CoreException e) {
 			e.printStackTrace();
 		}

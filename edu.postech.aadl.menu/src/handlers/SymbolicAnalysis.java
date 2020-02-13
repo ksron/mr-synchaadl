@@ -122,6 +122,7 @@ public class SymbolicAnalysis extends AbstractHandler {
 		maude.setMaudeExecPath(maudeExecPath);
 		maude.setOption(maudeOptions);
 		maude.setTargetMaude(aadlMaudeFullPath);
+		maude.setPspcFileName(propSpecFileName);
 
 		return maude;
 	}

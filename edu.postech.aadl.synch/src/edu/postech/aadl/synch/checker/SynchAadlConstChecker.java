@@ -3,6 +3,7 @@ package edu.postech.aadl.synch.checker;
 import java.util.ArrayList;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.EList;
 import org.osate.aadl2.ComponentCategory;
 import org.osate.aadl2.DirectedFeature;
 import org.osate.aadl2.StringLiteral;
@@ -14,6 +15,7 @@ import org.osate.aadl2.instance.InstanceObject;
 import org.osate.aadl2.instance.util.InstanceSwitch;
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager;
 import org.osate.aadl2.modelsupport.modeltraversal.AadlProcessingSwitchWithProgress;
+import org.osate.aadl2.util.Aadl2InstanceUtil;
 import org.osate.xtext.aadl2.properties.util.GetProperties;
 
 import edu.postech.aadl.synch.maude.template.RtmAadlSetting;
@@ -53,7 +55,7 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 				checkFeatDataOutInitValue(fi);
 				checkFeatDataOutParamValue(fi);
 				checkCompConnMiss(fi);
-				checkCompInnerConnMiss(fi);
+				// checkCompInnerConnMiss(fi);
 
 				monitor.worked(1);
 				return DONE;
@@ -166,7 +168,19 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 	}
 
 	private void checkCompInnerConnMiss(FeatureInstance fi) {
-		return;
+		ComponentInstance comp = fi.getContainingComponentInstance();
+		GetProperties.getConnectionTiming(fi);
+		if (fi.getDirection().outgoing()) {
+			EList<ConnectionInstance> out = Aadl2InstanceUtil.getOutgoingConnection(comp, fi);
+			if (out == null || out.isEmpty()) {
+				getErrorManager().error(fi, fi.getName() + " is not connected to any port");
+			}
+		} else if (fi.getDirection().incoming()) {
+			EList<ConnectionInstance> in = Aadl2InstanceUtil.getIncomingConnection(comp, fi);
+			if (in == null || in.isEmpty()) {
+				getErrorManager().error(fi, fi.getName() + " is not connected to any port");
+			}
+		}
 	}
 
 	private void checkFeatDataOutInitValue(FeatureInstance fi) {

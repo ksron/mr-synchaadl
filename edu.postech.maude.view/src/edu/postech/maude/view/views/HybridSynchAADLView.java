@@ -77,10 +77,22 @@ public class HybridSynchAADLView extends ViewPart {
 		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 
 		TableViewerColumn tvc0 = new TableViewerColumn(viewer, SWT.LEFT);
-		tvc0.getColumn().setText("Property Id");
+		tvc0.getColumn().setText("PSPC File");
 		tvc0.getColumn().setResizable(true);
 		tvc0.getColumn().setMoveable(true);
 		tvc0.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				MaudeResult mr = (MaudeResult) element;
+				return mr.pspc;
+			}
+		});
+
+		TableViewerColumn tvc1 = new TableViewerColumn(viewer, SWT.LEFT);
+		tvc1.getColumn().setText("Property Id");
+		tvc1.getColumn().setResizable(true);
+		tvc1.getColumn().setMoveable(true);
+		tvc1.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				MaudeResult mr = (MaudeResult) element;
@@ -88,11 +100,11 @@ public class HybridSynchAADLView extends ViewPart {
 			}
 		});
 
-		TableViewerColumn tvc1 = new TableViewerColumn(viewer, SWT.LEFT);
-		tvc1.getColumn().setText("Result");
-		tvc1.getColumn().setResizable(true);
-		tvc1.getColumn().setMoveable(true);
-		tvc1.setLabelProvider(new ColumnLabelProvider() {
+		TableViewerColumn tvc2 = new TableViewerColumn(viewer, SWT.LEFT);
+		tvc2.getColumn().setText("Result");
+		tvc2.getColumn().setResizable(true);
+		tvc2.getColumn().setMoveable(true);
+		tvc2.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				MaudeResult mr = (MaudeResult) element;
@@ -100,10 +112,10 @@ public class HybridSynchAADLView extends ViewPart {
 			}
 		});
 
-		TableViewerColumn tvc2 = new TableViewerColumn(viewer, SWT.LEFT);
-		tvc2.getColumn().setText("Location");
-		tvc2.getColumn().setResizable(true);
-		tvc2.getColumn().setMoveable(true);
+		TableViewerColumn tvc3 = new TableViewerColumn(viewer, SWT.LEFT);
+		tvc3.getColumn().setText("Location");
+		tvc3.getColumn().setResizable(true);
+		tvc3.getColumn().setMoveable(true);
 
 		LinkOpener linkHandler = rowObject -> {
 			MaudeResult mr = (MaudeResult)rowObject;
@@ -118,7 +130,7 @@ public class HybridSynchAADLView extends ViewPart {
 			}
 		};
 
-		tvc2.setLabelProvider(new LinkLabelProvider(new ColumnLabelProvider() {
+		tvc3.setLabelProvider(new LinkLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				MaudeResult mr = (MaudeResult) element;
@@ -126,11 +138,11 @@ public class HybridSynchAADLView extends ViewPart {
 			}
 		}, linkHandler));
 
-		TableViewerColumn tvc3 = new TableViewerColumn(viewer, SWT.LEFT);
-		tvc3.getColumn().setText("ElapsedTime");
-		tvc3.getColumn().setResizable(true);
-		tvc3.getColumn().setMoveable(true);
-		tvc3.setLabelProvider(new ColumnLabelProvider() {
+		TableViewerColumn tvc4 = new TableViewerColumn(viewer, SWT.LEFT);
+		tvc4.getColumn().setText("ElapsedTime");
+		tvc4.getColumn().setResizable(true);
+		tvc4.getColumn().setMoveable(true);
+		tvc4.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				MaudeResult mr = (MaudeResult) element;
@@ -139,6 +151,7 @@ public class HybridSynchAADLView extends ViewPart {
 		});
 
 		TableLayout layout = new TableLayout();
+		layout.addColumnData(new ColumnWeightData(1, true));
 		layout.addColumnData(new ColumnWeightData(1, true));
 		layout.addColumnData(new ColumnWeightData(2, true));
 		layout.addColumnData(new ColumnWeightData(1, true));

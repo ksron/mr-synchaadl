@@ -1,5 +1,7 @@
 package maude;
 
+import java.io.IOException;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
 
@@ -9,22 +11,35 @@ public class Maude {
 	private String maudeDirectory = null;
 	private String maudeExecPath = null;
 	private StringBuilder Options = null;
+	private String pspcFileName = null;
 	private String TargetPath = null;
 	private String TestFilePath = null;
-	private boolean req = false;
+	private boolean inv = false;
 
-	public void runMaude(IPath path, String nickName) {
+	public void runMaude(IPath path, String propId) {
 		if (!checkParameters()) {
 			System.out.println("Maude Incomplete Build!!");
 			return;
 		}
-		MaudeRunner mrt = new MaudeRunner(compileCommandOption().split(" "), path, nickName, req);
-		mrt.run();
+		try {
+			System.out.println("Maude process start!");
+			ProcessBuilder builder = new ProcessBuilder(compileCommandOption().split(" "));
+			// builder.redirectError(Redirect.INHERIT);
+			// builder.redirectOutput(Redirect.INHERIT);
+			Process process = builder.start();
+			ResultGenerator result = new ResultGenerator(process, path, this.pspcFileName, propId, inv);
+			result.start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
+	public void setRequirement(boolean inv) {
+		this.inv = inv;
+	}
 
-	public void setRequirement(boolean req) {
-		this.req = req;
+	public void setPspcFileName(String pspcFileName) {
+		this.pspcFileName = pspcFileName;
 	}
 
 	private boolean checkParameters() {
