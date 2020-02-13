@@ -1,6 +1,7 @@
 package edu.postech.maude.view.views;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
@@ -23,6 +24,10 @@ public class DisplayView {
 
 	public static void refreshData(EList<Property> prop) {
 		display.asyncExec(() -> view.refreshData(prop));
+	}
+
+	public static void removeData(IPath path) {
+		display.asyncExec(() -> view.removeData(path));
 	}
 
 	public static void removeData(IFile prop) {

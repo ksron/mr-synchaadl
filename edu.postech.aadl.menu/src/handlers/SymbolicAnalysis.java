@@ -91,18 +91,27 @@ public class SymbolicAnalysis extends AbstractHandler {
 
 	private void addPSPCListener() {
 		IFile editor = resManager.getEditorFile();
+		IPath resultDir = editor.getFullPath().removeLastSegments(2).append("verification").append("result");
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(event -> {
 			if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
 				if (event.getDelta() != null && event.getDelta().findMember(editor.getFullPath()) != null) {
 					IResourceDelta delta = event.getDelta().findMember(editor.getFullPath());
 					switch (delta.getKind()) {
-					case IResourceDelta.CHANGED:
-						Top top = getPropSpecResource(editor.getFullPath());
-						DisplayView.refreshData(top.getProperty());
-						break;
-					case IResourceDelta.REMOVED:
-						DisplayView.removeData(editor);
-						break;
+						case IResourceDelta.CHANGED:
+							Top top = getPropSpecResource(editor.getFullPath());
+							DisplayView.refreshData(top.getProperty());
+							break;
+						case IResourceDelta.REMOVED:
+							DisplayView.removeData(editor);
+							break;
+					}
+				} else if (event.getDelta() != null && event.getDelta().findMember(resultDir) != null) {
+					IResourceDelta delta = event.getDelta().findMember(resultDir);
+					for(IResourceDelta result : delta.getAffectedChildren()) {
+						switch(result.getKind()) {
+						case IResourceDelta.REMOVED:
+							DisplayView.removeData(result.getFullPath());
+						}
 					}
 				}
 			}

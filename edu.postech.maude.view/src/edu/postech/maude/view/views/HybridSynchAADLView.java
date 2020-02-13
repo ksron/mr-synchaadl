@@ -279,6 +279,15 @@ public class HybridSynchAADLView extends ViewPart {
 		}
 	}
 
+	public void removeData(IPath location) {
+		for (TableItem ti : viewer.getTable().getItems()) {
+			MaudeResult mr = (MaudeResult) ti.getData();
+			if (mr.getLocationString().equals(location.toString())) {
+				viewer.remove(mr);
+			}
+		}
+	}
+
 	public void removeData(IFile prop) {
 		for (TableItem ti : viewer.getTable().getItems()) {
 			MaudeResult mr = (MaudeResult) ti.getData();
