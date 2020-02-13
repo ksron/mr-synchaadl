@@ -2,7 +2,6 @@ package edu.postech.maude.view.views;
 
 
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -16,6 +15,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -31,12 +31,15 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ViewPart;
+
+import edu.postech.aadl.xtext.propspec.propSpec.Property;
 
 /**
  * This sample class demonstrates how to plug-in a new
@@ -71,8 +74,6 @@ public class HybridSynchAADLView extends ViewPart {
 	private Action stopProcessAction;
 	private Action deleteResultAction;
 
-	private Map<String, Long> maudeThreadMap;
-
 	@Override
 	public void createPartControl(Composite parent) {
 		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
@@ -97,7 +98,7 @@ public class HybridSynchAADLView extends ViewPart {
 			@Override
 			public String getText(Object element) {
 				MaudeResult mr = (MaudeResult) element;
-				return mr.propId;
+				return mr.getPropId();
 			}
 		});
 
@@ -109,7 +110,7 @@ public class HybridSynchAADLView extends ViewPart {
 			@Override
 			public String getText(Object element) {
 				MaudeResult mr = (MaudeResult) element;
-				return mr.result;
+				return mr.getResultString();
 			}
 		});
 
@@ -122,7 +123,7 @@ public class HybridSynchAADLView extends ViewPart {
 			MaudeResult mr = (MaudeResult)rowObject;
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			IWorkspaceRoot root = workspace.getRoot();
-			IPath path = new Path(mr.location);
+			IPath path = new Path(mr.getLocationString());
 			IFile ifile = root.getFile(path);
 			try {
 				IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), ifile);
@@ -135,7 +136,7 @@ public class HybridSynchAADLView extends ViewPart {
 			@Override
 			public String getText(Object element) {
 				MaudeResult mr = (MaudeResult) element;
-				return mr.location;
+				return mr.getLocationString();
 			}
 		}, linkHandler));
 
@@ -147,15 +148,15 @@ public class HybridSynchAADLView extends ViewPart {
 			@Override
 			public String getText(Object element) {
 				MaudeResult mr = (MaudeResult) element;
-				return mr.elapsedTime;
+				return mr.getElapsedTimeString();
 			}
 		});
 
 		TableLayout layout = new TableLayout();
 		layout.addColumnData(new ColumnWeightData(1, true));
 		layout.addColumnData(new ColumnWeightData(1, true));
-		layout.addColumnData(new ColumnWeightData(2, true));
 		layout.addColumnData(new ColumnWeightData(1, true));
+		layout.addColumnData(new ColumnWeightData(2, true));
 		layout.addColumnData(new ColumnWeightData(1, true));
 
 		viewer.getTable().setLayout(layout);
@@ -195,7 +196,7 @@ public class HybridSynchAADLView extends ViewPart {
 				MaudeResult mr = (MaudeResult) viewer.getStructuredSelection().getFirstElement();
 				if (mr.checkProcess()) {
 					mr.killProcess();
-					mr.result = "Terminated";
+					mr.setResultString("Terminated");
 					viewer.update(mr, null);
 				}
 			}
@@ -220,7 +221,6 @@ public class HybridSynchAADLView extends ViewPart {
 				Object obj = selection.getFirstElement();
 				MaudeResult mr = (MaudeResult) obj;
 				IPath path = mr.getLocationIPath();
-				String pspcFile = mr.getPspcFileName();
 				path = path.removeLastSegments(3).append("requirement");
 				IWorkspace workspace = ResourcesPlugin.getWorkspace();
 				IWorkspaceRoot root = workspace.getRoot();
@@ -231,7 +231,7 @@ public class HybridSynchAADLView extends ViewPart {
 
 				try {
 					for (IResource resource : ((IContainer) root.findMember(path)).members()) {
-						if (resource.getName().contains(pspcFile)) {
+						if (resource.getName().contains(mr.getPspcFileName())) {
 							IMarker marker = ((IFile) resource).createMarker(IMarker.TEXT);
 							marker.setAttributes(map);
 							IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(),
@@ -259,16 +259,33 @@ public class HybridSynchAADLView extends ViewPart {
 		viewer.getControl().setFocus();
 	}
 
-	public void setThreadId(String propId, long id) {
-		if (maudeThreadMap == null) {
-			maudeThreadMap = new HashMap<String, Long>();
-		}
-		maudeThreadMap.put(propId, new Long(id));
-	}
-
 	public MaudeResult initialData(MaudeResult mr) {
 		viewer.add(mr);
 		return mr;
+	}
+
+	public void refreshData(EList<Property> propList) {
+		for (TableItem ti : viewer.getTable().getItems()) {
+			MaudeResult mr = (MaudeResult) ti.getData();
+			boolean check = true;
+			for (Property pr : propList) {
+				if (mr.getPropId().equals(pr.getName())) {
+					check = false;
+				}
+			}
+			if (check) {
+				viewer.remove(mr);
+			}
+		}
+	}
+
+	public void removeData(IFile prop) {
+		for (TableItem ti : viewer.getTable().getItems()) {
+			MaudeResult mr = (MaudeResult) ti.getData();
+			if (mr.getPspcFileName().equals(prop.getName())) {
+				viewer.remove(mr);
+			}
+		}
 	}
 
 	public void updateData(MaudeResult element) {
@@ -276,7 +293,7 @@ public class HybridSynchAADLView extends ViewPart {
 		System.out.println("Update Data");
 	}
 
-	public void refreshData(MaudeResult oldElement, MaudeResult newElement) {
+	public void updateData(MaudeResult oldElement, MaudeResult newElement) {
 		viewer.add(newElement);
 		viewer.remove(oldElement);
 		System.out.println("refreshData method");

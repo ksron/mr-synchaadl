@@ -8,23 +8,24 @@ import java.io.InputStreamReader;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
+
+import edu.postech.aadl.xtext.propspec.propSpec.Property;
 
 public class MaudeResult {
 
-	public String result;
-	public IFile pspc;
-	public String propId;
-	public String location;
-	public String elapsedTime;
+	private String result;
+	private IFile pspc;
+	private Property prop;
+	private IPath path;
+	private String elapsedTime;
 
 	private Process process = null;
 
-	public MaudeResult(IFile pspc, String propId, String result, String name, String elapsedTime) {
+	public MaudeResult(IFile pspc, Property prop, String result, IPath path, String elapsedTime) {
 		this.pspc = pspc;
 		this.result = result;
-		this.propId = propId;
-		this.location = name;
+		this.prop = prop;
+		this.path = path;
 		this.elapsedTime = elapsedTime;
 	}
 
@@ -42,12 +43,28 @@ public class MaudeResult {
 		return process.isAlive();
 	}
 
+	public void setResultString(String result) {
+		this.result = result;
+	}
+
+	public String getResultString() {
+		return result;
+	}
+
+	public String getPropId() {
+		return prop.getName();
+	}
+
 	public String getPspcFileName() {
 		return pspc.getName();
 	}
 
+	public String getLocationString() {
+		return path.toString();
+	}
+
 	public IPath getLocationIPath() {
-		return new Path(location);
+		return path;
 	}
 
 	public Integer findPropIdLine() {
@@ -57,7 +74,7 @@ public class MaudeResult {
 			String line = null;
 			int idx = 1;
 			while ((line = br.readLine()) != null) {
-				if (line.contains("[" + propId + "]")) {
+				if (line.contains("[" + prop.getName() + "]")) {
 					return new Integer(idx);
 				}
 				idx++;
@@ -67,5 +84,9 @@ public class MaudeResult {
 		}
 
 		return 1;
+	}
+
+	public String getElapsedTimeString() {
+		return elapsedTime;
 	}
 }

@@ -254,8 +254,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	private def compileInTarget(String featureId, String componentId){
 		for(ConnectionReference cr : conxTable.values){
 			if(cr.connection.source.context!=null && cr.connection.destination.context!=null){
-				println("source : " + cr.connection.source.context)
-				println("dest : " + cr.connection.destination.context)
 				if(cr.connection.destination.context.name.escape.equals(componentId) && cr.connection.destination.connectionEnd.name.escape.equals(featureId)){
 					return cr.connection.source.context.name
 				}
@@ -355,19 +353,14 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		var expression = (mpv.ownedValue as StringLiteral).value
 		
 		return "((" + mode + ")" + "[" + expression.antlrParsing(o)+"])"
-		
-		//return "((" + mode + ")" + "[" + expression.split(";").map[if(it.trim.length>1) it.trim.compileCDParsing(o)].filterNull.join(" ; ", "empty") + "])"
 	}
 	
 	private def antlrParsing(String expression, ComponentInstance ci){
-		println("Parsing..")
 		
 		var stream = new ANTLRInputStream(expression)
 		var lexer = new FlowsLexer(stream)
 		var tokens = new CommonTokenStream(lexer)
 		var parser = new FlowsParser(tokens)
-		
-		println("Result : " + parser.getBuildParseTree) 
 		
         val bhaSeq = new FlowsVisitor().setComponentInstance(ci).visitContinuousdynamics(parser.continuousdynamics()) as BehaviorActionSequence;
 		val cf = new ContinuousFunction(bhaSeq, this.bc)
@@ -375,7 +368,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		cf.setVarId(this);
 		
 		cf.getMaude
-		//""
 	}
 	
 	// Compile Sampling/Response
@@ -396,7 +388,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				}
 			}
 		}
-		//println(targetInstances);
 		return targetInstances
 	}
 	

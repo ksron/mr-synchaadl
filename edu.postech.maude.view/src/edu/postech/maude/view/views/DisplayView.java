@@ -1,7 +1,11 @@
 package edu.postech.maude.view.views;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
+
+import edu.postech.aadl.xtext.propspec.propSpec.Property;
 
 public class DisplayView {
 	static private final HybridSynchAADLView view = (HybridSynchAADLView) PlatformUI.getWorkbench()
@@ -17,9 +21,17 @@ public class DisplayView {
 		display.asyncExec(() -> view.initialData(init));
 	}
 
-	public static void refreshDataView(MaudeResult oldMR, MaudeResult newMR) {
+	public static void refreshData(EList<Property> prop) {
+		display.asyncExec(() -> view.refreshData(prop));
+	}
+
+	public static void removeData(IFile prop) {
+		display.asyncExec(() -> view.removeData(prop));
+	}
+
+	public static void updateDataView(MaudeResult oldMR, MaudeResult newMR) {
 		display.asyncExec(
-				() -> view.refreshData(oldMR, newMR));
+				() -> view.updateData(oldMR, newMR));
 	}
 
 }

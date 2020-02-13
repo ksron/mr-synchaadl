@@ -7,6 +7,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
 
 import edu.postech.aadl.utils.IOUtils;
+import edu.postech.aadl.xtext.propspec.propSpec.Property;
 
 public class Maude {
 	private String maudeDirectory = null;
@@ -16,9 +17,8 @@ public class Maude {
 	private IFile pspcFile = null;
 	private String TargetPath = null;
 	private String TestFilePath = null;
-	private boolean inv = false;
 
-	public void runMaude(IPath path, String propId) {
+	public void runMaude(IPath path, Property prop) {
 		if (!checkParameters()) {
 			System.out.println("Maude Incomplete Build!!");
 			return;
@@ -30,7 +30,7 @@ public class Maude {
 			// builder.redirectError(Redirect.INHERIT);
 			// builder.redirectOutput(Redirect.INHERIT);
 			Process process = builder.start();
-			ResultGenerator result = new ResultGenerator(process, path, pspcFile, propId, inv);
+			ResultGenerator result = new ResultGenerator(process, path, pspcFile, prop);
 			result.start();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -46,10 +46,6 @@ public class Maude {
 		} else {
 			System.out.println("Doesn't support os");
 		}
-	}
-
-	public void setRequirement(boolean inv) {
-		this.inv = inv;
 	}
 
 	public void setPspcFile(IFile pspcFile) {
