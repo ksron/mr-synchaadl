@@ -15,6 +15,7 @@ import edu.postech.aadl.synch.propspec.PropspecEditorResourceManager;
 public class ConstraintChecker extends AbstractHandler {
 
 	private Action checkAct;
+	public boolean isPSPC;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -40,5 +41,10 @@ public class ConstraintChecker extends AbstractHandler {
 		};
 		checkAct.run();
 		return null;
+	}
+
+	public boolean isPspcFileSelected(XtextEditor editor) {
+		return isPSPC = editor == null;
+
 	}
 }

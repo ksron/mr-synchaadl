@@ -30,14 +30,29 @@
       <handler
             class="handlers.ConstraintChecker"
             commandId="SynchAadlMenu.commands.sampleCommand">
+			<enabledWhen>
+			    <with variable="activeEditorId">
+			        <equals value="edu.postech.aadl.xtext.propspec.PropSpec"/>
+			    </with>
+			</enabledWhen>
       </handler>
       <handler
             class="handlers.CodeGeneration"
             commandId="SynchAadlMenu.commands.sampleCommand2">
+			<enabledWhen>
+			    <with variable="activeEditorId">
+			        <equals value="edu.postech.aadl.xtext.propspec.PropSpec"/>
+			    </with>
+			</enabledWhen>
       </handler>
       <handler
             class="handlers.SymbolicAnalysis"
             commandId="SynchAadlMenu.commands.sampleCommand3">
+			<enabledWhen>
+			    <with variable="activeEditorId">
+			        <equals value="edu.postech.aadl.xtext.propspec.PropSpec"/>
+			    </with>
+			</enabledWhen>
       </handler>
    </extension>
    
