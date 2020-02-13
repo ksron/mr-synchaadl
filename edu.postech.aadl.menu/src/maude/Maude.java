@@ -1,6 +1,7 @@
 package maude;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
@@ -10,6 +11,7 @@ import edu.postech.aadl.utils.IOUtils;
 public class Maude {
 	private String maudeDirectory = null;
 	private String maudeExecPath = null;
+	private String maudeLibDir = null;
 	private StringBuilder Options = null;
 	private IFile pspcFile = null;
 	private String TargetPath = null;
@@ -24,6 +26,7 @@ public class Maude {
 		try {
 			System.out.println("Maude process start!");
 			ProcessBuilder builder = new ProcessBuilder(compileCommandOption().split(" "));
+			setProcessEnv(builder.environment());
 			// builder.redirectError(Redirect.INHERIT);
 			// builder.redirectOutput(Redirect.INHERIT);
 			Process process = builder.start();
@@ -31,6 +34,17 @@ public class Maude {
 			result.start();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private void setProcessEnv(Map<String, String> map) {
+		String os = System.getProperty("os.name").toLowerCase();
+		if (os.contains("mac")) {
+			map.put("DYLD_LIBRARY_PATH", "DYLD_LIBRARY_PATH:" + maudeLibDir);
+		} else if (os.contains("unix") || os.contains("linux")) {
+			map.put("LD_LIBRARY_PATH", "DYLD_LIBRARY_PATH:" + maudeLibDir);
+		} else {
+			System.out.println("Doesn't support os");
 		}
 	}
 
@@ -89,6 +103,10 @@ public class Maude {
 
 	public void setMaudeDirPath(String directory) {
 		this.maudeDirectory = directory;
+	}
+
+	public void setMaudeLibDirPath(String libDir) {
+		this.maudeLibDir = libDir;
 	}
 
 	public void setOption(String options) {

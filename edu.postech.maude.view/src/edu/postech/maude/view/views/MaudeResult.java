@@ -57,7 +57,7 @@ public class MaudeResult {
 			String line = null;
 			int idx = 1;
 			while ((line = br.readLine()) != null) {
-				if (line.contains(propId)) {
+				if (line.contains("[" + propId + "]")) {
 					return new Integer(idx);
 				}
 				idx++;

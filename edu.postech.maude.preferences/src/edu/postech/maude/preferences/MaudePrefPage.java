@@ -23,8 +23,9 @@ public class MaudePrefPage extends FieldEditorPreferencePage implements IWorkben
 
 	@Override
 	protected void createFieldEditors() {
-		addField(new DirectoryFieldEditor("MAUDE_DIRECTORY", "MAUDE_DIRECTORY:", getFieldEditorParent()));
+		addField(new DirectoryFieldEditor("MAUDE_DIR", "MAUDE_DIRECTORY:", getFieldEditorParent()));
 		addField(new FileFieldEditor("MAUDE", "MAUDE:", getFieldEditorParent()));
+		addField(new DirectoryFieldEditor("MAUDE_LIBRARY_DIR", "MAUDE_LIBRARY_DIR:", getFieldEditorParent()));
 		addField(new StringFieldEditor("MAUDE_OPTIONS", "MAUDE_OPTIONS:", getFieldEditorParent()));
 	}
 
