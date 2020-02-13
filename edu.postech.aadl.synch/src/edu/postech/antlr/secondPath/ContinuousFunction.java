@@ -78,15 +78,6 @@ public class ContinuousFunction {
 		}
 	}
 
-	public void testVariable() {
-		for (int i = 0; i < count; i++) {
-			// System.out.println("DataSubcomponentHolder : " + funcId.get(i).getDataSubcomponent().getName());
-			// System.out.println("BehaviorVariableHolder : " + varId.get(i).getBehaviorVariable().getName());
-			// System.out.println("ValueExpression : " + ve.get(i));
-		}
-
-	}
-
 	public String getMaude() {
 		String maude = "";
 		for (int i = 0; i < count; i++) {

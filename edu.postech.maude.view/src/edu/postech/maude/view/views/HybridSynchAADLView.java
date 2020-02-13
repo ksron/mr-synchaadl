@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -84,7 +85,7 @@ public class HybridSynchAADLView extends ViewPart {
 			@Override
 			public String getText(Object element) {
 				MaudeResult mr = (MaudeResult) element;
-				return mr.pspc;
+				return mr.getPspcFileName();
 			}
 		});
 
@@ -161,15 +162,8 @@ public class HybridSynchAADLView extends ViewPart {
 		viewer.getTable().setHeaderVisible(true);
 		viewer.getTable().setLinesVisible(true);
 
-		// List<MaudeResult> mrList = new ArrayList<MaudeResult>();
-		// mrList.add(new MaudeResult("nickname 1", "Result 1", "Location 1", "1.0ms"));
-		// mrList.add(new MaudeResult("nickname 2", "Result 2", "Location 2", "2.0ms"));
-		// mrList.add(new MaudeResult("nickname 3", "Result 3", "Location 3", "3.0ms"));
-
 		viewer.setContentProvider(new ArrayContentProvider());
-		// viewer.setInput(mrList);
 
-		// Create the help context id for the viewer's control
 		workbench.getHelpSystem().setHelp(viewer.getControl(), "edu.postech.maude.view.viewer");
 		getSite().setSelectionProvider(viewer);
 
@@ -191,7 +185,6 @@ public class HybridSynchAADLView extends ViewPart {
 	private void fillContextMenu(IMenuManager manager) {
 		manager.add(stopProcessAction);
 		manager.add(deleteResultAction);
-		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
@@ -226,17 +219,23 @@ public class HybridSynchAADLView extends ViewPart {
 				IStructuredSelection selection = viewer.getStructuredSelection();
 				Object obj = selection.getFirstElement();
 				MaudeResult mr = (MaudeResult) obj;
-				IPath path = new Path(mr.location);
-				String pspcFile = path.lastSegment().substring(0,
-						path.lastSegment().indexOf("-" + mr.propId)) + ".pspc";
+				IPath path = mr.getLocationIPath();
+				String pspcFile = mr.getPspcFileName();
 				path = path.removeLastSegments(3).append("requirement");
 				IWorkspace workspace = ResourcesPlugin.getWorkspace();
 				IWorkspaceRoot root = workspace.getRoot();
+
+				Integer line = mr.findPropIdLine();
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put(IMarker.LINE_NUMBER, line);
+
 				try {
 					for (IResource resource : ((IContainer) root.findMember(path)).members()) {
 						if (resource.getName().contains(pspcFile)) {
+							IMarker marker = ((IFile) resource).createMarker(IMarker.TEXT);
+							marker.setAttributes(map);
 							IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(),
-									(IFile) resource);
+									marker);
 						}
 					}
 				} catch (CoreException e1) {
@@ -249,6 +248,7 @@ public class HybridSynchAADLView extends ViewPart {
 	private void showMessage(String message) {
 		MessageDialog.openInformation(viewer.getControl().getShell(), "Sample View", message);
 	}
+
 
 	private void hookDoubleClickAction() {
 		viewer.addDoubleClickListener(event -> doubleClickAction.run());

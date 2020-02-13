@@ -25,7 +25,6 @@ public class ConstraintChecker extends AbstractHandler {
 				&& (part instanceof XtextEditor) ? (XtextEditor) part : null;
 
 		res.setEditor(newEditor);
-		res.getModelResource();
 
 		checkAct = new Action("Constraints Check") {
 			@Override
@@ -39,7 +38,6 @@ public class ConstraintChecker extends AbstractHandler {
 				}
 			}
 		};
-
 		checkAct.run();
 		return null;
 	}

@@ -61,14 +61,10 @@ public class SymbolicAnalysis extends AbstractHandler {
 		maudeDirPath = pref.getString("MAUDE_DIRECTORY");
 		maudeExecPath = pref.getString("MAUDE");
 		maudeOptions = pref.getString("MAUDE_OPTIONS");
-		System.out.println("maudeDirPath : " + maudeDirPath);
-		System.out.println("maudeExecPath : " + maudeExecPath);
-		System.out.println("maudeOptions : " + maudeOptions);
 
 		aadlMaudePath = resManager.getCodegenFilePath().toString();
 		aadlMaudeBaseDir = resManager.getEditorFile().getLocation().removeLastSegments(3).toString();
 		aadlMaudeFullPath = aadlMaudeBaseDir + aadlMaudePath;
-		System.out.println("aadlMaudeFullPath : " + aadlMaudeFullPath);
 
 		DisplayView.clearView();
 
@@ -122,7 +118,7 @@ public class SymbolicAnalysis extends AbstractHandler {
 		maude.setMaudeExecPath(maudeExecPath);
 		maude.setOption(maudeOptions);
 		maude.setTargetMaude(aadlMaudeFullPath);
-		maude.setPspcFileName(propSpecFileName);
+		maude.setPspcFile(resManager.getEditorFile());
 
 		return maude;
 	}

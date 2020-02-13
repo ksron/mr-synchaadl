@@ -11,7 +11,7 @@ public class Maude {
 	private String maudeDirectory = null;
 	private String maudeExecPath = null;
 	private StringBuilder Options = null;
-	private String pspcFileName = null;
+	private IFile pspcFile = null;
 	private String TargetPath = null;
 	private String TestFilePath = null;
 	private boolean inv = false;
@@ -27,7 +27,7 @@ public class Maude {
 			// builder.redirectError(Redirect.INHERIT);
 			// builder.redirectOutput(Redirect.INHERIT);
 			Process process = builder.start();
-			ResultGenerator result = new ResultGenerator(process, path, this.pspcFileName, propId, inv);
+			ResultGenerator result = new ResultGenerator(process, path, pspcFile, propId, inv);
 			result.start();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -38,8 +38,8 @@ public class Maude {
 		this.inv = inv;
 	}
 
-	public void setPspcFileName(String pspcFileName) {
-		this.pspcFileName = pspcFileName;
+	public void setPspcFile(IFile pspcFile) {
+		this.pspcFile = pspcFile;
 	}
 
 	private boolean checkParameters() {
