@@ -1,4 +1,4 @@
-package handlers;
+package edu.postech.aadl.menu;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;

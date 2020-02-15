@@ -1,4 +1,4 @@
-package handlers;
+package edu.postech.aadl.menu;
 
 import java.io.ByteArrayInputStream;
 

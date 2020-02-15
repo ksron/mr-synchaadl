@@ -24,4 +24,3 @@ Import-Package: edu.postech.aadl.synch.propspec,
  org.eclipse.ui.views.properties,
  org.eclipse.xtext.resource,
  org.eclipse.xtext.ui.editor
-Export-Package: edu.postech.maude.view.views

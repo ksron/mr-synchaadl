@@ -1,4 +1,4 @@
-package edu.postech.maude.view.views;
+package edu.postech.aadl.view;
 
 import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.ColumnViewer;

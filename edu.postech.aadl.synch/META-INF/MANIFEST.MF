@@ -34,8 +34,10 @@ Require-Bundle: org.eclipse.ui,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: POSTECH
-Export-Package: edu.postech.aadl.synch.checker.action,
+Export-Package: edu.postech.aadl.menu,
+ edu.postech.aadl.synch.checker.action,
  edu.postech.aadl.synch.maude.action,
  edu.postech.aadl.synch.maude.template,
  edu.postech.aadl.synch.propspec,
- edu.postech.aadl.utils
+ edu.postech.aadl.utils,
+ edu.postech.aadl.view

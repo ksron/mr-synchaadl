@@ -37,9 +37,9 @@ import edu.postech.aadl.utils.IOUtils;
  */
 public class RtmAadlPropertyWizard extends Wizard implements INewWizard {
 
-	protected final static String _TITLE = "SynchAADL Property Specification";
+	protected final static String _TITLE = "HybridSynchAADL Property Specification";
 	protected final static String _DESCRIPTION = "This wizard creates a new property spec file (*.pspc)" +
-			" that can be used to verify an SynchAADL instance model using Real-Time Maude";
+			" that can be used to verify an HybridSynchAADL instance model";
 
 	protected final static  String propExt = "pspc";
 

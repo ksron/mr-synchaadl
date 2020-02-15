@@ -1,51 +1,50 @@
 package edu.postech.aadl.synch.maude.template
 
+import com.google.common.collect.SetMultimap
 import org.osate.aadl2.DataPort
-import org.osate.aadl2.PropertyValue
 import org.osate.aadl2.Property
+import org.osate.aadl2.PropertyValue
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager
-import org.osate.ba.aadlba.BehaviorTransition
-import org.osate.ba.aadlba.DispatchCondition
-import org.osate.ba.aadlba.ExecuteCondition
+import org.osate.ba.aadlba.AssignmentAction
 import org.osate.ba.aadlba.BehaviorActionBlock
 import org.osate.ba.aadlba.BehaviorActionCollection
-import org.osate.ba.aadlba.IfStatement
-import org.osate.ba.aadlba.ElseStatement
-import org.osate.ba.aadlba.WhileOrDoUntilStatement
 import org.osate.ba.aadlba.BehaviorActionSequence
 import org.osate.ba.aadlba.BehaviorActionSet
-import org.osate.ba.aadlba.Otherwise
-import org.osate.ba.aadlba.ValueExpression
-import org.osate.ba.aadlba.ExecutionTimeoutCatch
-import org.osate.ba.aadlba.AssignmentAction
-import org.osate.ba.aadlba.SubprogramCallAction
 import org.osate.ba.aadlba.BehaviorActions
-import org.osate.ba.aadlba.Target
-import org.osate.ba.aadlba.IndexableElement
-import org.osate.ba.aadlba.Value
-import org.osate.ba.aadlba.Factor
-import org.osate.ba.aadlba.Term
-import org.osate.ba.aadlba.UnaryAddingOperator
-import org.osate.ba.aadlba.SimpleExpression
-import org.osate.ba.aadlba.Relation
-import org.osate.ba.aadlba.BehaviorPropertyConstant
-import org.osate.ba.aadlba.ValueConstant
 import org.osate.ba.aadlba.BehaviorBooleanLiteral
-import org.osate.ba.aadlba.BehaviorStringLiteral
-import org.osate.ba.aadlba.BehaviorRealLiteral
 import org.osate.ba.aadlba.BehaviorIntegerLiteral
-import org.osate.ba.aadlba.ValueVariable
+import org.osate.ba.aadlba.BehaviorPropertyConstant
+import org.osate.ba.aadlba.BehaviorRealLiteral
+import org.osate.ba.aadlba.BehaviorStringLiteral
+import org.osate.ba.aadlba.BehaviorTransition
 import org.osate.ba.aadlba.BehaviorVariableHolder
-import org.osate.ba.aadlba.ParameterLabel
 import org.osate.ba.aadlba.DataPortHolder
 import org.osate.ba.aadlba.DataSubcomponentHolder
+import org.osate.ba.aadlba.DispatchCondition
+import org.osate.ba.aadlba.ElseStatement
+import org.osate.ba.aadlba.ExecuteCondition
+import org.osate.ba.aadlba.ExecutionTimeoutCatch
+import org.osate.ba.aadlba.Factor
+import org.osate.ba.aadlba.IfStatement
+import org.osate.ba.aadlba.IndexableElement
+import org.osate.ba.aadlba.Otherwise
 import org.osate.ba.aadlba.ParameterHolder
+import org.osate.ba.aadlba.ParameterLabel
 import org.osate.ba.aadlba.PortCountValue
 import org.osate.ba.aadlba.PortFreshValue
-import com.google.common.collect.SetMultimapimport org.osate.ba.aadlba.PropertySetPropertyReference
-import org.osate.aadl2.ClassifierValue
-import org.osate.ba.aadlba.CommunicationAction
 import org.osate.ba.aadlba.PortSendAction
+import org.osate.ba.aadlba.PropertySetPropertyReference
+import org.osate.ba.aadlba.Relation
+import org.osate.ba.aadlba.SimpleExpression
+import org.osate.ba.aadlba.SubprogramCallAction
+import org.osate.ba.aadlba.Target
+import org.osate.ba.aadlba.Term
+import org.osate.ba.aadlba.UnaryAddingOperator
+import org.osate.ba.aadlba.Value
+import org.osate.ba.aadlba.ValueConstant
+import org.osate.ba.aadlba.ValueExpression
+import org.osate.ba.aadlba.ValueVariable
+import org.osate.ba.aadlba.WhileOrDoUntilStatement
 
 class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 
@@ -110,20 +109,24 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	
 	private def dispatch CharSequence compileAction(IfStatement a) {
 		if (a.elif) '''
-			(elsif («a.logicalValueExpression.compileExpression»){
-				«a.behaviorActions.compileAction»})
-							«IF a.elseStatement instanceof IfStatement»«ELSE»)«ENDIF»
+			(elsif («a.logicalValueExpression.compileExpression») {
+				«a.behaviorActions.compileAction»
+			})
 			«a.elseStatement?.compileAction»'''
 		else '''
-			if («a.logicalValueExpression.compileExpression»){
-				«a.behaviorActions.compileAction»}
-			«IF a.elseStatement instanceof IfStatement»(«ENDIF»«a.elseStatement?.compileAction»
+			if («a.logicalValueExpression.compileExpression») {
+				«a.behaviorActions.compileAction»
+			}
+			«IF a.elseStatement instanceof IfStatement»(«ENDIF»
+			«a.elseStatement?.compileAction»
+			«IF a.elseStatement instanceof IfStatement»)«ENDIF»
 			end if'''
 	}
 	
 	private def dispatch CharSequence compileAction(ElseStatement a) '''
 			else {
-				«a.behaviorActions.compileAction»}'''
+				«a.behaviorActions.compileAction»
+			}'''
 				
 	private def dispatch CharSequence compileAction(WhileOrDoUntilStatement a) {
 		if (a.doUntil) '''
@@ -137,7 +140,7 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	}
 	
 	private def dispatch CharSequence compileAction(AssignmentAction a) '''
-		(«a.target.compilePrefixTarget»{«a.target.compileTarget»} := «a.valueExpression.compileExpression»)'''
+		(«a.target.compileTarget» := «a.valueExpression.compileExpression»)'''
 	
 	private def dispatch CharSequence compileAction(SubprogramCallAction a) {
 		// a.check(a.dataAccess == null , "data access for subprogram not supported")
@@ -155,25 +158,14 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 		null
 	}
 	
-	private def compilePrefixTarget(Target t) {
-		t.check(! (t instanceof IndexableElement) || !(t as IndexableElement).setArrayIndexes, "arrays not supported")
-		switch t {
-			BehaviorVariableHolder:	"v"
-			DataPortHolder:			"f"
-			DataSubcomponentHolder:	"c"
-			ParameterHolder:		"p"
-			default:				null => [t.check(false, "Unsupported action reference: " + t.class.name)]
-		}
-	}
-	
 	
 	private def compileTarget(Target t) {
 		t.check(! (t instanceof IndexableElement) || !(t as IndexableElement).setArrayIndexes, "arrays not supported")
 		switch t {
-			BehaviorVariableHolder:	t.behaviorVariable.name.escape 
-			DataPortHolder:			t.dataPort.name.escape 
-			DataSubcomponentHolder:	t.dataSubcomponent.name.escape
-			ParameterHolder:		t.parameter.name.escape 
+			BehaviorVariableHolder:	"v{" + t.behaviorVariable.name.escape +"}" 
+			DataPortHolder:			"f{" + t.dataPort.name.escape + "}" 
+			DataSubcomponentHolder:	"c{" + t.dataSubcomponent.name.escape + "}"
+			ParameterHolder:		"p{" + t.parameter.name.escape + "}" 
 			default:				null => [t.check(false, "Unsupported action reference: " + t.class.name)]
 		}
 	}
@@ -240,6 +232,18 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 		// For ContinuousFunction
 		e.compileExpression;
 	}
+
+//    public def CharSequence compileFlow(FlowObject flows) {
+//    	flows.map[compileFlowItem].join(";", "none");
+//    }
+    
+//    public def dispatch CharSequence compileFlowItem(FlowODEItem flows) {
+//    	
+//    }
+    
+//     public def dispatch CharSequence compileFlowItem(FlowContFuncItem flows) {
+//    	
+//    }
 	
 	private def dispatch CharSequence compileExpression(ValueExpression e) {
 		val itRel = e.relations.iterator

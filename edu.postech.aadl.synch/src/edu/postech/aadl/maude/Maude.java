@@ -1,4 +1,4 @@
-package maude;
+package edu.postech.aadl.maude;
 
 import java.io.IOException;
 import java.util.Map;

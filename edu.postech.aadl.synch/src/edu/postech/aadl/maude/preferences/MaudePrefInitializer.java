@@ -1,4 +1,4 @@
-package edu.postech.maude.preferences;
+package edu.postech.aadl.maude.preferences;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.core.runtime.preferences.InstanceScope;

@@ -4,14 +4,14 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="edu.postech.maude.preferences.MaudePrefPage"
+            class="edu.postech.aadl.maude.preferences.MaudePrefPage"
             id="edu.postech.maude.preferences.page"
             name="Maude Preferences">
       </page>
    </extension>
     <extension point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="edu.postech.maude.preferences.MaudePrefInitializer">
+            class="edu.postech.aadl.maude.preferences.MaudePrefInitializer">
       </initializer>
   </extension>
 </plugin>

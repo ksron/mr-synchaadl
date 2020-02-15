@@ -1,4 +1,4 @@
-package handlers;
+package edu.postech.aadl.menu;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -23,11 +23,11 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
+import edu.postech.aadl.maude.Maude;
 import edu.postech.aadl.synch.propspec.PropspecEditorResourceManager;
+import edu.postech.aadl.view.DisplayView;
 import edu.postech.aadl.xtext.propspec.propSpec.Property;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
-import edu.postech.maude.view.views.DisplayView;
-import maude.Maude;
 
 public class SymbolicAnalysis extends AbstractHandler {
 

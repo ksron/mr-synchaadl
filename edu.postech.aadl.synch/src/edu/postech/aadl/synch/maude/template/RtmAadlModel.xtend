@@ -46,11 +46,8 @@ import org.osate.aadl2.ModalPropertyValue
 import org.eclipse.emf.common.util.ECollections
 import java.util.Comparator
 import org.antlr.v4.runtime.ANTLRInputStream
-import edu.postech.antlr.parser.FlowsLexer
 import org.antlr.v4.runtime.CommonTokenStream
-import edu.postech.antlr.parser.FlowsParser
-import edu.postech.antlr.firstPath.FlowsVisitor
-import edu.postech.antlr.secondPath.ContinuousFunction
+import edu.postech.aadl.antlr.ContinuousFunction
 import org.osate.ba.aadlba.BehaviorActionSequence
 import org.osate.xtext.aadl2.properties.util.PropertyUtils
 
@@ -338,7 +335,11 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		}
 	}
 	
-	public def compileContinuousDynamics(ModalPropertyValue mpv, ComponentInstance o){		
+	public def compileContinuousDynamics(ModalPropertyValue mpv, ComponentInstance o){
+		
+		//var FlowObject = asdf.parse(mpv).
+		//return compileFLow(FlowObject);
+				
 		var mode = ""
 		if(!mpv.inModes.isEmpty){
 			for(String modes : mpv.inModes.get(0).toString.split("#")){
@@ -356,18 +357,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	}
 	
 	private def antlrParsing(String expression, ComponentInstance ci){
-		
-		var stream = new ANTLRInputStream(expression)
-		var lexer = new FlowsLexer(stream)
-		var tokens = new CommonTokenStream(lexer)
-		var parser = new FlowsParser(tokens)
-		
-        val bhaSeq = new FlowsVisitor().setComponentInstance(ci).visitContinuousdynamics(parser.continuousdynamics()) as BehaviorActionSequence;
-		val cf = new ContinuousFunction(bhaSeq, this.bc)
-		cf.parse
-		cf.setVarId(this);
-		
-		cf.getMaude
+		return "Not Implemented"
 	}
 	
 	// Compile Sampling/Response

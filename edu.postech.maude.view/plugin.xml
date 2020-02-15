@@ -12,7 +12,7 @@
             id="edu.postech.maude.view.views.MaudeConsoleView"
             name="HybridSynchAADL Result"
             icon="icons/sample.png"
-            class="edu.postech.maude.view.views.HybridSynchAADLView"
+            class="edu.postech.aadl.view.HybridSynchAADLView"
             category="edu.postech.maude.view"
             inject="true">
       </view>

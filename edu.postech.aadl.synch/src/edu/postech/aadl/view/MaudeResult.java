@@ -1,4 +1,4 @@
-package edu.postech.maude.view.views;
+package edu.postech.aadl.view;
 
 import java.io.BufferedReader;
 import java.io.IOException;

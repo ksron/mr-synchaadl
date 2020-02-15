@@ -35,9 +35,11 @@ public class ModelChooseControl {
 				}
 				if (elm instanceof IContainer) {
 					try {
-						for (IResource mem : ((IContainer)elm).members()) {
-							if (select(viewer, elm, mem)) {
-								return true;
+						if (((IContainer) elm).isAccessible()) {
+							for (IResource mem : ((IContainer) elm).members()) {
+								if (select(viewer, elm, mem)) {
+									return true;
+								}
 							}
 						}
 					}

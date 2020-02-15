@@ -1,4 +1,4 @@
-package edu.postech.antlr.secondPath;
+package edu.postech.aadl.antlr;
 
 import java.util.ArrayList;
 import java.util.List;

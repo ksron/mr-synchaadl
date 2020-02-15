@@ -1,4 +1,4 @@
-package maude;
+package edu.postech.aadl.maude;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -12,10 +12,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 
 import edu.postech.aadl.utils.IOUtils;
+import edu.postech.aadl.view.DisplayView;
+import edu.postech.aadl.view.MaudeResult;
 import edu.postech.aadl.xtext.propspec.propSpec.Invariant;
 import edu.postech.aadl.xtext.propspec.propSpec.Property;
-import edu.postech.maude.view.views.DisplayView;
-import edu.postech.maude.view.views.MaudeResult;
 
 public class ResultGenerator extends Thread {
 	private IFile maudeResultFile;
