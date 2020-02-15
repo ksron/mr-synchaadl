@@ -17,21 +17,21 @@ target
 	;
 	
 simple_expression
-	: (unary_operator)? term (term_operator term)*
+	: term_expression (term_operator term_expression)*
 	;
 
-term
-	: factor (factor_operator factor)*
+term_expression
+	: factor_expression (factor_operator factor_expression)*
 	;
 	
-factor
-	: value (value_operator value)?
+factor_expression
+	: value_expression (value_operator value_expression)?
 	;
 	
-value
-	: value_constant					
-	| value_variable					
-	| LPAREN simple_expression RPAREN	
+value_expression
+	: (unary_operator)? value_constant					
+	| (unary_operator)? value_variable					
+	| (unary_operator)? LPAREN simple_expression RPAREN	
 	;
 
 

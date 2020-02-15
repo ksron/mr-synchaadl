@@ -18,11 +18,23 @@ public interface ContDynamicsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUnary_operator(@NotNull ContDynamicsParser.Unary_operatorContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ContDynamicsParser#value_expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValue_expression(@NotNull ContDynamicsParser.Value_expressionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ContDynamicsParser#assignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAssignment(@NotNull ContDynamicsParser.AssignmentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ContDynamicsParser#term_expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTerm_expression(@NotNull ContDynamicsParser.Term_expressionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ContDynamicsParser#simple_expression}.
 	 * @param ctx the parse tree
@@ -74,27 +86,15 @@ public interface ContDynamicsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFactor_operator(@NotNull ContDynamicsParser.Factor_operatorContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ContDynamicsParser#term}.
+	 * Visit a parse tree produced by {@link ContDynamicsParser#factor_expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTerm(@NotNull ContDynamicsParser.TermContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ContDynamicsParser#factor}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFactor(@NotNull ContDynamicsParser.FactorContext ctx);
+	T visitFactor_expression(@NotNull ContDynamicsParser.Factor_expressionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ContDynamicsParser#continuousdynamics}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitContinuousdynamics(@NotNull ContDynamicsParser.ContinuousdynamicsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ContDynamicsParser#value}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitValue(@NotNull ContDynamicsParser.ValueContext ctx);
 }

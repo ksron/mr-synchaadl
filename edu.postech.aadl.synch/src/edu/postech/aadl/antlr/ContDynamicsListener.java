@@ -19,6 +19,16 @@ public interface ContDynamicsListener extends ParseTreeListener {
 	 */
 	void exitUnary_operator(@NotNull ContDynamicsParser.Unary_operatorContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ContDynamicsParser#value_expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterValue_expression(@NotNull ContDynamicsParser.Value_expressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ContDynamicsParser#value_expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitValue_expression(@NotNull ContDynamicsParser.Value_expressionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ContDynamicsParser#assignment}.
 	 * @param ctx the parse tree
 	 */
@@ -28,6 +38,16 @@ public interface ContDynamicsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAssignment(@NotNull ContDynamicsParser.AssignmentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ContDynamicsParser#term_expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterTerm_expression(@NotNull ContDynamicsParser.Term_expressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ContDynamicsParser#term_expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitTerm_expression(@NotNull ContDynamicsParser.Term_expressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ContDynamicsParser#simple_expression}.
 	 * @param ctx the parse tree
@@ -113,25 +133,15 @@ public interface ContDynamicsListener extends ParseTreeListener {
 	 */
 	void exitFactor_operator(@NotNull ContDynamicsParser.Factor_operatorContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ContDynamicsParser#term}.
+	 * Enter a parse tree produced by {@link ContDynamicsParser#factor_expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterTerm(@NotNull ContDynamicsParser.TermContext ctx);
+	void enterFactor_expression(@NotNull ContDynamicsParser.Factor_expressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ContDynamicsParser#term}.
+	 * Exit a parse tree produced by {@link ContDynamicsParser#factor_expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitTerm(@NotNull ContDynamicsParser.TermContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ContDynamicsParser#factor}.
-	 * @param ctx the parse tree
-	 */
-	void enterFactor(@NotNull ContDynamicsParser.FactorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ContDynamicsParser#factor}.
-	 * @param ctx the parse tree
-	 */
-	void exitFactor(@NotNull ContDynamicsParser.FactorContext ctx);
+	void exitFactor_expression(@NotNull ContDynamicsParser.Factor_expressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ContDynamicsParser#continuousdynamics}.
 	 * @param ctx the parse tree
@@ -142,14 +152,4 @@ public interface ContDynamicsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitContinuousdynamics(@NotNull ContDynamicsParser.ContinuousdynamicsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ContDynamicsParser#value}.
-	 * @param ctx the parse tree
-	 */
-	void enterValue(@NotNull ContDynamicsParser.ValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ContDynamicsParser#value}.
-	 * @param ctx the parse tree
-	 */
-	void exitValue(@NotNull ContDynamicsParser.ValueContext ctx);
 }

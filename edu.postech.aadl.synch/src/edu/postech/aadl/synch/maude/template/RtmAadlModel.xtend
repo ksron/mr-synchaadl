@@ -32,6 +32,11 @@ import org.osate.xtext.aadl2.properties.util.PropertyUtils
 
 import static extension edu.postech.aadl.synch.maude.template.RtmAadlSetting.*
 import static extension edu.postech.aadl.utils.PropertyUtil.*
+import org.antlr.v4.runtime.ANTLRInputStream
+import org.antlr.v4.runtime.CommonTokenStream
+import edu.postech.aadl.antlr.ContDynamicsLexer
+import edu.postech.aadl.antlr.ContDynamicsParser
+import edu.postech.aadl.antlr.ContDynamicsFlowsVisitor
 
 class RtmAadlModel extends RtmAadlIdentifier {
 
@@ -162,7 +167,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 					«o.modeTransitionInstances.map[compileJumps].filterNull.join(' ;\n', 'empty')»
 					),
 				flows : (
-					«isAndGetContinuousDynamics(o).map[compileContinuousDynamics(it, o)].filterNull.join(" ;\n", "empty")»
+					«o.compileModalPropertyValue.map[compileFlows(o)].filterNull.join(" ;\n", "empty")»
 					),
 				sampling : (
 					«o.compileTargetInstanceList.map[compileSamplingTime].filterNull.join(" ,\n", "empty")»
@@ -306,7 +311,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		'''(«mti.source.name» -[ («mti.modeTransition.ownedTriggers.map[it.triggerPort.name.escape].filterNull.join(" , ", "[[true]]")») ]-> «mti.destination.name»)'''
 	}
 	// Compile Flows
-	private def isAndGetContinuousDynamics(ComponentInstance o){
+	private def compileModalPropertyValue(ComponentInstance o){
 		for(PropertyAssociation pa : o.ownedPropertyAssociations){
 			if(pa.property.qualifiedName().contains(PropertyUtil::CD)){
 				return pa.ownedValues
@@ -314,7 +319,14 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		}
 	}
 	
-	private def compileContinuousDynamics(ModalPropertyValue mpv, ComponentInstance o){
+	private def compileFlows(ModalPropertyValue mpv, ComponentInstance o){
+		var mode = o.compileMode(mpv)
+		var expression = (mpv.ownedValue as StringLiteral).value
+		
+		return "((" + mode + ")" + "[" + expression.parse(o)+"])"
+	}
+	
+	private def compileMode(ComponentInstance o, ModalPropertyValue mpv){
 		var mode = ""
 		if(!mpv.inModes.isEmpty){
 			for(String modes : mpv.inModes.get(0).toString.split("#")){
@@ -325,14 +337,17 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		} else {
 			mode = "@@default@loc@@"
 		}
-
-		var expression = (mpv.ownedValue as StringLiteral).value
-		
-		return "((" + mode + ")" + "[" + expression.antlrParsing(o)+"])"
 	}
 	
-	private def antlrParsing(String expression, ComponentInstance ci){
-		return "Not Implemented"
+	private def parse(String expression, ComponentInstance ci){
+		var stream = new ANTLRInputStream(expression)
+		var lexer = new ContDynamicsLexer(stream)
+		var tokens = new CommonTokenStream(lexer)
+		var parser = new ContDynamicsParser(tokens)
+		var visitor = new ContDynamicsFlowsVisitor()
+		var contDynamics = visitor.visit(parser.continuousdynamics)
+		
+		bc.compileCD(contDynamics)
 	}
 	
 	// Compile Sampling/Response

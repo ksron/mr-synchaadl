@@ -1,10 +1,5 @@
 package edu.postech.aadl.antlr.model;
 
-public class Constant implements ContDynamicsElem {
+public interface Constant extends Expression {
 
-	private String val;
-
-	public Constant(String val) {
-		this.val = val;
-	}
 }

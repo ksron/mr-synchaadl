@@ -1,15 +1,11 @@
 package edu.postech.aadl.antlr.model;
 
-public class ContDynamicsItem implements ContDynamicsElem {
+public interface ContDynamicsItem extends ContDynamicsElem {
+	public void setTarget(Target target);
+	public void setExpression(Expression expr);
 
-	private Target target;
-	private SimpleExpression expr;
+	public Target getTarget();
 
-	public void setTarget(Target target) {
-		this.target = target;
-	}
+	public Expression getExpression();
 
-	public void setExpr(SimpleExpression expr) {
-		this.expr = expr;
-	}
 }

@@ -1,51 +1,41 @@
 package edu.postech.aadl.antlr;
 
 import org.antlr.v4.runtime.misc.NotNull;
-import org.osate.aadl2.Aadl2Factory;
-import org.osate.aadl2.impl.Aadl2FactoryImpl;
-import org.osate.aadl2.instance.ComponentInstance;
-import org.osate.ba.aadlba.AadlBaFactory;
-import org.osate.ba.aadlba.impl.AadlBaFactoryImpl;
 
 import edu.postech.aadl.antlr.ContDynamicsParser.ContFuncContext;
 import edu.postech.aadl.antlr.ContDynamicsParser.ODEContext;
-import edu.postech.aadl.antlr.model.Constant;
 import edu.postech.aadl.antlr.model.ContDynamics;
 import edu.postech.aadl.antlr.model.ContDynamicsElem;
 import edu.postech.aadl.antlr.model.ContDynamicsItem;
-import edu.postech.aadl.antlr.model.ContFunc;
-import edu.postech.aadl.antlr.model.ContFuncTarget;
-import edu.postech.aadl.antlr.model.Divide;
-import edu.postech.aadl.antlr.model.Factor;
-import edu.postech.aadl.antlr.model.FactorOperator;
-import edu.postech.aadl.antlr.model.Minus;
-import edu.postech.aadl.antlr.model.Multiply;
-import edu.postech.aadl.antlr.model.ODE;
-import edu.postech.aadl.antlr.model.ODETarget;
-import edu.postech.aadl.antlr.model.Plus;
-import edu.postech.aadl.antlr.model.Power;
-import edu.postech.aadl.antlr.model.SimpleExpression;
+import edu.postech.aadl.antlr.model.Expression;
+import edu.postech.aadl.antlr.model.FactorExpression;
+import edu.postech.aadl.antlr.model.Operator;
+import edu.postech.aadl.antlr.model.TokenExpression;
 import edu.postech.aadl.antlr.model.Target;
-import edu.postech.aadl.antlr.model.Term;
-import edu.postech.aadl.antlr.model.TermOperator;
-import edu.postech.aadl.antlr.model.UnaryOperator;
-import edu.postech.aadl.antlr.model.Value;
-import edu.postech.aadl.antlr.model.ValueOperator;
+import edu.postech.aadl.antlr.model.TermExpression;
+import edu.postech.aadl.antlr.model.ValueExpression;
 import edu.postech.aadl.antlr.model.Variable;
+import edu.postech.aadl.antlr.model.impl.ConstantImpl;
+import edu.postech.aadl.antlr.model.impl.ContDynamicsImpl;
+import edu.postech.aadl.antlr.model.impl.ContFuncImpl;
+import edu.postech.aadl.antlr.model.impl.FactorExpressionImpl;
+import edu.postech.aadl.antlr.model.impl.ODEImpl;
+import edu.postech.aadl.antlr.model.impl.OperatorImpl;
+import edu.postech.aadl.antlr.model.impl.TokenExpressionImpl;
+import edu.postech.aadl.antlr.model.impl.TargetImpl;
+import edu.postech.aadl.antlr.model.impl.TermExpressionImpl;
+import edu.postech.aadl.antlr.model.impl.ValueExpressionImpl;
+import edu.postech.aadl.antlr.model.impl.VariableImpl;
 
 public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<ContDynamicsElem> {
 
-	private AadlBaFactory aadlbaFactory;
-	private Aadl2Factory aadl2Factory;
-
-	public ContDynamicsFlowsVisitor(ComponentInstance ci) {
-		aadlbaFactory = new AadlBaFactoryImpl();
-		aadl2Factory = new Aadl2FactoryImpl();
+	public ContDynamics visit(@NotNull ContDynamicsParser.ContinuousdynamicsContext ctx) {
+		return visitContinuousdynamics(ctx);
 	}
 
 	@Override
 	public ContDynamics visitContinuousdynamics(@NotNull ContDynamicsParser.ContinuousdynamicsContext ctx) {
-		ContDynamics cdObj = new ContDynamics();
+		ContDynamics cdObj = new ContDynamicsImpl();
 		for (ContDynamicsParser.AssignmentContext assignCtx : ctx.assignment()) {
 			ContDynamicsItem cdItem = visitAssignment(assignCtx);
 			cdObj.addItem(cdItem);
@@ -57,157 +47,134 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<ContDynami
 	public ContDynamicsItem visitAssignment(@NotNull ContDynamicsParser.AssignmentContext ctx) {
 		ContDynamicsItem item = null;
 		Target target = null;
-		SimpleExpression expr = null;
+		Expression expr = null;
 
 		ContDynamicsParser.TargetContext targetCtx = ctx.target();
 		if (targetCtx instanceof ContDynamicsParser.ContFuncContext) {
-			item = new ContFunc();
+			item = new ContFuncImpl();
 			target = visitContFunc((ContFuncContext) targetCtx);
 		} else if (targetCtx instanceof ContDynamicsParser.ODEContext) {
-			item = new ODE();
+			item = new ODEImpl();
 			target = visitODE((ODEContext) targetCtx);
 		}
 		item.setTarget(target);
 
 		expr = visitSimple_expression(ctx.simple_expression());
-		item.setExpr(expr);
+		item.setExpression(expr);
 		return item;
 	}
 
 	@Override
-	public ContFuncTarget visitContFunc(@NotNull ContDynamicsParser.ContFuncContext ctx) {
-		ContFuncTarget target = new ContFuncTarget(visitValue_variable(ctx.value_variable(0)),
-				visitValue_variable(ctx.value_variable(1)));
+	public Target visitContFunc(@NotNull ContDynamicsParser.ContFuncContext ctx) {
+		Target target = new TargetImpl(visitValue_variable(ctx.value_variable(0)));
+		target.setParam(visitValue_variable(ctx.value_variable(1)));
 		return target;
 	}
 
 	@Override
-	public ODETarget visitODE(@NotNull ContDynamicsParser.ODEContext ctx) {
-		ODETarget target = new ODETarget(visitValue_variable(ctx.value_variable()));
+	public Target visitODE(@NotNull ContDynamicsParser.ODEContext ctx) {
+		Target target = new TargetImpl(visitValue_variable(ctx.value_variable()));
 		return target;
 	}
 
 	@Override
-	public SimpleExpression visitSimple_expression(@NotNull ContDynamicsParser.Simple_expressionContext ctx) {
-		SimpleExpression expr = new SimpleExpression();
+	public TokenExpression visitSimple_expression(@NotNull ContDynamicsParser.Simple_expressionContext ctx) {
+		TokenExpression expr = new TokenExpressionImpl();
 
-		UnaryOperator unaryOp = visitUnary_operator(ctx.unary_operator());
-		expr.setUnaryOp(unaryOp);
+		TermExpression termExpr = visitTerm_expression(ctx.term_expression(0));
+		expr.addExpr(termExpr);
 
-		Term firstTerm = visitTerm(ctx.term(0));
-		expr.addTerm(firstTerm);
-
-		for (int i = 1; i < ctx.term().size(); i++) {
-			Term term = visitTerm(ctx.term(i));
-			expr.addTerm(term);
-			TermOperator termOp = visitTerm_operator(ctx.term_operator(i - 1));
-			expr.addTermOp(termOp);
+		for (int i = 1; i < ctx.term_expression().size(); i++) {
+			termExpr = visitTerm_expression(ctx.term_expression(i));
+			expr.addExpr(termExpr);
+			Operator termOp = visitTerm_operator(ctx.term_operator(i - 1));
+			expr.addOp(termOp);
 		}
 		return expr;
 	}
 
 	@Override
-	public UnaryOperator visitUnary_operator(@NotNull ContDynamicsParser.Unary_operatorContext ctx) {
-		UnaryOperator op = null;
-		if (ctx.PLUS() != null) {
-			op = new Plus(ctx.PLUS().getSymbol().getText());
-		} else if (ctx.MINUS() != null) {
-			op = new Minus(ctx.MINUS().getSymbol().getText());
-		}
-		return op;
+	public Operator visitTerm_operator(@NotNull ContDynamicsParser.Term_operatorContext ctx) {
+		return new OperatorImpl(ctx.getText());
 	}
 
+
 	@Override
-	public Term visitTerm(@NotNull ContDynamicsParser.TermContext ctx) {
-		Term term = new Term();
+	public TermExpression visitTerm_expression(@NotNull ContDynamicsParser.Term_expressionContext ctx) {
+		TermExpression term = new TermExpressionImpl();
 
-		Factor firstFact = visitFactor(ctx.factor(0));
-		term.addFact(firstFact);
+		FactorExpression factExpr = visitFactor_expression(ctx.factor_expression(0));
+		term.addExpr(factExpr);
 
-		for (int i = 1; i < ctx.factor().size(); i++) {
-			Factor fact = visitFactor(ctx.factor(i));
-			term.addFact(fact);
-			FactorOperator factOp = visitFactor_operator(ctx.factor_operator(i - 1));
-			term.addFactOp(factOp);
+		for (int i = 1; i < ctx.factor_expression().size(); i++) {
+			factExpr = visitFactor_expression(ctx.factor_expression(i));
+			term.addExpr(factExpr);
+			Operator factOp = visitFactor_operator(ctx.factor_operator(i - 1));
+			term.addOp(factOp);
 		}
 		return term;
 	}
 
 	@Override
-	public TermOperator visitTerm_operator(@NotNull ContDynamicsParser.Term_operatorContext ctx) {
-		TermOperator op = null;
-		if (ctx.PLUS() != null) {
-			op = new Plus(ctx.PLUS().getSymbol().getText());
-		} else if (ctx.MINUS() != null) {
-			op = new Minus(ctx.MINUS().getSymbol().getText());
-		}
-		return op;
+	public Operator visitFactor_operator(@NotNull ContDynamicsParser.Factor_operatorContext ctx) {
+		return new OperatorImpl(ctx.getText());
 	}
 
 	@Override
-	public FactorOperator visitFactor_operator(@NotNull ContDynamicsParser.Factor_operatorContext ctx) {
-		FactorOperator op = null;
-		if (ctx.MUL() != null) {
-			op = new Multiply(ctx.MUL().getSymbol().getText());
-		} else if (ctx.DIVIDE() != null) {
-			op = new Divide(ctx.DIVIDE().getSymbol().getText());
-		}
-		return op;
-	}
+	public FactorExpression visitFactor_expression(@NotNull ContDynamicsParser.Factor_expressionContext ctx) {
+		FactorExpression fact = new FactorExpressionImpl();
 
-	@Override
-	public Factor visitFactor(@NotNull ContDynamicsParser.FactorContext ctx) {
-		Factor fact = new Factor();
-
-		Value left = visitValue(ctx.value(0));
-		fact.setLeftVal(left);
+		ValueExpression left = visitValue_expression(ctx.value_expression(0));
+		fact.addExpr(left);
 
 		if (ctx.value_operator() != null) {
-			ValueOperator op = visitValue_operator(ctx.value_operator());
-			fact.setValOp(op);
+			Operator op = visitValue_operator(ctx.value_operator());
+			fact.addOp(op);
 		}
 
-		if (ctx.value().size() > 1) {
-			Value right = visitValue(ctx.value(1));
-			fact.setRightVal(right);
+		if (ctx.value_expression().size() > 1) {
+			ValueExpression right = visitValue_expression(ctx.value_expression(1));
+			fact.addExpr(right);
 		}
 
 		return fact;
 	}
 
 	@Override
-	public ValueOperator visitValue_operator(@NotNull ContDynamicsParser.Value_operatorContext ctx) {
-		ValueOperator op = null;
-		if (ctx.POWER() != null) {
-			op = new Power(ctx.POWER().getSymbol().getText());
-		}
-		return op;
+	public Operator visitValue_operator(@NotNull ContDynamicsParser.Value_operatorContext ctx) {
+		return new OperatorImpl(ctx.getText());
 	}
 
 	@Override
-	public Value visitValue(@NotNull ContDynamicsParser.ValueContext ctx) {
-		Value value = null;
+	public ValueExpression visitValue_expression(@NotNull ContDynamicsParser.Value_expressionContext ctx) {
+		ValueExpression expr = new ValueExpressionImpl();
+		if (ctx.unary_operator() != null) {
+			expr.addOp(visitUnary_operator(ctx.unary_operator()));
+		}
 		if (ctx.value_constant() != null) {
-			value = new Value(visitValue_constant(ctx.value_constant()));
+			expr.addExpr(visitValue_constant(ctx.value_constant()));
 		} else if (ctx.value_variable() != null) {
-			value = new Value(visitValue_variable(ctx.value_variable()));
+			expr.addExpr(visitValue_variable(ctx.value_variable()));
 		} else if (ctx.simple_expression() != null) {
-			value = new Value(visitSimple_expression(ctx.simple_expression()));
+			expr.addExpr(visitSimple_expression(ctx.simple_expression()));
 		}
-		return value;
+		return expr;
 	}
 
 	@Override
-	public Constant visitValue_constant(@NotNull ContDynamicsParser.Value_constantContext ctx) {
-		Constant var = new Constant(ctx.getText());
-		return var;
+	public Operator visitUnary_operator(@NotNull ContDynamicsParser.Unary_operatorContext ctx) {
+		return new OperatorImpl(ctx.getText());
+	}
+
+	@Override
+	public ConstantImpl visitValue_constant(@NotNull ContDynamicsParser.Value_constantContext ctx) {
+		return new ConstantImpl(ctx.getText());
 	}
 
 
 
 	@Override
 	public Variable visitValue_variable(@NotNull ContDynamicsParser.Value_variableContext ctx) {
-		Variable var = new Variable(ctx.getText());
-		return var;
+		return new VariableImpl(ctx.getText());
 	}
 }

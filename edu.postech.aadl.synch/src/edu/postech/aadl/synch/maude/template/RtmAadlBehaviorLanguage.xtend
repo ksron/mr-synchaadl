@@ -45,6 +45,11 @@ import org.osate.ba.aadlba.ValueConstant
 import org.osate.ba.aadlba.ValueExpression
 import org.osate.ba.aadlba.ValueVariable
 import org.osate.ba.aadlba.WhileOrDoUntilStatement
+import edu.postech.aadl.antlr.model.ContDynamics
+import edu.postech.aadl.antlr.model.ContDynamicsItem
+import edu.postech.aadl.antlr.model.ContFunc
+import edu.postech.aadl.antlr.model.TermExpression
+import edu.postech.aadl.antlr.model.TokenExpression
 
 class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 
@@ -228,10 +233,24 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 			null => [c.check(false, "Unsupported property constant: " + c.class.name)]
 	}
 	
-	public def CharSequence compileFlowsExpression(ValueExpression e){
-		// For ContinuousFunction
-		e.compileExpression;
-	}
+	public def CharSequence compileCD(ContDynamics cd)'''
+		«cd.getItems.map[compileCDItem].filterNull.join(" ; ")»
+	'''
+
+	
+	public def CharSequence compileCDItem(ContDynamicsItem item)'''
+		«item.compileTarget» = «(item.expression as TokenExpression).compileCDExpression»
+	'''
+	
+	public def CharSequence compileTarget(ContDynamicsItem item)'''
+		«IF item instanceof ContFunc»«item.target.variable»(«item.target.param»)«ELSE»dt/d[«item.target.variable»]«ENDIF»
+	'''
+	
+	public def CharSequence compileCDExpression(TokenExpression expr)'''
+	'''
+	
+	public def CharSequence compileCDExpression(TermExpression expr)'''
+	'''
 
 //    public def CharSequence compileFlow(FlowObject flows) {
 //    	flows.map[compileFlowItem].join(";", "none");

@@ -1,17 +1,10 @@
 package edu.postech.aadl.antlr.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ContDynamics implements ContDynamicsElem {
-	private List<ContDynamicsItem> cdItem;
+public interface ContDynamics extends ContDynamicsElem {
 
-	public ContDynamics() {
-		cdItem = new ArrayList<ContDynamicsItem>();
-	}
+	public void addItem(ContDynamicsItem item);
 
-	public void addItem(ContDynamicsItem item) {
-		cdItem.add(item);
-	}
-
+	public List<ContDynamicsItem> getItems();
 }
