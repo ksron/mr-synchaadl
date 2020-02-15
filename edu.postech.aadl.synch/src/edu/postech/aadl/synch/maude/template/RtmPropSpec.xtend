@@ -120,7 +120,7 @@ class RtmPropSpec {
 	
 	static def compileInterpreter(Mode mode){
 		if(mode == null){
-			return "interpreter-symbolic.maude"
+			return "interpreter-symbolic2-merge.maude"
 		} else if (mode instanceof RANDOM){
 			return "interpreter-random.maude"
 		} else if (mode instanceof DISTRIBUTED){

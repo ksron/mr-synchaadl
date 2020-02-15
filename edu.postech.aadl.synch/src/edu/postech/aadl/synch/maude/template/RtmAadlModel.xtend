@@ -2,61 +2,43 @@ package edu.postech.aadl.synch.maude.template
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.SetMultimap
+import edu.postech.aadl.utils.PropertyUtil
+import java.util.ArrayList
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
-// import org.osate.aadl2.AbstractConnectionEnd
+import org.eclipse.emf.common.util.EList
 import org.osate.aadl2.ConnectedElement
+import org.osate.aadl2.DefaultAnnexSubclause
 import org.osate.aadl2.DirectionType
+import org.osate.aadl2.ListValue
+import org.osate.aadl2.ModalPropertyValue
 import org.osate.aadl2.NamedElement
-import org.osate.aadl2.Parameter
 import org.osate.aadl2.ParameterConnection
 import org.osate.aadl2.Port
+import org.osate.aadl2.PortCategory
 import org.osate.aadl2.PortConnection
 import org.osate.aadl2.PropertyAssociation
 import org.osate.aadl2.StringLiteral
 import org.osate.aadl2.instance.ComponentInstance
 import org.osate.aadl2.instance.ConnectionReference
 import org.osate.aadl2.instance.FeatureInstance
+import org.osate.aadl2.instance.ModeInstance
+import org.osate.aadl2.instance.ModeTransitionInstance
 import org.osate.aadl2.instance.SystemInstance
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager
+import org.osate.ba.aadlba.BehaviorAnnex
+import org.osate.ba.aadlba.BehaviorVariable
+import org.osate.xtext.aadl2.properties.util.PropertyUtils
 
 import static extension edu.postech.aadl.synch.maude.template.RtmAadlSetting.*
 import static extension edu.postech.aadl.utils.PropertyUtil.*
-import static extension org.osate.xtext.aadl2.properties.util.GetProperties.*
-import org.osate.ba.aadlba.BehaviorAnnex
-import org.osate.aadl2.DefaultAnnexSubclause
-import java.util.ArrayList
-import java.util.List
-import org.osate.aadl2.instance.ModeInstance
-import org.osate.aadl2.instance.ModeTransitionInstance
-import org.eclipse.emf.common.util.EList
-import edu.postech.aadl.utils.PropertyUtil
-import org.osate.aadl2.instance.ConnectionInstance
-import org.osate.aadl2.FlowSpecification
-import org.osate.aadl2.instance.FlowSpecificationInstance
-import org.osate.aadl2.instance.EndToEndFlowInstance
-import org.osate.aadl2.NamedValue
-import org.osate.xtext.aadl2.properties.util.GetProperties
-import org.eclipse.emf.ecore.EObject
-import org.osate.ba.aadlba.BehaviorVariable
-import java.util.regex.Pattern
-import org.osate.aadl2.PortCategory
-import org.osate.aadl2.ListValue
-import org.osate.aadl2.ModalPropertyValue
-import org.eclipse.emf.common.util.ECollections
-import java.util.Comparator
-import org.antlr.v4.runtime.ANTLRInputStream
-import org.antlr.v4.runtime.CommonTokenStream
-import edu.postech.aadl.antlr.ContinuousFunction
-import org.osate.ba.aadlba.BehaviorActionSequence
-import org.osate.xtext.aadl2.properties.util.PropertyUtils
 
 class RtmAadlModel extends RtmAadlIdentifier {
 
-	private val RtmAadlBehaviorLanguage bc;
-	private val RtmAadlProperty pc;
-	private val IProgressMonitor monitor;
-	private val SetMultimap<ComponentInstance, ConnectionReference> conxTable = HashMultimap::create() ;
+	val RtmAadlBehaviorLanguage bc;
+	val RtmAadlProperty pc;
+	val IProgressMonitor monitor;
+	val SetMultimap<ComponentInstance, ConnectionReference> conxTable = HashMultimap::create() ;
 
 
 	new(IProgressMonitor pm, AnalysisErrorReporterManager errMgr, SetMultimap<String, String> opTable) {
@@ -93,12 +75,12 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		var check2 = true
 		
 		for(ConnectionReference param : smm.get(ci)){
-			if(param.connection.source.context != null && cr.connection.source.context != null && param.connection.source.context.name.equals(cr.connection.source.context.name)){
+			if(param.connection.source.context !== null &&cr.connection.source.context !== null && param.connection.source.context.name.equals(cr.connection.source.context.name)){
 				if(param.connection.source.connectionEnd.name.equals(cr.connection.source.connectionEnd.name)){
 					check1 = false
 				}
 			}
-			if(param.connection.source.context == null && cr.connection.source.context == null){
+			if(param.connection.source.context === null && cr.connection.source.context === null){
 				if(param.connection.source.connectionEnd.name.equals(cr.connection.source.connectionEnd.name)){
 					check1 = false
 				}
@@ -106,12 +88,12 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		}
 		
 		for(ConnectionReference param : smm.get(ci)){
-			if(param.connection.destination.context != null && cr.connection.destination.context != null && param.connection.destination.context.name.equals(cr.connection.destination.context.name)){
+			if(param.connection.destination.context !== null && cr.connection.destination.context !== null && param.connection.destination.context.name.equals(cr.connection.destination.context.name)){
 				if(param.connection.destination.connectionEnd.name.equals(cr.connection.destination.connectionEnd.name)){
 					check2 = false
 				}
 			}
-			if(param.connection.destination.context == null && cr.connection.destination.context == null){
+			if(param.connection.destination.context === null && cr.connection.destination.context === null){
 				if(param.connection.destination.connectionEnd.name.equals(cr.connection.destination.connectionEnd.name)){
 					check2 = false
 				}
@@ -155,7 +137,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				«ELSEIF o.isData»
 				value : null(«IF o.subcomponent.subcomponentType.name.contains("Boolean")»Boolean«ELSE»Real«ENDIF»),
 				«ENDIF»
-				«IF o.behavioral && ! (behAnx == null)»
+				«IF o.behavioral && ! (behAnx === null)»
 				currState : (
 					«behAnx.states.filter[isInitial].get(0).id("Location")»),
 				completeStates : (
@@ -239,7 +221,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def compileOutTarget(String featureId, String componentId){
 		for(ConnectionReference cr : conxTable.values){
-			if(cr.connection.source.context!=null && cr.connection.destination.context!=null){
+			if(cr.connection.source.context!==null && cr.connection.destination.context!==null){
 				if(cr.connection.source.context.name.escape.equals(componentId) && cr.connection.source.connectionEnd.name.escape.equals(featureId)){
 					return cr.connection.destination.context.name
 				}
@@ -250,7 +232,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def compileInTarget(String featureId, String componentId){
 		for(ConnectionReference cr : conxTable.values){
-			if(cr.connection.source.context!=null && cr.connection.destination.context!=null){
+			if(cr.connection.source.context!==null && cr.connection.destination.context!==null){
 				if(cr.connection.destination.context.name.escape.equals(componentId) && cr.connection.destination.connectionEnd.name.escape.equals(featureId)){
 					return cr.connection.source.context.name
 				}
@@ -300,7 +282,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	// Compile VarGen
 	private def compileVarGenName(ComponentInstance o){
-		if(o.getContainingComponentInstance == null)
+		if(o.getContainingComponentInstance === null)
 			return o.id("ComponentId")
 		return compileVarGenName(o.getContainingComponentInstance) +"."+ o.id("ComponentId")
 	}
@@ -321,13 +303,10 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	// Compile Jumps
 	private def compileJumps(ModeTransitionInstance mti){
-		val src = mti.name.split("_").get(0)
-		val dest = mti.name.split("_").get(mti.name.split("_").length-1)
-		val guard = mti.name.substring(src.length+1, mti.name.length-dest.length-1)
 		'''(«mti.source.name» -[ («mti.modeTransition.ownedTriggers.map[it.triggerPort.name.escape].filterNull.join(" , ", "[[true]]")») ]-> «mti.destination.name»)'''
 	}
 	// Compile Flows
-	public def isAndGetContinuousDynamics(ComponentInstance o){
+	private def isAndGetContinuousDynamics(ComponentInstance o){
 		for(PropertyAssociation pa : o.ownedPropertyAssociations){
 			if(pa.property.qualifiedName().contains(PropertyUtil::CD)){
 				return pa.ownedValues
@@ -335,11 +314,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		}
 	}
 	
-	public def compileContinuousDynamics(ModalPropertyValue mpv, ComponentInstance o){
-		
-		//var FlowObject = asdf.parse(mpv).
-		//return compileFLow(FlowObject);
-				
+	private def compileContinuousDynamics(ModalPropertyValue mpv, ComponentInstance o){
 		var mode = ""
 		if(!mpv.inModes.isEmpty){
 			for(String modes : mpv.inModes.get(0).toString.split("#")){
@@ -364,7 +339,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	private def compileTargetInstanceList(ComponentInstance o){
 		val targets = new ArrayList<String>()
 		for(ConnectionReference cr : conxTable.values){
-			if(cr.connection.source.context != null && cr.connection.destination.context != null){
+			if(cr.connection.source.context !== null && cr.connection.destination.context !== null){
 				if(cr.connection.source.context.name.equals(o.id("ComponentId"))){
 					targets.add(cr.connection.destination.context.name)
 				}
@@ -392,7 +367,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def compileSamplingTime(ComponentInstance o) {
 		var value = "(" + o.id("ComponentId") + " : ("
-		//println(value)
 		for(PropertyAssociation p : o.ownedPropertyAssociations){
 			if(p.property.name.contains(PropertyUtil::SAMPLING_TIME)){
 				return value += "rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(0)+"),rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(2)+")))"
@@ -403,9 +377,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def compileResponseTime(ComponentInstance o) {
 		var value = "(" + o.id("ComponentId") + " : ("
-		//println(value)
 		for(PropertyAssociation p : o.ownedPropertyAssociations){
-			//println("PropertyAssociation : " + p.property.name)
 			if(p.property.name.equals(PropertyUtil::RESPONSE_TIME)){
 				return value += "rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(0)+"),rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(2)+")))"
 			}
@@ -432,7 +404,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 
 	private def compileConnectionEndName(ConnectedElement end, ConnectionReference o) {
 		switch end {
-			ConnectedElement: '''«IF end.context != null»«end.context.name.escape» .. «ENDIF»«end.connectionEnd.name.escape»'''
+			ConnectedElement: '''«IF end.context !== null»«end.context.name.escape» .. «ENDIF»«end.connectionEnd.name.escape»'''
 			default:
 				null => [o.check(false, "Unsupported connection end")]
 		}
@@ -449,7 +421,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		}
 		
 		val value = pc.compilePropertyValue(p.property, ne)
-		if (value != null && !value.equals("param")) '''(«p.property.qualifiedName().escape» => {{«value»}})'''
+		if (value !== null && !value.equals("param")) '''(«p.property.qualifiedName().escape» => {{«value»}})'''
 	}
 
 
