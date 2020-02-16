@@ -150,23 +150,24 @@
          point="org.eclipse.ui.views">
       <category
             name="HybridSynchAADL Result"
-            id="edu.postech.maude.view">
+            id="edu.postech.aadl.synch">
       </category>
       <view
-            id="edu.postech.maude.view.views.MaudeConsoleView"
+            id="edu.postech.aadl.view.HybridSynchAADLView"
             name="HybridSynchAADL Result"
-            icon="icons/sample.png"
+            icon="icons/sample.gif"
             class="edu.postech.aadl.view.HybridSynchAADLView"
-            category="edu.postech.maude.view"
+            category="edu.postech.aadl.synch"
             inject="true">
       </view>
    </extension>
+   
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
             targetID="org.eclipse.jdt.ui.JavaPerspective">
          <view
-               id="edu.postech.maude.view.views.MaudeConsoleView"
+               id="edu.postech.aadl.view.HybridSynchAADLView"
                relative="org.eclipse.ui.views.ProblemView"
                relationship="right"
                ratio="0.5">

@@ -1,11 +1,26 @@
 package edu.postech.aadl.antlr.model.impl;
 
+import org.osate.ba.aadlba.ValueVariable;
+
 import edu.postech.aadl.antlr.model.Variable;
 
 public class VariableImpl implements Variable {
-	private String val;
+	private ValueVariable vv = null;
 
-	public VariableImpl(String val) {
-		this.val = val;
+	@Override
+	public void setValue(ValueVariable val) {
+		vv = val;
 	}
+
+	@Override
+	public ValueVariable getValue() {
+		return vv;
+	}
+
+	@Override
+	public String getText() {
+		return vv.toString();
+	}
+
+
 }

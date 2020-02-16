@@ -64,7 +64,7 @@ public class HybridSynchAADLView extends ViewPart {
 	/**
 	 * The ID of the view as specified by the extension.
 	 */
-	public static final String ID = "edu.postech.maude.view.views.MaudeConsoleView";
+	public static final String ID = "edu.postech.aadl.view.HybridSynchAADLView";
 
 	@Inject
 	public IWorkbench workbench;
@@ -165,7 +165,7 @@ public class HybridSynchAADLView extends ViewPart {
 
 		viewer.setContentProvider(new ArrayContentProvider());
 
-		workbench.getHelpSystem().setHelp(viewer.getControl(), "edu.postech.maude.view.viewer");
+		workbench.getHelpSystem().setHelp(viewer.getControl(), "edu.postech.aadl.view.HybridSynchAADLView");
 		getSite().setSelectionProvider(viewer);
 
 		makeActions();

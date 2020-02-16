@@ -569,6 +569,7 @@ public class ContDynamicsParser extends Parser {
 	}
 
 	public static class Value_variableContext extends ParserRuleContext {
+		public Token var;
 		public Token zero;
 		public List<TerminalNode> VALID_ID_START() { return getTokens(ContDynamicsParser.VALID_ID_START); }
 		public TerminalNode VALID_ID_START(int i) {
@@ -607,7 +608,7 @@ public class ContDynamicsParser extends Parser {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(93); match(VALID_ID_START);
+					setState(93); ((Value_variableContext)_localctx).var = match(VALID_ID_START);
 					}
 					} 
 				}

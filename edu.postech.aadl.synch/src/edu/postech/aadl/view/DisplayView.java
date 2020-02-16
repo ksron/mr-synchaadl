@@ -10,7 +10,7 @@ import edu.postech.aadl.xtext.propspec.propSpec.Property;
 
 public class DisplayView {
 	static private final HybridSynchAADLView view = (HybridSynchAADLView) PlatformUI.getWorkbench()
-			.getActiveWorkbenchWindow().getActivePage().findView("edu.postech.maude.view.views.MaudeConsoleView");
+			.getActiveWorkbenchWindow().getActivePage().findView("edu.postech.aadl.view.HybridSynchAADLView");
 	static private final Display display = view.workbench.getDisplay();
 
 

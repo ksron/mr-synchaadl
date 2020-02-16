@@ -1,12 +1,12 @@
 package edu.postech.aadl.antlr.model.impl;
 
+import edu.postech.aadl.antlr.model.CDExpression;
 import edu.postech.aadl.antlr.model.ContFunc;
-import edu.postech.aadl.antlr.model.Expression;
 import edu.postech.aadl.antlr.model.Target;
 
 public class ContFuncImpl implements ContFunc {
 	public Target target = null;
-	public Expression expression = null;
+	public CDExpression expression = null;
 
 	@Override
 	public void setTarget(Target targ) {
@@ -14,7 +14,7 @@ public class ContFuncImpl implements ContFunc {
 	}
 
 	@Override
-	public void setExpression(Expression expr) {
+	public void setExpression(CDExpression expr) {
 		expression = expr;
 	}
 
@@ -24,7 +24,7 @@ public class ContFuncImpl implements ContFunc {
 	}
 
 	@Override
-	public Expression getExpression() {
+	public CDExpression getExpression() {
 		return expression;
 	}
 }

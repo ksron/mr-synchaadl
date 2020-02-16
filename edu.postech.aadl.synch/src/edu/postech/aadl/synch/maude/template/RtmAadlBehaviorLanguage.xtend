@@ -1,6 +1,12 @@
 package edu.postech.aadl.synch.maude.template
 
 import com.google.common.collect.SetMultimap
+import edu.postech.aadl.antlr.model.ContDynamics
+import edu.postech.aadl.antlr.model.ContDynamicsItem
+import edu.postech.aadl.antlr.model.ContFunc
+import edu.postech.aadl.antlr.model.FactorCDExpression
+import edu.postech.aadl.antlr.model.SimpleCDExpression
+import edu.postech.aadl.antlr.model.TermCDExpression
 import org.osate.aadl2.DataPort
 import org.osate.aadl2.Property
 import org.osate.aadl2.PropertyValue
@@ -45,11 +51,10 @@ import org.osate.ba.aadlba.ValueConstant
 import org.osate.ba.aadlba.ValueExpression
 import org.osate.ba.aadlba.ValueVariable
 import org.osate.ba.aadlba.WhileOrDoUntilStatement
-import edu.postech.aadl.antlr.model.ContDynamics
-import edu.postech.aadl.antlr.model.ContDynamicsItem
-import edu.postech.aadl.antlr.model.ContFunc
-import edu.postech.aadl.antlr.model.TermExpression
-import edu.postech.aadl.antlr.model.TokenExpression
+import edu.postech.aadl.antlr.model.ValueCDExpression
+import edu.postech.aadl.antlr.model.Operator
+import edu.postech.aadl.antlr.model.Variable
+import edu.postech.aadl.antlr.model.Constant
 
 class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 
@@ -236,33 +241,96 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	public def CharSequence compileCD(ContDynamics cd)'''
 		«cd.getItems.map[compileCDItem].filterNull.join(" ; ")»
 	'''
-
 	
-	public def CharSequence compileCDItem(ContDynamicsItem item)'''
-		«item.compileTarget» = «(item.expression as TokenExpression).compileCDExpression»
+	private def CharSequence compileCDItem(ContDynamicsItem item)'''
+		«item.compileTarget» = «(item.expression as SimpleCDExpression).compileCDExpression»
 	'''
 	
-	public def CharSequence compileTarget(ContDynamicsItem item)'''
+	private def CharSequence compileTarget(ContDynamicsItem item)'''
 		«IF item instanceof ContFunc»«item.target.variable»(«item.target.param»)«ELSE»dt/d[«item.target.variable»]«ENDIF»
 	'''
 	
-	public def CharSequence compileCDExpression(TokenExpression expr)'''
-	'''
+	private def CharSequence compileCDExpression(SimpleCDExpression expr){
+		var simpleExprStr = expr.firstExpression.compileCDExpression.toString
+		if(expr.hasMultiExpr){
+			for(var i = 0; i < expr.opCount; i++){
+				simpleExprStr += expr.getOp(i).compileCDOperator
+				simpleExprStr += expr.getNextExpression(i).compileCDExpression
+			}
+		}
+		return simpleExprStr
+	}
 	
-	public def CharSequence compileCDExpression(TermExpression expr)'''
-	'''
-
-//    public def CharSequence compileFlow(FlowObject flows) {
-//    	flows.map[compileFlowItem].join(";", "none");
-//    }
-    
-//    public def dispatch CharSequence compileFlowItem(FlowODEItem flows) {
-//    	
-//    }
-    
-//     public def dispatch CharSequence compileFlowItem(FlowContFuncItem flows) {
-//    	
-//    }
+	private def CharSequence compileCDExpression(TermCDExpression expr){
+		var termExprStr = expr.firstExpression.compileCDExpression.toString
+		if(expr.hasMultiExpr){
+			for(var i = 0; i < expr.opCount; i++){
+				termExprStr += expr.getOp(i).compileCDOperator
+				termExprStr += expr.getNextExpression(i).compileCDExpression
+			}
+		}
+		return termExprStr
+	}
+	
+	private def CharSequence compileCDExpression(FactorCDExpression expr){
+		var factExprStr = expr.firstExpression.compileCDExpression.toString
+		if(expr.hasMultiExpr){
+			for(var i = 0; i < expr.opCount; i++){
+				factExprStr += expr.getOp(i).compileCDOperator
+				factExprStr += expr.getNextExpression(i).compileCDExpression
+			}
+		}
+		return factExprStr
+	}
+	
+	private def CharSequence compileCDExpression(ValueCDExpression expr){
+		var valExprStr = expr.getOp(0).compileCDUnaryOperator.toString
+		valExprStr += "("
+		var single = expr.firstExpression
+		if(single instanceof SimpleCDExpression){
+			valExprStr += " ( " + (single as SimpleCDExpression).compileCDExpression.toString + " ) "
+		}else if(single instanceof Variable){
+			valExprStr += (single as Variable).compileCDExpression.toString
+		}else if(single instanceof Constant){
+			valExprStr += (single as Constant).compileCDExpression.toString
+		}
+		valExprStr += ")"
+		return valExprStr;
+	}
+	
+	private def CharSequence compileCDExpression(Variable variable){
+		switch variable.getValue {
+			case DataSubcomponentHolder: 	'''c[«variable.text»]'''
+			case BehaviorVariableHolder:	'''v[«variable.text»]'''
+			default:						'''[Unsupported]'''
+		}
+	}
+	
+	private def CharSequence compileCDExpression(Constant constant){
+		switch constant.getValue {
+			case BehaviorRealLiteral:		'''[[«constant.text»]]'''
+			case BehaviorPropertyConstant:		(constant.getValue as BehaviorPropertyConstant).compilePropertyConstant
+			default:						'''[[Unsupported]]'''
+		}
+	}
+	
+	private def CharSequence compileCDUnaryOperator(Operator op){
+		switch op.value {
+			case Operator::ADD:			"plus"
+			case Operator::MINUS:		"minus"
+			default:					""
+		}
+	}
+	
+	private def CharSequence compileCDOperator(Operator op){
+		switch op.value {
+			case Operator::ADD:			"+"
+			case Operator::MINUS:		"-"
+			case Operator::MULTIPLY:	"*"
+			case Operator::DIVIDE:		"/"
+			case Operator::POWER:		"**"
+		}
+	}
 	
 	private def dispatch CharSequence compileExpression(ValueExpression e) {
 		val itRel = e.relations.iterator

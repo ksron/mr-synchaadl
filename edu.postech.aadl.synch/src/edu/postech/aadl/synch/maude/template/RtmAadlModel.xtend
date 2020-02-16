@@ -345,7 +345,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		var tokens = new CommonTokenStream(lexer)
 		var parser = new ContDynamicsParser(tokens)
 		var visitor = new ContDynamicsFlowsVisitor()
-		var contDynamics = visitor.visit(parser.continuousdynamics)
+		var contDynamics = visitor.visit(ci, parser.continuousdynamics)
 		
 		bc.compileCD(contDynamics)
 	}

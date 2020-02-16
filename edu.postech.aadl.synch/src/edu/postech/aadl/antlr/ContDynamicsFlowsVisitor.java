@@ -1,35 +1,55 @@
 package edu.postech.aadl.antlr;
 
 import org.antlr.v4.runtime.misc.NotNull;
+import org.eclipse.emf.common.util.ECollections;
+import org.osate.aadl2.Aadl2Factory;
+import org.osate.aadl2.DataSubcomponent;
+import org.osate.aadl2.impl.Aadl2FactoryImpl;
+import org.osate.aadl2.instance.ComponentInstance;
+import org.osate.ba.aadlba.AadlBaFactory;
+import org.osate.ba.aadlba.BehaviorPropertyConstant;
+import org.osate.ba.aadlba.BehaviorRealLiteral;
+import org.osate.ba.aadlba.BehaviorVariable;
+import org.osate.ba.aadlba.BehaviorVariableHolder;
+import org.osate.ba.aadlba.DataSubcomponentHolder;
+import org.osate.ba.aadlba.impl.AadlBaFactoryImpl;
+import org.osate.xtext.aadl2.properties.util.GetProperties;
 
 import edu.postech.aadl.antlr.ContDynamicsParser.ContFuncContext;
 import edu.postech.aadl.antlr.ContDynamicsParser.ODEContext;
+import edu.postech.aadl.antlr.model.CDExpression;
+import edu.postech.aadl.antlr.model.Constant;
 import edu.postech.aadl.antlr.model.ContDynamics;
 import edu.postech.aadl.antlr.model.ContDynamicsElem;
 import edu.postech.aadl.antlr.model.ContDynamicsItem;
-import edu.postech.aadl.antlr.model.Expression;
-import edu.postech.aadl.antlr.model.FactorExpression;
+import edu.postech.aadl.antlr.model.FactorCDExpression;
 import edu.postech.aadl.antlr.model.Operator;
-import edu.postech.aadl.antlr.model.TokenExpression;
+import edu.postech.aadl.antlr.model.SimpleCDExpression;
 import edu.postech.aadl.antlr.model.Target;
-import edu.postech.aadl.antlr.model.TermExpression;
-import edu.postech.aadl.antlr.model.ValueExpression;
+import edu.postech.aadl.antlr.model.TermCDExpression;
+import edu.postech.aadl.antlr.model.ValueCDExpression;
 import edu.postech.aadl.antlr.model.Variable;
 import edu.postech.aadl.antlr.model.impl.ConstantImpl;
 import edu.postech.aadl.antlr.model.impl.ContDynamicsImpl;
 import edu.postech.aadl.antlr.model.impl.ContFuncImpl;
-import edu.postech.aadl.antlr.model.impl.FactorExpressionImpl;
+import edu.postech.aadl.antlr.model.impl.FactorCDExpressionImpl;
 import edu.postech.aadl.antlr.model.impl.ODEImpl;
 import edu.postech.aadl.antlr.model.impl.OperatorImpl;
-import edu.postech.aadl.antlr.model.impl.TokenExpressionImpl;
 import edu.postech.aadl.antlr.model.impl.TargetImpl;
-import edu.postech.aadl.antlr.model.impl.TermExpressionImpl;
-import edu.postech.aadl.antlr.model.impl.ValueExpressionImpl;
+import edu.postech.aadl.antlr.model.impl.TermCDExpressionImpl;
+import edu.postech.aadl.antlr.model.impl.TokenCDExpressionImpl;
+import edu.postech.aadl.antlr.model.impl.ValueCDExpressionImpl;
 import edu.postech.aadl.antlr.model.impl.VariableImpl;
 
 public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<ContDynamicsElem> {
+	private ComponentInstance ci;
+	private AadlBaFactory aadlbaFactory;
+	private Aadl2Factory aadl2Factory;
 
-	public ContDynamics visit(@NotNull ContDynamicsParser.ContinuousdynamicsContext ctx) {
+	public ContDynamics visit(ComponentInstance ci, @NotNull ContDynamicsParser.ContinuousdynamicsContext ctx) {
+		this.ci = ci;
+		aadlbaFactory = new AadlBaFactoryImpl();
+		aadl2Factory = new Aadl2FactoryImpl();
 		return visitContinuousdynamics(ctx);
 	}
 
@@ -47,7 +67,7 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<ContDynami
 	public ContDynamicsItem visitAssignment(@NotNull ContDynamicsParser.AssignmentContext ctx) {
 		ContDynamicsItem item = null;
 		Target target = null;
-		Expression expr = null;
+		CDExpression expr = null;
 
 		ContDynamicsParser.TargetContext targetCtx = ctx.target();
 		if (targetCtx instanceof ContDynamicsParser.ContFuncContext) {
@@ -78,10 +98,10 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<ContDynami
 	}
 
 	@Override
-	public TokenExpression visitSimple_expression(@NotNull ContDynamicsParser.Simple_expressionContext ctx) {
-		TokenExpression expr = new TokenExpressionImpl();
+	public SimpleCDExpression visitSimple_expression(@NotNull ContDynamicsParser.Simple_expressionContext ctx) {
+		SimpleCDExpression expr = new TokenCDExpressionImpl();
 
-		TermExpression termExpr = visitTerm_expression(ctx.term_expression(0));
+		TermCDExpression termExpr = visitTerm_expression(ctx.term_expression(0));
 		expr.addExpr(termExpr);
 
 		for (int i = 1; i < ctx.term_expression().size(); i++) {
@@ -100,10 +120,10 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<ContDynami
 
 
 	@Override
-	public TermExpression visitTerm_expression(@NotNull ContDynamicsParser.Term_expressionContext ctx) {
-		TermExpression term = new TermExpressionImpl();
+	public TermCDExpression visitTerm_expression(@NotNull ContDynamicsParser.Term_expressionContext ctx) {
+		TermCDExpression term = new TermCDExpressionImpl();
 
-		FactorExpression factExpr = visitFactor_expression(ctx.factor_expression(0));
+		FactorCDExpression factExpr = visitFactor_expression(ctx.factor_expression(0));
 		term.addExpr(factExpr);
 
 		for (int i = 1; i < ctx.factor_expression().size(); i++) {
@@ -121,10 +141,10 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<ContDynami
 	}
 
 	@Override
-	public FactorExpression visitFactor_expression(@NotNull ContDynamicsParser.Factor_expressionContext ctx) {
-		FactorExpression fact = new FactorExpressionImpl();
+	public FactorCDExpression visitFactor_expression(@NotNull ContDynamicsParser.Factor_expressionContext ctx) {
+		FactorCDExpression fact = new FactorCDExpressionImpl();
 
-		ValueExpression left = visitValue_expression(ctx.value_expression(0));
+		ValueCDExpression left = visitValue_expression(ctx.value_expression(0));
 		fact.addExpr(left);
 
 		if (ctx.value_operator() != null) {
@@ -133,7 +153,7 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<ContDynami
 		}
 
 		if (ctx.value_expression().size() > 1) {
-			ValueExpression right = visitValue_expression(ctx.value_expression(1));
+			ValueCDExpression right = visitValue_expression(ctx.value_expression(1));
 			fact.addExpr(right);
 		}
 
@@ -146,8 +166,8 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<ContDynami
 	}
 
 	@Override
-	public ValueExpression visitValue_expression(@NotNull ContDynamicsParser.Value_expressionContext ctx) {
-		ValueExpression expr = new ValueExpressionImpl();
+	public ValueCDExpression visitValue_expression(@NotNull ContDynamicsParser.Value_expressionContext ctx) {
+		ValueCDExpression expr = new ValueCDExpressionImpl();
 		if (ctx.unary_operator() != null) {
 			expr.addOp(visitUnary_operator(ctx.unary_operator()));
 		}
@@ -167,14 +187,54 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<ContDynami
 	}
 
 	@Override
-	public ConstantImpl visitValue_constant(@NotNull ContDynamicsParser.Value_constantContext ctx) {
-		return new ConstantImpl(ctx.getText());
+	public Constant visitValue_constant(@NotNull ContDynamicsParser.Value_constantContext ctx) {
+		Constant constant = new ConstantImpl();
+		if (ctx.getText().matches("([0-9]+)(\\.[0-9]+)?")) {
+			BehaviorRealLiteral brl = aadlbaFactory.createBehaviorRealLiteral();
+			brl.setValue(ctx.getText());
+			constant.setValue(brl);
+		} else {
+			BehaviorPropertyConstant cspr = aadlbaFactory.createBehaviorPropertyConstant();
+			String[] prop = ctx.getText().split("::");
+			cspr.setProperty(GetProperties.lookupPropertyConstant(ci, prop[0], prop[1]));
+			constant.setValue(cspr);
+		}
+		return constant;
 	}
 
 
 
 	@Override
 	public Variable visitValue_variable(@NotNull ContDynamicsParser.Value_variableContext ctx) {
-		return new VariableImpl(ctx.getText());
+		Variable var = new VariableImpl();
+		if (checkHasDataSubCompHolder(ctx.getText())) {
+			DataSubcomponentHolder dsch = aadlbaFactory.createDataSubcomponentHolder();
+			DataSubcomponent dsc = aadl2Factory.createDataSubcomponent();
+			dsc.setName(ctx.var.getText());
+			dsch.setDataSubcomponent(dsc);
+			var.setValue(dsch);
+		} else {
+			BehaviorVariableHolder bvh = aadlbaFactory.createBehaviorVariableHolder();
+			BehaviorVariable bv = aadlbaFactory.createBehaviorVariable();
+			bv.setName(ctx.getText());
+			bvh.setVariable(bv);
+			var.setValue(bvh);
+		}
+		return var;
+	}
+
+	private boolean checkHasDataSubCompHolder(String var) {
+		ECollections.sort(ci.getComponentInstances(), (o1, o2) -> {
+			if (o1.getName().toString().length() < o2.getName().toString().length()) {
+				return 1;
+			}
+			return -1;
+		});
+		for (ComponentInstance o : ci.getComponentInstances()) {
+			if (var.contains(o.getName())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

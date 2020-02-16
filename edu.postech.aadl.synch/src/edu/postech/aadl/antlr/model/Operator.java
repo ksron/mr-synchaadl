@@ -7,4 +7,6 @@ public interface Operator extends ContDynamicsElem {
 	public static final String DIVIDE = "/";
 	public static final String POWER = "**";
 	public void setValue(String val);
+
+	public String getValue();
 }

@@ -36,7 +36,7 @@ value_expression
 
 
 value_variable
-   : VALID_ID_START* zero='(0)'?
+   : var=VALID_ID_START* zero='(0)'?
    ;
 
 value_constant

@@ -31,4 +31,9 @@ public class OperatorImpl implements Operator {
 			System.out.println("Doesn't support unary operator: " + val);
 		}
 	}
+
+	@Override
+	public String getValue() {
+		return val;
+	}
 }

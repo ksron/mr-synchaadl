@@ -1,4 +1,11 @@
 package edu.postech.aadl.antlr.model;
 
-public interface Variable extends Expression {
+import org.osate.ba.aadlba.ValueVariable;
+
+public interface Variable extends CDExpression {
+	public void setValue(ValueVariable val);
+
+	public ValueVariable getValue();
+
+	public String getText();
 }
