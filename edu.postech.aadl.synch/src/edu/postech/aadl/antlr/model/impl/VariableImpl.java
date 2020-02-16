@@ -1,5 +1,7 @@
 package edu.postech.aadl.antlr.model.impl;
 
+import org.osate.ba.aadlba.BehaviorVariableHolder;
+import org.osate.ba.aadlba.DataSubcomponentHolder;
 import org.osate.ba.aadlba.ValueVariable;
 
 import edu.postech.aadl.antlr.model.Variable;
@@ -19,8 +21,11 @@ public class VariableImpl implements Variable {
 
 	@Override
 	public String getText() {
-		return vv.toString();
+		if (vv instanceof DataSubcomponentHolder) {
+			return ((DataSubcomponentHolder) vv).getDataSubcomponent().getName();
+		} else if (vv instanceof BehaviorVariableHolder) {
+			return ((BehaviorVariableHolder) vv).getBehaviorVariable().getName();
+		}
+		return "none";
 	}
-
-
 }

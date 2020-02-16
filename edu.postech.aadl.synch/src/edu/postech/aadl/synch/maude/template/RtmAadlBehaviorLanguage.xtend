@@ -55,6 +55,7 @@ import edu.postech.aadl.antlr.model.ValueCDExpression
 import edu.postech.aadl.antlr.model.Operator
 import edu.postech.aadl.antlr.model.Variable
 import edu.postech.aadl.antlr.model.Constant
+import edu.postech.aadl.antlr.model.ODE
 
 class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 
@@ -117,20 +118,20 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 		a.actions.map[compileAction].filterNull.join(del, "skip");
 	}
 	
-	private def dispatch CharSequence compileAction(IfStatement a) {
+	private def dispatch CharSequence compileAction(IfStatement a) {	
 		if (a.elif) '''
-			(elsif («a.logicalValueExpression.compileExpression») {
+			(elsif («a.logicalValueExpression.compileExpression»){
 				«a.behaviorActions.compileAction»
 			})
+			«IF a.elseStatement instanceof IfStatement»«ELSE»)«ENDIF»
 			«a.elseStatement?.compileAction»'''
 		else '''
-			if («a.logicalValueExpression.compileExpression») {
+			if («a.logicalValueExpression.compileExpression»){
 				«a.behaviorActions.compileAction»
 			}
 			«IF a.elseStatement instanceof IfStatement»(«ENDIF»
 			«a.elseStatement?.compileAction»
-			«IF a.elseStatement instanceof IfStatement»)«ENDIF»
-			end if'''
+			end if'''	
 	}
 	
 	private def dispatch CharSequence compileAction(ElseStatement a) '''
@@ -238,54 +239,68 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 			null => [c.check(false, "Unsupported property constant: " + c.class.name)]
 	}
 	
-	public def CharSequence compileCD(ContDynamics cd)'''
-		«cd.getItems.map[compileCDItem].filterNull.join(" ; ")»
-	'''
+	public def CharSequence compileCD(ContDynamics cd)'''«cd.getItems.map[compileCDItem].filterNull.join(" ; ")»'''
 	
-	private def CharSequence compileCDItem(ContDynamicsItem item)'''
-		«item.compileTarget» = «(item.expression as SimpleCDExpression).compileCDExpression»
-	'''
+	private def CharSequence compileCDItem(ContDynamicsItem item)'''(«item.compileTarget» = «(item.expression as SimpleCDExpression).compileCDExpression»)'''
 	
-	private def CharSequence compileTarget(ContDynamicsItem item)'''
-		«IF item instanceof ContFunc»«item.target.variable»(«item.target.param»)«ELSE»dt/d[«item.target.variable»]«ENDIF»
-	'''
+	private def CharSequence compileTarget(ContDynamicsItem item){
+		if(item instanceof ContFunc){
+			item.target.param.text.id("VarId")
+		}
+		switch item{
+			ContFunc:		'''«item.target.variable.text»(«item.target.param.text»)'''
+			ODE:			'''dt/d[«item.target.variable.text»]'''
+			default:		''''''
+		}
+	}
 	
 	private def CharSequence compileCDExpression(SimpleCDExpression expr){
-		var simpleExprStr = expr.firstExpression.compileCDExpression.toString
+		var simpleExprStr = expr.opCount.countParenthesis + expr.firstExpression.compileCDExpression.toString
 		if(expr.hasMultiExpr){
 			for(var i = 0; i < expr.opCount; i++){
-				simpleExprStr += expr.getOp(i).compileCDOperator
-				simpleExprStr += expr.getNextExpression(i).compileCDExpression
+				simpleExprStr += " "+ expr.getOp(i).compileCDOperator+" "
+				simpleExprStr += expr.getNextExpression(i).compileCDExpression +")"
 			}
 		}
 		return simpleExprStr
 	}
 	
 	private def CharSequence compileCDExpression(TermCDExpression expr){
-		var termExprStr = expr.firstExpression.compileCDExpression.toString
+		var termExprStr = expr.opCount.countParenthesis + expr.firstExpression.compileCDExpression.toString
 		if(expr.hasMultiExpr){
 			for(var i = 0; i < expr.opCount; i++){
-				termExprStr += expr.getOp(i).compileCDOperator
-				termExprStr += expr.getNextExpression(i).compileCDExpression
+				termExprStr += " "+expr.getOp(i).compileCDOperator+ " "
+				termExprStr += expr.getNextExpression(i).compileCDExpression +")"
 			}
 		}
 		return termExprStr
 	}
 	
 	private def CharSequence compileCDExpression(FactorCDExpression expr){
-		var factExprStr = expr.firstExpression.compileCDExpression.toString
+		var factExprStr = expr.opCount.countParenthesis + expr.firstExpression.compileCDExpression.toString
 		if(expr.hasMultiExpr){
 			for(var i = 0; i < expr.opCount; i++){
-				factExprStr += expr.getOp(i).compileCDOperator
-				factExprStr += expr.getNextExpression(i).compileCDExpression
+				factExprStr += " "+expr.getOp(i).compileCDOperator+" "
+				factExprStr += expr.getNextExpression(i).compileCDExpression +")"
 			}
 		}
 		return factExprStr
 	}
 	
+		private def CharSequence countParenthesis(int count){
+		var p=""
+		for(var i=0; i < count; i++){
+			p+="("
+		}
+		return p
+	}
+	
 	private def CharSequence compileCDExpression(ValueCDExpression expr){
-		var valExprStr = expr.getOp(0).compileCDUnaryOperator.toString
-		valExprStr += "("
+		var valExprStr = ""
+		if(expr.getOp(0) != null){
+			valExprStr = expr.getOp(0).compileCDUnaryOperator.toString
+			valExprStr += "("
+		}
 		var single = expr.firstExpression
 		if(single instanceof SimpleCDExpression){
 			valExprStr += " ( " + (single as SimpleCDExpression).compileCDExpression.toString + " ) "
@@ -294,22 +309,24 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 		}else if(single instanceof Constant){
 			valExprStr += (single as Constant).compileCDExpression.toString
 		}
-		valExprStr += ")"
+		if(expr.getOp(0)!= null){
+			valExprStr += ")"
+		}
 		return valExprStr;
 	}
 	
 	private def CharSequence compileCDExpression(Variable variable){
-		switch variable.getValue {
-			case DataSubcomponentHolder: 	'''c[«variable.text»]'''
-			case BehaviorVariableHolder:	'''v[«variable.text»]'''
-			default:						'''[Unsupported]'''
+		switch variable.getValue{
+			DataSubcomponentHolder: '''c[«variable.text»]'''
+			BehaviorVariableHolder: '''v[«variable.text»]'''
+			default:				'''[Unsupported]'''
 		}
 	}
 	
 	private def CharSequence compileCDExpression(Constant constant){
 		switch constant.getValue {
-			case BehaviorRealLiteral:		'''[[«constant.text»]]'''
-			case BehaviorPropertyConstant:		(constant.getValue as BehaviorPropertyConstant).compilePropertyConstant
+			BehaviorRealLiteral:		'''[[«constant.text»]]'''
+			BehaviorPropertyConstant:		(constant.getValue as BehaviorPropertyConstant).compilePropertyConstant
 			default:						'''[[Unsupported]]'''
 		}
 	}

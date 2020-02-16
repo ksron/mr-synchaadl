@@ -323,7 +323,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		var mode = o.compileMode(mpv)
 		var expression = (mpv.ownedValue as StringLiteral).value
 		
-		return "((" + mode + ")" + "[" + expression.parse(o)+"])"
+		return "((" + mode + ")" + "[" + expression.parse(o)+" ])"
 	}
 	
 	private def compileMode(ComponentInstance o, ModalPropertyValue mpv){

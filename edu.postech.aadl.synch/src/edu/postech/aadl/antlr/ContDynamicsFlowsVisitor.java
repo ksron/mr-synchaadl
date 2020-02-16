@@ -210,7 +210,11 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<ContDynami
 		if (checkHasDataSubCompHolder(ctx.getText())) {
 			DataSubcomponentHolder dsch = aadlbaFactory.createDataSubcomponentHolder();
 			DataSubcomponent dsc = aadl2Factory.createDataSubcomponent();
-			dsc.setName(ctx.var.getText());
+			if(ctx.zero != null) {
+				dsc.setName(ctx.getText().substring(0, ctx.getText().indexOf("(0)")));
+			}else {
+				dsc.setName(ctx.getText());
+			}
 			dsch.setDataSubcomponent(dsc);
 			var.setValue(dsch);
 		} else {
