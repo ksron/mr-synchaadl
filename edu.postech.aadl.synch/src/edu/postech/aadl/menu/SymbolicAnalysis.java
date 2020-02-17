@@ -18,7 +18,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -61,7 +64,7 @@ public class SymbolicAnalysis extends AbstractHandler {
 		propSpecRes = getPropSpecResource(resManager.getEditorFile().getFullPath());
 
 		IPreferenceStore pref = new ScopedPreferenceStore(InstanceScope.INSTANCE, "edu.postech.maude.preferences.page");
-		maudeDirPath = pref.getString("MAUDE_DIRECTORY");
+		maudeDirPath = pref.getString("MAUDE_DIR");
 		maudeExecPath = pref.getString("MAUDE");
 		maudeOptions = pref.getString("MAUDE_OPTIONS");
 		maudeLibDir = pref.getString("MAUDE_LIBRARY_DIR");
@@ -71,7 +74,16 @@ public class SymbolicAnalysis extends AbstractHandler {
 		aadlMaudeBaseDir = resManager.getEditorFile().getLocation().removeLastSegments(3).toString();
 		aadlMaudeFullPath = aadlMaudeBaseDir + aadlMaudePath;
 
+		try {
+			IViewPart view = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+					.showView("edu.postech.aadl.view.HybridSynchAADLView");
+			DisplayView.setView(view);
+
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
 		DisplayView.clearView();
+
 
 		for (Property pr : propSpecRes.getProperty()) {
 			Maude maude = new Maude();

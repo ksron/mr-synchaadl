@@ -63,7 +63,7 @@ public class CodeGeneration extends AbstractHandler {
 		propSpecFileName = propSpecFileName.substring(0, propSpecFileName.indexOf("."));
 
 		IPreferenceStore pref = new ScopedPreferenceStore(InstanceScope.INSTANCE, "edu.postech.maude.preferences.page");
-		String maudeDirPath = pref.getString("MAUDE_DIRECTORY");
+		String maudeDirPath = pref.getString("MAUDE_DIR");
 
 		for (Property pr : propSpecRes.getProperty()) {
 			String userFormulaMaude = RtmPropSpec

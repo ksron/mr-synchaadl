@@ -20,7 +20,6 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -244,11 +243,6 @@ public class HybridSynchAADLView extends ViewPart {
 			}
 		};
 	}
-
-	private void showMessage(String message) {
-		MessageDialog.openInformation(viewer.getControl().getShell(), "Sample View", message);
-	}
-
 
 	private void hookDoubleClickAction() {
 		viewer.addDoubleClickListener(event -> doubleClickAction.run());
