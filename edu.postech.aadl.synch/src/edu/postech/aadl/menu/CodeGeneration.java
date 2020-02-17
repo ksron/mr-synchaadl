@@ -33,12 +33,10 @@ import edu.postech.aadl.xtext.propspec.propSpec.Property;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
 
 public class CodeGeneration extends AbstractHandler {
-
-	private PropspecEditorResourceManager resManager;
-
+	private boolean error = false;
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		resManager = new PropspecEditorResourceManager();
+		PropspecEditorResourceManager resManager = new PropspecEditorResourceManager();
 		IWorkbenchPart part = HandlerUtil.getActivePart(event);
 
 
@@ -53,9 +51,12 @@ public class CodeGeneration extends AbstractHandler {
 			act.setTargetPath(resManager.getCodegenFilePath());
 			act.selectionChanged(new StructuredSelection(resManager.getModelResource()));
 			act.execute(event);
+			act.join();
+			act.hasError();
 		} else {
-			System.out.println("No AADL instance model!");
+			throw new ExecutionException("No AADL instance model!");
 		}
+
 
 		Top propSpecRes = getPropSpecResource(resManager.getEditorFile().getFullPath());
 		String propSpecFileName = resManager.getEditorFile().getName();
@@ -73,6 +74,10 @@ public class CodeGeneration extends AbstractHandler {
 		}
 
 		return null;
+	}
+
+	public boolean isError() {
+		return error;
 	}
 
 	public void writeAnalysisMaudeFile(String txt, IPath path) {

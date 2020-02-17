@@ -12,6 +12,7 @@ import edu.postech.aadl.synch.checker.action.ConstrainsCheckAction;
 import edu.postech.aadl.synch.propspec.PropspecEditorResourceManager;
 
 public class ConstraintChecker extends AbstractHandler {
+	private boolean error = false;
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		PropspecEditorResourceManager res = new PropspecEditorResourceManager();
@@ -26,10 +27,16 @@ public class ConstraintChecker extends AbstractHandler {
 			ConstrainsCheckAction chkAct = new ConstrainsCheckAction();
 			chkAct.selectionChanged(new StructuredSelection(res.getModelResource()));
 			chkAct.execute(event);
+			chkAct.join();
+			error = chkAct.hasError();
+
 		} else {
-			System.out.println("No AADL instance model!");
+			throw new ExecutionException("No AADL instance model!");
 		}
 		return null;
 	}
 
+	public boolean isError() {
+		return error;
+	}
 }

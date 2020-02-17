@@ -45,7 +45,6 @@
             class="edu.postech.aadl.maude.preferences.MaudePrefInitializer">
       </initializer>
   </extension>
-  
 
    <extension
          point="org.eclipse.ui.commands">
@@ -67,6 +66,11 @@
             categoryId="HybridSynchAadlMenu.commands.category"
             name="Symbolic Analysis"
             id="HybridSynchAadlMenu.commands.symbolicAnalysis">
+      </command>
+       <command
+            categoryId="HybridSynchAadlMenu.commands.category"
+            name="Run"
+            id="HybridSynchAadlMenu.commands.run">
       </command>
    </extension>
    
@@ -100,6 +104,15 @@
 			    </with>
 			</enabledWhen>
       </handler>
+       <handler
+            class="edu.postech.aadl.menu.Run"
+            commandId="HybridSynchAadlMenu.commands.run">
+			<enabledWhen>
+			    <with variable="activeEditorId">
+			        <equals value="edu.postech.aadl.xtext.propspec.PropSpec"/>
+			    </with>
+			</enabledWhen>
+      </handler>
    </extension>
    
    
@@ -122,6 +135,12 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+7">
+      </key>
+      <key
+            commandId="HybridSynchAadlMenu.commands.run"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+8">
       </key>
    </extension>
    
@@ -147,6 +166,11 @@
             <command
                   commandId="HybridSynchAadlMenu.commands.symbolicAnalysis"
                   id="HybridSynchAadlMenu.menus.symbolicAnalysis"
+                  mnemonic="S">
+            </command>
+            <command
+                  commandId="HybridSynchAadlMenu.commands.run"
+                  id="HybridSynchAadlMenu.menus.run"
                   mnemonic="S">
             </command>
          </menu>
