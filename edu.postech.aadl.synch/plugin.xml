@@ -22,6 +22,14 @@
             id="edu.postech.aadl.synch.wizard.RtmAadlPropertyWizard">
       </wizard>
    </extension>
+   
+   <extension 
+         point="org.eclipse.core.resources.markers"
+         id="edu.postech.aadl.synch.SyncAadlObjectMarker"
+         name="Synchrnouls AADL Marker">
+      <super type="org.osate.aadl2.modelsupport.AadlObjectMarker"/>
+      <persistent value="true"/>
+   </extension>
 
 
    <extension

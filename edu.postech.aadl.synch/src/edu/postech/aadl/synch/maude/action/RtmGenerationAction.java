@@ -5,20 +5,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 
+import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instance.SystemOperationMode;
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
-import org.osate.ui.actions.AbstractInstanceOrDeclarativeModelReadOnlyAction;
 import org.osate.ui.dialogs.Dialog;
-import org.osgi.framework.Bundle;
 
 import com.google.common.collect.HashMultimap;
 
@@ -33,17 +34,27 @@ import edu.postech.aadl.utils.IOUtils;
  * @author Kyungmin Bae
  *
  */
-public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeModelReadOnlyAction {
+public final class RtmGenerationAction extends org.osate.ui.handlers.AbstractInstanceOrDeclarativeModelReadOnlyHandler {
 
 	private IPath targetPath;
+	private StructuredSelection selection;
 
-	public synchronized void setTargetPath(IPath targetPath) {
-		this.targetPath = targetPath;
+	public void selectionChanged(StructuredSelection selection) {
+		this.selection = selection;
 	}
 
 	@Override
-	protected Bundle getBundle() {
-		return Activator.getDefault().getBundle();
+	protected Object getCurrentSelection(ExecutionEvent event) {
+		if (selection instanceof IStructuredSelection && ((IStructuredSelection) selection).size() == 1) {
+			Object object = ((IStructuredSelection) selection).getFirstElement();
+			return object;
+		} else {
+			return null;
+		}
+	}
+
+	public synchronized void setTargetPath(IPath targetPath) {
+		this.targetPath = targetPath;
 	}
 
 	@Override
@@ -138,6 +149,11 @@ public final class RtmGenerationAction extends AbstractInstanceOrDeclarativeMode
 			Element declarativeObject) {
 		Dialog.showError(getActionName(), "Please choose an instance model");
 
+	}
+
+	@Override
+	protected boolean canAnalyzeDeclarativeModels() {
+		return false;
 	}
 
 }

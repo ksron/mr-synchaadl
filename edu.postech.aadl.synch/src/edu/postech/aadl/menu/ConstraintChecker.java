@@ -3,7 +3,6 @@ package edu.postech.aadl.menu;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.handlers.HandlerUtil;
@@ -13,10 +12,6 @@ import edu.postech.aadl.synch.checker.action.ConstrainsCheckAction;
 import edu.postech.aadl.synch.propspec.PropspecEditorResourceManager;
 
 public class ConstraintChecker extends AbstractHandler {
-
-	private Action checkAct;
-	public boolean isPSPC;
-
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		PropspecEditorResourceManager res = new PropspecEditorResourceManager();
@@ -27,24 +22,14 @@ public class ConstraintChecker extends AbstractHandler {
 
 		res.setEditor(newEditor);
 
-		checkAct = new Action("Constraints Check") {
-			@Override
-			public void run() {
-				if (res.getModelResource() != null) {
-					ConstrainsCheckAction chkAct = new ConstrainsCheckAction();
-					chkAct.selectionChanged(this, new StructuredSelection(res.getModelResource()));
-					chkAct.run(this);
-				} else {
-					System.out.println("No AADL instance model!");
-				}
-			}
-		};
-		checkAct.run();
+		if (res.getModelResource() != null) {
+			ConstrainsCheckAction chkAct = new ConstrainsCheckAction();
+			chkAct.selectionChanged(new StructuredSelection(res.getModelResource()));
+			chkAct.execute(event);
+		} else {
+			System.out.println("No AADL instance model!");
+		}
 		return null;
 	}
 
-	public boolean isPspcFileSelected(XtextEditor editor) {
-		return isPSPC = editor == null;
-
-	}
 }

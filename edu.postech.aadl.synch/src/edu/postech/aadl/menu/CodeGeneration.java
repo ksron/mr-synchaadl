@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IWorkbenchPart;
@@ -35,7 +34,6 @@ import edu.postech.aadl.xtext.propspec.propSpec.Top;
 
 public class CodeGeneration extends AbstractHandler {
 
-	private Action codegenAct;
 	private PropspecEditorResourceManager resManager;
 
 	@Override
@@ -49,21 +47,15 @@ public class CodeGeneration extends AbstractHandler {
 
 		resManager.setEditor(newEditor);
 
-		codegenAct = new Action("Code Generation") {
-			@Override
-			public void run() {
-				if (resManager.getModelResource() != null) {
-					RtmGenerationAction act = new RtmGenerationAction();
-					act.setTargetPath(resManager.getCodegenFilePath());
-					act.selectionChanged(this, new StructuredSelection(resManager.getModelResource()));
-					act.run(this);
-				} else {
-					System.out.println("No AADL instance model!");
-				}
-			}
-		};
 
-		codegenAct.run();
+		if (resManager.getModelResource() != null) {
+			RtmGenerationAction act = new RtmGenerationAction();
+			act.setTargetPath(resManager.getCodegenFilePath());
+			act.selectionChanged(new StructuredSelection(resManager.getModelResource()));
+			act.execute(event);
+		} else {
+			System.out.println("No AADL instance model!");
+		}
 
 		Top propSpecRes = getPropSpecResource(resManager.getEditorFile().getFullPath());
 		String propSpecFileName = resManager.getEditorFile().getName();

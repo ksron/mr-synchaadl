@@ -1,24 +1,35 @@
 package edu.postech.aadl.synch.checker.action;
 
+import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instance.SystemOperationMode;
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
-import org.osate.ui.actions.AbstractInstanceOrDeclarativeModelReadOnlyAction;
 import org.osate.ui.dialogs.Dialog;
-import org.osgi.framework.Bundle;
 
-import edu.postech.aadl.synch.Activator;
 import edu.postech.aadl.synch.checker.SynchAadlConstChecker;
 
-public class ConstrainsCheckAction extends AbstractInstanceOrDeclarativeModelReadOnlyAction {
+public class ConstrainsCheckAction extends org.osate.ui.handlers.AbstractInstanceOrDeclarativeModelReadOnlyHandler {
+
+	private StructuredSelection selection;
+
+	public void selectionChanged(StructuredSelection selection) {
+		this.selection = selection;
+	}
 
 	@Override
-	protected Bundle getBundle() {
-		return Activator.getDefault().getBundle();
+	protected Object getCurrentSelection(ExecutionEvent event) {
+		if (selection instanceof IStructuredSelection && ((IStructuredSelection) selection).size() == 1) {
+			Object object = ((IStructuredSelection) selection).getFirstElement();
+			return object;
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -55,6 +66,11 @@ public class ConstrainsCheckAction extends AbstractInstanceOrDeclarativeModelRea
 	protected void analyzeDeclarativeModel(IProgressMonitor monitor,
 			AnalysisErrorReporterManager errManager, Element declarativeObject) {
 		Dialog.showError(getActionName(), "Please select an instance model");
+	}
+
+	@Override
+	protected boolean canAnalyzeDeclarativeModels() {
+		return false;
 	}
 }
 
