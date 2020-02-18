@@ -148,6 +148,7 @@ public class PropertyUtil {
 		}
 	}
 
+
 	public static String getEnvContinuousDynamics(final NamedElement ne, final String propertySet,
 			final String propertyName) {
 		try {

@@ -2,6 +2,8 @@ package edu.postech.aadl.synch.checker;
 
 import java.util.ArrayList;
 
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.osate.aadl2.ComponentCategory;
@@ -18,7 +20,10 @@ import org.osate.aadl2.modelsupport.modeltraversal.AadlProcessingSwitchWithProgr
 import org.osate.aadl2.util.Aadl2InstanceUtil;
 import org.osate.xtext.aadl2.properties.util.GetProperties;
 
-import edu.postech.aadl.synch.maude.template.RtmAadlSetting;
+import edu.postech.aadl.antlr.ContDynamicsFlowsVisitor;
+import edu.postech.aadl.antlr.ContDynamicsLexer;
+import edu.postech.aadl.antlr.ContDynamicsParser;
+import edu.postech.aadl.antlr.model.ContDynamics;
 import edu.postech.aadl.utils.PropertyUtil;
 
 public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
@@ -39,7 +44,10 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 				checkEnvCompDataType(ci);
 				checkEnvSubComp(ci);
 				checkEnvCompHasCD(ci);
-				checkEnvCompCDVar(ci);
+				ContDynamics cd = parseContinuousDynamics(ci);
+				checkEnvFlowsDirectReferPort(ci, cd);
+				checkEnvFlowsWrongParam(ci, cd);
+				checkEnvFlowsWrongDataSubComp(ci, cd);
 
 				checkCompSubDataInitValue(ci);
 				checkCompSampleTime(ci);
@@ -63,7 +71,6 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 
 			@Override
 			public String caseConnectionInstance(ConnectionInstance ci) {
-
 				checkConnDelayedComp(ci);
 				checkConnBetweenEnvComps(ci);
 				checkConnEnvOutPortType(ci);
@@ -123,10 +130,30 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 		}
 	}
 
-	private void checkEnvCompCDVar(ComponentInstance ci) {
-		ArrayList<String> featureNames = new ArrayList<String>();
-		String ContinuousDynamics = null;
-		if (RtmAadlSetting.isEnv(ci)) {
+	private ContDynamics parseContinuousDynamics(ComponentInstance ci) {
+		if (PropertyUtil.isEnvironment(ci)) {
+			String flows = PropertyUtil.getEnvContinuousDynamics(ci, PropertyUtil.HYBRIDSYNCHAADL, PropertyUtil.CD);
+			if (flows == null) {
+				return null;
+			}
+			ANTLRInputStream stream = new ANTLRInputStream(flows);
+			ContDynamicsLexer lexer = new ContDynamicsLexer(stream);
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			ContDynamicsParser parser = new ContDynamicsParser(tokens);
+			ContDynamicsFlowsVisitor visitor = new ContDynamicsFlowsVisitor();
+			return visitor.visit(ci, parser.continuousdynamics());
+		}
+		return null;
+	}
+
+	private EList<String> getEnvFlowsVarList(ContDynamics cd) {
+		return null;
+	}
+
+	private void checkEnvFlowsDirectReferPort(ComponentInstance ci, ContDynamics cd) {
+		if (PropertyUtil.isEnvironment(ci) && cd != null) {
+			ArrayList<String> featureNames = new ArrayList<String>();
+			String ContinuousDynamics = null;
 			for (FeatureInstance fi : ci.getFeatureInstances()) {
 				featureNames.add(fi.getFeature().getName());
 			}
@@ -140,6 +167,18 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 					}
 				}
 			}
+		}
+	}
+
+	private void checkEnvFlowsWrongParam(ComponentInstance ci, ContDynamics cd) {
+		if (PropertyUtil.isEnvironment(ci) && cd != null) {
+
+		}
+	}
+
+	private void checkEnvFlowsWrongDataSubComp(ComponentInstance ci, ContDynamics cd) {
+		if (PropertyUtil.isEnvironment(ci) && cd != null) {
+
 		}
 	}
 

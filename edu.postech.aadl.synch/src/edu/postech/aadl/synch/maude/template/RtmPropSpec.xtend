@@ -61,7 +61,7 @@ class RtmPropSpec {
 	
 	static def compileRequirement(Top top, Property prop, Mode mode){
 		var verbose = ""
-		if(mode.verbose!=null){
+		if(mode!= null && mode.verbose!=null){
 			verbose += "set show timing off .\n"
 			verbose += "set show stats off .\n"
 			verbose += "set show command off .\n"
@@ -134,13 +134,17 @@ class RtmPropSpec {
 	
 	static def compileMode(Top top){
 		val mode = top.mode;
-		if((mode instanceof SYMBOLIC && (mode as SYMBOLIC).option != null) ||
-			(mode instanceof MODELCHECK && (mode as MODELCHECK).option != null)){
+		if(mode == null){
 			'''eq @m@ = ['«top.name.toUpperCase»-MODEL-SYMBOLIC] .'''
-		} else if(mode instanceof DISTRIBUTED){
-		'''  eq #sample = «mode.sample» .«"\n"»eq #response = «mode.response» .'''
-		} else{
-			''''''
+		}else{
+			if((mode instanceof SYMBOLIC && (mode as SYMBOLIC).option != null) ||
+				(mode instanceof MODELCHECK && (mode as MODELCHECK).option != null)){
+				'''eq @m@ = ['«top.name.toUpperCase»-MODEL-SYMBOLIC] .'''
+			} else if(mode instanceof DISTRIBUTED){
+			'''  eq #sample = «mode.sample» .«"\n"»eq #response = «mode.response» .'''
+			} else{
+				''''''
+			}
 		}
 	}
 	
@@ -274,20 +278,6 @@ class RtmPropSpec {
 			}
 		}
 	}
-	
-	static def getReachabilityCommand(Top top, Reachability reach)'''
-	reachability : 
-	(«top.name.escape+" | "+ reach.initCond.compileExp»)
-	==>
-	(«top.name.escape+" | "+ reach.goalCond.compileExp»)
-	'''
-	
-	static def getInvariantCommand(Top top, Invariant inv)'''
-	invariant : 
-	(«top.name.escape+" | "+ inv.initCond.compileExp»)
-	==>
-	(«top.name.escape+" | not("+ inv.goalCond.compileExp»))
-	'''
 
 	/**
 	 *  translate BA expressions

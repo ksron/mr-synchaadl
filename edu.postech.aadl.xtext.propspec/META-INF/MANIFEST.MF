@@ -12,15 +12,13 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
  org.osate.aadl2;bundle-version="1.0.0",
  org.osate.xtext.aadl2.properties;bundle-version="1.0.0",
+ org.osate.xtext.aadl2,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- org.eclipse.xtext.common.types,
- org.osate.aadl2.modelsupport;bundle-version="1.0.0",
  org.antlr.runtime,
- org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
- org.osate.xtext.aadl2,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.common.types,
+ org.objectweb.asm;bundle-version="[7.2.0,7.3.0)";resolution:=optional
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
@@ -36,4 +34,3 @@ Export-Package: edu.postech.aadl.xtext.propspec,
  edu.postech.aadl.xtext.propspec.propSpec.util,
  edu.postech.aadl.xtext.propspec.serializer,
  edu.postech.aadl.xtext.propspec.services
-
