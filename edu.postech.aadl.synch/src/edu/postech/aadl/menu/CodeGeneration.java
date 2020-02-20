@@ -24,7 +24,9 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.osate.ui.dialogs.Dialog;
 
+import edu.postech.aadl.maude.preferences.MaudePrefPage;
 import edu.postech.aadl.synch.maude.action.RtmGenerationAction;
 import edu.postech.aadl.synch.maude.template.RtmPropSpec;
 import edu.postech.aadl.synch.propspec.PropspecEditorResourceManager;
@@ -45,6 +47,12 @@ public class CodeGeneration extends AbstractHandler {
 
 		resManager.setEditor(newEditor);
 
+		IPreferenceStore pref = getValidMaudePref();
+		if (pref == null) {
+			error = true;
+			return null;
+		}
+		String maudeDirPath = pref.getString(MaudePrefPage.MAUDE_DIR);
 
 		if (resManager.getModelResource() != null) {
 			RtmGenerationAction act = new RtmGenerationAction();
@@ -61,9 +69,6 @@ public class CodeGeneration extends AbstractHandler {
 		Top propSpecRes = getPropSpecResource(resManager.getEditorFile().getFullPath());
 		String propSpecFileName = resManager.getEditorFile().getName();
 		propSpecFileName = propSpecFileName.substring(0, propSpecFileName.indexOf("."));
-
-		IPreferenceStore pref = new ScopedPreferenceStore(InstanceScope.INSTANCE, "edu.postech.maude.preferences.page");
-		String maudeDirPath = pref.getString("MAUDE_DIR");
 
 		for (Property pr : propSpecRes.getProperty()) {
 			String userFormulaMaude = RtmPropSpec
@@ -101,6 +106,17 @@ public class CodeGeneration extends AbstractHandler {
 			return (Top) eo;
 		}
 		return null;
+	}
+
+	private IPreferenceStore getValidMaudePref() {
+		IPreferenceStore pref = new ScopedPreferenceStore(InstanceScope.INSTANCE, "edu.postech.maude.preferences.page");
+		String maudeDirPath = pref.getString(MaudePrefPage.MAUDE_DIR);
+		if (maudeDirPath.isEmpty()) {
+			Dialog.showError("Maude Preferences Error",
+					"Maude directory is not found\n Please set correct Maude directory");
+			return null;
+		}
+		return pref;
 	}
 
 }

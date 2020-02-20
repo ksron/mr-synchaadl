@@ -3,10 +3,7 @@ package edu.postech.aadl.menu;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -25,8 +22,10 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.osate.ui.dialogs.Dialog;
 
 import edu.postech.aadl.maude.Maude;
+import edu.postech.aadl.maude.preferences.MaudePrefPage;
 import edu.postech.aadl.synch.propspec.PropspecEditorResourceManager;
 import edu.postech.aadl.view.DisplayView;
 import edu.postech.aadl.xtext.propspec.propSpec.Property;
@@ -57,17 +56,17 @@ public class SymbolicAnalysis extends AbstractHandler {
 
 
 		resManager.setEditor(xtextEditor);
-		addPSPCListener();
+
 
 		propSpecFileName = resManager.getEditorFile().getName();
 		propSpecFileName = propSpecFileName.substring(0, propSpecFileName.indexOf("."));
 		propSpecRes = getPropSpecResource(resManager.getEditorFile().getFullPath());
 
-		IPreferenceStore pref = new ScopedPreferenceStore(InstanceScope.INSTANCE, "edu.postech.maude.preferences.page");
-		maudeDirPath = pref.getString("MAUDE_DIR");
-		maudeExecPath = pref.getString("MAUDE");
-		maudeOptions = pref.getString("MAUDE_OPTIONS");
-		maudeLibDir = pref.getString("MAUDE_LIBRARY_DIR");
+		IPreferenceStore pref = getValidMaudePref();
+		maudeDirPath = pref.getString(MaudePrefPage.MAUDE_DIR);
+		maudeExecPath = pref.getString(MaudePrefPage.MAUDE);
+		maudeOptions = pref.getString(MaudePrefPage.MAUDE_OPTS);
+		maudeLibDir = pref.getString(MaudePrefPage.MAUDE_LIB_DIR);
 
 
 		aadlMaudePath = resManager.getCodegenFilePath().toString();
@@ -78,12 +77,10 @@ public class SymbolicAnalysis extends AbstractHandler {
 			IViewPart view = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 					.showView("edu.postech.aadl.view.HybridSynchAADLView");
 			DisplayView.setView(view);
-
+			DisplayView.removeData(resManager.getEditorFile());
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
-		DisplayView.clearView();
-
 
 		for (Property pr : propSpecRes.getProperty()) {
 			Maude maude = new Maude();
@@ -99,35 +96,6 @@ public class SymbolicAnalysis extends AbstractHandler {
 			maude.runMaude(resultPath, pr);
 		}
 		return null;
-	}
-
-	private void addPSPCListener() {
-		IFile editor = resManager.getEditorFile();
-		IPath resultDir = editor.getFullPath().removeLastSegments(2).append("verification").append("result");
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(event -> {
-			if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
-				if (event.getDelta() != null && event.getDelta().findMember(editor.getFullPath()) != null) {
-					IResourceDelta delta = event.getDelta().findMember(editor.getFullPath());
-					switch (delta.getKind()) {
-						case IResourceDelta.CHANGED:
-							Top top = getPropSpecResource(editor.getFullPath());
-							DisplayView.refreshData(top.getProperty());
-							break;
-						case IResourceDelta.REMOVED:
-							DisplayView.removeData(editor);
-							break;
-					}
-				} else if (event.getDelta() != null && event.getDelta().findMember(resultDir) != null) {
-					IResourceDelta delta = event.getDelta().findMember(resultDir);
-					for(IResourceDelta result : delta.getAffectedChildren()) {
-						switch(result.getKind()) {
-						case IResourceDelta.REMOVED:
-							DisplayView.removeData(result.getFullPath());
-						}
-					}
-				}
-			}
-		});
 	}
 
 	private Maude maudeDefaultBuilder(Maude maude) {
@@ -153,5 +121,35 @@ public class SymbolicAnalysis extends AbstractHandler {
 			return (Top) eo;
 		}
 		return null;
+	}
+
+	private IPreferenceStore getValidMaudePref() {
+		IPreferenceStore pref = new ScopedPreferenceStore(InstanceScope.INSTANCE, "edu.postech.maude.preferences.page");
+		String maudeDirPath = pref.getString(MaudePrefPage.MAUDE_DIR);
+		String maudeExecPath = pref.getString(MaudePrefPage.MAUDE);
+		String maudeOptions = pref.getString(MaudePrefPage.MAUDE_OPTS);
+		String maudeLibDir = pref.getString(MaudePrefPage.MAUDE_LIB_DIR);
+		if (maudeDirPath.isEmpty()) {
+			Dialog.showError("Maude Preferences Error",
+					"Maude directory path is not set");
+			return null;
+		}
+		if (maudeExecPath.isEmpty()) {
+			Dialog.showError("Maude Preferences Error",
+					"Maude path is not set");
+			return null;
+		}
+		if (maudeOptions.isEmpty()) {
+			Dialog.showError("Maude Preferences Error",
+					"Maude option is not set\n Please set correct Maude option [-no-prelude]");
+			return null;
+		}
+		if (maudeLibDir.isEmpty()) {
+			Dialog.showError("Maude Preferences Error",
+					"Maude library directory path is not set\n");
+			return null;
+		}
+
+		return pref;
 	}
 }

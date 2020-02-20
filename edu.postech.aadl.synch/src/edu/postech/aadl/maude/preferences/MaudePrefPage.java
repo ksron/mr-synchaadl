@@ -11,6 +11,11 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 public class MaudePrefPage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
+	public static final String MAUDE_DIR = "MAUDE_DIR";
+	public static final String MAUDE = "MAUDE";
+	public static final String MAUDE_LIB_DIR = "MAUDE_LIB_DIR";
+	public static final String MAUDE_OPTS = "MAUDE_OPTS";
+
 	public MaudePrefPage() {
 		super(GRID);
 	}
@@ -23,10 +28,10 @@ public class MaudePrefPage extends FieldEditorPreferencePage implements IWorkben
 
 	@Override
 	protected void createFieldEditors() {
-		addField(new DirectoryFieldEditor("MAUDE_DIR", "MAUDE_DIRECTORY:", getFieldEditorParent()));
-		addField(new FileFieldEditor("MAUDE", "MAUDE:", getFieldEditorParent()));
-		addField(new DirectoryFieldEditor("MAUDE_LIBRARY_DIR", "MAUDE_LIBRARY_DIR:", getFieldEditorParent()));
-		addField(new StringFieldEditor("MAUDE_OPTIONS", "MAUDE_OPTIONS:", getFieldEditorParent()));
+		addField(new DirectoryFieldEditor(MAUDE_DIR, "MAUDE_DIRECTORY:", getFieldEditorParent()));
+		addField(new FileFieldEditor(MAUDE, "MAUDE:", getFieldEditorParent()));
+		addField(new DirectoryFieldEditor(MAUDE_LIB_DIR, "MAUDE_LIBRARY_DIRECTORY:", getFieldEditorParent()));
+		addField(new StringFieldEditor(MAUDE_OPTS, "MAUDE_OPTIONS:", getFieldEditorParent()));
 	}
 
 }

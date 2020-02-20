@@ -14,9 +14,9 @@ public class MaudePrefInitializer extends AbstractPreferenceInitializer {
 	public void initializeDefaultPreferences() {
 		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE,
 				"edu.postech.maude.preferences.page");
-		scopedPreferenceStore.setDefault("MAUDEOPTIONS", "-no-prelude");
-		scopedPreferenceStore.setDefault("MAUDE", "maude.darwin64");
-		scopedPreferenceStore.setDefault("MAUDE_DIRECTORY", "maude");
-		scopedPreferenceStore.setDefault("MAUDE_LIBRARY_DIR", "maude");
+		scopedPreferenceStore.setDefault(MaudePrefPage.MAUDE_OPTS, "-no-prelude");
+		scopedPreferenceStore.setDefault(MaudePrefPage.MAUDE, "maude.darwin64");
+		scopedPreferenceStore.setDefault(MaudePrefPage.MAUDE_DIR, "maude");
+		scopedPreferenceStore.setDefault(MaudePrefPage.MAUDE_LIB_DIR, "maude");
 	}
 }

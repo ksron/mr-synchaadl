@@ -15,7 +15,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -37,8 +36,6 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ViewPart;
-
-import edu.postech.aadl.xtext.propspec.propSpec.Property;
 
 /**
  * This sample class demonstrates how to plug-in a new
@@ -256,30 +253,6 @@ public class HybridSynchAADLView extends ViewPart {
 	public MaudeResult initialData(MaudeResult mr) {
 		viewer.add(mr);
 		return mr;
-	}
-
-	public void refreshData(EList<Property> propList) {
-		for (TableItem ti : viewer.getTable().getItems()) {
-			MaudeResult mr = (MaudeResult) ti.getData();
-			boolean check = true;
-			for (Property pr : propList) {
-				if (mr.getPropId().equals(pr.getName())) {
-					check = false;
-				}
-			}
-			if (check) {
-				viewer.remove(mr);
-			}
-		}
-	}
-
-	public void removeData(IPath location) {
-		for (TableItem ti : viewer.getTable().getItems()) {
-			MaudeResult mr = (MaudeResult) ti.getData();
-			if (mr.getLocationString().equals(location.toString())) {
-				viewer.remove(mr);
-			}
-		}
 	}
 
 	public void removeData(IFile prop) {

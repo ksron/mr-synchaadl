@@ -5,8 +5,7 @@ Bundle-Vendor: POSTECH
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: edu.postech.aadl.xtext.propspec;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: 
- org.eclipse.xtext;bundle-version="[2.20.0,3.0.0]";visibility:=reexport,
+Require-Bundle: org.eclipse.xtext;bundle-version="[2.20.0,3.0.0]";visibility:=reexport,
  org.eclipse.xtext.generator;bundle-version="[2.20.0,3.0.0]";resolution:=optional,
  org.eclipse.emf.codegen.ecore;bundle-version="[2.20.0,3.0.0]";resolution:=optional,
  org.eclipse.emf.mwe.utils;bundle-version="[1.5.1,2.0.0]";resolution:=optional,
@@ -19,7 +18,9 @@ Require-Bundle:
  org.osate.aadl2;bundle-version="[2.0.0,3.0.0]",
  org.osate.xtext.aadl2.properties;bundle-version="[1.1.0,2.0.0]",
  org.osate.aadl2.modelsupport;bundle-version="[2.0.0,3.0.0]",
- org.osate.xtext.aadl2;bundle-version="[2.0.0,3.0.0]"
+ org.osate.xtext.aadl2;bundle-version="[2.0.0,3.0.0]",
+ org.antlr.runtime,
+ org.objectweb.asm;bundle-version="[7.2.0,7.3.0)";resolution:=optional
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
