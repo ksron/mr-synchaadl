@@ -44,6 +44,7 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 				checkEnvCompDataType(ci);
 				checkEnvSubComp(ci);
 				checkEnvCompHasCD(ci);
+				checkNonEnvCompHasCD(ci);
 				ContDynamics cd = parseContinuousDynamics(ci);
 				checkEnvFlowsDirectReferPort(ci, cd);
 				checkEnvFlowsWrongParam(ci, cd);
@@ -120,6 +121,13 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 					getErrorManager().error(ci, ci.getName() + " must be float type data component");
 				}
 			}
+		}
+	}
+
+	private void checkNonEnvCompHasCD(ComponentInstance ci) {
+		if (!PropertyUtil.isEnvironment(ci)
+				&& PropertyUtil.hasContinuousDynamics(ci, PropertyUtil.HYBRIDSYNCHAADL, PropertyUtil.CD)) {
+			getErrorManager().error(ci, ci.getName() + " must not have Continuous Dynamics property");
 		}
 	}
 

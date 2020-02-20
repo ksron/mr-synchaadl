@@ -86,6 +86,7 @@ public class ConstrainsCheckAction extends org.osate.ui.handlers.AbstractInstanc
 		int count = AadlUtil.countElementsBySubclass(root, ComponentInstance.class);
 		try {
 			monitor.beginTask(getActionName(), count);
+			errManager.addPrefix("Constraints");
 			(new SynchAadlConstChecker(monitor,errManager)).processPreOrderAll(root);
 		}
 		finally {
