@@ -2,12 +2,16 @@ package edu.postech.aadl.synch.maude.template
 
 import org.osate.aadl2.ComponentCategory
 import org.osate.aadl2.instance.ComponentInstance
+import edu.postech.aadl.utils.PropertyUtil
+import org.osate.aadl2.PropertyAssociation
+import org.osate.xtext.aadl2.properties.util.PropertyUtils
+import org.osate.aadl2.ListValue
+import org.osate.aadl2.StringLiteral
+import org.osate.aadl2.instance.FeatureInstance
 
 class RtmAadlSetting {
 
 	public static val SEMANTICS_PATH = "semantics";
-	public static val SEMANTICS_FILE = "interpreter-symbolic.maude";
-	public static val ANALYSIS_FILE  = "mr-sync-aadl-analysis.maude"; // should be revised. 
 	
 	static def isSync(ComponentInstance o) {
 		switch o.category.value {
@@ -55,17 +59,28 @@ class RtmAadlSetting {
 	}
 	
 	static def isEnv(ComponentInstance o) {
-		for(var i = 0; i < o.ownedPropertyAssociations.size; i++){
-			if(o.ownedPropertyAssociations.get(i).getProperty().name.equals("isEnvironment") &&
-				o.ownedPropertyAssociations.get(i).getProperty().inherit)
-				return true;
+		PropertyUtil::isEnvironment(o)
+	}
+	
+	static def isParam(ComponentInstance ci){
+		for(PropertyAssociation pa : ci.ownedPropertyAssociations){
+			if(pa.property.name.equals(PropertyUtil::INITIAL_VALUE)){
+				if(((PropertyUtils::getSimplePropertyValue(ci, pa.property) as ListValue).ownedListElements.get(0) as StringLiteral).value.equals("param")){
+					return true
+				}
+			}
 		}
-		return false;	
+		return false
+	}
+	
+	static def featClass(FeatureInstance fi){
+		var o = fi.containingComponentInstance
+		o.isEnv ? "Env" : "Data"
 	}
 	
 	static def compClass(ComponentInstance o) {
 		switch o.category.value {
-			case ComponentCategory::SYSTEM_VALUE:		"System" 
+			case ComponentCategory::SYSTEM_VALUE:		o.isEnv ? "Env" : "System" 
 			case ComponentCategory::PROCESS_VALUE:		"Process"
 			case ComponentCategory::THREAD_VALUE:		"Thread"
 			case ComponentCategory::DATA_VALUE:			"Data"

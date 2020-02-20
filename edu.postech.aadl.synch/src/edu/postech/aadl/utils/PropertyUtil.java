@@ -42,7 +42,6 @@ public class PropertyUtil {
 	 * Hybrid-AADL property set
 	 */
 	static public final String ENVIRONMENT = "isEnvironment";
-	static public final String ODE = "ODE";
 	static public final String CD = "ContinuousDynamics";
 
 	/*

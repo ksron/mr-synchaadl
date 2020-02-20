@@ -43,11 +43,13 @@ class RtmAadlProperty extends RtmAadlIdentifier {
 	
 	def compileSynchAadlPropertyValue(Property pr, NamedElement ne) {
 		switch pr.name {
-			case PropertyUtil::INPUT_ADAPTOR:	(PropertyUtils::getSimplePropertyValue(ne,pr) as StringLiteral).value
-			case PropertyUtil::MAX_CLOCK_DEV:	compileTimePropertyValue(pr, ne)
-			case PropertyUtil::SAMPLING_TIME:	compileRangePropertyValue(pr, ne)
-			case PropertyUtil::RESPONSE_TIME: 	compileRangePropertyValue(pr, ne)
-			case PropertyUtil::CD:				PropertyUtils::getStringValue(ne, pr)
+			case PropertyUtil::INPUT_ADAPTOR:		(PropertyUtils::getSimplePropertyValue(ne,pr) as StringLiteral).value
+			case PropertyUtil::MAX_CLOCK_DEV:		compileTimePropertyValue(pr, ne)
+			case PropertyUtil::SAMPLING_TIME:		compileRangePropertyValue(pr, ne)
+			case PropertyUtil::RESPONSE_TIME: 		compileRangePropertyValue(pr, ne)
+			case PropertyUtil::NONDETERMINISTIC: 	null
+			case PropertyUtil::ENVIRONMENT:			null
+			case PropertyUtil::CD:					null
 			default:							pr.compileDefaultPropertyValue(ne)
 		}
 	}

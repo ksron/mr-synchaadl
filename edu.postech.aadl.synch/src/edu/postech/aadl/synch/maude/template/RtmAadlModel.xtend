@@ -2,23 +2,27 @@ package edu.postech.aadl.synch.maude.template
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.SetMultimap
+import edu.postech.aadl.antlr.ContDynamicsFlowsVisitor
+import edu.postech.aadl.antlr.ContDynamicsLexer
+import edu.postech.aadl.antlr.ContDynamicsParser
 import edu.postech.aadl.utils.PropertyUtil
-import java.util.ArrayList
+import java.util.HashSet
+import org.antlr.v4.runtime.ANTLRInputStream
+import org.antlr.v4.runtime.CommonTokenStream
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.emf.common.util.EList
 import org.osate.aadl2.ConnectedElement
 import org.osate.aadl2.DefaultAnnexSubclause
 import org.osate.aadl2.DirectionType
-import org.osate.aadl2.ListValue
 import org.osate.aadl2.ModalPropertyValue
 import org.osate.aadl2.NamedElement
 import org.osate.aadl2.ParameterConnection
 import org.osate.aadl2.Port
-import org.osate.aadl2.PortCategory
 import org.osate.aadl2.PortConnection
 import org.osate.aadl2.PropertyAssociation
 import org.osate.aadl2.StringLiteral
+import org.osate.aadl2.SystemSubcomponent
 import org.osate.aadl2.instance.ComponentInstance
 import org.osate.aadl2.instance.ConnectionReference
 import org.osate.aadl2.instance.FeatureInstance
@@ -28,22 +32,16 @@ import org.osate.aadl2.instance.SystemInstance
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager
 import org.osate.ba.aadlba.BehaviorAnnex
 import org.osate.ba.aadlba.BehaviorVariable
-import org.osate.xtext.aadl2.properties.util.PropertyUtils
 
 import static extension edu.postech.aadl.synch.maude.template.RtmAadlSetting.*
 import static extension edu.postech.aadl.utils.PropertyUtil.*
-import org.antlr.v4.runtime.ANTLRInputStream
-import org.antlr.v4.runtime.CommonTokenStream
-import edu.postech.aadl.antlr.ContDynamicsLexer
-import edu.postech.aadl.antlr.ContDynamicsParser
-import edu.postech.aadl.antlr.ContDynamicsFlowsVisitor
 
 class RtmAadlModel extends RtmAadlIdentifier {
 
 	val RtmAadlBehaviorLanguage bc;
 	val RtmAadlProperty pc;
 	val IProgressMonitor monitor;
-	val SetMultimap<ComponentInstance, ConnectionReference> conxTable = HashMultimap::create() ;
+	val HashMultimap<ComponentInstance, ConnectionReference> conxTable = HashMultimap::create() ;
 
 
 	new(IProgressMonitor pm, AnalysisErrorReporterManager errMgr, SetMultimap<String, String> opTable) {
@@ -75,43 +73,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		'''
 	}
 	
-	private def putNotDuplicate(SetMultimap<ComponentInstance, ConnectionReference> smm, ComponentInstance ci, ConnectionReference cr){
-		var check1 = true
-		var check2 = true
-		
-		for(ConnectionReference param : smm.get(ci)){
-			if(param.connection.source.context !== null &&cr.connection.source.context !== null && param.connection.source.context.name.equals(cr.connection.source.context.name)){
-				if(param.connection.source.connectionEnd.name.equals(cr.connection.source.connectionEnd.name)){
-					check1 = false
-				}
-			}
-			if(param.connection.source.context === null && cr.connection.source.context === null){
-				if(param.connection.source.connectionEnd.name.equals(cr.connection.source.connectionEnd.name)){
-					check1 = false
-				}
-			}
-		}
-		
-		for(ConnectionReference param : smm.get(ci)){
-			if(param.connection.destination.context !== null && cr.connection.destination.context !== null && param.connection.destination.context.name.equals(cr.connection.destination.context.name)){
-				if(param.connection.destination.connectionEnd.name.equals(cr.connection.destination.connectionEnd.name)){
-					check2 = false
-				}
-			}
-			if(param.connection.destination.context === null && cr.connection.destination.context === null){
-				if(param.connection.destination.connectionEnd.name.equals(cr.connection.destination.connectionEnd.name)){
-					check2 = false
-				}
-			}
-		}
-		
-		if(check1 || check2){
-			smm.put(ci, cr)
-		}
-	}
-	
-	
-
 	private def CharSequence compileComponent(ComponentInstance o) {
 		if (monitor.isCanceled()) // when canceled
 			throw new OperationCanceledException
@@ -124,23 +85,16 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			val behAnx = if(o.behavioral && ! (anxSub.empty)) anxSub.get(0).parsedAnnexSubclause as BehaviorAnnex
 
 			
-			o.connectionInstances.forEach[connectionReferences.forEach[conxTable.putNotDuplicate(context, it)]]	
+			o.connectionInstances.forEach[connectionReferences.forEach[conxTable.put(context, it)]]	
 
 			'''
-			< «o.id("ComponentId")» : «IF o.isEnv»Env«ELSE»«o.compClass»«ENDIF» |
-				«IF o.isEnv»
+			< «o.id("ComponentId")» : «o.compClass» |
 				features : (
-					«o.featureInstances.map[compileEnvFeature(o)].filterNull.join('\n', "none")»),
-				«ELSE»
-				features : (
-					«o.featureInstances.map[compileDataFeature].filterNull.join('\n', "none")»),
-				«ENDIF»
+					«o.featureInstances.map[compileFeature].filterNull.join('\n', "none")»),
 				subcomponents : (
 					«o.componentInstances.filter[isSync].map[compileComponent].filterNull.join('\n',"none")»),
-				«IF o.isData && o.isParam»
-				value : param(«IF o.subcomponent.subcomponentType.name.contains("Boolean")»Boolean«ELSE»Real«ENDIF»),
-				«ELSEIF o.isData»
-				value : null(«IF o.subcomponent.subcomponentType.name.contains("Boolean")»Boolean«ELSE»Real«ENDIF»),
+				«IF o.isData»	
+				value : «o.compileValue»,
 				«ENDIF»
 				«IF o.behavioral && ! (behAnx === null)»
 				currState : (
@@ -181,95 +135,66 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				«ENDIF»
 				properties : (
 					«o.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")»),
-				«IF o.isEnv»
 				connections : (
-					«conxTable.get(o).map[compileEnvConnection(o)].filterNull.join(' ;\n', "empty")») 
-				«ELSE»
-				connections : (
-					«conxTable.get(o).map[compileDataConnection].filterNull.join(' ;\n', "empty")»)
-				«ENDIF»
+					«conxTable.get(o).map[compileConnection(o)].filterNull.join(' ;\n', "empty")») 
 				> ''' => [
 				monitor.worked(1)
 			]	
 		}
 	}
 	
-	private def isParam(ComponentInstance ci){
-		for(PropertyAssociation pa : ci.ownedPropertyAssociations){
-			if(pa.property.name.equals(PropertyUtil::INITIAL_VALUE)){
-				if(((PropertyUtils::getSimplePropertyValue(ci, pa.property) as ListValue).ownedListElements.get(0) as StringLiteral).value.equals("param")){
-					return true
+	private def compileTarget(FeatureInstance fi, ComponentInstance ci){
+		if(fi.direction.incoming){
+			for(ConnectionReference cr : conxTable.values){
+				if(cr.connection.source.context!==null && cr.connection.destination.context!==null){
+					if(cr.connection.destination.context.name.escape.equals(ci.name) && cr.connection.destination.connectionEnd.name.escape.equals(fi.name)){
+						return cr.connection.source.context.name
+					}
 				}
 			}
-		}
-		return false
-	}
-	
-	// Compile Features
-	private def compileEnvFeature(FeatureInstance o, ComponentInstance ci) {
-		val f = o.feature
-		switch f {
-			Port: '''
-			< «f.id("FeatureId")» : Env«f.direction.compileDirection(o)»Port | 
-				content : «f.category.compileOutFeature(o)»,
-				«IF f.direction.outgoing»
-				target : «compileOutTarget(f.id("FeatureId"), ci.id("ComponentId"))»,
-				«ELSE»
-				target : «compileInTarget(f.id("FeatureId"), ci.id("ComponentId"))»,
-				«ENDIF»
-				properties : «o.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")»,
-				envCache : «f.category.compileOutFeature(o)» >'''
-			default:
-				null => [o.check(false, "Unsupported feature: " + o.category.getName() + " " + o.name)]
-		}
-	}
-	
-	private def compileOutTarget(String featureId, String componentId){
-		for(ConnectionReference cr : conxTable.values){
-			if(cr.connection.source.context!==null && cr.connection.destination.context!==null){
-				if(cr.connection.source.context.name.escape.equals(componentId) && cr.connection.source.connectionEnd.name.escape.equals(featureId)){
-					return cr.connection.destination.context.name
-				}
-			}
-		}
-		return "none"
-	}
-	
-	private def compileInTarget(String featureId, String componentId){
-		for(ConnectionReference cr : conxTable.values){
-			if(cr.connection.source.context!==null && cr.connection.destination.context!==null){
-				if(cr.connection.destination.context.name.escape.equals(componentId) && cr.connection.destination.connectionEnd.name.escape.equals(featureId)){
-					return cr.connection.source.context.name
+		} else {
+			for(ConnectionReference cr : conxTable.values){
+				if(cr.connection.source.context!==null && cr.connection.destination.context!==null){
+					if(cr.connection.source.context.name.escape.equals(ci.name) && cr.connection.source.connectionEnd.name.escape.equals(fi.name)){
+						return cr.connection.destination.context.name
+					}
 				}
 			}
 		}
 		return "none"
 	}
 
-	private def compileDataFeature(FeatureInstance o) {
-		val f = o.feature
+	private def compileFeature(FeatureInstance fi) {
+		val f = fi.feature
+		var co = fi.containingComponentInstance
 		switch f {
 			Port: '''
-			< «f.id("FeatureId")» : Data«f.direction.compileDirection(o)»Port | 
-				content : «f.category.compileOutFeature(o)» ,
-				«IF f.direction.incoming»
+			< «f.id("FeatureId")» : «fi.compileFeatureClass» | 
+				content : «fi.compileOutFeature» ,
+				«IF !co.isEnv && f.direction.incoming»
 					cache : null(Real),
 				«ENDIF»
-				properties : «o.ownedPropertyAssociations.map[compilePropertyAssociation(o)].filterNull.join(' ;\n', "none")» >'''
+				«IF co.isEnv»
+				target : «fi.compileTarget(co)»,
+				envCache : «fi.compileOutFeature»,
+				«ENDIF»
+				properties : «fi.ownedPropertyAssociations.map[compilePropertyAssociation(fi)].filterNull.join(' ;\n', "none")» >'''
 			default:
-				null => [o.check(false, "Unsupported feature: " + o.category.getName() + " " + o.name)]
+				null => [fi.check(false, "Unsupported feature: " + fi.category.getName() + " " + fi.name)]
 		}
-
 	}
 	
-	private def compileOutFeature(PortCategory cat, FeatureInstance o){
-		val c = o.category
-		switch c {
-			case DATA_PORT : return "null(Real)"
-			case EVENT_DATA_PORT : return "null(Real)"
-			case EVENT_PORT : return "null(Unit)"
-			default : return "null(Real)"
+	private def compileOutFeature(FeatureInstance o){
+		switch o.category {
+			case DATA_PORT: 	 	"null(Real)"
+			case EVENT_DATA_PORT: 	"null(Real)"
+			case EVENT_PORT:  		"null(Unit)"
+			default :  				"null(Real)"
 		}
+	}
+	
+	private def compileFeatureClass(FeatureInstance fi){
+		'''«fi.featClass»«(fi.feature as Port).direction.compileDirection(fi)»Port'''
 	}
 
 	private def compileDirection(DirectionType type, FeatureInstance o) {
@@ -277,24 +202,26 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		'''«IF type.incoming»In«ENDIF»«IF type.outgoing»Out«ENDIF»'''
 	}
 	
-	
-	// Compile Variables
-	private def compileVariables(BehaviorVariable bv){
-		bv.id("VarId")
-		'''( «bv.name» : Real )'''
-		
+	private def compileValue(ComponentInstance o){
+		if(o.isParam){
+			'''param(«IF o.subcomponent.subcomponentType.name.contains("Boolean")»Boolean«ELSE»Real«ENDIF»)'''
+		}else{
+			'''null(«IF o.subcomponent.subcomponentType.name.contains("Boolean")»Boolean«ELSE»Real«ENDIF»)'''
+		}
 	}
 	
-	// Compile VarGen
+	private def compileVariables(BehaviorVariable bv){
+		'''( «bv.id("VarId")» : Real )'''
+	}
+	
 	private def compileVarGenName(ComponentInstance o){
 		if(o.getContainingComponentInstance === null)
-			return o.id("ComponentId")
-		return compileVarGenName(o.getContainingComponentInstance) +"."+ o.id("ComponentId")
+			return o.name.escape
+		return compileVarGenName(o.getContainingComponentInstance) +"."+ o.name.escape
 	}
 	
-	// Compile Current Mode
 	private def compileCurrentMode(EList<ModeInstance> mi){
-		mi.forEach[ element | id(element.name, "Location")]
+		mi.forEach[ element | element.name.id("Location")]
 		for(ModeInstance value : mi){
 			if(value.initial==true){
 				return value.name
@@ -306,11 +233,10 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		return mi.get(0).name
 	}
 	
-	// Compile Jumps
 	private def compileJumps(ModeTransitionInstance mti){
 		'''(«mti.source.name» -[ («mti.modeTransition.ownedTriggers.map[it.triggerPort.name.escape].filterNull.join(" , ", "[[true]]")») ]-> «mti.destination.name»)'''
 	}
-	// Compile Flows
+	
 	private def compileModalPropertyValue(ComponentInstance o){
 		for(PropertyAssociation pa : o.ownedPropertyAssociations){
 			if(pa.property.qualifiedName().contains(PropertyUtil::CD)){
@@ -350,38 +276,21 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		bc.compileCD(contDynamics)
 	}
 	
-	// Compile Sampling/Response
 	private def compileTargetInstanceList(ComponentInstance o){
-		val targets = new ArrayList<String>()
+		val targetInstances = new HashSet<ComponentInstance>()
 		for(ConnectionReference cr : conxTable.values){
 			if(cr.connection.source.context !== null && cr.connection.destination.context !== null){
-				if(cr.connection.source.context.name.equals(o.id("ComponentId"))){
-					targets.add(cr.connection.destination.context.name)
-				}
-			}
-		}
-		val targetInstances = new ArrayList<ComponentInstance>()
-		for(ComponentInstance ci : conxTable.keySet){
-			for(String target : targets){
-				if(ci.id("ComponentId").equals(target) && targetInstanceContains(targetInstances, ci)){
-					targetInstances.add(ci)
+				var source = (cr.context as ComponentInstance).findSubcomponentInstance(cr.connection.source.context as SystemSubcomponent)
+				if(source.equals(o)){
+					targetInstances.add((cr.context as ComponentInstance).findSubcomponentInstance(cr.connection.destination.context as SystemSubcomponent))
 				}
 			}
 		}
 		return targetInstances
 	}
 	
-	private def targetInstanceContains(ArrayList<ComponentInstance> tis, ComponentInstance target){
-		for(ComponentInstance ci : tis){
-			if(ci.name.toString.equals(target.name) && ci.ownedPropertyAssociations.size() == target.ownedPropertyAssociations.size()){
-				return false
-			}
-		}
-		return true
-	}
-	
 	private def compileSamplingTime(ComponentInstance o) {
-		var value = "(" + o.id("ComponentId") + " : ("
+		var value = "(" + o.name + " : ("
 		for(PropertyAssociation p : o.ownedPropertyAssociations){
 			if(p.property.name.contains(PropertyUtil::SAMPLING_TIME)){
 				return value += "rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(0)+"),rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(2)+")))"
@@ -391,7 +300,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	}
 	
 	private def compileResponseTime(ComponentInstance o) {
-		var value = "(" + o.id("ComponentId") + " : ("
+		var value = "(" + o.name + " : ("
 		for(PropertyAssociation p : o.ownedPropertyAssociations){
 			if(p.property.name.equals(PropertyUtil::RESPONSE_TIME)){
 				return value += "rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(0)+"),rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(2)+")))"
@@ -400,21 +309,15 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		return null;
 	}
 
-	
-	// Connection
-	private def CharSequence compileDataConnection(ConnectionReference o) {
-		val c = o.connection => [
-			o.check(it instanceof PortConnection || it instanceof ParameterConnection, "Unsupported connection type")
+	private def CharSequence compileConnection(ConnectionReference cr, ComponentInstance ci){
+		val c = cr.connection => [
+			cr.check(it instanceof PortConnection || it instanceof ParameterConnection, "Unsupported connection type")
 		]
-		'''(«c.source.compileConnectionEndName(o)» --> «c.destination.compileConnectionEndName(o)»)'''
-	}
-	
-	private def CharSequence compileEnvConnection(ConnectionReference o, ComponentInstance ci) {
-		val c = o.connection => [
-			o.check(it instanceof PortConnection || it instanceof ParameterConnection, "Unsupported connection type")
-		]
-		
-		'''(«c.source.compileConnectionEndName(o)»«IF ci.isSubcomponentData(c.source.connectionEnd.name.escape)» ==> «ELSE» =>> «ENDIF»«c.destination.compileConnectionEndName(o)»)'''
+		if(ci.isEnv){
+			'''(«c.source.compileConnectionEndName(cr)»«IF ci.isSubcomponentData(c.source.connectionEnd.name.escape)» ==> «ELSE» =>> «ENDIF»«c.destination.compileConnectionEndName(cr)»)'''
+		} else {
+			'''(«c.source.compileConnectionEndName(cr)» --> «c.destination.compileConnectionEndName(cr)»)'''
+		}
 	}
 
 	private def compileConnectionEndName(ConnectedElement end, ConnectionReference o) {
@@ -428,19 +331,11 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	// Compile Property
 	private def compilePropertyAssociation(PropertyAssociation p, NamedElement ne) {
-		switch(p.property.name){
-			case PropertyUtil::NONDETERMINISTIC: 	return null
-			case PropertyUtil::ENVIRONMENT:			return null
-			case PropertyUtil::CD:					return null
-			case PropertyUtil::ODE:					return null
-		}
-		
 		val value = pc.compilePropertyValue(p.property, ne)
 		if (value !== null && !value.equals("param")) '''(«p.property.qualifiedName().escape» => {{«value»}})'''
 	}
 
 
-	// Utility
 	private def compileInitialValue(NamedElement ne, String none) {
 		val iv = ne.dataInitialValue?.ownedListElements
 		if(! iv.nullOrEmpty) "[[" + (iv.get(0) as StringLiteral).value + "]]" else none // TODO: type checking
