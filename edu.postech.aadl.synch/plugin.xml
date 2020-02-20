@@ -78,7 +78,7 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="edu.postech.aadl.menu.ConstraintChecker"
+            class="edu.postech.aadl.synch.menu.ConstraintChecker"
             commandId="HybridSynchAadlMenu.commands.constraintsCheck">
 			<enabledWhen>
 			    <with variable="activeEditorId">
@@ -87,7 +87,7 @@
 			</enabledWhen>
       </handler>
       <handler
-            class="edu.postech.aadl.menu.CodeGeneration"
+            class="edu.postech.aadl.synch.menu.CodeGeneration"
             commandId="HybridSynchAadlMenu.commands.codeGeneration">
 			<enabledWhen>
 			    <with variable="activeEditorId">
@@ -96,7 +96,7 @@
 			</enabledWhen>
       </handler>
       <handler
-            class="edu.postech.aadl.menu.SymbolicAnalysis"
+            class="edu.postech.aadl.synch.menu.SymbolicAnalysis"
             commandId="HybridSynchAadlMenu.commands.symbolicAnalysis">
 			<enabledWhen>
 			    <with variable="activeEditorId">
@@ -105,7 +105,7 @@
 			</enabledWhen>
       </handler>
        <handler
-            class="edu.postech.aadl.menu.Run"
+            class="edu.postech.aadl.synch.menu.Run"
             commandId="HybridSynchAadlMenu.commands.run">
 			<enabledWhen>
 			    <with variable="activeEditorId">
@@ -188,7 +188,7 @@
             id="edu.postech.aadl.view.HybridSynchAADLView"
             name="HybridSynchAADL Result"
             icon="icons/sample.gif"
-            class="edu.postech.aadl.view.HybridSynchAADLView"
+            class="edu.postech.aadl.synch.view.HybridSynchAADLView"
             category="edu.postech.aadl.synch"
             inject="true">
       </view>

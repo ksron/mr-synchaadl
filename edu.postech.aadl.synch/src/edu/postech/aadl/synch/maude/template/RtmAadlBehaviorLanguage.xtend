@@ -1,12 +1,6 @@
 package edu.postech.aadl.synch.maude.template
 
 import com.google.common.collect.SetMultimap
-import edu.postech.aadl.antlr.model.ContDynamics
-import edu.postech.aadl.antlr.model.ContDynamicsItem
-import edu.postech.aadl.antlr.model.ContFunc
-import edu.postech.aadl.antlr.model.FactorCDExpression
-import edu.postech.aadl.antlr.model.SimpleCDExpression
-import edu.postech.aadl.antlr.model.TermCDExpression
 import org.osate.aadl2.DataPort
 import org.osate.aadl2.Property
 import org.osate.aadl2.PropertyValue
@@ -51,11 +45,7 @@ import org.osate.ba.aadlba.ValueConstant
 import org.osate.ba.aadlba.ValueExpression
 import org.osate.ba.aadlba.ValueVariable
 import org.osate.ba.aadlba.WhileOrDoUntilStatement
-import edu.postech.aadl.antlr.model.ValueCDExpression
-import edu.postech.aadl.antlr.model.Operator
-import edu.postech.aadl.antlr.model.Variable
-import edu.postech.aadl.antlr.model.Constant
-import edu.postech.aadl.antlr.model.ODE
+import edu.postech.aadl.synch.maude.parse.model.ContDynamics
 
 class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 
@@ -238,7 +228,7 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 		else
 			null => [c.check(false, "Unsupported property constant: " + c.class.name)]
 	}
-	
+	/*
 	public def CharSequence compileCD(ContDynamics cd)'''«cd.getItems.map[compileCDItem].filterNull.join(" ; ")»'''
 	
 	private def CharSequence compileCDItem(ContDynamicsItem item)'''(«item.compileTarget» = «(item.expression as SimpleCDExpression).compileCDExpression»)'''
@@ -348,6 +338,8 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 			case Operator::POWER:		"**"
 		}
 	}
+	*
+	*/
 	
 	private def dispatch CharSequence compileExpression(ValueExpression e) {
 		val itRel = e.relations.iterator

@@ -11,9 +11,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 
+import edu.postech.aadl.synch.view.DisplayView;
 import edu.postech.aadl.utils.IOUtils;
-import edu.postech.aadl.view.DisplayView;
-import edu.postech.aadl.view.MaudeResult;
 import edu.postech.aadl.xtext.propspec.propSpec.Invariant;
 import edu.postech.aadl.xtext.propspec.propSpec.Property;
 

@@ -2,9 +2,9 @@ package edu.postech.aadl.synch.maude.template
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.SetMultimap
-import edu.postech.aadl.antlr.ContDynamicsFlowsVisitor
-import edu.postech.aadl.antlr.ContDynamicsLexer
-import edu.postech.aadl.antlr.ContDynamicsParser
+import edu.postech.aadl.synch.maude.parse.ContDynamicsFlowsVisitor
+import edu.postech.aadl.synch.maude.parse.ContDynamicsLexer 
+import edu.postech.aadl.synch.maude.parse.ContDynamicsParser
 import edu.postech.aadl.utils.PropertyUtil
 import java.util.HashSet
 import org.antlr.v4.runtime.ANTLRInputStream
@@ -271,9 +271,10 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		var tokens = new CommonTokenStream(lexer)
 		var parser = new ContDynamicsParser(tokens)
 		var visitor = new ContDynamicsFlowsVisitor()
-		var contDynamics = visitor.visit(ci, parser.continuousdynamics)
-		
-		bc.compileCD(contDynamics)
+		visitor.visitContinuousdynamics(parser.continuousdynamics)
+		var contDynamics = visitor.contDynamics
+		println("Debug!")
+		//bc.compileCD(visitor.contDynamics)
 	}
 	
 	private def compileTargetInstanceList(ComponentInstance o){

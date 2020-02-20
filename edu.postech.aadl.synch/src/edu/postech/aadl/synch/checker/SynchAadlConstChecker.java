@@ -20,10 +20,10 @@ import org.osate.aadl2.modelsupport.modeltraversal.AadlProcessingSwitchWithProgr
 import org.osate.aadl2.util.Aadl2InstanceUtil;
 import org.osate.xtext.aadl2.properties.util.GetProperties;
 
-import edu.postech.aadl.antlr.ContDynamicsFlowsVisitor;
-import edu.postech.aadl.antlr.ContDynamicsLexer;
-import edu.postech.aadl.antlr.ContDynamicsParser;
-import edu.postech.aadl.antlr.model.ContDynamics;
+import edu.postech.aadl.synch.maude.parse.ContDynamicsFlowsVisitor;
+import edu.postech.aadl.synch.maude.parse.ContDynamicsLexer;
+import edu.postech.aadl.synch.maude.parse.ContDynamicsParser;
+import edu.postech.aadl.synch.maude.parse.model.ContDynamics;
 import edu.postech.aadl.utils.PropertyUtil;
 
 public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
@@ -149,7 +149,8 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			ContDynamicsParser parser = new ContDynamicsParser(tokens);
 			ContDynamicsFlowsVisitor visitor = new ContDynamicsFlowsVisitor();
-			return visitor.visit(ci, parser.continuousdynamics());
+			visitor.visit(parser.continuousdynamics());
+			return visitor.getContDynamics();
 		}
 		return null;
 	}
