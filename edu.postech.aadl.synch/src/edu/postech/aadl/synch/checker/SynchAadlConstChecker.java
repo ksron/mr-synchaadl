@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.common.util.EList;
 import org.osate.aadl2.ComponentCategory;
 import org.osate.aadl2.DirectedFeature;
 import org.osate.aadl2.StringLiteral;
@@ -17,13 +16,16 @@ import org.osate.aadl2.instance.InstanceObject;
 import org.osate.aadl2.instance.util.InstanceSwitch;
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager;
 import org.osate.aadl2.modelsupport.modeltraversal.AadlProcessingSwitchWithProgress;
-import org.osate.aadl2.util.Aadl2InstanceUtil;
+import org.osate.ba.aadlba.BehaviorVariableHolder;
+import org.osate.ba.aadlba.ValueVariable;
 import org.osate.xtext.aadl2.properties.util.GetProperties;
 
 import edu.postech.aadl.synch.maude.parse.ContDynamicsFlowsVisitor;
 import edu.postech.aadl.synch.maude.parse.ContDynamicsLexer;
 import edu.postech.aadl.synch.maude.parse.ContDynamicsParser;
 import edu.postech.aadl.synch.maude.parse.model.ContDynamics;
+import edu.postech.aadl.synch.maude.parse.model.ContDynamicsItem;
+import edu.postech.aadl.utils.ParseUtil;
 import edu.postech.aadl.utils.PropertyUtil;
 
 public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
@@ -45,10 +47,10 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 				checkEnvSubComp(ci);
 				checkEnvCompHasCD(ci);
 				checkNonEnvCompHasCD(ci);
+
 				ContDynamics cd = parseContinuousDynamics(ci);
 				checkEnvFlowsDirectReferPort(ci, cd);
 				checkEnvFlowsWrongParam(ci, cd);
-				checkEnvFlowsWrongDataSubComp(ci, cd);
 
 				checkCompSubDataInitValue(ci);
 				checkCompSampleTime(ci);
@@ -64,7 +66,6 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 				checkFeatDataOutInitValue(fi);
 				checkFeatDataOutParamValue(fi);
 				checkCompConnMiss(fi);
-				// checkCompInnerConnMiss(fi);
 
 				monitor.worked(1);
 				return DONE;
@@ -155,10 +156,6 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 		return null;
 	}
 
-	private EList<String> getEnvFlowsVarList(ContDynamics cd) {
-		return null;
-	}
-
 	private void checkEnvFlowsDirectReferPort(ComponentInstance ci, ContDynamics cd) {
 		if (PropertyUtil.isEnvironment(ci) && cd != null) {
 			ArrayList<String> featureNames = new ArrayList<String>();
@@ -181,13 +178,18 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 
 	private void checkEnvFlowsWrongParam(ComponentInstance ci, ContDynamics cd) {
 		if (PropertyUtil.isEnvironment(ci) && cd != null) {
-
-		}
-	}
-
-	private void checkEnvFlowsWrongDataSubComp(ComponentInstance ci, ContDynamics cd) {
-		if (PropertyUtil.isEnvironment(ci) && cd != null) {
-
+			for (ContDynamicsItem item : cd.getItems()) {
+				String param = ParseUtil.getParamString(item);
+				if (param != null) {
+					for (ValueVariable vv : ParseUtil.getTypedVariableList(item)) {
+						if (vv instanceof BehaviorVariableHolder
+								&& !((BehaviorVariableHolder) vv).getBehaviorVariable().getName().equals(param)) {
+							getErrorManager().error(ci, ci.getName() + " has wrong continuous dynamics variable("
+									+ ((BehaviorVariableHolder) vv).getBehaviorVariable().getName() + ") use");
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -212,22 +214,6 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 				}
 			}
 			getErrorManager().error(fi, fi.getName() + " is not connected to any port");
-		}
-	}
-
-	private void checkCompInnerConnMiss(FeatureInstance fi) {
-		ComponentInstance comp = fi.getContainingComponentInstance();
-		GetProperties.getConnectionTiming(fi);
-		if (fi.getDirection().outgoing()) {
-			EList<ConnectionInstance> out = Aadl2InstanceUtil.getOutgoingConnection(comp, fi);
-			if (out == null || out.isEmpty()) {
-				getErrorManager().error(fi, fi.getName() + " is not connected to any port");
-			}
-		} else if (fi.getDirection().incoming()) {
-			EList<ConnectionInstance> in = Aadl2InstanceUtil.getIncomingConnection(comp, fi);
-			if (in == null || in.isEmpty()) {
-				getErrorManager().error(fi, fi.getName() + " is not connected to any port");
-			}
 		}
 	}
 

@@ -37,6 +37,8 @@ public class CDExpression {
 		case POWER:
 			this.op = POWER;
 			break;
+		default:
+			this.op = "ErrOp: " + op;
 		}
 	}
 
@@ -47,6 +49,9 @@ public class CDExpression {
 			break;
 		case MINUS:
 			this.unaryOp = MINUS;
+			break;
+		default:
+			this.unaryOp = "ErrUnaryOp: " + op;
 		}
 	}
 
