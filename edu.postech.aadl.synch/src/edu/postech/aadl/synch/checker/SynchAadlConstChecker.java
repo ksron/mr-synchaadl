@@ -148,7 +148,7 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 			ContDynamicsLexer lexer = new ContDynamicsLexer(stream);
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			ContDynamicsParser parser = new ContDynamicsParser(tokens);
-			ContDynamicsFlowsVisitor visitor = new ContDynamicsFlowsVisitor();
+			ContDynamicsFlowsVisitor visitor = new ContDynamicsFlowsVisitor(ci);
 			visitor.visit(parser.continuousdynamics());
 			return visitor.getContDynamics();
 		}

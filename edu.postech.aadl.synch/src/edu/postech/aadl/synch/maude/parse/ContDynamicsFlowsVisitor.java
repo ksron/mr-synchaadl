@@ -1,31 +1,37 @@
 package edu.postech.aadl.synch.maude.parse;
 
 import org.antlr.v4.runtime.misc.NotNull;
+import org.osate.aadl2.instance.ComponentInstance;
 
 import edu.postech.aadl.synch.maude.parse.ContDynamicsParser.AssignmentContext;
 import edu.postech.aadl.synch.maude.parse.ContDynamicsParser.ContFuncContext;
 import edu.postech.aadl.synch.maude.parse.ContDynamicsParser.ODEContext;
+import edu.postech.aadl.synch.maude.parse.model.CDExpression;
 import edu.postech.aadl.synch.maude.parse.model.Constant;
 import edu.postech.aadl.synch.maude.parse.model.ContDynamics;
 import edu.postech.aadl.synch.maude.parse.model.ContDynamicsItem;
 import edu.postech.aadl.synch.maude.parse.model.ContFunc;
-import edu.postech.aadl.synch.maude.parse.model.Expression;
-import edu.postech.aadl.synch.maude.parse.model.FactorExpression;
+import edu.postech.aadl.synch.maude.parse.model.FactorCDExpression;
 import edu.postech.aadl.synch.maude.parse.model.ODE;
-import edu.postech.aadl.synch.maude.parse.model.SimpleExpression;
-import edu.postech.aadl.synch.maude.parse.model.TermExpression;
+import edu.postech.aadl.synch.maude.parse.model.SimpleCDExpression;
+import edu.postech.aadl.synch.maude.parse.model.TermCDExpression;
 import edu.postech.aadl.synch.maude.parse.model.Variable;
 
-public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<Expression> {
+public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<CDExpression> {
 
 	private ContDynamics cd;
+	private ComponentInstance ci;
+
+	public ContDynamicsFlowsVisitor(ComponentInstance ci) {
+		this.ci = ci;
+	}
 
 	public ContDynamics getContDynamics() {
 		return cd;
 	}
 
 	@Override
-	public Expression visitContinuousdynamics(@NotNull ContDynamicsParser.ContinuousdynamicsContext ctx) {
+	public CDExpression visitContinuousdynamics(@NotNull ContDynamicsParser.ContinuousdynamicsContext ctx) {
 		cd = new ContDynamics();
 		for (AssignmentContext ac : ctx.assignment()) {
 			visitAssignment(ac);
@@ -34,7 +40,7 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<Expression
 	}
 
 	@Override
-	public Expression visitAssignment(@NotNull ContDynamicsParser.AssignmentContext ctx) {
+	public CDExpression visitAssignment(@NotNull ContDynamicsParser.AssignmentContext ctx) {
 		ContDynamicsItem item = null;
 		if (ctx.target() instanceof ODEContext) {
 			item = new ODE();
@@ -49,18 +55,18 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<Expression
 	}
 
 	@Override
-	public Expression visitODE(@NotNull ContDynamicsParser.ODEContext ctx) {
-		return new Variable(ctx.value_variable().getText());
+	public CDExpression visitODE(@NotNull ContDynamicsParser.ODEContext ctx) {
+		return new Variable(ctx.value_variable().getText(), ci);
 	}
 
 	@Override
-	public Expression visitContFunc(@NotNull ContDynamicsParser.ContFuncContext ctx) {
-		return new Variable(ctx.value_variable(0).getText(), ctx.value_variable(1).getText());
+	public CDExpression visitContFunc(@NotNull ContDynamicsParser.ContFuncContext ctx) {
+		return new Variable(ctx.value_variable(0).getText(), ctx.value_variable(1).getText(), ci);
 	}
 
 	@Override
-	public Expression visitSimple_expression(@NotNull ContDynamicsParser.Simple_expressionContext ctx) {
-		SimpleExpression expr = new SimpleExpression();
+	public CDExpression visitSimple_expression(@NotNull ContDynamicsParser.Simple_expressionContext ctx) {
+		SimpleCDExpression expr = new SimpleCDExpression();
 		expr.setLeftExpression(visitTerm_expression(ctx.term_expression()));
 		if (ctx.simple_expression() != null && ctx.term_operator() != null) {
 			expr.setRightExpression(visitSimple_expression(ctx.simple_expression()));
@@ -70,8 +76,8 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<Expression
 	}
 
 	@Override
-	public Expression visitTerm_expression(@NotNull ContDynamicsParser.Term_expressionContext ctx) {
-		TermExpression expr = new TermExpression();
+	public CDExpression visitTerm_expression(@NotNull ContDynamicsParser.Term_expressionContext ctx) {
+		TermCDExpression expr = new TermCDExpression();
 		expr.setLeftExpression(visitFactor_expression(ctx.factor_expression()));
 		if (ctx.term_expression() != null && ctx.factor_operator() != null) {
 			expr.setRightExpression(visitTerm_expression(ctx.term_expression()));
@@ -81,8 +87,8 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<Expression
 	}
 
 	@Override
-	public Expression visitFactor_expression(@NotNull ContDynamicsParser.Factor_expressionContext ctx) {
-		FactorExpression expr = new FactorExpression();
+	public CDExpression visitFactor_expression(@NotNull ContDynamicsParser.Factor_expressionContext ctx) {
+		FactorCDExpression expr = new FactorCDExpression();
 		expr.setLeftExpression(visitValue_expression(ctx.value_expression()));
 		if (ctx.factor_expression() != null && ctx.value_operator() != null) {
 			expr.setRightExpression(visitFactor_expression(ctx.factor_expression()));
@@ -92,8 +98,8 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<Expression
 	}
 
 	@Override
-	public Expression visitValue_expression(@NotNull ContDynamicsParser.Value_expressionContext ctx) {
-		Expression expr = visitChildren(ctx);
+	public CDExpression visitValue_expression(@NotNull ContDynamicsParser.Value_expressionContext ctx) {
+		CDExpression expr = visitChildren(ctx);
 		if (ctx.unary_operator() != null) {
 			expr.setUnaryOperation(ctx.unary_operator().getText());
 		}
@@ -101,13 +107,13 @@ public class ContDynamicsFlowsVisitor extends ContDynamicsBaseVisitor<Expression
 	}
 
 	@Override
-	public Expression visitValue_constant(@NotNull ContDynamicsParser.Value_constantContext ctx) {
-		return new Constant(ctx.getText());
+	public CDExpression visitValue_constant(@NotNull ContDynamicsParser.Value_constantContext ctx) {
+		return new Constant(ctx.getText(), ci);
 	}
 
 	@Override
-	public Expression visitValue_variable(@NotNull ContDynamicsParser.Value_variableContext ctx) {
-		return new Variable(ctx.getText());
+	public CDExpression visitValue_variable(@NotNull ContDynamicsParser.Value_variableContext ctx) {
+		return new Variable(ctx.getText(), ci);
 	}
 
 

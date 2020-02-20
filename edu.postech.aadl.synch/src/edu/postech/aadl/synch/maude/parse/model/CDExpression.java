@@ -1,22 +1,22 @@
 package edu.postech.aadl.synch.maude.parse.model;
 
-public class Expression {
+public class CDExpression {
 	public final static String ADD = "+";
 	public final static String MINUS = "-";
 	public final static String MULTIPLY = "*";
 	public final static String DIVIDE = "/";
 	public final static String POWER = "^";
 
-	protected String op;
-	protected String unaryOp;
-	protected Expression left;
-	protected Expression right;
+	protected String op = null;
+	protected String unaryOp = null;
+	protected CDExpression left = null;
+	protected CDExpression right = null;
 
-	public void setLeftExpression(Expression left) {
+	public void setLeftExpression(CDExpression left) {
 		this.left = left;
 	}
 
-	public void setRightExpression(Expression right) {
+	public void setRightExpression(CDExpression right) {
 		this.right = right;
 	}
 
@@ -49,4 +49,21 @@ public class Expression {
 			this.unaryOp = MINUS;
 		}
 	}
+
+	public String getOp() {
+		return op;
+	}
+
+	public String getUnaryOp() {
+		return unaryOp;
+	}
+
+	public CDExpression getLeft() {
+		return left;
+	}
+
+	public CDExpression getRight() {
+		return right;
+	}
+
 }

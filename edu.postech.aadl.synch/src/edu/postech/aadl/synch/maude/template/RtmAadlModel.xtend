@@ -249,7 +249,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		var mode = o.compileMode(mpv)
 		var expression = (mpv.ownedValue as StringLiteral).value
 		
-		return "((" + mode + ")" + "[" + expression.parse(o)+" ])"
+		return "((" + mode + ")" + "[" + expression.parse(o)+" ] )"
 	}
 	
 	private def compileMode(ComponentInstance o, ModalPropertyValue mpv){
@@ -270,11 +270,9 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		var lexer = new ContDynamicsLexer(stream)
 		var tokens = new CommonTokenStream(lexer)
 		var parser = new ContDynamicsParser(tokens)
-		var visitor = new ContDynamicsFlowsVisitor()
+		var visitor = new ContDynamicsFlowsVisitor(ci)
 		visitor.visitContinuousdynamics(parser.continuousdynamics)
-		var contDynamics = visitor.contDynamics
-		println("Debug!")
-		//bc.compileCD(visitor.contDynamics)
+		bc.compileContinuousDynamics(visitor.contDynamics)
 	}
 	
 	private def compileTargetInstanceList(ComponentInstance o){

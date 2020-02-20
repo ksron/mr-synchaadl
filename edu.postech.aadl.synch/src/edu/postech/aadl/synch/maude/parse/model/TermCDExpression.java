@@ -1,5 +1,5 @@
 package edu.postech.aadl.synch.maude.parse.model;
 
-public class FactorExpression extends Expression {
+public class TermCDExpression extends CDExpression {
 
 }
