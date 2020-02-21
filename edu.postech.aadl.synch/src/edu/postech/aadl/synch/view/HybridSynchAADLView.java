@@ -1,6 +1,8 @@
 package edu.postech.aadl.synch.view;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -37,6 +39,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ViewPart;
 
+import edu.postech.aadl.maude.MaudeCSV;
 import edu.postech.aadl.maude.MaudeResult;
 
 /**
@@ -71,6 +74,7 @@ public class HybridSynchAADLView extends ViewPart {
 	private Action doubleClickAction;
 	private Action stopProcessAction;
 	private Action deleteResultAction;
+	private Action makeCSV;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -184,6 +188,7 @@ public class HybridSynchAADLView extends ViewPart {
 	private void fillContextMenu(IMenuManager manager) {
 		manager.add(stopProcessAction);
 		manager.add(deleteResultAction);
+		manager.add(makeCSV);
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
@@ -200,7 +205,6 @@ public class HybridSynchAADLView extends ViewPart {
 			}
 		};
 		stopProcessAction.setText("Stop Process");
-		stopProcessAction.setToolTipText("Action 1 tooltip");
 
 		deleteResultAction = new Action() {
 			@Override
@@ -210,7 +214,23 @@ public class HybridSynchAADLView extends ViewPart {
 			}
 		};
 		deleteResultAction.setText("Delete Result");
-		deleteResultAction.setToolTipText("Action 1 tooltip");
+
+		makeCSV = new Action() {
+			@Override
+			public void run() {
+				MaudeCSV csv = new MaudeCSV();
+				csv.setCategory();
+				for (TableItem ti : viewer.getTable().getItems()) {
+					csv.addColumn((MaudeResult) ti.getData());
+				}
+				MaudeResult mr = (MaudeResult) viewer.getStructuredSelection().getFirstElement();
+				String time = new SimpleDateFormat("yyyy.MM.dd.HH.mm").format(new Date());
+				IPath csvPath = mr.getLocationIPath().removeLastSegments(2).append("csv")
+						.append("result_" + time + ".csv");
+				csv.doGenerate(csvPath);
+			}
+		};
+		makeCSV.setText("Export all data into CSV file");
 
 		doubleClickAction = new Action() {
 			@Override
