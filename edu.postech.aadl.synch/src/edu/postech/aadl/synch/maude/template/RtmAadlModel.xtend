@@ -35,6 +35,8 @@ import org.osate.ba.aadlba.BehaviorVariable
 
 import static extension edu.postech.aadl.synch.maude.template.RtmAadlSetting.*
 import static extension edu.postech.aadl.utils.PropertyUtil.*
+import edu.postech.aadl.synch.maude.parse.ContDynamicsErrorListener
+import org.antlr.v4.runtime.misc.ParseCancellationException
 
 class RtmAadlModel extends RtmAadlIdentifier {
 
@@ -184,12 +186,12 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		}
 	}
 	
-	private def compileOutFeature(FeatureInstance o){
-		switch o.category {
+	private def compileOutFeature(FeatureInstance fi){
+		switch fi.category {
 			case DATA_PORT: 	 	"null(Real)"
 			case EVENT_DATA_PORT: 	"null(Real)"
 			case EVENT_PORT:  		"null(Unit)"
-			default :  				"null(Real)"
+			default :  				null => [fi.check(false, "Unsupported feature: " + fi.category.name() + " " + fi.name)]
 		}
 	}
 	
@@ -203,6 +205,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	}
 	
 	private def compileValue(ComponentInstance o){
+		o.check( o.correctParam, "invalid initial value: " + o.name)
 		if(o.isParam){
 			'''param(«IF o.subcomponent.subcomponentType.name.contains("Boolean")»Boolean«ELSE»Real«ENDIF»)'''
 		}else{
@@ -268,10 +271,20 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	private def parse(String expression, ComponentInstance ci){
 		var stream = new ANTLRInputStream(expression)
 		var lexer = new ContDynamicsLexer(stream)
+		lexer.removeErrorListeners()
+		lexer.addErrorListener(ContDynamicsErrorListener.INSTANCE)
 		var tokens = new CommonTokenStream(lexer)
 		var parser = new ContDynamicsParser(tokens)
+		parser.setBuildParseTree(true)
+		parser.removeErrorListeners()
+		parser.addErrorListener(ContDynamicsErrorListener.INSTANCE)
 		var visitor = new ContDynamicsFlowsVisitor(ci)
-		visitor.visitContinuousdynamics(parser.continuousdynamics)
+		try{
+			visitor.visitContinuousdynamics(parser.continuousdynamics)
+		}catch(ParseCancellationException e){
+			ci.check(false, e.toString)
+			return ""
+		}
 		bc.compileContinuousDynamics(visitor.contDynamics)
 	}
 	

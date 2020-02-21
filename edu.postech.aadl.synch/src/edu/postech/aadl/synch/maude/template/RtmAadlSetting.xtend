@@ -62,6 +62,18 @@ class RtmAadlSetting {
 		PropertyUtil::isEnvironment(o)
 	}
 	
+	static def isCorrectParam(ComponentInstance ci){
+		for(PropertyAssociation pa : ci.ownedPropertyAssociations){
+			if(pa.property.name.equals(PropertyUtil::INITIAL_VALUE)){
+				var value = ((PropertyUtils::getSimplePropertyValue(ci, pa.property) as ListValue).ownedListElements.get(0) as StringLiteral).value;
+				if (value.matches("[^0-9]+") && !value.equals("param")){
+					return false
+				}
+			}
+		}
+		return true
+	}
+	
 	static def isParam(ComponentInstance ci){
 		for(PropertyAssociation pa : ci.ownedPropertyAssociations){
 			if(pa.property.name.equals(PropertyUtil::INITIAL_VALUE)){
