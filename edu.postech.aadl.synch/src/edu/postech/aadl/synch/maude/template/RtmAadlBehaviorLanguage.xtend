@@ -45,13 +45,10 @@ import org.osate.ba.aadlba.ValueConstant
 import org.osate.ba.aadlba.ValueExpression
 import org.osate.ba.aadlba.ValueVariable
 import org.osate.ba.aadlba.WhileOrDoUntilStatement
-import edu.postech.aadl.synch.maude.parse.model.ContDynamics
-import edu.postech.aadl.synch.maude.parse.model.ContDynamicsItem
-import edu.postech.aadl.synch.maude.parse.model.Variable
-import edu.postech.aadl.synch.maude.parse.model.SimpleCDExpression
-import edu.postech.aadl.synch.maude.parse.model.Constant
-import edu.postech.aadl.synch.maude.parse.model.FactorCDExpression
-import edu.postech.aadl.synch.maude.parse.model.TermCDExpression
+import edu.postech.aadl.synch.maude.contspec.ContSpec
+import edu.postech.aadl.synch.maude.contspec.ContSpecItem
+import edu.postech.aadl.synch.maude.contspec.ODE
+import edu.postech.aadl.synch.maude.contspec.ContFunc
 
 class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 
@@ -191,227 +188,6 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	 * Behavior expressions
 	 */
 	 
-	private def dispatch CharSequence compileExpression(ValueVariable e) {
-		switch e {
-			BehaviorVariableHolder:	'''v[«e.behaviorVariable.name.escape»]'''
-			DataPortHolder:			'''f[«e.dataPort.name.escape»]'''
-			DataSubcomponentHolder:	'''c[«e.dataSubcomponent.name.escape»]'''
-			ParameterHolder:		'''p[«e.parameter.name.escape»]'''
-			PortCountValue:			'''count(«e.port.name.escape»)'''	=> [e.check(e.port instanceof DataPort, "only data port supported")]
-			PortFreshValue:			'''fresh(«e.port.name.escape»)'''	=> [e.check(e.port instanceof DataPort, "only data port supported")]
-			default:				null => [e.check(false, "Unsupported expression reference: " + e.class.name)]
-		}
-	}
-	private def dispatch CharSequence compileExpression(ValueConstant e) {
-		switch e {
-			BehaviorBooleanLiteral:		if (e.isValue()) "[[true]]" else "[[false]]"
-			BehaviorStringLiteral:		'''[["«e.value»"]]'''
-			BehaviorRealLiteral:		'''[[«e.value»]]'''
-			BehaviorIntegerLiteral:		'''[[«e.value»]]'''
-			PropertySetPropertyReference: e.compilePropertySetPropertyReference
-			BehaviorPropertyConstant:	e.compilePropertyConstant
-			default:					null => [e.check(false, "Unsupported expression constant: " + e.class.name)]
-		}
-	}
-	
-	private def compilePropertySetPropertyReference(PropertySetPropertyReference c){
-		val value = c.properties.get(0).property.element
-		if(value instanceof Property){
-			'''[[«value.getQualifiedName.escape»]]'''
-		}
-
-		else
-			null => [c.check(false, "Unsupported property reference : " + c.class.name)]
-	}
-	
-	
-	private def compilePropertyConstant(BehaviorPropertyConstant c) {
-		val value = c.property.constantValue
-		if (value instanceof PropertyValue){
-			'''[[«RtmAadlProperty::compilePropertyValue(value as PropertyValue)»]]'''
-		}
-
-		else
-			null => [c.check(false, "Unsupported property constant: " + c.class.name)]
-	}
-	
-	public def CharSequence compileContinuousDynamics(ContDynamics cd)'''«cd.getItems.map[compileContDynamicsItem].filterNull.join(" ; ")»'''
-	
-	private def CharSequence compileContDynamicsItem(ContDynamicsItem item)'''(«item.target.compileTarget» = «(item.expression as SimpleCDExpression).compileCDExpression»)'''
-	
-	private def CharSequence compileTarget(Variable variable){
-		if(variable.hasParam){
-			variable.paramString.id("VarId")
-			'''«variable.variableString»(«variable.paramString»)'''
-		}else{
-			'''dt/d[«variable.variableString»]'''
-		}
-	}
-	
-	private def CharSequence compileCDExpression(SimpleCDExpression expr){
-		var seq = ""
-		if(expr.unaryOp !== null){
-			seq += expr.unaryOp.compileUnaryOperation + "("
-		}
-		if(expr.op !== null){
-			seq += "(" + (expr.left as TermCDExpression).compileCDExpression + " " + expr.op + " " + (expr.right as SimpleCDExpression).compileCDExpression + ")"
-		}else{
-			seq += (expr.left as TermCDExpression).compileCDExpression
-		}
-		if(expr.unaryOp !== null){
-			seq += ")"
-		}
-		return seq
-	}
-	
-	private def CharSequence compileCDExpression(TermCDExpression expr){
-		var seq = ""
-		if(expr.op !== null){
-			seq += "(" + (expr.left as FactorCDExpression).compileCDExpression + " " + expr.op + " " + (expr.right as TermCDExpression).compileCDExpression + ")"
-		}else{
-			seq += (expr.left as FactorCDExpression).compileCDExpression
-		}
-		return seq
-	}
-	
-	private def CharSequence compileCDExpression(FactorCDExpression expr){
-		var seq = ""
-		var left = ""
-		switch (expr.left){
-			Constant:			left=(expr.left as Constant).compileCDExpression.toString
-			Variable:			left=(expr.left as Variable).compileCDExpression.toString
-			SimpleCDExpression: left=(expr.left as SimpleCDExpression).compileCDExpression.toString
-		}
-		if(expr.op !== null){
-			seq += "(" + left + " " + expr.op + " " + (expr.right as FactorCDExpression).compileCDExpression + ")"
-		}else{
-			seq += left
-		}
-		return seq
-	}
-	
-	private def CharSequence compileCDExpression(Variable variable){
-		switch(variable.typedVariable){
-			DataSubcomponentHolder:		'''c[«variable.variableString»]'''
-			BehaviorVariableHolder:		'''v[«variable.variableString»]'''
-			default:					'''[Unsupported]'''
-		}
-	}
-	
-	private def CharSequence compileCDExpression(Constant const){
-		switch(const.typedConstant){
-			BehaviorRealLiteral:		'''[[«const.constantString»]]'''
-			BehaviorPropertyConstant:	(const.typedConstant as BehaviorPropertyConstant).compilePropertyConstant
-			default:					'''[[Unsupported]]'''
-		}
-	}
-	
-	private def CharSequence compileUnaryOperation(String op){
-		switch(op){
-			case "+"	: '''plus'''
-			case "-"	: '''minus'''
-		}
-	}
-	
-	/* 
-	
-	private def CharSequence compileCDExpression(SimpleCDExpression expr){
-		var simpleExprStr = expr.opCount.countParenthesis + expr.firstExpression.compileCDExpression.toString
-		if(expr.hasMultiExpr){
-			for(var i = 0; i < expr.opCount; i++){
-				simpleExprStr += " "+ expr.getOp(i).compileCDOperator+" "
-				simpleExprStr += expr.getNextExpression(i).compileCDExpression +")"
-			}
-		}
-		return simpleExprStr
-	}
-	
-	private def CharSequence compileCDExpression(TermCDExpression expr){
-		var termExprStr = expr.opCount.countParenthesis + expr.firstExpression.compileCDExpression.toString
-		if(expr.hasMultiExpr){
-			for(var i = 0; i < expr.opCount; i++){
-				termExprStr += " "+expr.getOp(i).compileCDOperator+ " "
-				termExprStr += expr.getNextExpression(i).compileCDExpression +")"
-			}
-		}
-		return termExprStr
-	}
-	
-	private def CharSequence compileCDExpression(FactorCDExpression expr){
-		var factExprStr = expr.opCount.countParenthesis + expr.firstExpression.compileCDExpression.toString
-		if(expr.hasMultiExpr){
-			for(var i = 0; i < expr.opCount; i++){
-				factExprStr += " "+expr.getOp(i).compileCDOperator+" "
-				factExprStr += expr.getNextExpression(i).compileCDExpression +")"
-			}
-		}
-		return factExprStr
-	}
-	
-		private def CharSequence countParenthesis(int count){
-		var p=""
-		for(var i=0; i < count; i++){
-			p+="("
-		}
-		return p
-	}
-	
-	private def CharSequence compileCDExpression(ValueCDExpression expr){
-		var valExprStr = ""
-		if(expr.getOp(0) != null){
-			valExprStr = expr.getOp(0).compileCDUnaryOperator.toString
-			valExprStr += "("
-		}
-		var single = expr.firstExpression
-		if(single instanceof SimpleCDExpression){
-			valExprStr += " ( " + (single as SimpleCDExpression).compileCDExpression.toString + " ) "
-		}else if(single instanceof Variable){
-			valExprStr += (single as Variable).compileCDExpression.toString
-		}else if(single instanceof Constant){
-			valExprStr += (single as Constant).compileCDExpression.toString
-		}
-		if(expr.getOp(0)!= null){
-			valExprStr += ")"
-		}
-		return valExprStr;
-	}
-	
-	private def CharSequence compileCDExpression(Variable variable){
-		switch variable.getValue{
-			DataSubcomponentHolder: '''c[«variable.text»]'''
-			BehaviorVariableHolder: '''v[«variable.text»]'''
-			default:				'''[Unsupported]'''
-		}
-	}
-	
-	private def CharSequence compileCDExpression(Constant constant){
-		switch constant.getValue {
-			BehaviorRealLiteral:		'''[[«constant.text»]]'''
-			BehaviorPropertyConstant:		(constant.getValue as BehaviorPropertyConstant).compilePropertyConstant
-			default:						'''[[Unsupported]]'''
-		}
-	}
-	
-	private def CharSequence compileCDUnaryOperator(Operator op){
-		switch op.value {
-			case Operator::ADD:			"plus"
-			case Operator::MINUS:		"minus"
-			default:					""
-		}
-	}
-	
-	private def CharSequence compileCDOperator(Operator op){
-		switch op.value {
-			case Operator::ADD:			"+"
-			case Operator::MINUS:		"-"
-			case Operator::MULTIPLY:	"*"
-			case Operator::DIVIDE:		"/"
-			case Operator::POWER:		"**"
-		}
-	}
-	*
-	*/
-	
 	private def dispatch CharSequence compileExpression(ValueExpression e) {
 		val itRel = e.relations.iterator
 		var result = itRel.next.compileExpression
@@ -479,5 +255,59 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 		e.check(false, "Unsupported expression: " + e.class.name)
 		null
 	}
+		
+		private def dispatch CharSequence compileExpression(ValueVariable e) {
+		switch e {
+			BehaviorVariableHolder:	'''v[«e.behaviorVariable.name.escape»]'''
+			DataPortHolder:			'''f[«e.dataPort.name.escape»]'''
+			DataSubcomponentHolder:	'''c[«e.dataSubcomponent.name.escape»]'''
+			ParameterHolder:		'''p[«e.parameter.name.escape»]'''
+			PortCountValue:			'''count(«e.port.name.escape»)'''	=> [e.check(e.port instanceof DataPort, "only data port supported")]
+			PortFreshValue:			'''fresh(«e.port.name.escape»)'''	=> [e.check(e.port instanceof DataPort, "only data port supported")]
+			default:				null => [e.check(false, "Unsupported expression reference: " + e.class.name)]
+		}
+	}
+	private def dispatch CharSequence compileExpression(ValueConstant e) {
+		switch e {
+			BehaviorBooleanLiteral:		if (e.isValue()) "[[true]]" else "[[false]]"
+			BehaviorStringLiteral:		'''[["«e.value»"]]'''
+			BehaviorRealLiteral:		'''[[«e.value»]]'''
+			BehaviorIntegerLiteral:		'''[[«e.value»]]'''
+			PropertySetPropertyReference: e.compilePropertySetPropertyReference
+			BehaviorPropertyConstant:	e.compilePropertyConstant
+			default:					null => [e.check(false, "Unsupported expression constant: " + e.class.name)]
+		}
+	}
+	
+	private def compilePropertySetPropertyReference(PropertySetPropertyReference c){
+		val value = c.properties.get(0).property.element
+		if(value instanceof Property){
+			'''[[«value.getQualifiedName.escape»]]'''
+		}
+
+		else
+			null => [c.check(false, "Unsupported property reference : " + c.class.name)]
+	}
+	
+	
+	private def compilePropertyConstant(BehaviorPropertyConstant c) {
+		val value = c.property.constantValue
+		if (value instanceof PropertyValue){
+			'''[[«RtmAadlProperty::compilePropertyValue(value as PropertyValue)»]]'''
+		}
+
+		else
+			null => [c.check(false, "Unsupported property constant: " + c.class.name)]
+	}
+	
+	/**************************************************************************************************************
+	 * Continuous Dynamics expressions
+	 */
+	 
+	 public def CharSequence compileContSpec(ContSpec spec)'''«spec.getItems.map[compileContSpecItem].filterNull.join(" ; ")»'''
+	 
+	 private def dispatch CharSequence compileContSpecItem(ODE item)'''(dt/d[«(item.target as DataSubcomponentHolder).dataSubcomponent.name.escape»] = «item.expression.compileExpression»)'''
+	 
+	 private def dispatch CharSequence compileContSpecItem(ContFunc item)'''(«(item.target as DataSubcomponentHolder).dataSubcomponent.name.escape»(«(item.param as BehaviorVariableHolder).behaviorVariable.name.escape») = «item.expression.compileExpression»)'''
 			
 }

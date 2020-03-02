@@ -17,15 +17,15 @@ target
 	;
 	
 simple_expression
-	: term_expression (term_operator simple_expression)?
+	: term_expression (term_operator term_expression)*
 	;
 
 term_expression
-	: factor_expression (factor_operator term_expression)?
+	: factor_expression (factor_operator factor_expression)*
 	;
 	
 factor_expression
-	: value_expression (value_operator factor_expression)?
+	: value_expression (value_operator value_expression)?
 	;
 	
 value_expression

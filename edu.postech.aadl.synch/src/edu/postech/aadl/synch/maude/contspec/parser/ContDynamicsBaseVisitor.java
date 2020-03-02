@@ -1,5 +1,5 @@
 // Generated from ContDynamics.g4 by ANTLR 4.4
-package edu.postech.aadl.synch.maude.parse;
+package edu.postech.aadl.synch.maude.contspec.parser;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 

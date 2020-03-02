@@ -28,26 +28,16 @@ public class PropertyUtil {
 	static public final String INITIAL_VALUE = "Initial_Value" ;
 
 	/*
-	 * MR-Synch-AADL property set
+	 * Hybrid-AADL property set
 	 */
 	static public final String HYBRIDSYNCHAADL = "Hybrid_SynchAADL";
 	static public final String SYNCHRONOUS = "Synchronous";
 	static public final String NONDETERMINISTIC = "Nondeterministic";
-	static public final String INPUT_ADAPTOR = "InputAdaptor";
 	static public final String SAMPLING_TIME = "Sampling_Time";
 	static public final String RESPONSE_TIME = "Response_Time";
 	static public final String MAX_CLOCK_DEV = "Max_Clock_Deviation";
-
-	/*
-	 * Hybrid-AADL property set
-	 */
 	static public final String ENVIRONMENT = "isEnvironment";
-	static public final String CD = "ContinuousDynamics";
-
-	/*
-	 * Thermostat property set
-	 */
-	static public final String THERMOSTAT = "ThermostatSpec";
+	static public final String CONTINUOUSDYNAMIC = "ContinuousDynamic";
 
 	public static ListValue getDataInitialValue(final NamedElement ne) {
 

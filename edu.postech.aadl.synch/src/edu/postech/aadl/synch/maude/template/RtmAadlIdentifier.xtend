@@ -10,8 +10,8 @@ import java.util.Set
 
 class RtmAadlIdentifier {
 	
-	private val AnalysisErrorReporterManager errMgr;
-	private val SetMultimap<String, String> opTable;
+	val AnalysisErrorReporterManager errMgr;
+	val SetMultimap<String, String> opTable;
 	
 	new (AnalysisErrorReporterManager errMgr, SetMultimap<String, String> opTable) {
 		this.errMgr = errMgr;
@@ -24,22 +24,8 @@ class RtmAadlIdentifier {
 		«ENDFOR»
 	'''
 	
-	def generateLocations() '''
-		«FOR key: opTable.keySet»
-		«IF key.equals("Location")»
-		«locEncode(opTable.get(key))»
-		«ENDIF»
-		«ENDFOR»
-	'''
-	
-	def locEncode(Set<String> names){
-		var idx = 0
-		var encode = ""
-		for(String name : names){
-			encode += "eq " + name + " = loc(real(" + (idx++) + ")) .\n"
-		}
-		encode += "eq @@default@loc@@ = loc(real(" + (idx++) + ")) .\n"
-		return encode
+	def getIdsOfType(String sort) {
+		opTable.get(sort);
 	}
 	
 	def check(Element obj, boolean cond, String msg) {
@@ -76,13 +62,5 @@ class RtmAadlIdentifier {
 		else
 			iterable.join(separator)
 			
-	}
-	
-	public def isVarId(String vid){
-		for(String v : opTable.get("VarId")){
-			if(vid.equals(v))
-				return true
-		}
-		return false
 	}
 }

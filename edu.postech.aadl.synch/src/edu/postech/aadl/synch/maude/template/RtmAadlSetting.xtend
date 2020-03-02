@@ -85,7 +85,7 @@ class RtmAadlSetting {
 		return false
 	}
 	
-	static def featClass(FeatureInstance fi){
+	static def featureClass(FeatureInstance fi){
 		var o = fi.containingComponentInstance
 		o.isEnv ? "Env" : "Data"
 	}

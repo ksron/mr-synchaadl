@@ -2,13 +2,8 @@ package edu.postech.aadl.synch.maude.template
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.SetMultimap
-import edu.postech.aadl.synch.maude.parse.ContDynamicsFlowsVisitor
-import edu.postech.aadl.synch.maude.parse.ContDynamicsLexer 
-import edu.postech.aadl.synch.maude.parse.ContDynamicsParser
 import edu.postech.aadl.utils.PropertyUtil
 import java.util.HashSet
-import org.antlr.v4.runtime.ANTLRInputStream
-import org.antlr.v4.runtime.CommonTokenStream
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.emf.common.util.EList
@@ -35,8 +30,13 @@ import org.osate.ba.aadlba.BehaviorVariable
 
 import static extension edu.postech.aadl.synch.maude.template.RtmAadlSetting.*
 import static extension edu.postech.aadl.utils.PropertyUtil.*
-import edu.postech.aadl.synch.maude.parse.ContDynamicsErrorListener
-import org.antlr.v4.runtime.misc.ParseCancellationException
+import edu.postech.aadl.synch.maude.contspec.ContSpec
+import org.osate.aadl2.instance.ConnectionInstance
+import java.util.ArrayList
+import org.osate.aadl2.SubcomponentType
+import edu.postech.aadl.synch.maude.contspec.ContSpecItem
+import edu.postech.aadl.synch.maude.contspec.ContFunc
+import org.osate.ba.aadlba.BehaviorVariableHolder
 
 class RtmAadlModel extends RtmAadlIdentifier {
 
@@ -73,6 +73,17 @@ class RtmAadlModel extends RtmAadlIdentifier {
 				«generateLocations»
 			endm
 		'''
+		// FIXME: the "MODEL-SYMBOLIC" part is only generated for the symbolic mode
+	}
+	
+	def generateLocations() {
+		var idx = 0
+		var encode = ""
+		for(String name : getIdsOfType("Location")){
+			encode += "eq " + name + " = loc(real(" + (idx++) + ")) .\n"
+		}
+		encode += "eq @@default@loc@@ = loc(real(" + (idx++) + ")) .\n"
+		return encode
 	}
 	
 	private def CharSequence compileComponent(ComponentInstance o) {
@@ -126,10 +137,10 @@ class RtmAadlModel extends RtmAadlIdentifier {
 					«o.compileModalPropertyValue.map[compileFlows(o)].filterNull.join(" ;\n", "empty")»
 					),
 				sampling : (
-					«o.compileTargetInstanceList.map[compileSamplingTime].filterNull.join(" ,\n", "empty")»
+					«o.compileTargetInstances.map[compileSamplingTime].filterNull.join(" ,\n", "empty")»
 					),
 				response : (
-					«o.compileTargetInstanceList.map[compileResponseTime].filterNull.join(" ,\n", "empty")»
+					«o.compileTargetInstances.map[compileResponseTime].filterNull.join(" ,\n", "empty")»
 					),
 				varGen : (
 					< "«o.compileVarGenName»" >
@@ -144,27 +155,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			]	
 		}
 	}
-	
-	private def compileTarget(FeatureInstance fi, ComponentInstance ci){
-		if(fi.direction.incoming){
-			for(ConnectionReference cr : conxTable.values){
-				if(cr.connection.source.context!==null && cr.connection.destination.context!==null){
-					if(cr.connection.destination.context.name.escape.equals(ci.name) && cr.connection.destination.connectionEnd.name.escape.equals(fi.name)){
-						return cr.connection.source.context.name
-					}
-				}
-			}
-		} else {
-			for(ConnectionReference cr : conxTable.values){
-				if(cr.connection.source.context!==null && cr.connection.destination.context!==null){
-					if(cr.connection.source.context.name.escape.equals(ci.name) && cr.connection.source.connectionEnd.name.escape.equals(fi.name)){
-						return cr.connection.destination.context.name
-					}
-				}
-			}
-		}
-		return "none"
-	}
 
 	private def compileFeature(FeatureInstance fi) {
 		val f = fi.feature
@@ -174,7 +164,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			< «f.id("FeatureId")» : «fi.compileFeatureClass» | 
 				content : «fi.compileOutFeature» ,
 				«IF !co.isEnv && f.direction.incoming»
-					cache : null(Real),
+				cache : null(Real),
 				«ENDIF»
 				«IF co.isEnv»
 				target : «fi.compileTarget(co)»,
@@ -184,6 +174,17 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			default:
 				null => [fi.check(false, "Unsupported feature: " + fi.category.getName() + " " + fi.name)]
 		}
+	}
+	
+	private def compileTarget(FeatureInstance fi, ComponentInstance ci){
+		for(ConnectionInstance conn : ci.getAllEnclosingConnectionInstances()){
+			if(fi.direction.incoming && PropertyUtil::getSrcComponent(conn).equals(ci)){
+				return PropertyUtil::getDstComponent(conn).name
+			} else if(fi.direction.outgoing && PropertyUtil::getDstComponent(conn).equals(ci)){
+				return PropertyUtil::getSrcComponent(conn).name
+			}
+		}
+		null => [ci.check(false, "Unknown target: " + ci.category.getName() + " " + ci.name)]
 	}
 	
 	private def compileOutFeature(FeatureInstance fi){
@@ -196,7 +197,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	}
 	
 	private def compileFeatureClass(FeatureInstance fi){
-		'''«fi.featClass»«(fi.feature as Port).direction.compileDirection(fi)»Port'''
+		'''«fi.featureClass»«(fi.feature as Port).direction.compileDirection(fi)»Port'''
 	}
 
 	private def compileDirection(DirectionType type, FeatureInstance o) {
@@ -206,10 +207,11 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def compileValue(ComponentInstance o){
 		o.check( o.correctParam, "invalid initial value: " + o.name)
-		if(o.isParam){
-			'''param(«IF o.subcomponent.subcomponentType.name.contains("Boolean")»Boolean«ELSE»Real«ENDIF»)'''
-		}else{
-			'''null(«IF o.subcomponent.subcomponentType.name.contains("Boolean")»Boolean«ELSE»Real«ENDIF»)'''
+		switch o.subcomponent.subcomponentType.name {
+			case "Float":		o.isParam ? "param(Real)" : "null(Real)"
+			case "Real":		o.isParam ? "param(Real)" : "null(Real)"
+			case "Boolean":		o.isParam ? "param(Boolean)" : "null(Boolean)"
+			default : 			null => [o.check(false, "Unsupported data type: " + o.category.name() + " " + o.name)]
 		}
 	}
 	
@@ -242,7 +244,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def compileModalPropertyValue(ComponentInstance o){
 		for(PropertyAssociation pa : o.ownedPropertyAssociations){
-			if(pa.property.qualifiedName().contains(PropertyUtil::CD)){
+			if(pa.property.qualifiedName().contains(PropertyUtil::CONTINUOUSDYNAMIC)){
 				return pa.ownedValues
 			}
 		}
@@ -250,9 +252,15 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def compileFlows(ModalPropertyValue mpv, ComponentInstance o){
 		var mode = o.compileMode(mpv)
-		var expression = (mpv.ownedValue as StringLiteral).value
+		var expr = (mpv.ownedValue as StringLiteral).value
+		var spec = ContSpec::parse(expr, o)
+		for(ContSpecItem item : spec.items){
+			if(item instanceof ContFunc){
+				(item.param as BehaviorVariableHolder).behaviorVariable.name.id("VarId")
+			}
+		}
 		
-		return "((" + mode + ")" + "[" + expression.parse(o)+" ] )"
+		return "((" + mode + ")" + "[" + bc.compileContSpec(spec)+" ] )"
 	}
 	
 	private def compileMode(ComponentInstance o, ModalPropertyValue mpv){
@@ -267,35 +275,13 @@ class RtmAadlModel extends RtmAadlIdentifier {
 			mode = "@@default@loc@@"
 		}
 	}
+
 	
-	private def parse(String expression, ComponentInstance ci){
-		var stream = new ANTLRInputStream(expression)
-		var lexer = new ContDynamicsLexer(stream)
-		lexer.removeErrorListeners()
-		lexer.addErrorListener(ContDynamicsErrorListener.INSTANCE)
-		var tokens = new CommonTokenStream(lexer)
-		var parser = new ContDynamicsParser(tokens)
-		parser.setBuildParseTree(true)
-		parser.removeErrorListeners()
-		parser.addErrorListener(ContDynamicsErrorListener.INSTANCE)
-		var visitor = new ContDynamicsFlowsVisitor(ci)
-		try{
-			visitor.visitContinuousdynamics(parser.continuousdynamics)
-		}catch(ParseCancellationException e){
-			ci.check(false, e.toString)
-			return ""
-		}
-		bc.compileContinuousDynamics(visitor.contDynamics)
-	}
-	
-	private def compileTargetInstanceList(ComponentInstance o){
-		val targetInstances = new HashSet<ComponentInstance>()
-		for(ConnectionReference cr : conxTable.values){
-			if(cr.connection.source.context !== null && cr.connection.destination.context !== null){
-				var source = (cr.context as ComponentInstance).findSubcomponentInstance(cr.connection.source.context as SystemSubcomponent)
-				if(source.equals(o)){
-					targetInstances.add((cr.context as ComponentInstance).findSubcomponentInstance(cr.connection.destination.context as SystemSubcomponent))
-				}
+	private def compileTargetInstances(ComponentInstance ci){
+		var targetInstances = new HashSet<ComponentInstance>();
+		for(ConnectionInstance conn : ci.getAllEnclosingConnectionInstances()){
+			if(PropertyUtil::getSrcComponent(conn).equals(ci)){
+				targetInstances.add(PropertyUtil::getDstComponent(conn))
 			}
 		}
 		return targetInstances
@@ -305,7 +291,8 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		var value = "(" + o.name + " : ("
 		for(PropertyAssociation p : o.ownedPropertyAssociations){
 			if(p.property.name.contains(PropertyUtil::SAMPLING_TIME)){
-				return value += "rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(0)+"),rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(2)+")))"
+				var time = pc.compilePropertyValue(p.property, o).toString
+				return value += "rat("+time.split(" ").get(0)+"),rat("+time.split(" ").get(2)+")))"
 			}
 		}
 		return null;
@@ -315,7 +302,8 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		var value = "(" + o.name + " : ("
 		for(PropertyAssociation p : o.ownedPropertyAssociations){
 			if(p.property.name.equals(PropertyUtil::RESPONSE_TIME)){
-				return value += "rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(0)+"),rat("+pc.compilePropertyValue(p.property, o).toString.split(" ").get(2)+")))"
+				var time = pc.compilePropertyValue(p.property, o).toString
+				return value += "rat("+time.split(" ").get(0)+"),rat("+time.split(" ").get(2)+")))"
 			}
 		}
 		return null;

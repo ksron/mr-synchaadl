@@ -16,16 +16,12 @@ import org.osate.aadl2.instance.InstanceObject;
 import org.osate.aadl2.instance.util.InstanceSwitch;
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager;
 import org.osate.aadl2.modelsupport.modeltraversal.AadlProcessingSwitchWithProgress;
-import org.osate.ba.aadlba.BehaviorVariableHolder;
-import org.osate.ba.aadlba.ValueVariable;
 import org.osate.xtext.aadl2.properties.util.GetProperties;
 
-import edu.postech.aadl.synch.maude.parse.ContDynamicsFlowsVisitor;
-import edu.postech.aadl.synch.maude.parse.ContDynamicsLexer;
-import edu.postech.aadl.synch.maude.parse.ContDynamicsParser;
-import edu.postech.aadl.synch.maude.parse.model.ContDynamics;
-import edu.postech.aadl.synch.maude.parse.model.ContDynamicsItem;
-import edu.postech.aadl.utils.ParseUtil;
+import edu.postech.aadl.synch.maude.contspec.ContSpec;
+import edu.postech.aadl.synch.maude.contspec.parser.ContDynamicsFlowsVisitor;
+import edu.postech.aadl.synch.maude.contspec.parser.ContDynamicsLexer;
+import edu.postech.aadl.synch.maude.contspec.parser.ContDynamicsParser;
 import edu.postech.aadl.utils.PropertyUtil;
 
 public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
@@ -48,7 +44,7 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 				checkEnvCompHasCD(ci);
 				checkNonEnvCompHasCD(ci);
 
-				ContDynamics cd = parseContinuousDynamics(ci);
+				ContSpec cd = parseContinuousDynamics(ci);
 				checkEnvFlowsDirectReferPort(ci, cd);
 				checkEnvFlowsWrongParam(ci, cd);
 
@@ -127,21 +123,24 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 
 	private void checkNonEnvCompHasCD(ComponentInstance ci) {
 		if (!PropertyUtil.isEnvironment(ci)
-				&& PropertyUtil.hasContinuousDynamics(ci, PropertyUtil.HYBRIDSYNCHAADL, PropertyUtil.CD)) {
+				&& PropertyUtil.hasContinuousDynamics(ci, PropertyUtil.HYBRIDSYNCHAADL,
+						PropertyUtil.CONTINUOUSDYNAMIC)) {
 			getErrorManager().error(ci, ci.getName() + " must not have Continuous Dynamics property");
 		}
 	}
 
 	private void checkEnvCompHasCD(ComponentInstance ci) {
 		if (PropertyUtil.isEnvironment(ci)
-				&& !PropertyUtil.hasContinuousDynamics(ci, PropertyUtil.HYBRIDSYNCHAADL, PropertyUtil.CD)) {
+				&& !PropertyUtil.hasContinuousDynamics(ci, PropertyUtil.HYBRIDSYNCHAADL,
+						PropertyUtil.CONTINUOUSDYNAMIC)) {
 			getErrorManager().error(ci, ci.getName() + " must have Continuous Dynamics property");
 		}
 	}
 
-	private ContDynamics parseContinuousDynamics(ComponentInstance ci) {
+	private ContSpec parseContinuousDynamics(ComponentInstance ci) {
 		if (PropertyUtil.isEnvironment(ci)) {
-			String flows = PropertyUtil.getEnvContinuousDynamics(ci, PropertyUtil.HYBRIDSYNCHAADL, PropertyUtil.CD);
+			String flows = PropertyUtil.getEnvContinuousDynamics(ci, PropertyUtil.HYBRIDSYNCHAADL,
+					PropertyUtil.CONTINUOUSDYNAMIC);
 			if (flows == null) {
 				return null;
 			}
@@ -149,14 +148,13 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 			ContDynamicsLexer lexer = new ContDynamicsLexer(stream);
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			ContDynamicsParser parser = new ContDynamicsParser(tokens);
-			ContDynamicsFlowsVisitor visitor = new ContDynamicsFlowsVisitor(ci);
-			visitor.visit(parser.continuousdynamics());
-			return visitor.getContDynamics();
+			ContDynamicsFlowsVisitor visitor = new ContDynamicsFlowsVisitor();
+			return visitor.visit(parser.continuousdynamics(), ci);
 		}
 		return null;
 	}
 
-	private void checkEnvFlowsDirectReferPort(ComponentInstance ci, ContDynamics cd) {
+	private void checkEnvFlowsDirectReferPort(ComponentInstance ci, ContSpec cd) {
 		if (PropertyUtil.isEnvironment(ci) && cd != null) {
 			ArrayList<String> featureNames = new ArrayList<String>();
 			String ContinuousDynamics = null;
@@ -164,7 +162,7 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 				featureNames.add(fi.getFeature().getName());
 			}
 			ContinuousDynamics = PropertyUtil.getEnvContinuousDynamics(ci, PropertyUtil.HYBRIDSYNCHAADL,
-					PropertyUtil.CD);
+					PropertyUtil.CONTINUOUSDYNAMIC);
 			if (ContinuousDynamics != null) {
 				for (String feat : featureNames) {
 					if (ContinuousDynamics.contains(feat)) {
@@ -176,21 +174,8 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 		}
 	}
 
-	private void checkEnvFlowsWrongParam(ComponentInstance ci, ContDynamics cd) {
-		if (PropertyUtil.isEnvironment(ci) && cd != null) {
-			for (ContDynamicsItem item : cd.getItems()) {
-				String param = ParseUtil.getParamString(item);
-				if (param != null) {
-					for (ValueVariable vv : ParseUtil.getTypedVariableList(item)) {
-						if (vv instanceof BehaviorVariableHolder
-								&& !((BehaviorVariableHolder) vv).getBehaviorVariable().getName().equals(param)) {
-							getErrorManager().error(ci, ci.getName() + " has wrong continuous dynamics variable("
-									+ ((BehaviorVariableHolder) vv).getBehaviorVariable().getName() + ") use");
-						}
-					}
-				}
-			}
-		}
+	private void checkEnvFlowsWrongParam(ComponentInstance ci, ContSpec cd) {
+
 	}
 
 	private void checkCompSubDataInitValue(ComponentInstance ci) {
@@ -215,6 +200,8 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 			}
 			getErrorManager().error(fi, fi.getName() + " is not connected to any port");
 		}
+//		if (fi.getSrcConnectionInstances().isEmpty() && fi.getDstConnectionInstances().isEmpty())
+//			getErrorManager().error(fi, fi.getName() + " is not connected to any port");
 	}
 
 	private void checkFeatDataOutInitValue(FeatureInstance fi) {

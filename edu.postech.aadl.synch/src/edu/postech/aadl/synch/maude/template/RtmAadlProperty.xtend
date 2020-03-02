@@ -29,55 +29,22 @@ class RtmAadlProperty extends RtmAadlIdentifier {
 	
 	def compilePropertyValue(Property pr, NamedElement ne) {
 		switch (pr.eContainer as NamedElement).name {
-			case PropertyUtil::HYBRIDSYNCHAADL:	pr.compileSynchAadlPropertyValue(ne)
-			case PropertyUtil::DATA_MODEL:	pr.compileDataModelPropertyValue(ne)
-			default:						pr.compileDefaultPropertyValue(ne)
+			case PropertyUtil::DATA_MODEL:		pr.compileDataModelPropertyValue(ne)
+			default:							pr.compileDefaultPropertyValue(ne)
 		}
 	}
 	
 	def compileDataModelPropertyValue(Property pr, NamedElement ne){
 		switch pr.name {
-			case PropertyUtil::INITIAL_VALUE: 			((PropertyUtils::getSimplePropertyValue(ne,pr) as ListValue).ownedListElements.get(0) as StringLiteral).value
+			case PropertyUtil::INITIAL_VALUE: 	((PropertyUtils::getSimplePropertyValue(ne,pr) as ListValue).ownedListElements.get(0) as StringLiteral).value
 		}
 	}
-	
-	def compileSynchAadlPropertyValue(Property pr, NamedElement ne) {
-		switch pr.name {
-			case PropertyUtil::INPUT_ADAPTOR:		(PropertyUtils::getSimplePropertyValue(ne,pr) as StringLiteral).value
-			case PropertyUtil::MAX_CLOCK_DEV:		compileTimePropertyValue(pr, ne)
-			case PropertyUtil::SAMPLING_TIME:		compileRangePropertyValue(pr, ne)
-			case PropertyUtil::RESPONSE_TIME: 		compileRangePropertyValue(pr, ne)
-			case PropertyUtil::NONDETERMINISTIC: 	null
-			case PropertyUtil::ENVIRONMENT:			null
-			case PropertyUtil::CD:					null
-			default:							pr.compileDefaultPropertyValue(ne)
-		}
-	}
-	
-	def compileTimePropertyValue(Property pr, NamedElement ne) {		
-		val t = (ne.getSimplePropertyValue(pr) as NumberValue).getScaledValue("ms")		
-		return Float.valueOf(t.toString)
-	}
-	
-	def compileRangePropertyValue(Property pr, NamedElement ne) {
-		var range = ""
-
-		val minimum = (((ne.getSimplePropertyValue(pr) as RangeValue).minimum) as NumberValue).getScaledValue("ms")
-		val maximum = (((ne.getSimplePropertyValue(pr) as RangeValue).maximum) as NumberValue).getScaledValue("ms")
-				
-		range += Float.valueOf(minimum.toString) + " .. "			
-		range += Float.valueOf(maximum.toString)
-
-		return range
-	}
-	
 	
 	def compileDefaultPropertyValue(Property pr, NamedElement ne) {
 		val pe = PropertyUtils::getSimplePropertyValue(ne,pr)
 		if (pe instanceof PropertyValue)	
 			compilePropertyValue(pe as PropertyValue)
 	}
-	
 	
 	/**************************************************************************************************************
 	 * Property expressions (only basic values)
@@ -94,26 +61,22 @@ class RtmAadlProperty extends RtmAadlIdentifier {
 	}
 	
 	
-	static def dispatch CharSequence compilePropertyValue(IntegerLiteral iv) { 
-		translateUnit(Long::toString(iv.value), iv.unit?.name)
+	static def dispatch CharSequence compilePropertyValue(IntegerLiteral iv) {
+		Double::toString(iv.getScaledValue("ms"));	// FIXME: how to correctly deal with integers?
 	}
 	
 	
 	static def dispatch CharSequence compilePropertyValue(RealLiteral rv) {
-		translateUnit(Double::toString(rv.value), rv.unit?.name)
+		Double::toString(rv.getScaledValue("ms"));
+	}
+	
+	static def dispatch CharSequence compilePropertyValue(RangeValue pr) {
+		return compilePropertyValue(pr.minimum as NumberValue) + " .. " + compilePropertyValue(pr.maximum as NumberValue);
 	}
 	
 	static def dispatch CharSequence compilePropertyValue(PropertyValue pv) {
+		//FIXME: should report an error
 		null
-	}
-	
-	static private def CharSequence translateUnit(String num, String unit) {
-		switch unit?.toLowerCase() {
-			case null:	return num
-			case "ms":	return num
-			case "sec":	return num
-			default:	return num + " " + unit
-		}
 	}
 	
 }
