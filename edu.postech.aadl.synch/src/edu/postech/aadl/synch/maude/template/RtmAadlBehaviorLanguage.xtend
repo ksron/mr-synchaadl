@@ -304,10 +304,13 @@ class RtmAadlBehaviorLanguage extends RtmAadlIdentifier {
 	 * Continuous Dynamics expressions
 	 */
 	 
-	 public def CharSequence compileContSpec(ContSpec spec)'''«spec.getItems.map[compileContSpecItem].filterNull.join(" ; ")»'''
+	 public def CharSequence compileContSpec(ContSpec spec)'''
+	 «spec.getItems.map[compileContSpecItem].filterNull.join(" ; ")»'''
 	 
-	 private def dispatch CharSequence compileContSpecItem(ODE item)'''(dt/d[«(item.target as DataSubcomponentHolder).dataSubcomponent.name.escape»] = «item.expression.compileExpression»)'''
+	 private def dispatch CharSequence compileContSpecItem(ODE item)'''
+	 (dt/d[«(item.target as DataSubcomponentHolder).dataSubcomponent.name.escape»] = «item.expression.compileExpression»)'''
 	 
-	 private def dispatch CharSequence compileContSpecItem(ContFunc item)'''(«(item.target as DataSubcomponentHolder).dataSubcomponent.name.escape»(«(item.param as BehaviorVariableHolder).behaviorVariable.name.escape») = «item.expression.compileExpression»)'''
+	 private def dispatch CharSequence compileContSpecItem(ContFunc item)'''
+	 («(item.target as DataSubcomponentHolder).dataSubcomponent.name.escape»(«(item.param as BehaviorVariableHolder).behaviorVariable.name.escape») = «item.expression.compileExpression»)'''
 			
 }

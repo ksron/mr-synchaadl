@@ -35,7 +35,7 @@ class RtmPropSpec {
 	«top.compileLoadFiles(mode, maudeDirPath)»
 	mod TEST-«top.name.toUpperCase» is
 	  including «top.name.toUpperCase»-MODEL-SYMBOLIC .
-	  including «mode.compileModelTrans» .
+	  including «mode.compileModelTransition» .
 	  including SPECIFICATION-LANGUAGE-SEMANTICS .
 	  including CONVERSION .
 	
@@ -46,7 +46,7 @@ class RtmPropSpec {
   	«top.compileMode»
 	endm
 		  
-	«top.compileRequirement(prop, mode)»
+	«top.compileVerboseProperty(prop, mode)»
 	quit
 	'''
 	
@@ -59,18 +59,48 @@ class RtmPropSpec {
 	load «top.name».maude
 	'''
 	
-	static def compileRequirement(Top top, Property prop, Mode mode){
+	static def compileInterpreter(Mode mode){
+		switch (mode){
+			DISTRIBUTED:		'''interpreter-distributed'''
+			RANDOM:				'''interpreter-random'''
+			SYMBOLIC:			'''interpreter-«mode.name»«mode.option»'''
+			default:			'''interpreter-symbolic2-merge'''
+		}
+	}
+	
+	static def compileModelTransition(Mode mode){
+		switch (mode){
+			RANDOM:			'''RANDOM-SIMULATION'''
+			default:		'''MODEL-TRANSITION-SYSTEM'''
+		}
+	}
+	
+	static def compileProp(Top top)'''
+	«FOR Proposition prop : top.getProposition»
+	    op «prop.name» : -> PropSpec .
+		eq «prop.name» = «top.name.escape» | «prop.expression.compileExp» .
+	«ENDFOR»
+	'''
+	
+	static def compileMode(Top top){
+		val mode = top.mode;
+		if(mode == null || (mode != null && mode instanceof SYMBOLIC && (mode as SYMBOLIC).option != null)){
+			'''eq @m@ = ['«top.name.toUpperCase»-MODEL-SYMBOLIC] .'''
+		}else if(mode instanceof DISTRIBUTED){
+			'''eq #sample = «mode.sample» . eq #response = «mode.response» .'''
+		}
+	}
+	
+	static def compileVerboseProperty(Top top, Property prop, Mode mode){
 		var verbose = ""
 		if(mode!= null && mode.verbose!=null){
 			verbose += "set show timing off .\n"
 			verbose += "set show stats off .\n"
 			verbose += "set show command off .\n"
-			if(prop != null){
-				verbose += "red \"time-bound: \" + " + "string(" + prop.bound + ", 10) .\n"
-			}
-			if(mode != null && mode instanceof DISTRIBUTED){
-				verbose += "red \"sample: \" + " + "string(" + (mode as DISTRIBUTED).sample + ", 10) .\n"
-				verbose += "red \"response: \" + " + "string(" + (mode as DISTRIBUTED).response + ", 10) .\n"
+			verbose += "red \"time-bound: \" + " + "string(" + prop.bound + ", 10) .\n"
+			if(mode instanceof DISTRIBUTED){
+				verbose += "red \"sample: \" + " + "string(" + mode.sample + ", 10) .\n"
+				verbose += "red \"response: \" + " + "string(" + mode.response + ", 10) .\n"
 			}
 			verbose += "set show timing on .\n"
 			verbose += "set show stats on .\n"
@@ -87,195 +117,48 @@ class RtmPropSpec {
 		return verbose
 	}
 	
-	static def compileModelTrans(Mode mode){
-		if(mode != null && mode instanceof RANDOM){
-			return "RANDOM-SIMULATION"
-		}
-		return "MODEL-TRANSITION-SYSTEM"
-	}
-	
-	static def compileProperty(Top top, Property prop, Mode mode){
-		if (prop instanceof Reachability){
-			if(mode == null){
-				top.compileProperty(prop as Reachability)
-			}else if(mode instanceof SYMBOLIC){
-				top.compileProperty(prop as Reachability, mode as SYMBOLIC)
-			} else if(mode instanceof RANDOM){
-				top.compileProperty(prop as Reachability, mode as RANDOM)
-			} else if(mode instanceof DISTRIBUTED){
-				top.compileProperty(prop as Reachability, mode as DISTRIBUTED)
-			}
-		}else{
-			if(mode == null){
-				top.compileProperty(prop as Invariant)
-			}else if(mode instanceof SYMBOLIC){
-				top.compileProperty(prop as Invariant, mode as SYMBOLIC)
-			} else if(mode instanceof RANDOM){
-				top.compileProperty(prop as Invariant, mode as RANDOM)
-			} else if(mode instanceof DISTRIBUTED){
-				top.compileProperty(prop as Invariant, mode as DISTRIBUTED)
-			}
-		}
-	}
-	
-	static def compileInterpreter(Mode mode){
-		if(mode == null){
-			return "interpreter-symbolic2-merge.maude"
-		} else if (mode instanceof RANDOM){
-			return "interpreter-random.maude"
-		} else if (mode instanceof DISTRIBUTED){
-			return "interpreter-distributed.maude"
-		} else if (mode instanceof SYMBOLIC && (mode as SYMBOLIC).option != null){
-			return "interpreter-"+mode.name+"-merge.maude"
-		} else {
-			return "interpreter-"+mode.name+".maude"
-		}
-	}
-	
-	static def compileMode(Top top){
-		val mode = top.mode;
-		if(mode == null){
-			'''eq @m@ = ['«top.name.toUpperCase»-MODEL-SYMBOLIC] .'''
-		}else{
-			if((mode instanceof SYMBOLIC && (mode as SYMBOLIC).option != null) ||
-				(mode instanceof MODELCHECK && (mode as MODELCHECK).option != null)){
-				'''eq @m@ = ['«top.name.toUpperCase»-MODEL-SYMBOLIC] .'''
-			} else if(mode instanceof DISTRIBUTED){
-			'''  eq #sample = «mode.sample» .«"\n"»eq #response = «mode.response» .'''
-			} else{
-				''''''
-			}
-		}
-	}
-	
-	static def compileProp(Top top){
-		var result=""
-		for(Proposition prop : top.getProposition){
-			result += "op " + prop.name + " : -> PropSpec ." + "\n"
-			result += "eq " + prop.name + " = " + top.name.escape + " | " + prop.expression.compileExp + " ." + "\n"
-			result += "\n"
-		}
-		return result
-	}
-	
-	static def compileProperty(Top top, Reachability reach)'''
+	static def dispatch compileProperty(Top top, Property prop, Void mode)'''
 	search [1]
-	      {«top.compileInitConst(reach)» ||
-		   initState | 0 | «reach.bound»} 
+	      {«top.compileInitConst(prop)» ||
+		   initState | 0 | «prop.bound»} 
 		=>*
-		  {B:BoolExp || OBJ:Object | T:Time | «reach.bound»} 
+		  {B:BoolExp || OBJ:Object | T:Time | «prop.bound»} 
 		such that
-		  check-sat(B:BoolExp and «top.compileGoalConst(reach)») .
+		  check-sat(B:BoolExp and finalConst(OBJ:Object) and «top.compileGoalConst(prop)») .
 	'''
 	
-	static def compileProperty(Top top, Invariant inv)'''
+	static def dispatch compileProperty(Top top, Property prop, SYMBOLIC mode)'''
 	search [1]
-	      {«top.compileInitConst(inv)» ||
-		   initState | 0 | «inv.bound»} 
+	      {«top.compileInitConst(prop)» ||
+		   initState | 0 | «prop.bound»} 
 		=>*
-		  {B:BoolExp || OBJ:Object | T:Time | «inv.bound»} 
+		  {B:BoolExp || OBJ:Object | T:Time | «prop.bound»} 
 		such that
-		  check-sat(B:BoolExp and not(«top.compileGoalConst(inv)»)) .
-	'''
-	
-	static def compileProperty(Top top, Reachability reach, SYMBOLIC mode)'''
-	search [1]
-	      {«top.compileInitConst(reach)» ||
-		   initState | 0 | «reach.bound»} 
-		=>*
-		  {B:BoolExp || OBJ:Object | T:Time | «reach.bound»} 
-		such that
-		  check-sat(B:BoolExp and «top.compileGoalConst(reach)») .
-	'''
-	
-	static def compileProperty(Top top, Invariant inv, SYMBOLIC mode)'''
-	search [1]
-	      {«top.compileInitConst(inv)» ||
-		   initState | 0 | «inv.bound»} 
-		=>*
-		  {B:BoolExp || OBJ:Object | T:Time | «inv.bound»} 
-		such that
-		  check-sat(B:BoolExp and not(«top.compileGoalConst(inv)»)) .
+		  check-sat(B:BoolExp and finalConst(OBJ:Object) and «top.compileGoalConst(prop)») .
 	'''
 
-	static def compileProperty(Top top, Reachability reach, RANDOM mode)'''
-	red repeat({{initState, 0} | 0 | «reach.bound»}, «top.compileGoalConst(reach)») .
+	static def dispatch compileProperty(Top top, Property prop, RANDOM mode)'''
+	red repeat({{initState, 0} | 0 | «prop.bound»}, «top.compileGoalConst(prop)») .
 	'''
 	
-	static def compileProperty(Top top, Invariant inv, RANDOM mode)'''
-	red repeat({{initState, 0} | 0 | «inv.bound»}, not(«top.compileGoalConst(inv)»)) .
-	'''
-	
-	static def compileProperty(Top top, Reachability reach, DISTRIBUTED mode)'''
+	static def dispatch compileProperty(Top top, Property prop, DISTRIBUTED mode)'''
 	search [1]
-	      {initState | 0 | «reach.bound»} 
+	      {initState | 0 | «prop.bound»} 
 		=>*
-		  {OBJ:Object | T:Time | «reach.bound»} 
+		  {OBJ:Object | T:Time | «prop.bound»} 
 		such that
-		  check-true(«top.compileGoalConst(reach)») .
-	'''
-
-	static def compileProperty(Top top, Invariant inv, DISTRIBUTED mode)'''
-	search [1]
-	      {initState | 0 | «inv.bound»} 
-		=>*
-		  {OBJ:Object | T:Time | «inv.bound»} 
-		such that
-		  check-true(not(«top.compileGoalConst(inv)»)) .
+		  check-true(«top.compileGoalConst(prop)») .
 	'''
 	
-	static def compileInitConst(Top top, Property pr){
-		var const = ""
-		if(pr instanceof Reachability){
-			if((pr as Reachability).initCond != null)
-				const = (pr as Reachability).initCond.compileExp.toString
-			else
-				const = "[[true]]"
-		} else if (pr instanceof Invariant){
-			if((pr as Invariant).initCond != null)
-				const = (pr as Invariant).initCond.compileExp.toString
-			else
-				const = "[[true]]"
-		}
-		top.compileConst(const, false)
-	}
+	static def compileInitConst(Top top, Property pr)'''
+	eval(«top.name.escape» | «pr.initCond == null ? "[[true]]" : pr.initCond.compileExp», initState)
+	'''
 	
 	static def compileGoalConst(Top top, Property pr){
-		var const = ""
-		if(pr instanceof Reachability){
-			const = (pr as Reachability).goalCond.compileExp.toString
-		} else if (pr instanceof Invariant){
-			const = (pr as Invariant).goalCond.compileExp.toString
-		}
-		top.compileConst(const, true)
-	}
-	
-	static def compileConst(Top top, String const, Boolean goal){
-		if(top.mode instanceof RANDOM){
-			if(const.equals("[[true]]")){
-				return '''[[true]]'''
-			}else if(const.equals("[[false]]")){
-				return '''[[false]]'''
-			}else{
-				return top.name.escape+" | "+ const
-			}
-		}
-		if (!goal){
-			if(const.equals("[[true]]")){
-				return '''eval([[true]], initState)'''				
-			}else if(const.equals("[[false]]")){
-				return '''eval([[false]], initState)'''	
-			}else{
-				return '''eval(«top.name.escape+" | "+ const», initState)'''
-			}
-		} else if (goal){
-			if(const.equals("[[true]]")){
-				return '''eval([[true]], OBJ:Object)'''
-			}else if(const.equals("[[false]]")){
-				return '''eval([[false]], initState)'''	
-			}else{
-				return '''eval(«top.name.escape+" | "+ const», OBJ:Object)'''
-			}
+		switch(pr){
+			Invariant:			'''eval(«top.name.escape» | not(«pr.goalCond.compileExp»), OBJ:Object)'''
+			Reachability:		'''eval(«top.name.escape» | «pr.goalCond.compileExp», OBJ:Object)'''
+			default:			''''''
 		}
 	}
 
@@ -284,7 +167,6 @@ class RtmPropSpec {
 	 */
 	private static def dispatch CharSequence compileExp(BinaryExpression e) '''
 		(«e.left.compileExp» «e.op» «e.right.compileExp»)'''
-		
 		
 	private static def dispatch CharSequence compileExp(UnaryExpression e) '''
 		«e.op.translateUnaryOp»(«e.child.compileExp»)'''
@@ -296,40 +178,20 @@ class RtmPropSpec {
 		«e.def.name»'''
 
 	private static def dispatch CharSequence compileExp(Value e) {
-		val v = e.value
-		
-		if(v instanceof ContainedNamedElement){
-			var lastElement = (v as ContainedNamedElement).containmentPathElements.last.namedElement
-			var path = ""
-			var EList<ContainmentPathElement> ecpe = (v as ContainedNamedElement).containmentPathElements;
-			for(var i = 0; i < ecpe.length-1; i++){
-				if(path.length==0){
-					path += ecpe.get(i).namedElement.name
-				} else {
-					path += " . " + ecpe.get(i).namedElement.name
-				}
-			}
-			if(path.length==0){
-				return '''«lastElement.compilePrefix»'''
-			} else {
-				return '''( «path» | «lastElement.compilePrefix» )'''
-			}
-		}else{
-			return '''[[«RtmAadlProperty::compilePropertyValue(v as PropertyValue)»]]'''
+		var v = e.value
+		switch v {
+			ContainedNamedElement:		'''(«IF v.containmentPathElements.length > 1»«v.compilePath» | «ENDIF»«v.containmentPathElements.last.namedElement.compilePrefix» )'''
+			default:					'''[[«RtmAadlProperty::compilePropertyValue(v as PropertyValue)»]]'''
 		}
 	}
 	
 	private static def compilePrefix(NamedElement ne){
-		if(ne instanceof DataPort){
-			'''f[«ne.name»]'''
-		}else if(ne instanceof DataSubcomponent){
-			'''c[«ne.name»]'''
-		}else if (ne instanceof BehaviorVariable){
-			'''v[«ne.name»]'''
-		}else if (ne instanceof ParameterHolder){
-			'''p[«ne.name»]'''
-		}else{
-			'''ErrorPrefix'''
+		switch ne {
+			DataPort:					'''f[«ne.name»]'''
+			DataSubcomponent:			'''c[«ne.name»]'''
+			BehaviorVariable:			'''v[«ne.name»]'''
+			ParameterHolder:			'''p[«ne.name»]'''
+			default:					null
 		}
 	}
 	
@@ -341,8 +203,8 @@ class RtmPropSpec {
 		}
 	}
 	
-	// an component path
+	// an component path except component
 	private static def CharSequence compilePath(ContainedNamedElement path) {
-		path.containmentPathElements.map[namedElement.name.escape].join(' . ')
+		path.containmentPathElements.subList(0, path.containmentPathElements.length-1).map[namedElement.name.escape].join(' . ')
 	}
 }
