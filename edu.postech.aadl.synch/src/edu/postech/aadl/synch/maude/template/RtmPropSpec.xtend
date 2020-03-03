@@ -55,7 +55,7 @@ class RtmPropSpec {
 	«IF mode == null || (mode != null && mode instanceof SYMBOLIC)»
 	load «maudeDirPath»/smt.maude
 	«ENDIF»
-	load ./semantics/«mode.compileInterpreter»
+	load semantics/«mode.compileInterpreter».maude
 	load «top.name».maude
 	'''
 	

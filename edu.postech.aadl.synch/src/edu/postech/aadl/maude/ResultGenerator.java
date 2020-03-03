@@ -22,7 +22,6 @@ public class ResultGenerator extends Thread {
 	private Property prop;
 	private IFile pspcFile;
 	private IPath location;
-	private boolean inv;
 
 	public ResultGenerator(Process process, IPath path, IFile pspcFile, Property prop) {
 		this.process = process;
@@ -30,30 +29,31 @@ public class ResultGenerator extends Thread {
 		this.location = path;
 		this.pspcFile = pspcFile;
 		this.prop = prop;
-		this.inv = prop instanceof Invariant;
 	}
 
 	@Override
 	public void run() {
-		MaudeResult initial = new MaudeResult(pspcFile, prop, "Running", location, "");
+		Maude initial = new Maude(pspcFile, prop, "Running", location, "");
 		initial.setProcess(process);
 
 		DisplayView.initDataView(initial);
 		try {
-			String result = createMaudeResultFile(maudeResultFile);
-			String simplifiedResult = getMaudeSimpleResult(result);
-			String elapsedTime = getMaudeElapsedTime(result);
+			String result = getProcessResult();
+
+			writeResultFile(result, maudeResultFile);
+			String simplifiedResult = getSimplifiedResult(result);
+			String elapsedTime = getElapsedTime(result);
 			if (initial.getResultString().equals("Terminated")) {
 				return;
 			}
 			DisplayView.updateDataView(initial,
-					new MaudeResult(pspcFile, prop, simplifiedResult, location, elapsedTime));
+					new Maude(pspcFile, prop, simplifiedResult, location, elapsedTime));
 		} catch (IOException | CoreException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private String createMaudeResultFile(IFile file) throws IOException, CoreException {
+	private String getProcessResult() throws IOException, CoreException {
 		String result = "";
 		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
@@ -62,42 +62,35 @@ public class ResultGenerator extends Thread {
 		while ((line = reader.readLine()) != null) {
 			sb.append(line + "\n");
 		}
-		result += getSolutionString(sb.toString());
-		IOUtils.setFileContent(new ByteArrayInputStream(sb.toString().getBytes()), file);
+		result += sb.toString();
 		return result;
 	}
 
-	public String getSolutionString(String rm) {
-		if (rm.indexOf("No solution") != -1) {
-			return rm.substring(rm.indexOf("No solution"));
-		} else if (rm.indexOf("Solution 1") != -1) {
-			return rm.substring(rm.indexOf("Solution 1"));
-		} else {
-			return "Error Occured!";
-		}
+	private void writeResultFile(String result, IFile file) throws CoreException {
+		IOUtils.setFileContent(new ByteArrayInputStream(result.getBytes()), file);
 	}
 
-	public String getMaudeSimpleResult(String rm) {
-		if (inv) {
-			if (rm.indexOf("No solution") != -1) {
+	public String getSimplifiedResult(String rm) {
+		if (prop instanceof Invariant) {
+			if (rm.contains("No solution")) {
 				return "No counterexample found";
-			} else if (rm.indexOf("Solution 1") != -1) {
+			} else if (rm.contains("Solution 1")) {
 				return "No counterexample found";
 			} else {
-				return "Error Occured!";
+				return "Error occured!";
 			}
 		} else {
-			if (rm.indexOf("No solution") != -1) {
+			if (rm.contains("No solution")) {
 				return "UnReachable";
-			} else if (rm.indexOf("Solution 1") != -1) {
+			} else if (rm.contains("Solution 1")) {
 				return "Reachable";
 			} else {
-				return "Error Occured!";
+				return "Error occured!";
 			}
 		}
 	}
 
-	public String getMaudeElapsedTime(String rm) {
+	public String getElapsedTime(String rm) {
 		Pattern p = Pattern.compile("[0-9]+ms cpu");
 		Matcher m = p.matcher(rm);
 		String elapsedTime = "..";

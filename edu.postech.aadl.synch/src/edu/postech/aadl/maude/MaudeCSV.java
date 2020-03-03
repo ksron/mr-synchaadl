@@ -23,7 +23,7 @@ public class MaudeCSV {
 		}
 	}
 
-	public void addColumn(MaudeResult mr) {
+	public void addColumn(Maude mr) {
 		col.append(mr.getPspcFileName() + "," + mr.getPropId() + "," + mr.getResultString() + ","
 				+ mr.getLocationString() + "," + mr.getElapsedTimeString() + "\n");
 	}

@@ -2,6 +2,9 @@ package edu.postech.aadl.synch.maude.template
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.SetMultimap
+import edu.postech.aadl.synch.maude.contspec.ContFunc
+import edu.postech.aadl.synch.maude.contspec.ContSpec
+import edu.postech.aadl.synch.maude.contspec.ContSpecItem
 import edu.postech.aadl.utils.PropertyUtil
 import java.util.HashSet
 import org.eclipse.core.runtime.IProgressMonitor
@@ -17,8 +20,8 @@ import org.osate.aadl2.Port
 import org.osate.aadl2.PortConnection
 import org.osate.aadl2.PropertyAssociation
 import org.osate.aadl2.StringLiteral
-import org.osate.aadl2.SystemSubcomponent
 import org.osate.aadl2.instance.ComponentInstance
+import org.osate.aadl2.instance.ConnectionInstance
 import org.osate.aadl2.instance.ConnectionReference
 import org.osate.aadl2.instance.FeatureInstance
 import org.osate.aadl2.instance.ModeInstance
@@ -27,16 +30,10 @@ import org.osate.aadl2.instance.SystemInstance
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager
 import org.osate.ba.aadlba.BehaviorAnnex
 import org.osate.ba.aadlba.BehaviorVariable
+import org.osate.ba.aadlba.BehaviorVariableHolder
 
 import static extension edu.postech.aadl.synch.maude.template.RtmAadlSetting.*
 import static extension edu.postech.aadl.utils.PropertyUtil.*
-import edu.postech.aadl.synch.maude.contspec.ContSpec
-import org.osate.aadl2.instance.ConnectionInstance
-import java.util.ArrayList
-import org.osate.aadl2.SubcomponentType
-import edu.postech.aadl.synch.maude.contspec.ContSpecItem
-import edu.postech.aadl.synch.maude.contspec.ContFunc
-import org.osate.ba.aadlba.BehaviorVariableHolder
 
 class RtmAadlModel extends RtmAadlIdentifier {
 
@@ -197,7 +194,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	}
 	
 	private def compileFeatureClass(FeatureInstance fi){
-		'''«fi.featureClass»«(fi.feature as Port).direction.compileDirection(fi)»Port'''
+		'''«fi.containingComponentInstance.isEnv ? "Env" : "Data"»«(fi.feature as Port).direction.compileDirection(fi)»Port'''
 	}
 
 	private def compileDirection(DirectionType type, FeatureInstance o) {
@@ -206,7 +203,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	}
 	
 	private def compileValue(ComponentInstance o){
-		o.check( o.correctParam, "invalid initial value: " + o.name)
 		switch o.subcomponent.subcomponentType.name {
 			case "Float":		o.isParam ? "param(Real)" : "null(Real)"
 			case "Real":		o.isParam ? "param(Real)" : "null(Real)"
@@ -264,18 +260,16 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	}
 	
 	private def compileMode(ComponentInstance o, ModalPropertyValue mpv){
-		var mode = ""
 		if(!mpv.inModes.isEmpty){
 			for(String modes : mpv.inModes.get(0).toString.split("#")){
 				if(modes.contains(o.name)){
-					mode = modes.split("\\.").last
+					return modes.split("\\.").last
 				}
 			}
 		} else {
-			mode = "@@default@loc@@"
+			return "@@default@loc@@"
 		}
 	}
-
 	
 	private def compileTargetInstances(ComponentInstance ci){
 		var targetInstances = new HashSet<ComponentInstance>();
@@ -313,11 +307,11 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		val c = cr.connection => [
 			cr.check(it instanceof PortConnection || it instanceof ParameterConnection, "Unsupported connection type")
 		]
-		if(ci.isEnv){
-			'''(«c.source.compileConnectionEndName(cr)»«IF ci.isSubcomponentData(c.source.connectionEnd.name.escape)» ==> «ELSE» =>> «ENDIF»«c.destination.compileConnectionEndName(cr)»)'''
-		} else {
-			'''(«c.source.compileConnectionEndName(cr)» --> «c.destination.compileConnectionEndName(cr)»)'''
-		}
+		'''(«c.source.compileConnectionEndName(cr)» «cr.compileConnectionArrow(ci)» «c.destination.compileConnectionEndName(cr)»)'''
+	}
+	
+	private def compileConnectionArrow(ConnectionReference cr, ComponentInstance ci){
+		ci.isEnv ? '''«IF cr.destination instanceof ComponentInstance»=>>«ELSE»==>«ENDIF»''' : '''-->'''
 	}
 
 	private def compileConnectionEndName(ConnectedElement end, ConnectionReference o) {
@@ -328,8 +322,6 @@ class RtmAadlModel extends RtmAadlIdentifier {
 		}
 	}
 	
-	
-	// Compile Property
 	private def compilePropertyAssociation(PropertyAssociation p, NamedElement ne) {
 		val value = pc.compilePropertyValue(p.property, ne)
 		if (value !== null && !value.equals("param")) '''(«p.property.qualifiedName().escape» => {{«value»}})'''

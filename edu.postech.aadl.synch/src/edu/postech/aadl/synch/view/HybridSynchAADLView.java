@@ -40,7 +40,7 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ViewPart;
 
 import edu.postech.aadl.maude.MaudeCSV;
-import edu.postech.aadl.maude.MaudeResult;
+import edu.postech.aadl.maude.Maude;
 
 /**
  * This sample class demonstrates how to plug-in a new
@@ -87,7 +87,7 @@ public class HybridSynchAADLView extends ViewPart {
 		tvc0.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				MaudeResult mr = (MaudeResult) element;
+				Maude mr = (Maude) element;
 				return mr.getPspcFileName();
 			}
 		});
@@ -99,7 +99,7 @@ public class HybridSynchAADLView extends ViewPart {
 		tvc1.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				MaudeResult mr = (MaudeResult) element;
+				Maude mr = (Maude) element;
 				return mr.getPropId();
 			}
 		});
@@ -111,7 +111,7 @@ public class HybridSynchAADLView extends ViewPart {
 		tvc2.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				MaudeResult mr = (MaudeResult) element;
+				Maude mr = (Maude) element;
 				return mr.getResultString();
 			}
 		});
@@ -122,7 +122,7 @@ public class HybridSynchAADLView extends ViewPart {
 		tvc3.getColumn().setMoveable(true);
 
 		LinkOpener linkHandler = rowObject -> {
-			MaudeResult mr = (MaudeResult)rowObject;
+			Maude mr = (Maude)rowObject;
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			IWorkspaceRoot root = workspace.getRoot();
 			IPath path = new Path(mr.getLocationString());
@@ -137,7 +137,7 @@ public class HybridSynchAADLView extends ViewPart {
 		tvc3.setLabelProvider(new LinkLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				MaudeResult mr = (MaudeResult) element;
+				Maude mr = (Maude) element;
 				return mr.getLocationString();
 			}
 		}, linkHandler));
@@ -149,7 +149,7 @@ public class HybridSynchAADLView extends ViewPart {
 		tvc4.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				MaudeResult mr = (MaudeResult) element;
+				Maude mr = (Maude) element;
 				return mr.getElapsedTimeString();
 			}
 		});
@@ -196,7 +196,7 @@ public class HybridSynchAADLView extends ViewPart {
 		stopProcessAction = new Action() {
 			@Override
 			public void run() {
-				MaudeResult mr = (MaudeResult) viewer.getStructuredSelection().getFirstElement();
+				Maude mr = (Maude) viewer.getStructuredSelection().getFirstElement();
 				if (mr.checkProcess()) {
 					mr.killProcess();
 					mr.setResultString("Terminated");
@@ -209,7 +209,7 @@ public class HybridSynchAADLView extends ViewPart {
 		deleteResultAction = new Action() {
 			@Override
 			public void run() {
-				MaudeResult mr = (MaudeResult) viewer.getStructuredSelection().getFirstElement();
+				Maude mr = (Maude) viewer.getStructuredSelection().getFirstElement();
 				viewer.remove(mr);
 			}
 		};
@@ -221,9 +221,9 @@ public class HybridSynchAADLView extends ViewPart {
 				MaudeCSV csv = new MaudeCSV();
 				csv.setCategory();
 				for (TableItem ti : viewer.getTable().getItems()) {
-					csv.addColumn((MaudeResult) ti.getData());
+					csv.addColumn((Maude) ti.getData());
 				}
-				MaudeResult mr = (MaudeResult) viewer.getStructuredSelection().getFirstElement();
+				Maude mr = (Maude) viewer.getStructuredSelection().getFirstElement();
 				String time = new SimpleDateFormat("yyyy.MM.dd.HH.mm").format(new Date());
 				IPath csvPath = mr.getLocationIPath().removeLastSegments(2).append("csv")
 						.append("result_" + time + ".csv");
@@ -237,7 +237,7 @@ public class HybridSynchAADLView extends ViewPart {
 			public void run() {
 				IStructuredSelection selection = viewer.getStructuredSelection();
 				Object obj = selection.getFirstElement();
-				MaudeResult mr = (MaudeResult) obj;
+				Maude mr = (Maude) obj;
 				IPath path = mr.getLocationIPath();
 				path = path.removeLastSegments(3).append("requirement");
 				IWorkspace workspace = ResourcesPlugin.getWorkspace();
@@ -272,26 +272,26 @@ public class HybridSynchAADLView extends ViewPart {
 		viewer.getControl().setFocus();
 	}
 
-	public MaudeResult initialData(MaudeResult mr) {
+	public Maude initialData(Maude mr) {
 		viewer.add(mr);
 		return mr;
 	}
 
 	public void removeData(IFile prop) {
 		for (TableItem ti : viewer.getTable().getItems()) {
-			MaudeResult mr = (MaudeResult) ti.getData();
+			Maude mr = (Maude) ti.getData();
 			if (mr.getPspcFileName().equals(prop.getName())) {
 				viewer.remove(mr);
 			}
 		}
 	}
 
-	public void updateData(MaudeResult element) {
+	public void updateData(Maude element) {
 		viewer.add(element);
 		System.out.println("Update Data");
 	}
 
-	public void updateData(MaudeResult oldElement, MaudeResult newElement) {
+	public void updateData(Maude oldElement, Maude newElement) {
 		viewer.add(newElement);
 		viewer.remove(oldElement);
 		System.out.println("refreshData method");

@@ -24,7 +24,7 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.osate.ui.dialogs.Dialog;
 
-import edu.postech.aadl.maude.Maude;
+import edu.postech.aadl.maude.MaudeProcess;
 import edu.postech.aadl.maude.preferences.MaudePrefPage;
 import edu.postech.aadl.synch.propspec.PropspecEditorResourceManager;
 import edu.postech.aadl.synch.view.DisplayView;
@@ -32,8 +32,6 @@ import edu.postech.aadl.xtext.propspec.propSpec.Property;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
 
 public class SymbolicAnalysis extends AbstractHandler {
-
-	private String maudeDirPath;
 	private String maudeExecPath;
 	private String maudeOptions;
 	private String maudeLibDir;
@@ -57,17 +55,14 @@ public class SymbolicAnalysis extends AbstractHandler {
 
 		resManager.setEditor(xtextEditor);
 
-
 		propSpecFileName = resManager.getEditorFile().getName();
 		propSpecFileName = propSpecFileName.substring(0, propSpecFileName.indexOf("."));
 		propSpecRes = getPropSpecResource(resManager.getEditorFile().getFullPath());
 
 		IPreferenceStore pref = getValidMaudePref();
-		maudeDirPath = pref.getString(MaudePrefPage.MAUDE_DIR);
 		maudeExecPath = pref.getString(MaudePrefPage.MAUDE);
 		maudeOptions = pref.getString(MaudePrefPage.MAUDE_OPTS);
 		maudeLibDir = pref.getString(MaudePrefPage.MAUDE_LIB_DIR);
-
 
 		aadlMaudePath = resManager.getCodegenFilePath().toString();
 		aadlMaudeBaseDir = resManager.getEditorFile().getLocation().removeLastSegments(3).toString();
@@ -83,12 +78,12 @@ public class SymbolicAnalysis extends AbstractHandler {
 		}
 
 		for (Property pr : propSpecRes.getProperty()) {
-			Maude maude = new Maude();
+			MaudeProcess maude = new MaudeProcess();
 			maude = maudeDefaultBuilder(maude);
 
 			IPath pspcGeneratedMaudePath = resManager.getCodegenFilePath().removeLastSegments(1)
 					.append(propSpecFileName + "-" + propSpecRes.getName() + "-" + pr.getName() + ".maude");
-			maude.setTestFilePath(pspcGeneratedMaudePath);
+			maude.setPropertyMaudePath(pspcGeneratedMaudePath);
 
 			IPath resultPath = resManager.getCodegenFilePath().removeLastSegments(1).append("result")
 					.append(propSpecFileName + "-" + pr.getName() + ".txt");
@@ -98,11 +93,10 @@ public class SymbolicAnalysis extends AbstractHandler {
 		return null;
 	}
 
-	private Maude maudeDefaultBuilder(Maude maude) {
-		maude.setMaudeDirPath(maudeDirPath);
+	private MaudeProcess maudeDefaultBuilder(MaudeProcess maude) {
 		maude.setMaudeExecPath(maudeExecPath);
 		maude.setOption(maudeOptions);
-		maude.setTargetMaude(aadlMaudeFullPath);
+		maude.setAADLInstanceMaude(aadlMaudeFullPath);
 		maude.setPspcFile(resManager.getEditorFile());
 		maude.setMaudeLibDirPath(maudeLibDir);
 

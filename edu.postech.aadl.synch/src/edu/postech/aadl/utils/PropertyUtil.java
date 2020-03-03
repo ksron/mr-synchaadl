@@ -6,7 +6,9 @@ import org.osate.aadl2.EnumerationLiteral;
 import org.osate.aadl2.ListValue;
 import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.Property;
+import org.osate.aadl2.PropertyAssociation;
 import org.osate.aadl2.PropertyExpression;
+import org.osate.aadl2.StringLiteral;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.ConnectionInstance;
 import org.osate.aadl2.instance.ConnectionInstanceEnd;
@@ -112,6 +114,18 @@ public class PropertyUtil {
 		catch (PropertyLookupException e) {
 			return defaultValue;
 		}
+	}
+
+	public static boolean isParam(ComponentInstance ci){
+		for(PropertyAssociation pa : ci.getOwnedPropertyAssociations()){
+			if(pa.getProperty().getName().equals(INITIAL_VALUE)){
+				if (((StringLiteral) ((ListValue) PropertyUtils.getSimplePropertyValue(ci, pa.getProperty()))
+						.getOwnedListElements().get(0)).getValue().equals("param")) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public static boolean isEnvironment(ComponentInstance ci) {

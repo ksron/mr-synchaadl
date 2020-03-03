@@ -4,7 +4,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IViewPart;
 
-import edu.postech.aadl.maude.MaudeResult;
+import edu.postech.aadl.maude.Maude;
 
 public class DisplayView {
 	static private HybridSynchAADLView view;
@@ -19,11 +19,11 @@ public class DisplayView {
 		display.asyncExec(() -> view.removeData(prop));
 	}
 
-	public static void initDataView(MaudeResult init) {
+	public static void initDataView(Maude init) {
 		display.asyncExec(() -> view.initialData(init));
 	}
 
-	public static void updateDataView(MaudeResult oldMR, MaudeResult newMR) {
+	public static void updateDataView(Maude oldMR, Maude newMR) {
 		display.asyncExec(
 				() -> view.updateData(oldMR, newMR));
 	}
