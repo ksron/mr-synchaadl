@@ -9,6 +9,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 
+import edu.postech.aadl.xtext.propspec.propSpec.Invariant;
 import edu.postech.aadl.xtext.propspec.propSpec.Property;
 
 public class Maude {
@@ -33,10 +34,22 @@ public class Maude {
 		this.process = process;
 	}
 
+	public void setElapsedTime(String time) {
+		elapsedTime = time;
+	}
+
 	public void killProcess() {
 		if (process != null) {
 			process.destroy();
 		}
+	}
+
+	public IFile getPSPCFile() {
+		return pspc;
+	}
+
+	public Property getProp() {
+		return prop;
 	}
 
 	public boolean checkProcess() {
@@ -88,5 +101,9 @@ public class Maude {
 
 	public String getElapsedTimeString() {
 		return elapsedTime;
+	}
+
+	public boolean isInvProperty() {
+		return prop instanceof Invariant;
 	}
 }

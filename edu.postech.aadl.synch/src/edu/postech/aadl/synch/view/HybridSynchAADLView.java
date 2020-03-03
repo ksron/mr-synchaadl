@@ -39,8 +39,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ViewPart;
 
-import edu.postech.aadl.maude.MaudeCSV;
 import edu.postech.aadl.maude.Maude;
+import edu.postech.aadl.maude.MaudeCSV;
 
 /**
  * This sample class demonstrates how to plug-in a new
@@ -292,8 +292,8 @@ public class HybridSynchAADLView extends ViewPart {
 	}
 
 	public void updateData(Maude oldElement, Maude newElement) {
-		viewer.add(newElement);
 		viewer.remove(oldElement);
+		viewer.add(newElement);
 		System.out.println("refreshData method");
 
 	}
