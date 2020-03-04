@@ -10,13 +10,13 @@ public class Run extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		ConstraintChecker cc = new ConstraintChecker();
 		cc.execute(event);
-		if (cc.isError()) {
+		if (cc.hasError()) {
 			return null;
 		}
 
 		CodeGeneration cg = new CodeGeneration();
 		cg.execute(event);
-		if (cg.isError()) {
+		if (cg.hasError()) {
 			return null;
 		}
 

@@ -36,7 +36,7 @@ public class ConstraintChecker extends AbstractHandler {
 		return null;
 	}
 
-	public boolean isError() {
+	public boolean hasError() {
 		return error;
 	}
 }

@@ -24,7 +24,6 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.osate.ui.dialogs.Dialog;
 
 import edu.postech.aadl.maude.preferences.MaudePrefPage;
 import edu.postech.aadl.synch.maude.action.RtmGenerationAction;
@@ -47,11 +46,7 @@ public class CodeGeneration extends AbstractHandler {
 
 		resManager.setEditor(newEditor);
 
-		IPreferenceStore pref = getValidMaudePref();
-		if (pref == null) {
-			error = true;
-			return null;
-		}
+		IPreferenceStore pref = new ScopedPreferenceStore(InstanceScope.INSTANCE, "edu.postech.maude.preferences.page");
 		String maudeDirPath = pref.getString(MaudePrefPage.MAUDE_DIR);
 
 		if (resManager.getModelResource() != null) {
@@ -81,7 +76,7 @@ public class CodeGeneration extends AbstractHandler {
 		return null;
 	}
 
-	public boolean isError() {
+	public boolean hasError() {
 		return error;
 	}
 
@@ -107,16 +102,4 @@ public class CodeGeneration extends AbstractHandler {
 		}
 		return null;
 	}
-
-	private IPreferenceStore getValidMaudePref() {
-		IPreferenceStore pref = new ScopedPreferenceStore(InstanceScope.INSTANCE, "edu.postech.maude.preferences.page");
-		String maudeDirPath = pref.getString(MaudePrefPage.MAUDE_DIR);
-		if (maudeDirPath.isEmpty()) {
-			Dialog.showError("Maude Preferences Error",
-					"Maude directory is not found\n Please set correct Maude directory");
-			return null;
-		}
-		return pref;
-	}
-
 }

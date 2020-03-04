@@ -1,16 +1,15 @@
 package edu.postech.aadl.synch.view;
 
 
+import java.io.ByteArrayInputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
 import javax.inject.Inject;
 
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -40,25 +39,7 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ViewPart;
 
 import edu.postech.aadl.maude.Maude;
-import edu.postech.aadl.maude.MaudeCSV;
-
-/**
- * This sample class demonstrates how to plug-in a new
- * workbench view. The view shows data obtained from the
- * model. The sample creates a dummy model on the fly,
- * but a real implementation would connect to the model
- * available either in this or another plug-in (e.g. the workspace).
- * The view is connected to the model using a content provider.
- * <p>
- * The view uses a label provider to define how model
- * objects should be presented in the view. Each
- * view can present the same model objects using
- * different labels and icons, if needed. Alternatively,
- * a single label provider can be shared between views
- * in order to ensure that objects of the same type are
- * presented in the same way everywhere.
- * <p>
- */
+import edu.postech.aadl.utils.IOUtils;
 
 public class HybridSynchAADLView extends ViewPart {
 
@@ -166,8 +147,6 @@ public class HybridSynchAADLView extends ViewPart {
 		viewer.getTable().setLinesVisible(true);
 
 		viewer.setContentProvider(new ArrayContentProvider());
-
-		workbench.getHelpSystem().setHelp(viewer.getControl(), "edu.postech.aadl.view.HybridSynchAADLView");
 		getSite().setSelectionProvider(viewer);
 
 		makeActions();
@@ -218,16 +197,23 @@ public class HybridSynchAADLView extends ViewPart {
 		makeCSV = new Action() {
 			@Override
 			public void run() {
-				MaudeCSV csv = new MaudeCSV();
-				csv.setCategory();
+				StringBuffer sb = new StringBuffer();
+				sb.append("PSPC File,Property Id,Result,Location,ElapsedTime\n");
 				for (TableItem ti : viewer.getTable().getItems()) {
-					csv.addColumn((Maude) ti.getData());
+					Maude maude = (Maude) ti.getData();
+					sb.append(maude.getPspcFileName() + "," + maude.getPropId() + "," + maude.getResultString() + ","
+							+ maude.getLocationString() + "," + maude.getElapsedTimeString() + "\n");
 				}
 				Maude mr = (Maude) viewer.getStructuredSelection().getFirstElement();
 				String time = new SimpleDateFormat("yyyy.MM.dd.HH.mm").format(new Date());
 				IPath csvPath = mr.getLocationIPath().removeLastSegments(2).append("csv")
 						.append("result_" + time + ".csv");
-				csv.doGenerate(csvPath);
+				try {
+					IOUtils.setFileContent(new ByteArrayInputStream(sb.toString().getBytes()),
+							IOUtils.getFile(csvPath));
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
 			}
 		};
 		makeCSV.setText("Export all data into CSV file");
@@ -236,26 +222,14 @@ public class HybridSynchAADLView extends ViewPart {
 			@Override
 			public void run() {
 				IStructuredSelection selection = viewer.getStructuredSelection();
-				Object obj = selection.getFirstElement();
-				Maude mr = (Maude) obj;
-				IPath path = mr.getLocationIPath();
-				path = path.removeLastSegments(3).append("requirement");
-				IWorkspace workspace = ResourcesPlugin.getWorkspace();
-				IWorkspaceRoot root = workspace.getRoot();
-
+				Maude mr = (Maude) selection.getFirstElement();
 				Integer line = mr.findPropIdLine();
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put(IMarker.LINE_NUMBER, line);
-
 				try {
-					for (IResource resource : ((IContainer) root.findMember(path)).members()) {
-						if (resource.getName().contains(mr.getPspcFileName())) {
-							IMarker marker = ((IFile) resource).createMarker(IMarker.TEXT);
-							marker.setAttributes(map);
-							IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(),
-									marker);
-						}
-					}
+					IMarker marker = mr.getPSPCFile().createMarker(IMarker.TEXT);
+					marker.setAttributes(map);
+					IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), marker);
 				} catch (CoreException e1) {
 					e1.printStackTrace();
 				}
@@ -286,20 +260,8 @@ public class HybridSynchAADLView extends ViewPart {
 		}
 	}
 
-	public void updateData(Maude element) {
-		viewer.add(element);
-		System.out.println("Update Data");
-	}
-
 	public void updateData(Maude oldElement, Maude newElement) {
 		viewer.remove(oldElement);
 		viewer.add(newElement);
-		System.out.println("refreshData method");
-
 	}
-
-	public void clear() {
-		viewer.getTable().removeAll();
-	}
-
 }

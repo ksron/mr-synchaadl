@@ -2,19 +2,14 @@ package edu.postech.aadl.maude;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
@@ -27,13 +22,13 @@ public class MaudeProcess extends Thread {
 	private String maudeExecPath = null;
 	private String maudeLibDir = null;
 	private String maudeOptions = null;
-	private IPath propertyMaudePath = null;
+	private IPath propMaudePath = null;
 
 	private MaudeProcessListener listener = null;
 
 	public MaudeProcess(Maude mu, IPath propPath) {
 		maude = mu;
-		propertyMaudePath = propPath;
+		propMaudePath = propPath;
 		getMaudePrefrences();
 	}
 
@@ -58,7 +53,7 @@ public class MaudeProcess extends Thread {
 			process.waitFor();
 
 			String pResult = getProcessResult(process);
-			writeResultFile(pResult, maude.getLocationIPath().toFile());
+			writeResultFile(pResult, maude.getLocationIPath());
 			maude.setResultString(getSimplifiedResult(pResult));
 			maude.setElapsedTime(getElapsedTime(pResult));
 
@@ -72,7 +67,7 @@ public class MaudeProcess extends Thread {
 
 	private String compileCommandOption() {
 		return maudeExecPath + " " + maudeOptions + " "
-				+ IOUtils.getFile(propertyMaudePath).getLocation().toFile().getPath();
+				+ IOUtils.getFile(propMaudePath).getLocation().toFile().getPath();
 	}
 
 	private void setProcessEnv(Map<String, String> map) {
@@ -99,14 +94,11 @@ public class MaudeProcess extends Thread {
 		return result;
 	}
 
-	private void writeResultFile(String result, File file) throws CoreException {
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IPath location = Path.fromOSString(file.getAbsolutePath());
-		IFile ifile = workspace.getRoot().getFileForLocation(location);
-		IOUtils.setFileContent(new ByteArrayInputStream(result.getBytes()), ifile);
+	private void writeResultFile(String result, IPath file) throws CoreException {
+		IOUtils.setFileContent(new ByteArrayInputStream(result.getBytes()), IOUtils.getFile(file));
 	}
 
-	public String getSimplifiedResult(String rm) {
+	private String getSimplifiedResult(String rm) {
 		if (maude.isInvProperty()) {
 			if (rm.contains("No solution")) {
 				return "No counterexample found";
@@ -126,7 +118,7 @@ public class MaudeProcess extends Thread {
 		}
 	}
 
-	public String getElapsedTime(String rm) {
+	private String getElapsedTime(String rm) {
 		Pattern p = Pattern.compile("[0-9]+ms cpu");
 		Matcher m = p.matcher(rm);
 		String elapsedTime = "..";

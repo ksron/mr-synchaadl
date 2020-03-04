@@ -200,8 +200,6 @@ public class SynchAadlConstChecker extends AadlProcessingSwitchWithProgress {
 			}
 			getErrorManager().error(fi, fi.getName() + " is not connected to any port");
 		}
-//		if (fi.getSrcConnectionInstances().isEmpty() && fi.getDstConnectionInstances().isEmpty())
-//			getErrorManager().error(fi, fi.getName() + " is not connected to any port");
 	}
 
 	private void checkFeatDataOutInitValue(FeatureInstance fi) {
