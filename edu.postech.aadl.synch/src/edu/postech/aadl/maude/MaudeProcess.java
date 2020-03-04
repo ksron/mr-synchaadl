@@ -103,7 +103,7 @@ public class MaudeProcess extends Thread {
 			if (rm.contains("No solution")) {
 				return "No counterexample found";
 			} else if (rm.contains("Solution 1")) {
-				return "No counterexample found";
+				return "Counterexample found";
 			} else {
 				return "Error occured!";
 			}

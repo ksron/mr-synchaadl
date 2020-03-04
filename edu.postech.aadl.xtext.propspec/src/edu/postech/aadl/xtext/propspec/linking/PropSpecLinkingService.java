@@ -20,17 +20,14 @@ import org.osate.aadl2.FeatureGroup;
 import org.osate.aadl2.FeatureGroupPrototype;
 import org.osate.aadl2.FeatureGroupType;
 import org.osate.aadl2.NamedElement;
-import org.osate.aadl2.PropertyExpression;
 import org.osate.aadl2.Subcomponent;
 import org.osate.aadl2.SubprogramSubcomponent;
 import org.osate.aadl2.ThreadSubcomponent;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.aadl2.modelsupport.util.ResolvePrototypeUtil;
 
-import edu.postech.aadl.xtext.propspec.propSpec.BinaryExpression;
 import edu.postech.aadl.xtext.propspec.propSpec.ScopedExpression;
 import edu.postech.aadl.xtext.propspec.propSpec.Top;
-import edu.postech.aadl.xtext.propspec.propSpec.UnaryExpression;
 
 public class PropSpecLinkingService extends DefaultLinkingService {
 
@@ -47,66 +44,28 @@ public class PropSpecLinkingService extends DefaultLinkingService {
 
 		final String crossRefString = getCrossRefNodeAsString(node);
 
-		if (Aadl2Package.eINSTANCE.getNamedElement() == requiredType) {
-			if (context instanceof ContainmentPathElement) {
-				EObject res = null;
+		if (Aadl2Package.eINSTANCE.getNamedElement() == requiredType && context instanceof ContainmentPathElement) {
+			EObject res = null;
 
-				if (context.eContainer() instanceof ContainmentPathElement) // inside a path
-				{
-					ContainmentPathElement el = (ContainmentPathElement) ((ContainmentPathElement) context).getOwner();
-					res = findNamedObject(el, crossRefString);
-				} else if (context.eContainer() instanceof PropertyExpression) // inside an expression
-				{
-					ContainmentPathElement pl = getPropPathElement(context);
-					if (pl != null) {
-						res = findNamedObject(pl, crossRefString);
-					} else {
-						// Top Formula is non-scoped Value
-						ComponentClassifier ns = getContainingModelClassifier(context);
-						if (ns != null) {
-							res = ns.findNamedElement(crossRefString);
-						}
+			if (context.eContainer() instanceof ContainmentPathElement) { // inside a path
+
+				ContainmentPathElement el = (ContainmentPathElement) ((ContainmentPathElement) context).getOwner();
+				res = findNamedObject(el, crossRefString);
+			} else { // inside an expression
+
+				EObject container = context.eContainer().eContainer().eContainer();
+				ContainmentPathElement el = getContainingPathElement(container);
+				if (el == null) {
+					ComponentClassifier ns = getContainingModelClassifier(context);
+					if (ns != null) {
+						res = ns.findNamedElement(crossRefString);
 					}
 				} else {
-					if (context.eContainer().eContainer().eContainer() instanceof ScopedExpression) {
-						ContainedNamedElement path = ((ScopedExpression) context.eContainer().eContainer().eContainer())
-								.getPath();
-						List<ContainmentPathElement> list = path.getContainmentPathElements();
-						ContainmentPathElement el = list.get(list.size() - 1);
-						res = findNamedObject(el, crossRefString);
-					} else if (context.eContainer().eContainer().eContainer() instanceof BinaryExpression
-							|| context.eContainer().eContainer().eContainer() instanceof UnaryExpression) {
-
-						EObject container = context.eContainer().eContainer().eContainer();
-						while (container != null) {
-							if (container instanceof ScopedExpression) {
-								break;
-							}
-							container = container.eContainer();
-						}
-						if (container instanceof ScopedExpression) {
-							ContainedNamedElement path = ((ScopedExpression) container).getPath();
-							List<ContainmentPathElement> list = path.getContainmentPathElements();
-							ContainmentPathElement el = list.get(list.size() - 1);
-							res = findNamedObject(el, crossRefString);
-						} else {
-							// Non scoped Value
-							ComponentClassifier ns = getContainingModelClassifier(context);
-							if (ns != null) {
-								res = ns.findNamedElement(crossRefString);
-							}
-						}
-
-					} else {
-						ComponentClassifier ns = getContainingModelClassifier(context);
-						if (ns != null) {
-							res = ns.findNamedElement(crossRefString);
-						}
-					}
+					res = findNamedObject(el, crossRefString);
 				}
-				if (res != null && res instanceof NamedElement) {
-					return Collections.singletonList(res);
-				}
+			}
+			if (res != null && res instanceof NamedElement) {
+				return Collections.singletonList(res);
 			}
 		}
 
@@ -124,7 +83,7 @@ public class PropSpecLinkingService extends DefaultLinkingService {
 		return null;
 	}
 
-	private static ContainmentPathElement getPropPathElement(EObject element) {
+	private static ContainmentPathElement getContainingPathElement(EObject element) {
 		EObject container = element;
 		while (container != null) {
 			if (container instanceof ScopedExpression) {
