@@ -8,6 +8,11 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.misc.ParseCancellationException;
 import org.osate.aadl2.instance.ComponentInstance;
+import org.osate.ba.aadlba.BehaviorVariableHolder;
+import org.osate.ba.aadlba.Factor;
+import org.osate.ba.aadlba.SimpleExpression;
+import org.osate.ba.aadlba.Term;
+import org.osate.ba.aadlba.Value;
 
 import edu.postech.aadl.synch.maude.contspec.parser.ContDynamicsErrorListener;
 import edu.postech.aadl.synch.maude.contspec.parser.ContDynamicsFlowsVisitor;
@@ -46,5 +51,47 @@ public class ContSpec {
 			e.printStackTrace(); // TODO: show error dialog to user
 		}
 		return result;
+	}
+
+	public boolean findValueVariable(String name) {
+		List<String> names = new ArrayList<String>();
+		for (ContSpecItem item : cdItems) {
+			getValueVariableNames(item.getExpression(), names);
+		}
+		return names.contains(name);
+	}
+
+	public boolean isValidParameter() {
+		boolean ret = true;
+		for (ContSpecItem item : cdItems) {
+			if (item instanceof ContFunc) {
+				List<String> names = new ArrayList<String>();
+				getValueVariableNames(item.getExpression(), names);
+				ret &= names.contains(
+						((BehaviorVariableHolder) ((ContFunc) item).getParam()).getBehaviorVariable().getName());
+			}
+		}
+		return ret;
+	}
+
+	private void getValueVariableNames(SimpleExpression sExpr, List<String> name) {
+		for (Term term : sExpr.getTerms()) {
+			for (Factor factor : term.getFactors()) {
+				Value first = factor.getFirstValue();
+				Value second = factor.getSecondValue();
+				if (first != null && first instanceof BehaviorVariableHolder) {
+					name.add(((BehaviorVariableHolder) first).getBehaviorVariable().getName());
+				}
+				if (second != null && second instanceof BehaviorVariableHolder) {
+					name.add(((BehaviorVariableHolder) second).getBehaviorVariable().getName());
+				}
+				if (first != null && first instanceof SimpleExpression) {
+					getValueVariableNames((SimpleExpression) first, name);
+				}
+				if (second != null && second instanceof SimpleExpression) {
+					getValueVariableNames((SimpleExpression) second, name);
+				}
+			}
+		}
 	}
 }

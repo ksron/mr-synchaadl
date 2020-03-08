@@ -204,9 +204,9 @@ class RtmAadlModel extends RtmAadlIdentifier {
 	
 	private def compileValue(ComponentInstance o){
 		switch o.subcomponent.subcomponentType.name {
-			case "Float":		o.isParam ? "param(Real)" : "null(Real)"
-			case "Real":		o.isParam ? "param(Real)" : "null(Real)"
-			case "Boolean":		o.isParam ? "param(Boolean)" : "null(Boolean)"
+			case "Float":		o.isParameterized ? "param(Real)" : "null(Real)"
+			case "Real":		o.isParameterized ? "param(Real)" : "null(Real)"
+			case "Boolean":		o.isParameterized ? "param(Boolean)" : "null(Boolean)"
 			default : 			null => [o.check(false, "Unsupported data type: " + o.category.name() + " " + o.name)]
 		}
 	}
@@ -329,7 +329,7 @@ class RtmAadlModel extends RtmAadlIdentifier {
 
 
 	private def compileInitialValue(NamedElement ne, String none) {
-		val iv = ne.dataInitialValue?.ownedListElements
-		if(! iv.nullOrEmpty) "[[" + (iv.get(0) as StringLiteral).value + "]]" else none // TODO: type checking
+		val iv = ne.getSynchStringProp(PropertyUtil::DATA_MODEL, PropertyUtil::INITIAL_VALUE, null)
+		if(! iv.nullOrEmpty) "[[" + iv + "]]" else none // TODO: type checking
 	}
 }

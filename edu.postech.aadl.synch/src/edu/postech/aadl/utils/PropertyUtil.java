@@ -1,14 +1,16 @@
 package edu.postech.aadl.utils;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.osate.aadl2.ComponentCategory;
 import org.osate.aadl2.EnumerationLiteral;
 import org.osate.aadl2.ListValue;
 import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.Property;
-import org.osate.aadl2.PropertyAssociation;
 import org.osate.aadl2.PropertyExpression;
 import org.osate.aadl2.StringLiteral;
+import org.osate.aadl2.UnitLiteral;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.ConnectionInstance;
 import org.osate.aadl2.instance.ConnectionInstanceEnd;
@@ -16,6 +18,7 @@ import org.osate.aadl2.instance.ConnectionKind;
 import org.osate.aadl2.instance.FeatureCategory;
 import org.osate.aadl2.instance.FeatureInstance;
 import org.osate.aadl2.properties.PropertyLookupException;
+import org.osate.xtext.aadl2.properties.util.AadlProject;
 import org.osate.xtext.aadl2.properties.util.CommunicationProperties;
 import org.osate.xtext.aadl2.properties.util.GetProperties;
 import org.osate.xtext.aadl2.properties.util.PropertyUtils;
@@ -26,7 +29,6 @@ public class PropertyUtil {
 	 * Data Modeling Annex
 	 */
 	static public final String DATA_MODEL = "Data_Model";
-	static public final String DATA_REPRESENTATION = "Data_Representation" ;
 	static public final String INITIAL_VALUE = "Initial_Value" ;
 
 	/*
@@ -41,68 +43,16 @@ public class PropertyUtil {
 	static public final String ENVIRONMENT = "isEnvironment";
 	static public final String CONTINUOUSDYNAMIC = "ContinuousDynamic";
 
-	public static ListValue getDataInitialValue(final NamedElement ne) {
-
-		try {
-			Property initialValue = GetProperties.lookupPropertyDefinition(ne, DATA_MODEL, INITIAL_VALUE);
-			return (ListValue) PropertyUtils.getSimplePropertyValue(ne, initialValue);
-		}
-		catch (PropertyLookupException e) {
-			return null;
-		}
-	}
-
-	public static boolean hasDataInitValue(final NamedElement ne) {
-		ListValue value = getDataInitialValue(ne);
-		if (value != null) {
-			EList<PropertyExpression> pe = value.getOwnedListElements();
-			if (pe == null || pe.isEmpty()) {
-				return false;
-			}
-			return true;
-		}
-		return false;
-	}
-
 	public static boolean isSynchronous(ComponentInstance ci) {
 		return getSynchBooleanProp(ci, HYBRIDSYNCHAADL, SYNCHRONOUS, false);
 	}
 
 	public static boolean isTopComponent(ComponentInstance ci) {
-		return ci.getContainingComponentImpl() == null;
+		return ci.getContainingComponentInstance() == null;
 	}
 
-	public static boolean hasContinuousDynamics(final NamedElement ne, final String propertySet,
-			final String propertyName) {
-		try {
-			Property prop = GetProperties.lookupPropertyDefinition(ne, propertySet, propertyName);
-			if (prop == null) {
-				return false;
-			}
-			String cd = PropertyUtils.getStringValue(ne, prop);
-			if (cd == null) {
-				return false;
-			}
-		} catch (PropertyLookupException e) {
-			return false;
-		}
-		return true;
-	}
-
-	public static boolean hasTimeProperty(final NamedElement ne, final String propertySet, final String propertyName) {
-		try {
-			Property prop = GetProperties.lookupPropertyDefinition(ne, propertySet, propertyName);
-			if (prop == null) {
-				return false;
-			}
-			PropertyExpression pe = ne.getSimplePropertyValue(prop);
-			if (pe == null) {
-				return false;
-			}
-		} catch (PropertyLookupException e) {
-			return false;
-		}
-		return true;
+	public static boolean isEnvironment(ComponentInstance ci) {
+		return getSynchBooleanProp(ci, HYBRIDSYNCHAADL, ENVIRONMENT, false);
 	}
 
 	public static boolean getSynchBooleanProp(final NamedElement ne, final String propertySet,
@@ -116,11 +66,70 @@ public class PropertyUtil {
 		}
 	}
 
-	public static boolean isParam(ComponentInstance ci){
-		for(PropertyAssociation pa : ci.getOwnedPropertyAssociations()){
-			if(pa.getProperty().getName().equals(INITIAL_VALUE)){
-				if (((StringLiteral) ((ListValue) PropertyUtils.getSimplePropertyValue(ci, pa.getProperty()))
-						.getOwnedListElements().get(0)).getValue().equals("param")) {
+	public static List<String> getSynchListProp(final NamedElement ne, final String propertySet,
+			final String propertyName,
+			List<String> defaultValue) {
+		try {
+			Property synchronous = GetProperties.lookupPropertyDefinition(ne, propertySet, propertyName);
+			List<String> list = new ArrayList<String>();
+			for (PropertyExpression expr : ((ListValue) PropertyUtils.getSimplePropertyValue(ne, synchronous))
+					.getOwnedListElements()) {
+				list.add(((StringLiteral) expr).getValue());
+			}
+			return list;
+		} catch (PropertyLookupException e) {
+			return defaultValue;
+		}
+	}
+
+	public static String getSynchStringProp(final NamedElement ne, final String propertySet, final String propertyName,
+			String defaultValue) {
+		try {
+			Property synchronous = GetProperties.lookupPropertyDefinition(ne, propertySet, propertyName);
+			return PropertyUtils.getStringValue(ne, synchronous);
+		} catch (PropertyLookupException e) {
+			return defaultValue;
+		}
+	}
+
+	public static double getSynchRealProp(final NamedElement ne, final String propertySet, final String propertyName,
+			double defaultValue) {
+		try {
+			Property synchronous = GetProperties.lookupPropertyDefinition(ne, propertySet, propertyName);
+			return PropertyUtils.getRealValue(ne, synchronous);
+		} catch (PropertyLookupException e) {
+			return defaultValue;
+		}
+	}
+
+	public static long getSynchIntegerProp(final NamedElement ne, final String propertySet, final String propertyName,
+			long defaultValue) {
+		try {
+			Property synchronous = GetProperties.lookupPropertyDefinition(ne, propertySet, propertyName);
+			return PropertyUtils.getIntegerValue(ne, synchronous);
+		} catch (PropertyLookupException e) {
+			return defaultValue;
+		}
+	}
+
+	public static String getSynchRangeProp(final NamedElement ne, final String propertySet, final String propertyName,
+			String defaultValue) {
+		try {
+			Property synchronous = GetProperties.lookupPropertyDefinition(ne, propertySet, propertyName);
+			UnitLiteral ul = GetProperties.findUnitLiteral(synchronous, AadlProject.MS_LITERAL);
+			return PropertyUtils.getScaledRangeMaximum(ne, synchronous, ul) + ".."
+					+ PropertyUtils.getScaledRangeMinimum(ne, synchronous, ul);
+		} catch (PropertyLookupException e) {
+			return defaultValue;
+		}
+	}
+
+	public static boolean isParameterized(final NamedElement ne) {
+		List<String> prNames = PropertyUtil.getSynchListProp(ne, PropertyUtil.DATA_MODEL, PropertyUtil.INITIAL_VALUE,
+				null);
+		if (prNames != null) {
+			for (String name : prNames) {
+				if (name.contains("param")) {
 					return true;
 				}
 			}
@@ -128,38 +137,8 @@ public class PropertyUtil {
 		return false;
 	}
 
-	public static boolean isEnvironment(ComponentInstance ci) {
-		return getSynchBooleanProp(ci, HYBRIDSYNCHAADL, ENVIRONMENT, false);
-	}
-
-	public static boolean isController(ComponentInstance ci) {
-		for (ComponentInstance child : ci.getComponentInstances()) {
-			if (child.getCategory() == ComponentCategory.PROCESS) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public static boolean getEnvBooleanProp(final NamedElement ne, final String propertySet, final String propertyName,
-			boolean defaultValue) {
-		try {
-			Property environment = GetProperties.lookupPropertyDefinition(ne, propertySet, propertyName);
-			return PropertyUtils.getBooleanValue(ne, environment);
-		} catch (PropertyLookupException e) {
-			return defaultValue;
-		}
-	}
-
-
-	public static String getEnvContinuousDynamics(final NamedElement ne, final String propertySet,
-			final String propertyName) {
-		try {
-			Property environment = GetProperties.lookupPropertyDefinition(ne, propertySet, propertyName);
-			return PropertyUtils.getStringValue(ne, environment);
-		} catch (PropertyLookupException e) {
-			return null;
-		}
+	public static boolean isDataPortFeature(final FeatureInstance fi) {
+		return fi.getCategory() == FeatureCategory.DATA_PORT;
 	}
 
 	public static boolean isPortConnection(final ConnectionInstance conn) {

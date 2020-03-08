@@ -30,13 +30,15 @@ import org.osate.ba.aadlba.BehaviorVariable
 import org.osate.ba.aadlba.ParameterHolder
 
 class RtmPropSpec {
-	
+
 	static def compilePropertyCommand(Top top, Property prop, Mode mode, String maudeDirPath)'''
 	«top.compileLoadFiles(mode, maudeDirPath)»
 	mod TEST-«top.name.toUpperCase» is
 	  including «top.name.toUpperCase»-MODEL-SYMBOLIC .
 	  including «mode.compileModelTransition» .
 	  including SPECIFICATION-LANGUAGE-SEMANTICS .
+  	  including COUNTEREXAMPLE-INTERFACE .
+  	  including META-LEVEL .
 	  including CONVERSION .
 	
 	  op initState : -> Object .
@@ -78,7 +80,7 @@ class RtmPropSpec {
 	static def compileProp(Top top)'''
 	«FOR Proposition prop : top.getProposition»
 	    op «prop.name» : -> PropSpec .
-		eq «prop.name» = «top.name.escape» | «prop.expression.compileExp» .
+		eq «prop.name» = «prop.expression.compileExp» .
 	«ENDFOR»
 	'''
 	
@@ -118,23 +120,23 @@ class RtmPropSpec {
 	}
 	
 	static def dispatch compileProperty(Top top, Property prop, Void mode)'''
-	search [1]
-	      {«top.compileInitConst(prop)» ||
-		   initState | 0 | «prop.bound»} 
-		=>*
-		  {B:BoolExp || OBJ:Object | T:Time | «prop.bound»} 
-		such that
-		  check-sat(B:BoolExp and finalConst(OBJ:Object) and «top.compileGoalConst(prop)») .
+	red counterexample(metaSearchPath(upModule('TEST-«top.name.toUpperCase», false), 
+			upTerm({«top.compileInitConst(prop)» || initState | 0 | «prop.bound»}), 
+			upTerm({B:BoolExp || OBJ:Object | T:Time | «prop.bound»}),
+			upTerm(check-sat(B:BoolExp and finalConst(OBJ:Object) and «top.compileGoalConst(prop)»)) = upTerm((true).Bool),
+			'*,
+			unbounded,
+			1)) .
 	'''
 	
 	static def dispatch compileProperty(Top top, Property prop, SYMBOLIC mode)'''
-	search [1]
-	      {«top.compileInitConst(prop)» ||
-		   initState | 0 | «prop.bound»} 
-		=>*
-		  {B:BoolExp || OBJ:Object | T:Time | «prop.bound»} 
-		such that
-		  check-sat(B:BoolExp and finalConst(OBJ:Object) and «top.compileGoalConst(prop)») .
+	red counterexample(metaSearchPath(upModule('TEST-«top.name.toUpperCase», false), 
+			upTerm({«top.compileInitConst(prop)» || initState | 0 | «prop.bound»}), 
+			upTerm({B:BoolExp || OBJ:Object | T:Time | «prop.bound»}),
+			upTerm(check-sat(B:BoolExp and finalConst(OBJ:Object) and «top.compileGoalConst(prop)»)) = upTerm((true).Bool),
+			'*,
+			unbounded,
+			1)) .
 	'''
 
 	static def dispatch compileProperty(Top top, Property prop, RANDOM mode)'''
@@ -149,6 +151,8 @@ class RtmPropSpec {
 		such that
 		  check-true(«top.compileGoalConst(prop)») .
 	'''
+	
+
 	
 	static def compileInitConst(Top top, Property pr)'''
 	eval(«top.name.escape» | «pr.initCond == null ? "[[true]]" : pr.initCond.compileExp», initState)

@@ -140,7 +140,7 @@
             commandId="HybridSynchAadlMenu.commands.run"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+8">
+            sequence="M1+9">
       </key>
    </extension>
    

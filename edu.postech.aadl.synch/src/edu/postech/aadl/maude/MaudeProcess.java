@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,9 +54,9 @@ public class MaudeProcess extends Thread {
 			process.waitFor();
 
 			String pResult = getProcessResult(process);
-			writeResultFile(pResult, maude.getLocationIPath());
 			maude.setResultString(getSimplifiedResult(pResult));
 			maude.setElapsedTime(getElapsedTime(pResult));
+			writeResultFile(compileResultFile(pResult), maude.getLocationIPath());
 
 			listener.update(maude);
 		} catch (IOException | CoreException e) {
@@ -94,23 +95,67 @@ public class MaudeProcess extends Thread {
 		return result;
 	}
 
+	private String compileResultFile(String result) {
+		StringBuffer sbResult = new StringBuffer();
+		sbResult.append(System.getProperty("line.separator"));
+		Pattern time = Pattern.compile("Time\\[[0-9]+\\]");
+		Matcher matcher = time.matcher(result);
+		while (matcher.find()) {
+			sbResult.append(matcher.group());
+			result = result.substring(matcher.start());
+			Map<String, String> map = getSMTValueMap(result);
+			sbResult.append(getModel(result, map));
+		}
+		return sbResult.toString();
+	}
+
+	private Map<String, String> getSMTValueMap(String result) {
+		Map<String, String> map = new HashMap<String, String>();
+		Pattern start = Pattern.compile("SMT\\[.*\\]");
+		Matcher matcher = start.matcher(result);
+		if (matcher.find()) {
+			result.substring(matcher.start() + 5);
+			for (String elem : result.split(",")) {
+				String param = elem.split("|->")[0];
+				String value = elem.split("|->")[1];
+				map.put(param, value);
+			}
+		}
+		return map;
+	}
+
+	private String getModel(String result, Map<String, String> map) {
+		String ret = "";
+		Pattern start = Pattern.compile("Model\\[.*\\]");
+		Matcher matcher = start.matcher(result);
+		if (matcher.find()) {
+			ret = result.substring(matcher.start());
+			for (String param : map.keySet()) {
+				if (ret.contains(param)) {
+					ret.replace(param, map.get(param));
+				}
+			}
+		}
+		return ret;
+	}
+
 	private void writeResultFile(String result, IPath file) throws CoreException {
 		IOUtils.setFileContent(new ByteArrayInputStream(result.getBytes()), IOUtils.getFile(file));
 	}
 
 	private String getSimplifiedResult(String rm) {
 		if (maude.isInvProperty()) {
-			if (rm.contains("No solution")) {
+			if (rm.contains("counterexample(failure)")) {
 				return "No counterexample found";
-			} else if (rm.contains("Solution 1")) {
+			} else if (rm.contains("result CounterExample:")) {
 				return "Counterexample found";
 			} else {
 				return "Error occured!";
 			}
 		} else {
-			if (rm.contains("No solution")) {
+			if (rm.contains("counterexample(failure)")) {
 				return "UnReachable";
-			} else if (rm.contains("Solution 1")) {
+			} else if (rm.contains("result CounterExample:")) {
 				return "Reachable";
 			} else {
 				return "Error occured!";
