@@ -140,7 +140,7 @@ class RtmPropSpec {
 	'''
 
 	static def dispatch compileProperty(Top top, Property prop, RANDOM mode)'''
-	red repeat({{initState, 0} | 0 | «prop.bound»}, «top.compileGoalConst(prop)») .
+	red repeat({{initState, «Math::round(Math::random * 100)»} | 0 | «prop.bound»}, «top.compileGoalConst(prop)») .
 	'''
 	
 	static def dispatch compileProperty(Top top, Property prop, DISTRIBUTED mode)'''
